@@ -1,0 +1,20 @@
+---
+title: "A. From images to 3D models: Photogrammetry and Structure from Motion concepts"
+subtitle: "Topic 2: Structure from Motion"
+date: 8/28/2024
+Topic: "Topic 2: Structure from Motion"
+assignment-due-date:
+---
+
+## A. From images to 3D models: Photogrammetry and Structure from Motion concepts 
+
+### Outline:
+
+* overview of UAS technology, system's classifications
+* UAS components and operations
+* UAS applications
+* in class demonstration of selected systems
+
+### Lecture
+
+

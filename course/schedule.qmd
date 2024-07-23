@@ -1,0 +1,17 @@
+---
+title: "Schedule"
+listing:
+  contents: topics/**/part_*.qmd
+  type: table
+  sort:
+    - "date"
+  fields: [date, Topic, title, assignment-due-date]
+  exclude: 
+    contents: 
+        - topics/**/assignments/*.qmd
+        - topics/**/lectures/*.qmd
+---
+
+Schedule and links to material
+
+> Schedule will be adjusted as needed during the semester.

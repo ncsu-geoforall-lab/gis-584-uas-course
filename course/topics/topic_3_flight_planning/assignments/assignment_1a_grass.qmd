@@ -1,0 +1,103 @@
+---
+subtitle: "Terrain Analysis of the flight site using GIS tools"
+title: "Assignment 1A"
+# subtitle: "A. Introduction to Unmanned Aerial Systems"
+# date: 8/19/2024
+# image: ../images/header.jpg
+# category: Topic 1
+assignment-due-date: 9/21/2024
+---
+
+In order to execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Also remember that the ground altitude is measured in the take off localization and does not take into account local relief. It can be crucial in the mountainous areas. In our case trees, buildings and other man-made structures are more of a concern. Because both – terrain data (from lidar) and planned flight path are available, the elevation difference between the flight ceiling and the surface can be computed using GIS tools.
+
+*If you are unfamiliar with GRASS GIS - visit the OSgeoLab youtube channel and watch at least the [Getting started with GRASS GIS GUI](https://youtu.be/xqsnwtlP-2Y) video.*
+
+#### General workflow:
+
+1. Compute a raster for elevation of the flight path
+2. Generate DSM
+3. Calculate the elevation difference between the flight path and surface
+
+#### Data
+
+- GRASS Location ([Lake_Wheeler_NCspm](https://drive.google.com/file/d/0B1AfQGDB8tPXNXVpOEdyejlpbEE/view?usp=sharing&resourcekey=0-txsjafPn-_3yd3G0PLusww))
+- 2013 lidar data from [Mid Pines](http://fatra.cnr.ncsu.edu/uav-lidar-analytics-course/mid_pines_spm_2013.las)
+
+#### Software
+
+- [GRASS GIS](http://grass.osgeo.org/)
+
+### Compute a raster for elevation of the flight path
+
+For this analysis you can run GRASS GIS with the Lake_Wheeler_NCspm location. Create a new mapset to manage your flight analysis. 
+*Copy the unzipped location folder into your grassdata folder (in Windows in Documents)
+
+**REMEMBER** 
+
+Change working directory:  
+Settings > GRASS working environment > Change working directory > select/create any directory or type `cd` (stands for change directory) into the GUI Console and hit Enter. 
+
+*Now you can use the commands from the assignment requiring the text file without the need to specify the full path to the file*
+
+- Download the [flight path kml file](https://drive.google.com/file/d/0B8j08KoSleFQZHYycXlGa1hHMVU/view?usp=sharing&resourcekey=0-OLqHRV9bOnV0idjl9zYDJQ) (there is a [file from another flight here](https://drive.google.com/file/d/1aLWNeKsOEVgfgWKfp3h5wKd1Uk4ZaWY8/view?usp=sharing), you can use it as a comparison), copy the file(s) to your working directory folder.
+- Launch GRASS
+- Import downloaded kml into GRASS with `v.import`, which will reproject the input on the fly:
+
+```bash
+v.import input=flight_path1.kml output=flight_track_kml
+```
+
+Convert vector line to elevation points. Set the maximum distance between the points as 0.3 m 
+
+```bash
+v.to.points -i input=flight_track_kml output=flight_track_points dmax=0.3
+```
+
+Convert vector to raster after setting the region to study area and 1m resolution
+
+```bash
+g.region vect=flight_track_kml res=1
+v.to.rast input=flight_track_points output=flight_path_altitude_rast use=z
+```
+
+Make the flight path line thick (wide) enough taking to account the wingspan of the UAV and weather impacts on the flight trajectory. Desired width of the path = 5m (radius 2.5m) 
+
+```bash
+r.grow -m input=flight_path_altitude_rast output=flight_path_wide radius=2.5
+```
+
+### Generate DSM
+
+1. Download lidar data for Mid Pines to your computer
+2. Set region to your study area using g.region or using the zoom function for setting the region
+3. Import lidar data to GRASS
+
+Windows
+```bash
+r.in.lidar mid_pines_spm_2013.las output=mid_pines_surface_max method=max class_filter=1,2 return_filter=first resolution=3 -oe 
+```
+
+Mac/Linux
+```bash
+r.in.pdal mid_pines_spm_2013.las output=mid_pines_surface_max method=max class_filter=1,2 return_filter=first resolution=3 -oe 
+```
+> NOTE - If you have any issues with the command r.in.lidar - you can download the interpolated DSMs for Mid Pines and use `r.unpack` to unpack the rasters.
+
+### Calculate the elevation difference between the flight path and surface
+Use map algebra to compute difference between two rasters - elevation of your flight path and Surface of the terrain 
+
+```bash
+r.mapcalc expression="elev_diff = flight_path_wide - mid_pines_surface_max"
+```
+
+Use the acquired diffrence map to evaluate your flight plan, pay close attention to the obstacle free zones.
+
+### Visualize results
+
+You can use screenshots from eMotion3 software and GRASS. If you discovered any obstacles and needed to readjust the flight path.
+ 
+- include the picture and description of the issue. You can display the orthophoto, COA boundaries for better understanding of the terrain. Sample orthophotos (for the Mid Pines area) can be downloaded from the folder - (Use r.unpack to unpack the rasters)
+
+### Explain your choice of the flight area, parameters and takeoff and landing locations based on the performed analysis
+
+The aim is to prove that the flight plan can be used to execute a safe and sucessful flight mission. Describe your thought process - what did you take into account first, what problems did you encouter? Did you need to change your initial plans based on software limitations, legal issues or the relief of the targeted area? 

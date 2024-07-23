@@ -1,0 +1,85 @@
+---
+title: "GIS/MEA 584: Mapping and Analytics Using UAS"
+---
+
+# Course description
+
+The course starts with a brief overview of the UAS mapping technology and its rules and regulations. The principles of UAS data collection are explained along with hands-on practice in flight planning and execution. The main focus of this course is on processing the collected imagery using structure from motion technique and deriving orthophoto mosaics and ultra-high resolution digital elevation models of land surface, vegetation and structures. More advanced topics include multitemporal 3D data analysis, fusion with lidar data and 3D visualization with applications in natural resources. 
+
+## Instructor
+
+Dr. Corey T. White
+
+Office hours: 	by appointment
+Email: 	[ctwhite@ncsu.edu](ctwhite@ncsu.edu)
+
+## Prerequisites
+
+ None, but GIS/MEA582 and/or GIS540 or equivalent courses are highly recommended. 
+
+## Educational Approach
+
+ This course will consist of: lectures, readings, hands-on exercises, homework assignments, and a major project. All the work will be collected within an electronic portfolio that will systematically include the work that you will do for this and other GIS courses. Extra credits will be given for innovative solutions, creativity in problem solving and extensions to given tasks. 
+
+## Class materials and schedule
+
+See instructions in Course [logistics](/course/logistics.qmd) and [schedule](/course/schedule.qmd)
+
+### Textbooks
+
+No required textbook, on-line material is used.
+
+Recommended books:
+
+* [Amy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.](https://www.taylorfrancis.com/books/edit/10.1201/9780429283239/fundamentals-capturing-processing-drone-imagery-data-amy-frazier-kunwar-singh)
+
+* [Jonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.](https://www.wiley.com/go/carrivick/structuremotiongeosciences)
+
+* [Paul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.](https://onlinelibrary.wiley.com/book/10.1002/9781118396780)
+    
+* [Douglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press](https://catalog.lib.ncsu.edu/record/NCSU3721828) 
+
+### Software
+
+See Course [logistics](course/logistics.qmd) web page.
+
+## Grading policy
+
+60% homeworks, 40% project
+100% is the maximum number of points (total+extra credits) achieved in class. Points are taken off for late submissions.
+
+| Grade | Course and each HW |
+|-------|--------------------|
+| Max   | 100                |
+| A+    | 97                 |
+| A     | 93                 |
+| A-    | 90                 |
+| B+    | 87                 |
+| B     | 83                 |
+| B-    | 80                 |
+| C+    | 77                 |
+| C     | 73                 |
+
+## Topics
+
+* Introduction to Unmanned Aerial Systems
+* Rules and regulations for UAS operations
+* From images to 3D models: Photogrammetry and Structure from Motion concepts
+* UAS flight planning
+* Imagery processing and structure from motion (SfM)
+* Accuracy of UAS-derived DSM and orthophoto
+* UAS and lidar data: comparison and fusion
+* Analysis of ultra high resolution elevation models
+* Analysis of multitemporal UAS data and its applications
+
+## Academic integrity
+
+[Overview](https://studentconduct.dasa.ncsu.edu/), [Policies](https://policies.ncsu.edu/), [Code of Student Conduct](https://policies.ncsu.edu/policy/pol-11-35-01/) 
+
+## Attendance policy
+
+in regular section, attendance is checked at each class, see also [attendance regulations and university definitions of excused absences](https://policies.ncsu.edu/regulation/reg-02-20-03)
+
+## Accommodation of students with disabilities
+
+[Disability Services Office](https://dso.dasa.ncsu.edu/)

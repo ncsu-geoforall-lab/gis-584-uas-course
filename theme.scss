@@ -1,0 +1,22 @@
+/*-- scss:defaults --*/
+// Base document colors
+$primary: #006600;
+$body-bg: #ffffff;
+$body-color: rgb(10, 10, 10);
+$link-color: $primary;
+$presentation-heading-color: $primary;
+
+.text-center {
+    text-align: center;
+}
+
+.banner-image {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+  
+.banner-image img {
+    width: 100%;
+    height: auto;
+}

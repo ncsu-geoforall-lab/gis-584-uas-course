@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  favicon: images/favicon.ico
+  title: "GIS/MEA 584: UAS Mapping and Analytics"
+  bread-crumbs: true
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: Syllabus
+
+      - course/schedule.qmd
+      - course/logistics.qmd
+      - course/topics.qmd
+      - course/projects.qmd
+
+
+  page-footer: 
+    center: 
+      - href: https://creativecommons.org/licenses/by-sa/4.0/
+        text: "© 2024 GeoForAll Lab CC BY-SA"
+
+    left:
+      - href: https://moodle-courses1718.wolfware.ncsu.edu/course/view.php?id=4709
+        text: Moodle
+      - href: https://help.ncsu.edu/
+        text: Computing Help
+      - href: https://geospatial.ncsu.edu/
+        text: MGIST Home
+      - href: https://www.ncsu.edu/policies/prr-disclaimer.php
+        text: Disclaimer
+      - href: https://oit.ncsu.edu/itaccess
+        text: Accessibility
+
+    right: 
+      - icon: github
+        href: https://github.com/ncsu-geoforall-lab/gis-584-uas-course
+      - href: https://geospatial.ncsu.edu/geoforall/
+        text: GeoForAll Lab
+      
+
+format:
+  html:
+    theme: [simple, theme.scss]
+    toc: true
+    toc-title: Table of Contents
+    include-before-body: includes/banner.html

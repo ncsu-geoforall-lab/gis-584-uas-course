@@ -1,0 +1,50 @@
+---
+title: "UAS Flight Planning"
+subtitle: "Topic 3: UAS Flight Planning"
+date: 9/16/2024
+Topic: "Topic 3: UAS Flight Planning"
+# assignment-due-date: 8/21/2024
+---
+
+## Outline
+
+- Defining the data collection purpose
+- Survey area, take off and landing locations
+- Terrain and weather conditions
+- Safe flight
+- Flight parameters
+- Flight planning and management platforms
+
+## Lecture
+
+- [Flight planning introduction]()
+- [Flight plan analysis in GIS](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/flight_analysis.html)
+- Lecture recordings - parts 1, 2, 3
+- Recording of the Intro to flight planning in eMotion software
+
+## Supplemental materials
+
+### Flight - watch the following if you were unable to attend the flight session
+
+- Fixed wing flight (eBee X): [set up](https://youtu.be/jBgrxB6-pj4), [launch](https://youtu.be/BlsHC1kSrE4) and [landing](https://youtu.be/_9o2zZMSXOw)
+- Vertical take-off (VTOL) fixed wing flight with [Wingtra drone](https://youtu.be/ra1sMJzibjY)
+- Rotary wing flight (Phantom)
+    - Flight with [Drone Deploy flight](https://youtu.be/1OnZPV1HeQs) planning app
+    - Flight with [Pix4D Capture flight](https://youtu.be/nV_7d6YdYTc) planning app
+
+### Flight planning and management platforms
+
+<!-- TODO Update this info -->
+- Skyward [website](https://skyward.io/) and [trial request](https://skyward.io/pricing/)
+- eMotion 3 [installer](https://drive.google.com/open?id=1Na_A4QGyJYRGDT5WUjWyxjIGZvE4uJzn) and [manual](https://drive.google.com/open?id=1qmRIbpE1K_xji2BbZDaKXnOUqZ-NlPAb)
+
+## Assignment
+
+Prepare a flight plan:
+
+- [Flight planning in eMotion 3 software]()
+- [Flight plan analysis in GRASS GIS](assignments/assignment_1a_grass.qmd)
+
+## Homework
+
+Prepare a report on the flight plan: purpose, permits, map of the area boundary, with take off, landing, locations, ground control points and flight altitude analysis.

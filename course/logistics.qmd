@@ -1,0 +1,65 @@
+---
+title: "Logistics"
+---
+
+### Course website and Moodle
+
+The course material can be accessed on the **Schedule** web page.  
+Course Forum, assignment submissions, project material, and grades are handled in **Moodle**.
+
+### Lectures
+
+- Focus of lectures is on principles, theory, concepts, methods and lectures are mostly software independent.
+- Lecture slides and video are available at each topic's web page - you can access them through **Schedule** or Moodle.
+- Topics webpages also include links to addition reading and other resources.
+
+### Assignments
+
+- Most topics include hands-on assignment - the links to assignments are provided at each topic's web page - you can access them through **Schedule** or Moodle.
+- Following the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:
+  - **Introduction**: task, problem
+  - **Methods**: general description of methods and concepts
+  - **Results**: present the results, including maps, graphs, tables with comments
+  - **Discussion**: was there anything unexpected or problematic in the results? Were there any issues related to the methodology or software? Include suggestions for improvements here.
+  - **Conclusion**: 1-2 sentences on what you have learned
+- Submit your report through Moodle in pdf format, use naming convention `LastnameFirstname_HW#.pdf`.
+
+### Software
+
+- [GRASS GIS 7.8.5](http://grass.osgeo.org/) (you can use [these instructions to install it](http://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software))
+- Agisoft Metashape (provided at NCSU) - you can work on the demo version; installation files for Windows, Linux and Mac are available [on Agisoft website](http://www.agisoft.com/downloads/installer/).
+
+Other resources:
+- open source software [OpenDroneMap](http://opendronemap.org/) and [MicMac](http://logiciels.ign.fr/?-Micmac,3-) (documentation can be found [here](http://logiciels.ign.fr/IMG/pdf/docmicmac-2.pdf), not used in this course)
+- [LibLAS](http://download.osgeo.org/liblas/libLAS-1.8.0.tar.bz2) and [LAStools](http://www.cs.unc.edu/~isenburg/lastools/download/LAStools.zip) for managing the .las files in GRASS
+- [NCSU Virtual Computing Lab (VCL)](https://vcl.ncsu.edu/scheduling/)
+  - Go to Reservations - New reservation
+  - Choose MS Windows instance *ArcGIS Desktop 10.5.1*, which has also GRASS GIS 7.2.1, or Linux instance *Ubuntu 16.04 LTS Base*
+
+### Data
+
+#### General resources
+
+- [North Carolina dataset (formatted as GRASS location)](https://grass.osgeo.org/sampledata/north_carolina/nc_spm_08_grass7.zip)
+
+#### UAS data
+
+- boundaries of all COAs obtained by NGAT in North Carolina ([google maps](https://www.google.com/maps/d/edit?mid=zi8EsFDQAyqo.kr7lL7Germeo), [shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU))
+- Study site (Lake Wheeler): COA boundaries ([shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU), [kml](https://drive.google.com/open?id=0B1AfQGDB8tPXOFdwR3VoTUloX0k)), GCP coordinates ([txt](https://drive.google.com/open?id=0B1AfQGDB8tPXN2FHTzlicWRENUU), [kml](https://drive.google.com/open?id=0B1AfQGDB8tPXb2c1bTF4QXhfT1k)), also included in the GRASS location (see processed data)
+- Survey data: [down-sampled pictures](https://drive.google.com/a/ncsu.edu/file/d/1xYhNBBDVPP4UG2aiSjcZ_tTOm4gnQcMz/view?usp=sharing) and [log](https://drive.google.com/open?id=0B1AfQGDB8tPXTWdfdGJWZ0pkOWc) from the flight 06/20/2015, [sample pictures and log](https://drive.google.com/open?id=0B1AfQGDB8tPXYlVyM2x5YTNqTjg) from the flight 09/22/2016, [all pictures and log (full flight)](https://drive.google.com/drive/folders/0B1AfQGDB8tPXOXBRSHlJUmZZQmM?resourcekey=0-CSu2NTf4BxeHPfF7Q0ljww&usp) from the flight 09/22/2016
+- Processed data:
+  - [Mid Pines dataset (formatted as GRASS location): LakeWheeler_NCspm](https://drive.google.com/open?id=0B1AfQGDB8tPXNXVpOEdyejlpbEE) with timeseries of DSMs from 2015 flights
+  - [Smaller sample point cloud: 2015_06_sample_points_NCsmp.las](https://drive.google.com/open?id=0B1AfQGDB8tPXaUZGU0FPSW5DNWM)
+  - [Mid Pines point clouds](https://drive.google.com/open?id=0B1AfQGDB8tPXUlc5N2pNQlR1T0E) (limited extent)
+  - Optional (very large files: 1GB+)
+    - [Mid Pines point clouds from 2015 flights in las, obj and txt formats](https://drive.google.com/open?id=0B1AfQGDB8tPXfk1IZlhLZ2FhNksyQ1VfX1o3YVFpZ19MOVRTWE9PNnpySXNtRTdJN2pFNlU)
+    - [Point clouds for the gully area at Midpines](https://drive.google.com/open?id=0B1AfQGDB8tPXSDdSZGpJSktXM3c) (high density, from 2015 flights)
+
+#### Lidar data
+
+- [Classified lidar point cloud in LAS format for Mid_Pines](http://fatra.cnr.ncsu.edu/uav-lidar-analytics-course/mid_pines_spm_2013.las)
+- [Secref and Mid Pines interpolated DEM/DSM (use r.unpack)](http://fatra.cnr.ncsu.edu/uav-lidar-analytics-course/secref_mid_pines_spm_elev.zip)
+
+#### Orthophotography
+
+- [Orthophotos](https://drive.google.com/drive/folders/0B1AfQGDB8tPXd05tSTVLZUZBd00) as GRASS GIS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)

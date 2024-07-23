@@ -1,0 +1,46 @@
+---
+title: "A. Introduction to Unmanned Aerial Systems"
+subtitle: "Topic 1: UAS Basics"
+date: 8/19/2024
+Topic: "Topic 1: UAS Basics"
+# assignment-due-date: 8/21/2024
+---
+
+# Introduction to Unmanned Aerial Systems
+
+## Outline
+
+* overview of UAS technology, system's classifications
+* UAS components and operations
+* UAS applications
+* in class demonstration of selected systems
+
+## Lecture
+
+* Lecture Slides: [Introduction to UAS](lectures/lecture_1a.qmd)
+* Recording
+
+## Supplemental materials
+
+### Systems
+
+#### Fixed wing 
+* [senseFly](https://www.sensefly.com/)
+* [eBee Classic](https://www.sensefly.com/drone/ebee-mapping-drone/)
+* [eBee Plus](https://www.sensefly.com/drone/ebee-plus-survey-drone/)
+* [eBee SQ](https://www.sensefly.com/drone/ebee-sq-agriculture-drone/)
+
+#### Rotary wing
+- [ZX5 by Trimble](https://www.trimble.com/Survey/ZX5.aspx)
+- [Inspire 2 by DJI](https://www.dji.com/inspire-2)
+- [Mavic 2 by DJI](https://www.dji.com/mavic-2)
+- [Phantom 4 Pro by DJI](https://www.dji.com/phantom-4-pro-v2)
+
+## Assignment
+
+* [UAS: systems and applications](assignments/assignment_1a.qmd)
+
+## Homework
+
+Prepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. ([Assignment 1A](assignments/assignment_1a.qmd))
+
