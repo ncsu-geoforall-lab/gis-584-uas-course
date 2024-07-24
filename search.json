@@ -1,5 +1,68 @@
 [
   {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Instructor",
+    "text": "Instructor\nDr. Corey T. White\nOffice hours: by appointment Email: ctwhite@ncsu.edu"
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nNone, but GIS/MEA582 and/or GIS540 or equivalent courses are highly recommended."
+  },
+  {
+    "objectID": "index.html#educational-approach",
+    "href": "index.html#educational-approach",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Educational Approach",
+    "text": "Educational Approach\nThis course will consist of: lectures, readings, hands-on exercises, homework assignments, and a major project. All the work will be collected within an electronic portfolio that will systematically include the work that you will do for this and other GIS courses. Extra credits will be given for innovative solutions, creativity in problem solving and extensions to given tasks."
+  },
+  {
+    "objectID": "index.html#class-materials-and-schedule",
+    "href": "index.html#class-materials-and-schedule",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Class materials and schedule",
+    "text": "Class materials and schedule\nSee instructions in Course logistics and schedule\n\nTextbooks\nNo required textbook, on-line material is used.\nRecommended books:\n\nAmy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.\nJonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.\nPaul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.\nDouglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press\n\n\n\nSoftware\nSee Course logistics web page."
+  },
+  {
+    "objectID": "index.html#grading-policy",
+    "href": "index.html#grading-policy",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Grading policy",
+    "text": "Grading policy\n60% homeworks, 40% project 100% is the maximum number of points (total+extra credits) achieved in class. Points are taken off for late submissions.\n\n\n\nGrade\nCourse and each HW\n\n\n\n\nMax\n100\n\n\nA+\n97\n\n\nA\n93\n\n\nA-\n90\n\n\nB+\n87\n\n\nB\n83\n\n\nB-\n80\n\n\nC+\n77\n\n\nC\n73"
+  },
+  {
+    "objectID": "index.html#topics",
+    "href": "index.html#topics",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Topics",
+    "text": "Topics\n\nIntroduction to Unmanned Aerial Systems\nRules and regulations for UAS operations\nFrom images to 3D models: Photogrammetry and Structure from Motion concepts\nUAS flight planning\nImagery processing and structure from motion (SfM)\nAccuracy of UAS-derived DSM and orthophoto\nUAS and lidar data: comparison and fusion\nAnalysis of ultra high resolution elevation models\nAnalysis of multitemporal UAS data and its applications"
+  },
+  {
+    "objectID": "index.html#academic-integrity",
+    "href": "index.html#academic-integrity",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Academic integrity",
+    "text": "Academic integrity\nOverview, Policies, Code of Student Conduct"
+  },
+  {
+    "objectID": "index.html#attendance-policy",
+    "href": "index.html#attendance-policy",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Attendance policy",
+    "text": "Attendance policy\nin regular section, attendance is checked at each class, see also attendance regulations and university definitions of excused absences"
+  },
+  {
+    "objectID": "index.html#accommodation-of-students-with-disabilities",
+    "href": "index.html#accommodation-of-students-with-disabilities",
+    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "section": "Accommodation of students with disabilities",
+    "text": "Accommodation of students with disabilities\nDisability Services Office"
+  },
+  {
     "objectID": "course/schedule.html",
     "href": "course/schedule.html",
     "title": "Schedule",
@@ -7,11 +70,74 @@
     "text": "Schedule and links to material\n\nSchedule will be adjusted as needed during the semester.\n\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTopic\n\n\nTitle\n\n\nassignment-due-date\n\n\n\n\n\n\nAug 19, 2024\n\n\nTopic 1: UAS Basics\n\n\nA. Introduction to Unmanned Aerial Systems\n\n\n \n\n\n\n\nAug 26, 2024\n\n\nTopic 1: UAS Basics\n\n\nB. Rules and regulations for UAS operations\n\n\n \n\n\n\n\nAug 28, 2024\n\n\nTopic 2: Structure from Motion\n\n\nA. From images to 3D models: Photogrammetry and Structure from Motion concepts\n\n\n \n\n\n\n\nSep 16, 2024\n\n\nTopic 3: UAS Flight Planning\n\n\nUAS Flight Planning\n\n\n \n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "course/topics.html",
-    "href": "course/topics.html",
-    "title": "Topics",
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
+    "title": "UAS Flight Planning",
+    "section": "Outline",
+    "text": "Outline\n\nDefining the data collection purpose\nSurvey area, take off and landing locations\nTerrain and weather conditions\nSafe flight\nFlight parameters\nFlight planning and management platforms"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
+    "title": "UAS Flight Planning",
+    "section": "Lecture",
+    "text": "Lecture\n\nFlight planning introduction\nFlight plan analysis in GIS\nLecture recordings - parts 1, 2, 3\nRecording of the Intro to flight planning in eMotion software"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
+    "title": "UAS Flight Planning",
+    "section": "Supplemental materials",
+    "text": "Supplemental materials\n\nFlight - watch the following if you were unable to attend the flight session\n\nFixed wing flight (eBee X): set up, launch and landing\nVertical take-off (VTOL) fixed wing flight with Wingtra drone\nRotary wing flight (Phantom)\n\nFlight with Drone Deploy flight planning app\nFlight with Pix4D Capture flight planning app\n\n\n\n\nFlight planning and management platforms\n\n\nSkyward website and trial request\neMotion 3 installer and manual"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
+    "title": "UAS Flight Planning",
+    "section": "Assignment",
+    "text": "Assignment\nPrepare a flight plan:\n\nFlight planning in eMotion 3 software\nFlight plan analysis in GRASS GIS"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
+    "title": "UAS Flight Planning",
+    "section": "Homework",
+    "text": "Homework\nPrepare a report on the flight plan: purpose, permits, map of the area boundary, with take off, landing, locations, ground control points and flight altitude analysis."
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html",
+    "title": "Assignment 1A",
     "section": "",
-    "text": "About this site"
+    "text": "During the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.\nThe presentation should be 7 - 10 minutes long and include the following:\n\nName of the UAS\nPhoto and/or diagram of its components\nType\nPlace (country) and year of manufacture\nTechnical specifications (size, weight, endurance, wingspan, payload….)\nMain applications\nCase study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained\n\nTry to find something relevant to your research interest or just something unique that will be worth sharing.\nUpload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule."
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
+    "title": "B. Rules and regulations for UAS operations",
+    "section": "Outline",
+    "text": "Outline\n\nlevels of regulatory authority\nSmall UAS Rule (Part 107)\nUAS authorizations to fly\ntypes of airspace and restrictions to flight\ncurrent information resources"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
+    "title": "B. Rules and regulations for UAS operations",
+    "section": "Lecture",
+    "text": "Lecture\n\n[Rules and Regulations]\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nOperating UAS in North Carolina\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA data innovation center, airspace type vector data in shape and kmz format\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources\n\nOther helpful material\n\nEducational use of UAS"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
+    "title": "B. Rules and regulations for UAS operations",
+    "section": "Assignment",
+    "text": "Assignment\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample exam"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
+    "title": "B. Rules and regulations for UAS operations",
+    "section": "Homework",
+    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation."
   },
   {
     "objectID": "course/topics/topic_2_sfm/part_a_images_to_3d.html#a.-from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts",
@@ -21,11 +147,53 @@
     "text": "A. From images to 3D models: Photogrammetry and Structure from Motion concepts\n\nOutline:\n\noverview of UAS technology, system’s classifications\nUAS components and operations\nUAS applications\nin class demonstration of selected systems\n\n\n\nLecture"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html",
-    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html",
-    "title": "Assignment 1A",
-    "section": "",
-    "text": "During the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.\nThe presentation should be 7 - 10 minutes long and include the following:\n\nName of the UAS\nPhoto and/or diagram of its components\nType\nPlace (country) and year of manufacture\nTechnical specifications (size, weight, endurance, wingspan, payload….)\nMain applications\nCase study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained\n\nTry to find something relevant to your research interest or just something unique that will be worth sharing.\nUpload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule."
+    "objectID": "course/projects.html#proposal-presentation-and-paper-requirements",
+    "href": "course/projects.html#proposal-presentation-and-paper-requirements",
+    "title": "Projects",
+    "section": "Proposal, presentation and paper requirements",
+    "text": "Proposal, presentation and paper requirements\n\nProposal\n\nDefine research question, select location, list available data, methods (theory), software tools, describe expected results.\n\n\n\nPresentation\n\nLength: DE students 10 minutes, on-campus students 15 min + 5 min discussion\nIntroduction/background: problem, motivation for the research, research question / objective\nStudy site: where, why this site, geographic characteristics\nData acquisition: platform and sensor, flight plan (if applicable), flight conditions\nData properties and processing: resolution, spatial extent, accuracy\nAnalysis and/or modeling methods: describe methodology and workflows\nResults: present and explain the results using qualitative and quantitative description, tables, graphs, maps/images\nDiscussion: discuss impact of flight conditions, data and methods on the results, uncertainty issues, compare with results from other studies, which questions remain unresolved, what still needs to be done\nConclusion: summary of the most important findings including advances in methodology, future work\n\n\n\nPaper\n\nStructure and formatting should follow scientific journal standards.\nSame sections as the presentation\nText and Figures: min. 4 pages, single spaced including tables and references images, maps, graphs, presented in readable size with scale and legends where needed\nReferences: at least 5 papers from scientific journals, rest can be reports, web documents\nAppendix (optional): workflows, scripts, metadata. Software commands, issues go here"
+  },
+  {
+    "objectID": "course/projects.html#past-projects",
+    "href": "course/projects.html#past-projects",
+    "title": "Projects",
+    "section": "Past Projects",
+    "text": "Past Projects\n\nProjects 2021\n\nBartenfelder, Amy: Areal Changes at LAke Wheeler Field After the 2017 Hurricane Season\nWebb, Andrew: Cabon Mapping of Agricultural Fields\nWilliams, Chantel: Northern Umstead State Park - Vegetation\nGoodnight, Dallas: Can NC One Map Orthoimagery be used to accurately measure Cape Lookout Park shoreline elevation changes over time?\nWingler, Dylan: Using LiDAR to Compare Impact between Hurricane Matthew and Sandy on Cape Hatteras, NC\nPelfrey, Hank: Estimating Individual Tree Location and Height with UAS Photogrammetry\nDorner, Judy: Object detection in UAS Imagery Using Machine Learning Applications\nMoy, Matthew: Creating and Interpolated DSM of Downtown Cary, NC\nPerry, Marcus: Mars Science Helicopter: Exploring Photogrammetry with Ingenuity’s NavCam Data\nSawtelle, Macy: Testing the Capability of Unmanned Aircraft vehicles to Monitor Forest Regeneration Activities\nWilliams, Patrick: Using Unmanned Aerial System Imagery to Perform Solar Potential Analysis\nErlenbach, Peter: Image Classification Using Drone Data\nJohnson, Randy: Urban Landcover Classification Utilizing UAS\nHill, Russell: Canyonlands National Park - 3D mash and a Scene Layer Package\nFarrell, Sean: Multiple Return Lidar Analysis of Hydrologic Changes Due to Highway Flooding from Hurricane Florence\nTan, Samantha: The Impact of hurricane Events on Coastlines: Measuring Coastline Loss with Pre and Post Michael Orthophotogrammetry\nHerzig, Bill: Drone vs Satellite - Multispectral NDVI Image Pixel Analysis\n\n\n\nProjects 2020\n\nAdams, Eric: Environmental Study Using UAS Data in the Edenton Bay, NC Region\nBert, Steve: Optimizing Parking Management for the City of Raleigh. An Unmanned Aircraft Systems Inventory Approach\nDavis, Britt: Structure from Motion as a Participatory Design Tool: The Landscape Architect’s Guide to Better Models and Deeper Community Engagement\nFranklin, Samuel: A Comparative Analysis of UAS in Archeology\nMcDonald, Christopher: UAS Technology for Mapping Urban Development – SouthEnd District of Charlotte, NC\nParish, William: UAS Implementation for Civil Engineering Design and Construction: NC 12 Bridge near Rodanthe Study\nPhillips, Ryan: Evaluating the Effect of Image Resolution on Digital Surface Model Construction and Usefulness\nPierson, Gardner: The Use of High Resolution UAS Data vs Traditional Ariel Imaging to Predict Inundation and Potential Urban Impact on the Southern Slope of Mt. Etna, Italy, Using a Lava Flow Emplacement Model.\nSignor, Kari: Exploring Lidar Classification Methods: Archaeological Applications in the Maya Lowlands\nSpear, Michael: Using UAS Umagery for Land Cover Classification\nWatts, Matthew: Exploring LiDAR in Area of Wildfire and Assessing the Benefits of Adding UAS Data\n\n\n\nProjects 2019\n\nBaker, Kurt: Effective ground classification of non-uniform laser data\nBrown, Tamika: The Implications of Using Unmanned Aerial Systems to Monitor Hazardous Waste Facility Sites and Better Understand Community Endangerment within the City of Chicago\nCharping, Charlie: UAS Technology for Open Pit Mining\nConrad, Matt: 3D Modelling from Video: Technology Application\nCummings, John: Automated Detection of Roadway Features Via UAS\nDavis, Jeremy: Creating a Basis for the Influence of Elevation on Wheat Varieties in North Carolina\nGroh, Erica: Proposed UAS Survey of Alluvial Fans in California\nHoffman, Dallas: Analysis of Multiple Return Lidar in ArcGIS\nJones, Alli: LIDAR and UAV to Monitor Beach Nourishment - Emerald Isle, NC\nMa, Xingli: Use of UAS to Detect Disease in Soybeans\nNicholas, D. Chase: Tracking Crop Development with UAVs: Using SfM to Estimate Plant Height and Volume\nOberrender, Daniel: Cave Detection using Local Relief Model derived from UAS SfM\nPotter, Andrew: Coastal Change Analysis of the Cape Lookout National Seashore\nRuiz, Rachel: Implementation of Unmanned Aerial System to Conduct Bridge Inspection\nScheip, Corey: UAS Imagery to Supplement Lidar-Based Landslide Programs\nWheaton, James: Utilizing UAS to Generate Land Cover Data\nWilliams, Caleb: Unmanned Aerial Systems for Waterfowl Population Studies at the Tom Yawkey Wildlife Center\n\n\n\nProjects 2018\n\nAlbert, James: A New Approach to Landfill Management in the Solid Waste Industry\nAnderson, Alexander: Using UAS Structure from Motion and and LiDAR DSMs to Identify, Monitor and Mitigate Coastal Erosion In Okaloosa County\nBastias, Sabina and Montgomery, Kellyn: Combining Nadir and Oblique Imagery to Address Distortion in UAS Data\nCatlow, Maureen, Hahn, Becca, and Voigt Erin: “RescUAV data after Hurricane Irma: Natural Disaster Analysis”\nDawson, Victor: ???\nEdenhart-Pepe, Skyler and Pierce, Austin: Evaluating the use of time series UAS and Lidar data to monitor rate of change of hydrologic flow patterns on land development projects.\nFelipe, Lauren: ???\nForte, Michael: Object Detection Using Structure From Motion Techniques\nHowell, Andrew: Estimating Area and Standing Biomass of Zizania latifolia Using sUAS\nKesselring, Todd: Using LiDAR and NDVI for Vegetation Management in Utility Right of Ways\nLamb, Kelsey: Mapping surface water and impervious surface\nLiesch, Mandy: Changes in Water Balance Associated with Farm Development\nMeyers, William: Measuring and Modeling Biomass of Pines at Tatum Farm\nSchrum, Paul: 3D UAV track in Blender: A Blender Addon to import, edit, then export UAV trajectories\nSuffern, Carrie: Monitoring Drainage Issues at a Small Farm: Use of UAS DSMs and LiDAR DEMs to Forecast Storm Runoff and Monitor Sinkhole Formation\nVincent, Sarah: UAV versus Statewide Contours, is it worth it to move dirt?\n\n\n\nProjects 2016\n\nTravis Howell: Mapping volume of wood chip pile\nCorbin Kling: Jockey’s Ridge State Park: a potential Mars dune analog\nNicholas Kruskamp: Forest structure\nWilliam Ross: Water Surface Elevation Generation & Storm Debris Volume Estimation using UAS\nJoshua Rudd: Crop growth monitoring using sUAS\n\n\n\nProjects 2015\n\nDyer Tristan: Barrier island monitoring of volume change\nFoley Molly: Mapping forest fragmentation in urbanizing landscape using sUAS\nReckling William: Utilities\nBayasgalan Gantulga: Beaver dam impact assessment\nBelica Laura: Monitoring grass conditions under different levels of management (change to solar irradiation from UAS DSM?)\nHarmon Brendan: Gully monitoring and volume change assesment\nPetras Vaclav: Optimizing point cloud density for modeling microtopography controls over surface flow.\nPetrasova Anna: Extracting bare earth from sUAS using lower resolution bare earth lidar\nSmart Lindsey Suzanne: Mapping coastal plain microtopography and its impact on surface water distribution\nVelasquez Montoya Liliana: Mapping soil erosion using sUAS DEMs"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
+    "title": "A. Introduction to Unmanned Aerial Systems",
+    "section": "Outline",
+    "text": "Outline\n\noverview of UAS technology, system’s classifications\nUAS components and operations\nUAS applications\nin class demonstration of selected systems"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
+    "title": "A. Introduction to Unmanned Aerial Systems",
+    "section": "Lecture",
+    "text": "Lecture\n\nLecture Slides: Introduction to UAS\nRecording"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
+    "title": "A. Introduction to Unmanned Aerial Systems",
+    "section": "Supplemental materials",
+    "text": "Supplemental materials\n\nSystems\n\nFixed wing\n\nsenseFly\neBee Classic\neBee Plus\neBee SQ\n\n\n\nRotary wing\n\nZX5 by Trimble\nInspire 2 by DJI\nMavic 2 by DJI\nPhantom 4 Pro by DJI"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
+    "title": "A. Introduction to Unmanned Aerial Systems",
+    "section": "Assignment",
+    "text": "Assignment\n\nUAS: systems and applications"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
+    "title": "A. Introduction to Unmanned Aerial Systems",
+    "section": "Homework",
+    "text": "Homework\nPrepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. (Assignment 1A)"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#objectives",
@@ -60,7 +228,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
     "title": "Introduction to UAS",
     "section": "UAS or UAV? Or maybe a drone?",
-    "text": "UAS or UAV? Or maybe a drone?\n\n\n\nUAV = Unmanned Aerial Vehicle\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\n\n\n\nMore about terminology in the article: Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’"
+    "text": "UAS or UAV? Or maybe a drone?\n\n\n\nUAV = Unmanned Aerial Vehicle\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\n\n\nMore about terminology in the article: Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-does-a-uas-look-like",
@@ -88,7 +256,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-classifications",
     "title": "Introduction to UAS",
     "section": "Different Classifications",
-    "text": "Different Classifications\n\n\n\nPhysical size\nWeight\nEndurance\nAltitude\nWing loading\nEngine type\nRange\nPerformance\nCapabilities\nType\n\n\n\n\n\n\nMore about classification in the article: Perspectives on Unmanned Aircraft Classification for Civil Airworthiness Standards"
+    "text": "Different Classifications\n\n\n\nPhysical size\nWeight\nEndurance\nAltitude\nWing loading\nEngine type\nRange\nPerformance\nCapabilities\nType\n\n\n\n\n\nMore about classification in the article: Perspectives on Unmanned Aircraft Classification for Civil Airworthiness Standards"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#simplified-classifications",
@@ -294,172 +462,11 @@
     "text": "Barriers\n\nconstantly changing legislation and regulations,\npolitical and societal acceptance,\n… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?"
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
-    "title": "UAS Flight Planning",
-    "section": "Outline",
-    "text": "Outline\n\nDefining the data collection purpose\nSurvey area, take off and landing locations\nTerrain and weather conditions\nSafe flight\nFlight parameters\nFlight planning and management platforms"
-  },
-  {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
-    "title": "UAS Flight Planning",
-    "section": "Lecture",
-    "text": "Lecture\n\nFlight planning introduction\nFlight plan analysis in GIS\nLecture recordings - parts 1, 2, 3\nRecording of the Intro to flight planning in eMotion software"
-  },
-  {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
-    "title": "UAS Flight Planning",
-    "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nFlight - watch the following if you were unable to attend the flight session\n\nFixed wing flight (eBee X): set up, launch and landing\nVertical take-off (VTOL) fixed wing flight with Wingtra drone\nRotary wing flight (Phantom)\n\nFlight with Drone Deploy flight planning app\nFlight with Pix4D Capture flight planning app\n\n\n\n\nFlight planning and management platforms\n\n\nSkyward website and trial request\neMotion 3 installer and manual"
-  },
-  {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
-    "title": "UAS Flight Planning",
-    "section": "Assignment",
-    "text": "Assignment\nPrepare a flight plan:\n\nFlight planning in eMotion 3 software\nFlight plan analysis in GRASS GIS"
-  },
-  {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
-    "title": "UAS Flight Planning",
-    "section": "Homework",
-    "text": "Homework\nPrepare a report on the flight plan: purpose, permits, map of the area boundary, with take off, landing, locations, ground control points and flight altitude analysis."
-  },
-  {
-    "objectID": "index.html#instructor",
-    "href": "index.html#instructor",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Instructor",
-    "text": "Instructor\nDr. Corey T. White\nOffice hours: by appointment Email: ctwhite@ncsu.edu"
-  },
-  {
-    "objectID": "index.html#prerequisites",
-    "href": "index.html#prerequisites",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Prerequisites",
-    "text": "Prerequisites\nNone, but GIS/MEA582 and/or GIS540 or equivalent courses are highly recommended."
-  },
-  {
-    "objectID": "index.html#educational-approach",
-    "href": "index.html#educational-approach",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Educational Approach",
-    "text": "Educational Approach\nThis course will consist of: lectures, readings, hands-on exercises, homework assignments, and a major project. All the work will be collected within an electronic portfolio that will systematically include the work that you will do for this and other GIS courses. Extra credits will be given for innovative solutions, creativity in problem solving and extensions to given tasks."
-  },
-  {
-    "objectID": "index.html#class-materials-and-schedule",
-    "href": "index.html#class-materials-and-schedule",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Class materials and schedule",
-    "text": "Class materials and schedule\nSee instructions in Course logistics and schedule\n\nTextbooks\nNo required textbook, on-line material is used.\nRecommended books:\n\nAmy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.\nJonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.\nPaul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.\nDouglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press\n\n\n\nSoftware\nSee Course logistics web page."
-  },
-  {
-    "objectID": "index.html#grading-policy",
-    "href": "index.html#grading-policy",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Grading policy",
-    "text": "Grading policy\n60% homeworks, 40% project 100% is the maximum number of points (total+extra credits) achieved in class. Points are taken off for late submissions.\n\n\n\nGrade\nCourse and each HW\n\n\n\n\nMax\n100\n\n\nA+\n97\n\n\nA\n93\n\n\nA-\n90\n\n\nB+\n87\n\n\nB\n83\n\n\nB-\n80\n\n\nC+\n77\n\n\nC\n73"
-  },
-  {
-    "objectID": "index.html#topics",
-    "href": "index.html#topics",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Topics",
-    "text": "Topics\n\nIntroduction to Unmanned Aerial Systems\nRules and regulations for UAS operations\nFrom images to 3D models: Photogrammetry and Structure from Motion concepts\nUAS flight planning\nImagery processing and structure from motion (SfM)\nAccuracy of UAS-derived DSM and orthophoto\nUAS and lidar data: comparison and fusion\nAnalysis of ultra high resolution elevation models\nAnalysis of multitemporal UAS data and its applications"
-  },
-  {
-    "objectID": "index.html#academic-integrity",
-    "href": "index.html#academic-integrity",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Academic integrity",
-    "text": "Academic integrity\nOverview, Policies, Code of Student Conduct"
-  },
-  {
-    "objectID": "index.html#attendance-policy",
-    "href": "index.html#attendance-policy",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Attendance policy",
-    "text": "Attendance policy\nin regular section, attendance is checked at each class, see also attendance regulations and university definitions of excused absences"
-  },
-  {
-    "objectID": "index.html#accommodation-of-students-with-disabilities",
-    "href": "index.html#accommodation-of-students-with-disabilities",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
-    "section": "Accommodation of students with disabilities",
-    "text": "Accommodation of students with disabilities\nDisability Services Office"
-  },
-  {
     "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_1a_grass.html",
     "href": "course/topics/topic_3_flight_planning/assignments/assignment_1a_grass.html",
     "title": "Assignment 1A",
     "section": "",
     "text": "In order to execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Also remember that the ground altitude is measured in the take off localization and does not take into account local relief. It can be crucial in the mountainous areas. In our case trees, buildings and other man-made structures are more of a concern. Because both – terrain data (from lidar) and planned flight path are available, the elevation difference between the flight ceiling and the surface can be computed using GIS tools.\nIf you are unfamiliar with GRASS GIS - visit the OSgeoLab youtube channel and watch at least the Getting started with GRASS GIS GUI video.\n\nGeneral workflow:\n\nCompute a raster for elevation of the flight path\nGenerate DSM\nCalculate the elevation difference between the flight path and surface\n\n\n\nData\n\nGRASS Location (Lake_Wheeler_NCspm)\n2013 lidar data from Mid Pines\n\n\n\nSoftware\n\nGRASS GIS\n\n\n\nCompute a raster for elevation of the flight path\nFor this analysis you can run GRASS GIS with the Lake_Wheeler_NCspm location. Create a new mapset to manage your flight analysis. *Copy the unzipped location folder into your grassdata folder (in Windows in Documents)\nREMEMBER\nChange working directory:\nSettings &gt; GRASS working environment &gt; Change working directory &gt; select/create any directory or type cd (stands for change directory) into the GUI Console and hit Enter.\nNow you can use the commands from the assignment requiring the text file without the need to specify the full path to the file\n\nDownload the flight path kml file (there is a file from another flight here, you can use it as a comparison), copy the file(s) to your working directory folder.\nLaunch GRASS\nImport downloaded kml into GRASS with v.import, which will reproject the input on the fly:\n\nv.import input=flight_path1.kml output=flight_track_kml\nConvert vector line to elevation points. Set the maximum distance between the points as 0.3 m\nv.to.points -i input=flight_track_kml output=flight_track_points dmax=0.3\nConvert vector to raster after setting the region to study area and 1m resolution\ng.region vect=flight_track_kml res=1\nv.to.rast input=flight_track_points output=flight_path_altitude_rast use=z\nMake the flight path line thick (wide) enough taking to account the wingspan of the UAV and weather impacts on the flight trajectory. Desired width of the path = 5m (radius 2.5m)\nr.grow -m input=flight_path_altitude_rast output=flight_path_wide radius=2.5\n\n\nGenerate DSM\n\nDownload lidar data for Mid Pines to your computer\nSet region to your study area using g.region or using the zoom function for setting the region\nImport lidar data to GRASS\n\nWindows\nr.in.lidar mid_pines_spm_2013.las output=mid_pines_surface_max method=max class_filter=1,2 return_filter=first resolution=3 -oe \nMac/Linux\nr.in.pdal mid_pines_spm_2013.las output=mid_pines_surface_max method=max class_filter=1,2 return_filter=first resolution=3 -oe \n\nNOTE - If you have any issues with the command r.in.lidar - you can download the interpolated DSMs for Mid Pines and use r.unpack to unpack the rasters.\n\n\n\nCalculate the elevation difference between the flight path and surface\nUse map algebra to compute difference between two rasters - elevation of your flight path and Surface of the terrain\nr.mapcalc expression=\"elev_diff = flight_path_wide - mid_pines_surface_max\"\nUse the acquired diffrence map to evaluate your flight plan, pay close attention to the obstacle free zones.\n\n\nVisualize results\nYou can use screenshots from eMotion3 software and GRASS. If you discovered any obstacles and needed to readjust the flight path.\n\ninclude the picture and description of the issue. You can display the orthophoto, COA boundaries for better understanding of the terrain. Sample orthophotos (for the Mid Pines area) can be downloaded from the folder - (Use r.unpack to unpack the rasters)\n\n\n\nExplain your choice of the flight area, parameters and takeoff and landing locations based on the performed analysis\nThe aim is to prove that the flight plan can be used to execute a safe and sucessful flight mission. Describe your thought process - what did you take into account first, what problems did you encouter? Did you need to change your initial plans based on software limitations, legal issues or the relief of the targeted area?"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
-    "title": "A. Introduction to Unmanned Aerial Systems",
-    "section": "Outline",
-    "text": "Outline\n\noverview of UAS technology, system’s classifications\nUAS components and operations\nUAS applications\nin class demonstration of selected systems"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
-    "title": "A. Introduction to Unmanned Aerial Systems",
-    "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides: Introduction to UAS\nRecording"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
-    "title": "A. Introduction to Unmanned Aerial Systems",
-    "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nSystems\n\nFixed wing\n\nsenseFly\neBee Classic\neBee Plus\neBee SQ\n\n\n\nRotary wing\n\nZX5 by Trimble\nInspire 2 by DJI\nMavic 2 by DJI\nPhantom 4 Pro by DJI"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
-    "title": "A. Introduction to Unmanned Aerial Systems",
-    "section": "Assignment",
-    "text": "Assignment\n\nUAS: systems and applications"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
-    "title": "A. Introduction to Unmanned Aerial Systems",
-    "section": "Homework",
-    "text": "Homework\nPrepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. (Assignment 1A)"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
-    "title": "B. Rules and regulations for UAS operations",
-    "section": "Outline",
-    "text": "Outline\n\nlevels of regulatory authority\nSmall UAS Rule (Part 107)\nUAS authorizations to fly\ntypes of airspace and restrictions to flight\ncurrent information resources"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
-    "title": "B. Rules and regulations for UAS operations",
-    "section": "Lecture",
-    "text": "Lecture\n\n[Rules and Regulations]\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nOperating UAS in North Carolina\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA data innovation center, airspace type vector data in shape and kmz format\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources\n\nOther helpful material\n\nEducational use of UAS"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
-    "title": "B. Rules and regulations for UAS operations",
-    "section": "Assignment",
-    "text": "Assignment\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample exam"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
-    "title": "B. Rules and regulations for UAS operations",
-    "section": "Homework",
-    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation."
   },
   {
     "objectID": "course/logistics.html",
@@ -469,17 +476,10 @@
     "text": "Course website and Moodle\nThe course material can be accessed on the Schedule web page.\nCourse Forum, assignment submissions, project material, and grades are handled in Moodle.\n\n\nLectures\n\nFocus of lectures is on principles, theory, concepts, methods and lectures are mostly software independent.\nLecture slides and video are available at each topic’s web page - you can access them through Schedule or Moodle.\nTopics webpages also include links to addition reading and other resources.\n\n\n\nAssignments\n\nMost topics include hands-on assignment - the links to assignments are provided at each topic’s web page - you can access them through Schedule or Moodle.\nFollowing the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:\n\nIntroduction: task, problem\nMethods: general description of methods and concepts\nResults: present the results, including maps, graphs, tables with comments\nDiscussion: was there anything unexpected or problematic in the results? Were there any issues related to the methodology or software? Include suggestions for improvements here.\nConclusion: 1-2 sentences on what you have learned\n\nSubmit your report through Moodle in pdf format, use naming convention LastnameFirstname_HW#.pdf.\n\n\n\nSoftware\n\nGRASS GIS 7.8.5 (you can use these instructions to install it)\nAgisoft Metashape (provided at NCSU) - you can work on the demo version; installation files for Windows, Linux and Mac are available on Agisoft website.\n\nOther resources: - open source software OpenDroneMap and MicMac (documentation can be found here, not used in this course) - LibLAS and LAStools for managing the .las files in GRASS - NCSU Virtual Computing Lab (VCL) - Go to Reservations - New reservation - Choose MS Windows instance ArcGIS Desktop 10.5.1, which has also GRASS GIS 7.2.1, or Linux instance Ubuntu 16.04 LTS Base\n\n\nData\n\nGeneral resources\n\nNorth Carolina dataset (formatted as GRASS location)\n\n\n\nUAS data\n\nboundaries of all COAs obtained by NGAT in North Carolina (google maps, shp)\nStudy site (Lake Wheeler): COA boundaries (shp, kml), GCP coordinates (txt, kml), also included in the GRASS location (see processed data)\nSurvey data: down-sampled pictures and log from the flight 06/20/2015, sample pictures and log from the flight 09/22/2016, all pictures and log (full flight) from the flight 09/22/2016\nProcessed data:\n\nMid Pines dataset (formatted as GRASS location): LakeWheeler_NCspm with timeseries of DSMs from 2015 flights\nSmaller sample point cloud: 2015_06_sample_points_NCsmp.las\nMid Pines point clouds (limited extent)\nOptional (very large files: 1GB+)\n\nMid Pines point clouds from 2015 flights in las, obj and txt formats\nPoint clouds for the gully area at Midpines (high density, from 2015 flights)\n\n\n\n\n\nLidar data\n\nClassified lidar point cloud in LAS format for Mid_Pines\nSecref and Mid Pines interpolated DEM/DSM (use r.unpack)\n\n\n\nOrthophotography\n\nOrthophotos as GRASS GIS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)"
   },
   {
-    "objectID": "course/projects.html#proposal-presentation-and-paper-requirements",
-    "href": "course/projects.html#proposal-presentation-and-paper-requirements",
-    "title": "Projects",
-    "section": "Proposal, presentation and paper requirements",
-    "text": "Proposal, presentation and paper requirements\n\nProposal\n\nDefine research question, select location, list available data, methods (theory), software tools, describe expected results.\n\n\n\nPresentation\n\nLength: DE students 10 minutes, on-campus students 15 min + 5 min discussion\nIntroduction/background: problem, motivation for the research, research question / objective\nStudy site: where, why this site, geographic characteristics\nData acquisition: platform and sensor, flight plan (if applicable), flight conditions\nData properties and processing: resolution, spatial extent, accuracy\nAnalysis and/or modeling methods: describe methodology and workflows\nResults: present and explain the results using qualitative and quantitative description, tables, graphs, maps/images\nDiscussion: discuss impact of flight conditions, data and methods on the results, uncertainty issues, compare with results from other studies, which questions remain unresolved, what still needs to be done\nConclusion: summary of the most important findings including advances in methodology, future work\n\n\n\nPaper\n\nStructure and formatting should follow scientific journal standards.\nSame sections as the presentation\nText and Figures: min. 4 pages, single spaced including tables and references images, maps, graphs, presented in readable size with scale and legends where needed\nReferences: at least 5 papers from scientific journals, rest can be reports, web documents\nAppendix (optional): workflows, scripts, metadata. Software commands, issues go here"
-  },
-  {
-    "objectID": "course/projects.html#past-projects",
-    "href": "course/projects.html#past-projects",
-    "title": "Projects",
-    "section": "Past Projects",
-    "text": "Past Projects\n\nProjects 2021\n\nBartenfelder, Amy: Areal Changes at LAke Wheeler Field After the 2017 Hurricane Season\nWebb, Andrew: Cabon Mapping of Agricultural Fields\nWilliams, Chantel: Northern Umstead State Park - Vegetation\nGoodnight, Dallas: Can NC One Map Orthoimagery be used to accurately measure Cape Lookout Park shoreline elevation changes over time?\nWingler, Dylan: Using LiDAR to Compare Impact between Hurricane Matthew and Sandy on Cape Hatteras, NC\nPelfrey, Hank: Estimating Individual Tree Location and Height with UAS Photogrammetry\nDorner, Judy: Object detection in UAS Imagery Using Machine Learning Applications\nMoy, Matthew: Creating and Interpolated DSM of Downtown Cary, NC\nPerry, Marcus: Mars Science Helicopter: Exploring Photogrammetry with Ingenuity’s NavCam Data\nSawtelle, Macy: Testing the Capability of Unmanned Aircraft vehicles to Monitor Forest Regeneration Activities\nWilliams, Patrick: Using Unmanned Aerial System Imagery to Perform Solar Potential Analysis\nErlenbach, Peter: Image Classification Using Drone Data\nJohnson, Randy: Urban Landcover Classification Utilizing UAS\nHill, Russell: Canyonlands National Park - 3D mash and a Scene Layer Package\nFarrell, Sean: Multiple Return Lidar Analysis of Hydrologic Changes Due to Highway Flooding from Hurricane Florence\nTan, Samantha: The Impact of hurricane Events on Coastlines: Measuring Coastline Loss with Pre and Post Michael Orthophotogrammetry\nHerzig, Bill: Drone vs Satellite - Multispectral NDVI Image Pixel Analysis\n\n\n\nProjects 2020\n\nAdams, Eric: Environmental Study Using UAS Data in the Edenton Bay, NC Region\nBert, Steve: Optimizing Parking Management for the City of Raleigh. An Unmanned Aircraft Systems Inventory Approach\nDavis, Britt: Structure from Motion as a Participatory Design Tool: The Landscape Architect’s Guide to Better Models and Deeper Community Engagement\nFranklin, Samuel: A Comparative Analysis of UAS in Archeology\nMcDonald, Christopher: UAS Technology for Mapping Urban Development – SouthEnd District of Charlotte, NC\nParish, William: UAS Implementation for Civil Engineering Design and Construction: NC 12 Bridge near Rodanthe Study\nPhillips, Ryan: Evaluating the Effect of Image Resolution on Digital Surface Model Construction and Usefulness\nPierson, Gardner: The Use of High Resolution UAS Data vs Traditional Ariel Imaging to Predict Inundation and Potential Urban Impact on the Southern Slope of Mt. Etna, Italy, Using a Lava Flow Emplacement Model.\nSignor, Kari: Exploring Lidar Classification Methods: Archaeological Applications in the Maya Lowlands\nSpear, Michael: Using UAS Umagery for Land Cover Classification\nWatts, Matthew: Exploring LiDAR in Area of Wildfire and Assessing the Benefits of Adding UAS Data\n\n\n\nProjects 2019\n\nBaker, Kurt: Effective ground classification of non-uniform laser data\nBrown, Tamika: The Implications of Using Unmanned Aerial Systems to Monitor Hazardous Waste Facility Sites and Better Understand Community Endangerment within the City of Chicago\nCharping, Charlie: UAS Technology for Open Pit Mining\nConrad, Matt: 3D Modelling from Video: Technology Application\nCummings, John: Automated Detection of Roadway Features Via UAS\nDavis, Jeremy: Creating a Basis for the Influence of Elevation on Wheat Varieties in North Carolina\nGroh, Erica: Proposed UAS Survey of Alluvial Fans in California\nHoffman, Dallas: Analysis of Multiple Return Lidar in ArcGIS\nJones, Alli: LIDAR and UAV to Monitor Beach Nourishment - Emerald Isle, NC\nMa, Xingli: Use of UAS to Detect Disease in Soybeans\nNicholas, D. Chase: Tracking Crop Development with UAVs: Using SfM to Estimate Plant Height and Volume\nOberrender, Daniel: Cave Detection using Local Relief Model derived from UAS SfM\nPotter, Andrew: Coastal Change Analysis of the Cape Lookout National Seashore\nRuiz, Rachel: Implementation of Unmanned Aerial System to Conduct Bridge Inspection\nScheip, Corey: UAS Imagery to Supplement Lidar-Based Landslide Programs\nWheaton, James: Utilizing UAS to Generate Land Cover Data\nWilliams, Caleb: Unmanned Aerial Systems for Waterfowl Population Studies at the Tom Yawkey Wildlife Center\n\n\n\nProjects 2018\n\nAlbert, James: A New Approach to Landfill Management in the Solid Waste Industry\nAnderson, Alexander: Using UAS Structure from Motion and and LiDAR DSMs to Identify, Monitor and Mitigate Coastal Erosion In Okaloosa County\nBastias, Sabina and Montgomery, Kellyn: Combining Nadir and Oblique Imagery to Address Distortion in UAS Data\nCatlow, Maureen, Hahn, Becca, and Voigt Erin: “RescUAV data after Hurricane Irma: Natural Disaster Analysis”\nDawson, Victor: ???\nEdenhart-Pepe, Skyler and Pierce, Austin: Evaluating the use of time series UAS and Lidar data to monitor rate of change of hydrologic flow patterns on land development projects.\nFelipe, Lauren: ???\nForte, Michael: Object Detection Using Structure From Motion Techniques\nHowell, Andrew: Estimating Area and Standing Biomass of Zizania latifolia Using sUAS\nKesselring, Todd: Using LiDAR and NDVI for Vegetation Management in Utility Right of Ways\nLamb, Kelsey: Mapping surface water and impervious surface\nLiesch, Mandy: Changes in Water Balance Associated with Farm Development\nMeyers, William: Measuring and Modeling Biomass of Pines at Tatum Farm\nSchrum, Paul: 3D UAV track in Blender: A Blender Addon to import, edit, then export UAV trajectories\nSuffern, Carrie: Monitoring Drainage Issues at a Small Farm: Use of UAS DSMs and LiDAR DEMs to Forecast Storm Runoff and Monitor Sinkhole Formation\nVincent, Sarah: UAV versus Statewide Contours, is it worth it to move dirt?\n\n\n\nProjects 2016\n\nTravis Howell: Mapping volume of wood chip pile\nCorbin Kling: Jockey’s Ridge State Park: a potential Mars dune analog\nNicholas Kruskamp: Forest structure\nWilliam Ross: Water Surface Elevation Generation & Storm Debris Volume Estimation using UAS\nJoshua Rudd: Crop growth monitoring using sUAS\n\n\n\nProjects 2015\n\nDyer Tristan: Barrier island monitoring of volume change\nFoley Molly: Mapping forest fragmentation in urbanizing landscape using sUAS\nReckling William: Utilities\nBayasgalan Gantulga: Beaver dam impact assessment\nBelica Laura: Monitoring grass conditions under different levels of management (change to solar irradiation from UAS DSM?)\nHarmon Brendan: Gully monitoring and volume change assesment\nPetras Vaclav: Optimizing point cloud density for modeling microtopography controls over surface flow.\nPetrasova Anna: Extracting bare earth from sUAS using lower resolution bare earth lidar\nSmart Lindsey Suzanne: Mapping coastal plain microtopography and its impact on surface water distribution\nVelasquez Montoya Liliana: Mapping soil erosion using sUAS DEMs"
+    "objectID": "course/topics.html",
+    "href": "course/topics.html",
+    "title": "Topics",
+    "section": "",
+    "text": "About this site"
   }
 ]
