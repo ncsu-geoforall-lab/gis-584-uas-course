@@ -445,7 +445,7 @@
     "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
     "title": "B. Rules and regulations for UAS operations",
     "section": "Lecture",
-    "text": "Lecture\n\n[Rules and Regulations]\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nOperating UAS in North Carolina\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA data innovation center, airspace type vector data in shape and kmz format\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources\n\nOther helpful material\n\nEducational use of UAS"
+    "text": "Lecture\n\nLecture Slides: Rules and Regulations\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nOperating UAS in North Carolina\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA data innovation center, airspace type vector data in shape and kmz format\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources\n\nOther helpful material\n\nEducational use of UAS"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
@@ -481,5 +481,285 @@
     "title": "Projects",
     "section": "Past Projects",
     "text": "Past Projects\n\nProjects 2021\n\nBartenfelder, Amy: Areal Changes at LAke Wheeler Field After the 2017 Hurricane Season\nWebb, Andrew: Cabon Mapping of Agricultural Fields\nWilliams, Chantel: Northern Umstead State Park - Vegetation\nGoodnight, Dallas: Can NC One Map Orthoimagery be used to accurately measure Cape Lookout Park shoreline elevation changes over time?\nWingler, Dylan: Using LiDAR to Compare Impact between Hurricane Matthew and Sandy on Cape Hatteras, NC\nPelfrey, Hank: Estimating Individual Tree Location and Height with UAS Photogrammetry\nDorner, Judy: Object detection in UAS Imagery Using Machine Learning Applications\nMoy, Matthew: Creating and Interpolated DSM of Downtown Cary, NC\nPerry, Marcus: Mars Science Helicopter: Exploring Photogrammetry with Ingenuity’s NavCam Data\nSawtelle, Macy: Testing the Capability of Unmanned Aircraft vehicles to Monitor Forest Regeneration Activities\nWilliams, Patrick: Using Unmanned Aerial System Imagery to Perform Solar Potential Analysis\nErlenbach, Peter: Image Classification Using Drone Data\nJohnson, Randy: Urban Landcover Classification Utilizing UAS\nHill, Russell: Canyonlands National Park - 3D mash and a Scene Layer Package\nFarrell, Sean: Multiple Return Lidar Analysis of Hydrologic Changes Due to Highway Flooding from Hurricane Florence\nTan, Samantha: The Impact of hurricane Events on Coastlines: Measuring Coastline Loss with Pre and Post Michael Orthophotogrammetry\nHerzig, Bill: Drone vs Satellite - Multispectral NDVI Image Pixel Analysis\n\n\n\nProjects 2020\n\nAdams, Eric: Environmental Study Using UAS Data in the Edenton Bay, NC Region\nBert, Steve: Optimizing Parking Management for the City of Raleigh. An Unmanned Aircraft Systems Inventory Approach\nDavis, Britt: Structure from Motion as a Participatory Design Tool: The Landscape Architect’s Guide to Better Models and Deeper Community Engagement\nFranklin, Samuel: A Comparative Analysis of UAS in Archeology\nMcDonald, Christopher: UAS Technology for Mapping Urban Development – SouthEnd District of Charlotte, NC\nParish, William: UAS Implementation for Civil Engineering Design and Construction: NC 12 Bridge near Rodanthe Study\nPhillips, Ryan: Evaluating the Effect of Image Resolution on Digital Surface Model Construction and Usefulness\nPierson, Gardner: The Use of High Resolution UAS Data vs Traditional Ariel Imaging to Predict Inundation and Potential Urban Impact on the Southern Slope of Mt. Etna, Italy, Using a Lava Flow Emplacement Model.\nSignor, Kari: Exploring Lidar Classification Methods: Archaeological Applications in the Maya Lowlands\nSpear, Michael: Using UAS Umagery for Land Cover Classification\nWatts, Matthew: Exploring LiDAR in Area of Wildfire and Assessing the Benefits of Adding UAS Data\n\n\n\nProjects 2019\n\nBaker, Kurt: Effective ground classification of non-uniform laser data\nBrown, Tamika: The Implications of Using Unmanned Aerial Systems to Monitor Hazardous Waste Facility Sites and Better Understand Community Endangerment within the City of Chicago\nCharping, Charlie: UAS Technology for Open Pit Mining\nConrad, Matt: 3D Modelling from Video: Technology Application\nCummings, John: Automated Detection of Roadway Features Via UAS\nDavis, Jeremy: Creating a Basis for the Influence of Elevation on Wheat Varieties in North Carolina\nGroh, Erica: Proposed UAS Survey of Alluvial Fans in California\nHoffman, Dallas: Analysis of Multiple Return Lidar in ArcGIS\nJones, Alli: LIDAR and UAV to Monitor Beach Nourishment - Emerald Isle, NC\nMa, Xingli: Use of UAS to Detect Disease in Soybeans\nNicholas, D. Chase: Tracking Crop Development with UAVs: Using SfM to Estimate Plant Height and Volume\nOberrender, Daniel: Cave Detection using Local Relief Model derived from UAS SfM\nPotter, Andrew: Coastal Change Analysis of the Cape Lookout National Seashore\nRuiz, Rachel: Implementation of Unmanned Aerial System to Conduct Bridge Inspection\nScheip, Corey: UAS Imagery to Supplement Lidar-Based Landslide Programs\nWheaton, James: Utilizing UAS to Generate Land Cover Data\nWilliams, Caleb: Unmanned Aerial Systems for Waterfowl Population Studies at the Tom Yawkey Wildlife Center\n\n\n\nProjects 2018\n\nAlbert, James: A New Approach to Landfill Management in the Solid Waste Industry\nAnderson, Alexander: Using UAS Structure from Motion and and LiDAR DSMs to Identify, Monitor and Mitigate Coastal Erosion In Okaloosa County\nBastias, Sabina and Montgomery, Kellyn: Combining Nadir and Oblique Imagery to Address Distortion in UAS Data\nCatlow, Maureen, Hahn, Becca, and Voigt Erin: “RescUAV data after Hurricane Irma: Natural Disaster Analysis”\nDawson, Victor: ???\nEdenhart-Pepe, Skyler and Pierce, Austin: Evaluating the use of time series UAS and Lidar data to monitor rate of change of hydrologic flow patterns on land development projects.\nFelipe, Lauren: ???\nForte, Michael: Object Detection Using Structure From Motion Techniques\nHowell, Andrew: Estimating Area and Standing Biomass of Zizania latifolia Using sUAS\nKesselring, Todd: Using LiDAR and NDVI for Vegetation Management in Utility Right of Ways\nLamb, Kelsey: Mapping surface water and impervious surface\nLiesch, Mandy: Changes in Water Balance Associated with Farm Development\nMeyers, William: Measuring and Modeling Biomass of Pines at Tatum Farm\nSchrum, Paul: 3D UAV track in Blender: A Blender Addon to import, edit, then export UAV trajectories\nSuffern, Carrie: Monitoring Drainage Issues at a Small Farm: Use of UAS DSMs and LiDAR DEMs to Forecast Storm Runoff and Monitor Sinkhole Formation\nVincent, Sarah: UAV versus Statewide Contours, is it worth it to move dirt?\n\n\n\nProjects 2016\n\nTravis Howell: Mapping volume of wood chip pile\nCorbin Kling: Jockey’s Ridge State Park: a potential Mars dune analog\nNicholas Kruskamp: Forest structure\nWilliam Ross: Water Surface Elevation Generation & Storm Debris Volume Estimation using UAS\nJoshua Rudd: Crop growth monitoring using sUAS\n\n\n\nProjects 2015\n\nDyer Tristan: Barrier island monitoring of volume change\nFoley Molly: Mapping forest fragmentation in urbanizing landscape using sUAS\nReckling William: Utilities\nBayasgalan Gantulga: Beaver dam impact assessment\nBelica Laura: Monitoring grass conditions under different levels of management (change to solar irradiation from UAS DSM?)\nHarmon Brendan: Gully monitoring and volume change assesment\nPetras Vaclav: Optimizing point cloud density for modeling microtopography controls over surface flow.\nPetrasova Anna: Extracting bare earth from sUAS using lower resolution bare earth lidar\nSmart Lindsey Suzanne: Mapping coastal plain microtopography and its impact on surface water distribution\nVelasquez Montoya Liliana: Mapping soil erosion using sUAS DEMs"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html",
+    "title": "GIS/MEA 584: UAS Mapping and Analytics",
+    "section": "",
+    "text": "UAS Rules and Regulations\n\n\nGIS/MEA 584:\n\n\nMapping and Analysis Using UAS\n\n\nJustyna Jeziorska\n\n\nCenter for Geospatial Analytics  North Carolina State University\n\n\n\nObjectives\n\n\n\nUnderstand the role of the Federal Aviation Administration (FAA) in ensuring safety in National Airspace System (NAS);\n\n\nRecognize 3 main types of UAS operations and distinguish between them;\n\n\nName the requirements for legal operations of commercial purposes in the U.S. - both in regard to the pilot and to the UAS;\n\n\nOutline safety guidelines for recreational use of UAS;\n\n\n\n\nObjectives\n\n\n\nKnow operating rules for commercial use of UAS (Part 107);\n\n\nRecognize permanent and temporary “no-drone-zones” and knows where to find information about them;\n\n\nUnderstand the role of Certificate of Authorization and the process of obtaining it;\n\n\nRecognize whan the educational use of UAS can be classified as recreational and when commercial\n\n\n\n\n\nFederal Aviation Adminiostration (FAA)\n\n\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Created in 1958 in response to a series of fatal accidents and midair collisions involving commercial aircraft;&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;Mandated to develop plans and policies for the use of navigable airspace to ensure the safety of aircraft and the efficient use of airspace;&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/FAA.png\" width=90%&gt;\n&lt;/div&gt;\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Since the creation of the FAA, American airspace has become one of the most regulated fields in the United States.&lt;/li&gt;\n\n\n\nNational Airspace System (NAS)\n\n\n\nAlready congested with piloted aircraft, and adding a swarm of UAVs requires thoughtful planning;\n\n\nMain mandate - to ensure that UASs do not endanger current users of the NAS (including manned or other unmanned aircraft) nor compromise the safety of the people and property on the ground\n\n\nWhen it comes to the safe operation and integration of the UAS into the NAS, one of the main concern that the FAA has is the lack of detect-sense-and avoid capability of the current UAS technology\n\n\n\n\n\nTypes of UAS operations\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;FAA distinguishes 3 main types of operations&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Different rules apply for legal operations of UAS depending on the type of UAS operations&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/uas_operations.PNG\"&gt;\n&lt;/div&gt;\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Additional type - &lt;strong&gt;educational use&lt;/strong&gt; can be considered as recreational or commercial&lt;/li&gt;\n\n\n\nRecreational use of UAS\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;The recreational use of sUAS is the operation of an unmanned aircraft for &lt;strong&gt;personal interests and enjoyment&lt;/strong&gt;.&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;using a sUAS to take photographs for your own personal use would be considered recreational;&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/recreational.png\"&gt;\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;using the same device to take photographs or videos for compensation or sale to another individual would be considered a commercial operation.&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n\n\n\nRecreational use - safety guidelines\n\n&lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Follow community-based safety guidelines, as developed by organizations such as the Academy of Model Aeronautics (AMA)&lt;/li&gt;\n    &lt;/ul&gt;\n\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Fly no higher than &lt;strong&gt;400 feet&lt;/strong&gt; and remain below any surrounding obstacles when possible.&lt;/li&gt;\n\nKeep your sUAS in eyesight at all times, and use an observer to assist if needed.\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/did_you_know2.PNG\"&gt;\n&lt;/div&gt;\n\n\n\nRecreational use - safety guidelines\n\n&lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Remain well clear of and &lt;strong&gt;do not interfere with manned aircraft operations&lt;/strong&gt;, and you must see and avoid other aircraft and obstacles at all times.&lt;/li&gt;\n    &lt;/ul&gt;\n\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Do not intentionally fly over unprotected persons or moving vehicles, and remain &lt;strong&gt;at least 25 feet away&lt;/strong&gt; from individuals and vulnerable property.&lt;/li&gt;\n\nContact the airport and control tower before flying within 5 miles of an airport\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/cartoon3.jpg\"&gt;\n&lt;/div&gt;\n\n\n\nRecreational use - safety guidelines\n\n&lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Ensure the operating environment is safe and that the operator is competent and proficient in the operation of the sUAS.&lt;/li&gt;\n    &lt;/ul&gt;\n\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Do not fly near or over sensitive infrastructure or property such as power stations, water treatment facilities, correctional facilities, heavily traveled roadways, government facilities, etc.&lt;/li&gt;\n\nDo not fly in adverse weather conditions such as in high winds or reduced visibility.\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/funny2.jpg\"&gt;\n&lt;/div&gt;\n\n\n\nRecreational use - safety guidelines\n\n&lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Check and follow all local laws and ordinances before flying over private property.&lt;/li&gt;\n    &lt;/ul&gt;\n\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Do not conduct surveillance or photograph persons in areas where there is an expectation of privacy without the individual’s permission.&lt;/li&gt;\n\nDo not fly under the influence of alcohol or drugs\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/cartoon.jpg\"&gt;\n&lt;/div&gt;\n\n\n\nCommercial use of UAS\n\n\nAny commercial use in connection with a business, including:\n\n\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Selling photos or videos taken from a UAS&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;Using UAS to provide contract services, such as industrial equipment or factory inspection,&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;Using UAS to provide professional services, such as security or telecommunications,&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;Using UAS to monitor the progress of work your company is performing.&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/commercial2.png\"&gt;\n    &lt;img src=\"img/rules/inspection.jpg\"&gt;\n&lt;/div&gt;\n\n\n\nCommercial use - Remote Pilot requirements\n\n&lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Must be at least 16 years of age&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;Must hold a &lt;a href =\"https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot/\"&gt;remote pilot airman certificate&lt;/a&gt; with a small UAS rating or be under the direct supervision of someone holding a remote pilot airman certificate&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;div class=\"left\"&gt;\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Must pass the applicable Transportation Security Administration (TSA) vetting&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;How to obtain a Remote Pilote Airman Certificate &lt;a href =\"https://www.youtube.com/watch?v=v-d1RuTFvbs\"&gt;(video)&lt;/a&gt;&lt;/li&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/licence.png\"&gt;\n&lt;/div&gt;\n\n\n\nRemote Pilot Certificate\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;&lt;a href =\"https://www.aopa.org/-/media/files/aopa/home/go-flying/drones/aopa-checklist-for-obtaining-a-remote-pilot-certificate.pdf?la=en\"&gt;Checklist for \nObtaining a Remote Pilot Certificate\n\n    &lt;li class=\"fragment\"&gt;&lt;a href =\"https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/media/remote_pilot_study_guide.pdf\"&gt;Remote Pilot Study Guide&lt;/a&gt;&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;&lt;a href =\"https://www.faasafety.gov/login/Default.aspx?dest=gslac/ALC/course_content&enroll=true&cID=451\"&gt;FAA Safety Team Part 107 Small UAS Training Course (login required)&lt;/a&gt;&lt;/li&gt;\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/test.PNG\"  width=80%&gt;\n&lt;/div&gt;\n\n\n\nCommercial use - UAS requirements\n\n\n    &lt;ul&gt;\n        &lt;li class=\"fragment\"&gt;Must weight less than 55 lbs.&lt;/li&gt;\n        &lt;li class=\"fragment\"&gt;Must undergo pre-flight check by remote pilot in command (or the person supervising the operation)&lt;/li&gt;\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n   &lt;img src=\"img/rules/cartoon9.jpg\"&gt;\n\n\n\nThe U.S. Court of Appeals for the District of Columbia Circuit invalidated the registration requirement with the decision from May 19th 2017\n\n\nThe registration requirement is back on since 12/13/2017\n\n\n\nCommercial use - location requirements\n\n&lt;img src=\"img/rules/NAS_classification.PNG\" width=80%&gt;\n&lt;div class=\"left\"&gt;\n    &lt;ul&gt;\n        &lt;li class=\"small fragment\"&gt;Class B/C/D May operate with permission from local Air Traffic Control&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;ul&gt;\n        &lt;li class=\"small fragment\"&gt;CLASS E/G – May operate while following all other regulations&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n\n\n\nCommercial use - location requirements\n\n\n\nEasy way to remember main elements\n\n    &lt;ul&gt;\n        &lt;li class=\"small fragment\"&gt;Solid line – higher class, dashed line – lower class&lt;/li&gt;\n        &lt;li class=\"small fragment\"&gt;Blue line – higher class, magenta line – lower class&lt;/li&gt;\n    &lt;/ul&gt;\n\nThis translates to:\n\n    &lt;ul&gt;\n        &lt;li class=\"small fragment\"&gt;Solid blue – class B, Solid magenta – class C&lt;/li&gt;\n        &lt;li class=\"small fragment\"&gt;Dashed blue – class D, Dashed magenta – class E&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n   &lt;img src=\"img/rules/NAS_map.png\"&gt;\n    &lt;ul&gt;\n    &lt;li class=\"small\"&gt;&lt;a href =\"http://c-aviation.net/airspace-guide-usa-chart-reading-tutorial/\"&gt;Chart reading tutorial&lt;/a&gt;&lt;/li&gt;\n    &lt;li class=\"small\"&gt;&lt;a href =\"https://www.faasafety.gov/gslac/ALC/course_content.aspx?cID=42&sID=505&preview=true\"&gt;FAA online course on airspace classification and map&lt;/a&gt;&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n\n\n\nCommercial use - operating rules\n\n&lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Must fly under 400 feet above ground level (AGL) or, if flying at an altitude higher than 400 feet AGL, stay within 400 feet of a structure.&lt;/li&gt;\n    &lt;/ul&gt;\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Must not fly from a moving vehicle unless you are in a sparsely populated area &lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Must fly at or below 100 mph&lt;/li&gt;\n\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/structures.PNG\"&gt;\n&lt;/div&gt;\n\n\n\nCommercial use - operating rules\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Must fly during daylight hours or civil twilight hours (30 minutes before official sunrise to 30 minutes after official sunset, local time) with appropriate anti-collision lighting&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/light.PNG\"&gt;\n&lt;/div&gt;\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Must yield right of way to manned aircraft&lt;/li&gt;\n    &lt;/ul&gt;\n\n\n\nCommercial use - operating rules\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Must keep the UAS in sight (i.e. visual line of sight), either by the remote pilot in command or a visual observer&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Must not fly over people&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/did_you_know3.PNG\"&gt;\n&lt;/div&gt;\n\n\n\nWaivers from operating rules for commercial use of UAS\n\n&lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;If you want to operate UAS for commercial purposes outside of these rules, you may apply for certificate of waiver.&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;The FAA will grant waivers if operation can be performed safely but may otherwise not be allowed under Part 107.&lt;/li&gt;\n    &lt;/ul&gt;\n\n\n\nWaivable sections of part 107\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Operation from a moving vehicle or aircraft (§&nbsp;107.25)*&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Daylight operation (§&nbsp;107.29)&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Visual line of sight aircraft operation (§&nbsp;107.31)*&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Visual observer (§&nbsp;107.33)&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Operation in certain airspace (§&nbsp;107.41)&lt;/li&gt;\n    &lt;/ul&gt;\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Yielding the right of way (§&nbsp;107.37(a))&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Operation of multiple small unmanned aircraft systems (§&nbsp;107.35)&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Operation over people (§&nbsp;107.39)&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Operating limitations for small unmanned aircraft (§&nbsp;107.51)&lt;/li&gt;\n    &lt;/ul&gt;\n\n&lt;ul&gt;\n    &lt;li class=\"small\"&gt;No waiver of this provision will be issued to allow the carriage of property of another by aircraft for compensation or hire&lt;/li&gt;\n\n    &lt;/ul&gt;\n\n\n\nWaivable sections of part 107\n\n&lt;img src=\"img/rules/waivers.PNG\" width=70%&gt;\n    &lt;p class=\"small\"&gt;as of January 2017&lt;/p&gt;\n\n\n\nAccident Reporting (§ 107.9)\n\nNo later than 10 days after an operation (…) a remote pilot in command must report to the Federal Aviation Administration in a manner acceptable to the Administrator, any operation of the small unmanned aircraft involving at least:\n\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Serious injury to any person or any loss of consciousness; or&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;Damage to any property, other than the small unmanned aircraft, unless the cost of repair (including materials and labor) or fair market value of the property does not exceed &lt;strong&gt;$500&lt;/strong&gt;&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/drone-crash-test.png\"&gt;\n&lt;/div&gt;\n\n\n\nWhere NOT to fly\n\n&lt;img src=\"img/rules/no_drone_zoneFAA.PNG\" width=70%&gt;\n\n\n\nAirspace restrictions\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Security Sensitive Airspace Restrictions&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Temporary Flight Restrictions (TFRs)&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Restricted or Special Use Airspace&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Stadiums and sporting events&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Wildfires&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Airports&lt;/li&gt;\n    &lt;/ul&gt;\n\n\n    &lt;img src=\"img/rules/no_drone_zone.PNG\" width=60%&gt;\n\n\n\n\nSecurity Sensitive Airspace Restrictions\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Prohibited all UAS flights within the airspace&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Restrictions extend from the ground up to 400 feet AGL,&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Apply to all types and purposes of UAS flight operations,&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Remain in effect 24 hours a day, 7 days a week.&lt;/li&gt;\n\n    &lt;/ul&gt;\n\n\n    &lt;img src=\"img/rules/restricted2.png\"&gt;\n    &lt;li&gt;14 CFR § 99.7&lt;/li&gt;\n\n\n\n\nTemporary Flight Restrictions\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;TFR - area of airspace where air travel is limited because of a temporary hazardous condition, such as a wildfire or chemical spill; a security-related event&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;TFR contains the details about the restriction (size, altitude, time period that it is in effect, and what types of operations are restricted and permitted)&lt;/li&gt;\n    &lt;/ul&gt;\n\n\n    &lt;img src=\"img/rules/tfr.PNG\"&gt;\n    &lt;li&gt;&lt;a href =\"http://tfr.faa.gov/tfr_map_ims/html/index.html\"&gt;TFR map&lt;/a&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;a href =\"http://tfr.faa.gov/tfr2/list.html\"&gt;TFR list&lt;/a&gt;&lt;/li&gt;\n\n\n\n\nRestricted or Special Use Airspace\n\n\nTypes of Special Use Airspace include:\n\n\nProhibited areas\n\n\nRestricted areas\n\n\nWarning areas\n\n\nMilitary operation areas (MOAs)\n\n\nAlert areas\n\n\nControlled firing areas (CFAs)\n\n\n\n\n    &lt;img src=\"img/rules/cartoon_DC.jpg\"&gt;\n\nThe airspace surrounding Washington DC is the most restricted in the country more info\n\n\n\n\nStadiums and sporting events\n\n\n&lt;ul&gt;\n&lt;li&gt;UAS operations are &lt;strong&gt;prohibited&lt;/strong&gt; within a radius of &lt;strong&gt;3 nautical miles&lt;/strong&gt; of the stadium or venue of:&lt;/li&gt;\n    &lt;ul&gt;\n    &lt;li class=\"small fragment\"&gt;Major League Baseball&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;National Football League&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;NCAA Division One Football&lt;/li&gt;\n    &lt;li class=\"small fragment\"&gt;NASCAR Sprint Cup, Indy Car, and Champ Series races&lt;/li&gt;\n    &lt;/ul&gt;\n\n\n    &lt;img src=\"img/rules/did_you_know7.PNG\"&gt;\n\n\n\n\nWildfires\n\n\nIt is illegal to fly your UAS in or around a wildfire firefighting operation \n\n\n    &lt;img src=\"img/rules/wildfires.PNG\" width=90%&gt;\n\n\n\n\nAirports\n\n\n\nRecreational operators are required to give notice for flights within 5 miles of an airport to both the airport operator and air traffic control tower, if the airport has a tower.\n\n\n\n\nRecreational operations are not permitted in Class B airspace around most major airports without specific air traffic permission and coordination\n\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/rules/drone_airport.jpg\"&gt;"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#objectives",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#objectives",
+    "title": "UAS Rules and Regulations",
+    "section": "Objectives",
+    "text": "Objectives\n\n\nUnderstand the role of the Federal Aviation Administration (FAA) in ensuring safety in National Airspace System (NAS)\nRecognize the 3 main types of UAS operations and distinguish between them\nName the requirements for legal operations of commercial purposes in the U.S. Both in regard to the pilot and to the UAS\nOutline safety guidelines for recreational use of UAS"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#federal-aviation-administration-faa",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#federal-aviation-administration-faa",
+    "title": "UAS Rules and Regulations",
+    "section": "Federal Aviation Administration (FAA)",
+    "text": "Federal Aviation Administration (FAA)\n\n\n\nCreated in 1958 in response to a series of fatal accidents and midair collisions involving commercial aircraft\nMandated to develop plans and policies for the use of navigable airspace to ensure the safety of aircraft and the efficient use of airspace\nSince the creation of the FAA, American airspace has become one of the most regulated fields in the United States"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#national-airspace-system-nas",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#national-airspace-system-nas",
+    "title": "UAS Rules and Regulations",
+    "section": "National Airspace System (NAS)",
+    "text": "National Airspace System (NAS)\n\n\nAlready congested with piloted aircraft, and adding a swarm of UAVs requires thoughtful planning\nMain mandate: to ensure that UASs do not endanger current users of the NAS (including manned or other unmanned aircraft) nor compromise the safety of the people and property on the ground\nThe lack of detect-sense-and-avoid capability of the current UAS technology is a major concern for the FAA"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#types-of-uas-operations",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#types-of-uas-operations",
+    "title": "UAS Rules and Regulations",
+    "section": "Types of UAS operations",
+    "text": "Types of UAS operations\n\n\n\nFAA distinguishes 3 main types of operations\nDifferent rules apply for legal operations of UAS depending on the type of UAS operations\nAdditional type - educational use can be considered as recreational or commercial"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use-of-uas",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use-of-uas",
+    "title": "UAS Rules and Regulations",
+    "section": "Recreational use of UAS",
+    "text": "Recreational use of UAS\n\n\n\nThe recreational use of sUAS is the operation of an unmanned aircraft for personal interests and enjoyment\nUsing a sUAS to take photographs for your own personal use would be considered recreational\nUsing the same device to take photographs or videos for compensation or sale to another individual would be considered a commercial operation"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines",
+    "title": "UAS Rules and Regulations",
+    "section": "Recreational use - safety guidelines",
+    "text": "Recreational use - safety guidelines\n\nFollow community-based safety guidelines, as developed by organizations such as the Academy of Model Aeronautics (AMA)\n\n\n\n\nFly no higher than 400 feet and remain below any surrounding obstacles when possible\nKeep your sUAS in eyesight at all times, and use an observer to assist if needed"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-1",
+    "title": "UAS Rules and Regulations",
+    "section": "Recreational use - safety guidelines",
+    "text": "Recreational use - safety guidelines\n\nRemain well clear of and do not interfere with manned aircraft operations, and you must see and avoid other aircraft and obstacles at all times\n\n\n\n\nDo not intentionally fly over unprotected persons or moving vehicles, and remain at least 25 feet away from individuals and vulnerable property.\nContact the airport and control tower before flying within 5 miles of an airport"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-2",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-2",
+    "title": "UAS Rules and Regulations",
+    "section": "Recreational use - safety guidelines",
+    "text": "Recreational use - safety guidelines\n\nRemain well clear of and do not interfere with manned aircraft operations, and you must see and avoid other aircraft and obstacles at all times\n\n\n\n\nEnsure the operating environment is safe and that the operator is competent and proficient in the operation of the sUAS.\nDo not fly near or over sensitive infrastructure or property such as power stations, water treatment facilities, correctional facilities, heavily traveled roadways, government facilities, etc.\nDo not fly in adverse weather conditions such as in high winds or reduced visibility."
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-3",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-3",
+    "title": "UAS Rules and Regulations",
+    "section": "Recreational use - safety guidelines",
+    "text": "Recreational use - safety guidelines\n\n\n\nCheck and follow all local laws and ordinances before flying over private property.\nDo not conduct surveillance or photograph persons in areas where there is an expectation of privacy without the individual’s permission.\nDo not fly under the influence of alcohol or drugs"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use-of-uas",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use-of-uas",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use of UAS",
+    "text": "Commercial use of UAS\nAny commercial use in connection with a business, including:\n\n\n\nSelling photos or videos taken from a UAS\nUsing UAS to provide contract services, such as industrial equipment or factory inspection\nUsing UAS to provide professional services, such as security or telecommunications\nUsing UAS to monitor the progress of work your company is performing"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---remote-pilot-requirements",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---remote-pilot-requirements",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use - Remote Pilot requirements",
+    "text": "Commercial use - Remote Pilot requirements\n\nMust be at least 16 years of age\nMust hold a remote pilot airman certificate with a small UAS rating or be under the direct supervision of someone holding a remote pilot airman certificate\n\n\n\n\nMust pass the applicable Transportation Security Administration (TSA) vetting\nHow to obtain a Remote Pilot Airman Certificate (video)"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#remote-pilot-certificate",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#remote-pilot-certificate",
+    "title": "UAS Rules and Regulations",
+    "section": "Remote Pilot Certificate",
+    "text": "Remote Pilot Certificate\n\n\n\nChecklist for Obtaining a Remote Pilot Certificate\nRemote Pilot Study Guide\nFAA Safety Team Part 107 Small UAS Training Course (login required)"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#objectives-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#objectives-1",
+    "title": "UAS Rules and Regulations",
+    "section": "Objectives",
+    "text": "Objectives\n\n\nKnow operating rules for commercial use of UAS (Part 107)\nRecognize permanent and temporary “no-drone-zones” and knows where to find information about them\nUnderstand the role of Certificate of Authorization and the process of obtaining it\nRecognize when the educational use of UAS can be classified as recreational and when commercial"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---uas-requirements",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---uas-requirements",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use - UAS requirements",
+    "text": "Commercial use - UAS requirements\n\n\n\nMust weigh less than 55 lbs.\nMust undergo pre-flight check by remote pilot in command (or the person supervising the operation)\n\n\n\n\n\n\nThe U.S. Court of Appeals for the District of Columbia Circuit invalidated the registration requirement with the decision from May 19th, 2017\nThe registration requirement is back on since 12/13/2017"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use - location requirements",
+    "text": "Commercial use - location requirements\n\n\nClass B/C/D: May operate with permission from local Air Traffic Control\nClass E/G: May operate while following all other regulations"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements-1",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use - location requirements",
+    "text": "Commercial use - location requirements\n\n\nEasy way to remember main elements:\n\nSolid line – higher class, dashed line – lower class\nBlue line – higher class, magenta line – lower class\n\nThis translates to:\n\nSolid blue – class B, Solid magenta – class C\nDashed blue – class D, Dashed magenta – class E\n\n\n\n\nChart reading tutorial\nFAA online course on airspace classification and map"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use - operating rules",
+    "text": "Commercial use - operating rules\n\nMust fly under 400 feet above ground level (AGL) or, if flying at an altitude higher than 400 feet AGL, stay within 400 feet of a structure\n\n\n\n\nMust not fly from a moving vehicle unless you are in a sparsely populated area\nMust fly at or below 100 mph"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-1",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use - operating rules",
+    "text": "Commercial use - operating rules\n\n\n\nMust fly during daylight hours or civil twilight hours (30 minutes before official sunrise to 30 minutes after official sunset, local time) with appropriate anti-collision lighting\n\n\n\n\n\n\nMust yield right of way to manned aircraft"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-2",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-2",
+    "title": "UAS Rules and Regulations",
+    "section": "Commercial use - operating rules",
+    "text": "Commercial use - operating rules\n\n\n\nMust keep the UAS in sight (i.e. visual line of sight), either by the remote pilot in command or a visual observer\nMust not fly over people"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivers-from-operating-rules-for-commercial-use-of-uas",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivers-from-operating-rules-for-commercial-use-of-uas",
+    "title": "UAS Rules and Regulations",
+    "section": "Waivers from operating rules for commercial use of UAS",
+    "text": "Waivers from operating rules for commercial use of UAS\n\nIf you want to operate UAS for commercial purposes outside of these rules, you may apply for a certificate of waiver\nThe FAA will grant waivers if operation can be performed safely but may otherwise not be allowed under Part 107"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107",
+    "title": "UAS Rules and Regulations",
+    "section": "Waivable sections of part 107",
+    "text": "Waivable sections of part 107\n\n\n\nOperation from a moving vehicle or aircraft (§ 107.25)*\nDaylight operation (§ 107.29)\nVisual line of sight aircraft operation (§ 107.31)*\nVisual observer (§ 107.33)\nOperation in certain airspace (§ 107.41)\n\n\n\nYielding the right of way (§ 107.37(a))\nOperation of multiple small unmanned aircraft systems (§ 107.35)\nOperation over people (§ 107.39)\nOperating limitations for small unmanned aircraft (§ 107.51)\n\n\n\n\nNo waiver of this provision will be issued to allow the carriage of property of another by aircraft for compensation or hire"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107-1",
+    "title": "UAS Rules and Regulations",
+    "section": "Waivable sections of part 107",
+    "text": "Waivable sections of part 107\n\nas of January 2017"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#accident-reporting-107.9",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#accident-reporting-107.9",
+    "title": "UAS Rules and Regulations",
+    "section": "Accident Reporting (§ 107.9)",
+    "text": "Accident Reporting (§ 107.9)\nNo later than 10 days after an operation, a remote pilot in command must report to the Federal Aviation Administration in a manner acceptable to the Administrator, any operation of the small unmanned aircraft involving at least:\n\n\n\nSerious injury to any person or any loss of consciousness; or\nDamage to any property, other than the small unmanned aircraft, unless the cost of repair (including materials and labor) or fair market value of the property does not exceed $500"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#where-not-to-fly",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#where-not-to-fly",
+    "title": "UAS Rules and Regulations",
+    "section": "Where NOT to fly",
+    "text": "Where NOT to fly"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airspace-restrictions",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airspace-restrictions",
+    "title": "UAS Rules and Regulations",
+    "section": "Airspace restrictions",
+    "text": "Airspace restrictions\n\n\n\nSecurity Sensitive Airspace Restrictions\nTemporary Flight Restrictions (TFRs)\nRestricted or Special Use Airspace\nStadiums and sporting events\nWildfires\nAirports"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#security-sensitive-airspace-restrictions",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#security-sensitive-airspace-restrictions",
+    "title": "UAS Rules and Regulations",
+    "section": "Security Sensitive Airspace Restrictions",
+    "text": "Security Sensitive Airspace Restrictions\n\n\n\nProhibited all UAS flights within the airspace\nRestrictions extend from the ground up to 400 feet AGL\nApply to all types and purposes of UAS flight operations\nRemain in effect 24 hours a day, 7 days a week\n\n\n\n14 CFR § 99.7"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#temporary-flight-restrictions",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#temporary-flight-restrictions",
+    "title": "UAS Rules and Regulations",
+    "section": "Temporary Flight Restrictions",
+    "text": "Temporary Flight Restrictions\n\n\n\nTFR: Area of airspace where air travel is limited because of a temporary hazardous condition, such as a wildfire or chemical spill; a security-related event\nTFR contains the details about the restriction (size, altitude, time period that it is in effect, and what types of operations are restricted and permitted)\n\n\n\n\nTFR map\nTFR list"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#restricted-or-special-use-airspace",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#restricted-or-special-use-airspace",
+    "title": "UAS Rules and Regulations",
+    "section": "Restricted or Special Use Airspace",
+    "text": "Restricted or Special Use Airspace\n\n\nTypes of Special Use Airspace include: - Prohibited areas - Restricted areas - Warning areas - Military operation areas (MOAs) - Alert areas - Controlled firing areas (CFAs)\n\n\nThe airspace surrounding Washington DC is the most restricted in the country More info"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#stadiums-and-sporting-events",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#stadiums-and-sporting-events",
+    "title": "UAS Rules and Regulations",
+    "section": "Stadiums and sporting events",
+    "text": "Stadiums and sporting events\n\n\nUAS operations are prohibited within a radius of 3 nautical miles of the stadium or venue of:\n\nMajor League Baseball\nNational Football League\nNCAA Division One Football\nNASCAR Sprint Cup, Indy Car, and Champ Series races"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#wildfires",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#wildfires",
+    "title": "UAS Rules and Regulations",
+    "section": "Wildfires",
+    "text": "Wildfires\n\n\nIt is illegal to fly your UAS in or around a wildfire firefighting operation"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airports",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airports",
+    "title": "UAS Rules and Regulations",
+    "section": "Airports",
+    "text": "Airports\n\nRecreational operators are required to give notice for flights within 5 miles of an airport to both the airport operator and air traffic control tower, if the airport has a tower\nRecreational operations are not permitted in Class B airspace around most major airports without specific air traffic permission and coordination"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#public-entities",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#public-entities",
+    "title": "UAS Rules and Regulations",
+    "section": "Public Entities",
+    "text": "Public Entities\n\n\nPublicly funded university, law enforcement agency, fire department, or any other federal or state government agency have\nTWO OPTIONS:\n\nFollow the same requirements and operating rules for business users (known as “Part 107”)\n\nOR\n\nOperate UAS for a government entity outside of these rules, you may apply for a blanket public Certificate of Authorization (COA)"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#certificate-of-authorization",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#certificate-of-authorization",
+    "title": "UAS Rules and Regulations",
+    "section": "Certificate of Authorization",
+    "text": "Certificate of Authorization\n\nCan be obtained: - Only by government entities – such as federal and state government agencies, law enforcement agencies, and public colleges and universities - Only for public (governmental) UAS aircraft operations\nAllows: - Flights at or below 400 feet in Class G airspace nationwide - Self-certification of the UAS pilot - The ability to obtain emergency COAs under special circumstances"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#certificate-of-authorization-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#certificate-of-authorization-1",
+    "title": "UAS Rules and Regulations",
+    "section": "Certificate of Authorization",
+    "text": "Certificate of Authorization\n\n\n\nCOAs are issued for a specific period of time, usually two years\nInclude special provisions unique to each proposal, such as a defined block of airspace and time of day sUAS can be used"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#how-to-apply-for-coa",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#how-to-apply-for-coa",
+    "title": "UAS Rules and Regulations",
+    "section": "How to apply for COA?",
+    "text": "How to apply for COA?\n\n\nSince 2009, the FAA has taken steps to streamline the application process by transitioning online\nVisit the FAA website for more information on how to apply for a COA online\nThe average COA processing time is less than 60 days\nExpedited authorization is available in emergency and life-threatening situations\nSample COA Application"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#educational-use",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#educational-use",
+    "title": "UAS Rules and Regulations",
+    "section": "Educational use",
+    "text": "Educational use\n\n\n\nNew legal interpretation from the FAA (May 5, 2016), the use of UAS by students in accredited education institutions as part of their coursework will be allowed under recreational guidelines for model aircraft\nThis does not apply to research efforts, which would too closely link operation of the UAS to faculty members’ professional duties and compensation"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#uas-best-practices",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#uas-best-practices",
+    "title": "UAS Rules and Regulations",
+    "section": "UAS best practices",
+    "text": "UAS best practices\n\n\n\nIf you can, tell other people you’ll be taking pictures or video of them before you do so\nIf someone has a reasonable expectation of privacy, don’t violate it by taking pictures or video, unless you’ve got a very good reason\nDon’t fly over other people’s private property without permission if you can easily avoid doing so"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#uas-best-practices-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#uas-best-practices-1",
+    "title": "UAS Rules and Regulations",
+    "section": "UAS best practices",
+    "text": "UAS best practices\n\n\n\nDon’t gather personal data for no reason, and don’t keep it for longer than you have to\nIf you keep sensitive data about other people, secure it against loss or theft\nIf someone asks you to delete personal data about him or her that you’ve gathered, do so, unless you’ve got a good reason not to\n\n\n\n\nDon’t harass people with your drone"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#resources",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#resources",
+    "title": "UAS Rules and Regulations",
+    "section": "Resources",
+    "text": "Resources\n\n\n\nU.S. Air Space map\nKnow Before you Fly website\nRegister your drone\nOperating UAS in North Carolina\nAviation Weather Center"
   }
 ]

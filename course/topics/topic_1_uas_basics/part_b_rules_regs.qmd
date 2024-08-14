@@ -16,7 +16,7 @@ Topic: "Topic 1: UAS Basics"
 
 ## Lecture
 
-* [Rules and Regulations]
+* Lecture Slides: [Rules and Regulations](lectures/lecture_1b.qmd)
 
 ### Supplemental materials
 

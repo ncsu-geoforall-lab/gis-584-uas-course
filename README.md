@@ -25,8 +25,7 @@ quarto preview
 Convert images to webp format using the following commands:
 
 ```bash
-mogrify -format webp -quality 80 *.png
-mogrify -format webp -quality 80 *.jpg
+mogrify -format webp -quality 80 *.{png,PNG,jpg}
 ```
 
 ## Deployment
