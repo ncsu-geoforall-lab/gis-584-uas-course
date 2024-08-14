@@ -15,3 +15,63 @@ listing:
 Schedule and links to material
 
 > Schedule will be adjusted as needed during the semester.
+
+# Schedule and Links to Material for the Distance Education Section
+
+*Schedule will be adjusted as needed during the semester.*
+
+| Date Range           | Lecture/Assignment Topic and Project Tasks | Assignment Due Date         |
+|----------------------|--------------------------------------------|-----------------------------|
+| **August 19**        | **Introduction to the course**             |                             |
+|                      | - [Course logistics](logistics.html) (Course instructions, management, and resources) |                             |
+|                      | - [Course Moodle site](https://moodle-courses1819.wolfware.ncsu.edu/course/view.php?id=576) |                             |
+| **August 19-23**     | **Topic 1: UAS basics** A. Introduction to Unmanned Aerial Systems |                             |
+|                      | - Mo lecture, We hardware demos, assignment 1A: prepare presentation on UAS applications |                             |
+| **August 26-30**     | **Topic 1: UAS basics** B. Rules and regulations for UAS operations | Sep. 2                      |
+|                      | - Mo lecture, We student presentations of UAS applications, assignment: 1B UAS Rule Part 107 test subset |                             |
+| **Sep. 2-6**         | **Topic 2: Structure from Motion** A. From images to 3D models: Photogrammetry and Structure from Motion concepts | Sep. 30                     |
+|                      | - Mo lecture, We assignment 2A: 3D models from indoor photos |                             |
+|                      | - **Project: submit proposal** |                             |
+| **Sep. 9-13**        | **Topic 3: UAS flight planning**            | Sep. 23                     |
+|                      | - Mo lecture, We assignment: prepare and analyze a flight plan |                             |
+| **Sep. 16-20**       | **UAS FLIGHT**                              |                             |
+|                      | - Meeting point: Mid Pines Road, Raleigh; [35.727104, -78.696173](https://goo.gl/maps/GRVRUKJzRav) |                             |
+|                      | - Time: 1:30 pm on Mo or We |                             |
+|                      | - **Project: Data acquisition** |                             |
+| **Sep. 23-27**       | **Topic 2: Structure from Motion** B. UAS Imagery processing | Sep. 30                     |
+|                      | - Lecture either Sep. 23 or 25 (depending on the flight date), Mo assignment: processing with AGISOFT Photoscan |                             |
+| **Oct. 7-9**         | **Topic 4: GIS analytics** A. Analysis of UAS data processing results | Oct. 23                     |
+|                      | - Mo lecture, We assignment: analysis of errors and distortions in Photoscan and GRASS GIS |                             |
+| **Oct. 14-16**       | **Topic 4: GIS analytics** B. Point cloud data analysis: point clouds, surfaces, and voxel models | Oct. 23                     |
+|                      | - Mo lecture, We assignment: viewing point clouds in plas.io, analyzing point clouds and generating surfaces in GRASS GIS |                             |
+|                      | - **Project: Data processing** |                             |
+| **Oct. 21-25**       | **Topic 5: Advanced analytics** A. UAS and lidar data: comparison, fusion and analysis | Nov. 6                      |
+|                      | - Mo lecture, We assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow |                             |
+|                      | - **Project: Workflow development and testing** |                             |
+| **Oct. 28 - Nov. 1** | **Topic 5: Advanced analytics** B. Analysis of multitemporal UAS data and its applications | Nov. 6                      |
+|                      | - Mo lecture, We assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes |                             |
+| **Nov. 4-8**         | **Topic 6: Imagery processing and SfM with open source solutions** | Nov. 13                     |
+|                      | - Mo lecture, We assignment: processing with ODM or WebODM, high performance computing |                             |
+|                      | - **Project: Perform analysis and/or modeling** |                             |
+| **Nov. 11-15**       | **Topic 7: 3D modeling and geovisualization** | Dec. 4                      |
+|                      | - Mo lecture, We assignment: Get familiar with Blender interface, Refine a UAV-derived 3D model using sculpting tools, Photorealistic rendering |                             |
+| **Nov. 18-20**       | **Project help sessions**                   |                             |
+|                      | - **Project: Visualize results, work on presentation** |                             |
+|                      | - [Project presentation and paper requirements, final project titles](projects.html) |                             |
+| **Nov. 25-27**       | **Project help sessions**                   |                             |
+|                      | - **Project: Visualize results, work on presentation** |                             |
+|                      | - [Project presentation and paper requirements, final project titles](projects.html) |                             |
+| **Dec. 2-4**         | **Project presentations** ([See the requirements and project titles](projects.html)) | Dec. 4                      |
+|                      | - DE section: To record your presentation, use [Open Broadcaster Software](https://obsproject.com/index) ([tutorial](http://www.howtogeek.com/183231/how-to-record-your-desktop-and-create-a-screencast-on-windows/)), MS Powerpoint, Libre Office, or any other software with similar recording functionality. |                             |
+|                      | - Upload the presentation to Moodle or, if the file is too big, upload your file to Google drive and share it with the instructors. |                             |
+|                      | - Please keep the presentation to 10 minutes and name your file `LastnameFirstname_Presentation.avi`, `LastnameFirstname_Presentation.pptx` (or whatever format you use). |                             |
+|                      | - Recorded presentations are due Dec. 4. |                             |
+| **Dec. 9-11**        | **Finish project paper and upload it to Moodle as a pdf file** `LastnameFirstname_Paper.pdf` | Dec. 11                     |
+|                      | - For archiving purposes also submit a complete coursework in a ZIP file |                             |
+|                      | - The ZIP file should include: project paper, presentation slides, and all homework papers |                             |
+|                      | - Upload your work as a single ZIP file `LastnameFirstname.zip` to your Google drive and share it with the instructors. |                             |
+| **Dec. 16**          | **Cut-off day, no late submissions possible after this day** |                             |
+
+## Related Courses
+
+If you are looking for what is the next step, here are some [related courses](https://geospatial.ncsu.edu/geoforall/courses.html).

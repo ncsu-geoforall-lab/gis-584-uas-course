@@ -4,7 +4,7 @@
     "href": "course/schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Schedule and links to material\n\nSchedule will be adjusted as needed during the semester.\n\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTopic\n\n\nTitle\n\n\nassignment-due-date\n\n\n\n\n\n\nAug 19, 2024\n\n\nTopic 1: UAS Basics\n\n\nA. Introduction to Unmanned Aerial Systems\n\n\n \n\n\n\n\nAug 26, 2024\n\n\nTopic 1: UAS Basics\n\n\nB. Rules and regulations for UAS operations\n\n\n \n\n\n\n\nAug 28, 2024\n\n\nTopic 2: Structure from Motion\n\n\nA. From images to 3D models: Photogrammetry and Structure from Motion concepts\n\n\n \n\n\n\n\nSep 16, 2024\n\n\nTopic 3: UAS Flight Planning\n\n\nUAS Flight Planning\n\n\n \n\n\n\n\n\nNo matching items"
+    "text": "Schedule and links to material"
   },
   {
     "objectID": "course/topics.html",
@@ -466,7 +466,7 @@
     "href": "course/logistics.html",
     "title": "Logistics",
     "section": "",
-    "text": "Course website and Moodle\nThe course material can be accessed on the Schedule web page.\nCourse Forum, assignment submissions, project material, and grades are handled in Moodle.\n\n\nLectures\n\nFocus of lectures is on principles, theory, concepts, methods and lectures are mostly software independent.\nLecture slides and video are available at each topic’s web page - you can access them through Schedule or Moodle.\nTopics webpages also include links to addition reading and other resources.\n\n\n\nAssignments\n\nMost topics include hands-on assignment - the links to assignments are provided at each topic’s web page - you can access them through Schedule or Moodle.\nFollowing the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:\n\nIntroduction: task, problem\nMethods: general description of methods and concepts\nResults: present the results, including maps, graphs, tables with comments\nDiscussion: was there anything unexpected or problematic in the results? Were there any issues related to the methodology or software? Include suggestions for improvements here.\nConclusion: 1-2 sentences on what you have learned\n\nSubmit your report through Moodle in pdf format, use naming convention LastnameFirstname_HW#.pdf.\n\n\n\nSoftware\n\nGRASS GIS 7.8.5 (you can use these instructions to install it)\nAgisoft Metashape (provided at NCSU) - you can work on the demo version; installation files for Windows, Linux and Mac are available on Agisoft website.\n\nOther resources: - open source software OpenDroneMap and MicMac (documentation can be found here, not used in this course) - LibLAS and LAStools for managing the .las files in GRASS - NCSU Virtual Computing Lab (VCL) - Go to Reservations - New reservation - Choose MS Windows instance ArcGIS Desktop 10.5.1, which has also GRASS GIS 7.2.1, or Linux instance Ubuntu 16.04 LTS Base\n\n\nData\n\nGeneral resources\n\nNorth Carolina dataset (formatted as GRASS location)\n\n\n\nUAS data\n\nboundaries of all COAs obtained by NGAT in North Carolina (google maps, shp)\nStudy site (Lake Wheeler): COA boundaries (shp, kml), GCP coordinates (txt, kml), also included in the GRASS location (see processed data)\nSurvey data: down-sampled pictures and log from the flight 06/20/2015, sample pictures and log from the flight 09/22/2016, all pictures and log (full flight) from the flight 09/22/2016\nProcessed data:\n\nMid Pines dataset (formatted as GRASS location): LakeWheeler_NCspm with timeseries of DSMs from 2015 flights\nSmaller sample point cloud: 2015_06_sample_points_NCsmp.las\nMid Pines point clouds (limited extent)\nOptional (very large files: 1GB+)\n\nMid Pines point clouds from 2015 flights in las, obj and txt formats\nPoint clouds for the gully area at Midpines (high density, from 2015 flights)\n\n\n\n\n\nLidar data\n\nClassified lidar point cloud in LAS format for Mid_Pines\nSecref and Mid Pines interpolated DEM/DSM (use r.unpack)\n\n\n\nOrthophotography\n\nOrthophotos as GRASS GIS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)"
+    "text": "Course website and Moodle\nThe course material can be accessed on the Schedule web page.\nCourse Forum, assignment submissions, project material, and grades are handled in Moodle.\n\n\nLectures\n\nFocus of lectures is on principles, theory, concepts, methods and lectures are mostly software independent.\nLecture slides and video are available at each topic’s web page - you can access them through Schedule or Moodle.\nTopics webpages also include links to addition reading and other resources.\nNCSU Panopto: Fall 2024 Letcure Recordings\n\n\n\nAssignments\n\nMost topics include hands-on assignment - the links to assignments are provided at each topic’s web page - you can access them through Schedule or Moodle.\nFollowing the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:\n\nIntroduction: task, problem\nMethods: general description of methods and concepts\nResults: present the results, including maps, graphs, tables with comments\nDiscussion: was there anything unexpected or problematic in the results? Were there any issues related to the methodology or software? Include suggestions for improvements here.\nConclusion: 1-2 sentences on what you have learned\n\nSubmit your report through Moodle in pdf format, use naming convention LastnameFirstname_HW#.pdf.\n\n\n\nSoftware\n\nGRASS GIS 7.8.5 (you can use these instructions to install it)\nAgisoft Metashape (provided at NCSU) - you can work on the demo version; installation files for Windows, Linux and Mac are available on Agisoft website.\n\nOther resources: - open source software OpenDroneMap and MicMac (documentation can be found here, not used in this course) - LibLAS and LAStools for managing the .las files in GRASS - NCSU Virtual Computing Lab (VCL) - Go to Reservations - New reservation - Choose MS Windows instance ArcGIS Desktop 10.5.1, which has also GRASS GIS 7.2.1, or Linux instance Ubuntu 16.04 LTS Base\n\n\nData\n\nGeneral resources\n\nNorth Carolina dataset (formatted as GRASS location)\n\n\n\nUAS data\n\nboundaries of all COAs obtained by NGAT in North Carolina (google maps, shp)\nStudy site (Lake Wheeler): COA boundaries (shp, kml), GCP coordinates (txt, kml), also included in the GRASS location (see processed data)\nSurvey data: down-sampled pictures and log from the flight 06/20/2015, sample pictures and log from the flight 09/22/2016, all pictures and log (full flight) from the flight 09/22/2016\nProcessed data:\n\nMid Pines dataset (formatted as GRASS location): LakeWheeler_NCspm with timeseries of DSMs from 2015 flights\nSmaller sample point cloud: 2015_06_sample_points_NCsmp.las\nMid Pines point clouds (limited extent)\nOptional (very large files: 1GB+)\n\nMid Pines point clouds from 2015 flights in las, obj and txt formats\nPoint clouds for the gully area at Midpines (high density, from 2015 flights)\n\n\n\n\n\nLidar data\n\nClassified lidar point cloud in LAS format for Mid_Pines\nSecref and Mid Pines interpolated DEM/DSM (use r.unpack)\n\n\n\nOrthophotography\n\nOrthophotos as GRASS GIS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)"
   },
   {
     "objectID": "course/projects.html#proposal-presentation-and-paper-requirements",
@@ -761,5 +761,96 @@
     "title": "UAS Rules and Regulations",
     "section": "Resources",
     "text": "Resources\n\n\n\nU.S. Air Space map\nKnow Before you Fly website\nRegister your drone\nOperating UAS in North Carolina\nAviation Weather Center"
+  },
+  {
+    "objectID": "course/topics.html#topic-1-uas-basics",
+    "href": "course/topics.html#topic-1-uas-basics",
+    "title": "Topics",
+    "section": "Topic 1: UAS Basics",
+    "text": "Topic 1: UAS Basics\nA. Introduction to Unmanned Aerial Systems\nB. Rules and regulations for UAS operations"
+  },
+  {
+    "objectID": "course/topics.html#topic-2-structure-from-motion",
+    "href": "course/topics.html#topic-2-structure-from-motion",
+    "title": "Topics",
+    "section": "Topic 2: Structure from Motion",
+    "text": "Topic 2: Structure from Motion\nA.From images to 3D models: Photogrammetry and Structure from Motion concepts\nB. UAS Imagery processing"
+  },
+  {
+    "objectID": "course/topics.html#topic-3-uas-flight-planning",
+    "href": "course/topics.html#topic-3-uas-flight-planning",
+    "title": "Topics",
+    "section": "Topic 3: UAS Flight Planning",
+    "text": "Topic 3: UAS Flight Planning\nA. UAS Flight Planning"
+  },
+  {
+    "objectID": "course/topics.html#topic-4-gis-analysis",
+    "href": "course/topics.html#topic-4-gis-analysis",
+    "title": "Topics",
+    "section": "Topic 4: GIS Analysis",
+    "text": "Topic 4: GIS Analysis\nA. Analysis of UAS data processing results\nB. Point cloud data analysis: point clouds, surfaces, and voxel models"
+  },
+  {
+    "objectID": "course/topics.html#topic-5-advanced-analytics",
+    "href": "course/topics.html#topic-5-advanced-analytics",
+    "title": "Topics",
+    "section": "Topic 5: Advanced Analytics",
+    "text": "Topic 5: Advanced Analytics\nA. UAS and lidar data: comparison, fusion and analysis\nB. Analysis of multitemporal UAS data and its applications"
+  },
+  {
+    "objectID": "course/topics.html#topic-6-imagery-processing-and-sfm",
+    "href": "course/topics.html#topic-6-imagery-processing-and-sfm",
+    "title": "Topics",
+    "section": "Topic 6: Imagery Processing and SfM",
+    "text": "Topic 6: Imagery Processing and SfM"
+  },
+  {
+    "objectID": "course/topics.html#topic-7-3d-modeling-and-geovisualization",
+    "href": "course/topics.html#topic-7-3d-modeling-and-geovisualization",
+    "title": "Topics",
+    "section": "Topic 7: 3D Modeling and Geovisualization",
+    "text": "Topic 7: 3D Modeling and Geovisualization"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/part_a_images_to_3d.html#outline",
+    "href": "course/topics/topic_2_sfm/part_a_images_to_3d.html#outline",
+    "title": "A. From images to 3D models: Photogrammetry and Structure from Motion concepts",
+    "section": "Outline:",
+    "text": "Outline:\n\nprinciples of photogrammetry\nUAS low range flight and consumer camera image acquisition\nlateral and forward overlap, stereoscopic coverage\nprinciples of Structure from Motion\n3D reconstruction from multiple overlapping imagery"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/part_a_images_to_3d.html#lecture",
+    "href": "course/topics/topic_2_sfm/part_a_images_to_3d.html#lecture",
+    "title": "A. From images to 3D models: Photogrammetry and Structure from Motion concepts",
+    "section": "Lecture",
+    "text": "Lecture\n\nLecture Slides: Photogrammetry and SfM"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/part_a_images_to_3d.html#supplemental-materials",
+    "href": "course/topics/topic_2_sfm/part_a_images_to_3d.html#supplemental-materials",
+    "title": "A. From images to 3D models: Photogrammetry and Structure from Motion concepts",
+    "section": "Supplemental materials",
+    "text": "Supplemental materials\n\nLecture Slides 2016, learn about history of aerial mapping\nISPRS 2016 paper on Reconstruction of Palmyra from tourist photos\nISPRS 2016 paper on Reconstruction of popular monuments from crowdsourced photos\nOpen Heritage - 3D models of iconic locations"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/part_a_images_to_3d.html#assignment",
+    "href": "course/topics/topic_2_sfm/part_a_images_to_3d.html#assignment",
+    "title": "A. From images to 3D models: Photogrammetry and Structure from Motion concepts",
+    "section": "Assignment",
+    "text": "Assignment\nPerform an experiment to investigate impact of the number and orientation of photos, light, as well as shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.\n\nLab Experiment: 3D reconstruction from multiple overlapping imagery"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/part_a_images_to_3d.html#homework",
+    "href": "course/topics/topic_2_sfm/part_a_images_to_3d.html#homework",
+    "title": "A. From images to 3D models: Photogrammetry and Structure from Motion concepts",
+    "section": "Homework",
+    "text": "Homework\nPrepare short report on your 3D modeling experiment.\n3D models from previous courses are available on OsgeoLab Skechfab account. If you would like your model to be added to the collectionl please indicate at the end of your report “I agree for my 3D model to be uploaded to the OsgeoLab Skechfab collection and I want(/don’t want) my name to be listed as an author in the model description” and submit on through moodle your 3D model (preferably in the .obj format with accompaning .mtl and .jpg files, or check other formats supported by Sketchfab)"
+  },
+  {
+    "objectID": "course/schedule.html#related-courses",
+    "href": "course/schedule.html#related-courses",
+    "title": "Schedule",
+    "section": "Related Courses",
+    "text": "Related Courses\nIf you are looking for what is the next step, here are some related courses."
   }
 ]

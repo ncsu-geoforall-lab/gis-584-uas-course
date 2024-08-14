@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../images/favicon.ico" rel="icon">
+<link href="../../../favicon.ico" rel="icon">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -125,10 +125,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#a.-from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts" id="toc-a.-from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts" class="nav-link active" data-scroll-target="#a.-from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts">A. From images to 3D models: Photogrammetry and Structure from Motion concepts</a>
+  <li><a href="#from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts" id="toc-from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts" class="nav-link active" data-scroll-target="#from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts">From images to 3D models: Photogrammetry and Structure from Motion concepts</a>
   <ul class="collapse">
   <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline:</a></li>
   <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
+  <li><a href="#supplemental-materials" id="toc-supplemental-materials" class="nav-link" data-scroll-target="#supplemental-materials">Supplemental materials</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -166,19 +169,44 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="a.-from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="a.-from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts">A. From images to 3D models: Photogrammetry and Structure from Motion concepts</h2>
-<section id="outline" class="level3">
-<h3 class="anchored" data-anchor-id="outline">Outline:</h3>
+<section id="from-images-to-3d-models-photogrammetry-and-structure-from-motion-concepts" class="level1">
+<h1>From images to 3D models: Photogrammetry and Structure from Motion concepts</h1>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline:</h2>
 <ul>
-<li>overview of UAS technology, system’s classifications</li>
-<li>UAS components and operations</li>
-<li>UAS applications</li>
-<li>in class demonstration of selected systems</li>
+<li>principles of photogrammetry</li>
+<li>UAS low range flight and consumer camera image acquisition</li>
+<li>lateral and forward overlap, stereoscopic coverage</li>
+<li>principles of Structure from Motion</li>
+<li>3D reconstruction from multiple overlapping imagery</li>
 </ul>
 </section>
-<section id="lecture" class="level3">
-<h3 class="anchored" data-anchor-id="lecture">Lecture</h3>
+<section id="lecture" class="level2">
+<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
+<ul>
+<li>Lecture Slides: <a href="https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/HM_Photogrammetry_and_SfM.html">Photogrammetry and SfM</a> <!-- * Lecture Slides: [Introduction to UAS](lectures/lecture_1a.qmd) --></li>
+</ul>
+</section>
+<section id="supplemental-materials" class="level2">
+<h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
+<ul>
+<li><a href="https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/02_Aerial_Photogrammetry_Concepts.html#/">Lecture Slides 2016</a>, learn about history of aerial mapping</li>
+<li><a href="https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/III-5/81/2016/">ISPRS 2016 paper on Reconstruction of Palmyra from tourist photos</a></li>
+<li><a href="https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/III-3/51/2016/">ISPRS 2016 paper on Reconstruction of popular monuments from crowdsourced photos</a></li>
+<li><a href="https://artsandculture.google.com/project/cyark">Open Heritage - 3D models of iconic locations</a></li>
+</ul>
+</section>
+<section id="assignment" class="level2">
+<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
+<p>Perform an experiment to investigate impact of the number and orientation of photos, light, as well as shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.</p>
+<ul>
+<li><a href="https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/lab_exp_3Dreconstr.html">Lab Experiment</a>: 3D reconstruction from multiple overlapping imagery</li>
+</ul>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<p>Prepare short report on your 3D modeling experiment.</p>
+<p>3D models from previous courses are available on <a href="https://sketchfab.com/osgeolab/collections/classroom-models">OsgeoLab Skechfab account</a>. If you would like your model to be added to the collectionl please indicate at the end of your report “I agree for my 3D model to be uploaded to the OsgeoLab Skechfab collection and I want(/don’t want) my name to be listed as an author in the model description” and submit on through moodle your 3D model (preferably in the .obj format with accompaning .mtl and .jpg files, or check <a href="https://help.sketchfab.com/hc/en-us/articles/202508396-3D-File-Formats?page=3#3d-formats">other formats supported by Sketchfab</a>)</p>
 
 
 </section>
