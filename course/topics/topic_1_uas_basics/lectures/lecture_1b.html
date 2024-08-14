@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.56">
+
+  <meta name="author" content="Justyna Jeziorska &amp; Corey White">
+  <title>GIS/MEA 584: UAS Mapping and Analytics – UAS Rules and Regulations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto.css">
+  <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">UAS Rules and Regulations</h1>
+  <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Justyna Jeziorska &amp; Corey White 
+</div>
+</div>
+</div>
+
+</section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<div>
+<ul>
+<li class="fragment"><strong>Understand</strong> the role of the Federal Aviation Administration (FAA) in ensuring safety in National Airspace System (NAS)</li>
+<li class="fragment"><strong>Recognize</strong> the 3 main types of UAS operations and distinguish between them</li>
+<li class="fragment"><strong>Name</strong> the requirements for legal operations of commercial purposes in the U.S. Both in regard to the pilot and to the UAS</li>
+<li class="fragment"><strong>Outline</strong> safety guidelines for recreational use of UAS</li>
+</ul>
+</div>
+</section>
+<section id="objectives-1" class="slide level2">
+<h2>Objectives</h2>
+<div>
+<ul>
+<li class="fragment"><strong>Know</strong> operating rules for commercial use of UAS (Part 107)</li>
+<li class="fragment"><strong>Recognize</strong> permanent and temporary “no-drone-zones” and knows where to find information about them</li>
+<li class="fragment"><strong>Understand</strong> the role of Certificate of Authorization and the process of obtaining it</li>
+<li class="fragment"><strong>Recognize</strong> when the educational use of UAS can be classified as recreational and when commercial</li>
+</ul>
+</div>
+</section>
+<section id="federal-aviation-administration-faa" class="slide level2 smaller">
+<h2>Federal Aviation Administration (FAA)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Created in 1958 in response to a series of fatal accidents and midair collisions involving commercial aircraft</li>
+<li>Mandated to develop plans and policies for the use of navigable airspace to ensure the safety of aircraft and the efficient use of airspace</li>
+<li>Since the creation of the FAA, American airspace has become one of the most regulated fields in the United States</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/FAA.webp"></p>
+</div></div>
+</section>
+<section id="national-airspace-system-nas" class="slide level2">
+<h2>National Airspace System (NAS)</h2>
+<div>
+<ul>
+<li class="fragment">Already congested with piloted aircraft, and adding a swarm of UAVs requires thoughtful planning</li>
+<li class="fragment">Main mandate: to ensure that UASs do not endanger current users of the NAS (including manned or other unmanned aircraft) nor compromise the safety of the people and property on the ground</li>
+<li class="fragment">The lack of detect-sense-and-avoid capability of the current UAS technology is a major concern for the FAA</li>
+</ul>
+</div>
+</section>
+<section id="types-of-uas-operations" class="slide level2">
+<h2>Types of UAS operations</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>FAA distinguishes 3 main types of operations</li>
+<li>Different rules apply for legal operations of UAS depending on the type of UAS operations</li>
+<li>Additional type - <strong>educational use</strong> can be considered as recreational or commercial</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/uas_operations.webp"></p>
+</div></div>
+</section>
+<section id="recreational-use-of-uas" class="slide level2 smaller">
+<h2>Recreational use of UAS</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>The recreational use of sUAS is the operation of an unmanned aircraft for <strong>personal interests and enjoyment</strong></li>
+<li>Using a sUAS to take photographs for your own personal use would be considered recreational</li>
+<li>Using the same device to take photographs or videos for compensation or sale to another individual would be considered a commercial operation</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/recreational.webp"></p>
+</div></div>
+</section>
+<section id="recreational-use---safety-guidelines" class="slide level2">
+<h2>Recreational use - safety guidelines</h2>
+<ul>
+<li>Follow community-based safety guidelines, as developed by organizations such as the Academy of Model Aeronautics (AMA)</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Fly no higher than <strong>400 feet</strong> and remain below any surrounding obstacles when possible</li>
+<li>Keep your sUAS <strong>in eyesight at all times</strong>, and use an observer to assist if needed</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/did_you_know2.webp"></p>
+</div></div>
+</section>
+<section id="recreational-use---safety-guidelines-1" class="slide level2 smaller">
+<h2>Recreational use - safety guidelines</h2>
+<ul>
+<li>Remain well clear of and <strong>do not interfere with manned aircraft operations</strong>, and you must see and avoid other aircraft and obstacles at all times</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Do not intentionally fly over unprotected persons or moving vehicles, and remain <strong>at least 25 feet away</strong> from individuals and vulnerable property.</li>
+<li>Contact the airport and control tower before flying within <strong>5 miles</strong> of an airport</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/cartoon3.webp"></p>
+</div></div>
+</section>
+<section id="recreational-use---safety-guidelines-2" class="slide level2 smaller">
+<h2>Recreational use - safety guidelines</h2>
+<ul>
+<li>Remain well clear of and <strong>do not interfere with manned aircraft operations</strong>, and you must see and avoid other aircraft and obstacles at all times</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Ensure the operating environment is safe and that the operator is competent and proficient in the operation of the sUAS.</li>
+<li>Do not fly near or over sensitive infrastructure or property such as power stations, water treatment facilities, correctional facilities, heavily traveled roadways, government facilities, etc.</li>
+<li>Do not fly in adverse weather conditions such as in high winds or reduced visibility.</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/funny2.webp"></p>
+</div></div>
+</section>
+<section id="recreational-use---safety-guidelines-3" class="slide level2 smaller">
+<h2>Recreational use - safety guidelines</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Check and follow all local laws and ordinances before flying over private property.</li>
+<li>Do not conduct surveillance or photograph persons in areas where there is an expectation of privacy without the individual’s permission.</li>
+<li>Do not fly under the influence of alcohol or drugs</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/cartoon.webp"></p>
+</div></div>
+</section>
+<section id="commercial-use-of-uas" class="slide level2 smaller">
+<h2>Commercial use of UAS</h2>
+<p>Any commercial use in connection with a business, including:</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Selling photos or videos taken from a UAS</li>
+<li>Using UAS to provide contract services, such as industrial equipment or factory inspection</li>
+<li>Using UAS to provide professional services, such as security or telecommunications</li>
+<li>Using UAS to monitor the progress of work your company is performing</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/commercial2.webp"> <img data-src="../images/inspection.webp"></p>
+</div></div>
+</section>
+<section id="commercial-use---remote-pilot-requirements" class="slide level2 smaller">
+<h2>Commercial use - Remote Pilot requirements</h2>
+<ul>
+<li>Must be at least 16 years of age</li>
+<li>Must hold a <a href="https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot/">remote pilot airman certificate</a> with a small UAS rating or be under the direct supervision of someone holding a remote pilot airman certificate</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Must pass the applicable Transportation Security Administration (TSA) vetting</li>
+<li>How to obtain a Remote Pilot Airman Certificate <a href="https://www.youtube.com/watch?v=v-d1RuTFvbs">(video)</a></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/licence.webp"></p>
+</div></div>
+</section>
+<section id="remote-pilot-certificate" class="slide level2">
+<h2>Remote Pilot Certificate</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li><a href="https://www.aopa.org/-/media/files/aopa/home/go-flying/drones/aopa-checklist-for-obtaining-a-remote-pilot-certificate.pdf?la=en">Checklist for Obtaining a Remote Pilot Certificate</a></li>
+<li><a href="https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/media/remote_pilot_study_guide.pdf">Remote Pilot Study Guide</a></li>
+<li><a href="https://www.faasafety.gov/login/Default.aspx?dest=gslac/ALC/course_content&amp;enroll=true&amp;cID=451">FAA Safety Team Part 107 Small UAS Training Course (login required)</a></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/test.webp" style="width:80.0%"></p>
+</div></div>
+</section>
+<section id="commercial-use---uas-requirements" class="slide level2">
+<h2>Commercial use - UAS requirements</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Must weigh less than 55 lbs.</li>
+<li>Must undergo pre-flight check by remote pilot in command (or the person supervising the operation)</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/cartoon9.webp"></p>
+</div></div>
+<ul>
+<li>The U.S. Court of Appeals for the District of Columbia Circuit invalidated the registration requirement with <a href="https://www.cadc.uscourts.gov/internet/opinions.nsf/FA6F27FFAA83E20585258125004FBC13/$file/15-1495-1675918.pdf">the decision</a> from May 19th, 2017</li>
+<li>The registration requirement is back on since 12/13/2017</li>
+</ul>
+</section>
+<section id="commercial-use---location-requirements" class="slide level2">
+<h2>Commercial use - location requirements</h2>
+
+<img data-src="../images/NAS_classification.webp" class="center r-stretch" style="width:100.0%"><ul>
+<li>Class B/C/D: May operate with permission from local Air Traffic Control</li>
+<li>Class E/G: May operate while following all other regulations</li>
+</ul>
+</section>
+<section id="commercial-use---location-requirements-1" class="slide level2 smaller">
+<h2>Commercial use - location requirements</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Easy way to remember main elements:</strong></p>
+<ul>
+<li>Solid line – higher class, dashed line – lower class</li>
+<li>Blue line – higher class, magenta line – lower class</li>
+</ul>
+<p><strong>This translates to:</strong></p>
+<ul>
+<li>Solid blue – class B, Solid magenta – class C</li>
+<li>Dashed blue – class D, Dashed magenta – class E</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/NAS_map.webp"></p>
+<ul>
+<li><a href="http://c-aviation.net/airspace-guide-usa-chart-reading-tutorial/">Chart reading tutorial</a></li>
+<li><a href="https://www.faasafety.gov/gslac/ALC/course_content.aspx?cID=42&amp;sID=505&amp;preview=true">FAA online course on airspace classification and map</a></li>
+</ul>
+</div></div>
+</section>
+<section id="commercial-use---operating-rules" class="slide level2">
+<h2>Commercial use - operating rules</h2>
+<ul>
+<li>Must fly under 400 feet above ground level (AGL) or, if flying at an altitude higher than 400 feet AGL, stay within 400 feet of a structure</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Must not fly from a moving vehicle unless you are in a sparsely populated area</li>
+<li>Must fly at or below 100 mph</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/structures.webp"></p>
+</div></div>
+</section>
+<section id="commercial-use---operating-rules-1" class="slide level2">
+<h2>Commercial use - operating rules</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Must fly during daylight hours or civil twilight hours (30 minutes before official sunrise to 30 minutes after official sunset, local time) with appropriate anti-collision lighting</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/light.webp"></p>
+</div></div>
+<ul>
+<li>Must yield right of way to manned aircraft</li>
+</ul>
+</section>
+<section id="commercial-use---operating-rules-2" class="slide level2">
+<h2>Commercial use - operating rules</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Must keep the UAS in sight (i.e.&nbsp;visual line of sight), either by the remote pilot in command or a visual observer</li>
+<li>Must not fly over people</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/did_you_know3.webp"></p>
+</div></div>
+</section>
+<section id="waivers-from-operating-rules-for-commercial-use-of-uas" class="slide level2">
+<h2>Waivers from operating rules for commercial use of UAS</h2>
+<ul>
+<li>If you want to operate UAS for commercial purposes outside of these rules, you may apply for a certificate of waiver</li>
+<li>The FAA will grant waivers if operation can be performed safely but may otherwise not be allowed under Part 107</li>
+</ul>
+</section>
+<section id="waivable-sections-of-part-107" class="slide level2 smaller">
+<h2>Waivable sections of part 107</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Operation from a moving vehicle or aircraft (§ 107.25)*</li>
+<li>Daylight operation (§ 107.29)</li>
+<li>Visual line of sight aircraft operation (§ 107.31)*</li>
+<li>Visual observer (§ 107.33)</li>
+<li>Operation in certain airspace (§ 107.41)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Yielding the right of way (§ 107.37(a))</li>
+<li>Operation of multiple small unmanned aircraft systems (§ 107.35)</li>
+<li>Operation over people (§ 107.39)</li>
+<li>Operating limitations for small unmanned aircraft (§ 107.51)</li>
+</ul>
+</div></div>
+<ul>
+<li>No waiver of this provision will be issued to allow the carriage of property of another by aircraft for compensation or hire</li>
+</ul>
+</section>
+<section id="waivable-sections-of-part-107-1" class="slide level2">
+<h2>Waivable sections of part 107</h2>
+
+<img data-src="../images/waivers.webp" style="width:70.0%" class="r-stretch"><p><em>as of January 2017</em></p>
+</section>
+<section id="accident-reporting-107.9" class="slide level2 smaller">
+<h2>Accident Reporting (§ 107.9)</h2>
+<p>No later than <strong>10 days</strong> after an operation, a remote pilot in command must report to the Federal Aviation Administration in a manner acceptable to the Administrator, any operation of the small unmanned aircraft involving at least:</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Serious injury to any person or any loss of consciousness; or</li>
+<li>Damage to any property, other than the small unmanned aircraft, unless the cost of repair (including materials and labor) or fair market value of the property does not exceed <strong>$500</strong></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/drone-crash-test.webp"></p>
+</div></div>
+</section>
+<section id="where-not-to-fly" class="slide level2">
+<h2>Where NOT to fly</h2>
+
+<img data-src="../images/no_drone_zoneFAA.webp" style="width:70.0%" class="r-stretch"></section>
+<section id="airspace-restrictions" class="slide level2 smaller">
+<h2>Airspace restrictions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Security Sensitive Airspace Restrictions</li>
+<li>Temporary Flight Restrictions (TFRs)</li>
+<li>Restricted or Special Use Airspace</li>
+<li>Stadiums and sporting events</li>
+<li>Wildfires</li>
+<li>Airports</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/no_drone_zone.webp" style="width:60.0%"></p>
+</div></div>
+</section>
+<section id="security-sensitive-airspace-restrictions" class="slide level2">
+<h2>Security Sensitive Airspace Restrictions</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Prohibited all UAS flights within the airspace</li>
+<li>Restrictions extend from the ground up to 400 feet AGL</li>
+<li>Apply to all types and purposes of UAS flight operations</li>
+<li>Remain in effect 24 hours a day, 7 days a week</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/restricted2.webp"></p>
+<p>14 CFR § 99.7</p>
+</div></div>
+</section>
+<section id="temporary-flight-restrictions" class="slide level2">
+<h2>Temporary Flight Restrictions</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>TFR: Area of airspace where air travel is limited because of a temporary hazardous condition, such as a wildfire or chemical spill; a security-related event</li>
+<li>TFR contains the details about the restriction (size, altitude, time period that it is in effect, and what types of operations are restricted and permitted)</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/tfr.webp"></p>
+<ul>
+<li><a href="http://tfr.faa.gov/tfr_map_ims/html/index.html">TFR map</a></li>
+<li><a href="http://tfr.faa.gov/tfr2/list.html">TFR list</a></li>
+</ul>
+</div></div>
+</section>
+<section id="restricted-or-special-use-airspace" class="slide level2">
+<h2>Restricted or Special Use Airspace</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Types of Special Use Airspace include: - Prohibited areas - Restricted areas - Warning areas - Military operation areas (MOAs) - Alert areas - Controlled firing areas (CFAs)</p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/cartoon_DC.webp"></p>
+<p><em>The airspace surrounding Washington DC is the most restricted in the country</em> <a href="https://www.faa.gov/uas/where_to_fly/no_drone_zone/">More info</a></p>
+</div></div>
+</section>
+<section id="stadiums-and-sporting-events" class="slide level2">
+<h2>Stadiums and sporting events</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>UAS operations are <strong>prohibited</strong> within a radius of <strong>3 nautical miles</strong> of the stadium or venue of:</p>
+<ul>
+<li>Major League Baseball</li>
+<li>National Football League</li>
+<li>NCAA Division One Football</li>
+<li>NASCAR Sprint Cup, Indy Car, and Champ Series races</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/did_you_know7.webp"></p>
+</div></div>
+</section>
+<section id="wildfires" class="slide level2">
+<h2>Wildfires</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>It is <strong>illegal</strong> to fly your UAS in or around a wildfire firefighting operation <img data-src="../images/did_you_know6.webp" style="width:90.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/wildfires.webp" style="width:90.0%"></p>
+</div></div>
+</section>
+<section id="airports" class="slide level2 smaller">
+<h2>Airports</h2>
+<ul>
+<li>Recreational operators are required to give notice for flights within <strong>5 miles</strong> of an airport to <strong>both</strong> the <strong>airport operator</strong> and <strong>air traffic control tower</strong>, if the airport has a tower</li>
+<li>Recreational operations are <strong>not permitted</strong> in Class B airspace around most major airports without specific air traffic permission and coordination</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/drone_airport.webp"></p>
+</div></div>
+</section>
+<section id="public-entities" class="slide level2 smaller">
+<h2>Public Entities</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Publicly funded university, law enforcement agency, fire department, or any other federal or state government agency have<br>
+<strong>TWO OPTIONS:</strong></p>
+<ul>
+<li>Follow the same requirements and operating rules for business users (known as <strong>“Part 107”</strong>)</li>
+</ul>
+<p><strong>OR</strong></p>
+<ul>
+<li>Operate UAS for a government entity outside of these rules, you may apply for a blanket public <strong>Certificate of Authorization (COA)</strong></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/public.webp"></p>
+</div></div>
+</section>
+<section id="certificate-of-authorization" class="slide level2">
+<h2>Certificate of Authorization</h2>
+<div>
+<p><strong>Can be obtained:</strong> - Only by government entities – such as federal and state government agencies, law enforcement agencies, and public colleges and universities - Only for public (governmental) UAS aircraft operations</p>
+<p><strong>Allows:</strong> - Flights at or below 400 feet in Class G airspace nationwide - Self-certification of the UAS pilot - The ability to obtain emergency COAs under special circumstances</p>
+</div>
+</section>
+<section id="certificate-of-authorization-1" class="slide level2">
+<h2>Certificate of Authorization</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>COAs are issued for a specific period of time, usually two years</li>
+<li>Include special provisions unique to each proposal, such as a defined block of airspace and time of day sUAS can be used</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/coa.webp"></p>
+</div></div>
+</section>
+<section id="how-to-apply-for-coa" class="slide level2">
+<h2>How to apply for COA?</h2>
+<div>
+<ul>
+<li class="fragment">Since 2009, the FAA has taken steps to streamline the application process by transitioning online</li>
+<li class="fragment">Visit the <a href="https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/coa/">FAA website</a> for more information on how to apply for a COA online</li>
+<li class="fragment">The average COA processing time is less than 60 days</li>
+<li class="fragment">Expedited authorization is available in emergency and life-threatening situations</li>
+<li class="fragment"><a href="https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/media/COA%20Sample%20Application%20v%201-1.pdf">Sample COA Application</a></li>
+</ul>
+</div>
+</section>
+<section id="educational-use" class="slide level2 smaller">
+<h2>Educational use</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>New legal interpretation from the FAA (May 5, 2016), the use of UAS by students in accredited education institutions as part of their coursework will be allowed under <strong>recreational guidelines for model aircraft</strong></li>
+<li>This <strong>does not apply</strong> to research efforts, which would too closely link operation of the UAS to faculty members’ professional duties and compensation</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/uas_operations.webp"> <img data-src="../images/group_photo.webp"></p>
+</div></div>
+</section>
+<section id="uas-best-practices" class="slide level2 smaller">
+<h2>UAS best practices</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>If you can, tell other people you’ll be taking pictures or video of them before you do so</li>
+<li>If someone has a reasonable expectation of privacy, don’t violate it by taking pictures or video, unless you’ve got a very good reason</li>
+<li>Don’t fly over other people’s private property without permission if you can easily avoid doing so</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/funny1.webp"></p>
+</div></div>
+<p><img data-src="../images/important_note.webp"></p>
+</section>
+<section id="uas-best-practices-1" class="slide level2 smaller">
+<h2>UAS best practices</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Don’t gather personal data for no reason, and don’t keep it for longer than you have to</li>
+<li>If you keep sensitive data about other people, secure it against loss or theft</li>
+<li>If someone asks you to delete personal data about him or her that you’ve gathered, do so, unless you’ve got a good reason not to</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/cartoon7.webp"></p>
+<ul>
+<li>Don’t harass people with your drone</li>
+</ul>
+</div></div>
+<p><img data-src="../images/important_note.webp"></p>
+</section>
+<section id="resources" class="slide level2 smaller">
+<h2>Resources</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><a href="http://knowbeforeyoufly.org/air-space-map/">U.S. Air Space map</a></li>
+<li><a href="http://knowbeforeyoufly.org">Know Before you Fly website</a></li>
+<li><a href="https://registermyuas.faa.gov/">Register your drone</a></li>
+<li><a href="https://www.ncdot.gov/aviation/uas/">Operating UAS in North Carolina</a></li>
+<li><a href="https://www.aviationweather.gov/">Aviation Weather Center</a></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/cartoon2.webp"></p>
+</div></div>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/ncsu-geoforall-lab\.github\.io\/gis-584-uas-course\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
