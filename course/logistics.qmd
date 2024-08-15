@@ -27,11 +27,13 @@ Course Forum, assignment submissions, project material, and grades are handled i
 
 ### Software
 
-- [GRASS GIS 7.8.5](http://grass.osgeo.org/) (you can use [these instructions to install it](http://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software))
+- [GRASS GIS 8.4](http://grass.osgeo.org/) (you can use [these instructions to install it](http://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software))
 - Agisoft Metashape (provided at NCSU) - you can work on the demo version; installation files for Windows, Linux and Mac are available [on Agisoft website](http://www.agisoft.com/downloads/installer/).
+- [OpenDroneMap](http://opendronemap.org/) and 
 
-Other resources:
-- open source software [OpenDroneMap](http://opendronemap.org/) and [MicMac](http://logiciels.ign.fr/?-Micmac,3-) (documentation can be found [here](http://logiciels.ign.fr/IMG/pdf/docmicmac-2.pdf), not used in this course)
+### Other resources
+
+- ([MicMac](http://logiciels.ign.fr/?-Micmac,3-) documentation can be found [here](http://logiciels.ign.fr/IMG/pdf/docmicmac-2.pdf), not used in this course)
 - [LibLAS](http://download.osgeo.org/liblas/libLAS-1.8.0.tar.bz2) and [LAStools](http://www.cs.unc.edu/~isenburg/lastools/download/LAStools.zip) for managing the .las files in GRASS
 - [NCSU Virtual Computing Lab (VCL)](https://vcl.ncsu.edu/scheduling/)
   - Go to Reservations - New reservation
