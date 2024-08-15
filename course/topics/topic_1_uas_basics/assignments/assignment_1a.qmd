@@ -1,10 +1,6 @@
 ---
 subtitle: "UAS: systems and applications"
 title: "Assignment 1A"
-# subtitle: "A. Introduction to Unmanned Aerial Systems"
-# date: 8/19/2024
-# image: ../images/header.jpg
-# category: Topic 1
 assignment-due-date: 8/21/2024
 ---
 

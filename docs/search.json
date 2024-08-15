@@ -438,14 +438,14 @@
     "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
     "title": "B. Rules and regulations for UAS operations",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides: Rules and Regulations\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nOperating UAS in North Carolina\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA data innovation center, airspace type vector data in shape and kmz format\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources\n\nOther helpful material\n\nEducational use of UAS"
+    "text": "Lecture\n\nLecture Slides: Rules and Regulations\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nWhere can I find study materials for the Part 107 aeronautical knowledge test?\nOperating UAS in North Carolina\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA data innovation center, airspace type vector data in shape and kmz format\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources\n\nOther helpful material\n\nEducational use of UAS"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
     "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
     "title": "B. Rules and regulations for UAS operations",
     "section": "Assignment",
-    "text": "Assignment\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample exam"
+    "text": "Assignment\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
@@ -845,5 +845,68 @@
     "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
     "section": "Large Language Model (LLM) (i.e., ChatGPT, Bard, etc..) policy",
     "text": "Large Language Model (LLM) (i.e., ChatGPT, Bard, etc..) policy\nThe use of LLMs in this course is permitted for the purposes of completing assignments and projects. However, the use of LLMs for the purposes of completing exams is strictly prohibited. Students are also required to cite the use of LLMs in their assignments and projects. Failure to do so will result in a violation of the courses academic integrity policy. Students are also to be aware that the use of LLMs in this course is not a substitute for learning the material. Assignments and projects must be properly cited and contain no plagerized materials. (The policy was created with the aid GitHub CoPilot)"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html",
+    "title": "Assignment 1B",
+    "section": "",
+    "text": "UAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
+    "title": "Assignment 1B",
+    "section": "Homework",
+    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation."
+  },
+  {
+    "objectID": "backup.html",
+    "href": "backup.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Schedule and links to material"
+  },
+  {
+    "objectID": "backup.html#related-courses",
+    "href": "backup.html#related-courses",
+    "title": "Schedule",
+    "section": "Related Courses",
+    "text": "Related Courses\nIf you are looking for what is the next step, here are some related courses."
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2a.html#what-is-remote-sensing",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2a.html#what-is-remote-sensing",
+    "title": "From Images to 3D models: Photogrammetry and Structure from Motion Concepts",
+    "section": "What is Remote Sensing?",
+    "text": "What is Remote Sensing?\n\n\n    &lt;ul&gt;\n        &lt;li class=\"fragment\"&gt;Sensing without contact;&lt;/li&gt;\n        &lt;li class=\"fragment\"&gt;Acquiring data from a distance;&lt;/li&gt;\n        &lt;li class=\"fragment\"&gt;Passive sensors: sensor captures reflected rays&lt;/li&gt;\n        &lt;li class=\"fragment\"&gt;Active sensors: sensor sends out rays and captures the return signal (lidar, radar, sonar)&lt;/li&gt;\n    &lt;/ul&gt; \n\n\n    &lt;img src=\"../images/remote_sensing_photogrammetry.webp\"&gt;\n\n\n\nRemote sensing for mapping explained\n\n   &lt;a href=\"https://www.youtube.com/watch?v=3iaFzafWJQE\"&gt;&lt;img src=\"../images/movie_remote.webp\"&gt;&lt;/a&gt;\n\n\n\nRemote sensing, photogrammerty and GIS\n\n \n\nSource of diagrams: Schenk (2005), modified\n\n\n\n\nPhotogrammetry\n\n\n\n3-D coordinate measuring technique that uses PHOTOGRAPHS as the fundamental medium for measurement (the science of taking precise measurements from photographs);\n\n\nCan be classified into two types: aerial and terrestrial (close range);\n\n\nAerial Photogrammerty was a crucial development in map making\n\n\n\n\n\nVertical and oblique aerial imagery\n\n\n\n\n\nVertical aerial photography\n\n\nJockey’s Ridge 1932\n\n\n\n\n\nOblique aerial photography\n\n\nSan Francisco Earthquake, 1906: Note the high distortion\n\n\n\n\n\nPhotogrammetric process\n\n\n\n\n\nGeometry of aerial photograph\n\n\n    &lt;img src=\"../images/geometry_side.webp\"&gt;\n&lt;/div&gt;\n&lt;div class=\"right fragment\"&gt;\n&lt;p&gt;\n       &lt;img src=\"../images/geometry.webp\"&gt;\n\n&lt;/div&gt;\n\n\n\nWhy do we need to process the images?\n\n\nFrom perspective to orthographic view\n\n\n        &lt;img src=\"../images/pespective_vs_orthographic.webp\" width=\"90%\"&gt;\n&lt;/div&gt;\n&lt;div class=\"right fragment\"&gt;\n&lt;p&gt;\n        &lt;img class=\"fragment\" src=\"../images/scale.webp\" width=\"90%\"&gt;\n&lt;/p&gt;\n&lt;/div&gt;\n\n\n\nWhy do we need to process the images?\n\n\nPerspective and relief distortion\n\n\n&lt;p&gt;\n    &lt;img src=\"../images/pespective_vs_orthographic_image_plane.webp\"&gt;\n&lt;/p&gt;\n&lt;/div&gt;\n&lt;div class=\"right fragment\"&gt;\n    &lt;img src=\"../images/disortion.webp\"&gt;\n&lt;/div&gt;\n\n\n\nOrthorectification\n\n\n    &lt;p class=\"fragment\"&gt;Process that removes:&lt;/p&gt;\n        &lt;ul&gt;\n            &lt;li class=\"fragment\"&gt;geometric perspective,&lt;/li&gt;\n            &lt;li class=\"fragment\"&gt;effects of relief displacement,&lt;/li&gt;\n            &lt;li class=\"fragment\"&gt;optical distortions from the sensor&lt;/li&gt;\n        &lt;/ul&gt;\n    &lt;p class=\"fragment\"&gt;from a photograph or digital image&lt;/p&gt;\n&lt;/div&gt;\n&lt;div class=\"right fragment\"&gt;\n    &lt;img src=\"../images/DSM_ortho.webp\" width=\"40%\"&gt;\n    &lt;img src=\"../images/ortho_example.webp\" width=\"80%\"&gt;\n&lt;/div&gt;\n&lt;p class=\"fragment\"&gt;The resulting image - an &lt;strong&gt;orthophoto&lt;/strong&gt; or &lt;strong&gt;orthoimage.&lt;/strong&gt;&lt;/p&gt;\n\n\n\nOrthorectification\n\n\n\n\n\nOrthorectification\n\n\n\n\n\nOrthorectification\n\n\n\n\n\nOrthorectification\n\n\n\n\n\nOrthorectification\n\n\n\n\n\nOrthorectification\n\n\n\n\n\nOrthorectification\n\n\n\n\n\nOrthophoto\n\n\n  &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;Photo that is geometrically corrected and has a uniform scale;&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Can be used to measure true horizontal distances \n    (depending on cartographic projection and spatial extent)&lt;/li&gt;\n&lt;/div&gt;\n&lt;div class=\"left\"&gt;\n    &lt;img src=\"../images/ortho_example_measure.webp\"&gt;\n&lt;/div&gt;\n\n\n\nHow do we get there?\n\n\n        &lt;p class=\"small fragment\"&gt;Old way: analogue&lt;/p&gt;\n            &lt;img class=\"fragment\" src=\"../images/analogue.webp\" width=\"90%\"&gt;\n        &lt;p class=\"small fragment\"&gt;Now: digital&lt;/p&gt;\n            &lt;img class=\"fragment\" src=\"../images/digital.webp\" width=\"90%\"&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n        &lt;p&gt; &lt;img class=\"fragment\" src=\"../images/orthophoto_how.webp\"&gt;\n        &lt;/p&gt;\n&lt;/div&gt;\n\n\n\nWhat do we need?\n\n\n\nDigital imagery with sufficient overlap;\n\n\n(Digital elevation model to remove the relief distortion)\n\n\n(Exterior orientation parameters  from aerial triangulation or Inertial Measurement Unit (IMU) to remove tilt distortion);\n\n\n(Camera calibration report, to transform perspective to ortho projection);\n\n\n(Ground Control Points for georeferencing and to reduce distortions);\n\n\nPhotogrammetric processing software that utilizes collinearity equations.\n\n\n\nParameters 2,3,4 can be estimated from the images - see lecture on Imagery processing\n\n\n\n\n\nDigital imagery\n\n     &lt;img class=\"fragment\" src=\"../images/digital_imagery.webp\"&gt;\n\n     &lt;img class=\"fragment\" src=\"../images/multiview.webp\"&gt;\n\n\n     &lt;img class=\"fragment\" src=\"../images/camera_sensor.webp\" width=\"75%\"&gt;\n\n\n\n\nLocation of the photo\n\n\nGeotagging a photograph - associating a photo with a geographical location (latitude, longnitude and usually altitude)\n\n\n\n     &lt;img class=\"fragment\" src=\"../images/geotag.webp\"&gt;\n\n\n &lt;ul&gt;\n &lt;li class=\"small fragment\"&gt;In theory, every part of a picture can be tied to a geographic location, but in the most typical application, only &lt;strong&gt;the position of the sensor&lt;/strong&gt; is associated with the &lt;strong&gt;entire digital image&lt;/strong&gt;&lt;/li&gt;\n &lt;li class=\"small fragment\"&gt;GPS in the camera or UAS measures location with very low accuracy&lt;/li&gt;\n &lt;/ul&gt; \n\n\n\n\n\nGeotagging\n\n\n\n\n\nGeotagging\n\n\n\n\n\nGeotagging\n\n\n\n\n\nGeotagging\n\n\n\n\n\n\nGround Control Points\n\n\n\nGCP - target in the project area with known 3 coordinates (X,Y,Z or lat, long, alt)\n\n\nAccurate, well placed and marked GCPs are essential elements for model accuracy and georeferencing\n\n\n\n &lt;p class=\"fragment\"&gt;&lt;strong&gt;Photo Identifiable:&lt;/strong&gt;&lt;/p&gt;\n\n\nany feature on the ground,\n\n&lt;ul&gt;\n         &lt;li class=\"small fragment\"&gt;specific (e.g. corners)&lt;/li&gt;\n         &lt;li class=\"small fragment\"&gt;unmovable,&lt;/li&gt;\n         &lt;li class=\"small fragment\"&gt;not covered by vegetation&lt;/li&gt;\n     &lt;/ul&gt;\n &lt;li class=\"fragment\"&gt;it can be surveyed later on.&lt;/li&gt;\n\n\n\n     &lt;img class=\"fragment\" src=\"../images/GCPs.webp\"&gt;\n\n\n\n\n\nGround Control Points\n\n\n    &lt;p class=\"fragment\"&gt;Pre-marked (Panels): marking or painting figures or symbols on the ground before the UAS flies&lt;/p&gt;\n     &lt;img class=\"fragment\" src=\"../images/GCP_sketch.webp\" width=\"75% \"&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n        &lt;img class=\"fragment\" src=\"../images/GCP_photo.webp\"&gt;\n&lt;/div&gt;\n\n\n\nWhy Ground Control Points?\n\n    &lt;img class=\"fragment\" src=\"../images/relative_absolute_orientation.webp\"&gt;\n            &lt;ul&gt;\n            &lt;li class=\"fragment\"&gt;necessary for georeferencing if photos are not geotagged&lt;/li&gt;\n            &lt;li class=\"fragment\"&gt;improve precision of the model&lt;/li&gt;\n            &lt;li class=\"fragment\"&gt;important for quality control&lt;/li&gt;\n            &lt;/ul&gt;\n\n\n\nWhy Ground Control Points?\n\n\n\n\n\nWhy Ground Control Points?\n\n\n\n\n\nWhy Ground Control Points?\n\n\n\n\n\nFrom 2D images to a 3D model\n\n\n\northophoto is a 2D image\n\nelevation data are derived as part of orthorectification process\n\nexact camera parameters and manually identified GCPs on the images were needed to derive a DEM\n\nStructure from Motion: automated point matching, camera parameter estimation and 3D model generation\n\n\n\n\nMultiple-view geometry\n\n\n\nScene geometry (structure): Given 2D point matches in two or more images, where are the corresponding points in 3D?\n\n\nCorrespondence (stereo matching): Given a point in just one image, how does it constrain the position of the corresponding point in another image?\n\n\nCamera geometry (motion): Given a set of corresponding points in two or more images, what are the camera matrices for these views?\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;range imaging technique,&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;process of estimating 3D structures from overlapping 2D image sequences,&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;may be coupled with local motion signals&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nStructure from Motion (SfM)\n\n\n\n\n\nUAS Photogrammetric process\n\n\n\nThroughout the whole process, it is important to remember&lt;/&gt;\n\n\nWhat is the aim or the project? and\n\n\nWhat will be the data used for?\n\n\n\n\n\nWhat we have learned\n\n\n\nWhat is remote sensing and photogrammetry\n\n\nProperties of aerial image\n\n\nWhy do we need orthrectification to measure from aerial images\n\n\nWhat process allows us to extract 3D data from series of overlapping 2D images"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2a.html#geometry-of-aerial-photograph",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2a.html#geometry-of-aerial-photograph",
+    "title": "Photogrammetry and Structure from Motion Concepts",
+    "section": "Geometry of aerial photograph",
+    "text": "Geometry of aerial photograph"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2a.html#why-do-we-need-to-process-the-images",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2a.html#why-do-we-need-to-process-the-images",
+    "title": "Photogrammetry and Structure from Motion Concepts",
+    "section": "Why do we need to process the images?",
+    "text": "Why do we need to process the images?\nFrom perspective to orthographic view"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2a.html#why-do-we-need-to-process-the-images-1",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2a.html#why-do-we-need-to-process-the-images-1",
+    "title": "Photogrammetry and Structure from Motion Concepts",
+    "section": "Why do we need to process the images?",
+    "text": "Why do we need to process the images?\nPerspective and relief distortion"
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2a.html#ground-control-points-1",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2a.html#ground-control-points-1",
+    "title": "Photogrammetry and Structure from Motion Concepts",
+    "section": "Ground Control Points",
+    "text": "Ground Control Points\n\n\nPre-marked (Panels): marking or painting figures or symbols on the ground before the UAS flies"
   }
 ]

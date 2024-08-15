@@ -1,0 +1,15 @@
+---
+title: "Assignment 1B"
+subtitle: "UAS Rule Part 107 test subset"
+# subtitle: "A. Introduction to Unmanned Aerial Systems"
+# date: 8/19/2024
+# image: ../images/header.jpg
+# category: Topic 1
+assignment-due-date: 9/4/2024
+---
+
+UAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided [sample questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf)
+
+## Homework
+
+Prepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation.

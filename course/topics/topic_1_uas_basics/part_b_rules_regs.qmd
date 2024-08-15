@@ -22,6 +22,7 @@ assignment-due-date: 9/2/2024
 
 * [FAA Unmanned Aircraft Systems](https://www.faa.gov/uas/)
 * [Becoming a Pilot sUAS Rule (Part 107)](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot/)
+* [Where can I find study materials for the Part 107 aeronautical knowledge test?](https://www.faa.gov/faq/where-can-i-find-study-materials-part-107-aeronautical-knowledge-test)
 * [Operating UAS in North Carolina](https://www.ncdot.gov/aviation/uas/)
 * Aeronautical charts and related georeferenced data
     * [View digital aeronautical charts](https://vfrmap.com/)
@@ -36,7 +37,7 @@ assignment-due-date: 9/2/2024
 
 ## Assignment
 
-UAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample exam 
+UAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided [sample questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf) 
 
 ## Homework
 
