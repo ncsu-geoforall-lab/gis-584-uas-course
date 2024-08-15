@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Schedule – GIS/MEA 584: UAS Mapping and Analytics</title>
+<title>Course Schedule – GIS/MEA 584: UAS Mapping and Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,20 +72,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-schedule .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-date','listing-Topic','listing-title','listing-assignment-due-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-schedule',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author"],
+      searchColumns: ["listing-schedule"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-schedule'] = new List('listing-schedule', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -131,7 +131,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -154,7 +154,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../course/schedule.html" aria-current="page"> 
-<span class="menu-text">Schedule</span></a>
+<span class="menu-text">Course Schedule</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../course/logistics.html"> 
@@ -179,18 +179,7 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of Contents</h2>
-   
-  <ul>
-  <li><a href="#schedule-and-links-to-material-for-the-distance-education-section" id="toc-schedule-and-links-to-material-for-the-distance-education-section" class="nav-link active" data-scroll-target="#schedule-and-links-to-material-for-the-distance-education-section">Schedule and Links to Material for the Distance Education Section</a>
-  <ul class="collapse">
-  <li><a href="#related-courses" id="toc-related-courses" class="nav-link" data-scroll-target="#related-courses">Related Courses</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <!-- banner.html -->
@@ -200,7 +189,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Schedule</h1>
+<h1 class="title">Course Schedule</h1>
 </div>
 
 
@@ -217,377 +206,295 @@ window.Quarto = {
 </header>
 
 
-<p>Schedule and links to material</p>
+
+
+
+
+<div class="quarto-listing quarto-listing-container-custom" id="listing-schedule">
 <blockquote class="blockquote">
-<p>Schedule will be adjusted as needed during the semester.</p>
+Schedule will be adjusted as needed during the semester.
 </blockquote>
-<section id="schedule-and-links-to-material-for-the-distance-education-section" class="level1">
-<h1>Schedule and Links to Material for the Distance Education Section</h1>
-<p><em>Schedule will be adjusted as needed during the semester.</em></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Date Range</th>
-<th>Lecture/Assignment Topic and Project Tasks</th>
-<th>Assignment Due Date</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>August 19</strong></td>
-<td><strong>Introduction to the course</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- <a href="logistics.html">Course logistics</a> (Course instructions, management, and resources)</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- <a href="https://moodle-courses1819.wolfware.ncsu.edu/course/view.php?id=576">Course Moodle site</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>August 19-23</strong></td>
-<td><strong>Topic 1: UAS basics</strong> A. Introduction to Unmanned Aerial Systems</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- Mo lecture, We hardware demos, assignment 1A: prepare presentation on UAS applications</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>August 26-30</strong></td>
-<td><strong>Topic 1: UAS basics</strong> B. Rules and regulations for UAS operations</td>
-<td>Sep.&nbsp;2</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- Mo lecture, We student presentations of UAS applications, assignment: 1B UAS Rule Part 107 test subset</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Sep.&nbsp;2-6</strong></td>
-<td><strong>Topic 2: Structure from Motion</strong> A. From images to 3D models: Photogrammetry and Structure from Motion concepts</td>
-<td>Sep.&nbsp;30</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- Mo lecture, We assignment 2A: 3D models from indoor photos</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- <strong>Project: submit proposal</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Sep.&nbsp;9-13</strong></td>
-<td><strong>Topic 3: UAS flight planning</strong></td>
-<td>Sep.&nbsp;23</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Mo lecture, We assignment: prepare and analyze a flight plan</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Sep.&nbsp;16-20</strong></td>
-<td><strong>UAS FLIGHT</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Meeting point: Mid Pines Road, Raleigh; <a href="https://goo.gl/maps/GRVRUKJzRav">35.727104, -78.696173</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- Time: 1:30 pm on Mo or We</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- <strong>Project: Data acquisition</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Sep.&nbsp;23-27</strong></td>
-<td><strong>Topic 2: Structure from Motion</strong> B. UAS Imagery processing</td>
-<td>Sep.&nbsp;30</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Lecture either Sep.&nbsp;23 or 25 (depending on the flight date), Mo assignment: processing with AGISOFT Photoscan</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Oct.&nbsp;7-9</strong></td>
-<td><strong>Topic 4: GIS analytics</strong> A. Analysis of UAS data processing results</td>
-<td>Oct.&nbsp;23</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Mo lecture, We assignment: analysis of errors and distortions in Photoscan and GRASS GIS</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Oct.&nbsp;14-16</strong></td>
-<td><strong>Topic 4: GIS analytics</strong> B. Point cloud data analysis: point clouds, surfaces, and voxel models</td>
-<td>Oct.&nbsp;23</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Mo lecture, We assignment: viewing point clouds in plas.io, analyzing point clouds and generating surfaces in GRASS GIS</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- <strong>Project: Data processing</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Oct.&nbsp;21-25</strong></td>
-<td><strong>Topic 5: Advanced analytics</strong> A. UAS and lidar data: comparison, fusion and analysis</td>
-<td>Nov.&nbsp;6</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- Mo lecture, We assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- <strong>Project: Workflow development and testing</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Oct.&nbsp;28 - Nov.&nbsp;1</strong></td>
-<td><strong>Topic 5: Advanced analytics</strong> B. Analysis of multitemporal UAS data and its applications</td>
-<td>Nov.&nbsp;6</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Mo lecture, We assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Nov.&nbsp;4-8</strong></td>
-<td><strong>Topic 6: Imagery processing and SfM with open source solutions</strong></td>
-<td>Nov.&nbsp;13</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Mo lecture, We assignment: processing with ODM or WebODM, high performance computing</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- <strong>Project: Perform analysis and/or modeling</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Nov.&nbsp;11-15</strong></td>
-<td><strong>Topic 7: 3D modeling and geovisualization</strong></td>
-<td>Dec.&nbsp;4</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- Mo lecture, We assignment: Get familiar with Blender interface, Refine a UAV-derived 3D model using sculpting tools, Photorealistic rendering</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Nov.&nbsp;18-20</strong></td>
-<td><strong>Project help sessions</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- <strong>Project: Visualize results, work on presentation</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- <a href="projects.html">Project presentation and paper requirements, final project titles</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Nov.&nbsp;25-27</strong></td>
-<td><strong>Project help sessions</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- <strong>Project: Visualize results, work on presentation</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- <a href="projects.html">Project presentation and paper requirements, final project titles</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Dec.&nbsp;2-4</strong></td>
-<td><strong>Project presentations</strong> (<a href="projects.html">See the requirements and project titles</a>)</td>
-<td>Dec.&nbsp;4</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- DE section: To record your presentation, use <a href="https://obsproject.com/index">Open Broadcaster Software</a> (<a href="http://www.howtogeek.com/183231/how-to-record-your-desktop-and-create-a-screencast-on-windows/">tutorial</a>), MS Powerpoint, Libre Office, or any other software with similar recording functionality.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Upload the presentation to Moodle or, if the file is too big, upload your file to Google drive and share it with the instructors.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- Please keep the presentation to 10 minutes and name your file <code>LastnameFirstname_Presentation.avi</code>, <code>LastnameFirstname_Presentation.pptx</code> (or whatever format you use).</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Recorded presentations are due Dec.&nbsp;4.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Dec.&nbsp;9-11</strong></td>
-<td><strong>Finish project paper and upload it to Moodle as a pdf file</strong> <code>LastnameFirstname_Paper.pdf</code></td>
-<td>Dec.&nbsp;11</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- For archiving purposes also submit a complete coursework in a ZIP file</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>- The ZIP file should include: project paper, presentation slides, and all homework papers</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>- Upload your work as a single ZIP file <code>LastnameFirstname.zip</code> to your Google drive and share it with the instructors.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Dec.&nbsp;16</strong></td>
-<td><strong>Cut-off day, no late submissions possible after this day</strong></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<section id="related-courses" class="level2">
-<h2 class="anchored" data-anchor-id="related-courses">Related Courses</h2>
+<h3 class="anchored">
+Aug.&nbsp;19
+</h3>
+<h4 class="primary anchored">
+Introduction to the course
+</h4>
+<ul>
+<li>
+Course logistics: <a href="../course/logistics.html">link</a> (Course instructions, management, and resources)
+</li>
+<li>
+Course Moodle site: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4084&amp;bp=s">link</a>
+</li>
+</ul>
+<h3 class="anchored">
+Aug.&nbsp;19-23
+</h3>
+<h4 class="primary anchored">
+<a href="../course/topics/topic_1_uas_basics/part_a_introduction.html">Topic 1: UAS basics A. Introduction to Unmanned Aerial Systems</a>
+</h4>
+<ul>
+<li>
+Mo lecture, We hardware demos, assignment 1A: prepare presentation on UAS applications
+</li>
+</ul>
+<h3 class="anchored">
+Aug.&nbsp;26-30
+</h3>
+<h4 class="primary anchored">
+<a href="../course/topics/topic_1_uas_basics/part_b_rules_regs.html">Topic 1: UAS basics B. Rules and regulations for UAS operations</a>
+</h4>
+<ul>
+<li>
+Mo lecture, We student presentations of UAS applications, assignment: 1B UAS Rule Part 107 test subset
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Sep.&nbsp;2</p>
+<h3 class="anchored">
+Sep.&nbsp;2
+</h3>
+<h4 class="no-class anchored">
+Labor Day: No Class
+</h4>
+<ul>
+</ul>
+<h3 class="anchored">
+Sep.&nbsp;2-6
+</h3>
+<h4 class="primary anchored">
+Topic 2: Structure from Motion A. From images to 3D models: Photogrammetry and Structure from Motion concepts
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment 2A: 3D models from indoor photos
+</li>
+<li>
+Project: submit proposal
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Sep.&nbsp;30</p>
+<h3 class="anchored">
+Sep.&nbsp;9-13
+</h3>
+<h4 class="primary anchored">
+Topic 3: UAS flight planning
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment: prepare and analyze a flight plan
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Sep.&nbsp;23</p>
+<h3 class="anchored">
+Sep.&nbsp;16-20
+</h3>
+<h4 class="primary anchored">
+UAS FLIGHT
+</h4>
+<ul>
+<li>
+Meeting point: Mid Pines Road, Raleigh; <a href="https://goo.gl/maps/GRVRUKJzRav">35.727104, -78.696173</a>
+</li>
+<li>
+Time: 1:30 pm on Mo or We
+</li>
+<li>
+Project: Data acquisition
+</li>
+</ul>
+<h3 class="anchored">
+Sep.&nbsp;23-27
+</h3>
+<h4 class="primary anchored">
+Topic 2: Structure from Motion B. UAS Imagery processing
+</h4>
+<ul>
+<li>
+Lecture either Sep.&nbsp;23 or 25 (depending on the flight date), Mo assignment: processing with AGISOFT Photoscan
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Sep.&nbsp;30</p>
+<h3 class="anchored">
+Oct.&nbsp;7-9
+</h3>
+<h4 class="primary anchored">
+Topic 4: GIS analytics A. Analysis of UAS data processing results
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment: analysis of errors and distortions in Photoscan and GRASS GIS
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
+<h3 class="anchored">
+Oct.&nbsp;14-15
+</h3>
+<h4 class="no-class anchored">
+Fall break: No Class
+</h4>
+<ul>
+</ul>
+<h3 class="anchored">
+Oct.&nbsp;14-16
+</h3>
+<h4 class="primary anchored">
+Topic 4: GIS analytics B. Point cloud data analysis: point clouds, surfaces, and voxel models
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment: viewing point clouds in plas.io, analyzing point clouds and generating surfaces in GRASS GIS
+</li>
+<li>
+Project: Data processing
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
+<h3 class="anchored">
+Oct.&nbsp;21-25
+</h3>
+<h4 class="primary anchored">
+Topic 5: Advanced analytics A. UAS and lidar data: comparison, fusion and analysis
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow
+</li>
+<li>
+Project: Workflow development and testing
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Nov.&nbsp;6</p>
+<h3 class="anchored">
+Oct.&nbsp;28 - Nov.&nbsp;1
+</h3>
+<h4 class="primary anchored">
+Topic 5: Advanced analytics B. Analysis of multitemporal UAS data and its applications
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Nov.&nbsp;6</p>
+<h3 class="anchored">
+Nov.&nbsp;4-8
+</h3>
+<h4 class="primary anchored">
+Topic 6: Imagery processing and SfM with open source solutions
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment: processing with ODM or WebODM, high performance computing
+</li>
+<li>
+Project: Perform analysis and/or modeling
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Nov.&nbsp;13</p>
+<h3 class="anchored">
+Nov.&nbsp;11-15
+</h3>
+<h4 class="primary anchored">
+Topic 7: 3D modeling and geovisualization
+</h4>
+<ul>
+<li>
+Mo lecture, We assignment: Get familiar with Blender interface, Refine a UAV-derived 3D model using sculpting tools, Photorealistic rendering
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Dec.&nbsp;4</p>
+<h3 class="anchored">
+Nov.&nbsp;18-20
+</h3>
+<h4 class="primary anchored">
+Project help sessions
+</h4>
+<ul>
+<li>
+Project: Visualize results, work on presentation
+</li>
+<li>
+<a href="projects.html">Project presentation and paper requirements, final project titles</a>
+</li>
+</ul>
+<h3 class="anchored">
+Nov.&nbsp;25-27
+</h3>
+<h4 class="no-class anchored">
+Thanksgiving break: No Class
+</h4>
+<ul>
+<li>
+Project: Visualize results, work on presentation
+</li>
+<li>
+<a href="projects.html">Project presentation and paper requirements, final project titles</a>
+</li>
+</ul>
+<h3 class="anchored">
+Nov.&nbsp;25-27
+</h3>
+<h4 class="primary anchored">
+Project help sessions
+</h4>
+<ul>
+<li>
+Project: Visualize results, work on presentation
+</li>
+<li>
+<a href="projects.html">Project presentation and paper requirements, final project titles</a>
+</li>
+</ul>
+<h3 class="anchored">
+Dec.&nbsp;2-4
+</h3>
+<h4 class="primary anchored">
+Project presentations (<a href="projects.html">See the requirements and project titles</a>)
+</h4>
+<ul>
+<li>
+DE section: To record your presentation, use <a href="https://obsproject.com/index">Open Broadcaster Software</a> (<a href="http://www.howtogeek.com/183231/how-to-record-your-desktop-and-create-a-screencast-on-windows/">tutorial</a>), MS Powerpoint, Libre Office, or any other software with similar recording functionality.
+</li>
+<li>
+Upload the presentation to Moodle or, if the file is too big, upload your file to Google drive and share it with the instructors.
+</li>
+<li>
+Please keep the presentation to 10 minutes and name your file <code>LastnameFirstname_Presentation.avi</code>, <code>LastnameFirstname_Presentation.pptx</code> (or whatever format you use).
+</li>
+<li>
+Recorded presentations are due Dec.&nbsp;4.
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Dec.&nbsp;4</p>
+<h3 class="anchored">
+Dec.&nbsp;9-11
+</h3>
+<h4 class="primary anchored">
+Finish project paper and upload it to Moodle as a pdf file <code>LastnameFirstname_Paper.pdf</code>
+</h4>
+<ul>
+<li>
+For archiving purposes also submit a complete coursework in a ZIP file
+</li>
+<li>
+The ZIP file should include: project paper, presentation slides, and all homework papers
+</li>
+<li>
+Upload your work as a single ZIP file <code>LastnameFirstname.zip</code> to your Google drive and share it with the instructors.
+</li>
+</ul>
+<p><strong>Assignment Due Date:</strong> Dec.&nbsp;11</p>
+<h3 class="anchored">
+Dec.&nbsp;16
+</h3>
+<h4 class="primary anchored">
+Cut-off day, no late submissions possible after this day
+</h4>
+<ul>
+</ul>
+<p><img src="content/images/schedule.webp" alt="lecture" width="100%"></p>
 <p>If you are looking for what is the next step, here are some <a href="https://geospatial.ncsu.edu/geoforall/courses.html">related courses</a>.</p>
-
-
-
-</section>
-</section>
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-title-sort" data-direction="asc">
-          Title
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
-</th>
-<th>
-Topic
-</th>
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
-<th>
-assignment-due-date
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-listing-date-sort="1724025600000" data-listing-file-modified-sort="1723728687519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="85" data-listing-title-sort="A. Introduction to Unmanned Aerial Systems" data-listing-filename-sort="part_a_introduction.qmd">
-<td>
-<span class="listing-date">Aug 19, 2024</span>
-</td>
-<td>
-<span class="listing-Topic">Topic 1: UAS Basics</span>
-</td>
-<td>
-<a href="../course/topics/topic_1_uas_basics/part_a_introduction.html" class="title listing-title">A. Introduction to Unmanned Aerial Systems</a>
-</td>
-<td>
-<span class="listing-assignment-due-date">9/2/2024</span>
-</td>
-</tr>
-<tr data-index="1" data-listing-date-sort="1724630400000" data-listing-file-modified-sort="1723728687519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="177" data-listing-title-sort="B. Rules and regulations for UAS operations" data-listing-filename-sort="part_b_rules_regs.qmd">
-<td>
-<span class="listing-date">Aug 26, 2024</span>
-</td>
-<td>
-<span class="listing-Topic">Topic 1: UAS Basics</span>
-</td>
-<td>
-<a href="../course/topics/topic_1_uas_basics/part_b_rules_regs.html" class="title listing-title">B. Rules and regulations for UAS operations</a>
-</td>
-<td>
-<span class="listing-assignment-due-date">9/2/2024</span>
-</td>
-</tr>
-<tr data-index="2" data-listing-date-sort="1724803200000" data-listing-file-modified-sort="1723728687519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="218" data-listing-title-sort="A. From images to 3D models: Photogrammetry and Structure from Motion concepts" data-listing-filename-sort="part_a_images_to_3d.qmd">
-<td>
-<span class="listing-date">Aug 28, 2024</span>
-</td>
-<td>
-<span class="listing-Topic">Topic 2: Structure from Motion</span>
-</td>
-<td>
-<a href="../course/topics/topic_2_sfm/part_a_images_to_3d.html" class="title listing-title">A. From images to 3D models: Photogrammetry and Structure from Motion concepts</a>
-</td>
-<td>
-<span class="listing-assignment-due-date">9/30/2024</span>
-</td>
-</tr>
-<tr data-index="3" data-listing-date-sort="1726444800000" data-listing-file-modified-sort="1723728687519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="175" data-listing-title-sort="UAS Flight Planning" data-listing-filename-sort="part_a_uas_flight_planning.qmd">
-<td>
-<span class="listing-date">Sep 16, 2024</span>
-</td>
-<td>
-<span class="listing-Topic">Topic 3: UAS Flight Planning</span>
-</td>
-<td>
-<a href="../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="title listing-title">UAS Flight Planning</a>
-</td>
-<td>
-<span class="listing-assignment-due-date">&nbsp;</span>
-</td>
-</tr>
-</tbody>
-</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
