@@ -1,0 +1,159 @@
+schedule:
+  - date_range: "Aug. 19"
+    topic: "Introduction to the course"
+    details: 
+      - "Course logistics: [link](logistics.qmd) (Course instructions, management, and resources)"
+      - "Course Moodle site: [link](https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4084&bp=s)"
+    due_date: ""
+    no_class: false
+  
+  - date_range: "Aug. 19-23"
+    topic: "[Topic 1: UAS basics A. Introduction to Unmanned Aerial Systems](topics/topic_1_uas_basics/part_a_introduction.qmd)"
+    details:
+      - "Mo lecture, We hardware demos, assignment 1A: prepare presentation on UAS applications"
+    due_date: ""
+    no_class: false
+  
+  - date_range: "Aug. 26-30"
+    topic: "[Topic 1: UAS basics B. Rules and regulations for UAS operations](topics/topic_1_uas_basics/part_b_rules_regs.qmd)"
+    details:
+      - "Mo lecture, We student presentations of UAS applications, assignment: 1B UAS Rule Part 107 test subset"
+    due_date: "Sep. 2"
+    no_class: false
+
+  - date_range: "Sep. 2"
+    topic: "Labor Day: No Class"
+    details: []
+    due_date: ""
+    no_class: true
+  
+  - date_range: "Sep. 2-6"
+    topic: "Topic 2: Structure from Motion A. From images to 3D models: Photogrammetry and Structure from Motion concepts"
+    details:
+      - "Mo lecture, We assignment 2A: 3D models from indoor photos"
+      - "Project: submit proposal"
+    due_date: "Sep. 30"
+    no_class: false
+  
+  - date_range: "Sep. 9-13"
+    topic: "Topic 3: UAS flight planning"
+    details:
+      - "Mo lecture, We assignment: prepare and analyze a flight plan"
+    due_date: "Sep. 23"
+    no_class: false
+  
+  - date_range: "Sep. 16-20"
+    topic: "UAS FLIGHT"
+    details:
+      - "Meeting point: Mid Pines Road, Raleigh; [35.727104, -78.696173](https://goo.gl/maps/GRVRUKJzRav)"
+      - "Time: 1:30 pm on Mo or We"
+      - "Project: Data acquisition"
+    due_date: ""
+    no_class: false
+  
+  - date_range: "Sep. 23-27"
+    topic: "Topic 2: Structure from Motion B. UAS Imagery processing"
+    details:
+      - "Lecture either Sep. 23 or 25 (depending on the flight date), Mo assignment: processing with AGISOFT Photoscan"
+    due_date: "Sep. 30"
+    no_class: false
+  
+  - date_range: "Oct. 7-9"
+    topic: "Topic 4: GIS analytics A. Analysis of UAS data processing results"
+    details:
+      - "Mo lecture, We assignment: analysis of errors and distortions in Photoscan and GRASS GIS"
+    due_date: "Oct. 23"
+    no_class: false
+
+  - date_range: "Oct. 14-15"
+    topic: "Fall break: No Class"
+    details: []
+    due_date: ""
+    no_class: true
+  
+  - date_range: "Oct. 14-16"
+    topic: "Topic 4: GIS analytics B. Point cloud data analysis: point clouds, surfaces, and voxel models"
+    details:
+      - "Mo lecture, We assignment: viewing point clouds in plas.io, analyzing point clouds and generating surfaces in GRASS GIS"
+      - "Project: Data processing"
+    due_date: "Oct. 23"
+    no_class: false
+  
+  - date_range: "Oct. 21-25"
+    topic: "Topic 5: Advanced analytics A. UAS and lidar data: comparison, fusion and analysis"
+    details:
+      - "Mo lecture, We assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow"
+      - "Project: Workflow development and testing"
+    due_date: "Nov. 6"
+    no_class: false
+  
+  - date_range: "Oct. 28 - Nov. 1"
+    topic: "Topic 5: Advanced analytics B. Analysis of multitemporal UAS data and its applications"
+    details:
+      - "Mo lecture, We assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes"
+    due_date: "Nov. 6"
+    no_class: false
+  
+  - date_range: "Nov. 4-8"
+    topic: "Topic 6: Imagery processing and SfM with open source solutions"
+    details:
+      - "Mo lecture, We assignment: processing with ODM or WebODM, high performance computing"
+      - "Project: Perform analysis and/or modeling"
+    due_date: "Nov. 13"
+    no_class: false
+  
+  - date_range: "Nov. 11-15"
+    topic: "Topic 7: 3D modeling and geovisualization"
+    details:
+      - "Mo lecture, We assignment: Get familiar with Blender interface, Refine a UAV-derived 3D model using sculpting tools, Photorealistic rendering"
+    due_date: "Dec. 4"
+    no_class: false
+  
+  - date_range: "Nov. 18-20"
+    topic: "Project help sessions"
+    details:
+      - "Project: Visualize results, work on presentation"
+      - "[Project presentation and paper requirements, final project titles](projects.html)"
+    due_date: ""
+    no_class: false
+  
+  - date_range: "Nov. 25-27"
+    topic: "Thanksgiving break: No Class"
+    details:
+      - "Project: Visualize results, work on presentation"
+      - "[Project presentation and paper requirements, final project titles](projects.html)"
+    due_date: ""
+    no_class: true
+
+  - date_range: "Nov. 25-27"
+    topic: "Project help sessions"
+    details:
+      - "Project: Visualize results, work on presentation"
+      - "[Project presentation and paper requirements, final project titles](projects.html)"
+    due_date: ""
+    no_class: false
+  
+  - date_range: "Dec. 2-4"
+    topic: "Project presentations ([See the requirements and project titles](projects.html))"
+    details:
+      - "DE section: To record your presentation, use [Open Broadcaster Software](https://obsproject.com/index) ([tutorial](http://www.howtogeek.com/183231/how-to-record-your-desktop-and-create-a-screencast-on-windows/)), MS Powerpoint, Libre Office, or any other software with similar recording functionality."
+      - "Upload the presentation to Moodle or, if the file is too big, upload your file to Google drive and share it with the instructors."
+      - "Please keep the presentation to 10 minutes and name your file `LastnameFirstname_Presentation.avi`, `LastnameFirstname_Presentation.pptx` (or whatever format you use)."
+      - "Recorded presentations are due Dec. 4."
+    due_date: "Dec. 4"
+    no_class: false
+  
+  - date_range: "Dec. 9-11"
+    topic: "Finish project paper and upload it to Moodle as a pdf file `LastnameFirstname_Paper.pdf`"
+    details:
+      - "For archiving purposes also submit a complete coursework in a ZIP file"
+      - "The ZIP file should include: project paper, presentation slides, and all homework papers"
+      - "Upload your work as a single ZIP file `LastnameFirstname.zip` to your Google drive and share it with the instructors."
+    due_date: "Dec. 11"
+    no_class: false
+  
+  - date_range: "Dec. 16"
+    topic: "Cut-off day, no late submissions possible after this day"
+    details: []
+    due_date: ""
+    no_class: false

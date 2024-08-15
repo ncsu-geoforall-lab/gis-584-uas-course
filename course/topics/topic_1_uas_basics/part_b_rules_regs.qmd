@@ -1,8 +1,8 @@
 ---
+topic: "Topic 1: UAS Basics"
 title: "B. Rules and regulations for UAS operations"
 subtitle: "Topic 1: UAS Basics"
 date: 8/26/2024
-Topic: "Topic 1: UAS Basics"
 assignment-due-date: 9/2/2024
 ---
 
