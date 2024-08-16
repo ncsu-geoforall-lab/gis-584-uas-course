@@ -158,11 +158,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#compute-a-raster-for-elevation-of-the-flight-path" id="toc-compute-a-raster-for-elevation-of-the-flight-path" class="nav-link active" data-scroll-target="#compute-a-raster-for-elevation-of-the-flight-path">Compute a raster for elevation of the flight path</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a>
+  <ul class="collapse">
+  <li><a href="#compute-a-raster-for-elevation-of-the-flight-path" id="toc-compute-a-raster-for-elevation-of-the-flight-path" class="nav-link" data-scroll-target="#compute-a-raster-for-elevation-of-the-flight-path">Compute a raster for elevation of the flight path</a></li>
   <li><a href="#generate-dsm" id="toc-generate-dsm" class="nav-link" data-scroll-target="#generate-dsm">Generate DSM</a></li>
   <li><a href="#calculate-the-elevation-difference-between-the-flight-path-and-surface" id="toc-calculate-the-elevation-difference-between-the-flight-path-and-surface" class="nav-link" data-scroll-target="#calculate-the-elevation-difference-between-the-flight-path-and-surface">Calculate the elevation difference between the flight path and surface</a></li>
   <li><a href="#visualize-results" id="toc-visualize-results" class="nav-link" data-scroll-target="#visualize-results">Visualize results</a></li>
   <li><a href="#explain-your-choice-of-the-flight-area-parameters-and-takeoff-and-landing-locations-based-on-the-performed-analysis" id="toc-explain-your-choice-of-the-flight-area-parameters-and-takeoff-and-landing-locations-based-on-the-performed-analysis" class="nav-link" data-scroll-target="#explain-your-choice-of-the-flight-area-parameters-and-takeoff-and-landing-locations-based-on-the-performed-analysis">Explain your choice of the flight area, parameters and takeoff and landing locations based on the performed analysis</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -193,6 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
 <p>In order to execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Also remember that the ground altitude is measured in the take off localization and does not take into account local relief. It can be crucial in the mountainous areas. In our case trees, buildings and other man-made structures are more of a concern. Because both – terrain data (from lidar) and planned flight path are available, the elevation difference between the flight ceiling and the surface can be computed using GIS tools.</p>
 <p><em>If you are unfamiliar with GRASS GIS - visit the OSgeoLab youtube channel and watch at least the <a href="https://youtu.be/xqsnwtlP-2Y">Getting started with GRASS GIS GUI</a> video.</em></p>
 <section id="general-workflow" class="level4">
@@ -270,6 +275,7 @@ Settings &gt; GRASS working environment &gt; Change working directory &gt; selec
 <p>The aim is to prove that the flight plan can be used to execute a safe and sucessful flight mission. Describe your thought process - what did you take into account first, what problems did you encouter? Did you need to change your initial plans based on software limitations, legal issues or the relief of the targeted area?</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
