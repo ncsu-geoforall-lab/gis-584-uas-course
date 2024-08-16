@@ -18,8 +18,7 @@ date: 8/28/2024
 
 ## Lecture
 
-* Lecture Slides: [Photogrammetry and SfM](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/HM_Photogrammetry_and_SfM.html)
-<!-- * Lecture Slides: [Introduction to UAS](lectures/lecture_1a.qmd) -->
+* Lecture Slides: [Photogrammetry and SfM](lectures/lecture_2a.qmd)
 
 ##  Supplemental materials
 

@@ -4,6 +4,8 @@ subtitle: "UAS Rule Part 107 test subset"
 assignment-due-date: 9/4/2024
 ---
 
+## Task
+
 UAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided [sample questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf)
 
 ## Homework

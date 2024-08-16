@@ -1,0 +1,8 @@
+---
+title: "Flight Planning"
+subtitle: "Center for Geospatial Analytics at North Carolina State University"
+author: "Justyna Jeziorska, Helena Mitasova & Corey White"
+format:
+    revealjs:
+        theme: [simple, ../../../../theme.scss]
+---

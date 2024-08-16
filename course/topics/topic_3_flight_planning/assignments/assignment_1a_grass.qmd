@@ -5,8 +5,10 @@ title: "Assignment 1A"
 # date: 8/19/2024
 # image: ../images/header.jpg
 # category: Topic 1
-assignment-due-date: 9/21/2024
+assignment-due-date: 9/23/2024
 ---
+
+## Task
 
 In order to execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Also remember that the ground altitude is measured in the take off localization and does not take into account local relief. It can be crucial in the mountainous areas. In our case trees, buildings and other man-made structures are more of a concern. Because both – terrain data (from lidar) and planned flight path are available, the elevation difference between the flight ceiling and the surface can be computed using GIS tools.
 

@@ -30,15 +30,16 @@ schedule:
     details:
       - "**Mon: Labor Day - No Class**"
       - "Wed: [Lecture](topics/topic_2_sfm/lectures/lecture_2a.qmd)"
-      - "Assignment 2A: 3D models from indoor photos"
+      - "[Assignment 2A: 3D models from indoor photos](topics/topic_2_sfm/assignments/assignment_2a.qmd)"
       - "Project: submit proposal"
     due_date: "Sep. 30"
     no_class: false
   
   - date_range: "Sep. 9-13"
-    topic: "Topic 3: UAS flight planning"
+    topic: "[Topic 3: UAS flight planning](topics/topic_3_uas_flight_planning/uas_flight_planning.qmd)"
     details:
-      - "Mo lecture, We assignment: prepare and analyze a flight plan"
+      - "Mon: [Lecture](topics/topic_3_uas_flight_planning/lectures/lecture_1a.qmd)"
+      - "Wed: In Class Assignment - [Assignment prepare and analyze a flight plan](topics/topic_3_uas_flight_planning/assignments/assignment_1a_grass.qmd)"
     due_date: "Sep. 23"
     no_class: false
   
@@ -52,9 +53,11 @@ schedule:
     no_class: false
   
   - date_range: "Sep. 23-27"
-    topic: "Topic 2: Structure from Motion B. UAS Imagery processing"
+    topic: "[Topic 2: Structure from Motion B. UAS Imagery processing](topics/topic_2_sfm/part_b_img_processing_sfm.qmd)"
     details:
-      - "Lecture either Sep. 23 or 25 (depending on the flight date), Mo assignment: processing with AGISOFT Photoscan"
+      - "Mon: [Lecture](topics/topic_2_sfm/lectures/lecture_2b.qmd)" 
+      # - "either Sep. 23 or 25 (depending on the flight date)"
+      - "Wed: In Class Assignment - [Processing with AGISOFT Photoscan](topics/topic_2_sfm/assignments/assignment_2b.qmd)"
     due_date: "Sep. 30"
     no_class: false
   

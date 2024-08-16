@@ -4,6 +4,7 @@ title: "Assignment 1A"
 assignment-due-date: 8/21/2024
 ---
 
+## Task
 
 During the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.
 
@@ -18,5 +19,7 @@ The presentation should be 7 - 10 minutes long and include the following:
 * Case study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained 
 
 Try to find something relevant to your research interest or just something unique that will be worth sharing.
+
+## Homework
 
 Upload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule. 
