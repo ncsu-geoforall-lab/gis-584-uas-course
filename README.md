@@ -28,6 +28,20 @@ Convert images to webp format using the following commands:
 mogrify -format webp -quality 80 *.{png,PNG,jpg,JPG}
 ```
 
+### Converting Reveal.js slides to Quarto
+
+To convert Reveal.js slides to Quarto, use the following command:
+
+```bash
+./update_lecture_images.sh <input_file> <input_image_dir> <output_dir> 
+```
+
+For example, this code converts the images found in the lecture_2b.qmd file to webp format and saves them to the course/topics/topic_2_sfm/images directory:
+
+```bash
+./update_lecture_images.sh "course/topics/topic_2_sfm/lectures/lecture_2b.qmd" "../uav-lidar-analytics-course/lectures/" "course/topics/topic_2_sfm/images
+```
+
 ## Deployment
 
 The site is deployed to GitHub Pages using the `gh-pages` branch. The site will be automatically deployed when changes are pushed to the `main` branch.
