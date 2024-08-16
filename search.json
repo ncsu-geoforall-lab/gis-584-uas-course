@@ -427,6 +427,13 @@
     "text": "Homework\nUpload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule."
   },
   {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-planning-software",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-planning-software",
+    "title": "Flight Planning",
+    "section": "Flight planning software",
+    "text": "Flight planning software\n\nMultiple available platforms\nSome are dedicated for specific UAS and sold with the system by the manufacturer\n\nTrimble UAS - Trimble Aerial Imaging\nsenseFly UAS - eMotion 3\nDJI - DJI Ground Station Pro\nYuneec - UAV Toolbox\n\nSome are more universal and can work with a variety of platforms:\n\nUgCS\nOpen Source Mission Planner - mostly for DIY drones"
+  },
+  {
     "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
     "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
     "title": "UAS Flight Planning",
