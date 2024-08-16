@@ -2,9 +2,7 @@
 title: "Structure from Motion Visualization"
 subtitle: "UAS Mapping Simulation"
 author: "Corey T. White"
-format:
-    html:
-        theme: []
+format: "html"
 ---
 
 ## Structure from Motion Example

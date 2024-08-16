@@ -1482,5 +1482,12 @@
     "title": "Flight Planning",
     "section": "Flight planning software",
     "text": "Flight planning software\n\nMultiple available platforms\nSome are dedicated for specific UAS and sold with the system by the manufacturer\n\nTrimble UAS - Trimble Aerial Imaging\nsenseFly UAS - eMotion 3\nDJI - DJI Ground Station Pro\nYuneec - UAV Toolbox\n\nSome are more universal and can work with a variety of platforms:\n\nUgCS\nOpen Source Mission Planner - mostly for DIY drones"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists",
+    "title": "Flight Planning",
+    "section": "Site evaluation and checklists",
+    "text": "Site evaluation and checklists\n\n\nTerrain check – high obstacles in the take-off, mission, landing, and alternative landing locations\nAsk the locals about possible air traffic or ground activities\nWeather check\n\nTemperature affects battery life\nMost of the UAS can’t operate in rain\n\nUse checklists, don’t rely on your memory!\nSample checklists: paper (for Phantom) and RMUS app"
   }
 ]

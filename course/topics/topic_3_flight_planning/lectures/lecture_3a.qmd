@@ -109,7 +109,7 @@ format:
 :::
 
 ::: {.column width="50%"}
-![](../images/gcp.webp){width=90%}
+![](../images/GCP.webp){width=90%}
 :::
 :::
 
@@ -190,21 +190,19 @@ format:
 
 ---
 
-<section class="smaller">
-<h2>Site evaluation and checklists</h2>
-<img class="fragment" src="../images/flowchart_site.webp">
-<ul>
-<li class="fragment"> terrain check – high obstacles in the take-off, mission, landing and alternative landing locations</li> 
-<li class="fragment"> ask the locals about possible air traffic or ground activities</li> 
-<li class="fragment"> weather check</li> 
-<ul>
-<li class="small fragment"> temperature effects battery life</li> 
-<li class="small fragment"> most of the UAS can’t operate in rain. </li> 
-</ul>
-<li class="fragment"> use checklists, don't rely on your memory!
-<li class="fragment"> sample checklists: <a href="https://phantompilots.com/attachments/drone-checklist-pdf.41608/">paper (for Phantom)</a> and <a href="https://www.rmus.com/pages/rmus-uav-pilot-preflight-compliance-checklist">RMUS app</a>
-</ul>
-</section>
+## Site evaluation and checklists
+
+![](../images/flowchart_site.webp)
+
+- Terrain check – high obstacles in the take-off, mission, landing, and alternative landing locations
+- Ask the locals about possible air traffic or ground activities
+- Weather check
+  - Temperature affects battery life
+  - Most of the UAS can’t operate in rain
+- Use checklists, don't rely on your memory!
+- Sample checklists: [paper (for Phantom)](https://phantompilots.com/attachments/drone-checklist-pdf.41608/) and [RMUS app](https://www.rmus.com/pages/rmus-uav-pilot-preflight-compliance-checklist)
+
+---
 
 <section class="smaller">
     <h2>Site evaluation and checklists</h2>
@@ -256,24 +254,24 @@ the Remote Pilot in Command (RPIC) is required to develop a **preflight inspecti
 <ul>
 </section>
 
-<section>
+<section class="text-center">
     <h3>Lake Wheeler test site</h3>
-    <img src="../images/LW_google.webp">
+    <img src="../images/LW_google.webp" width="80%">
 </section>
 
-<section>
+<section class="text-center">
     <h3>Lake Wheeler test site</h3>
-    <img src="../images/LakeWheeler_COA.webp">
+    <img src="../images/LakeWheeler_COA.webp" width="80%">
 </section>
 
-<section>
+<section class="text-center">
     <h3>Lake Wheeler test site</h3>
-    <img src="../images/lake_wheeler1.webp">
+    <img src="../images/lake_wheeler1.webp" width="80%">
 </section>
 
-<section>
+<section class="text-center">
     <h3>Lake Wheeler test site</h3>
-    <img src="../images/lake_wheeler2.webp">
+    <img src="../images/lake_wheeler2.webp" width="80%">
 </section>
 
 <section class="text-center">
@@ -299,38 +297,51 @@ the Remote Pilot in Command (RPIC) is required to develop a **preflight inspecti
 <section>
     <h2>How to plan a mapping flight?</h2>
     <p>UAS Photogrammetric process</p>
-    <img class="fragment" src="../images/photogrammetric_process.webp">
+<img class="fragment" src="../images/photogrammetric_process.webp">
+
 ::: {.columns}
-::: {.column width="50%"} 
-        <img src="../images/aerial_survey.webp">
+::: {.column width="50%"}
+
+<img src="../images/aerial_survey.webp">
+
 :::
-::: {.column width="50%"} 
-    <img src="../images/flight_track.webp">
+::: {.column width="50%"}
+
+<img src="../images/flight_track.webp">
+
 :::
+:::
+
 </section>
+
 <section>
     <h3>How to plan a mapping flight?</h3>
- <img src="../images/pix4D1.webp">
+    <img src="../images/pix4D1.webp">
 </section>
+
 <section>
     <h3>How to plan a mapping flight?</h3>
- <img src="../images/pix4D2.webp">
+    <img src="../images/pix4D2.webp">
 </section>
+
 <section>
     <h3>How to plan a mapping flight?</h3>
- <img src="../images/pix4D3.webp">
+    <img src="../images/pix4D3.webp">
 </section>
+
 <section>
     <h3>How to plan a mapping flight?</h3>
- <img src="../images/pix4D4.webp">
+    <img src="../images/pix4D4.webp">
 </section>
+
 <section>
     <h3>How to plan a mapping flight?</h3>
- <img src="../images/pix4D5.webp">
+    <img src="../images/pix4D5.webp">
 </section>
+
 <section>
     <h3>How to plan a mapping flight?</h3>
- <img src="../images/pix4D6.webp">
+    <img src="../images/pix4D6.webp">
 </section>
 
 <section>
