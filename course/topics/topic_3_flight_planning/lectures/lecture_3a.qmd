@@ -188,9 +188,11 @@ format:
 :::
 </section>
 
-<section>
-    <h2>Site evaluation and checklists</h2>
-     <img class="fragment" src="../images/flowchart_site.webp">
+---
+
+<section class="smaller">
+<h2>Site evaluation and checklists</h2>
+<img class="fragment" src="../images/flowchart_site.webp">
 <ul>
 <li class="fragment"> terrain check – high obstacles in the take-off, mission, landing and alternative landing locations</li> 
 <li class="fragment"> ask the locals about possible air traffic or ground activities</li> 
@@ -206,27 +208,36 @@ format:
 
 <section class="smaller">
     <h2>Site evaluation and checklists</h2>
-     <img  src="../images/site.webp">
+    <img  src="../images/site.webp">
 </section>
 
-<section class="smaller">
-<h3>Site evaluation and checklists</h3>
-<p>Preflight inspection is required under Part 107.49; <br>the Remote Pilot in  Comand (RPIC) is required to develop a <strong>preflight inspection checklist</strong> if the manufacture has not developed one.</p>
+---
+
+### Site evaluation and checklists {.smaller}
+
+Preflight inspection is required under Part 107.49;  
+the Remote Pilot in Command (RPIC) is required to develop a **preflight inspection checklist** if the manufacturer has not developed one.
+
 ::: {.columns}
 ::: {.column width="50%"}
-<p class="small fragment"><a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=5&cad=rja&uact=8&ved=0ahUKEwi5oMOcj_7YAhWN71MKHaugClAQFghAMAQ&url=https%3A%2F%2Fconnect.ncdot.gov%2Fresources%2FAviation%2520Resources%2520Documents%2FNCDOT_Operational_Procedures_Template.docx&usg=AOvVaw0kdoCv8PlKVsnEPkF3rkoQ">NCDOT UAS Operational Procedures Guide</a>
-<ul>
-    <li class="small fragment">The checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor</li> 
-    <li class="small fragment">In case that is not available, a standard Flight Checklist should be made and followed by the flight crew</li> 
-</ul>
+
+[NCDOT Unmanned Aircraft Systems Program](https://www.ncdot.gov/divisions/aviation/uas/Pages/default.aspx)
+
+- The checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor
+- In case that is not available, a standard Flight Checklist should be made and followed by the flight crew
+- **Please note: After Dec. 1, 2024, North Carolina will no longer require commercial and government drone operators to obtain an N.C. permit​**
+
 :::
 ::: {.column width="50%"}
-<img src="../images/checklistNC.webp">
-:::
-:::
-</section>
 
-<section>
+![](../images/checklistNC.webp)
+
+:::
+:::
+
+---
+
+<section class="smaller">
     <h2>Flight control</h2>
     <img class="fragment" src="../images/flowchart_control.webp">
     <ul>
@@ -265,27 +276,25 @@ format:
     <img src="../images/lake_wheeler2.webp">
 </section>
 
-<section>
+<section class="text-center">
     <h2>Flight planning</h2>
 </section>
 
-<section>
-<h2>Flight planning software</h2>
-<ul>
-    <li class="fragment">Multiple available platforms</li> 
-    <li class="fragment">Some are dedicated for specific UAS and sold with the system by the manufacturer</li> 
-    <ul class="fragment">
-        <li class="small"><a href="https://www.trimble.com/survey/unmanned-aircraft-systems">Trimble UAS<a> - <a href="https://apps.trimbleaccess.com/help/en/AerialImaging=2.2.6">Trimble Aerial Imaging</a>
-        <li class="small"><a href="https://sensefly.com/">senseFly UAS<a> - <a href="https://sensefly.com/software/emotion/">eMotion 3</a>
-        <li class="small"><a href="https://www.dji.com/">DJI<a> - <a href="https://www.dji.com/ground-station-pro">DJI Ground Station Pro</a>
-        <li class="small"><a href="https://us.yuneec.com/">Yuneec<a> - <a href=”https://uavtoolbox.com/”>UAV Toolbox</a>
-    </ul>
-    <li class="fragment">Some are more universal and can work with variety of platforms:
-<ul class="fragment">
-    <li><a href="https://www.ugcs.com/">UgCS</a>
-    <li>Open Source <a href=”https://ardupilot.org/planner/docs/mission-planner-overview.html”>Mission Planner</a> - mostly for DIY drones</li>
-</ul>
-</section>
+---
+
+## Flight planning software {.smaller}
+
+- Multiple available platforms
+- Some are dedicated for specific UAS and sold with the system by the manufacturer
+  - [Trimble UAS](https://www.trimble.com/survey/unmanned-aircraft-systems) - [Trimble Aerial Imaging](https://apps.trimbleaccess.com/help/en/AerialImaging=2.2.6)
+  - [senseFly UAS](https://sensefly.com/) - [eMotion 3](https://sensefly.com/software/emotion/)
+  - [DJI](https://www.dji.com/) - [DJI Ground Station Pro](https://www.dji.com/ground-station-pro)
+  - [Yuneec](https://us.yuneec.com/) - [UAV Toolbox](https://uavtoolbox.com/)
+- Some are more universal and can work with a variety of platforms:
+  - [UgCS](https://www.ugcs.com/)
+  - Open Source [Mission Planner](https://ardupilot.org/planner/docs/mission-planner-overview.html) - mostly for DIY drones
+
+---
 
 <section>
     <h2>How to plan a mapping flight?</h2>
