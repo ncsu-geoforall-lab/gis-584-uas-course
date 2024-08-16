@@ -324,63 +324,63 @@
   {
     "objectID": "index.html#instructor",
     "href": "index.html#instructor",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Instructor",
     "text": "Instructor\nDr. Corey T. White\nOffice hours: by appointment Email: ctwhite@ncsu.edu"
   },
   {
     "objectID": "index.html#prerequisites",
     "href": "index.html#prerequisites",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Prerequisites",
     "text": "Prerequisites\nNone, but GIS/MEA582 and/or GIS540 or equivalent courses are highly recommended."
   },
   {
     "objectID": "index.html#educational-approach",
     "href": "index.html#educational-approach",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Educational Approach",
     "text": "Educational Approach\nThis course will consist of: lectures, readings, hands-on exercises, homework assignments, and a major project. All the work will be collected within an electronic portfolio that will systematically include the work that you will do for this and other GIS courses. Extra credits will be given for innovative solutions, creativity in problem solving and extensions to given tasks."
   },
   {
     "objectID": "index.html#class-materials-and-schedule",
     "href": "index.html#class-materials-and-schedule",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Class materials and schedule",
     "text": "Class materials and schedule\nSee instructions in Course logistics and schedule\n\nTextbooks\nNo required textbook, on-line material is used.\nRecommended books:\n\nAmy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.\nJonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.\nPaul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.\nDouglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press\n\n\n\nSoftware\nSee Course logistics web page."
   },
   {
     "objectID": "index.html#grading-policy",
     "href": "index.html#grading-policy",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Grading policy",
     "text": "Grading policy\n60% homeworks, 40% project 100% is the maximum number of points (total+extra credits) achieved in class. Points are taken off for late submissions.\n\n\n\nGrade\nCourse and each HW\n\n\n\n\nMax\n100\n\n\nA+\n97\n\n\nA\n93\n\n\nA-\n90\n\n\nB+\n87\n\n\nB\n83\n\n\nB-\n80\n\n\nC+\n77\n\n\nC\n73"
   },
   {
     "objectID": "index.html#topics",
     "href": "index.html#topics",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Topics",
     "text": "Topics\n\nIntroduction to Unmanned Aerial Systems\nRules and regulations for UAS operations\nFrom images to 3D models: Photogrammetry and Structure from Motion concepts\nUAS flight planning\nImagery processing and structure from motion (SfM)\nAccuracy of UAS-derived DSM and orthophoto\nUAS and lidar data: comparison and fusion\nAnalysis of ultra high resolution elevation models\nAnalysis of multitemporal UAS data and its applications"
   },
   {
     "objectID": "index.html#academic-integrity",
     "href": "index.html#academic-integrity",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Academic integrity",
     "text": "Academic integrity\nOverview, Policies, Code of Student Conduct"
   },
   {
     "objectID": "index.html#attendance-policy",
     "href": "index.html#attendance-policy",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Attendance policy",
     "text": "Attendance policy\nin regular section, attendance is checked at each class, see also attendance regulations and university definitions of excused absences"
   },
   {
     "objectID": "index.html#accommodation-of-students-with-disabilities",
     "href": "index.html#accommodation-of-students-with-disabilities",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Accommodation of students with disabilities",
     "text": "Accommodation of students with disabilities\nDisability Services Office"
   },
@@ -842,7 +842,7 @@
   {
     "objectID": "index.html#large-language-model-llm-i.e.-chatgpt-bard-etc..-policy",
     "href": "index.html#large-language-model-llm-i.e.-chatgpt-bard-etc..-policy",
-    "title": "GIS/MEA 584: Mapping and Analytics Using UAS",
+    "title": "Mapping and Analytics Using UAS",
     "section": "Large Language Model (LLM) (i.e., ChatGPT, Bard, etc..) policy",
     "text": "Large Language Model (LLM) (i.e., ChatGPT, Bard, etc..) policy\nThe use of LLMs in this course is permitted for the purposes of completing assignments and projects. However, the use of LLMs for the purposes of completing exams is strictly prohibited. Students are also required to cite the use of LLMs in their assignments and projects. Failure to do so will result in a violation of the courses academic integrity policy. Students are also to be aware that the use of LLMs in this course is not a substitute for learning the material. Assignments and projects must be properly cited and contain no plagerized materials. (The policy was created with the aid GitHub CoPilot)"
   },
@@ -1047,7 +1047,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#uas-data",
     "title": "Imagery Processing",
     "section": "UAS data",
-    "text": "UAS data\nWhat do we get after the flight mission?"
+    "text": "UAS data\n\nWhat do we get after the flight mission?"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#digital-imagery",
@@ -1082,7 +1082,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#uas-data-processing-outputs",
     "title": "Imagery Processing",
     "section": "UAS data processing outputs",
-    "text": "UAS data processing outputs\nWhat do we get after processing the data?"
+    "text": "UAS data processing outputs\n\nWhat do we get after processing the data?"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#orthophoto",
@@ -1201,14 +1201,14 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#processing-workflow",
     "title": "Imagery Processing",
     "section": "Processing workflow",
-    "text": "Processing workflow\n\nPreprocessing stage:\n\n\nLoading photos into Metashape\nInspecting loaded images, removing unnecessary images"
+    "text": "Processing workflow\n\n\nPreprocessing stage:\n\n\nLoading photos into Metashape\nInspecting loaded images, removing unnecessary images"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#processing-workflow-1",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#processing-workflow-1",
     "title": "Imagery Processing",
     "section": "Processing workflow",
-    "text": "Processing workflow\nProcessing stage:\n\n\nAligning photos\nBuilding dense point cloud\n\n(optional: editing dense point cloud)\n\nBuilding mesh (3D polygonal model)\n\n(optional: editing mesh)\n\nGenerating texture\nBuilding DSM and orthomosaic"
+    "text": "Processing workflow\n\nProcessing stage:\n\n\nAligning photos\nBuilding dense point cloud\n\n(optional: editing dense point cloud)\n\nBuilding mesh (3D polygonal model)\n\n(optional: editing mesh)\n\nGenerating texture\nBuilding DSM and orthomosaic"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results",
@@ -1264,7 +1264,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#building-dense-point-cloud-1",
     "title": "Imagery Processing",
     "section": "Building dense point cloud",
-    "text": "Building dense point cloud\nDepth Filtering modes\nAlgorithms sorting outliers (due to some factors, like poor texture of some elements of the scene, noisy or badly focused images)\n\nMild depth filtering mode &gt; for complex geometry (numerous small details on the foreground), for important features not to be sorted out\nAggressive depth filtering mode &gt; sorting out most of the outliers\nModerate depth filtering mode &gt; results in between the Mild and Aggressive"
+    "text": "Building dense point cloud\n\nDepth Filtering modes\nAlgorithms sorting outliers (due to some factors, like poor texture of some elements of the scene, noisy or badly focused images)\n\nMild depth filtering mode &gt; for complex geometry (numerous small details on the foreground), for important features not to be sorted out\nAggressive depth filtering mode &gt; sorting out most of the outliers\nModerate depth filtering mode &gt; results in between the Mild and Aggressive"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#optional-editing-dense-point-cloud",
@@ -1313,28 +1313,28 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#texture-mapping-modes",
     "title": "Imagery Processing",
     "section": "Texture mapping modes",
-    "text": "Texture mapping modes\nGeneric\n\nCreates as uniform texture as possible\n\nAdaptive orthophoto\n\nThe object surface split into the flat part and vertical regions\nThe flat part of the surface textured using the orthographic projection, while vertical regions textured separately to maintain accurate texture representation in such regions\nMore compact texture representation for nearly planar scenes + good texture quality for vertical surfaces"
+    "text": "Texture mapping modes\n\nGeneric\n\nCreates as uniform texture as possible\n\n\n\nAdaptive orthophoto\n\nThe object surface split into the flat part and vertical regions\nThe flat part of the surface textured using the orthographic projection, while vertical regions textured separately to maintain accurate texture representation in such regions\nMore compact texture representation for nearly planar scenes + good texture quality for vertical surfaces"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#texture-mapping-modes-1",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#texture-mapping-modes-1",
     "title": "Imagery Processing",
     "section": "Texture mapping modes",
-    "text": "Texture mapping modes\nOrthophoto\n\nThe whole object surface textured in the orthographic projection\nEven more compact texture representation than the Adaptive orthophoto at the expense of texture quality in vertical regions\n\nSpherical\n\nOnly for objects that have a ball-like form\n\nSingle photo\n\nTexture from a single photo (photo can be selected from ‘Texture from’ list)\n\nKeep uv\n\nGenerates texture atlas using current texture parametrization; Rebuilding current texture with different resolution or generating the atlas parametrized in the external software"
+    "text": "Texture mapping modes\n\nOrthophoto\n\nThe whole object surface textured in the orthographic projection\nEven more compact texture representation than the Adaptive orthophoto at the expense of texture quality in vertical regions\n\n\n\nSpherical\n\nOnly for objects that have a ball-like form\n\n\n\nSingle photo\n\nTexture from a single photo (photo can be selected from ‘Texture from’ list)\n\n\n\nKeep uv\n\nGenerates texture atlas using current texture parametrization; Rebuilding current texture with different resolution or generating the atlas parametrized in the external software"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#generating-dsm",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#generating-dsm",
     "title": "Imagery Processing",
     "section": "Generating DSM",
-    "text": "Generating DSM\n\n\n\n\nParameters\n\nSource data: Dense point cloud\nInterpolation\n\nDisabled: leads to accurate reconstruction results since only areas corresponding to dense point cloud points are reconstructed\nEnabled (recommended): Interpolation mode - Agisoft will calculate DEM for all areas of the scene that are visible on at least one image."
+    "text": "Generating DSM\n\n\n\n\n\nParameters\n\nSource data: Dense point cloud\nInterpolation\n\nDisabled: leads to accurate reconstruction results since only areas corresponding to dense point cloud points are reconstructed\nEnabled (recommended): Interpolation mode - Agisoft will calculate DEM for all areas of the scene that are visible on at least one image."
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#generating-orthophoto",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#generating-orthophoto",
     "title": "Imagery Processing",
     "section": "Generating orthophoto",
-    "text": "Generating orthophoto\n\n\n\n\nParameters\n\nSurface: DEM\nBlending mode\n\nMosaic (default): Implements an approach with data division into several frequency domains, which are blended independently\nAverage: Uses the weighted average value of all pixels from individual photos\nDisabled: The color value for the pixel is taken from the photo with the camera view being almost along the normal to the reconstructed surface in that point."
+    "text": "Generating orthophoto\n\n\n\n\n\nParameters\n\nSurface: DEM\nBlending mode\n\nMosaic (default): Implements an approach with data division into several frequency domains, which are blended independently\nAverage: Uses the weighted average value of all pixels from individual photos\nDisabled: The color value for the pixel is taken from the photo with the camera view being almost along the normal to the reconstructed surface in that point."
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-and-saving-intermediate-results",
@@ -1376,7 +1376,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#processing-report",
     "title": "Imagery Processing",
     "section": "Processing report",
-    "text": "Processing report\n\n\nIncludes:\n\nOrthophoto and digital elevation model sketch\nCamera parameters and survey scheme\nTie points data export (matching points and panoramas)\nImage overlap statistics\nCamera positioning error estimates\nGround control point error estimates"
+    "text": "Processing report\n\n\n\nIncludes:\n\nOrthophoto and digital elevation model sketch\nCamera parameters and survey scheme\nTie points data export (matching points and panoramas)\nImage overlap statistics\nCamera positioning error estimates\nGround control point error estimates"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#batch-processing",
@@ -1432,35 +1432,35 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results",
     "title": "Imagery Processing",
     "section": "Exporting results & saving intermediate results",
-    "text": "Exporting results & saving intermediate results\nOrthophoto export"
+    "text": "Exporting results & saving intermediate results\n\nOrthophoto export"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-1",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-1",
     "title": "Imagery Processing",
     "section": "Exporting results & saving intermediate results",
-    "text": "Exporting results & saving intermediate results\nDEM export"
+    "text": "Exporting results & saving intermediate results\n\nDEM export"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-2",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-2",
     "title": "Imagery Processing",
     "section": "Exporting results & saving intermediate results",
-    "text": "Exporting results & saving intermediate results\n3D model export"
+    "text": "Exporting results & saving intermediate results\n\n3D model export"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-3",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-3",
     "title": "Imagery Processing",
     "section": "Exporting results & saving intermediate results",
-    "text": "Exporting results & saving intermediate results\nPoint cloud export"
+    "text": "Exporting results & saving intermediate results\n\nPoint cloud export"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-4",
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#exporting-results-saving-intermediate-results-4",
     "title": "Imagery Processing",
     "section": "Exporting results & saving intermediate results",
-    "text": "Exporting results & saving intermediate results\nProcessing report generation"
+    "text": "Exporting results & saving intermediate results\n\nProcessing report generation"
   },
   {
     "objectID": "course/schedule.html",
@@ -1468,5 +1468,12 @@
     "title": "Schedule",
     "section": "",
     "text": "Schedule will be adjusted as needed during the semester.\n\n\nAug. 19\n\n\nIntroduction to the course\n\n\n\nCourse logistics: link (Course instructions, management, and resources)\n\n\nCourse Moodle site: link\n\n\n\nAug. 19-23\n\n\nTopic 1: UAS basics A. Introduction to Unmanned Aerial Systems\n\n\n\nMon: Lecture\n\n\nWed: Work on assingment 1A in class\n\n\nAssignment 1A: prepare presentation on UAS applications\n\n\nAssignment Due Date: Aug. 28\n\nAug. 26-30\n\n\nTopic 1: UAS basics B. Rules and regulations for UAS operations\n\n\n\nMon: Lecture\n\n\nWed: Student presentations of UAS applications\n\n\nAssignment: 1B UAS Rule Part 107 test subset\n\n\nAssignment Due Date: Sep. 4\n\nSep. 2-6\n\n\nTopic 2: Structure from Motion A. From images to 3D models: Photogrammetry and Structure from Motion concepts\n\n\n\nMon: Labor Day - No Class\n\n\nWed: Lecture\n\n\nAssignment 2A: 3D models from indoor photos\n\n\nProject: submit proposal\n\n\nAssignment Due Date: Sep. 30\n\nSep. 9-13\n\n\nTopic 3: UAS flight planning\n\n\n\nMon: Lecture\n\n\nWed: In Class Assignment - Prepare and analyze a flight plan\n\n\nAssignment Due Date: Sep. 23\n\nSep. 16-20\n\n\nUAS FLIGHT\n\n\n\nMeeting point: Mid Pines Road, Raleigh; 35.727104, -78.696173\n\n\nTime: 1:30 pm on Mo or We\n\n\nProject: Data acquisition\n\n\n\nSep. 23-27\n\n\nTopic 2: Structure from Motion B. UAS Imagery processing\n\n\n\nMon: Lecture\n\n\nWed: In Class Assignment - Processing with AGISOFT Photoscan\n\n\nAssignment Due Date: Sep. 30\n\nOct. 7-9\n\n\nTopic 4: GIS analytics A. Analysis of UAS data processing results\n\n\n\nMo lecture, We assignment: analysis of errors and distortions in Photoscan and GRASS GIS\n\n\nAssignment Due Date: Oct. 23\n\nOct. 14-15\n\n\nFall break: No Class\n\n\n\n\nOct. 14-16\n\n\nTopic 4: GIS analytics B. Point cloud data analysis: point clouds, surfaces, and voxel models\n\n\n\nMo lecture, We assignment: viewing point clouds in plas.io, analyzing point clouds and generating surfaces in GRASS GIS\n\n\nProject: Data processing\n\n\nAssignment Due Date: Oct. 23\n\nOct. 21-25\n\n\nTopic 5: Advanced analytics A. UAS and lidar data: comparison, fusion and analysis\n\n\n\nMo lecture, We assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow\n\n\nProject: Workflow development and testing\n\n\nAssignment Due Date: Nov. 6\n\nOct. 28 - Nov. 1\n\n\nTopic 5: Advanced analytics B. Analysis of multitemporal UAS data and its applications\n\n\n\nMo lecture, We assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes\n\n\nAssignment Due Date: Nov. 6\n\nNov. 4-8\n\n\nTopic 6: Imagery processing and SfM with open source solutions\n\n\n\nMo lecture, We assignment: processing with ODM or WebODM, high performance computing\n\n\nProject: Perform analysis and/or modeling\n\n\nAssignment Due Date: Nov. 13\n\nNov. 11-15\n\n\nTopic 7: 3D modeling and geovisualization\n\n\n\nMo lecture, We assignment: Get familiar with Blender interface, Refine a UAV-derived 3D model using sculpting tools, Photorealistic rendering\n\n\nAssignment Due Date: Dec. 4\n\nNov. 18-20\n\n\nProject help sessions\n\n\n\nProject: Visualize results, work on presentation\n\n\nProject presentation and paper requirements, final project titles\n\n\n\nNov. 25-27\n\n\nThanksgiving break: No Class\n\n\n\nProject: Visualize results, work on presentation\n\n\nProject presentation and paper requirements, final project titles\n\n\n\nNov. 25-27\n\n\nProject help sessions\n\n\n\nProject: Visualize results, work on presentation\n\n\nProject presentation and paper requirements, final project titles\n\n\n\nDec. 2-4\n\n\nProject presentations (See the requirements and project titles)\n\n\n\nDE section: To record your presentation, use Open Broadcaster Software (tutorial), MS Powerpoint, Libre Office, or any other software with similar recording functionality.\n\n\nUpload the presentation to Moodle or, if the file is too big, upload your file to Google drive and share it with the instructors.\n\n\nPlease keep the presentation to 10 minutes and name your file LastnameFirstname_Presentation.avi, LastnameFirstname_Presentation.pptx (or whatever format you use).\n\n\nRecorded presentations are due Dec. 4.\n\n\nAssignment Due Date: Dec. 4\n\nDec. 9-11\n\n\nFinish project paper and upload it to Moodle as a pdf file LastnameFirstname_Paper.pdf\n\n\n\nFor archiving purposes also submit a complete coursework in a ZIP file\n\n\nThe ZIP file should include: project paper, presentation slides, and all homework papers\n\n\nUpload your work as a single ZIP file LastnameFirstname.zip to your Google drive and share it with the instructors.\n\n\nAssignment Due Date: Dec. 11\n\nDec. 16\n\n\nCut-off day, no late submissions possible after this day\n\n\n\n\nIf you are looking for what is the next step, here are some related courses.\n\nNo matching items"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html",
+    "title": "Flight Planning",
+    "section": "",
+    "text": "Flight planning\n\n\nGIS/MEA 584:\n\n\nMapping and Analysis Using UAS\n\n\nJustyna Jeziorska\n\n\nCenter for Geospatial Analytics  North Carolina State University\n\n\n\nObjectives\n\n\n\nDescribe phases of flight planning\n\n\nUnderstand safety procedures and checklists\n\n\nUnderstand the role of Ground Control Points and its distirbution and accuracy\n\n\nUtilize flight planning software\n\n\n\n\n\nUAS Photogrammetric process\n\n\n\nThroughout the whole process, it is important to remember\n\n\n    &lt;li class=\"fragment\"&gt;&lt;strong&gt;What&lt;/strong&gt; is the aim or the project? and &lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;&lt;strong&gt;What&lt;/strong&gt; will be the data used for?&lt;/li&gt;\n&lt;/ul&gt;\n\n\n\nFlight planning - a multistep process\n\n\n\nThroughout the whole process, it is important to remember\n\n\n    &lt;li class=\"fragment\"&gt;&lt;strong&gt;What&lt;/strong&gt; is the aim or the project? and &lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;&lt;strong&gt;What&lt;/strong&gt; will be the data used for?&lt;/li&gt;\n&lt;/ul&gt;\n\n\n\nProject definition\n\n\n\n\ndefining the scope of the project\n\n\nchoosing UAS and sensor\n\n\nassesing the cost, labor and time consumption\n\n\ncollecting information about terrain\n\n\n\n\n\nProject definition\n\n\n\n\ndefining the area and resolution based on\n\n\n\nUAS and sensor capabilies\n\n\nsize of mapping area\n\n\nterrain constraints\n\n\nproject requirements\n\n\n\n\n\n\nProject definition\n\n\n\n\nevaluating the legal constrains, obtaining permissions\n\n\ndefining the coordinate system\n\n\n\ndependent on the desired coordinate system of the final data\n\n\nconsistent with the coordinate system of GCP survey\n\n\n\n\n\nFlight planning\n\n\n\n\nmission area assesment\n\n\nplanning geometric parameters\n\n\nchoosing flight planning and flight logging platform\n\n\npreliminary weather assesment (climate, season, forecasts)\n\n\ncreating a flight plan (software specific)\n\n\n\n\n\nPlacing Ground Control Points (GCPs)\n\n\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;A minimum number of 5 GCPs is recommended.&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;5 to 10 GCPs are usually enough, even for large projects.&lt;/li&gt;\n\n    &lt;li class=\"fragment\"&gt;In cases that the topography of the area is complex, use more GCPs&lt;/li&gt;\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/plan/gcp.png\" width=90%&gt;\n&lt;/div&gt;\n    &lt;ul&gt;\n    &lt;li class=\"fragment\"&gt;The GCPs should be distributed evenly in the area&lt;/li&gt;\n    &lt;li class=\"fragment\"&gt;Do not place the GCPs exactly at the edges of the area&lt;/li&gt;\n    &lt;/ul&gt;\n\n\n\nPlacing Ground Control Points (GCPs)\n\n\n\nBefore measuring the GCPs coordinates, the following items must be defined:\n\n\n\nGCP coordinate system\n\n\nGCP accuracy\n\n\nTopographic equipment (total station or hand held GPS?)\n\n\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/new/GCP_photo.png\"&gt;\n&lt;/div&gt;\n\n\n\nGCPs Accuracy\n\n\n\nFactors for defining GCP acuracy:\n\n\n\nAccuracy needed for the final results\n\n\nGround Sampling Distance* of the images:\n\n\n\nGCP target size: 5-10 x\n\n\nGCP accuracy: at least 0.1 GSD\n\n\n\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/plan/GSD2.PNG\" width=75%&gt;\n&lt;/div&gt;\n\n\n\ndistance between two consecutive pixel centers measured on the ground\n\n\n\n\n\nGround Sampling Distance\n\n\n\n\nDistance between two consecutive pixel centers measured on the ground:\n\n\n\nbigger GSD = lower spatial resolution\n\n\n\nGSD depends on\n\n\n\nflight altitude\n\n\ncamera focal length\n\n\ncamera resolution (pixel size)\n\n\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/plan/GSD2.PNG\"&gt;\n&lt;/div&gt;\n\n\n\nSite evaluation and checklists\n\n\n\n\nterrain check – high obstacles in the take-off, mission, landing and alternative landing locations\n\n\nask the locals about possible air traffic or ground activities\n\n\nweather check\n\n\n\ntemperature effects battery life\n\n\nmost of the UAS can’t operate in rain.\n\n\n\nuse checklists, don’t rely on your memory!\n\nsample checklists: paper (for Phantom) and RMUS app\n\n\n\n\nSite evaluation and checklists\n\n\n\n\n\nSite evaluation and checklists\n\n\nPreflight inspection is required under Part 107.49; the Remote Pilot in Comand (RPIC) is required to develop a preflight inspection checklist if the manufacture has not developed one.\n\n\n\nNCDOT UAS Operational Procedures Guide\n\n\nThe checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor\n\n\nIn case that is not available, a standard Flight Checklist should be made and followed by the flight crew\n\n\n&lt;/div&gt;\n&lt;div class=\"right\"&gt;\n    &lt;img src=\"img/plan/checklistNC.jpg\"&gt;\n&lt;/div&gt;\n\n\n\nFlight control\n\n\n\n\nThe UAS RPIC should launch, operate, and recover from preset locations so that the aircraft will fly according to the mission plan.\n\n\nAfter the UAS is launched, the flight crew should have a clear view of the aircraft at all times, called Visual Line of Sight (VLOS). Observation locations should be selected for the maximum line of sight throughout the planned flight operations area (Part 107.31).\n\n\n\n\n\nFlight control\n\n\n\n\nTo ensure the flight is going according to the flight plan, the RP, PMC and VO (if used) must be able to maintain effective communication with each other at all times (Part 107.33).\n\n\nUpon any failure during the flight or any loss of visual contact with the UAS, the RPIC should command the aircraft back to the recovery location or utilize the built-in fail-safe features to recover the aircraft\n\n\n\n\n\nLake Wheeler test site\n\n&lt;img src=\"img/plan/LW_google.png\"&gt;\n\n\n\nLake Wheeler test site\n\n&lt;img src=\"img/plan/LakeWheeler_COA.png\"&gt;\n\n\n\nLake Wheeler test site\n\n&lt;img src=\"img/plan/lake_wheeler1.png\"&gt;\n\n\n\nLake Wheeler test site\n\n&lt;img src=\"img/plan/lake_wheeler2.png\"&gt;\n\n\n\nFlight planning\n\n\n\n\nFlight planning software\n\n\n\nMultiple available platforms\n\n\nSome are dedicated for specific UAS and sold with the system by the manufacturer\n\n\n\nTrimble UAS - Trimble Aerial Imaging\n\nsenseFly UAS - eMotion 3\n\nDJI - DJI Ground Station Pro\n\nLitchi\n\nMicrodrones - mdCOCKPIT\n\nYuneec - UAV Toolbox\n\n\nSome are more universal and can work with variety of platforms:\n\n\nUgCS\n\nOpen Source Mission Planner - mostly for DIY drones\n\n\n\n\n\nHow to plan a mapping flight?\n\n\nUAS Photogrammetric process\n\n\n\n    &lt;img src=\"img/aerial_survey.png\"&gt;\n&lt;/div&gt;\n&lt;div class=\"right fragment\"&gt;\n    &lt;img src=\"img/flight_track.png\"&gt;\n&lt;/div&gt;\n\n\n\nHow to plan a mapping flight?\n\n\n\n\n\nHow to plan a mapping flight?\n\n\n\n\n\nHow to plan a mapping flight?\n\n\n\n\n\nHow to plan a mapping flight?\n\n\n\n\n\nHow to plan a mapping flight?\n\n\n\n\n\nHow to plan a mapping flight?\n\n\n\n\n\n\nWhat we have learned\n\n\n\nPhases of UAS flight planning\n\n\nSafety procedures and checklists for safe flight operations\n\n\nhow does our study site look like\n\n\nhow to plan a flight"
   }
 ]

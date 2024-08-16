@@ -1,5 +1,6 @@
 ---
-title: "GIS/MEA 584: Mapping and Analytics Using UAS"
+title: "Mapping and Analytics Using UAS"
+subtitle: "NCSU GIS/MEA 584"
 ---
 
 # Course description
