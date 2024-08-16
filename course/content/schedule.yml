@@ -39,7 +39,7 @@ schedule:
     topic: "[Topic 3: UAS flight planning](topics/topic_3_uas_flight_planning/uas_flight_planning.qmd)"
     details:
       - "Mon: [Lecture](topics/topic_3_uas_flight_planning/lectures/lecture_1a.qmd)"
-      - "Wed: In Class Assignment - [Assignment prepare and analyze a flight plan](topics/topic_3_uas_flight_planning/assignments/assignment_1a_grass.qmd)"
+      - "Wed: In Class Assignment - [Prepare and analyze a flight plan](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
     due_date: "Sep. 23"
     no_class: false
   

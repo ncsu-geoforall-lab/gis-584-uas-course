@@ -12,11 +12,11 @@ title: "Topics"
 
 [A.From images to 3D models: Photogrammetry and Structure from Motion concepts](topics/topic_2_sfm/part_a_images_to_3d.qmd)
 
-[B. UAS Imagery processing](topics/topic_2_sfm/)
+[B. UAS Imagery processing](topics/topic_2_sfm/part_b_img_processing_sfm.qmd)
 
 ## Topic 3: UAS Flight Planning
 
-[A. UAS Flight Planning](topics/)
+[A. UAS Flight Planning](topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd)
 
 ## Topic 4: GIS Analysis
 

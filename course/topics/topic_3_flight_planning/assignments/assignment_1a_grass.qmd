@@ -1,10 +1,6 @@
 ---
 subtitle: "Terrain Analysis of the flight site using GIS tools"
-title: "Assignment 1A"
-# subtitle: "A. Introduction to Unmanned Aerial Systems"
-# date: 8/19/2024
-# image: ../images/header.jpg
-# category: Topic 1
+title: "Assignment 3"
 assignment-due-date: 9/23/2024
 ---
 

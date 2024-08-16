@@ -1,6 +1,6 @@
 ---
-title: "Course Schedule"
-search: false
+title: "Schedule"
+search: true
 format:
   html:
     toc: false
