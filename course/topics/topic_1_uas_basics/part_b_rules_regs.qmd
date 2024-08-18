@@ -17,6 +17,13 @@ assignment-due-date: 9/2/2024
 ## Lecture
 
 * Lecture Slides: [Rules and Regulations](lectures/lecture_1b.qmd)
+* Lecture Recording: TBD
+* Past Videos (2017)
+    * [Part 1](https://youtu.be/Pf_kwEq6too?feature=shared)
+    * [Part 2](https://youtu.be/JUM93NZlukI?feature=shared)
+    * [Part 3](https://youtu.be/goewibtKfgQ?feature=shared)
+    * [Part 4](https://youtu.be/KQ02OTxmlNA?feature=shared)
+    * [Part 5](https://youtu.be/lW58hD165sY?feature=shared)
 
 ### Supplemental materials
 
@@ -24,6 +31,7 @@ assignment-due-date: 9/2/2024
 * [Becoming a Pilot sUAS Rule (Part 107)](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot/)
 * [Where can I find study materials for the Part 107 aeronautical knowledge test?](https://www.faa.gov/faq/where-can-i-find-study-materials-part-107-aeronautical-knowledge-test)
 * [Operating UAS in North Carolina](https://www.ncdot.gov/aviation/uas/)
+* [UAS Activities at NC State: Rules and Regulations](https://oit.ncsu.edu/about/units/campus-it/rules-and-regulations/uas/)
 * Aeronautical charts and related georeferenced data
     * [View digital aeronautical charts](https://vfrmap.com/)
     * [Skyvector](https://skyvector.com/):charts, airspace and airport information for pilots
