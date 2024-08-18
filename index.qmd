@@ -26,6 +26,10 @@ Email: 	[ctwhite@ncsu.edu](ctwhite@ncsu.edu)
 
 See instructions in Course [logistics](/course/logistics.qmd) and [schedule](/course/schedule.qmd)
 
+## Moodle
+
+Course Forum, assignment submissions, project material, and grades are handled in [Moodle]({{< var course_params.moodle_link >}}).
+
 ### Textbooks
 
 No required textbook, on-line material is used.

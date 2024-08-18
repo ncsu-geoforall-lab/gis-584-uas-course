@@ -347,7 +347,7 @@
     "href": "index.html#class-materials-and-schedule",
     "title": "Mapping and Analytics Using UAS",
     "section": "Class materials and schedule",
-    "text": "Class materials and schedule\nSee instructions in Course logistics and schedule\n\nTextbooks\nNo required textbook, on-line material is used.\nRecommended books:\n\nAmy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.\nJonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.\nPaul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.\nDouglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press\n\n\n\nSoftware\nSee Course logistics web page."
+    "text": "Class materials and schedule\nSee instructions in Course logistics and schedule"
   },
   {
     "objectID": "index.html#grading-policy",
@@ -1608,5 +1608,12 @@
     "title": "Introduction to UAS",
     "section": "UAS sensors for mapping",
     "text": "UAS sensors for mapping\n\nRGB cameras\nInfrared sensors\nMultispectral and hyperspectral sensors\nLaser scanners\nThermal sensors"
+  },
+  {
+    "objectID": "index.html#moodle",
+    "href": "index.html#moodle",
+    "title": "Mapping and Analytics Using UAS",
+    "section": "Moodle",
+    "text": "Moodle\nCourse Forum, assignment submissions, project material, and grades are handled in Moodle.\n\nTextbooks\nNo required textbook, on-line material is used.\nRecommended books:\n\nAmy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.\nJonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.\nPaul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.\nDouglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press\n\n\n\nSoftware\nSee Course logistics web page."
   }
 ]
