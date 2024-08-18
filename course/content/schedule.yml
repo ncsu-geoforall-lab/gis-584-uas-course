@@ -44,7 +44,7 @@ schedule:
     no_class: false
   
   - date_range: "Sep. 16-20"
-    topic: "UAS FLIGHT"
+    topic: "UAS FLIGHT (TBD)"
     details:
       - "Meeting point: Mid Pines Road, Raleigh; [35.727104, -78.696173](https://goo.gl/maps/GRVRUKJzRav)"
       - "Time: 1:30 pm on Mo or We"
