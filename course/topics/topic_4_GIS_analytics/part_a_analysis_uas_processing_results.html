@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-09-23">
 
-<title>Schedule – GIS/MEA 584: UAS Mapping and Analytics</title>
+<title>A. Analysis of UAS data processing results – GIS/MEA 584: UAS Mapping and Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,25 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../favicon.ico" rel="icon">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.ico" rel="icon">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,76 +68,18 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-schedule .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-schedule',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-schedule"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-schedule'] = new List('listing-schedule', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">GIS/MEA 584: UAS Mapping and Analytics</span>
     </a>
   </div>
@@ -149,23 +90,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../course/schedule.html" aria-current="page"> 
+    <a class="nav-link" href="../../../course/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/logistics.html"> 
+    <a class="nav-link" href="../../../course/logistics.html"> 
 <span class="menu-text">Logistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/topics.html"> 
+    <a class="nav-link" href="../../../course/topics.html"> 
 <span class="menu-text">Topics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/projects.html"> 
+    <a class="nav-link" href="../../../course/projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -179,17 +120,32 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#analysis-of-uas-data-processing-results" id="toc-analysis-of-uas-data-processing-results" class="nav-link active" data-scroll-target="#analysis-of-uas-data-processing-results">Analysis of UAS data processing results</a>
+  <ul class="collapse">
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
+  <li><a href="#supplemental-materials" id="toc-supplemental-materials" class="nav-link" data-scroll-target="#supplemental-materials">Supplemental materials</a></li>
+  <li><a href="#assignment-homework" id="toc-assignment-homework" class="nav-link" data-scroll-target="#assignment-homework">Assignment &amp; Homework</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <!-- banner.html -->
 <div class="banner-image">
-    <img src="../includes/images/banner.jpg" alt="Banner">
+    <img src="../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Schedule</h1>
+<h1 class="title">A. Analysis of UAS data processing results</h1>
+<p class="subtitle lead">Topic 4: GIS Analytics</p>
 </div>
 
 
@@ -197,6 +153,12 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 23, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -206,297 +168,42 @@ window.Quarto = {
 </header>
 
 
+<section id="analysis-of-uas-data-processing-results" class="level1">
+<h1>Analysis of UAS data processing results</h1>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<ul>
+<li>Compare survey data and errors from different flights</li>
+<li>Recognize differences in geoprocessing products generated by different softwares</li>
+<li>Understand significance of using GCPs in the processing and their impact on the final products</li>
+<li>Recognize what processing steps need to be modified in order to improve particular errors</li>
+<li>Understand what causes the ‘Bowl effect’ and know the solutions to fix it</li>
+<li>Execute distance, area and volume measurements</li>
+</ul>
+</section>
+<section id="lecture" class="level2">
+<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
+<ul>
+<li><a href="../lectures/2017_Analysis.html#/">Lecture Slides</a></li>
+</ul>
+</section>
+<section id="supplemental-materials" class="level2">
+<h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
+<ul>
+<li>Bowl effect explained: <a href="https://onlinelibrary.wiley.com/doi/10.1002/esp.3609/epdf">Mitigating systematic error in topographic models derived from UAV and ground-based image networks</a></li>
+<li>Image residuals, camera calibration and impact of GCPs: <a href="https://onlinelibrary.wiley.com/doi/10.1111/phor.12072/full">Evaluation of structure from motion for soil microtopography measurement</a></li>
+<li>Alternative to GCPs - RTK/PPK equipped UAS: <a href="https://pix4d.com/rtk-ppk-drones-gcp-comparison/">Do RTK/PPK drones give you better results than using GCPs?</a></li>
+</ul>
+</section>
+<section id="assignment-homework" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-homework">Assignment &amp; Homework</h2>
+<p><a href="../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html">Assignment 4A</a></p>
 
 
+</section>
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-custom" id="listing-schedule">
-<blockquote class="blockquote">
-Schedule will be adjusted as needed during the semester.
-</blockquote>
-<h4 class="anchored">
-Aug.&nbsp;19 | Introduction to the course
-</h4>
-<ul>
-<li>
-Course logistics: <a href="../course/logistics.html">link</a> (Course instructions, management, and resources)
-</li>
-<li>
-Course Moodle site: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4084&amp;bp=s">link</a>
-</li>
-</ul>
-<h4 class="anchored">
-Aug.&nbsp;19-23 | Topic 1: UAS Basics
-</h4>
-<p>
-<a href="../course/topics/topic_1_uas_basics/part_a_introduction.html">1A. Introduction to Unmanned Aerial Systems</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_1_uas_basics/lectures/lecture_1a.html">Lecture</a>
-</li>
-<li>
-Wed: Work on assingment 1A in class
-</li>
-<li>
-<a href="../course/topics/topic_1_uas_basics/assignments/assignment_1a.html">Assignment 1A: prepare presentation on UAS applications</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Aug.&nbsp;28</p>
-<h4 class="anchored">
-Aug.&nbsp;26-30 | Topic 1: UAS Basics
-</h4>
-<p>
-<a href="../course/topics/topic_1_uas_basics/part_b_rules_regs.html">1B. Rules and regulations for UAS operations</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_1_uas_basics/lectures/lecture_1b.html">Lecture</a>
-</li>
-<li>
-Wed: Student presentations of UAS applications
-</li>
-<li>
-<a href="../course/topics/topic_1_uas_basics/assignments/assignment_1b.html">Assignment: 1B UAS Rule Part 107 test subset</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;4</p>
-<h4 class="anchored">
-Sep.&nbsp;2 | Labor Day: No Class
-</h4>
-<ul>
-</ul>
-<h4 class="anchored">
-Sep.&nbsp;2-6 | Topic 2: Structure from Motion
-</h4>
-<p>
-<a href="../course/topics/topic_2_sfm/part_a_images_to_3d.html">2A. From images to 3D models: Photogrammetry and Structure from Motion concepts</a>
-</p>
-<ul>
-<li>
-<strong>Mon: Labor Day - No Class</strong>
-</li>
-<li>
-Wed: <a href="../course/topics/topic_2_sfm/lectures/lecture_2a.html">Lecture</a>
-</li>
-<li>
-<a href="../course/topics/topic_2_sfm/assignments/assignment_2a.html">Assignment 2A: 3D models from indoor photos</a>
-</li>
-<li>
-Project: submit proposal
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;30</p>
-<h4 class="anchored">
-Sep.&nbsp;9-13 | Topic 3: UAS Flight Planning
-</h4>
-<p>
-<a href="../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html">3. UAS flight planning</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_3_flight_planning/lectures/lecture_3a.html">Lecture</a>
-</li>
-<li>
-Wed: In Class Assignment - <a href="../course/topics/topic_3_flight_planning/assignments/assignment_1a_grass.html">Prepare and analyze a flight plan</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;23</p>
-<h4 class="anchored">
-Sep.&nbsp;16-20 | UAS FLIGHT (TBD)
-</h4>
-<ul>
-<li>
-Meeting point: Mid Pines Road, Raleigh; <a href="https://goo.gl/maps/GRVRUKJzRav">35.727104, -78.696173</a>
-</li>
-<li>
-Time: 1:30 pm on Mo or We
-</li>
-<li>
-Project: Data acquisition
-</li>
-</ul>
-<h4 class="anchored">
-Sep.&nbsp;23-27 | Topic 2: Structure from Motion
-</h4>
-<p>
-<a href="../course/topics/topic_2_sfm/part_b_img_processing_sfm.html">2B. UAS Imagery processing</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_2_sfm/lectures/lecture_2b.html">Lecture</a>
-</li>
-<li>
-Wed: In Class Assignment - <a href="../course/topics/topic_2_sfm/assignments/assignment_2b.html">Processing with AGISOFT Photoscan</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;30</p>
-<h4 class="anchored">
-Sep.&nbsp;30 - Oct.&nbsp;4 | Topic 4: Geospatial Analytics
-</h4>
-<p>
-<a href="../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html">4A. Analysis of UAS data processing results</a>
-</p>
-<ul>
-<li>
-Mon: lecture
-</li>
-<li>
-Wed: <a href="topics/topic_4_GIS_analytics/assignments/assignment_1a.qmd">In Class Assignments</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
-<h4 class="anchored">
-Oct.&nbsp;7-11 | Topic 4: Geospatial Analytics
-</h4>
-<p>
-<a href="../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html">4B. Point cloud data analysis</a>
-</p>
-<ul>
-<li>
-Mon: lecture
-</li>
-<li>
-Wed: assignment: analysis of errors and distortions in Photoscan and GRASS GIS
-</li>
-<li>
-Project: Data processing
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
-<h4 class="anchored">
-Oct.&nbsp;14-15 | Fall break: No Class
-</h4>
-<ul>
-</ul>
-<h4 class="anchored">
-Oct.&nbsp;14-18 | Topic 4: GIS analytics B. Point cloud data analysis: point clouds, surfaces, and voxel models
-</h4>
-<ul>
-<li>
-Mo lecture, We assignment: viewing point clouds in plas.io, analyzing point clouds and generating surfaces in GRASS GIS
-</li>
-<li>
-Project: Data processing
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
-<h4 class="anchored">
-Oct.&nbsp;21-25 | Topic 5: Advanced analytics A. UAS and lidar data: comparison, fusion and analysis
-</h4>
-<ul>
-<li>
-Mo lecture, We assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow
-</li>
-<li>
-Project: Workflow development and testing
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Nov.&nbsp;6</p>
-<h4 class="anchored">
-Oct.&nbsp;28 - Nov.&nbsp;1 | Topic 5: Advanced analytics B. Analysis of multitemporal UAS data and its applications
-</h4>
-<ul>
-<li>
-Mo lecture, We assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Nov.&nbsp;6</p>
-<h4 class="anchored">
-Nov.&nbsp;4-8 | Topic 6: Imagery processing and SfM with open source solutions
-</h4>
-<ul>
-<li>
-Mo lecture, We assignment: processing with ODM or WebODM, high performance computing
-</li>
-<li>
-Project: Perform analysis and/or modeling
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Nov.&nbsp;13</p>
-<h4 class="anchored">
-Nov.&nbsp;11-15 | Topic 7: 3D modeling and geovisualization
-</h4>
-<ul>
-<li>
-Mo lecture, We assignment: Get familiar with Blender interface, Refine a UAV-derived 3D model using sculpting tools, Photorealistic rendering
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Dec.&nbsp;4</p>
-<h4 class="anchored">
-Nov.&nbsp;18-22 | Project help sessions
-</h4>
-<ul>
-<li>
-Project: Visualize results, work on presentation
-</li>
-<li>
-<a href="projects.html">Project presentation and paper requirements, final project titles</a>
-</li>
-</ul>
-<h4 class="anchored">
-Nov.&nbsp;25-27 | Thanksgiving break: No Class
-</h4>
-<ul>
-<li>
-Project: Visualize results, work on presentation
-</li>
-<li>
-<a href="projects.html">Project presentation and paper requirements, final project titles</a>
-</li>
-</ul>
-<h4 class="anchored">
-Nov.&nbsp;25-29 | Project help sessions
-</h4>
-<ul>
-<li>
-Project: Visualize results, work on presentation
-</li>
-<li>
-<a href="projects.html">Project presentation and paper requirements, final project titles</a>
-</li>
-</ul>
-<h4 class="anchored">
-Dec.&nbsp;2-6 | Project presentations (<a href="projects.html">See the requirements and project titles</a>)
-</h4>
-<ul>
-<li>
-DE section: To record your presentation, use <a href="https://obsproject.com/index">Open Broadcaster Software</a> (<a href="http://www.howtogeek.com/183231/how-to-record-your-desktop-and-create-a-screencast-on-windows/">tutorial</a>), MS Powerpoint, Libre Office, or any other software with similar recording functionality.
-</li>
-<li>
-Upload the presentation to Moodle or, if the file is too big, upload your file to Google drive and share it with the instructors.
-</li>
-<li>
-Please keep the presentation to 10 minutes and name your file <code>LastnameFirstname_Presentation.avi</code>, <code>LastnameFirstname_Presentation.pptx</code> (or whatever format you use).
-</li>
-<li>
-Recorded presentations are due Dec.&nbsp;4.
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Dec.&nbsp;4</p>
-<h4 class="anchored">
-Dec.&nbsp;9-13 | Finish project paper and upload it to Moodle as a pdf file <code>LastnameFirstname_Paper.pdf</code>
-</h4>
-<ul>
-<li>
-For archiving purposes also submit a complete coursework in a ZIP file
-</li>
-<li>
-The ZIP file should include: project paper, presentation slides, and all homework papers
-</li>
-<li>
-Upload your work as a single ZIP file <code>LastnameFirstname.zip</code> to your Google drive and share it with the instructors.
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Dec.&nbsp;11</p>
-<p><img src="content/images/schedule.webp" alt="lecture" width="100%"></p>
-<p>
-If you are looking for what is the next step, here are some <a href="https://geospatial.ncsu.edu/geoforall/courses.html" target="_blank">related courses</a>.
-</p>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
