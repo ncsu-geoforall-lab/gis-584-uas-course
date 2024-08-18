@@ -46,14 +46,14 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-unmanned-aircraft-system",
     "title": "Introduction to UAS",
     "section": "UAS: Unmanned Aircraft System",
-    "text": "UAS: Unmanned Aircraft System\n\n\n\nUnmanned = without a person onboard (operated by automatic or remote control)\nAircraft = able to fly\nSystem = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)\n\n\n Consists of three elements:\n\nUnmanned Aircraft\nControl Station\nData Link"
+    "text": "UAS: Unmanned Aircraft System\n\n\n\nUnmanned = without a person onboard (operated by automatic or remote control)\nAircraft = able to fly\nSystem = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)\n\n\n\nConsists of three elements:\n\nUnmanned Aircraft\nControl Station\nData Link"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
     "title": "Introduction to UAS",
     "section": "UAS or UAV? Or maybe a drone?",
-    "text": "UAS or UAV? Or maybe a drone?\n\n\n\nUAV = Unmanned Aerial Vehicle\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\n\n\n\nMore about terminology in the article: Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’"
+    "text": "UAS or UAV? Or maybe a drone?\n\n\nUnmanned Aerial Vehicle (UAV)\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\n\n\nMore about terminology in the article: Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-does-a-uas-look-like",
@@ -137,7 +137,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#multispectral-and-hyperspectral-cameras",
     "title": "Introduction to UAS",
     "section": "Multispectral and hyperspectral cameras",
-    "text": "Multispectral and hyperspectral cameras\n\n\n\nMiniaturization is challenging in terms of optics and sensor calibration\nWeight, cost, data quality has improved; spectral bands, resolution need improvements\nCameras with NIR band: agriculture and vegetation mapping (for NDVI)\nThe more bands the more information, but also higher price of the sensor (multispectral - couple thousands, hyperspectral - tens of thousands $)"
+    "text": "Multispectral and hyperspectral cameras\n\n\n\nMiniaturization is challenging in terms of optics and sensor calibration\nWeight, cost, data quality has improved; spectral bands, resolution need improvements\nCameras with NIR band: agriculture and vegetation mapping (for NDVI)\nThe more bands the more information, but also higher price of the sensor\n\n$$ multispectral - couple thousands\n$$$ hyperspectral - tens of thousands"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#active-sensors---lidar-and-sar",
@@ -213,8 +213,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
     "title": "Introduction to UAS",
-    "section": "Army and government",
-    "text": "Army and government\n\n\n\nPublic Use Aircraft\n\nDepartment of Agriculture\nDepartment of Commerce\nDepartment of Defence\nDepartment of Energy\nDepartment of Homeland Security\nDepartment of Interior\nDepartment of Justice\nNASA\nNOAA\nState Universities\nState Law Enforcement\n\n\n\n\n\n\nMilitary Use"
+    "section": "Army and Government",
+    "text": "Army and Government\n\n\n\n\nDepartment of Agriculture\nDepartment of Commerce\nDepartment of Defence\nDepartment of Energy\nDepartment of Homeland Security\nDepartment of Interior\nDepartment of Justice\nNASA\nNOAA\nState Universities\nState Law Enforcement\n\n\n\n\n\nMilitary Use"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#civilian-application-fields",
@@ -227,36 +227,36 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
     "title": "Introduction to UAS",
-    "section": "Application examples (1)",
-    "text": "Application examples (1)\n\n\n\nAgriculture:\n\nUAS equipped with fertilizer and pesticide dispersing equipment can be used to spray over large fields;\n\nTelecommunications:\n\nAs mobile relay platforms, e.g., in disaster zones for emergency telecommunications"
+    "section": "Application Examples (1)",
+    "text": "Application Examples (1)\n\n\n\nAgriculture:\n\nUAS equipped with fertilizer and pesticide dispersing equipment can be used to spray over large fields;\n\nTelecommunications:\n\nAs mobile relay platforms, e.g., in disaster zones for emergency telecommunications"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
     "title": "Introduction to UAS",
-    "section": "Application examples (2)",
-    "text": "Application examples (2)\n\n\n\nNews broadcasting:\n\nIn providing aerial video feeds for news events;\n\nAir traffic Control and ground traffic control:\n\nTo monitor traffic and accidents over highways and streets, capture violation of traffic rules;"
+    "section": "Application Examples (2)",
+    "text": "Application Examples (2)\n\n\n\nNews Broadcasting:\n\nIn providing aerial video feeds for news events;\n\nAir Traffic Control and Ground Traffic Control:\n\nTo monitor traffic and accidents over highways and streets, capture violation of traffic rules;"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
     "title": "Introduction to UAS",
-    "section": "Application examples (3)",
-    "text": "Application examples (3)\n\n\n\nMineral exploration:\n\nIn aerial survey, to find minerals in hard-to-reach regions;\nIn existing mines, to map extracted material volumes;\n\nCoastal monitoring:\n\nMapping dynamic shorelines and post-storm assessment"
+    "section": "Application Examples (3)",
+    "text": "Application Examples (3)\n\n\n\nMineral Exploration:\n\nIn aerial survey, to find minerals in hard-to-reach regions;\nIn existing mines, to map extracted material volumes;\n\nCoastal Monitoring:\n\nMapping dynamic shorelines and post-storm assessment"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
     "title": "Introduction to UAS",
     "section": "UAS for Remote Sensing (1)",
-    "text": "UAS for Remote Sensing (1)\n\n\n\nAgriculture and environment:\n\nCrop monitoring, vegetation mapping, forest fire monitoring, animals detection;\n\nIntelligence, surveillance, and reconnaissance:\n\nDetection of lost persons in difficult-to-access situations, support fire brigades in real-time crisis management, rapid disaster management;"
+    "text": "UAS for Remote Sensing (1)\n\n\n\nAgriculture and Environment:\n\nCrop monitoring, vegetation mapping, forest fire monitoring, animals detection;\n\nIntelligence, Surveillance, and Reconnaissance:\n\nDetection of lost persons in difficult-to-access situations, support fire brigades in real-time crisis management, rapid disaster management;"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
     "title": "Introduction to UAS",
     "section": "UAS for Remote Sensing (2)",
-    "text": "UAS for Remote Sensing (2)\n\n\n\nAerial monitoring in engineering:\n\nInfrastructure inspections, distributed wind measurement, landslide monitoring;\n\nCultural heritage:\n\nOrthophotos of archaeological sites, 3D models of man-made structures;"
+    "text": "UAS for Remote Sensing (2)\n\n\n\nAerial Monitoring in Engineering:\n\nInfrastructure inspections, distributed wind measurement, landslide monitoring;\n\nCultural Heritage:\n\nOrthophotos of archaeological sites, 3D models of man-made structures;"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-3",
@@ -284,7 +284,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#barriers",
     "title": "Introduction to UAS",
     "section": "Barriers",
-    "text": "Barriers\n\nconstantly changing legislation and regulations,\npolitical and societal acceptance,\n… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?"
+    "text": "Barriers\n\nConstantly changing legislation and regulations\nPolitical and societal acceptance\n\n… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
@@ -1601,5 +1601,12 @@
     "title": "Mapping and Analytics Using UAS",
     "section": "Large Language Model (LLM) policy",
     "text": "Large Language Model (LLM) policy\nThe use of LLMs in this course is permitted for the purposes of completing assignments and projects. However, the use of LLMs for the purposes of completing exams is strictly prohibited. Students are also required to cite the use of LLMs in their assignments and projects. Failure to do so will result in a violation of the courses academic integrity policy. Students are also to be aware that the use of LLMs in this course is not a substitute for learning the material. Assignments and projects must be properly cited and contain no plagerized materials. (The policy was created with the aid GitHub CoPilot)"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-sensors-for-mapping",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-sensors-for-mapping",
+    "title": "Introduction to UAS",
+    "section": "UAS sensors for mapping",
+    "text": "UAS sensors for mapping\n\nRGB cameras\nInfrared sensors\nMultispectral and hyperspectral sensors\nLaser scanners\nThermal sensors"
   }
 ]

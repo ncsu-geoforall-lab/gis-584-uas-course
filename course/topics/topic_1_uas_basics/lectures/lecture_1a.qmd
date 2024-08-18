@@ -24,10 +24,10 @@ For the brief summary read the [overview article](http://www.insidegnss.com/auto
 ## UAS or UAV? Or maybe a drone?
 
 ::: {.incremental}
-- UAV = Unmanned Aerial Vehicle
-- UAS = Unmanned Aerial Systems
-- Drone = Dynamic Remotely Operated Navigation Equipment
-- RPA = Remotely Piloted Aircraft
+- **UAV** = Unmanned Aerial Vehicle
+- **UAS** = Unmanned Aerial Systems
+- **Drone** = Dynamic Remotely Operated Navigation Equipment
+- **RPA** = Remotely Piloted Aircraft
 :::
 
 ## UAS: Unmanned Aircraft System {.smaller}
@@ -36,16 +36,17 @@ For the brief summary read the [overview article](http://www.insidegnss.com/auto
 
 <!-- Left -->
 ::: {.column width="40%"}
-- Unmanned = without a person onboard (operated by automatic or remote control)
-- Aircraft = able to fly
-- System = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)
+- **Unmanned** = without a person onboard (operated by automatic or remote control)
+- **Aircraft** = able to fly
+- **System** = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)
 :::
 
 <!-- Right -->
 ::: {.column width="60%"}
 
 ![](../images/Pilot_data_UAV.webp)
-Consists of three elements:
+
+**Consists of three elements:**
 
 1. Unmanned Aircraft
 2. Control Station
@@ -60,10 +61,11 @@ Consists of three elements:
 ::: {.columns}
 
 ::: {.column width="50%"}
-- UAV = Unmanned Aerial Vehicle
-    - Excludes: missiles, weapons, or exploding warheads,
-    - Includes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,
-    - Doesn't include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.
+**Unmanned Aerial Vehicle (UAV)**
+
+- **Excludes:** missiles, weapons, or exploding warheads,
+- **Includes:** all classes of airplanes, helicopters, airships, and powered-lift aircraft,
+- **Doesn't include:** traditional balloons, rockets, tethered aircraft, and un-powered gliders.
 :::
 
 ::: {.column width="50%"}
@@ -148,13 +150,14 @@ System elements
 :::
 :::
 
-## Sensors
+## Sensors {.center .text-center}
 ![](../images/uav_sensors.webp)
 
-## Sensors
+## Sensors {.center .text-center}
 ![](../images/uav_sensors2.webp)
 
-## sUAS sensors for mapping
+## UAS sensors for mapping
+
 - RGB cameras
 - Infrared sensors
 - Multispectral and hyperspectral sensors
@@ -162,6 +165,7 @@ System elements
 - Thermal sensors
 
 ## RGB (natural color) cameras {.smaller}
+
 :::{.columns}
 :::{.column width="50%"}
 - Most common payload for consumer-grade UAS
@@ -181,7 +185,9 @@ System elements
 - Miniaturization is challenging in terms of optics and sensor calibration
 - Weight, cost, data quality has improved; spectral bands, resolution need improvements
 - Cameras with NIR band: agriculture and vegetation mapping (for NDVI)
-- The more bands the more information, but also higher price of the sensor (multispectral - couple thousands, hyperspectral - tens of thousands $)
+- The more bands the more information, but also higher price of the sensor
+    - $$ multispectral - couple thousands
+    - $$$ hyperspectral - tens of thousands
 :::
 :::{.column width="40%"}
 ![](../images/hyperspectral.webp)
@@ -233,7 +239,7 @@ The optimal combination of carrier (Unmanned Vehicle) and sensing payload needs 
 ## Who uses UAS? {.center .text-center}
 Types of UAV Operations
 
-## Types of UAS Operations
+## Types of UAS Operations {.smaller}
 
 - **Public Operations**  
   Governmental, limited by federal statute to certain government operations within U.S. Airspace;
@@ -283,21 +289,21 @@ Regulations, standards, policies, and procedures
 ## What are UAS used for? {.center .text-center}
 
 
-## Army and government {.smaller .text-center}
+## Army and Government {.smaller .text-center}
 :::{.columns}
 :::{.column}
-- Public Use Aircraft
-    - Department of Agriculture
-    - Department of Commerce
-    - Department of Defence
-    - Department of Energy
-    - Department of Homeland Security
-    - Department of Interior
-    - Department of Justice
-    - NASA
-    - NOAA
-    - State Universities
-    - State Law Enforcement
+<!-- - Public Use Aircraft -->
+- Department of Agriculture
+- Department of Commerce
+- Department of Defence
+- Department of Energy
+- Department of Homeland Security
+- Department of Interior
+- Department of Justice
+- NASA
+- NOAA
+- State Universities
+- State Law Enforcement
 :::
 
 :::{.column}
@@ -309,12 +315,12 @@ Regulations, standards, policies, and procedures
 
 ![](../images/drones_industry.webp)
 
-## Application examples (1) {.smaller}
+## Application Examples (1) {.smaller}
 :::{.columns}
 :::{.column width="60%"}
-- Agriculture:
+- **Agriculture:**
     - UAS equipped with fertilizer and pesticide dispersing equipment can be used to spray over large fields;
-- Telecommunications:
+- **Telecommunications:**
     - As mobile relay platforms, e.g., in disaster zones for emergency telecommunications
 :::
 
@@ -323,13 +329,13 @@ Regulations, standards, policies, and procedures
 :::
 :::
 
-## Application examples (2)
+## Application Examples (2) {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
-- News broadcasting:
+- **News Broadcasting:**
     - In providing aerial video feeds for news events;
-- Air traffic Control and ground traffic control:
+- **Air Traffic Control and Ground Traffic Control:**
     - To monitor traffic and accidents over highways and streets, capture violation of traffic rules;
 :::
 
@@ -338,14 +344,14 @@ Regulations, standards, policies, and procedures
 :::
 :::
 
-## Application examples (3)
+## Application Examples (3) {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
-- Mineral exploration:
+- **Mineral Exploration:**
     - In aerial survey, to find minerals in hard-to-reach regions;
     - In existing mines, to map extracted material volumes;
-- Coastal monitoring:
+- **Coastal Monitoring:**
     - Mapping dynamic shorelines and post-storm assessment
 :::
 
@@ -358,9 +364,9 @@ Regulations, standards, policies, and procedures
 
 :::{.columns}
 :::{.column width="60%"}
-- Agriculture and environment:
+- **Agriculture and Environment:**
     - Crop monitoring, vegetation mapping, forest fire monitoring, animals detection;
-- Intelligence, surveillance, and reconnaissance:
+- **Intelligence, Surveillance, and Reconnaissance:**
     - Detection of lost persons in difficult-to-access situations, support fire brigades in real-time crisis management, rapid disaster management;
 :::
 
@@ -369,13 +375,13 @@ Regulations, standards, policies, and procedures
 :::
 :::
 
-## UAS for Remote Sensing (2)
+## UAS for Remote Sensing (2) {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
-- Aerial monitoring in engineering:
+- **Aerial Monitoring in Engineering:**
     - Infrastructure inspections, distributed wind measurement, landslide monitoring;
-- Cultural heritage:
+- **Cultural Heritage:**
     - Orthophotos of archaeological sites, 3D models of man-made structures;
 :::
 
@@ -384,11 +390,11 @@ Regulations, standards, policies, and procedures
 :::
 :::
 
-## UAS for Remote Sensing (3)
+## UAS for Remote Sensing (3) {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
-- General surveying, mapping, and photogrammetry, cadastral applications:
+- **General surveying, mapping, and photogrammetry, cadastral applications:**
     - Cadastral surveying, alternative to traditional surveying, high-precision parcel boundary determination;
 :::
 
@@ -409,6 +415,7 @@ Regulations, standards, policies, and procedures
 
 ## Barriers
 
-- constantly changing legislation and regulations,
-- political and societal acceptance,
-- ... what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?
+- Constantly changing legislation and regulations
+- Political and societal acceptance
+
+*... what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?*
