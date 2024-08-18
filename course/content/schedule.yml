@@ -28,11 +28,11 @@ schedule:
     due_date: "Sep. 4"
     no_class: false
 
-  - date_range: "Sep. 2"
-    topic: "Labor Day: No Class"
-    details: []
-    due_date: ""
-    no_class: true
+  # - date_range: "Sep. 2"
+  #   topic: "Labor Day: No Class"
+  #   details: []
+  #   due_date: ""
+  #   no_class: true
 
   - date_range: "Sep. 2-6"
     topic: "Topic 2: Structure from Motion"
@@ -79,7 +79,7 @@ schedule:
     details:
       - "Mon: lecture"
       - "Wed: [In Class Assignments](topics/topic_4_GIS_analytics/assignments/assignment_1a.qmd)"
-    due_date: "Oct. 23"
+    due_date: "Oct. 21"
     no_class: false
 
   - date_range: "Oct. 7-11"
@@ -89,42 +89,49 @@ schedule:
       - "Mon: lecture"
       - "Wed: assignment: analysis of errors and distortions in Photoscan and GRASS GIS"
       - "Project: Data processing"
-    due_date: "Oct. 23"
+    due_date: "Oct. 21"
     no_class: false
 
-  - date_range: "Oct. 14-15"
-    topic: "Fall break: No Class"
-    details: []
-    due_date: ""
-    no_class: true
+  # - date_range: "Oct. 14-15"
+  #   topic: "Fall break: No Class"
+  #   details: []
+  #   due_date: ""
+  #   no_class: true
   
   - date_range: "Oct. 14-18"
-    topic: "Topic 4: GIS analytics B. Point cloud data analysis: point clouds, surfaces, and voxel models"
+    topic: "Fall Break - Guest Speaker"
     details:
-      - "Mo lecture, We assignment: viewing point clouds in plas.io, analyzing point clouds and generating surfaces in GRASS GIS"
+      - "Mon: **Fall break - (No Class)**"
+      - "Wed: Guest speaker: Dr. William Reckling ([LinkedIn](https://www.linkedin.com/in/william-reckling/))"
       - "Project: Data processing"
     due_date: "Oct. 23"
     no_class: false
   
   - date_range: "Oct. 21-25"
-    topic: "Topic 5: Advanced analytics A. UAS and lidar data: comparison, fusion and analysis"
+    topic: "Topic 5: Advanced Analytics"
+    subtopic: "5A. UAS and Lidar Data: Comparison, Fusion and Analysis"
     details:
-      - "Mo lecture, We assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow"
+      - "Mon: Lecture"
+      - "Wed: assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow"
       - "Project: Workflow development and testing"
     due_date: "Nov. 6"
     no_class: false
   
   - date_range: "Oct. 28 - Nov. 1"
-    topic: "Topic 5: Advanced analytics B. Analysis of multitemporal UAS data and its applications"
+    topic: "Topic 5: Advanced Analytics"
+    subtopic: "5B. Analysis of Multitemporal UAS Data and its Applications"
     details:
-      - "Mo lecture, We assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes"
+      - "Mon: lecture"
+      - "Wed: assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes"
     due_date: "Nov. 6"
     no_class: false
   
   - date_range: "Nov. 4-8"
     topic: "Topic 6: Imagery processing and SfM with open source solutions"
+    subtopic: "6A. OpenDroneMap and WebODM"
     details:
-      - "Mo lecture, We assignment: processing with ODM or WebODM, high performance computing"
+      - "Mon: Lecture"
+      - "Wed: Assignment: processing with ODM or WebODM, high performance computing"
       - "Project: Perform analysis and/or modeling"
     due_date: "Nov. 13"
     no_class: false
