@@ -251,13 +251,57 @@ Structure from Motion Visualization - Correctly Positioned Anchor Points
         for (let i = 0; i < vertices.length; i += 3) {
             const x = vertices[i];
             const y = vertices[i + 1];
-            vertices[i + 2] = simplex.noise2D(x * 0.3, y * 0.3) * 0.4; // Reduced amplitude for a more subtle terrain
+            vertices[i + 2] = simplex.noise2D(x * 0.3, y * 0.3) / 2.0; // Reduced amplitude for a more subtle terrain
         }
+
+        const elevationColors = [
+            { value: 0.0, color: new THREE.Color(0x00bfbf) }, // 0% 0 191 191
+            { value: 0.2, color: new THREE.Color(0x00ff00) }, // 20% 0 255 0
+            { value: 0.4, color: new THREE.Color(0xffff00) }, // 40% 255 255 0
+            { value: 0.6, color: new THREE.Color(0xff7f00) }, // 60% 255 127 0
+            { value: 0.8, color: new THREE.Color(0xbf7f3f) }, // 80% 191 127 63
+            { value: 1.0, color: new THREE.Color(0xc8c8c8) }  // 100% 200 200 200
+        ];
+
+        const vertexShader = `
+            varying float vElevation;
+            void main() {
+                vElevation = position.z;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+
+        const fragmentShader = `
+            uniform vec3 elevationColors[3];
+            varying float vElevation;
+            void main() {
+                vec3 color;
+                if (vElevation < 0.5) {
+                    color = mix(elevationColors[0], elevationColors[1], vElevation * 2.0);
+                } else {
+                    color = mix(elevationColors[1], elevationColors[2], (vElevation - 0.5) * 2.0);
+                }
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `;
 
         geometry.computeVertexNormals(); // Recompute normals after modifying vertices
 
+        // Colored Terrain
+        // const shaderMaterial = new THREE.ShaderMaterial({
+        //     vertexShader: vertexShader,
+        //     fragmentShader: fragmentShader,
+        //     uniforms: {
+        //         elevationColors: { value: elevationColors.map(e => e.color) }
+        //     }
+        // });
+        // const terrain = new THREE.Mesh(geometry, shaderMaterial);
+
+        // Wired Terrain
         const material = new THREE.MeshStandardMaterial({ color: 0x228b22, wireframe: true });
         const terrain = new THREE.Mesh(geometry, material);
+
+        
         terrain.rotation.x = -Math.PI / 2; // Rotate to make it horizontal
         scene.add(terrain);
 
