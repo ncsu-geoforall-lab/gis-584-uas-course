@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-08-28">
 
-<title>GIS/MEA 584: UAS Mapping and Analytics - A. From images to 3D models: Photogrammetry and Structure from Motion concepts</title>
+<title>GIS/MEA 584: UAS Mapping and Analytics - Assignment 4B</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../favicon.ico" rel="icon">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">GIS/MEA 584: UAS Mapping and Analytics</span>
     </a>
   </div>
@@ -90,23 +89,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/schedule.html"> 
+    <a class="nav-link" href="../../../../course/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/logistics.html"> 
+    <a class="nav-link" href="../../../../course/logistics.html"> 
 <span class="menu-text">Logistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/topics.html"> 
+    <a class="nav-link" href="../../../../course/topics.html"> 
 <span class="menu-text">Topics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/projects.html"> 
+    <a class="nav-link" href="../../../../course/projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -125,10 +124,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline:</a></li>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
-  <li><a href="#supplemental-materials" id="toc-supplemental-materials" class="nav-link" data-scroll-target="#supplemental-materials">Supplemental materials</a></li>
-  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
   <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
   </ul>
 </nav>
@@ -137,13 +133,13 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 <!-- banner.html -->
 <div class="banner-image">
-    <img src="../../../includes/images/banner.jpg" alt="Banner">
+    <img src="../../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">A. From images to 3D models: Photogrammetry and Structure from Motion concepts</h1>
-<p class="subtitle lead">Topic 2: Structure from Motion</p>
+<h1 class="title">Assignment 4B</h1>
+<p class="subtitle lead">Analysis of UAS data processing results</p>
 </div>
 
 
@@ -151,12 +147,6 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 28, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -166,42 +156,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline:</h2>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
 <ul>
-<li>principles of photogrammetry</li>
-<li>UAS low range flight and consumer camera image acquisition</li>
-<li>lateral and forward overlap, stereoscopic coverage</li>
-<li>principles of Structure from Motion</li>
-<li>3D reconstruction from multiple overlapping imagery</li>
-</ul>
-</section>
-<section id="lecture" class="level2">
-<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
-<ul>
-<li>Lecture Slides: <a href="../../../course/topics/topic_2_sfm/lectures/lecture_2a.html">Photogrammetry and SfM</a></li>
-</ul>
-</section>
-<section id="supplemental-materials" class="level2">
-<h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
-<ul>
-<li><a href="https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/02_Aerial_Photogrammetry_Concepts.html#/">Lecture Slides 2016</a>, learn about history of aerial mapping</li>
-<li><a href="https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/III-5/81/2016/">ISPRS 2016 paper on Reconstruction of Palmyra from tourist photos</a></li>
-<li><a href="https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/III-3/51/2016/">ISPRS 2016 paper on Reconstruction of popular monuments from crowdsourced photos</a></li>
-<li><a href="https://artsandculture.google.com/project/cyark">Open Heritage - 3D models of iconic locations</a></li>
-</ul>
-</section>
-<section id="assignment" class="level2">
-<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
-<p>Perform an experiment to investigate impact of the number and orientation of photos, light, as well as shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.</p>
-<ul>
-<li><a href="../../../course/topics/topic_2_sfm/assignments/assignment_2a.html">Lab Experiment</a>: 3D reconstruction from multiple overlapping imagery</li>
+<li><a href="../assignments/point_clouds.html">Processing lidar and UAS SfM point clouds</a></li>
 </ul>
 </section>
 <section id="homework" class="level2">
 <h2 class="anchored" data-anchor-id="homework">Homework</h2>
-<p>Prepare short report on your 3D modeling experiment.</p>
-<p>3D models from previous courses are available on <a href="https://sketchfab.com/osgeolab/collections/classroom-models">OsgeoLab Skechfab account</a>. If you would like your model to be added to the collectionl please indicate at the end of your report “I agree for my 3D model to be uploaded to the OsgeoLab Skechfab collection and I want(/don’t want) my name to be listed as an author in the model description” and submit on through moodle your 3D model (preferably in the .obj format with accompaning .mtl and .jpg files, or check <a href="https://help.sketchfab.com/hc/en-us/articles/202508396-3D-File-Formats?page=3#3d-formats">other formats supported by Sketchfab</a>)</p>
+<p>Prepare report on analyzing point clouds, computing and visualizing bare earth and canopy surfaces.</p>
 
 
 </section>

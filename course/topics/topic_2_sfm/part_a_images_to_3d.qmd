@@ -6,8 +6,6 @@ date: 8/28/2024
 "Assignment Due Date": 9/30/2024
 ---
 
-# From images to 3D models: Photogrammetry and Structure from Motion concepts
-
 ## Outline:
 
 * principles of photogrammetry
@@ -31,7 +29,7 @@ date: 8/28/2024
 
 Perform an experiment to investigate impact of the number and orientation of photos, light, as well as shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.
 
-* [Lab Experiment](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/lab_exp_3Dreconstr.html): 3D reconstruction from multiple overlapping imagery
+* [Lab Experiment](assignments/assignment_2a.qmd): 3D reconstruction from multiple overlapping imagery
 
 ## Homework
 

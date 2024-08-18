@@ -29,8 +29,8 @@ date: 8/28/2024
 
 ## Assignment
 <!-- TODO: Update Links -->
-* [Intro to the assignment (slides)](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/2017_Imagery_Processing_assignment_intro.html#/)
-* [Geoprocessing UAS imagery in Agisoft Metashape](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/geoprocessing.html)
+<!-- * [Intro to the assignment (slides)](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/2017_Imagery_Processing_assignment_intro.html#/) -->
+* [Geoprocessing UAS imagery in Agisoft Metashape](assignments/assignment_2b.qmd)
 
 ## Homework
 
