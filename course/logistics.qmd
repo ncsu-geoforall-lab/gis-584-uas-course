@@ -4,19 +4,19 @@ title: "Logistics"
 
 ### Course website and Moodle
 
-The course material can be accessed on the **Schedule** web page.  
-Course Forum, assignment submissions, project material, and grades are handled in **Moodle**.
+The course material can be accessed on the [Schedule](schedule.qmd) web page.  
+Course Forum, assignment submissions, project material, and grades are handled in [Moodle]({{< var course_params.moodle_link >}}).
 
 ### Lectures
 
 - Focus of lectures is on principles, theory, concepts, methods and lectures are mostly software independent.
 - Lecture slides and video are available at each topic's web page - you can access them through **Schedule** or Moodle.
 - Topics webpages also include links to addition reading and other resources.
-- [NCSU Panopto: Fall 2024 Letcure Recordings](https://ncsu.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=a33b90fe-d4d1-47bb-9a0f-b1c1016650f3)
+- [NCSU Panopto: Fall 2024 Letcure Recordings]({{< var course_params.panopto_link >}})
 
 ### Assignments
 
-- Most topics include hands-on assignment - the links to assignments are provided at each topic's web page - you can access them through **Schedule** or Moodle.
+- Most topics include hands-on assignment - the links to assignments are provided at each topic's web page - you can access them through [Moodle]({{< var course_params.moodle >}}) or the course [schedule](schedule.qmd).
 - Following the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:
   - **Introduction**: task, problem
   - **Methods**: general description of methods and concepts
@@ -27,27 +27,28 @@ Course Forum, assignment submissions, project material, and grades are handled i
 
 ### Software
 
-- [GRASS GIS 8.4](http://grass.osgeo.org/) (you can use [these instructions to install it](http://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software))
-- Agisoft Metashape (provided at NCSU) - you can work on the demo version; installation files for Windows, Linux and Mac are available [on Agisoft website](http://www.agisoft.com/downloads/installer/).
-- [OpenDroneMap](http://opendronemap.org/) and 
+- [GRASS GIS {{< var software.grass.version >}}]({{< var software.grass.website >}}) (you can use [these instructions to install it](https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software))
+- [Agisoft Metashape]({{< var software.agisoft.website >}}) (provided at NCSU) - you can work on the demo version.
+- [OpenDroneMap](http://opendronemap.org/)
 
 ### Other resources
 
-- ([MicMac](http://logiciels.ign.fr/?-Micmac,3-) documentation can be found [here](http://logiciels.ign.fr/IMG/pdf/docmicmac-2.pdf), not used in this course)
-- [LibLAS](http://download.osgeo.org/liblas/libLAS-1.8.0.tar.bz2) and [LAStools](http://www.cs.unc.edu/~isenburg/lastools/download/LAStools.zip) for managing the .las files in GRASS
+- [MicMac](https://github.com/micmacIGN/micmac) documentation can be found [here](https://github.com/micmacIGN/Documentation/blob/master/DocMicMac.pdf), not used in this course.
+- [PDAL](https://pdal.io/en/2.7.2/) - Point Data Abstraction Library
+- [LibLAS](https://liblas.org/) and [LAStools](https://lastools.github.io/) for managing the .las files in GRASS
 - [NCSU Virtual Computing Lab (VCL)](https://vcl.ncsu.edu/scheduling/)
-  - Go to Reservations - New reservation
-  - Choose MS Windows instance *ArcGIS Desktop 10.5.1*, which has also GRASS GIS 7.2.1, or Linux instance *Ubuntu 16.04 LTS Base*
 
 ### Data
 
 #### General resources
 
-- [North Carolina dataset (formatted as GRASS location)](https://grass.osgeo.org/sampledata/north_carolina/nc_spm_08_grass7.zip)
+- [North Carolina dataset (formatted as GRASS location)](https://grass.osgeo.org/sampledata/north_carolina/nc_spm_08_grass7.zip) 
 
 #### UAS data
 
-- boundaries of all COAs obtained by NGAT in North Carolina ([google maps](https://www.google.com/maps/d/edit?mid=zi8EsFDQAyqo.kr7lL7Germeo), [shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU))
+> Many of these links are currently broken and in the process of being migrated to a new hosting serivce.
+
+- Boundaries of all COAs obtained by NGAT in North Carolina ([google maps](https://www.google.com/maps/d/edit?mid=zi8EsFDQAyqo.kr7lL7Germeo), [shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU))
 - Study site (Lake Wheeler): COA boundaries ([shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU), [kml](https://drive.google.com/open?id=0B1AfQGDB8tPXOFdwR3VoTUloX0k)), GCP coordinates ([txt](https://drive.google.com/open?id=0B1AfQGDB8tPXN2FHTzlicWRENUU), [kml](https://drive.google.com/open?id=0B1AfQGDB8tPXb2c1bTF4QXhfT1k)), also included in the GRASS location (see processed data)
 - Survey data: [down-sampled pictures](https://drive.google.com/a/ncsu.edu/file/d/1xYhNBBDVPP4UG2aiSjcZ_tTOm4gnQcMz/view?usp=sharing) and [log](https://drive.google.com/open?id=0B1AfQGDB8tPXTWdfdGJWZ0pkOWc) from the flight 06/20/2015, [sample pictures and log](https://drive.google.com/open?id=0B1AfQGDB8tPXYlVyM2x5YTNqTjg) from the flight 09/22/2016, [all pictures and log (full flight)](https://drive.google.com/drive/folders/0B1AfQGDB8tPXOXBRSHlJUmZZQmM?resourcekey=0-CSu2NTf4BxeHPfF7Q0ljww&usp) from the flight 09/22/2016
 - Processed data:

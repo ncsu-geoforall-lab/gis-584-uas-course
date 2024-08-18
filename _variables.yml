@@ -1,0 +1,15 @@
+course_params:
+  term: "Fall 2024"
+  course_website: "schedule.qmd"
+  moodle_link: "https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4084&bp=s"
+  panopto_link: "https://ncsu.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=a33b90fe-d4d1-47bb-9a0f-b1c1016650f3"
+
+software:
+  grass:
+    website: "https://grass.osgeo.org/"
+    version: "8.4"
+  agisoft:
+    website: "https://www.agisoft.com/downloads/installer/"
+    version: "2.1.2"
+  webodm:
+    version: "2.5"

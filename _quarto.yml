@@ -40,7 +40,6 @@ website:
       - href: https://geospatial.ncsu.edu/geoforall/
         text: GeoForAll Lab
       
-
 format:
   html:
     theme: [simple, theme.scss]
