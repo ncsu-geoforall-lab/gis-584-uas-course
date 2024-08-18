@@ -1,17 +1,19 @@
 <blockquote>Schedule will be adjusted as needed during the semester.</blockquote>
-  <% for (const item of items.pop().schedule) { %>
-  <h3 class=> <%= item.date_range %></h3>
-  <h4 class="<%= item.no_class ? 'no-class' : 'primary' %>"> <%= item.topic %></h4>
-  <ul>
-    <% for (const detail of item.details) { %>
-    <li><%- detail %></li>
-    <% } %>
-  </ul>
-  <% if (item.due_date) { %>
-  <strong>Assignment Due Date:</strong> <%= item.due_date %>
-  <% } %>
+<% for (const item of items.pop().schedule) { %>
+<h4> <%= item.date_range %> | <%= item.topic %></h4>
+<% if (item.subtopic) { %>
+<p> <%= item.subtopic %> </p>
+<% } %>
+<ul>
+<% for (const detail of item.details) { %>
+  <li><%- detail %></li>
+<% } %>
+</ul>
+<% if (item.due_date) { %>
+<strong>Assignment Due Date:</strong> <%= item.due_date %>
+<% } %>
 <% } %>
 
 <img src="content/images/schedule.webp" alt="lecture" width="100%">
 
-If you are looking for what is the next step, here are some [related courses](https://geospatial.ncsu.edu/geoforall/courses.html).
+<p>If you are looking for what is the next step, here are some <a href="https://geospatial.ncsu.edu/geoforall/courses.html" target="_blank">related courses</a>.</p>

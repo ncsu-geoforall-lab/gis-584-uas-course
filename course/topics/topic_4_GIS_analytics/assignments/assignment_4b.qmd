@@ -1,0 +1,13 @@
+---
+subtitle: "Analysis of UAS data processing results"
+title: "Assignment 4B"
+assignment-due-date: 10/23/2024
+---
+
+## Task
+
+- [Processing lidar and UAS SfM point clouds](../assignments/point_clouds.html)
+
+## Homework
+
+Prepare report on analyzing point clouds, computing and visualizing bare earth and canopy surfaces.

@@ -1,0 +1,14 @@
+---
+subtitle: "Analysis of UAS data processing results"
+title: "Assignment 4A"
+assignment-due-date: 10/23/2024
+---
+
+## Task
+
+- [Execute measurements in Agisoft Metashape](../assignments/volumes.html)
+- [Analyze differences in DSMs](../assignments/analysis.html) generated using different techniques or acquired at different times. Distinguish between errors, artifacts, and real change in vegetation and/or bare ground surface.
+
+## Homework
+
+ Prepare report on the results of measurements in Agisoft and DSM comparison in GRASS GIS Include figures/graphs and calculations. 
