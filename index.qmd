@@ -85,6 +85,6 @@ in regular section, attendance is checked at each class, see also [attendance re
 
 [Disability Services Office](https://dso.dasa.ncsu.edu/)
 
-## Large Language Model (LLM) (i.e., ChatGPT, Bard, etc..) policy
+## Large Language Model (LLM) policy
 
 The use of LLMs in this course is permitted for the purposes of completing assignments and projects. However, the use of LLMs for the purposes of completing exams is strictly prohibited. Students are also required to cite the use of LLMs in their assignments and projects. Failure to do so will result in a violation of the courses academic integrity policy. Students are also to be aware that the use of LLMs in this course is not a substitute for learning the material. Assignments and projects must be properly cited and contain no plagerized materials. (The policy was created with the aid GitHub CoPilot)
