@@ -1,6 +1,6 @@
 schedule:
   - date_range: "Aug. 19"
-    topic: "Introduction to the course"
+    topic: "Introduction to the Course"
     subtopic: ""
     details: 
       - "Course logistics: [link](logistics.qmd) (Course instructions, management, and resources)"
@@ -121,51 +121,46 @@ schedule:
     topic: "Topic 5: Advanced Analytics"
     subtopic: "5B. Analysis of Multitemporal UAS Data and its Applications"
     details:
-      - "Mon: lecture"
+      - "Mon: Lecture"
       - "Wed: assignment: temporal data framework, mapping plant growth and soil erosion, change in viewsheds, volumes"
     due_date: "Nov. 6"
     no_class: false
   
   - date_range: "Nov. 4-8"
-    topic: "Topic 6: Imagery processing and SfM with open source solutions"
+    topic: "Topic 6: Imagery processing and SfM with Open Source Solutions"
     subtopic: "6A. OpenDroneMap and WebODM"
     details:
       - "Mon: Lecture"
-      - "Wed: Assignment: processing with ODM or WebODM, high performance computing"
+      - "Wed: Assignment: Processing with ODM or WebODM, high performance computing"
       - "Project: Perform analysis and/or modeling"
     due_date: "Nov. 13"
     no_class: false
   
   - date_range: "Nov. 11-15"
-    topic: "Topic 7: 3D modeling and geovisualization"
+    topic: "Topic 7: 3D Modeling and Geovisualization"
     details:
-      - "Mo lecture, We assignment: Get familiar with Blender interface, Refine a UAV-derived 3D model using sculpting tools, Photorealistic rendering"
+      - "Mon: Lecture"
+      - "Wed: Assignment: TBD"
     due_date: "Dec. 4"
     no_class: false
   
   - date_range: "Nov. 18-22"
-    topic: "Project help sessions"
+    topic: "Guest Speaker & Project help sessions"
     details:
+      - "Mon: Guest Speaker: Mitchell DuRant - Cypress Creek Renewables ([LinkedIn](https://www.linkedin.com/in/mitchell-durant/))"
+      - "Wed: Project help session"
       - "Project: Visualize results, work on presentation"
       - "[Project presentation and paper requirements, final project titles](projects.html)"
     due_date: ""
     no_class: false
   
-  - date_range: "Nov. 25-27"
+  - date_range: "Nov. 25-29"
     topic: "Thanksgiving break: No Class"
     details:
-      - "Project: Visualize results, work on presentation"
+      - "Work on project: visualize results, work on presentation"
       - "[Project presentation and paper requirements, final project titles](projects.html)"
     due_date: ""
     no_class: true
-
-  - date_range: "Nov. 25-29"
-    topic: "Project help sessions"
-    details:
-      - "Project: Visualize results, work on presentation"
-      - "[Project presentation and paper requirements, final project titles](projects.html)"
-    due_date: ""
-    no_class: false
   
   - date_range: "Dec. 2-6"
     topic: "Project presentations ([See the requirements and project titles](projects.html))"
@@ -183,6 +178,6 @@ schedule:
       - "For archiving purposes also submit a complete coursework in a ZIP file"
       - "The ZIP file should include: project paper, presentation slides, and all homework papers"
       - "Upload your work as a single ZIP file `LastnameFirstname.zip` to your Google drive and share it with the instructors."
-    due_date: "Dec. 11"
+    due_date: "Dec. 9"
     no_class: false
   
