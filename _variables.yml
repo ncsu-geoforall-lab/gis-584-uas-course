@@ -13,3 +13,7 @@ software:
     version: "2.1.2"
   webodm:
     version: "2.5"
+
+recordings:
+  topic1:
+    lecture1a: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=965b4d89-574a-4ae3-aa38-b1c1016651e4
