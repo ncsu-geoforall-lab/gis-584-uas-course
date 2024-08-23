@@ -18,7 +18,7 @@ assignment-due-date: 8/28/2024
 ## Lecture
 
 * Lecture Slides: [Introduction to UAS](lectures/lecture_1a.qmd)
-* Lecture Recording: TBD
+* Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1a >}}) (NCSU Only)
 * Past Videos (2017)
     * [Part 1](https://youtu.be/ey_ryHr5JOU?feature=shared)
     * [Part 2](https://youtu.be/7eX8qyRALLs?feature=shared)

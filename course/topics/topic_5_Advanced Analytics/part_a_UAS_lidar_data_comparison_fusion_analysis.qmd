@@ -1,0 +1,28 @@
+---
+topic: "Topic 5: Advanced Analytics"
+title: "A. UAS and lidar data: comparison, fusion and analysis"
+subtitle: "Topic 5: Advanced Analytics"
+date: 10/21/2024
+assignment-due-date: 11/06/2024
+---
+
+# UAS and lidar data: comparison, fusion and analysis
+
+## Outline
+- Analysis of lidar and UAS DSMs differences
+- Patching and smooth fusion of UAS and lidar DSM
+- Overland flow simulation on fused DEM
+
+## Lecture
+- [Lecture Slides](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/fusion_uas_lidar_view.html#/)
+
+## Supplemental materials
+- [Drone LiDAR vs Photogrammetry](https://www.geoweeknews.com/news/drone-lidar-vs-photogrammetry-technical-guide): A Technical Guide, brief article from SPAR3D (online news on 3D technology: sensing, processing and visualization)
+- Fusion of multi-scale DEMs using a regularized super-resolution method. Linwei Yue , Huanfeng Shen , Qiangqiang Yuan , Liangpei Zhang. International Journal of Geographical Information Science. Vol. 29, Iss. 12, 2015
+- [Petrasova et al. 2017, Fusion of high-resolution DEMs for water flow modeling.](https://opengeospatialdata.springeropen.com/articles/10.1186/s40965-017-0019-2) Open Geospatial Data, Software and Standards 2:6.
+
+## Assignment & Homework
+
+[Assignment 5A](assignments/assignment_5a.qmd)
+-[Fusion of UAS and lidar data](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/fusion_uas_lidar.html)
+- Optional, advanced topic: [Python Scripting for UAS/lidar analysis in GRASS GIS](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/python.html)
