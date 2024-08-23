@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UAS and Lidar Data: Comparison, Fusion, and Analysis – GIS/MEA 584: UAS Mapping and Analytics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">GIS/MEA 584: UAS Mapping and Analytics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/logistics.html"> 
+<span class="menu-text">Logistics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/topics.html"> 
+<span class="menu-text">Topics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#uas-and-lidar-data-comparison-fusion-and-analysis" id="toc-uas-and-lidar-data-comparison-fusion-and-analysis" class="nav-link active" data-scroll-target="#uas-and-lidar-data-comparison-fusion-and-analysis">UAS and Lidar Data: Comparison, Fusion, and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#gismea-584-mapping-and-analysis-using-uas" id="toc-gismea-584-mapping-and-analysis-using-uas" class="nav-link" data-scroll-target="#gismea-584-mapping-and-analysis-using-uas">GIS/MEA 584: Mapping and Analysis Using UAS</a></li>
+  <li><a href="#helena-mitasova-anna-petrasova-justyna-jeziorska" id="toc-helena-mitasova-anna-petrasova-justyna-jeziorska" class="nav-link" data-scroll-target="#helena-mitasova-anna-petrasova-justyna-jeziorska">Helena Mitasova, Anna Petrasova, Justyna Jeziorska</a></li>
+  </ul></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#point-clouds-from-lidar" id="toc-point-clouds-from-lidar" class="nav-link" data-scroll-target="#point-clouds-from-lidar">Point Clouds from Lidar</a></li>
+  <li><a href="#point-clouds-from-sfm" id="toc-point-clouds-from-sfm" class="nav-link" data-scroll-target="#point-clouds-from-sfm">Point Clouds from SfM</a></li>
+  <li><a href="#comparison-of-point-cloud-properties" id="toc-comparison-of-point-cloud-properties" class="nav-link" data-scroll-target="#comparison-of-point-cloud-properties">Comparison of Point Cloud Properties</a>
+  <ul class="collapse">
+  <li><a href="#airborne-lidar" id="toc-airborne-lidar" class="nav-link" data-scroll-target="#airborne-lidar">Airborne Lidar:</a></li>
+  <li><a href="#uas-sfm" id="toc-uas-sfm" class="nav-link" data-scroll-target="#uas-sfm">UAS SfM:</a></li>
+  </ul></li>
+  <li><a href="#motivation-for-lidar-and-uas-sfm-fusion" id="toc-motivation-for-lidar-and-uas-sfm-fusion" class="nav-link" data-scroll-target="#motivation-for-lidar-and-uas-sfm-fusion">Motivation for Lidar and UAS SfM Fusion</a></li>
+  <li><a href="#fusion-techniques" id="toc-fusion-techniques" class="nav-link" data-scroll-target="#fusion-techniques">Fusion Techniques</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a></li>
+  <li><a href="#identify-distortions-due-to-processing" id="toc-identify-distortions-due-to-processing" class="nav-link" data-scroll-target="#identify-distortions-due-to-processing">Identify Distortions Due to Processing</a></li>
+  <li><a href="#identify-changes-in-topography" id="toc-identify-changes-in-topography" class="nav-link" data-scroll-target="#identify-changes-in-topography">Identify Changes in Topography</a></li>
+  <li><a href="#comparing-profiles-fields" id="toc-comparing-profiles-fields" class="nav-link" data-scroll-target="#comparing-profiles-fields">Comparing Profiles: Fields</a></li>
+  <li><a href="#comparing-profiles-building" id="toc-comparing-profiles-building" class="nav-link" data-scroll-target="#comparing-profiles-building">Comparing Profiles: Building</a></li>
+  <li><a href="#comparing-profiles-road" id="toc-comparing-profiles-road" class="nav-link" data-scroll-target="#comparing-profiles-road">Comparing Profiles: Road</a></li>
+  <li><a href="#correct-for-systematic-error-and-distortions" id="toc-correct-for-systematic-error-and-distortions" class="nav-link" data-scroll-target="#correct-for-systematic-error-and-distortions">Correct for Systematic Error and Distortions</a></li>
+  <li><a href="#updating-lidar-dem-by-patching" id="toc-updating-lidar-dem-by-patching" class="nav-link" data-scroll-target="#updating-lidar-dem-by-patching">Updating Lidar DEM by Patching</a></li>
+  <li><a href="#updating-lidar-dem-by-patching-1" id="toc-updating-lidar-dem-by-patching-1" class="nav-link" data-scroll-target="#updating-lidar-dem-by-patching-1">Updating Lidar DEM by Patching</a></li>
+  <li><a href="#smooth-fusion" id="toc-smooth-fusion" class="nav-link" data-scroll-target="#smooth-fusion">Smooth Fusion</a></li>
+  <li><a href="#fusion-method" id="toc-fusion-method" class="nav-link" data-scroll-target="#fusion-method">Fusion Method</a></li>
+  <li><a href="#influence-of-overlap-width-s" id="toc-influence-of-overlap-width-s" class="nav-link" data-scroll-target="#influence-of-overlap-width-s">Influence of Overlap Width ( s )</a></li>
+  <li><a href="#fusion-with-spatially-variable-s" id="toc-fusion-with-spatially-variable-s" class="nav-link" data-scroll-target="#fusion-with-spatially-variable-s">Fusion with Spatially Variable ( s )</a></li>
+  <li><a href="#fusion-with-spatially-variable-s-1" id="toc-fusion-with-spatially-variable-s-1" class="nav-link" data-scroll-target="#fusion-with-spatially-variable-s-1">Fusion with Spatially Variable ( s )</a></li>
+  <li><a href="#lidar-and-uas-sfm-patching-and-fusion" id="toc-lidar-and-uas-sfm-patching-and-fusion" class="nav-link" data-scroll-target="#lidar-and-uas-sfm-patching-and-fusion">Lidar and UAS SfM Patching and Fusion</a></li>
+  <li><a href="#fusing-vegetated-patch-with-bare-ground" id="toc-fusing-vegetated-patch-with-bare-ground" class="nav-link" data-scroll-target="#fusing-vegetated-patch-with-bare-ground">Fusing Vegetated Patch with Bare Ground</a></li>
+  <li><a href="#spatially-variable-overlap" id="toc-spatially-variable-overlap" class="nav-link" data-scroll-target="#spatially-variable-overlap">Spatially Variable Overlap</a></li>
+  <li><a href="#modeling-overland-flow" id="toc-modeling-overland-flow" class="nav-link" data-scroll-target="#modeling-overland-flow">Modeling Overland Flow</a></li>
+  <li><a href="#path-sampling-method" id="toc-path-sampling-method" class="nav-link" data-scroll-target="#path-sampling-method">Path Sampling Method</a></li>
+  <li><a href="#flow-over-uas-mapped-field" id="toc-flow-over-uas-mapped-field" class="nav-link" data-scroll-target="#flow-over-uas-mapped-field">Flow Over UAS Mapped Field</a></li>
+  <li><a href="#flow-over-patched-dems" id="toc-flow-over-patched-dems" class="nav-link" data-scroll-target="#flow-over-patched-dems">Flow Over Patched DEMs</a></li>
+  <li><a href="#example-from-assignment" id="toc-example-from-assignment" class="nav-link" data-scroll-target="#example-from-assignment">Example from Assignment</a></li>
+  <li><a href="#example-from-assignment-1" id="toc-example-from-assignment-1" class="nav-link" data-scroll-target="#example-from-assignment-1">Example from Assignment</a></li>
+  <li><a href="#what-did-we-learn" id="toc-what-did-we-learn" class="nav-link" data-scroll-target="#what-did-we-learn">What Did We Learn?</a></li>
+  <li><a href="#intro-to-python-in-grass-gis" id="toc-intro-to-python-in-grass-gis" class="nav-link" data-scroll-target="#intro-to-python-in-grass-gis">Intro to Python in GRASS GIS</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a>
+  <ul class="collapse">
+  <li><a href="#what-is-scripting-good-for" id="toc-what-is-scripting-good-for" class="nav-link" data-scroll-target="#what-is-scripting-good-for">What is scripting good for?</a></li>
+  <li><a href="#why-python" id="toc-why-python" class="nav-link" data-scroll-target="#why-python">Why Python?</a></li>
+  </ul></li>
+  <li><a href="#running-python-in-grass" id="toc-running-python-in-grass" class="nav-link" data-scroll-target="#running-python-in-grass">Running Python in GRASS</a></li>
+  <li><a href="#grass-python-scripting-library" id="toc-grass-python-scripting-library" class="nav-link" data-scroll-target="#grass-python-scripting-library">GRASS Python Scripting Library</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<!-- banner.html -->
+<div class="banner-image">
+    <img src="../../../../includes/images/banner.jpg" alt="Banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">UAS and Lidar Data: Comparison, Fusion, and Analysis</h1>
+<p class="subtitle lead">GIS/MEA 584: Mapping and Analysis Using UAS</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Helena Mitasova </p>
+             <p>Anna Petrasova </p>
+             <p>Justyna Jeziorska </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="uas-and-lidar-data-comparison-fusion-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="uas-and-lidar-data-comparison-fusion-and-analysis">UAS and Lidar Data: Comparison, Fusion, and Analysis</h2>
+<section id="gismea-584-mapping-and-analysis-using-uas" class="level3">
+<h3 class="anchored" data-anchor-id="gismea-584-mapping-and-analysis-using-uas">GIS/MEA 584: Mapping and Analysis Using UAS</h3>
+</section>
+<section id="helena-mitasova-anna-petrasova-justyna-jeziorska" class="level3">
+<h3 class="anchored" data-anchor-id="helena-mitasova-anna-petrasova-justyna-jeziorska">Helena Mitasova, Anna Petrasova, Justyna Jeziorska</h3>
+<p><a href="https://geospatial.ncsu.edu/">Center for Geospatial Analytics</a>,<br>
+<a href="http://www.ncsu.edu/">North Carolina State University</a></p>
+</section>
+</section>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<ul>
+<li>Motivation for combining lidar and UAS SfM data</li>
+<li>Analysis of lidar and UAS SfM DSMs differences</li>
+<li>Patching and smooth fusion of UAS and lidar DSM</li>
+<li>Overland flow simulation on fused DEM</li>
+</ul>
+</section>
+<section id="point-clouds-from-lidar" class="level2">
+<h2 class="anchored" data-anchor-id="point-clouds-from-lidar">Point Clouds from Lidar</h2>
+<ul>
+<li>Measured variable is the time of return for each pulse</li>
+<li>Georeferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform</li>
+<li>(x, y, z) is derived from time, GPS positioning, and INS parameters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/lidar/midpines_lidar_plasviewcozoom.jpg" class="img-fluid figure-img"></p>
+<figcaption>Point cloud visualization from Lidar</figcaption>
+</figure>
+</div>
+</section>
+<section id="point-clouds-from-sfm" class="level2">
+<h2 class="anchored" data-anchor-id="point-clouds-from-sfm">Point Clouds from SfM</h2>
+<ul>
+<li>Measured variable is reflected energy captured as imagery</li>
+<li>Georeferencing can be done entirely from GCPs</li>
+<li>(x, y, z) is derived from overlapping images and GCPs</li>
+<li>Alternatively: GPS and INS for the position and orientation of images and camera parameters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/lidar/midpines_uas_plasviewco2.jpg" class="img-fluid figure-img"></p>
+<figcaption>Point cloud visualization from SfM</figcaption>
+</figure>
+</div>
+</section>
+<section id="comparison-of-point-cloud-properties" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-point-cloud-properties">Comparison of Point Cloud Properties</h2>
+<section id="airborne-lidar" class="level3">
+<h3 class="anchored" data-anchor-id="airborne-lidar">Airborne Lidar:</h3>
+<ul>
+<li>Passes through vegetation, multiple returns</li>
+<li>Shifts between swaths, corduroy effect</li>
+<li>Regional coverage</li>
+<li>High cost</li>
+</ul>
+</section>
+<section id="uas-sfm" class="level3">
+<h3 class="anchored" data-anchor-id="uas-sfm">UAS SfM:</h3>
+<ul>
+<li>Very high point density</li>
+<li>Limited capability to map under vegetation</li>
+<li>Influenced by cast shadows</li>
+<li>Low cost but limited area</li>
+</ul>
+<p>Different distribution of errors and distortions:<br>
+Lidar and SfM provide an independent set of measurements.</p>
+</section>
+</section>
+<section id="motivation-for-lidar-and-uas-sfm-fusion" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-for-lidar-and-uas-sfm-fusion">Motivation for Lidar and UAS SfM Fusion</h2>
+<ul>
+<li>Low-cost DEM updates in rapidly changing landscapes (e.g., construction sites)</li>
+<li>Replacing vegetated areas in UAS SfM with bare ground</li>
+<li>Watershed analysis when only part of the watershed was mapped by UAS</li>
+<li>Improve accuracy and level of detail over stable features (buildings, bridges)</li>
+<li>Add your suggestion</li>
+</ul>
+</section>
+<section id="fusion-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="fusion-techniques">Fusion Techniques</h2>
+<ul>
+<li>Merge the point clouds, decimate or bin at high resolution, interpolate: computationally demanding</li>
+<li>Interpolate DEMs, randomly sample, patch, and reinterpolate: loss of detail, time-consuming</li>
+<li>Interpolate DEMs and patch: sharp edges</li>
+<li>Smooth fusion - requires DEMs at the same resolution</li>
+</ul>
+</section>
+<section id="workflow" class="level2">
+<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
+<ul>
+<li>Evaluate the point clouds, select resolution</li>
+<li>Interpolate lidar and UAS DEMs at the same resolution</li>
+<li>Evaluate the differences between the lidar and UAS DEMs</li>
+<li>If applicable, identify errors and apply corrections</li>
+<li>Apply smooth fusion</li>
+</ul>
+</section>
+<section id="identify-distortions-due-to-processing" class="level2">
+<h2 class="anchored" data-anchor-id="identify-distortions-due-to-processing">Identify Distortions Due to Processing</h2>
+<ul>
+<li>Identify the spatial pattern of distortions</li>
+<li>Difference maps between Lidar DSM and UAS SfM DSMs: different distortions from AGISOFT and PIX4D</li>
+</ul>
+<p><img src="img/fusion_lidar_uav/dif_lid_agi_junesh.jpg" class="img-fluid" alt="Difference Maps"> <img src="img/fusion_lidar_uav/dif_lid_pix4d_junesh.jpg" class="img-fluid" alt="Difference Maps"></p>
+</section>
+<section id="identify-changes-in-topography" class="level2">
+<h2 class="anchored" data-anchor-id="identify-changes-in-topography">Identify Changes in Topography</h2>
+<ul>
+<li>Vegetation growth or removal</li>
+<li>Change in elevation surface due to erosion processes</li>
+<li>UAS SfM - lidar difference maps with custom color</li>
+</ul>
+<p><img src="img/fusion_lidar_uav/diff_lid_uavGCPjune.jpg" class="img-fluid" alt="Elevation Difference Maps"> <img src="img/fusion_lidar_uav/field_rill_photo.jpg" class="img-fluid" alt="Field Image"></p>
+</section>
+<section id="comparing-profiles-fields" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-profiles-fields">Comparing Profiles: Fields</h2>
+<ul>
+<li>Identify systematic errors (vertical shifts)</li>
+<li>Differences due to vegetation growth, erosion/deposition</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/Anna_profile_fields.jpg" class="img-fluid figure-img"></p>
+<figcaption>Profiles Comparison Fields</figcaption>
+</figure>
+</div>
+</section>
+<section id="comparing-profiles-building" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-profiles-building">Comparing Profiles: Building</h2>
+<ul>
+<li>High accuracy, lower level of detail in lidar data</li>
+<li>Negligible systematic error</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/Anna_profile_house.jpg" class="img-fluid figure-img"></p>
+<figcaption>Profiles Comparison Building</figcaption>
+</figure>
+</div>
+</section>
+<section id="comparing-profiles-road" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-profiles-road">Comparing Profiles: Road</h2>
+<ul>
+<li>Relatively easy to identify stable features</li>
+<li>High accuracy - differences between lidar and UAS SfM within 4cm</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/subregion_road_profile_2.png" class="img-fluid figure-img"></p>
+<figcaption>Profiles Comparison Road</figcaption>
+</figure>
+</div>
+</section>
+<section id="correct-for-systematic-error-and-distortions" class="level2">
+<h2 class="anchored" data-anchor-id="correct-for-systematic-error-and-distortions">Correct for Systematic Error and Distortions</h2>
+<ul>
+<li>Systematic error: if due to GPS shift, use median difference</li>
+<li>Systematic error: if tilt, use regression function</li>
+<li>Complex UAS SfM distortions can be reduced using interpolated GCP differences or differencing with lidar</li>
+<li>Importance of well-distributed, accurate GCPs</li>
+</ul>
+</section>
+<section id="updating-lidar-dem-by-patching" class="level2">
+<h2 class="anchored" data-anchor-id="updating-lidar-dem-by-patching">Updating Lidar DEM by Patching</h2>
+<ul>
+<li>Replace the grid cells in the updated area by UAS DEM</li>
+<li>Average over an overlap</li>
+<li>Usually creates an edge - requires post-processing</li>
+</ul>
+<p><img src="img/fusion_lidar_uav/Brendaninitial_fusion.png" class="img-fluid" alt="Patching Results"> <img src="img/fusion_lidar_uav/Brendaninitial_fusion_relief.png" class="img-fluid" alt="Patching Results"></p>
+<p>Images by Brendan Harmon</p>
+</section>
+<section id="updating-lidar-dem-by-patching-1" class="level2">
+<h2 class="anchored" data-anchor-id="updating-lidar-dem-by-patching-1">Updating Lidar DEM by Patching</h2>
+<p>Edge between lidar and UAS SfM DEMs</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/patchingedge.png" class="img-fluid figure-img"></p>
+<figcaption>Edge Visualization</figcaption>
+</figure>
+</div>
+</section>
+<section id="smooth-fusion" class="level2">
+<h2 class="anchored" data-anchor-id="smooth-fusion">Smooth Fusion</h2>
+<ul>
+<li>Derive overlap raster</li>
+<li>Weighted smoothing based on the distance from the edge</li>
+</ul>
+<p><img src="img/fusion_lidar_uav/Anna_patching.jpg" class="img-fluid" alt="Fusion Results"> <img src="img/fusion_lidar_uav/Anna_fusion.jpg" class="img-fluid" alt="Fusion Results"></p>
+</section>
+<section id="fusion-method" class="level2">
+<h2 class="anchored" data-anchor-id="fusion-method">Fusion Method</h2>
+<p>Linear combination of elevation surfaces ( z_{A} ) and ( z_{B} ) with weights given by overlap width ( s ) and distance ( d ) to the edge of ( z_{A} ):</p>
+<p><span class="math display">\[
+z_{AB} = z_{A} w + z_{B}(1 - w),
+\\[10pt]
+w = f(s, d) =
+\begin{cases}
+  \frac{d}{s} &amp; 0 \leq d &lt; s \\
+  1 &amp; d \geq s
+\end{cases}
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/schema2.png" class="img-fluid figure-img"></p>
+<figcaption>Fusion Method Schema</figcaption>
+</figure>
+</div>
+</section>
+<section id="influence-of-overlap-width-s" class="level2">
+<h2 class="anchored" data-anchor-id="influence-of-overlap-width-s">Influence of Overlap Width ( s )</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/sm_all.png" class="img-fluid figure-img"></p>
+<figcaption>Overlap Influence</figcaption>
+</figure>
+</div>
+</section>
+<section id="fusion-with-spatially-variable-s" class="level2">
+<h2 class="anchored" data-anchor-id="fusion-with-spatially-variable-s">Fusion with Spatially Variable ( s )</h2>
+<p>By taking into account spatially variable differences ( z ) between DEMs ( A ) and ( B ) along the overlap: - We get a more gradual transition where differences are high - We preserve subtle features of both DEMs where differences are small</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/schema3.png" class="img-fluid figure-img"></p>
+<figcaption>Spatially Variable Fusion</figcaption>
+</figure>
+</div>
+</section>
+<section id="fusion-with-spatially-variable-s-1" class="level2">
+<h2 class="anchored" data-anchor-id="fusion-with-spatially-variable-s-1">Fusion with Spatially Variable ( s )</h2>
+<p>Absolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/fusionv2.png" class="img-fluid figure-img"></p>
+<figcaption>Fusion Visualization</figcaption>
+</figure>
+</div>
+</section>
+<section id="lidar-and-uas-sfm-patching-and-fusion" class="level2">
+<h2 class="anchored" data-anchor-id="lidar-and-uas-sfm-patching-and-fusion">Lidar and UAS SfM Patching and Fusion</h2>
+<p><img src="img/fusion_lidar_uav/assignment_patched.jpg" class="img-fluid" alt="Patched vs.&nbsp;Fused DSMs"> <img src="img/fusion_lidar_uav/assignment_fused.jpg" class="img-fluid" alt="Patched vs.&nbsp;Fused DSMs"></p>
+<p>Simply patched vs.&nbsp;fused UAS and lidar DSMs with overlap width ( s = 20&nbsp;m )</p>
+</section>
+<section id="fusing-vegetated-patch-with-bare-ground" class="level2">
+<h2 class="anchored" data-anchor-id="fusing-vegetated-patch-with-bare-ground">Fusing Vegetated Patch with Bare Ground</h2>
+<p><img src="img/fusion_lidar_uav/assignment_uas_ground.jpg" class="img-fluid" alt="Bare Ground Fused"> <img src="img/fusion_lidar_uav/assignment_fused_ground.jpg" class="img-fluid" alt="Bare Ground Fused"></p>
+<p>Vegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM.</p>
+</section>
+<section id="spatially-variable-overlap" class="level2">
+<h2 class="anchored" data-anchor-id="spatially-variable-overlap">Spatially Variable Overlap</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/assignment_overlap.jpg" class="img-fluid figure-img"></p>
+<figcaption>Spatial Overlap</figcaption>
+</figure>
+</div>
+<p>Bare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap</p>
+</section>
+<section id="modeling-overland-flow" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-overland-flow">Modeling Overland Flow</h2>
+<p>Microtopography captured at ultra-high resolution by UAS SfM poses special challenges to flow routing:</p>
+<ul>
+<li>Real depressions are important features</li>
+<li>Complex pattern of ponding, overflow of barriers is not supported by standard tools</li>
+<li>Noisy surface requires a robust algorithm</li>
+</ul>
+</section>
+<section id="path-sampling-method" class="level2">
+<h2 class="anchored" data-anchor-id="path-sampling-method">Path Sampling Method</h2>
+<p>Stochastic method for solving flow continuity equations</p>
+<p><img src="img/fusion_lidar_uav/fanimwalk.gif" class="img-fluid" alt="Flow Animation"> <img src="img/fusion_lidar_uav/fanimhhcolp.gif" class="img-fluid" alt="Flow Animation"></p>
+<p><a href="http://www4.ncsu.edu/~hmitaso/gmslab/papers/II.6.8_Mitasova_044.pdf">Mitasova et al., 2005</a></p>
+</section>
+<section id="flow-over-uas-mapped-field" class="level2">
+<h2 class="anchored" data-anchor-id="flow-over-uas-mapped-field">Flow Over UAS Mapped Field</h2>
+<p>Crop surface creates barrier leading to artificial ponding</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/fusion_lidar_uav/agisoft_june.gif" class="img-fluid figure-img"></p>
+<figcaption>Flow Over Mapped Field</figcaption>
+</figure>
+</div>
+</section>
+<section id="flow-over-patched-dems" class="level2">
+<h2 class="anchored" data-anchor-id="flow-over-patched-dems">Flow Over Patched DEMs</h2>
+<p><img src="img/fusion_lidar_uav/problem_water_scale.png" class="img-fluid" alt="Flow Pattern"> <img src="img/fusion_lidar_uav/problem_solution_man_scale.png" class="img-fluid" alt="Flow Pattern"></p>
+<p>Replacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution</p>
+</section>
+<section id="example-from-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="example-from-assignment">Example from Assignment</h2>
+<p><img src="img/fusion_lidar_uav/assignment_flow_patched.jpg" class="img-fluid" alt="Flow Comparison"> <img src="img/fusion_lidar_uav/assignment_flow_smooth_patched.jpg" class="img-fluid" alt="Flow Comparison"></p>
+<p>Water flow on DSM created by simple patching vs.&nbsp;smooth patching</p>
+</section>
+<section id="example-from-assignment-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-from-assignment-1">Example from Assignment</h2>
+<p><img src="img/fusion_lidar_uav/assignment_flow_smooth_patched.jpg" class="img-fluid" alt="Flow on DSM vs.&nbsp;Bare Ground"> <img src="img/fusion_lidar_uav/assignment_flow_ground.jpg" class="img-fluid" alt="Flow on DSM vs.&nbsp;Bare Ground"></p>
+<p>Water flow on DSM vs.&nbsp;bare ground fused from UAS DSM and lidar DEM</p>
+</section>
+<section id="what-did-we-learn" class="level2">
+<h2 class="anchored" data-anchor-id="what-did-we-learn">What Did We Learn?</h2>
+<ul>
+<li>Evaluation and interpretation of differences between lidar and UAS SfM DEMs</li>
+<li>Techniques for smooth fusion of high-resolution DEMs</li>
+<li>Impact of fusion technique on overland flow modeling</li>
+</ul>
+</section>
+<section id="intro-to-python-in-grass-gis" class="level2">
+<h2 class="anchored" data-anchor-id="intro-to-python-in-grass-gis">Intro to Python in GRASS GIS</h2>
+</section>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<section id="what-is-scripting-good-for" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-scripting-good-for">What is scripting good for?</h3>
+<ul>
+<li>Running tasks and workflows repeatedly on many datasets</li>
+<li>Sharing your workflow with colleagues</li>
+<li>Making your work reproducible (for your own benefit)</li>
+</ul>
+</section>
+<section id="why-python" class="level3">
+<h3 class="anchored" data-anchor-id="why-python">Why Python?</h3>
+<ul>
+<li>Most widely used language in geospatial applications</li>
+<li>Easy to learn</li>
+<li>Active community, many libraries</li>
+</ul>
+</section>
+</section>
+<section id="running-python-in-grass" class="level2">
+<h2 class="anchored" data-anchor-id="running-python-in-grass">Running Python in GRASS</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/python_editor.png" class="img-fluid figure-img"></p>
+<figcaption>Python Editor</figcaption>
+</figure>
+</div>
+<p>Python shell for one-line statements, editor for scripts</p>
+</section>
+<section id="grass-python-scripting-library" class="level2">
+<h2 class="anchored" data-anchor-id="grass-python-scripting-library">GRASS Python Scripting Library</h2>
+<ul>
+<li>Enables running GRASS GIS modules</li>
+<li>Import: ```python import grass.script as gs</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ncsu-geoforall-lab\.github\.io\/gis-584-uas-course\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://moodle-courses1718.wolfware.ncsu.edu/course/view.php?id=4709">
+<p>Moodle</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://help.ncsu.edu/">
+<p>Computing Help</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/">
+<p>MGIST Home</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.ncsu.edu/policies/prr-disclaimer.php">
+<p>Disclaimer</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://oit.ncsu.edu/itaccess">
+<p>Accessibility</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<p>© 2024 GeoForAll Lab CC BY-SA</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ncsu-geoforall-lab/gis-584-uas-course">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/geoforall/">
+<p>GeoForAll Lab</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-09-23">
 
-<title>Topics – GIS/MEA 584: UAS Mapping and Analytics</title>
+<title>B. Point cloud data analysis – GIS/MEA 584: UAS Mapping and Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../favicon.ico" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.ico" rel="icon">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">GIS/MEA 584: UAS Mapping and Analytics</span>
     </a>
   </div>
@@ -89,23 +90,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/schedule.html"> 
+    <a class="nav-link" href="../../../course/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/logistics.html"> 
+    <a class="nav-link" href="../../../course/logistics.html"> 
 <span class="menu-text">Logistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../course/topics.html" aria-current="page"> 
+    <a class="nav-link" href="../../../course/topics.html"> 
 <span class="menu-text">Topics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/projects.html"> 
+    <a class="nav-link" href="../../../course/projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -124,13 +125,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#topic-1-uas-basics" id="toc-topic-1-uas-basics" class="nav-link active" data-scroll-target="#topic-1-uas-basics">Topic 1: UAS Basics</a></li>
-  <li><a href="#topic-2-structure-from-motion" id="toc-topic-2-structure-from-motion" class="nav-link" data-scroll-target="#topic-2-structure-from-motion">Topic 2: Structure from Motion</a></li>
-  <li><a href="#topic-3-uas-flight-planning" id="toc-topic-3-uas-flight-planning" class="nav-link" data-scroll-target="#topic-3-uas-flight-planning">Topic 3: UAS Flight Planning</a></li>
-  <li><a href="#topic-4-gis-analysis" id="toc-topic-4-gis-analysis" class="nav-link" data-scroll-target="#topic-4-gis-analysis">Topic 4: GIS Analysis</a></li>
-  <li><a href="#topic-5-advanced-analytics" id="toc-topic-5-advanced-analytics" class="nav-link" data-scroll-target="#topic-5-advanced-analytics">Topic 5: Advanced Analytics</a></li>
-  <li><a href="#topic-6-imagery-processing-and-sfm" id="toc-topic-6-imagery-processing-and-sfm" class="nav-link" data-scroll-target="#topic-6-imagery-processing-and-sfm">Topic 6: Imagery Processing and SfM</a></li>
-  <li><a href="#topic-7-3d-modeling-and-geovisualization" id="toc-topic-7-3d-modeling-and-geovisualization" class="nav-link" data-scroll-target="#topic-7-3d-modeling-and-geovisualization">Topic 7: 3D Modeling and Geovisualization</a></li>
+  <li><a href="#point-cloud-data-analysis" id="toc-point-cloud-data-analysis" class="nav-link active" data-scroll-target="#point-cloud-data-analysis">Point cloud data analysis</a>
+  <ul class="collapse">
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
+  <li><a href="#supplemental-materials" id="toc-supplemental-materials" class="nav-link" data-scroll-target="#supplemental-materials">Supplemental materials</a></li>
+  <li><a href="#assignment-homework" id="toc-assignment-homework" class="nav-link" data-scroll-target="#assignment-homework">Assignment &amp; Homework</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -138,12 +139,13 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 <!-- banner.html -->
 <div class="banner-image">
-    <img src="../includes/images/banner.jpg" alt="Banner">
+    <img src="../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Topics</h1>
+<h1 class="title">B. Point cloud data analysis</h1>
+<p class="subtitle lead">Topic 4: GIS Analytics</p>
 </div>
 
 
@@ -151,6 +153,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 23, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -160,37 +168,46 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="topic-1-uas-basics" class="level2">
-<h2 class="anchored" data-anchor-id="topic-1-uas-basics">Topic 1: UAS Basics</h2>
-<p><a href="../course/topics/topic_1_uas_basics/part_a_introduction.html">A. Introduction to Unmanned Aerial Systems</a></p>
-<p><a href="../course/topics/topic_1_uas_basics/part_b_rules_regs.html">B. Rules and regulations for UAS operations</a></p>
+<section id="point-cloud-data-analysis" class="level1">
+<h1>Point cloud data analysis</h1>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<ul>
+<li>Characteristics of UAS SfM and lidar-based point cloud data</li>
+<li>Point cloud data representation and formats</li>
+<li>Point cloud data processing, visualization, and analysis</li>
+<li>Bare earth point extraction</li>
+<li>Working with classified point clouds</li>
+<li>Computing DEM and topographic analysis</li>
+<li>Voxel-based analysis and vertical profiles</li>
+</ul>
 </section>
-<section id="topic-2-structure-from-motion" class="level2">
-<h2 class="anchored" data-anchor-id="topic-2-structure-from-motion">Topic 2: Structure from Motion</h2>
-<p><a href="../course/topics/topic_2_sfm/part_a_images_to_3d.html">A.From images to 3D models: Photogrammetry and Structure from Motion concepts</a></p>
-<p><a href="../course/topics/topic_2_sfm/part_b_img_processing_sfm.html">B. UAS Imagery processing</a></p>
+<section id="lecture" class="level2">
+<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
+<ul>
+<li><a href="../lectures/point_clouds.html">Lecture slides</a></li>
+</ul>
 </section>
-<section id="topic-3-uas-flight-planning" class="level2">
-<h2 class="anchored" data-anchor-id="topic-3-uas-flight-planning">Topic 3: UAS Flight Planning</h2>
-<p><a href="../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html">A. UAS Flight Planning</a></p>
+<section id="supplemental-materials" class="level2">
+<h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
+<ul>
+<li><p><a href="https://grasswiki.osgeo.org/wiki/Processing_lidar_and_UAV_point_clouds_in_GRASS_GIS_(workshop_at_FOSS4G_Boston_2017)">Processing point clouds in GRASS GIS</a>, workshop presented at FOSS4G conference in Boston in 2017 (start with the section “Binning the point cloud”).</p></li>
+<li><p><a href="https://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf">LAS specification v1.4-R13</a>, July 2013</p></li>
+<li><p><a href="https://www.oxts.com/technical-notes/why-use-an-inertial-navigation-system-ins-with-a-lidar/">Lidar and INS</a></p></li>
+<li><p>Past Lecture recordings:</p>
+<ul>
+<li><a href="https://youtu.be/X-27KYsG6kE">Properties</a></li>
+<li><a href="https://youtu.be/yKFSodBHDRg">Processing</a></li>
+<li><a href="https://youtu.be/MU4wSk_M8yk">DEMs and voxel models</a></li>
+</ul></li>
+</ul>
 </section>
-<section id="topic-4-gis-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="topic-4-gis-analysis">Topic 4: GIS Analysis</h2>
-<p>A. Analysis of UAS data processing results</p>
-<p>B. Point cloud data analysis: point clouds, surfaces, and voxel models</p>
-</section>
-<section id="topic-5-advanced-analytics" class="level2">
-<h2 class="anchored" data-anchor-id="topic-5-advanced-analytics">Topic 5: Advanced Analytics</h2>
-<p><a href="../course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html">A. UAS and lidar data: comparison, fusion and analysis</a></p>
-<p><a href="../course/topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.html">B. Analysis of multitemporal UAS data and its applications</a></p>
-</section>
-<section id="topic-6-imagery-processing-and-sfm" class="level2">
-<h2 class="anchored" data-anchor-id="topic-6-imagery-processing-and-sfm">Topic 6: Imagery Processing and SfM</h2>
-</section>
-<section id="topic-7-3d-modeling-and-geovisualization" class="level2">
-<h2 class="anchored" data-anchor-id="topic-7-3d-modeling-and-geovisualization">Topic 7: 3D Modeling and Geovisualization</h2>
+<section id="assignment-homework" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-homework">Assignment &amp; Homework</h2>
+<p><a href="../../../course/topics/topic_4_GIS_analysis/assignments/assignment_4b.html">Assignment 4B</a></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
