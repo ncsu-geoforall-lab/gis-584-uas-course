@@ -1615,5 +1615,12 @@
     "title": "Mapping and Analytics Using UAS",
     "section": "Moodle",
     "text": "Moodle\nCourse Forum, assignment submissions, project material, and grades are handled in Moodle.\n\nTextbooks\nNo required textbook, on-line material is used.\nRecommended books:\n\nAmy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.\nJonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.\nPaul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.\nDouglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press\n\n\n\nSoftware\nSee Course logistics web page."
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/grass.html#structure-from-motion-example",
+    "href": "course/topics/topic_2_sfm/grass.html#structure-from-motion-example",
+    "title": "GRASS LOGO",
+    "section": "Structure from Motion Example",
+    "text": "Structure from Motion Example\n\n\n\n\n\nGRASS GIS Laser Effect"
   }
 ]
