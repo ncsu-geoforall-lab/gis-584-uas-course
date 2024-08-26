@@ -211,22 +211,29 @@ Any commercial use in connection with a business, including:
 
 ::: {.columns}
 ::: {.column width="50%"}
-**Easy way to remember main elements:**
 
-- Solid line – higher class, dashed line – lower class
-- Blue line – higher class, magenta line – lower class
+#### Line Pattern
 
-**This translates to:**
+- Solid line – higher class (More Restrictive)
+- Dashed line – lower class (Less Restrictive)
 
-- Solid blue – class B, Solid magenta – class C
-- Dashed blue – class D, Dashed magenta – class E
+#### Line Color
+
+- Blue line – higher class (More Restrictive)
+- Magenta line – lower class (Less Restrictive)
+
+[FAA online course on airspace classification and map](https://www.faasafety.gov/gslac/ALC/course_content.aspx?cID=42&sID=505&preview=true)
 :::
 ::: {.column width="50%"}
 ![](../images/NAS_map.webp)
 
-- [Chart reading tutorial](http://c-aviation.net/airspace-guide-usa-chart-reading-tutorial/)
-- [FAA online course on airspace classification and map](https://www.faasafety.gov/gslac/ALC/course_content.aspx?cID=42&sID=505&preview=true)
+#### This translates to:
+
+- **Solid blue** – class B, **Solid magenta** – class C
+- **Dashed blue** – class D, **Dashed magenta** – class E
 :::
+
+
 :::
 
 ## Commercial Use - Operating Rules 

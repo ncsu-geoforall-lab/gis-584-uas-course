@@ -592,7 +592,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements-1",
     "title": "UAS Rules and Regulations",
     "section": "Commercial use - location requirements",
-    "text": "Commercial use - location requirements\n\n\nEasy way to remember main elements:\n\nSolid line – higher class, dashed line – lower class\nBlue line – higher class, magenta line – lower class\n\nThis translates to:\n\nSolid blue – class B, Solid magenta – class C\nDashed blue – class D, Dashed magenta – class E\n\n\n\n\nChart reading tutorial\nFAA online course on airspace classification and map"
+    "text": "Commercial use - location requirements\n\n\nLine Pattern\n\nSolid line – higher class (More Restrictive)\nDashed line – lower class (Less Restrictive)\n\nLine Color\n\nBlue line – higher class (More Restrictive)\nMagenta line – lower class (Less Restrictive)\n\nFAA online course on airspace classification and map\n\n\nThis translates to:\n\nSolid blue – class B, Solid magenta – class C\nDashed blue – class D, Dashed magenta – class E"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules",
