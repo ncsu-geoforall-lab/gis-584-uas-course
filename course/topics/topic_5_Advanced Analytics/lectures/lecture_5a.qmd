@@ -1,0 +1,272 @@
+---
+title: "UAS and Lidar Data: Comparison, Fusion, and Analysis"
+subtitle: "GIS/MEA 584: Mapping and Analysis Using UAS"
+authors: 
+  - "Helena Mitasova"
+  - "Anna Petrasova"
+  - "Justyna Jeziorska"
+format: html
+---
+
+## UAS and Lidar Data: Comparison, Fusion, and Analysis
+
+### GIS/MEA 584: Mapping and Analysis Using UAS
+### Helena Mitasova, Anna Petrasova, Justyna Jeziorska
+
+[Center for Geospatial Analytics](https://geospatial.ncsu.edu/),  
+[North Carolina State University](http://www.ncsu.edu/)
+
+## Outline
+
+- Motivation for combining lidar and UAS SfM data
+- Analysis of lidar and UAS SfM DSMs differences
+- Patching and smooth fusion of UAS and lidar DSM
+- Overland flow simulation on fused DEM
+
+## Point Clouds from Lidar
+
+- Measured variable is the time of return for each pulse
+- Georeferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform
+- (x, y, z) is derived from time, GPS positioning, and INS parameters
+
+![Point cloud visualization from Lidar](img/lidar/midpines_lidar_plasviewcozoom.jpg)
+
+## Point Clouds from SfM
+
+- Measured variable is reflected energy captured as imagery
+- Georeferencing can be done entirely from GCPs
+- (x, y, z) is derived from overlapping images and GCPs
+- Alternatively: GPS and INS for the position and orientation of images and camera parameters
+
+![Point cloud visualization from SfM](img/lidar/midpines_uas_plasviewco2.jpg)
+
+## Comparison of Point Cloud Properties
+
+### Airborne Lidar:
+- Passes through vegetation, multiple returns
+- Shifts between swaths, corduroy effect
+- Regional coverage
+- High cost
+
+### UAS SfM:
+- Very high point density
+- Limited capability to map under vegetation
+- Influenced by cast shadows
+- Low cost but limited area
+
+Different distribution of errors and distortions:  
+Lidar and SfM provide an independent set of measurements.
+
+## Motivation for Lidar and UAS SfM Fusion
+
+- Low-cost DEM updates in rapidly changing landscapes (e.g., construction sites)
+- Replacing vegetated areas in UAS SfM with bare ground
+- Watershed analysis when only part of the watershed was mapped by UAS
+- Improve accuracy and level of detail over stable features (buildings, bridges)
+- Add your suggestion
+
+## Fusion Techniques
+
+- Merge the point clouds, decimate or bin at high resolution, interpolate: computationally demanding
+- Interpolate DEMs, randomly sample, patch, and reinterpolate: loss of detail, time-consuming
+- Interpolate DEMs and patch: sharp edges
+- Smooth fusion - requires DEMs at the same resolution
+
+## Workflow
+
+- Evaluate the point clouds, select resolution
+- Interpolate lidar and UAS DEMs at the same resolution
+- Evaluate the differences between the lidar and UAS DEMs
+- If applicable, identify errors and apply corrections
+- Apply smooth fusion
+
+## Identify Distortions Due to Processing
+
+- Identify the spatial pattern of distortions
+- Difference maps between Lidar DSM and UAS SfM DSMs: different distortions from AGISOFT and PIX4D
+
+![Difference Maps](img/fusion_lidar_uav/dif_lid_agi_junesh.jpg) ![Difference Maps](img/fusion_lidar_uav/dif_lid_pix4d_junesh.jpg)
+
+## Identify Changes in Topography
+
+- Vegetation growth or removal
+- Change in elevation surface due to erosion processes
+- UAS SfM - lidar difference maps with custom color
+
+![Elevation Difference Maps](img/fusion_lidar_uav/diff_lid_uavGCPjune.jpg) ![Field Image](img/fusion_lidar_uav/field_rill_photo.jpg)
+
+## Comparing Profiles: Fields
+
+- Identify systematic errors (vertical shifts)
+- Differences due to vegetation growth, erosion/deposition
+
+![Profiles Comparison Fields](img/fusion_lidar_uav/Anna_profile_fields.jpg)
+
+## Comparing Profiles: Building
+
+- High accuracy, lower level of detail in lidar data
+- Negligible systematic error
+
+![Profiles Comparison Building](img/fusion_lidar_uav/Anna_profile_house.jpg)
+
+## Comparing Profiles: Road
+
+- Relatively easy to identify stable features
+- High accuracy - differences between lidar and UAS SfM within 4cm
+
+![Profiles Comparison Road](img/fusion_lidar_uav/subregion_road_profile_2.png)
+
+## Correct for Systematic Error and Distortions
+
+- Systematic error: if due to GPS shift, use median difference
+- Systematic error: if tilt, use regression function
+- Complex UAS SfM distortions can be reduced using interpolated GCP differences or differencing with lidar
+- Importance of well-distributed, accurate GCPs
+
+## Updating Lidar DEM by Patching
+
+- Replace the grid cells in the updated area by UAS DEM
+- Average over an overlap
+- Usually creates an edge - requires post-processing
+
+![Patching Results](img/fusion_lidar_uav/Brendaninitial_fusion.png) ![Patching Results](img/fusion_lidar_uav/Brendaninitial_fusion_relief.png)
+
+Images by Brendan Harmon
+
+## Updating Lidar DEM by Patching
+
+Edge between lidar and UAS SfM DEMs
+
+![Edge Visualization](img/fusion_lidar_uav/patchingedge.png)
+
+## Smooth Fusion
+
+- Derive overlap raster
+- Weighted smoothing based on the distance from the edge
+
+![Fusion Results](img/fusion_lidar_uav/Anna_patching.jpg) ![Fusion Results](img/fusion_lidar_uav/Anna_fusion.jpg)
+
+## Fusion Method
+
+Linear combination of elevation surfaces \( z_{A} \) and \( z_{B} \) with weights given by overlap width \( s \) and distance \( d \) to the edge of \( z_{A} \):
+
+$$
+z_{AB} = z_{A} w + z_{B}(1 - w),
+\\[10pt]
+w = f(s, d) =
+\begin{cases} 
+  \frac{d}{s} & 0 \leq d < s \\
+  1 & d \geq s
+\end{cases}
+$$
+
+![Fusion Method Schema](img/fusion_lidar_uav/schema2.png)
+
+## Influence of Overlap Width \( s \)
+
+![Overlap Influence](img/fusion_lidar_uav/sm_all.png)
+
+## Fusion with Spatially Variable \( s \)
+
+By taking into account spatially variable differences \( \Delta z \) between DEMs \( A \) and \( B \) along the overlap:
+- We get a more gradual transition where differences are high
+- We preserve subtle features of both DEMs where differences are small
+
+![Spatially Variable Fusion](img/fusion_lidar_uav/schema3.png)
+
+## Fusion with Spatially Variable \( s \)
+
+Absolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.
+
+![Fusion Visualization](img/fusion_lidar_uav/fusionv2.png)
+
+## Lidar and UAS SfM Patching and Fusion
+
+![Patched vs. Fused DSMs](img/fusion_lidar_uav/assignment_patched.jpg) ![Patched vs. Fused DSMs](img/fusion_lidar_uav/assignment_fused.jpg)
+
+Simply patched vs. fused UAS and lidar DSMs with overlap width \( s = 20\ m \)
+
+## Fusing Vegetated Patch with Bare Ground
+
+![Bare Ground Fused](img/fusion_lidar_uav/assignment_uas_ground.jpg) ![Bare Ground Fused](img/fusion_lidar_uav/assignment_fused_ground.jpg)
+
+Vegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM.
+
+## Spatially Variable Overlap
+
+![Spatial Overlap](img/fusion_lidar_uav/assignment_overlap.jpg)
+
+Bare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap
+
+## Modeling Overland Flow
+
+Microtopography captured at ultra-high resolution by UAS SfM poses special challenges to flow routing:
+
+- Real depressions are important features
+- Complex pattern of ponding, overflow of barriers is not supported by standard tools
+- Noisy surface requires a robust algorithm
+
+## Path Sampling Method
+
+Stochastic method for solving flow continuity equations
+
+![Flow Animation](img/fusion_lidar_uav/fanimwalk.gif) ![Flow Animation](img/fusion_lidar_uav/fanimhhcolp.gif)
+
+[Mitasova et al., 2005](http://www4.ncsu.edu/~hmitaso/gmslab/papers/II.6.8_Mitasova_044.pdf)
+
+## Flow Over UAS Mapped Field
+
+Crop surface creates barrier leading to artificial ponding
+
+![Flow Over Mapped Field](img/fusion_lidar_uav/agisoft_june.gif)
+
+## Flow Over Patched DEMs
+
+![Flow Pattern](img/fusion_lidar_uav/problem_water_scale.png) ![Flow Pattern](img/fusion_lidar_uav/problem_solution_man_scale.png)
+
+Replacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution
+
+## Example from Assignment
+
+![Flow Comparison](img/fusion_lidar_uav/assignment_flow_patched.jpg) ![Flow Comparison](img/fusion_lidar_uav/assignment_flow_smooth_patched.jpg)
+
+Water flow on DSM created by simple patching vs. smooth patching
+
+## Example from Assignment
+
+![Flow on DSM vs. Bare Ground](img/fusion_lidar_uav/assignment_flow_smooth_patched.jpg) ![Flow on DSM vs. Bare Ground](img/fusion_lidar_uav/assignment_flow_ground.jpg)
+
+Water flow on DSM vs. bare ground fused from UAS DSM and lidar DEM
+
+## What Did We Learn?
+
+- Evaluation and interpretation of differences between lidar and UAS SfM DEMs
+- Techniques for smooth fusion of high-resolution DEMs
+- Impact of fusion technique on overland flow modeling
+
+## Intro to Python in GRASS GIS
+
+## Motivation
+
+### What is scripting good for?
+- Running tasks and workflows repeatedly on many datasets
+- Sharing your workflow with colleagues
+- Making your work reproducible (for your own benefit)
+
+### Why Python?
+- Most widely used language in geospatial applications
+- Easy to learn
+- Active community, many libraries
+
+## Running Python in GRASS
+
+![Python Editor](img/python_editor.png)
+
+Python shell for one-line statements, editor for scripts
+
+## GRASS Python Scripting Library
+
+- Enables running GRASS GIS modules
+- Import:
+```python
+import grass.script as gs

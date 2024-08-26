@@ -20,15 +20,15 @@ title: "Topics"
 
 ## Topic 4: GIS Analysis
 
-A. Analysis of UAS data processing results
+[A. Analysis of UAS data processing results](topics\topic_4_GIS_analytics\part_a_analysis_uas_processing_results.qmd)
 
-B. Point cloud data analysis: point clouds, surfaces, and voxel models
+[B. Point cloud data analysis: point clouds, surfaces, and voxel models](topics\topic_4_GIS_analytics\part_b_point_cloud_analysis.qmd)
 
 ## Topic 5: Advanced Analytics
 
-A. UAS and lidar data: comparison, fusion and analysis
+[A. UAS and lidar data: comparison, fusion and analysis](topics\topic_5_Advanced Analytics\part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)
 
-B. Analysis of multitemporal UAS data and its applications
+[B. Analysis of multitemporal UAS data and its applications](topics\topic_5_Advanced Analytics\part_b_Analysis_multitemporal_UAS_data_applications.qmd)
 
 ## Topic 6: Imagery Processing and SfM
 
