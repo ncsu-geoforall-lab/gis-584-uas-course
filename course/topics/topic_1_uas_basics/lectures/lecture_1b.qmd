@@ -151,7 +151,9 @@ Any commercial use in connection with a business, including:
 ## Commercial use - Remote Pilot requirements {.smaller}
 
 - Must be at least 16 years of age
-- Must hold a [remote pilot airman certificate](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot/) with a small UAS rating or be under the direct supervision of someone holding a remote pilot airman certificate
+- Be able to read, speak, write, and understand English
+- Be in a physical and mental condition to safely fly a drone
+- [Pass the initial aeronautical knowledge exam: "Unmanned Aircraft General – Small (UAG)"](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot/)
 
 ::: {.columns}
 ::: {.column width="60%"}
@@ -164,10 +166,13 @@ Any commercial use in connection with a business, including:
 :::
 
 
-## Remote Pilot Certificate
+## Remote Pilot Certificate {.smaller}
 
 ::: {.columns}
 ::: {.column width="60%"}
+### Requirements
+- Must be easily accessible by the remote pilot during all UAS operations
+- Certificate holders must complete an [online recurrent training](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot#keepCurrent) every 24 calendar months to maintain aeronautical knowledge recency (Effective - April 2021)
 - [Checklist for Obtaining a Remote Pilot Certificate](https://www.aopa.org/-/media/files/aopa/home/go-flying/drones/aopa-checklist-for-obtaining-a-remote-pilot-certificate.pdf?la=en)
 - [Remote Pilot Study Guide](https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/media/remote_pilot_study_guide.pdf)
 - [FAA Safety Team Part 107 Small UAS Training Course (login required)](https://www.faasafety.gov/login/Default.aspx?dest=gslac/ALC/course_content&enroll=true&cID=451)
@@ -224,7 +229,7 @@ Any commercial use in connection with a business, including:
 :::
 :::
 
-## Commercial use - operating rules 
+## Commercial Use - Operating Rules 
 
 - Must fly under 400 feet above ground level (AGL) or, if flying at an altitude higher than 400 feet AGL, stay within 400 feet of a structure
 
@@ -238,11 +243,19 @@ Any commercial use in connection with a business, including:
 :::
 :::
 
-## Commercial use - operating rules
+## Commercial Use - Remote ID
+
+- UAS must broadcast identification and location to authorities and nearby operators. (Effective March 2021)
+- Real-time tracking and identification of UAS in flight.
+- You can operate without a Remote ID with FAA recognized Identification Area.
+
+## Commercial Use - Operating Rules {.smaller}
 
 ::: {.columns}
 ::: {.column width="60%"}
-- Must fly during daylight hours or civil twilight hours (30 minutes before official sunrise to 30 minutes after official sunset, local time) with appropriate anti-collision lighting
+-  Nighttime operations and flights over people allowed under certain conditions without a waiver (Effective - March 2021)
+    - Requires additional training
+    - Requires anti-collision lighting for nighttime operations
 :::
 ::: {.column width="40%"}
 ![](../images/light.webp)
@@ -251,17 +264,103 @@ Any commercial use in connection with a business, including:
 
 - Must yield right of way to manned aircraft
 
-## Commercial use - operating rules
+## Commercial Use - Flight Over People
+
+**4 Classes of UAS**
+
+### Required for all Classes
+
+- Anit-collision ights
+- Training
+
+## Class 1
+
+**Weight Limit:** Less than 0.55 pounds (250 grams).
+
+**Requirements:**
+
+- No exposed rotating parts that can cause lacerations.
+
+**Operations:**
+
+- Can fly over people without additional restrictions.
+
+**Example UAS**
+- DJI Mavic Mini / Mini 2 / Mini 3 Pro
+
+
+## Class 2 {.smaller}
+
+**Weight Limit:** No specific weight limit.
+
+- Must not casue injury greater than 11 ft-lbs of kinetic energy.
+
+**Requirements:**
+
+- No exposed rotating parts that can cause lacerations.
+- Follow Remote ID rule
+
+**Operations:**
+
+- Can fly in open-air assemblies
+- Allows limited operations over people.
+
+**Example UAS**
+
+- Parrot Anafi
+
+## Class 3 {.smaller}
+
+**Weight Limit:** No specific limit, but similar to Category 2.
+
+- Must not cause injury greater than the severity of injury from 25 ft-lbs of kinetic energy.
+
+**Requirements:**
+
+- No exposed rotating parts that can cause lacerations.
+- Follow Remote ID rule
+
+**Operations:**
+
+- Can fly over "any-person" under certain conditions.
+    - Operating in a controlled environment where everyone is notified the UAS is operating above.
+    - Persons are part of the UAS team
+    - Persons are protect by a covered area
+
+**Example UAS**- Can fly in open-air assemblies
+    
+- DJI Phantom 4 Pro V2.0
+
+## Class 4 {.smaller}
+
+**Weight Limit:** No specific weight limit.
+
+**Requirements:**
+
+- Most restricted
+- UAS must have airworthiness certificate issued (same as a crewed aircraft)
+- Follow Remote ID rule
+
+**Operations:**
+
+- Can operate over people, including sustained flight over open-air assemblies, subject to additional safety requirements.
+
+**Example UAS:**
+
+- DJI Matrice 300 RTK
+
+## Commercial Use - Operating Rules
 
 ::: {.columns}
 ::: {.column width="60%"}
 - Must keep the UAS in sight (i.e. visual line of sight), either by the remote pilot in command or a visual observer
-- Must not fly over people
 :::
 ::: {.column width="40%"}
 ![](../images/did_you_know3.webp)
 :::
 :::
+
+
 
 ## Waivers from operating rules for commercial use of UAS
 
