@@ -174,8 +174,7 @@ Any commercial use in connection with a business, including:
 - Must be easily accessible by the remote pilot during all UAS operations
 - Certificate holders must complete an [online recurrent training](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot#keepCurrent) every 24 calendar months to maintain aeronautical knowledge recency (Effective - April 2021)
 - [Checklist for Obtaining a Remote Pilot Certificate](https://www.aopa.org/-/media/files/aopa/home/go-flying/drones/aopa-checklist-for-obtaining-a-remote-pilot-certificate.pdf?la=en)
-- [Remote Pilot Study Guide](https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/media/remote_pilot_study_guide.pdf)
-- [FAA Safety Team Part 107 Small UAS Training Course (login required)](https://www.faasafety.gov/login/Default.aspx?dest=gslac/ALC/course_content&enroll=true&cID=451)
+- [FAA Safety Team Part 107 Small UAS Training Course (login required)](https://www.faasafety.gov/gslac/ALC/CourseLanding.aspx?cID=677)
 :::
 ::: {.column width="40%"}
 ![](../images/test.webp){width=80%}
@@ -460,8 +459,8 @@ No later than **10 days** after an operation, a remote pilot in command must rep
 ::: {.column width="40%"}
 ![](../images/tfr.webp)
 
-- [TFR map](http://tfr.faa.gov/tfr_map_ims/html/index.html)
-- [TFR list](http://tfr.faa.gov/tfr2/list.html)
+- [TFR map](https://tfr.faa.gov/tfr_map_ims/html/index.html)
+- [TFR list](https://tfr.faa.gov/tfr2/list.html)
 :::
 :::
 
@@ -481,7 +480,7 @@ Types of Special Use Airspace include:
 ![](../images/cartoon_DC.webp)
 
 *The airspace surrounding Washington DC is the most restricted in the country*
-[More info](https://www.faa.gov/uas/where_to_fly/no_drone_zone/)
+[More info](https://www.faa.gov/uas/resources/community_engagement/no_drone_zone)
 :::
 :::
 
@@ -578,7 +577,7 @@ Publicly funded university, law enforcement agency, fire department, or any othe
 - Visit the [FAA website](https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/coa/) for more information on how to apply for a COA online
 - The average COA processing time is less than 60 days
 - Expedited authorization is available in emergency and life-threatening situations
-- [Sample COA Application](https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/media/COA%20Sample%20Application%20v%201-1.pdf)
+- [Sample COA Application](https://www.faa.gov/sites/faa.gov/files/about/office_org/headquarters_offices/ato/COA%2520Sample%2520Application%2520v%25201-1.pdf)
 :::
 
 ## Educational use {.smaller}
@@ -630,8 +629,8 @@ Publicly funded university, law enforcement agency, fire department, or any othe
 
 ::: {.columns}
 ::: {.column width="50%"}
-- [U.S. Air Space map](http://knowbeforeyoufly.org/air-space-map/)
-- [Know Before you Fly website](http://knowbeforeyoufly.org)
+- [U.S. Air Space map](https://nasstatus.faa.gov/map)
+- [Know Before you Fly website](https://knowbeforeyoufly.org)
 - [Register your drone](https://registermyuas.faa.gov/)
 - [Operating UAS in North Carolina](https://www.ncdot.gov/aviation/uas/)
 - [Aviation Weather Center](https://www.aviationweather.gov/)

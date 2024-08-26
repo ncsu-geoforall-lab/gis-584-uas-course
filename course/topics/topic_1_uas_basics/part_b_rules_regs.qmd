@@ -17,7 +17,7 @@ assignment-due-date: 9/2/2024
 ## Lecture
 
 * Lecture Slides: [Rules and Regulations](lectures/lecture_1b.qmd)
-* Lecture Recording: TBD
+* Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1b >}}) (NCSU Only)
 * Past Videos (2017)
     * [Part 1](https://youtu.be/Pf_kwEq6too?feature=shared)
     * [Part 2](https://youtu.be/JUM93NZlukI?feature=shared)
@@ -36,11 +36,11 @@ assignment-due-date: 9/2/2024
     * [View digital aeronautical charts](https://vfrmap.com/)
     * [Skyvector](https://skyvector.com/):charts, airspace and airport information for pilots
     * [Download georeferenced digital aeronautical charts](http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/vfr/), download Charlotte for NC chart
-    * [FAA data innovation center](https://www.faa.gov/nextgen/equipadsb/research/airspace/media/2020ADS-BAirspaceMap.kmz), airspace type vector data in shape and kmz format 
+    * [FAA Data Portal](https://www.faa.gov/data)
 * Weather data
     * [Aviation Weather Center](https://www.aviationweather.gov/), interactive METAR, TAFs and other NOAA NWS resources 
-* Other helpful material
-    * [Educational use of UAS](https://drive.google.com/open?id=0B8j08KoSleFQd3gzdElMOHJKMHM) 
+<!-- * Other helpful material (Need Permission)
+    * [Educational use of UAS](https://drive.google.com/open?id=0B8j08KoSleFQd3gzdElMOHJKMHM)  -->
 
 
 ## Assignment
