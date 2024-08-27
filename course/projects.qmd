@@ -2,11 +2,28 @@
 title: "Projects"
 ---
 
+The focus of this project is on the analysis of UAS data rather than the data collection process itself. You are not required to collect your own UAS data; however, the dataset you use must be sourced from UAS data. Alternatively, your project could involve enhancing some aspect of UAS data collection, such as flight planning or Structure from Motion (SfM).
+
+#### Available Data Sources:
+
+- Lake Wheeler (NCSU) - Agricultural Land: A dataset we will provide.
+-  Utilize Open Data Sources
+    - [OpenTopography](https://portal.opentopography.org/datasets?search=uav)
+- Collect Your Own Data: Optionally, you may choose to collect your own UAS data.
+
 ## Proposal, presentation and paper requirements
+
+### Pre-Proposal
+
+- Submit a project pre-proposal to the [project discussion forum]({{< course_params.moodle_project_pre_proposal_link >}}) on Moodle.
+
+In the pre-proposal please define the scope of the project, the project location, data, and analysis you would like to perform.
 
 ### Proposal
 
 - Define research question, select location, list available data, methods (theory), software tools, describe expected results.
+
+[Submit to Moodle]({{< course_params.moodle_project_proposal_link >}})
 
 ### Presentation
 

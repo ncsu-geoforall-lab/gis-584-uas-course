@@ -33,30 +33,59 @@ schedule:
   #   details: []
   #   due_date: ""
   #   no_class: true
-
   - date_range: "Sep. 2-6"
-    topic: "Topic 2: Structure from Motion"
-    subtopic: "[2A. From images to 3D models: Photogrammetry and Structure from Motion concepts](topics/topic_2_sfm/part_a_images_to_3d.qmd)"
+    topic: "Topic 3: UAS Flight Planning (Revised)"
+    subtopic: "[3. UAS flight planning](topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd)"
     details:
       - "**Mon: Labor Day - No Class**"
-      - "Wed: [Lecture](topics/topic_2_sfm/lectures/lecture_2a.qmd)"
-      - "[Assignment 2A: 3D models from indoor photos](topics/topic_2_sfm/assignments/assignment_2a.qmd)"
-      - "Project: submit proposal"
+      - "Wed: [Lecture](topics/topic_3_flight_planning/lectures/lecture_3a.qmd)"
+      # - "Wed: In Class Assignment - [Prepare and analyze a flight plan](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
+    due_date: "Sep. 23"
+    no_class: false
+
+  # - date_range: "Sep. 2-6"
+  #   topic: "Topic 2: Structure from Motion"
+  #   subtopic: "[2A. From images to 3D models: Photogrammetry and Structure from Motion concepts](topics/topic_2_sfm/part_a_images_to_3d.qmd)"
+  #   details:
+  #     - "**Mon: Labor Day - No Class**"
+  #     - "Wed: [Lecture](topics/topic_2_sfm/lectures/lecture_2a.qmd)"
+  #     - "[Assignment 2A: 3D models from indoor photos](topics/topic_2_sfm/assignments/assignment_2a.qmd)"
+  #     - "Project: submit proposal"
+  #   due_date: "Sep. 30"
+  #   no_class: false
+
+  - date_range: "Sep. 9"
+    topic: "Pre-Proposal Due"
+    subtopic: "[Projects Page](projects.html)"
+    details:
+      - "Submit brief Idea to the [project discussions forum](https://moodle-courses2425.wolfware.ncsu.edu/mod/forum/view.php?id=429301)"
+    due_date: "Sep. 9"
+    no_class: false
+
+  - date_range: "Sep. 9-13"
+    topic: "Topic 2: Structure from Motion (Revised)"
+    subtopic: "[2A. From images to 3D models: Photogrammetry and Structure from Motion concepts](topics/topic_2_sfm/part_a_images_to_3d.qmd)"
+    details:
+      - "Mon: [Lecture](topics/topic_2_sfm/lectures/lecture_2a.qmd)"
+      - "Wed: [Assignment 2A: 3D models from indoor photos](topics/topic_2_sfm/assignments/assignment_2a.qmd)"
+      - "Project: [submit proposal](https://moodle-courses2425.wolfware.ncsu.edu/mod/assign/view.php?id=429376)"
     due_date: "Sep. 30"
     no_class: false
   
-  - date_range: "Sep. 9-13"
-    topic: "Topic 3: UAS Flight Planning"
-    subtopic: "[3. UAS flight planning](topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd)"
-    details:
-      - "Mon: [Lecture](topics/topic_3_flight_planning/lectures/lecture_3a.qmd)"
-      - "Wed: In Class Assignment - [Prepare and analyze a flight plan](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
-    due_date: "Sep. 23"
-    no_class: false
+  # - date_range: "Sep. 9-13"
+  #   topic: "Topic 3: UAS Flight Planning"
+  #   subtopic: "[3. UAS flight planning](topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd)"
+  #   details:
+  #     - "Mon: [Lecture](topics/topic_3_flight_planning/lectures/lecture_3a.qmd)"
+  #     - "Wed: In Class Assignment - [Prepare and analyze a flight plan](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
+  #   due_date: "Sep. 23"
+  #   no_class: false
   
   - date_range: "Sep. 16-20"
     topic: "UAS FLIGHT (TBD)"
     details:
+      - "Mon: [Assignment 3. UAS flight planning](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
+      - "Wed: (UAS Flight TBD)"
       - "Meeting point: Mid Pines Road, Raleigh; [35.727104, -78.696173](https://goo.gl/maps/GRVRUKJzRav)"
       - "Time: 1:30 pm on Mo or We"
       - "Project: Data acquisition"
