@@ -35,7 +35,7 @@ schedule:
       - "**Mon: Labor Day - No Class**"
       - "Wed: [Lecture](topics/topic_3_flight_planning/lectures/lecture_3a.qmd)"
       # - "Wed: In Class Assignment - [Prepare and analyze a flight plan](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
-    due_date: "Sep. 23"
+    due_date: "Sep. 25"
     no_class: false
 
   # - date_range: "Sep. 2-6"
@@ -103,7 +103,7 @@ schedule:
     details:
       - "Mon: lecture"
       - "Wed: [In Class Assignments](topics/topic_4_GIS_analytics/assignments/assignment_1a.qmd)"
-    due_date: "Oct. 21"
+    due_date: "Oct. 23"
     no_class: false
 
   - date_range: "Oct. 7-11"
@@ -113,7 +113,7 @@ schedule:
       - "Mon: lecture"
       - "Wed: assignment: analysis of errors and distortions in Photoscan and GRASS GIS"
       - "Project: Data processing"
-    due_date: "Oct. 21"
+    due_date: "Oct. 23"
     no_class: false
 
   # - date_range: "Oct. 14-15"
