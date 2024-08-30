@@ -942,7 +942,7 @@
     "href": "course/topics/topic_2_sfm/part_b_img_processing_sfm.html#supplemental-materials",
     "title": "B. Imagery processing and structure from motion (SfM)",
     "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nY. Furukawa and C. Hernández . Multi-View Stereo: A Tutorial. Foundations and TrendsR in Computer Graphics and Vision, vol. 9, no. 1-2, pp. 1–148, 2013."
+    "text": "Supplemental materials\n\nLectures and demos from the 2021 Geological Society of America short course:\n\n“Introduction to Structure from Motion Photogrammetry”\nOpenTopography YouTube Course\n\nY. Furukawa and C. Hernández . Multi-View Stereo: A Tutorial. Foundations and TrendsR in Computer Graphics and Vision, vol. 9, no. 1-2, pp. 1–148, 2013."
   },
   {
     "objectID": "course/topics/topic_2_sfm/part_b_img_processing_sfm.html#assignment",
@@ -2133,5 +2133,12 @@
     "title": "Projects",
     "section": "",
     "text": "The focus of this project is on the analysis of UAS data rather than the data collection process itself. You are not required to collect your own UAS data; however, the dataset you use must be sourced from UAS data. Alternatively, your project could involve enhancing some aspect of UAS data collection, such as flight planning or Structure from Motion (SfM)."
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/part_b_img_processing_sfm.html#structure-from-motion-example",
+    "href": "course/topics/topic_2_sfm/part_b_img_processing_sfm.html#structure-from-motion-example",
+    "title": "B. Imagery processing and structure from motion (SfM)",
+    "section": "Structure from Motion Example",
+    "text": "Structure from Motion Example\n\n\n\n\n\nStructure from Motion Visualization - Correctly Positioned Anchor Points"
   }
 ]
