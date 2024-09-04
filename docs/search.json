@@ -2307,14 +2307,14 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#altitude",
     "title": "Flight Planning",
     "section": "Altitude",
-    "text": "Altitude\nImpacts of Flight path AGL = Above Ground Level\nAltitude (AGL) 70m - 120m\nTerrain Aware Fligh Path"
+    "text": "Altitude\n\n\n\nImpacts the flight path\nAGL = Above Ground Level\nAltitude (AGL)\n\n70m - 120m\n\nTerrain Aware Fligh Path\n\n\nAltitude 70m  Altitude 120m"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#overlap",
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#overlap",
     "title": "Flight Planning",
     "section": "Overlap",
-    "text": "Overlap\n\nFront and Side\n\nMin Overlap 60% forward 40% Laterial (Side)\nHomogeneous Terrian &gt; Overlap"
+    "text": "Overlap\n\nFront and Side\n\nMin Overlap 60% forward 40% Laterial (Side)\nHomogeneous Terrian &gt; Overlap\n\n\n\n\n\n\nCaution\n\n\nHow will overlap impact your flight path?"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#location",
@@ -2335,14 +2335,14 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#camera-angle",
     "title": "Flight Planning",
     "section": "Camera Angle",
-    "text": "Camera Angle\n\nStraight down (nadir)\n\nMost mapping\n\nPitched (oblique) 70-80 degrees\n\nImproved 3D\nBuildings\nRough Terrain"
+    "text": "Camera Angle\n\n\nNadir (Straight down)\n\nMost mapping\n\n\nOblique (Pitched)\n\n70-80 degrees\nImproved 3D\nBuildings\nRough Terrain"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-patterns",
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-patterns",
     "title": "Flight Planning",
     "section": "Flight Patterns",
-    "text": "Flight Patterns\n\nNormal (Lawnmoweer)\nCrosshatch Pattern"
+    "text": "Flight Patterns\n\n\nNormal\n\n\n\nLawnmower\n\n\n\nCrosshatch Pattern \n\nMore detail\nLonger flight times"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#drone-speed",
@@ -2363,6 +2363,6 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#optional-settings",
     "title": "Flight Planning",
     "section": "Optional Settings",
-    "text": "Optional Settings\n\nMechanical Shutter: On\nFocus: inf\nShutter Priority: 1/800\nAspect Ratio: 3/2\n150 = agh"
+    "text": "Optional Settings\n\nMechanical Shutter: On\nFocus: inf\nShutter Priority: 1/800\nAspect Ratio: 3/2"
   }
 ]

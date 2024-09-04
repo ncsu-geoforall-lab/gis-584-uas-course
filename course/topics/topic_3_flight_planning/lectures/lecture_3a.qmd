@@ -315,32 +315,72 @@ General camera setting are usally fine.
 - Focus: inf
 - Shutter Priority: 1/800
 - Aspect Ratio: 3/2
-- 150 = agh
 
 ## Camera Angle
+:::{.columns}
+:::{.column width="50%"}
 
-- Straight down (nadir)
-    - Most mapping
-- Pitched (oblique) 70-80 degrees
-    - Improved 3D
-    - Buildings
-    - Rough Terrain
+**Nadir (Straight down)**
+
+- Most mapping
+
+:::
+:::{.column width="50%"}
+**Oblique (Pitched)** 
+
+- 70-80 degrees
+- Improved 3D
+- Buildings
+- Rough Terrain
+
+:::
+:::
 
 ## Altitude
 
-Impacts of Flight path
-AGL = Above Ground Level
+:::{.columns}
+:::{.column width="50%"}
 
-Altitude (AGL)
-70m - 120m
+- Impacts the flight path
 
-Terrain Aware Fligh Path
+- AGL = Above Ground Level
+
+- Altitude (AGL)
+  - 70m - 120m 
+
+- Terrain Aware Fligh Path
+
+:::
+:::{.column width="50%"}
+
+Altitude 70m
+![Altitude 70m](../images/flight_plan_70m_75ol.webp)
+Altitude 120m
+![Altitude 120m](../images/flight_plan_120m_75ol.webp)
+:::
+:::
 
 
 ## Flight Patterns
 
-- Normal (Lawnmoweer)
-- Crosshatch Pattern
+:::{.columns}
+:::{.column width="50%"}
+
+Normal
+
+![Lawnmower](../images/flight_plan_120m_75ol.webp)
+
+:::
+:::{.column width="50%"}
+
+Crosshatch Pattern
+![Grid](../images/flight_plan_lattice_120m.webp)
+
+- More detail
+- Longer flight times
+
+:::
+:::
 
 ## Overlap
 
@@ -351,6 +391,12 @@ Min Overlap
 40% Laterial (Side)
 
 Homogeneous Terrian > Overlap
+
+
+:::{.callout-caution}
+**How will overlap impact your flight path?**
+:::
+
 
 ## Drone Speed
 
