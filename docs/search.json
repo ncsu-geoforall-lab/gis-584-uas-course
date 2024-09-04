@@ -298,7 +298,7 @@
     "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
     "title": "UAS Flight Planning",
     "section": "Lecture",
-    "text": "Lecture\n\nFlight planning introduction\nFlight plan analysis in GIS\nLecture recordings - parts 1, 2, 3\nRecording of the Intro to flight planning in eMotion software"
+    "text": "Lecture\n\nFlight planning introduction"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
@@ -1481,14 +1481,14 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-planning-software",
     "title": "Flight Planning",
     "section": "Flight planning software",
-    "text": "Flight planning software\n\nMultiple available platforms\nSome are dedicated for specific UAS and sold with the system by the manufacturer\n\nTrimble UAS - Trimble Aerial Imaging\nsenseFly UAS - eMotion 3\nDJI - DJI Ground Station Pro\nYuneec - UAV Toolbox\n\nSome are more universal and can work with a variety of platforms:\n\nUgCS\nOpen Source Mission Planner - mostly for DIY drones"
+    "text": "Flight planning software\n\nMultiple available platforms\nSome are dedicated for specific UAS and sold with the system by the manufacturer\n\n\n\nCommerical\n\nDroneDeploy\nPix4Dcapture Pro\nDJI GS PRO\nUgCS\nDroneLink\n\n\nOpen Source\n\nQGroundControl\nMission Planner"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists",
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists",
     "title": "Flight Planning",
     "section": "Site evaluation and checklists",
-    "text": "Site evaluation and checklists\n\n\nTerrain check – high obstacles in the take-off, mission, landing, and alternative landing locations\nAsk the locals about possible air traffic or ground activities\nWeather check\n\nTemperature affects battery life\nMost of the UAS can’t operate in rain\n\nUse checklists, don’t rely on your memory!\nSample checklists: paper (for Phantom) and RMUS app"
+    "text": "Site evaluation and checklists\n\n\nTerrain check – high obstacles in the take-off, mission, landing, and alternative landing locations\nAsk the locals about possible air traffic or ground activities\nWeather check\n\nTemperature affects battery life\nMost of the UAS can’t operate in rain\n\nUse checklists, don’t rely on your memory!\n\nSample checklists: paper (for Phantom) and RMUS app"
   },
   {
     "objectID": "course/topics/topic_2_sfm/assignments/assignment_2a.html#laboratory-experiment-3d-reconstruction-from-multiple-photos",
@@ -2140,5 +2140,229 @@
     "title": "B. Imagery processing and structure from motion (SfM)",
     "section": "Structure from Motion Example",
     "text": "Structure from Motion Example\n\n\n\n\n\nStructure from Motion Visualization - Correctly Positioned Anchor Points"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#objectives",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#objectives",
+    "title": "Flight Planning",
+    "section": "Objectives",
+    "text": "Objectives\n\n\nPhases of flight planning\nSafety procedures and checklists\nGround Control Points and its distirbution and accuracy\nFlight planning software"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#uas-photogrammetric-process",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#uas-photogrammetric-process",
+    "title": "Flight Planning",
+    "section": "UAS Photogrammetric process",
+    "text": "UAS Photogrammetric process\n\nThroughout the whole process, it is important to remember:\n\nWhat is the aim or the project?\nWhat will be the data used for?"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#project-definition",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#project-definition",
+    "title": "Flight Planning",
+    "section": "Project Definition",
+    "text": "Project Definition\n\n\nDefining the scope of the project\nChoosing UAS and sensor\nAssessing the cost, labor, and time consumption\nCollecting information about terrain"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#project-definition-2",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#project-definition-2",
+    "title": "Flight Planning",
+    "section": "Project Definition",
+    "text": "Project Definition\n\n\nEvaluate the legal constraints, obtain permission\nDefining the coordinate system:\n\nDependent on the desired coordinate system of the final data\nConsistent with the coordinate system of GCP survey"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-planning",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-planning",
+    "title": "Flight Planning",
+    "section": "Flight planning",
+    "text": "Flight planning\n\n\nMission area assessment\nPlanning geometric parameters\nChoosing flight planning and flight logging platform\nPreliminary weather assessment (climate, season, forecasts)\nCreating a flight plan (software specific)"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#project-definition-1",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#project-definition-1",
+    "title": "Flight Planning",
+    "section": "Project Definition",
+    "text": "Project Definition\n\n\nDefine the area and resolution based on:\n\nUAS and sensor capabilities\nSpatial extent of the mapping area\nTerrain constraints\nProject requirements"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#placing-ground-control-points-gcps",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#placing-ground-control-points-gcps",
+    "title": "Flight Planning",
+    "section": "Placing Ground Control Points (GCPs)",
+    "text": "Placing Ground Control Points (GCPs)\n\n\n\nA minimum number of 5 GCPs is recommended.\n5 to 10 GCPs are usually enough, even for large projects.\nIn cases that the topography of the area is complex, use more GCPs\nThe GCPs should be distributed evenly in the area\nDo not place the GCPs exactly at the edges of the area"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#placing-ground-control-points-gcps-1",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#placing-ground-control-points-gcps-1",
+    "title": "Flight Planning",
+    "section": "Placing Ground Control Points (GCPs)",
+    "text": "Placing Ground Control Points (GCPs)\n\n\nBefore measuring the GCPs coordinates, the following items must be defined:\n\nGCP coordinate system\nGCP accuracy\nTopographic equipment (total station or hand held GPS?)"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#gcps-accuracy",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#gcps-accuracy",
+    "title": "Flight Planning",
+    "section": "GCPs Accuracy",
+    "text": "GCPs Accuracy\n\n\nFactors for defining GCP accuracy:\n\nAccuracy needed for the final results\nGround Sampling Distance* of the images:\n\nGCP target size: 5-10 x\nGCP accuracy: at least 0.1 GSD\n\n\n\n\n\n\nDistance between two consecutive pixel centers measured on the ground"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#ground-sampling-distance",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#ground-sampling-distance",
+    "title": "Flight Planning",
+    "section": "Ground Sampling Distance",
+    "text": "Ground Sampling Distance\n\n\nDistance between two consecutive pixel centers measured on the ground:\nThe formula to calculate GSD is:\n\\[\n\\text{GSD} = \\frac{\\text{A} \\times \\text{S}}{\\text{F} \\times \\text{D}}\n\\]\nWhere:\n\nA: Flight Altitude (m)\nS: Sensor(hight, width) (mm)\nF: Focal Length (mm)\nD: Image Dimensions (height, width) (pixels)\n\nBigger GSD = lower spatial resolution\nSmaller GSD = higher spatial resolution"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-control",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-control",
+    "title": "Flight Planning",
+    "section": "Flight control",
+    "text": "Flight control\n\n\nThe UAS RPIC should launch, operate, and recover from preset locations so that the aircraft will fly according to the mission plan.\nVisual Line of Sight (VLOS) - the flight crew should have a clear view of the aircraft at all times, called .\nObservation locations should be selected for the maximum line of sight throughout the planned flight operations area (Part 107.31)."
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-control-1",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-control-1",
+    "title": "Flight Planning",
+    "section": "Flight control",
+    "text": "Flight control\n\n\nRP (Remote Pilot), PMC (Person Manipulating the Flight Controls), and VO (Visual Observer) (if used)\n\nmust be able to maintain effective communication with each other at all times (Part 107.33).\n\nUpon any failure during the flight or any loss of visual contact with the UAS, the RPIC should command the aircraft back to the recovery location or utilize the built-in fail-safe features to recover the aircraft."
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists-1",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists-1",
+    "title": "Flight Planning",
+    "section": "Site evaluation and checklists",
+    "text": "Site evaluation and checklists"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists-2",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#site-evaluation-and-checklists-2",
+    "title": "Flight Planning",
+    "section": "Site evaluation and checklists",
+    "text": "Site evaluation and checklists\nPreflight inspection is required under Part 107.49;\n\nRemote Pilot in Command (RPIC) is required to develop a preflight inspection checklist if the manufacturer has not developed one.\n\n\nNCDOT Unmanned Aircraft Systems Program\n\nThe checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor\nIn case that is not available, a standard Flight Checklist should be made and followed by the flight crew\n\n\n\n\n\n\nNote: As of Dec. 1, 2024, North Carolina no longer require commercial and government drone operators to obtain an N.C. permit"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site",
+    "title": "Flight Planning",
+    "section": "Lake Wheeler test site",
+    "text": "Lake Wheeler test site"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site-1",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site-1",
+    "title": "Flight Planning",
+    "section": "Lake Wheeler test site",
+    "text": "Lake Wheeler test site"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site-2",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site-2",
+    "title": "Flight Planning",
+    "section": "Lake Wheeler test site",
+    "text": "Lake Wheeler test site"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site-3",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler-test-site-3",
+    "title": "Flight Planning",
+    "section": "Lake Wheeler test site",
+    "text": "Lake Wheeler test site"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler---imagery",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler---imagery",
+    "title": "Flight Planning",
+    "section": "Lake Wheeler - Imagery",
+    "text": "Lake Wheeler - Imagery"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler---aeronautical-chart",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lake-wheeler---aeronautical-chart",
+    "title": "Flight Planning",
+    "section": "Lake Wheeler - Aeronautical chart",
+    "text": "Lake Wheeler - Aeronautical chart"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#how-to-plan-a-mapping-flight",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#how-to-plan-a-mapping-flight",
+    "title": "Flight Planning",
+    "section": "How to plan a mapping flight?",
+    "text": "How to plan a mapping flight?\nUAS Photogrammetric process"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#summary",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#summary",
+    "title": "Flight Planning",
+    "section": "Summary",
+    "text": "Summary\n\nPhases of UAS flight planning\nSafety procedures and checklists for safe flight operations\nHow does our study site look like\nHow to plan a flight"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#specs",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#specs",
+    "title": "Flight Planning",
+    "section": "Specs",
+    "text": "Specs\n\nMechanical Shutter On\nFocus - inf\nShutter Priority 1/800\n3/2 aspect\n150 = agh"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#altitude",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#altitude",
+    "title": "Flight Planning",
+    "section": "Altitude",
+    "text": "Altitude\nImpacts of Flight path AGL = Above Ground Level\nAltitude (AGL) 70m - 120m\nTerrain Aware Fligh Path"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#overlap",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#overlap",
+    "title": "Flight Planning",
+    "section": "Overlap",
+    "text": "Overlap\n\nFront and Side\n\nMin Overlap 60% forward 40% Laterial (Side)\nHomogeneous Terrian &gt; Overlap"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#location",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#location",
+    "title": "Flight Planning",
+    "section": "Location",
+    "text": "Location\n\nFly larger extent than you need.\nThink about the area you need for analysis"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#camera-specs",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#camera-specs",
+    "title": "Flight Planning",
+    "section": "Camera Specs",
+    "text": "Camera Specs\nGeneral camera setting are usally fine."
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#camera-angle",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#camera-angle",
+    "title": "Flight Planning",
+    "section": "Camera Angle",
+    "text": "Camera Angle\n\nStraight down (nadir)\n\nMost mapping\n\nPitched (oblique) 70-80 degrees\n\nImproved 3D\nBuildings\nRough Terrain"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-patterns",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#flight-patterns",
+    "title": "Flight Planning",
+    "section": "Flight Patterns",
+    "text": "Flight Patterns\n\nNormal (Lawnmoweer)\nCrosshatch Pattern"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#drone-speed",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#drone-speed",
+    "title": "Flight Planning",
+    "section": "Drone Speed",
+    "text": "Drone Speed\n~30 km/hr\n\nLighting\nCamera Shutter\nAltitude\nMotion Blur"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lighting",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#lighting",
+    "title": "Flight Planning",
+    "section": "Lighting",
+    "text": "Lighting\n\nOvercast\nNoon\nAvoid Shadows\nPartly Cloudly"
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#optional-settings",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3a.html#optional-settings",
+    "title": "Flight Planning",
+    "section": "Optional Settings",
+    "text": "Optional Settings\n\nMechanical Shutter: On\nFocus: inf\nShutter Priority: 1/800\nAspect Ratio: 3/2\n150 = agh"
   }
 ]

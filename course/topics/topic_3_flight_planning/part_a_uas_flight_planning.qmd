@@ -17,10 +17,10 @@ assignment-due-date: 8/23/2024
 
 ## Lecture
 
-- [Flight planning introduction]()
-- [Flight plan analysis in GIS](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/flight_analysis.html)
+- [Flight planning introduction](lectures/lecture_3a.qmd)
+<!-- - [Flight plan analysis in GIS](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/flight_analysis.html)
 - Lecture recordings - parts 1, 2, 3
-- Recording of the Intro to flight planning in eMotion software
+- Recording of the Intro to flight planning in eMotion software -->
 
 ## Supplemental materials
 

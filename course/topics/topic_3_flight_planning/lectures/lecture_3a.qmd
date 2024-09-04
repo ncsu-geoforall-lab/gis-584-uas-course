@@ -7,276 +7,249 @@ format:
         theme: [simple, ../../../../theme.scss]
 ---
 
-<!-- <section>
-    <h2>Flight planning</h2>
-    <h4>GIS/MEA 584:</h4>
-    <h4>Mapping and Analysis Using UAS</h4>
-    <h4 style="margin-top: 0.5em">
-        Justyna Jeziorska</h4>
-    <p class="title-foot">
-        <a href="https://geospatial.ncsu.edu/" title="Center for Geospatial Analytics">Center for Geospatial Analytics</a>
-       <br> <a href="https://www.ncsu.edu/" title="North Carolina State University">North Carolina State University</a>
-</section> -->
+## Objectives
 
-<section>
-    <h2>Objectives</h2>
-    <ul>
-        <li class="fragment"><strong>Describe</strong> phases of flight planning</li>
-        <li class="fragment"><strong>Understand</strong> safety procedures and checklists</li>
-        <li class="fragment"><strong>Understand</strong> the role of Ground Control Points and its distirbution and accuracy</li>
-        <li class="fragment"><strong>Utilize</strong> flight planning software</li>
-    </ul>
-</section>
+::: {.incremental}
 
-<section>
-    <h2>UAS Photogrammetric process</h2>
-    <img class="fragment" src="../images/photogrammetric_process.webp">
-    <p class="fragment">Throughout the whole process, it is important to remember</p>
-    <ul>
-        <li class="fragment"><strong>What</strong> is the aim or the project? and </li>
-        <li class="fragment"><strong>What</strong> will be the data used for?</li>
-    </ul>
-</section>
+- Phases of flight planning
+- Safety procedures and checklists
+- Ground Control Points and its distirbution and accuracy
+- Flight planning software
 
-<section>
-    <h2>Flight planning <br>- a multistep process</h2>
-    <img class="fragment" src="../images/flowchart_green.webp">
-    <p class="fragment">Throughout the whole process, it is important to remember</p>
-    <ul>
-        <li class="fragment"><strong>What</strong> is the aim or the project? and </li>
-        <li class="fragment"><strong>What</strong> will be the data used for?</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Project definition</h2>
-     <img src="../images/flowchart_project.webp">
-    <ul>
-        <li class="fragment"> defining the scope of the project </li> 
-        <li class="fragment"> choosing UAS and sensor </li> 
-        <li class="fragment"> assesing the cost, labor and time consumption</li> 
-        <li class="fragment"> collecting information about terrain</li> 
-    </ul>
-</section>
-
-<section>
-    <h2>Project definition</h2>
-    <img src="../images/flowchart_project.webp">
-    <ul>
-        <li> defining the area and resolution based on</li> 
-        <ul>
-            <li class="fragment"> UAS and sensor capabilies</li> 
-            <li class="fragment"> size of mapping area</li> 
-            <li class="fragment"> terrain constraints</li> 
-            <li class="fragment"> project requirements</li> 
-        </ul>
-    </ul>
-</section>
-
-<section>
-    <h2>Project definition</h2>
-     <img src="../images/flowchart_project.webp">
-<ul>
-<li class="fragment"> evaluating the legal constrains, obtaining permissions</li> 
-<li class="fragment"> defining the coordinate system</li>
-<ul>
-<li class="fragment"> dependent on the desired coordinate system of the final data</li> 
-<li class="fragment"> consistent with the coordinate system of GCP survey</li> 
-</ul>
-</section>
-
-<section>
-    <h2>Flight planning</h2>
-     <img src="../images/flowchart_planning.webp">
-<ul>
-<li class="fragment"> mission area assesment</li> 
-<li class="fragment"> planning geometric parameters</li> 
-<li class="fragment"> choosing flight planning and flight logging platform</li> 
-<li class="fragment"> preliminary weather assesment (climate, season, forecasts)</li> 
-<li class="fragment"> creating a flight plan (software specific)</li> 
-</ul>
-</section>
+:::
 
 ---
 
-### Placing Ground Control Points (GCPs)
+## UAS Photogrammetric process
+
+![](../images/photogrammetric_process.webp)
+
+Throughout the whole process, it is important to remember:
+
+- **What** is the aim or the project?
+- **What** will be the data used for?
+
+---
+
+## Project Definition
+
+![](../images/flowchart_project.webp)
+
+- Defining the scope of the project
+- Choosing UAS and sensor
+- Assessing the cost, labor, and time consumption
+- Collecting information about terrain
+
+---
+
+## Project Definition
+
+![](../images/flowchart_project.webp)
+
+- Define the area and resolution based on:
+  - UAS and sensor capabilities
+  - Spatial extent of the mapping area
+  - Terrain constraints
+  - Project requirements
+
+---
+
+## Project Definition
+
+![](../images/flowchart_project.webp)
+
+- Evaluate the legal constraints, obtain permission
+- Defining the coordinate system:
+  - Dependent on the desired coordinate system of the final data
+  - Consistent with the coordinate system of GCP survey
+
+---
+
+## Flight planning
+
+![](../images/flowchart_planning.webp)
+
+- Mission area assessment
+- Planning geometric parameters
+- Choosing flight planning and flight logging platform
+- Preliminary weather assessment (climate, season, forecasts)
+- Creating a flight plan (software specific)
+
+---
+
+## Placing Ground Control Points (GCPs) { .smaller }
 
 ::: {.columns}
-::: {.column width="50%"}
-- A minimum number of 5 GCPs is recommended.
+::: {.column width="60%"}
+- A **minimum number** of **5 GCPs** is recommended.
 - 5 to 10 GCPs are usually enough, even for large projects.
 - In cases that the topography of the area is complex, use more GCPs
+- The GCPs should be **distributed evenly** in the area
+- **Do not place** the GCPs exactly at the **edges** of the area
 :::
 
-::: {.column width="50%"}
-![](../images/GCP.webp){width=90%}
+::: {.column width="40%"}
+![](../images/GCP.webp)
 :::
 :::
-
-- The GCPs should be distributed evenly in the area
-- Do not place the GCPs exactly at the edges of the area
 
 ---
 
-<section>
 
-### Placing Ground Control Points (GCPs)
 
-::: {.columns}
-::: {.column width="50%"}
-<p>Before measuring the GCPs coordinates, the following items must be defined:</p>
-<ul>
-    <li class="fragment"> GCP coordinate system</li> 
-    <li class="fragment"> GCP accuracy</li> 
-    <li class="fragment"> Topographic equipment (total station or hand held GPS?)</li> 
-</ul>
-:::
-::: {.column width="50%"}
-<img src="../images/GCP_photo.webp">
-:::
-:::
-</section>
----
-
-<section class="smaller">
-<h3>GCPs Accuracy</h3>
+## Placing Ground Control Points (GCPs)
 
 ::: {.columns}
 ::: {.column width="50%"}
 
-<p class="fragment">Factors for defining GCP acuracy:</p>
-<ul>
-    <li class="fragment">Accuracy needed for the final results</li> 
-    <li class="fragment">Ground Sampling Distance* of the images:</li>
-    <ul> 
-        <li class="small fragment">GCP target size: 5-10 x </li> 
-        <li class="small fragment">GCP accuracy: at least 0.1 GSD</li>
-    </ul>
-</ul>
+Before measuring the GCPs coordinates, the following items must be defined:
+
+- GCP coordinate system
+- GCP accuracy
+- Topographic equipment (total station or hand held GPS?)
 
 :::
 ::: {.column width="50%"}
-<img src="../images/GSD2.webp" width=75%>
+![](../images/GCP_photo.webp)
 :::
 :::
-<ul> 
-    <li>* distance between two consecutive pixel centers measured on the ground</li>
-</ul> 
-</section>
 
 ---
 
-<section class="smaller">
-<h2>Ground Sampling Distance</h2>
+## GCPs Accuracy {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
-<p class="fragment">Distance between two consecutive pixel centers measured on the ground: </p>
-<ul>
-<li class="fragment">bigger GSD =  lower spatial resolution</li> 
-</ul>
-<p class="fragment">GSD depends on</p>
-<ul>
-<li  class="small fragment">flight altitude</li> 
-<li  class="small fragment">camera focal length</li> 
-<li  class="small fragment">camera resolution (pixel size)</li> 
-</ul>
+
+Factors for defining GCP accuracy:
+
+- Accuracy needed for the final results
+- Ground Sampling Distance* of the images:
+  - GCP target size: 5-10 x
+  - GCP accuracy: at least 0.1 GSD
+
 :::
 ::: {.column width="50%"}
-<img src="../images/GSD2.webp">
+![](../images/GSD2.webp){width=75%}
 :::
 :::
-</section>
+
+*Distance between two consecutive pixel centers measured on the ground*
 
 ---
 
-## Site evaluation and checklists
+## Ground Sampling Distance {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+Distance between two consecutive pixel centers measured on the ground:
+
+The formula to calculate GSD is:
+
+$$
+\text{GSD} = \frac{\text{A} \times \text{S}}{\text{F} \times \text{D}}
+$$
+
+Where:
+
+- A: Flight Altitude (m)
+- S: Sensor(hight, width) (mm)
+- F: Focal Length (mm)
+- D: Image Dimensions (height, width) (pixels)
+
+**Bigger GSD** = lower spatial resolution \
+**Smaller GSD** = higher spatial resolution
+:::
+::: {.column width="40%"}
+![](../images/GSD2.webp)
+:::
+:::
+
+---
+
+## Site evaluation and checklists {.smaller}
 
 ![](../images/flowchart_site.webp)
 
 - Terrain check – high obstacles in the take-off, mission, landing, and alternative landing locations
 - Ask the locals about possible air traffic or ground activities
-- Weather check
+- **Weather check**
   - Temperature affects battery life
   - Most of the UAS can’t operate in rain
 - Use checklists, don't rely on your memory!
-- Sample checklists: [paper (for Phantom)](https://phantompilots.com/attachments/drone-checklist-pdf.41608/) and [RMUS app](https://www.rmus.com/pages/rmus-uav-pilot-preflight-compliance-checklist)
+    - Sample checklists: [paper (for Phantom)](https://phantompilots.com/attachments/drone-checklist-pdf.41608/) and [RMUS app](https://www.rmus.com/pages/rmus-uav-pilot-preflight-compliance-checklist)
 
 ---
 
-<section class="smaller">
-    <h2>Site evaluation and checklists</h2>
-    <img  src="../images/site.webp">
-</section>
+## Site evaluation and checklists
+
+![](../images/site.webp)
 
 ---
 
-### Site evaluation and checklists {.smaller}
+## Site evaluation and checklists {.smaller}
 
-Preflight inspection is required under Part 107.49;  
-the Remote Pilot in Command (RPIC) is required to develop a **preflight inspection checklist** if the manufacturer has not developed one.
+**Preflight inspection is required under Part 107.49;** \
+
+**Remote Pilot in Command (RPIC)** is required to develop a **preflight inspection checklist** if the manufacturer has not developed one.
 
 ::: {.columns}
-::: {.column width="50%"}
+::: {.column width="60%"}
 
 [NCDOT Unmanned Aircraft Systems Program](https://www.ncdot.gov/divisions/aviation/uas/Pages/default.aspx)
 
 - The checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor
 - In case that is not available, a standard Flight Checklist should be made and followed by the flight crew
-- **Please note: After Dec. 1, 2024, North Carolina will no longer require commercial and government drone operators to obtain an N.C. permit​**
+
+
 
 :::
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ![](../images/checklistNC.webp)
 
 :::
 :::
 
+> Note: As of Dec. 1, 2024, North Carolina no longer require commercial and government drone operators to obtain an N.C. permit
+
 ---
 
-<section class="smaller">
-    <h2>Flight control</h2>
-    <img class="fragment" src="../images/flowchart_control.webp">
-    <ul>
-        <li class="fragment">The UAS RPIC should launch, operate, and recover from preset locations so that the aircraft will fly according to the mission plan.</li> 
-        <li class="fragment">After the UAS is launched, the flight crew should have a clear view of the aircraft at all times, called Visual Line of Sight (VLOS). Observation locations should be selected for the maximum line of sight throughout the planned flight operations area (Part 107.31).</li> 
-    <ul>
-</section>
+## Flight control {.smaller}
 
-<section class="smaller">
-<h2>Flight control</h2>
-<img src="../images/flowchart_control.webp">
-<ul>
-    <li class="fragment">To ensure the flight is going according to the flight plan, the RP, PMC and VO (if used) must be able to maintain effective communication with each other at all times (Part 107.33).</li> 
+![](../images/flowchart_control.webp)
 
-    <li class="fragment">Upon any failure during the flight or any loss of visual contact with the UAS, the RPIC should command the aircraft back to the recovery location or utilize the built-in fail-safe features to recover the aircraft</li> 
-<ul>
-</section>
+- The UAS RPIC should **launch, operate, and recover** from **preset locations** so that the aircraft will fly according to the mission plan.
+- **Visual Line of Sight (VLOS)** - the flight crew should have a clear view of the aircraft at all times, called . 
+- Observation locations should be selected for the **maximum line of sight** throughout the planned flight operations area (Part 107.31).
 
-<section class="text-center">
-    <h3>Lake Wheeler test site</h3>
-    <img src="../images/LW_google.webp" width="80%">
-</section>
+---
 
-<section class="text-center">
-    <h3>Lake Wheeler test site</h3>
-    <img src="../images/LakeWheeler_COA.webp" width="80%">
-</section>
+## Flight control {.smaller}
 
-<section class="text-center">
-    <h3>Lake Wheeler test site</h3>
-    <img src="../images/lake_wheeler1.webp" width="80%">
-</section>
+![](../images/flowchart_control.webp)
 
-<section class="text-center">
-    <h3>Lake Wheeler test site</h3>
-    <img src="../images/lake_wheeler2.webp" width="80%">
-</section>
+- **RP (Remote Pilot)**, **PMC (Person Manipulating the Flight Controls)**, and **VO (Visual Observer)** (if used)
+    - must be able to maintain effective communication with each other at all times (Part 107.33).
+- Upon any failure during the flight or any loss of visual contact with the UAS, the RPIC should command the aircraft back to the recovery location or utilize the built-in fail-safe features to recover the aircraft.
 
-<section class="text-center">
-    <h2>Flight planning</h2>
-</section>
+---
+
+
+## Lake Wheeler - Imagery
+
+![](../images/LW_google.webp){width="80%"}
+
+
+## Lake Wheeler - Aeronautical chart
+
+![](../images/lake_wheeler1.webp){width="80%"}
+
+
+## Lake Wheeler test site
+
+![](../images/lake_wheeler2.webp){width="80%"}
 
 ---
 
@@ -284,74 +257,122 @@ the Remote Pilot in Command (RPIC) is required to develop a **preflight inspecti
 
 - Multiple available platforms
 - Some are dedicated for specific UAS and sold with the system by the manufacturer
-  - [Trimble UAS](https://www.trimble.com/survey/unmanned-aircraft-systems) - [Trimble Aerial Imaging](https://apps.trimbleaccess.com/help/en/AerialImaging=2.2.6)
-  - [senseFly UAS](https://sensefly.com/) - [eMotion 3](https://sensefly.com/software/emotion/)
-  - [DJI](https://www.dji.com/) - [DJI Ground Station Pro](https://www.dji.com/ground-station-pro)
-  - [Yuneec](https://us.yuneec.com/) - [UAV Toolbox](https://uavtoolbox.com/)
-- Some are more universal and can work with a variety of platforms:
-  - [UgCS](https://www.ugcs.com/)
-  - Open Source [Mission Planner](https://ardupilot.org/planner/docs/mission-planner-overview.html) - mostly for DIY drones
+
+::: { .columns }
+::: { .column width="50%"}
+**Commerical**
+
+  - [DroneDeploy](https://www.dronedeploy.com/)
+  - [Pix4Dcapture Pro](https://www.pix4d.com/product/pix4dcapture/)
+  - [DJI GS PRO](https://www.dji.com/ground-station-pro)
+  - [UgCS](https://www.sphengineering.com/flight-planning/ugcs)
+  - [DroneLink](https://www.dronelink.com/)
+:::
+
+::: { .column width="50%"}
+
+**Open Source**
+
+  - [QGroundControl](http://qgroundcontrol.com/)
+  - [Mission Planner](https://ardupilot.org/planner/index.html)
+
+:::
+:::
 
 ---
 
-<section>
-    <h2>How to plan a mapping flight?</h2>
-    <p>UAS Photogrammetric process</p>
-<img class="fragment" src="../images/photogrammetric_process.webp">
+## How to plan a mapping flight? {.smaller}
+
+UAS Photogrammetric process
+
+![](../images/photogrammetric_process.webp)
 
 ::: {.columns}
 ::: {.column width="50%"}
 
-<img src="../images/aerial_survey.webp">
+![](../images/aerial_survey.webp)
 
 :::
 ::: {.column width="50%"}
 
-<img src="../images/flight_track.webp">
+![](../images/flight_track.webp)
 
 :::
 :::
 
-</section>
 
-<section>
-    <h3>How to plan a mapping flight?</h3>
-    <img src="../images/pix4D1.webp">
-</section>
+## Location
 
-<section>
-    <h3>How to plan a mapping flight?</h3>
-    <img src="../images/pix4D2.webp">
-</section>
+- Fly larger extent than you need.
+- Think about the area you need for analysis
 
-<section>
-    <h3>How to plan a mapping flight?</h3>
-    <img src="../images/pix4D3.webp">
-</section>
+## Camera Specs
 
-<section>
-    <h3>How to plan a mapping flight?</h3>
-    <img src="../images/pix4D4.webp">
-</section>
+General camera setting are usally fine.
 
-<section>
-    <h3>How to plan a mapping flight?</h3>
-    <img src="../images/pix4D5.webp">
-</section>
+## Optional Settings
+- Mechanical Shutter: On
+- Focus: inf
+- Shutter Priority: 1/800
+- Aspect Ratio: 3/2
+- 150 = agh
 
-<section>
-    <h3>How to plan a mapping flight?</h3>
-    <img src="../images/pix4D6.webp">
-</section>
+## Camera Angle
 
-<section>
-   <h2>What we have learned</h2>
-    <ul>
-        <li class="fragment">Phases of UAS flight planning</li>
-        <li class="fragment">Safety procedures and checklists for safe flight operations</li>
-        <li class="fragment">how does our study site look like</li>
-        <li class="fragment">how to plan a flight</li>
-    </ul>
-</section>
+- Straight down (nadir)
+    - Most mapping
+- Pitched (oblique) 70-80 degrees
+    - Improved 3D
+    - Buildings
+    - Rough Terrain
 
+## Altitude
+
+Impacts of Flight path
+AGL = Above Ground Level
+
+Altitude (AGL)
+70m - 120m
+
+Terrain Aware Fligh Path
+
+
+## Flight Patterns
+
+- Normal (Lawnmoweer)
+- Crosshatch Pattern
+
+## Overlap
+
+- Front and Side
+
+Min Overlap 
+60% forward
+40% Laterial (Side)
+
+Homogeneous Terrian > Overlap
+
+## Drone Speed
+
+~30 km/hr
+
+- Lighting
+- Camera Shutter
+- Altitude
+- Motion Blur
+
+## Lighting
+
+- Overcast
+- Noon
+- Avoid Shadows
+- Partly Cloudly
+
+
+## Summary
+
+- Phases of UAS flight planning
+- Safety procedures and checklists for safe flight operations
+- How does our study site look like
+- How to plan a flight
 
