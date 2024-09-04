@@ -18,8 +18,7 @@ assignment-due-date: 8/23/2024
 ## Lecture
 
 - [Flight planning introduction](lectures/lecture_3a.qmd)
-<!-- - [Flight plan analysis in GIS](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/flight_analysis.html)
-- Lecture recordings - parts 1, 2, 3
+- [Lecture Recording]({{< var recordings.topic3.lecture3 >}})
 - Recording of the Intro to flight planning in eMotion software -->
 
 ## Supplemental materials
@@ -34,15 +33,24 @@ assignment-due-date: 8/23/2024
 
 ### Flight planning and management platforms
 
-<!-- TODO Update this info -->
-- Skyward [website](https://skyward.io/) and [trial request](https://skyward.io/pricing/)
-- eMotion 3 [installer](https://drive.google.com/open?id=1Na_A4QGyJYRGDT5WUjWyxjIGZvE4uJzn) and [manual](https://drive.google.com/open?id=1qmRIbpE1K_xji2BbZDaKXnOUqZ-NlPAb)
+#### Commerical Options
+  - [DroneDeploy](https://www.dronedeploy.com/)
+  - [Pix4Dcapture Pro](https://www.pix4d.com/product/pix4dcapture/)
+  - [DJI GS PRO](https://www.dji.com/ground-station-pro)
+  - [UgCS](https://www.sphengineering.com/flight-planning/ugcs)
+  - [DroneLink](https://www.dronelink.com/)
+
+#### Open Source Options
+
+  - [QGroundControl](http://qgroundcontrol.com/)
+  - [Mission Planner](https://ardupilot.org/planner/index.html)
+  - [MavProxy](https://ardupilot.org/mavproxy/docs/getting_started/index.html)
 
 ## Assignment
 
 Prepare a flight plan:
 
-- [Flight planning in eMotion 3 software]()
+<!-- - [Flight planning in eMotion 3 software]() -->
 - [Flight plan analysis in GRASS GIS](assignments/assignment_1a_grass.qmd)
 
 ## Homework
