@@ -17,6 +17,8 @@ date: 8/28/2024
 ## Lecture
 
 * Lecture Slides: [Photogrammetry and SfM](lectures/lecture_2a.qmd)
+* Lecture Recording: [Fall 2024]({{< var recordings.topic2.lecture2a >}}) (NCSU Only)
+* In-Class Recording: [Fall 2024]({{< var recordings.topic2.assignment2a >}}) (NCSU Only)
 
 ##  Supplemental materials
 
