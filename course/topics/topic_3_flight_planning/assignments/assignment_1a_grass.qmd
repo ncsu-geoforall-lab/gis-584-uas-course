@@ -18,8 +18,8 @@ In order to execute a safe flight, you need to make sure that the flight path wi
 
 #### Data
 
-- GRASS Location ([Lake_Wheeler_NCspm](https://drive.google.com/file/d/0B1AfQGDB8tPXNXVpOEdyejlpbEE/view?usp=sharing&resourcekey=0-txsjafPn-_3yd3G0PLusww))
-- 2013 lidar data from [Mid Pines](http://fatra.cnr.ncsu.edu/uav-lidar-analytics-course/mid_pines_spm_2013.las)
+- GRASS Location ([Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}))
+- 2013 lidar data from [Mid Pines]({{< var data.mid_pines_lidar_url >}})
 
 #### Software
 

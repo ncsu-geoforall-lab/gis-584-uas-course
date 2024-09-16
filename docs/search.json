@@ -298,21 +298,21 @@
     "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
     "title": "UAS Flight Planning",
     "section": "Lecture",
-    "text": "Lecture\n\nFlight planning introduction"
+    "text": "Lecture\n\nFlight planning introduction\nLecture Recording\nRecording of the Intro to flight planning in eMotion software –&gt;"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
     "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
     "title": "UAS Flight Planning",
     "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nFlight - watch the following if you were unable to attend the flight session\n\nFixed wing flight (eBee X): set up, launch and landing\nVertical take-off (VTOL) fixed wing flight with Wingtra drone\nRotary wing flight (Phantom)\n\nFlight with Drone Deploy flight planning app\nFlight with Pix4D Capture flight planning app\n\n\n\n\nFlight planning and management platforms\n\n\nSkyward website and trial request\neMotion 3 installer and manual"
+    "text": "Supplemental materials\n\nFlight - watch the following if you were unable to attend the flight session\n\nFixed wing flight (eBee X): set up, launch and landing\nVertical take-off (VTOL) fixed wing flight with Wingtra drone\nRotary wing flight (Phantom)\n\nFlight with Drone Deploy flight planning app\nFlight with Pix4D Capture flight planning app\n\n\n\n\nFlight planning and management platforms\n\nCommerical Options\n\nDroneDeploy\nPix4Dcapture Pro\nDJI GS PRO\nUgCS\nDroneLink\n\n\n\nOpen Source Options\n\nQGroundControl\nMission Planner\nMavProxy"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
     "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
     "title": "UAS Flight Planning",
     "section": "Assignment",
-    "text": "Assignment\nPrepare a flight plan:\n\nFlight planning in eMotion 3 software\nFlight plan analysis in GRASS GIS"
+    "text": "Assignment\nPrepare a flight plan:\n\n\nFlight plan analysis in GRASS GIS"
   },
   {
     "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
@@ -816,7 +816,7 @@
     "href": "course/topics/topic_2_sfm/part_a_images_to_3d.html#lecture",
     "title": "A. From images to 3D models: Photogrammetry and Structure from Motion concepts",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides: Photogrammetry and SfM"
+    "text": "Lecture\n\nLecture Slides: Photogrammetry and SfM\nLecture Recording: Fall 2024 (NCSU Only)\nIn-Class Recording: Fall 2024 (NCSU Only)"
   },
   {
     "objectID": "course/topics/topic_2_sfm/part_a_images_to_3d.html#supplemental-materials",
