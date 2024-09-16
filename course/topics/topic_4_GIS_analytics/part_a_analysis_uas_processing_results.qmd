@@ -17,7 +17,7 @@ assignment-due-date: 10/23/2024
 - Execute distance, area and volume measurements
 
 ## Lecture
-- [Lecture Slides](../lectures/2017_Analysis.html#/)
+- [Lecture Slides](lectures/lecture_4a.qmd)
 
 ## Supplemental materials
 - Bowl effect explained: [Mitigating systematic error in topographic models derived from UAV and ground-based image networks](https://onlinelibrary.wiley.com/doi/10.1002/esp.3609/epdf)
