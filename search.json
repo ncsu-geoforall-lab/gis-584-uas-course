@@ -1428,20 +1428,6 @@
     "text": "Assignment & Homework\nAssignment 4A"
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#task",
-    "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#task",
-    "title": "Assignment 4B",
-    "section": "Task",
-    "text": "Task\n\nProcessing lidar and UAS SfM point clouds"
-  },
-  {
-    "objectID": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#homework",
-    "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#homework",
-    "title": "Assignment 4B",
-    "section": "Homework",
-    "text": "Homework\nPrepare report on analyzing point clouds, computing and visualizing bare earth and canopy surfaces."
-  },
-  {
     "objectID": "course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html#task",
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html#task",
     "title": "Assignment 4A",
@@ -1454,6 +1440,20 @@
     "title": "Assignment 4A",
     "section": "Homework",
     "text": "Homework\nPrepare report on the results of measurements in Agisoft and DSM comparison in GRASS GIS Include figures/graphs and calculations."
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#task",
+    "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#task",
+    "title": "Assignment 4B",
+    "section": "Task",
+    "text": "Task\n\nProcessing lidar and UAS SfM point clouds"
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#homework",
+    "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#homework",
+    "title": "Assignment 4B",
+    "section": "Homework",
+    "text": "Homework\nPrepare report on analyzing point clouds, computing and visualizing bare earth and canopy surfaces."
   },
   {
     "objectID": "course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html#outline",
