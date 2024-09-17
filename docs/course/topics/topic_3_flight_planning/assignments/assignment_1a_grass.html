@@ -227,15 +227,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="compute-a-raster-for-elevation-of-the-flight-path">Compute a raster for elevation of the flight path</h3>
 <p>For this analysis you can run GRASS GIS with the Lake_Wheeler_NCspm location. Create a new mapset to manage your flight analysis. *Copy the unzipped location folder into your grassdata folder (in Windows in Documents)</p>
 <p><strong>REMEMBER</strong></p>
-<p>Change working directory:<br>
-Settings &gt; GRASS working environment &gt; Change working directory &gt; select/create any directory or type <code>cd</code> (stands for change directory) into the GUI Console and hit Enter.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Change working directory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>Settings &gt; GRASS working environment &gt; Change working directory &gt; select/create any directory</code></p>
 <p><em>Now you can use the commands from the assignment requiring the text file without the need to specify the full path to the file</em></p>
+</div>
+</div>
 <ul>
-<li>Download the <a href="https://drive.google.com/file/d/0B8j08KoSleFQZHYycXlGa1hHMVU/view?usp=sharing&amp;resourcekey=0-OLqHRV9bOnV0idjl9zYDJQ">flight path kml file</a> (there is a <a href="https://drive.google.com/file/d/1aLWNeKsOEVgfgWKfp3h5wKd1Uk4ZaWY8/view?usp=sharing">file from another flight here</a>, you can use it as a comparison), copy the file(s) to your working directory folder.</li>
+<li>Download the <a href="https://storage.googleapis.com/gis-course-data/gis584/flight_path1.kml">flight path kml file</a> (there is a <a href="https://storage.googleapis.com/gis-course-data/gis584/flight_path2.kml">file from another flight here</a>, you can use it as a comparison), copy the file(s) to your working directory folder.</li>
 <li>Launch GRASS</li>
 <li>Import downloaded kml into GRASS with <code>v.import</code>, which will reproject the input on the fly:</li>
 </ul>
+<!-- :::: {.panel-tabset} -->
+<!-- ### bash -->
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.import</span> input=flight_path1.kml output=flight_track_kml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- ### python
+```python
+import grass.script as gs
+
+# Import KML file
+gs.run_command('v.import', input='flight_path1.kml', output='flight_track_kml')
+```
+
+### R
+
+```r
+library(rgrass7)
+
+# Initialize GRASS session
+# You need to update these parameters to meet your systems setup.
+initGRASS(gisBase = "/usr/lib/grass84", gisDbase = "~/grassdata", location = "location_name", mapset = "PERMANENT")
+
+# Import KML file
+execGRASS("v.import", input = "flight_path1.kml", output = "flight_track_kml")
+``` -->
+<!-- ::: -->
 <p>Convert vector line to elevation points. Set the maximum distance between the points as 0.3 m</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.to.points</span> <span class="at">-i</span> input=flight_track_kml output=flight_track_points dmax=0.3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Convert vector to raster after setting the region to study area and 1m resolution</p>

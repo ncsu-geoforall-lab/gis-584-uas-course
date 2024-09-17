@@ -33,4 +33,5 @@ data:
   mid_pines_lidar_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las
   mid_pines_copc_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_copc_2013.laz
   flight_path_kml_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path1.kml
+  flight_path_kml_2_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path2.kml
   gcp_12_degrees_url: https://storage.googleapis.com/gis-course-data/gis584/GCP_12_degrees.geojson
