@@ -18,8 +18,9 @@ assignment-due-date: 8/23/2024
 ## Lecture
 
 - [Flight planning introduction](lectures/lecture_3a.qmd)
-- [Lecture Recording]({{< var recordings.topic3.lecture3 >}})
-- Recording of the Intro to flight planning in eMotion software -->
+- [Lecture Recording]({{< var recordings.topic3.lecture3 >}}) (NCSU Only)
+- [Assignment Recording]({{< var recordings.topic3.assignment3 >}}) (NCSU Only)
+<!-- - Recording of the Intro to flight planning in eMotion software -->
 
 ## Supplemental materials
 

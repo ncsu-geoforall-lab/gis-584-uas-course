@@ -26,7 +26,11 @@ recordings:
     assignment2a: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=89ef8351-fd4a-4427-854c-b1c1016660af
   topic3:
     lecture3: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=094b5155-03b5-4f07-9dd1-b1c101665bec&start=1758.223763
+    assignment3: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d7c12ad4-9eb0-4e3f-9e6b-b1c1016663c8&start=288
 
 data:
   lake_wheeler_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip
   mid_pines_lidar_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las
+  mid_pines_copc_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_copc_2013.laz
+  flight_path_kml_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path1.kml
+  gcp_12_degrees_url: https://storage.googleapis.com/gis-course-data/gis584/GCP_12_degrees.geojson

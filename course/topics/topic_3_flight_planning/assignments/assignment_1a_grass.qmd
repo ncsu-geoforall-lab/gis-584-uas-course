@@ -19,7 +19,9 @@ In order to execute a safe flight, you need to make sure that the flight path wi
 #### Data
 
 - GRASS Location ([Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}))
-- 2013 lidar data from [Mid Pines]({{< var data.mid_pines_lidar_url >}})
+- Mid Pines 2013 lidar data from [las]({{< var data.mid_pines_lidar_url >}})
+- Mid Pines 2013 lidar data from [copc.laz]({{< var data.mid_pines_copc_url >}})
+- Flight Path ([KML]({{< var data.flight_path_kml_url >}}))
 
 #### Software
 
