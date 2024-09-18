@@ -24,16 +24,14 @@ The process can be very time consuming (depending on computational power of your
 ### Preparation
 
 #### Data
-
-- **OPTION 1: RECOMMENDED IN THE CLASSROOM** - small area, photos downsampled to accelerate processing (but lower the resolution of the outputs)
-    - [download data]({{< var data.downsized_samples_url >}}) - photos, log and coordinates of 3 GCPs
-    - **Processing outputs** from this option are provided [here]({{< var data.downsized_samples_results_url >}})
-- **OPTION 2: Small area (to accelerate processing), but photos not downsampled (to obtain the highest resolution of the outputs)**
+  
+- **OPTION 1: Small area (to accelerate processing), but photos not downsampled (to obtain the highest resolution of the outputs)**
     - [download data](https://drive.google.com/open?id=1pKD7N0dzOZLQSWD4cj98UWrvrR62pxVW) - photos, log and coordinates of 3 GCPs
-- **OPTION 3: Full flight, photos original resolution**  
+    
+- **OPTION 2: Full flight, photos original resolution**  
     **LONG PROCESSING TIME!**
     - [download data](https://drive.google.com/file/d/13wPTiJcBaxX2AZjibT9N7QIffHddoaqZ) - photos, log and coordinates of 12 GCPs
-- **OPTION 4: You can use your own data**
+- **OPTION 3: You can use your own data**
 
 #### Software
 
@@ -152,7 +150,7 @@ Double click on the next photo and repeat the steps. As soon as the GCP marker p
 
 Filter photos by each marker again. Agisoft adjusts the GCPs positions on the run, so you can locate the GCP on additional images that will appear in the Photos pane.
 
-In this sample processing we will include 4 GCPs. Mathematically, you need to indicate marker positions for at least 3 GCPs. Accurate error estimates can be calculated with at least 4 GCPs, while often at least 5 are needed to cover the center of the project as well, which reduces the chance of error propagation and resulting terrain distortions especially on flat or undulating terrain types.
+In this sample processing we will include 3 GCPs. Mathematically, you need to indicate marker positions for at least 3 GCPs. Accurate error estimates can be calculated with at least 4 GCPs, while often at least 5 are needed to cover the center of the project as well, which reduces the chance of error propagation and resulting terrain distortions especially on flat or undulating terrain types.
 
 Click Save ![Save Icon](images/save_icon.webp) in the toolbar.
 
