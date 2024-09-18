@@ -77,14 +77,13 @@ schedule:
   #   no_class: false
   
   - date_range: "Sep. 16-20"
-    topic: "UAS FLIGHT (TBD)"
+    topic: "UAS FLIGHT"
     details:
       - "Mon: [Assignment 3. UAS flight planning](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
-      - "Wed: (UAS Flight TBD)"
+      - "Wed: (UAS Flight @ 10:15 am)"
       - "Meeting point: Mid Pines Road, Raleigh; [35.727104, -78.696173](https://goo.gl/maps/GRVRUKJzRav)"
-      - "Time: 1:30 pm on Mo or We"
       - "Project: Data acquisition"
-    due_date: ""
+    due_date: "Sep. 25"
     no_class: false
   
   - date_range: "Sep. 23-27"
@@ -92,7 +91,6 @@ schedule:
     subtopic: "[2B. UAS Imagery processing](topics/topic_2_sfm/part_b_img_processing_sfm.qmd)"
     details:
       - "Mon: [Lecture](topics/topic_2_sfm/lectures/lecture_2b.qmd)" 
-      # - "either Sep. 23 or 25 (depending on the flight date)"
       - "Wed: In Class Assignment - [Processing with AGISOFT Photoscan](topics/topic_2_sfm/assignments/assignment_2b.qmd)"
     due_date: "Sep. 30"
     no_class: false
