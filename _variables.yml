@@ -35,3 +35,5 @@ data:
   flight_path_kml_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path1.kml
   flight_path_kml_2_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path2.kml
   gcp_12_degrees_url: https://storage.googleapis.com/gis-course-data/gis584/GCP_12_degrees.geojson
+  downsized_samples_url: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/092216/downsized_samples.zip
+  downsized_samples_results_url: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/092216/RESULTS_Sample_downsized.zip

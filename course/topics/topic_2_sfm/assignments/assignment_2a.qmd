@@ -10,12 +10,14 @@ Select an object in your office, at home, or outside, take multiple overlapping 
 
 Take the photos from various locations and place features on the physical model to explore the best approach for obtaining a model with minimal distortions. Use any suitable software, for example:
 
-- [Colmap](https://demuc.de/colmap/) (see below) - free and open-source software.
+- [Reality Scan](https://www.unrealengine.com/en-US/realityscan) - Unreal Engine Reality Capture
+- [Colmap](https://colmap.github.io/index.html) (see below) - free and open-source software.
 - [Meshroom (AliceVision)](https://alicevision.org/) (Window and Linux) - free and open-source software.
 - [ReCap](http://remake.autodesk.com/try-remake) (Windows only) 30-days free trial is available and students can get the software for free for 3 years.
 - [Regard3D](http://www.regard3d.org/index.php) (Windows and Mac) - free and open-source software.
 - [Agisoft Metashape 2.1.2](https://www.agisoft.com/downloads/installer/) (which we will be using later for aerial imagery processing).
 - [Polycam](https://poly.cam/) (Mobile app) - with try for free online option.
+<!-- - [OpenSfM](https://opensfm.org/) - Requiures  -->
 
 
 <center>

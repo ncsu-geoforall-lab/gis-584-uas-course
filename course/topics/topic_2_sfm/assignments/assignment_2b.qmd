@@ -26,8 +26,8 @@ The process can be very time consuming (depending on computational power of your
 #### Data
 
 - **OPTION 1: RECOMMENDED IN THE CLASSROOM** - small area, photos downsampled to accelerate processing (but lower the resolution of the outputs)
-    - [download data](https://drive.google.com/open?id=1SWDhzXMC66Gu__jSzD0rlf0kF1S8Vk3V) - photos, log and coordinates of 3 GCPs
-    - **Processing outputs** from this option are provided [here](https://drive.google.com/open?id=19z1wIMJ2Ehjdey4gHt1q9uZm0ZMWcfbL)
+    - [download data]({{< var data.downsized_samples_url >}}) - photos, log and coordinates of 3 GCPs
+    - **Processing outputs** from this option are provided [here]({{< var data.downsized_samples_results_url >}})
 - **OPTION 2: Small area (to accelerate processing), but photos not downsampled (to obtain the highest resolution of the outputs)**
     - [download data](https://drive.google.com/open?id=1pKD7N0dzOZLQSWD4cj98UWrvrR62pxVW) - photos, log and coordinates of 3 GCPs
 - **OPTION 3: Full flight, photos original resolution**  
