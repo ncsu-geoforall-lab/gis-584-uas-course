@@ -21,6 +21,7 @@ date: 8/28/2024
 ## Lecture
 
 * Lecture Slides: [Photogrammetry and SfM](lectures/lecture_2b.qmd)
+* Lecture Recording: [Fall 2024]({{< var recordings.topic2.lecture2b >}}) (NCSU Only)
 
 ##  Supplemental materials
 
@@ -463,7 +464,7 @@ Prepare report on generating orthomosaic and Digital Surface Model using images 
 </body>
 </html>
 
-
+```
 
 
 
