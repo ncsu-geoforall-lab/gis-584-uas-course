@@ -208,7 +208,7 @@ format:
 
 ---
 
-## Digital Elevation Model {.smaller}
+<!-- ## Digital Elevation Model {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -225,7 +225,7 @@ format:
 ::: 
 ::: 
 
----
+--- -->
 
 ## Structure from Motion (SfM) {.smaller}
 
@@ -347,7 +347,7 @@ Everything boils down to... money (and time)
 
 ---
 
-## Agisoft Metashape Professional {.smaller}
+<!-- ## Agisoft Metashape Professional {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -874,10 +874,10 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
     - Marker-based chunk alignment
 - More on GCP placing and processing in Agisoft see [intro to the assignment](./2017_Imagery_Processing_assignment_intro.html)
 
----
+--- -->
 
 ## What did we learn?
 
 - What is a general workflow for UAS imagery processing
 - How do we transform UAS data into orthophoto, DSM, 3D model, and point cloud
-- How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program
+<!-- - How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program -->
