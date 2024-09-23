@@ -499,15 +499,26 @@ Items in brackets are optional
 <p><img data-src="../images/camera_sensor.webp" style="width:80.0%"></p>
 </div></div>
 </section>
-<section id="digital-elevation-model" class="slide level2 smaller">
-<h2>Digital Elevation Model</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/disortion.webp"></p>
-</div><div class="column" style="width:50%;">
-<p><strong>In the past:</strong> Shape of the ground surface must be known in order to remove the effects of relief displacement</p>
-<p><strong>Now:</strong> Computed automatically by Structure from Motion</p>
-</div></div>
+<section class="slide level2">
+
+<!-- ## Digital Elevation Model {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/disortion.webp)
+
+::: 
+::: {.column width="50%"}
+
+**In the past:** Shape of the ground surface must be known in order to remove the effects of relief displacement
+
+**Now:** Computed automatically by Structure from Motion
+
+::: 
+::: 
+
+--- -->
 </section>
 <section id="structure-from-motion-sfm" class="slide level2 smaller">
 <h2>Structure from Motion (SfM)</h2>
@@ -601,429 +612,542 @@ Items in brackets are optional
 <li>many many more…</li>
 </ul>
 </section>
-<section id="agisoft-metashape-professional" class="slide level2 smaller">
-<h2>Agisoft Metashape Professional</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Image-based solution aimed at creating 3D content from still images</li>
-<li>Operates with arbitrary images and is efficient in both controlled and uncontrolled conditions</li>
-<li>Both image alignment and 3D model reconstruction are fully automated</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><a href="http://www.agisoft.com/downloads/installer/">Installer</a></li>
-<li><a href="https://www.agisoft.com/pdf/metashape-pro_1_5_en.pdf">Manual</a></li>
-<li>Tutorials for:
-<ul>
-<li><a href="http://www.agisoft.com/pdf/PS_1.3%20-Tutorial%20%28BL%29%20-%20Orthophoto,%20DEM%20%28GCPs%29.pdf">Orthophoto and DSM generation with GCPs</a></li>
-<li><a href="https://agisoft.freshdesk.com/support/solutions/articles/31000148866-dense-cloud-classification">Dense Cloud Classification &amp; DTM Generation</a></li>
-<li><a href="https://agisoft.freshdesk.com/support/solutions/articles/31000148884-dem-based-measurements-">DEM based Measurements</a></li>
-</ul></li>
-<li><a href="https://www.youtube.com/channel/UCPheXwPeFLnWHo8u4ksSH7w">YouTube channel</a></li>
-</ul>
-<p><img data-src="../images/Agisoft_Logo.webp" style="width:30.0%"></p>
-</div></div>
-</section>
-<section id="processing-workflow" class="slide level2 smaller">
-<h2>Processing workflow</h2>
-<p><img data-src="../images/flowchart_processing_plain.webp"></p>
-<h3 id="preprocessing-stage">Preprocessing stage:</h3>
-<p><img data-src="../images/flowchart_processing_pre.webp"></p>
-<ul>
-<li>Loading photos into Metashape</li>
-<li>Inspecting loaded images, removing unnecessary images</li>
-</ul>
-</section>
-<section id="processing-workflow-1" class="slide level2 smaller">
-<h2>Processing workflow</h2>
-<h3 id="processing-stage">Processing stage:</h3>
+<section class="slide level2">
 
-<img data-src="../images/flowchart_processing_exporting.webp" class="r-stretch"><ol type="1">
-<li>Aligning photos</li>
-<li>Building dense point cloud
-<ul>
-<li>(optional: editing dense point cloud)</li>
-</ul></li>
-<li>Building mesh (3D polygonal model)
-<ul>
-<li>(optional: editing mesh)</li>
-</ul></li>
-<li>Generating texture</li>
-<li>Building DSM and orthomosaic</li>
-</ol>
-</section>
-<section id="exporting-results" class="slide level2">
-<h2>Exporting results</h2>
-<p><img data-src="../images/flowchart_processing_ex.webp"></p>
-<p><img data-src="../images/processing_outputs.webp"></p>
-</section>
-<section id="preprocessing" class="slide level2">
-<h2>Preprocessing</h2>
-<ul>
-<li>Loading photos</li>
-<li>Loading camera positions (flight log)</li>
-<li>If the EO is in the photos EXIF file, the parameters will load automatically</li>
-</ul>
+<!-- ## Agisoft Metashape Professional {.smaller}
 
-<img data-src="../images/camera_positions.webp" style="width:70.0%" class="r-stretch"></section>
-<section id="aligning-photos" class="slide level2 smaller">
-<h2>Aligning photos</h2>
-<p>At this stage, Agisoft Metashape implements SfM algorithms to monitor the movement of features through a sequence of multiple images:</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Obtains the relative location of the acquisition positions</li>
-<li>Refines camera calibration parameters</li>
-<li><strong>Sparse point cloud</strong> and a set of <strong>camera positions</strong> are formed</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/aligning_photos_funny.webp" style="width:60.0%"></p>
-</div></div>
-</section>
-<section id="bundle-block-adjustment" class="slide level2 smaller">
-<h2>Bundle Block Adjustment</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Non-linear method for refining structure and motion</li>
-<li>Minimizing reprojection error</li>
-<li>Detecting image feature points (i.e., various geometrical similarities such as object edges or other specific details)</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/bundle_block_adjustment.webp"></p>
-</div></div>
-</section>
-<section id="bundle-block-adjustment-1" class="slide level2 smaller">
-<h2>Bundle Block Adjustment</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Subsequently monitoring the movement of those points throughout the sequence of multiple images</li>
-<li>Using this information as input, the locations of those feature points can be estimated and rendered as a sparse 3D point cloud</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/Bundle_Block_Adjustment2.webp"></p>
-</div></div>
-</section>
-<section id="aligning-cameras-in-metashape" class="slide level2 smaller">
-<h2>Aligning cameras in Metashape</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/aligned_photos.webp" style="width:58.5%"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/sparse_cloud.webp" style="width:39.0%"></p>
-<p class="small">
-<strong>Sparse point cloud</strong> generation
-</p>
-</div></div>
-<p><strong>Accuracy</strong></p>
-<ul>
-<li><strong>High</strong> accuracy setting &gt; more accurate camera position estimates (time-consuming)</li>
-<li><strong>Low</strong> accuracy setting &gt; rough camera positions</li>
-</ul>
-</section>
-<section id="building-dense-point-cloud" class="slide level2 smaller">
-<h2>Building dense point cloud</h2>
-<p>At the stage of dense point cloud generation, Agisoft calculates depth maps for every image</p>
-<ul>
-<li>Quality: <strong>Highest, High, Medium, Low, Lower</strong> &gt; the higher quality, the more accurate camera position estimates, but the process is more time-consuming</li>
-</ul>
-<p><img data-src="../images/sparse_cloud.webp" style="width:40.0%"></p>
-<p><img data-src="../images/arrows.webp" style="width:10.0%"></p>
-<p><img data-src="../images/dense_cloud.webp" style="width:40.0%"></p>
-</section>
-<section id="building-dense-point-cloud-1" class="slide level2 smaller">
-<h2>Building dense point cloud</h2>
-<h3 id="depth-filtering-modes">Depth Filtering modes</h3>
-<p>Algorithms sorting outliers (due to some factors, like poor texture of some elements of the scene, noisy or badly focused images)</p>
-<ul>
-<li><strong>Mild</strong> depth filtering mode &gt; for <strong>complex geometry</strong> (numerous small details on the foreground), for important features not to be sorted out</li>
-<li><strong>Aggressive</strong> depth filtering mode &gt; sorting out most of the outliers</li>
-<li><strong>Moderate</strong> depth filtering mode &gt; results in between the Mild and Aggressive</li>
-</ul>
-</section>
-<section id="optional-editing-dense-point-cloud" class="slide level2 smaller">
-<h2>Optional: Editing dense point cloud</h2>
-<div class="columns">
-<div class="column" style="width:60%&quot;;">
-<ul>
-<li>Manual points removal</li>
-<li>Automatic filtering based on applied masks</li>
-<li>Sparse cloud only:
-<ul>
-<li>Reducing the number of points in the cloud by setting tie point per photo limit</li>
-<li>Automatic filtering based on:
-<ul>
-<li>Reprojection error</li>
-<li>Reconstruction uncertainty</li>
-<li>Image count</li>
-</ul></li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/editing_pointcloud.webp"></p>
-</div></div>
-</section>
-<section id="building-mesh" class="slide level2 smaller">
-<h2>Building mesh</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><strong>Arbitrary</strong> &gt; for modeling of any kind of object
-<ul>
-<li>Should be selected for closed objects (statues, buildings, etc.)</li>
-<li>Memory consumption: high</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/mesh.webp" style="width:65.0%"></p>
-</div></div>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><strong>High field</strong> &gt; for modeling of planar surfaces
-<ul>
-<li>Should be selected for aerial photography</li>
-<li>Memory consumption: low</li>
-<li>Allows for larger data sets processing</li>
-</ul></li>
-</ul>
-</div></div>
-</section>
-<section id="building-mesh-1" class="slide level2 smaller">
-<h2>Building mesh</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><strong>Source data</strong> &gt; the source for the mesh generation
-<ul>
-<li><strong>Sparse cloud</strong> &gt; fast 3D model generation (low quality)</li>
-<li><strong>Dense cloud</strong> &gt; high-quality output based on the previously reconstructed dense point cloud</li>
-</ul></li>
-<li><strong>Face count</strong> &gt; the maximum face count in the final mesh</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/mesh_low.webp"></p>
-<p><img data-src="../images/mesh_high.webp"></p>
-</div></div>
-</section>
-<section id="optional-editing-mesh" class="slide level2 smaller">
-<h2>Optional: Editing mesh</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><strong>Close Holes tool</strong> &gt; repairs your model if the reconstruction procedure resulted in a mesh with several holes, due to <strong>insufficient image overlap</strong>
-<ul>
-<li>Necessary step for <strong>volumes calculation</strong></li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/close_holes.webp"></p>
-</div></div>
-<ul>
-<li><strong>Decimation tool</strong> &gt; decreases the geometric resolution of the model by replacing a high-resolution mesh with a lower resolution one</li>
-</ul>
-</section>
-<section id="optional-editing-mesh-1" class="slide level2 smaller">
-<h2>Optional: Editing mesh</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li><strong>Automatic filtering</strong> based on specified criteria:
-<ul>
-<li>Connected component size</li>
-<li>Polygon size</li>
-</ul></li>
-<li>Manual polygon removal</li>
-<li>Fixing mesh topology</li>
-<li><strong>Editing mesh in the external program</strong>
-<ul>
-<li>Export mesh for editing in the external program</li>
-<li>Import edited mesh</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/mesh_editing.webp" style="width:80.0%"></p>
-<p><img data-src="../images/mesh_editing2.webp" style="width:80.0%"></p>
-</div></div>
-</section>
-<section id="generating-texture" class="slide level2 smaller">
-<h2>Generating texture</h2>
-<ul>
-<li>Determines how the object texture will be packed in the texture atlas</li>
-<li>Affects the quality of the final model</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/texture.webp" style="width:80.0%"></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><strong>Texture mapping modes:</strong>
-<ul>
-<li>Generic</li>
-<li>Adaptive orthophoto</li>
-<li>Orthophoto</li>
-<li>Spherical</li>
-<li>Single photo</li>
-<li>Keep uv</li>
-</ul></li>
-</ul>
-</div></div>
-</section>
-<section id="texture-mapping-modes" class="slide level2 smaller">
-<h2>Texture mapping modes</h2>
-<h3 id="generic">Generic</h3>
-<ul>
-<li>Creates as uniform texture as possible</li>
-</ul>
-<h3 id="adaptive-orthophoto">Adaptive orthophoto</h3>
-<ul>
-<li>The object surface split into the flat part and vertical regions</li>
-<li>The flat part of the surface textured using the orthographic projection, while vertical regions textured separately to maintain accurate texture representation in such regions</li>
-<li>More compact texture representation for nearly planar scenes + good texture quality for vertical surfaces</li>
-</ul>
-</section>
-<section id="texture-mapping-modes-1" class="slide level2 smaller">
-<h2>Texture mapping modes</h2>
-<h4 id="orthophoto-1">Orthophoto</h4>
-<ul>
-<li>The whole object surface textured in the orthographic projection</li>
-<li>Even more compact texture representation than the Adaptive orthophoto at the expense of texture quality in vertical regions</li>
-</ul>
-<h4 id="spherical">Spherical</h4>
-<ul>
-<li>Only for objects that have a ball-like form</li>
-</ul>
-<h4 id="single-photo">Single photo</h4>
-<ul>
-<li>Texture from a single photo (photo can be selected from ‘Texture from’ list)</li>
-</ul>
-<h4 id="keep-uv">Keep uv</h4>
-<ul>
-<li>Generates texture atlas using current texture parametrization; Rebuilding current texture with different resolution or generating the atlas parametrized in the external software</li>
-</ul>
-</section>
-<section id="generating-dsm" class="slide level2 smaller">
-<h2>Generating DSM</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/build_DEM.webp"></p>
-</div><div class="column" style="width:50%;">
-<h3 class="smaller" id="parameters">Parameters</h3>
-<ul>
-<li><strong>Source data:</strong> Dense point cloud</li>
-<li><strong>Interpolation</strong>
-<ul>
-<li>Disabled: leads to accurate reconstruction results since only areas corresponding to dense point cloud points are reconstructed</li>
-<li>Enabled (recommended): Interpolation mode - Agisoft will calculate DEM for all areas of the scene that are visible on at least one image.</li>
-</ul></li>
-</ul>
-</div></div>
-</section>
-<section id="generating-orthophoto" class="slide level2 smaller">
-<h2>Generating orthophoto</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><img data-src="../images/build_ortho.webp" style="width:70.0%"></p>
-</div><div class="column" style="width:60%;">
-<h3 id="parameters-1">Parameters</h3>
-<ul>
-<li><strong>Surface:</strong> DEM</li>
-<li><strong>Blending mode</strong>
-<ul>
-<li>Mosaic (default): Implements an approach with data division into several frequency domains, which are blended independently</li>
-<li>Average: Uses the weighted average value of all pixels from individual photos</li>
-<li>Disabled: The color value for the pixel is taken from the photo with the camera view being almost along the normal to the reconstructed surface in that point.</li>
-</ul></li>
-</ul>
-</div></div>
-</section>
-<section id="exporting-results-saving-intermediate-results" class="slide level2">
-<h2>Exporting results &amp; saving intermediate results</h2>
-<h4 id="orthophoto-export">Orthophoto export</h4>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/ortho_example.webp"></p>
-</div></div>
-</section>
-<section id="exporting-results-saving-intermediate-results-1" class="slide level2">
-<h2>Exporting results &amp; saving intermediate results</h2>
-<h4 id="dem-export">DEM export</h4>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/DSM.webp" style="width:150.0%"></p>
-</div></div>
-</section>
-<section id="exporting-results-saving-intermediate-results-2" class="slide level2">
-<h2>Exporting results &amp; saving intermediate results</h2>
-<h4 id="d-model-export">3D model export</h4>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/sketchfab.webp" style="width:72.0%"></p>
-</div></div>
-</section>
-<section id="exporting-results-saving-intermediate-results-3" class="slide level2">
-<h2>Exporting results &amp; saving intermediate results</h2>
-<h4 id="point-cloud-export">Point cloud export</h4>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/pointcloud.webp"></p>
-</div></div>
-</section>
-<section id="exporting-results-saving-intermediate-results-4" class="slide level2 smaller">
-<h2>Exporting results &amp; saving intermediate results</h2>
-<h3 id="processing-report-generation">Processing report generation</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/report_1.webp" style="width:60.0%"></p>
-<p><img data-src="../images/report_2.webp" style="width:60.0%"></p>
-</div></div>
-</section>
-<section id="processing-report" class="slide level2 smaller">
-<h2>Processing report</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<h3 id="includes">Includes:</h3>
-<ul>
-<li>Orthophoto and digital elevation model sketch</li>
-<li>Camera parameters and survey scheme</li>
-<li>Tie points data export (matching points and panoramas)</li>
-<li>Image overlap statistics</li>
-<li>Camera positioning error estimates</li>
-<li>Ground control point error estimates</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/Agisoft_report.webp" style="width:90.0%"></p>
-</div></div>
-</section>
-<section id="batch-processing" class="slide level2">
-<h2>Batch processing</h2>
+::: {.columns}
+::: {.column width="50%"}
 
-<img data-src="../images/Agisoft_batch.webp" class="r-stretch"></section>
-<section id="quality-processing-with-gcps" class="slide level2 smaller">
-<h2>Quality processing with GCPs</h2>
-<ul>
-<li>Marker positions are defined by their projections on the source photos</li>
-<li>After optimizing alignment based on markers, Point cloud generation and other steps need to be performed
-<ul>
-<li>Used for:
-<ul>
-<li>Setting up a coordinate system</li>
-<li>Photo alignment optimization</li>
-<li>Measuring distances and volumes</li>
-<li>Marker-based chunk alignment</li>
-</ul></li>
-</ul></li>
-<li>More on GCP placing and processing in Agisoft see <a href="./2017_Imagery_Processing_assignment_intro.html">intro to the assignment</a></li>
-</ul>
+- Image-based solution aimed at creating 3D content from still images
+- Operates with arbitrary images and is efficient in both controlled and uncontrolled conditions
+- Both image alignment and 3D model reconstruction are fully automated
+
+::: 
+::: {.column width="50%"}
+
+- [Installer](http://www.agisoft.com/downloads/installer/)
+- [Manual](https://www.agisoft.com/pdf/metashape-pro_1_5_en.pdf)
+- Tutorials for:
+  - [Orthophoto and DSM generation with GCPs](http://www.agisoft.com/pdf/PS_1.3%20-Tutorial%20%28BL%29%20-%20Orthophoto,%20DEM%20%28GCPs%29.pdf)
+  - [Dense Cloud Classification & DTM Generation](https://agisoft.freshdesk.com/support/solutions/articles/31000148866-dense-cloud-classification)
+  - [DEM based Measurements](https://agisoft.freshdesk.com/support/solutions/articles/31000148884-dem-based-measurements-)
+- [YouTube channel](https://www.youtube.com/channel/UCPheXwPeFLnWHo8u4ksSH7w)
+
+![](../images/Agisoft_Logo.webp){ width=30% }
+
+::: 
+::: 
+
+---
+
+## Processing workflow {.smaller}
+
+![](../images/flowchart_processing_plain.webp)
+
+### Preprocessing stage:
+
+![](../images/flowchart_processing_pre.webp)
+
+- Loading photos into Metashape
+- Inspecting loaded images, removing unnecessary images
+
+---
+
+## Processing workflow {.smaller}
+
+### Processing stage:
+
+![](../images/flowchart_processing_exporting.webp)
+
+1. Aligning photos
+2. Building dense point cloud
+    - (optional: editing dense point cloud)
+3. Building mesh (3D polygonal model)
+    - (optional: editing mesh)
+4. Generating texture
+5. Building DSM and orthomosaic
+
+---
+
+## Exporting results
+
+![](../images/flowchart_processing_ex.webp)
+
+![](../images/processing_outputs.webp)
+
+---
+
+## Preprocessing
+
+- Loading photos
+- Loading camera positions (flight log)
+- If the EO is in the photos EXIF file, the parameters will load automatically
+
+![](../images/camera_positions.webp){ width=70% }
+
+---
+
+## Aligning photos {.smaller}
+
+At this stage, Agisoft Metashape implements SfM algorithms to monitor the movement of features through a sequence of multiple images:
+
+::: {.columns}
+::: {.column width="50%"}
+
+- Obtains the relative location of the acquisition positions
+- Refines camera calibration parameters
+- **Sparse point cloud** and a set of **camera positions** are formed
+
+::: 
+::: {.column width="50%"}
+
+![](../images/aligning_photos_funny.webp){ width=60% }
+
+::: 
+::: 
+
+---
+
+## Bundle Block Adjustment {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+- Non-linear method for refining structure and motion
+- Minimizing reprojection error
+- Detecting image feature points (i.e., various geometrical similarities such as object edges or other specific details)
+
+::: 
+::: {.column width="50%"}
+
+![](../images/bundle_block_adjustment.webp)
+
+::: 
+::: 
+
+---
+
+## Bundle Block Adjustment {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+- Subsequently monitoring the movement of those points throughout the sequence of multiple images
+- Using this information as input, the locations of those feature points can be estimated and rendered as a sparse 3D point cloud
+
+::: 
+::: {.column width="50%"}
+
+![](../images/Bundle_Block_Adjustment2.webp)
+
+::: 
+::: 
+
+---
+
+## Aligning cameras in Metashape {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/aligned_photos.webp){ width=58.5% }
+
+::: 
+::: {.column width="50%"}
+
+![](../images/sparse_cloud.webp){ width=39% }
+
+<p class="small"><strong>Sparse point cloud</strong> generation</p>
+
+::: 
+::: 
+
+**Accuracy**
+
+- **High** accuracy setting > more accurate camera position estimates (time-consuming)
+- **Low** accuracy setting > rough camera positions
+
+---
+
+## Building dense point cloud {.smaller}
+
+At the stage of dense point cloud generation, Agisoft calculates depth maps for every image
+
+- Quality: **Highest, High, Medium, Low, Lower** > the higher quality, the more accurate camera position estimates, but the process is more time-consuming
+
+![](../images/sparse_cloud.webp){ width=40% }
+
+![](../images/arrows.webp){ width=10% }
+
+![](../images/dense_cloud.webp){ width=40% }
+
+---
+
+## Building dense point cloud {.smaller}
+
+### Depth Filtering modes
+
+Algorithms sorting outliers (due to some factors, like poor texture of some elements of the scene, noisy or badly focused images)
+
+- **Mild** depth filtering mode > for **complex geometry** (numerous small details on the foreground), for important features not to be sorted out
+- **Aggressive** depth filtering mode > sorting out most of the outliers
+- **Moderate** depth filtering mode > results in between the Mild and Aggressive
+
+---
+
+## Optional: Editing dense point cloud {.smaller}
+
+::: {.columns}
+::: {.column width=60%"}
+
+- Manual points removal
+- Automatic filtering based on applied masks
+- Sparse cloud only:
+  - Reducing the number of points in the cloud by setting tie point per photo limit
+  - Automatic filtering based on:
+    - Reprojection error
+    - Reconstruction uncertainty
+    - Image count
+
+::: 
+::: {.column width="40%"}
+
+![](../images/editing_pointcloud.webp)
+
+::: 
+::: 
+
+---
+
+## Building mesh {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+- **Arbitrary** > for modeling of any kind of object
+  - Should be selected for closed objects (statues, buildings, etc.)
+  - Memory consumption: high
+
+::: 
+::: {.column width="50%"}
+
+![](../images/mesh.webp){ width=65% }
+
+::: 
+::: 
+
+::: {.columns}
+::: {.column width="50%"}
+
+- **High field** > for modeling of planar surfaces
+  - Should be selected for aerial photography
+  - Memory consumption: low
+  - Allows for larger data sets processing
+
+::: 
+::: 
+
+---
+
+## Building mesh {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+- **Source data** > the source for the mesh generation
+  - **Sparse cloud** > fast 3D model generation (low quality)
+  - **Dense cloud** > high-quality output based on the previously reconstructed dense point cloud
+- **Face count** > the maximum face count in the final mesh
+
+::: 
+::: {.column width="50%"}
+
+![](../images/mesh_low.webp)
+
+![](../images/mesh_high.webp)
+
+::: 
+::: 
+
+---
+
+## Optional: Editing mesh {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+- **Close Holes tool** > repairs your model if the reconstruction procedure resulted in a mesh with several holes, due to **insufficient image overlap**
+  - Necessary step for **volumes calculation**
+
+::: 
+::: {.column width="50%"}
+
+![](../images/close_holes.webp)
+
+::: 
+::: 
+
+- **Decimation tool** > decreases the geometric resolution of the model by replacing a high-resolution mesh with a lower resolution one
+
+---
+
+## Optional: Editing mesh {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+- **Automatic filtering** based on specified criteria:
+  - Connected component size
+  - Polygon size
+- Manual polygon removal
+- Fixing mesh topology
+- **Editing mesh in the external program**
+  - Export mesh for editing in the external program
+  - Import edited mesh
+
+::: 
+::: {.column width="40%"}
+
+![](../images/mesh_editing.webp){ width=80% }
+
+![](../images/mesh_editing2.webp){ width=80% }
+
+::: 
+::: 
+
+---
+
+## Generating texture {.smaller}
+
+- Determines how the object texture will be packed in the texture atlas
+- Affects the quality of the final model
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/texture.webp){ width=80% }
+
+::: 
+::: {.column width="50%"}
+
+- **Texture mapping modes:**
+  - Generic
+  - Adaptive orthophoto
+  - Orthophoto
+  - Spherical
+  - Single photo
+  - Keep uv
+
+::: 
+::: 
+
+---
+
+## Texture mapping modes {.smaller}
+
+### Generic
+
+- Creates as uniform texture as possible
+
+### Adaptive orthophoto
+
+- The object surface split into the flat part and vertical regions
+- The flat part of the surface textured using the orthographic projection, 
+  while vertical regions textured separately to maintain accurate texture representation in such regions
+- More compact texture representation for nearly planar scenes + good texture quality 
+  for vertical surfaces
+
+---
+
+## Texture mapping modes {.smaller}
+
+#### Orthophoto
+
+- The whole object surface textured in the orthographic projection
+- Even more compact texture representation than the Adaptive orthophoto at
+  the expense of texture quality in vertical regions
+
+#### Spherical
+
+- Only for objects that have a ball-like form
+
+#### Single photo
+
+- Texture from a single photo (photo can be selected from 'Texture from' list)
+
+#### Keep uv
+
+- Generates texture atlas using current texture parametrization; Rebuilding current texture with different resolution or generating
+  the atlas parametrized in the external software
+
+---
+
+## Generating DSM {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/build_DEM.webp)
+
+::: 
+::: {.column width="50%"}
+
+### Parameters {.smaller}
+
+- **Source data:** Dense point cloud
+- **Interpolation**
+  - Disabled: leads to accurate reconstruction results since only areas corresponding to dense point cloud points are reconstructed
+  - Enabled (recommended): Interpolation mode - Agisoft will calculate DEM for all areas of the scene that are visible on at least one image.
+
+::: 
+::: 
+
+---
+
+## Generating orthophoto {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+
+![](../images/build_ortho.webp){ width=70% }
+
+::: 
+::: {.column width="60%"}
+
+### Parameters
+
+- **Surface:** DEM
+- **Blending mode**
+  - Mosaic (default): Implements an approach with data division into several frequency domains, which are blended independently
+  - Average: Uses the weighted average value of all pixels from individual photos
+  - Disabled: The color value for the pixel is taken from the photo with the camera view being almost along the normal to the reconstructed surface in that point.
+
+::: 
+::: 
+
+---
+
+## Exporting results & saving intermediate results
+
+#### Orthophoto export
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/ortho_example.webp)
+
+::: 
+::: 
+
+---
+
+## Exporting results & saving intermediate results
+
+#### DEM export
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/DSM.webp){ width=150% }
+
+::: 
+::: 
+
+---
+
+## Exporting results & saving intermediate results
+
+#### 3D model export
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/sketchfab.webp){ width=72% }
+
+::: 
+::: 
+
+---
+
+## Exporting results & saving intermediate results
+
+#### Point cloud export
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/pointcloud.webp)
+
+::: 
+::: 
+
+---
+
+## Exporting results & saving intermediate results {.smaller}
+
+### Processing report generation
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](../images/report_1.webp){ width=60% }
+
+![](../images/report_2.webp){ width=60% }
+
+::: 
+::: 
+
+---
+
+## Processing report {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+### Includes:
+
+- Orthophoto and digital elevation model sketch
+- Camera parameters and survey scheme
+- Tie points data export (matching points and panoramas)
+- Image overlap statistics
+- Camera positioning error estimates
+- Ground control point error estimates
+
+::: 
+::: {.column width="40%"}
+
+![](../images/Agisoft_report.webp){ width=90% }
+
+::: 
+::: 
+
+---
+
+## Batch processing
+
+![](../images/Agisoft_batch.webp)
+
+---
+
+## Quality processing with GCPs {.smaller}
+
+- Marker positions are defined by their projections on the source photos
+- After optimizing alignment based on markers, Point cloud generation and other steps need to be performed
+  - Used for:
+    - Setting up a coordinate system
+    - Photo alignment optimization
+    - Measuring distances and volumes
+    - Marker-based chunk alignment
+- More on GCP placing and processing in Agisoft see [intro to the assignment](./2017_Imagery_Processing_assignment_intro.html)
+
+--- -->
 </section>
 <section id="what-did-we-learn" class="slide level2">
 <h2>What did we learn?</h2>
 <ul>
 <li>What is a general workflow for UAS imagery processing</li>
-<li>How do we transform UAS data into orthophoto, DSM, 3D model, and point cloud</li>
-<li>How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program</li>
+<li>How do we transform UAS data into orthophoto, DSM, 3D model, and point cloud <!-- - How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program --></li>
 </ul>
 
 <div class="quarto-auto-generated-content">
