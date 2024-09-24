@@ -46,3 +46,6 @@ format:
     toc: true
     toc-title: Table of Contents
     include-before-body: includes/banner.html
+    
+execute: 
+  freeze: auto

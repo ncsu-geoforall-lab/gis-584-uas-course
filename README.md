@@ -6,7 +6,7 @@ Course website for GIS/MAE 584 Mapping and Analytics Using UAS
 
 ## Requirements
 
-[Quarto: v1.4](https://quarto.org/docs/get-started/)
+[Quarto: v1.5.57](https://quarto.org/docs/get-started/)
 
 ## Configuration
 
