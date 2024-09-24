@@ -268,5 +268,7 @@ Python shell for one-line statements, editor for scripts
 
 - Enables running GRASS GIS modules
 - Import:
+
 ```python
 import grass.script as gs
+```
