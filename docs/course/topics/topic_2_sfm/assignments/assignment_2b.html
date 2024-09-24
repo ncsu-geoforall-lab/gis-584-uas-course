@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,8 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script type="module" src="../../../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
 </head>
@@ -125,14 +161,45 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#geoprocessing-of-the-uas-data" id="toc-geoprocessing-of-the-uas-data" class="nav-link active" data-scroll-target="#geoprocessing-of-the-uas-data">Geoprocessing of the UAS data</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#general-workflow-with-gcps" id="toc-general-workflow-with-gcps" class="nav-link" data-scroll-target="#general-workflow-with-gcps">General workflow (with GCPs)</a></li>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation">Preparation</a></li>
-  <li><a href="#stage-1-aligning-photos-in-low-quality-in-order-to-place-gcps" id="toc-stage-1-aligning-photos-in-low-quality-in-order-to-place-gcps" class="nav-link" data-scroll-target="#stage-1-aligning-photos-in-low-quality-in-order-to-place-gcps">Stage 1: Aligning photos in low quality (in order to place GCPs)</a></li>
-  <li><a href="#stage-2-placing-gcps" id="toc-stage-2-placing-gcps" class="nav-link" data-scroll-target="#stage-2-placing-gcps">Stage 2: Placing GCPs</a></li>
-  <li><a href="#stage-3-building-complex-geometry-for-quality-processing" id="toc-stage-3-building-complex-geometry-for-quality-processing" class="nav-link" data-scroll-target="#stage-3-building-complex-geometry-for-quality-processing">Stage 3: Building complex geometry (for quality processing)</a></li>
-  <li><a href="#stage-4-exporting-results" id="toc-stage-4-exporting-results" class="nav-link" data-scroll-target="#stage-4-exporting-results">Stage 4: Exporting results</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation">Preparation</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#preferences" id="toc-preferences" class="nav-link" data-scroll-target="#preferences">Preferences</a></li>
   </ul></li>
+  <li><a href="#stage-1-aligning-photos" id="toc-stage-1-aligning-photos" class="nav-link" data-scroll-target="#stage-1-aligning-photos">Stage 1: Aligning Photos</a>
+  <ul class="collapse">
+  <li><a href="#adding-photos" id="toc-adding-photos" class="nav-link" data-scroll-target="#adding-photos">Adding photos</a></li>
+  <li><a href="#loading-camera-positions" id="toc-loading-camera-positions" class="nav-link" data-scroll-target="#loading-camera-positions">Loading camera positions</a></li>
+  <li><a href="#aligning-photos" id="toc-aligning-photos" class="nav-link" data-scroll-target="#aligning-photos">Aligning photos</a></li>
+  </ul></li>
+  <li><a href="#stage-2-placing-gcps" id="toc-stage-2-placing-gcps" class="nav-link" data-scroll-target="#stage-2-placing-gcps">Stage 2: Placing GCPs</a>
+  <ul class="collapse">
+  <li><a href="#loading-the-gcps-coordinates" id="toc-loading-the-gcps-coordinates" class="nav-link" data-scroll-target="#loading-the-gcps-coordinates">Loading the GCPs coordinates</a></li>
+  <li><a href="#indicating-gcps-on-the-pictures" id="toc-indicating-gcps-on-the-pictures" class="nav-link" data-scroll-target="#indicating-gcps-on-the-pictures">Indicating GCPs on the pictures</a></li>
+  <li><a href="#optimizing-alignment" id="toc-optimizing-alignment" class="nav-link" data-scroll-target="#optimizing-alignment">Optimizing alignment</a></li>
+  <li><a href="#optimizing-based-on-the-gcp-markers" id="toc-optimizing-based-on-the-gcp-markers" class="nav-link" data-scroll-target="#optimizing-based-on-the-gcp-markers">Optimizing based on the GCP Markers</a></li>
+  </ul></li>
+  <li><a href="#stage-3-building-complex-geometry" id="toc-stage-3-building-complex-geometry" class="nav-link" data-scroll-target="#stage-3-building-complex-geometry">Stage 3: Building complex geometry</a>
+  <ul class="collapse">
+  <li><a href="#editing-geometry" id="toc-editing-geometry" class="nav-link" data-scroll-target="#editing-geometry">Editing geometry</a></li>
+  <li><a href="#building-dem" id="toc-building-dem" class="nav-link" data-scroll-target="#building-dem">Building DEM</a></li>
+  <li><a href="#building-orthophoto" id="toc-building-orthophoto" class="nav-link" data-scroll-target="#building-orthophoto">Building Orthophoto</a></li>
+  <li><a href="#batch-processing" id="toc-batch-processing" class="nav-link" data-scroll-target="#batch-processing">Batch processing</a></li>
+  </ul></li>
+  <li><a href="#stage-4-exporting-results" id="toc-stage-4-exporting-results" class="nav-link" data-scroll-target="#stage-4-exporting-results">Stage 4: Exporting results</a>
+  <ul class="collapse">
+  <li><a href="#orthomosaic" id="toc-orthomosaic" class="nav-link" data-scroll-target="#orthomosaic">Orthomosaic</a></li>
+  <li><a href="#digital-surface-model" id="toc-digital-surface-model" class="nav-link" data-scroll-target="#digital-surface-model">Digital surface model</a></li>
+  <li><a href="#generating-report" id="toc-generating-report" class="nav-link" data-scroll-target="#generating-report">Generating report</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
+  <li><a href="#point-cloud" id="toc-point-cloud" class="nav-link" data-scroll-target="#point-cloud">Point cloud</a></li>
+  <li><a href="#camera-calibration-and-orientation-data" id="toc-camera-calibration-and-orientation-data" class="nav-link" data-scroll-target="#camera-calibration-and-orientation-data">Camera calibration and orientation data</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#render-3d-model" id="toc-render-3d-model" class="nav-link" data-scroll-target="#render-3d-model">Render 3D Model</a></li>
   </ul>
 </nav>
     </div>
@@ -172,29 +239,45 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="general-workflow-with-gcps">General workflow (with GCPs)</h3>
 <p><strong>Preparation</strong></p>
 <ul>
-<li>Stage 1: Building simple geometry (in order to place GCPs)</li>
-<li>Stage 2: Placing GCPs</li>
-<li>Stage 3: Building complex geometry</li>
-<li>Stage 4: Exporting results</li>
+<li><a href="#stage-1-aligning-photos">Stage 1</a>: Building simple geometry (in order to place GCPs)</li>
+<li><a href="#stage-2-placing-gcps">Stage 2</a>: Placing GCPs</li>
+<li><a href="#stage-3-building-complex-geometry">Stage 3</a>: Building complex geometry</li>
+<li><a href="#stage-4-exporting-results">Stage 4</a>: Exporting results</li>
 </ul>
 </section>
 <section id="preparation" class="level3">
 <h3 class="anchored" data-anchor-id="preparation">Preparation</h3>
 <section id="data" class="level4">
 <h4 class="anchored" data-anchor-id="data">Data</h4>
-<ul>
-<li><strong>OPTION 1: Small area (to accelerate processing), but photos not downsampled (to obtain the highest resolution of the outputs)</strong>
+<section id="option-1---small-area" class="level5">
+<h5 class="anchored" data-anchor-id="option-1---small-area">OPTION 1 - Small area</h5>
+<p>You can use a smaller area to accelerate processing. The photos are not downsampled in order to obtain the highest resolution of the outputs.</p>
 <ul>
 <li><a href="https://drive.google.com/open?id=1pKD7N0dzOZLQSWD4cj98UWrvrR62pxVW">download data</a> - photos, log and coordinates of 3 GCPs</li>
-<li><strong>Processing outputs</strong> from this option are provided <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/092216/RESULTS_Sample_downsized.zip">here</a></li>
-</ul></li>
-<li><strong>OPTION 2: Full flight, photos original resolution</strong><br>
-<strong>LONG PROCESSING TIME!</strong>
+</ul>
+</section>
+<section id="option-2---full-flight-photos-original-resolution" class="level5">
+<h5 class="anchored" data-anchor-id="option-2---full-flight-photos-original-resolution">OPTION 2 - Full flight, photos original resolution</h5>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>LONG PROCESSING TIME!</strong></p>
+</div>
+</div>
 <ul>
 <li><a href="https://drive.google.com/file/d/13wPTiJcBaxX2AZjibT9N7QIffHddoaqZ">download data</a> - photos, log and coordinates of 12 GCPs</li>
-</ul></li>
-<li><strong>OPTION 3: You can use your own data</strong></li>
 </ul>
+</section>
+<section id="option-3-you-can-use-your-own-data" class="level5">
+<h5 class="anchored" data-anchor-id="option-3-you-can-use-your-own-data">OPTION 3: You can use your own data</h5>
+</section>
 </section>
 <section id="software" class="level4">
 <h4 class="anchored" data-anchor-id="software">Software</h4>
@@ -205,14 +288,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="preferences" class="level4">
 <h4 class="anchored" data-anchor-id="preferences">Preferences</h4>
 <p>When launching Metashape for the first time, some settings need to be adjusted to optimize performance. These settings need to be done only once, at the first use of Metashape, and are loaded by default in subsequent sessions.</p>
-<p>Menu &gt; Tools &gt; Preferences</p>
+<section id="menu-tools-preferences" class="level5">
+<h5 class="anchored" data-anchor-id="menu-tools-preferences">Menu &gt; Tools &gt; Preferences</h5>
 <p><strong>General tab:</strong></p>
 <ul>
 <li>Leave default (optional – write log to file: enabled, if you want to save the txt log file)</li>
 </ul>
 <p><strong>GPU tab:</strong></p>
 <ul>
-<li>Check the “USE CPU when performing GPU accelerated processing” option at the bottom</li>
+<li>Check the <code>USE CPU when performing GPU accelerated processing</code> option at the bottom</li>
 </ul>
 <p><strong>Appearance Tab:</strong></p>
 <ul>
@@ -226,14 +310,14 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Project Files
 <ul>
-<li>Keep key points: disabled</li>
-<li>Keep depth maps: disabled</li>
-<li>Store absolute image paths: disabled</li>
+<li>Keep key points: <code>disabled</code></li>
+<li>Keep depth maps: <code>disabled</code></li>
+<li>Store absolute image paths: <code>disabled</code></li>
 </ul></li>
-<li>Export/Import: enable all</li>
+<li>Export/Import: <code>enable all</code></li>
 <li>Miscellaneous:
 <ul>
-<li>Enable fine level task division: enabled</li>
+<li>Enable fine level task division: <code>enabled</code></li>
 </ul></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -244,199 +328,251 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 </section>
-<section id="stage-1-aligning-photos-in-low-quality-in-order-to-place-gcps" class="level3">
-<h3 class="anchored" data-anchor-id="stage-1-aligning-photos-in-low-quality-in-order-to-place-gcps">Stage 1: Aligning photos in low quality (in order to place GCPs)</h3>
+</section>
+<section id="stage-1-aligning-photos" class="level3">
+<h3 class="anchored" data-anchor-id="stage-1-aligning-photos">Stage 1: Aligning Photos</h3>
 <p>In order to localize the GCPs first a preliminary simple model needs to be built.</p>
 <section id="adding-photos" class="level4">
 <h4 class="anchored" data-anchor-id="adding-photos">Adding photos</h4>
-<p>Menu &gt; Workflow &gt; Add Photos</p>
-<p>Indicate the path to the folder (downloaded data) containing photos and select them all. In the Reference pane, you can see that the photos have been loaded, but the coordinate system indicates local coordinates. It can be changed in the Settings. Click the settings icon <img src="images/settings_icon.webp" class="img-fluid" alt="Settings Icon"> &gt; change coordinate system to WGS 84 (EPSG:4326).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/agi_reference.webp" class="img-fluid figure-img"></p>
-<figcaption>Reference</figcaption>
-</figure>
-</div>
+<section id="menu-workflow-add-photos" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-add-photos">Menu &gt; Workflow &gt; Add Photos</h5>
+<p>Indicate the path to the folder (downloaded data) containing photos and select them all. In the Reference pane, you can see that the photos have been loaded, but the coordinate system indicates local coordinates. It can be changed in the Settings.</p>
+<p>Click the settings icon <img src="images/settings_icon.webp" class="img-fluid" width="25" alt="Settings Icon"> &gt; change coordinate system to <code>WGS 84 (EPSG:4326)</code>.</p>
+<p><img src="images/agi_reference.webp" class="img-fluid"></p>
+</section>
 </section>
 <section id="loading-camera-positions" class="level4">
 <h4 class="anchored" data-anchor-id="loading-camera-positions">Loading camera positions</h4>
-<p>Click Import button <img src="images/import_icon.webp" class="img-fluid" alt="Import Icon"> on the Reference pane toolbar &gt; select file containing camera positions information (log file*) in the Open dialog.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/log_load.webp" class="img-fluid figure-img"></p>
-<figcaption>Log Load</figcaption>
-</figure>
+<p>Click Import button <img src="images/import_icon.webp" class="img-fluid" width="25" alt="Import Icon"> on the Reference pane toolbar &gt; select file containing camera positions information (<code>2016_09_22_sample.txt</code>) in the Open dialog.</p>
+<p><img src="images/log_load.webp" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>*Agisoft supports the camera orientation files in 5 formats: .csv, .txt, .tel, .xml, and .log. The default format of the Trimble Aerial Imaging log is .jxl. In order to convert the Trimble .jxl log file please run <a href="https://github.com/wenzeslaus/jxl2csv">script by Vaclav Petras</a> or use <strong>provided already converted log in .txt format</strong>.</p>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Agisoft supports the camera orientation files in 5 formats: .csv, .txt, .tel, .xml, and .log. The default format of the Trimble Aerial Imaging log is .jxl. In order to convert the Trimble .jxl log file please run <a href="https://github.com/wenzeslaus/jxl2csv">script by Vaclav Petras</a> or use <strong>provided already converted log in .txt format</strong>.</p>
+</div>
+</div>
 <p>Make sure that the columns are named properly – you can adjust their placement by indicating column number (top right of dialog box).</p>
 </section>
 <section id="aligning-photos" class="level4">
 <h4 class="anchored" data-anchor-id="aligning-photos">Aligning photos</h4>
 <ul>
-<li>Accuracy: Low</li>
-<li>Check: Reference preselection</li>
-<li>Key point limit: default</li>
-<li>Tie point limit: default</li>
-<li>Adaptive camera model fitting: enabled</li>
+<li>Accuracy: <code>Low</code></li>
+<li>Check: <code>Reference preselection</code></li>
+<li>Key point limit: <code>default</code></li>
+<li>Tie point limit: <code>default</code></li>
+<li>Adaptive camera model fitting: <code>enabled</code></li>
 </ul>
-<p>Menu &gt; Workflow &gt; Align Photos</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/align_photos.webp" class="img-fluid figure-img"></p>
-<figcaption>Align Photos</figcaption>
-</figure>
-</div>
-<p>Click Save <img src="images/save_icon.webp" class="img-fluid" alt="Save Icon"> in the toolbar.</p>
+<section id="menu-workflow-align-photos" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-align-photos">Menu &gt; Workflow &gt; Align Photos</h5>
+<p><img src="images/align_photos.webp" class="img-fluid"></p>
+<p>Click Save <img src="images/save_icon.webp" class="img-fluid" width="25"> in the toolbar.</p>
+</section>
 </section>
 </section>
 <section id="stage-2-placing-gcps" class="level3">
 <h3 class="anchored" data-anchor-id="stage-2-placing-gcps">Stage 2: Placing GCPs</h3>
 <section id="loading-the-gcps-coordinates" class="level4">
 <h4 class="anchored" data-anchor-id="loading-the-gcps-coordinates">Loading the GCPs coordinates</h4>
-<p>Click Import button <img src="images/import_icon.webp" class="img-fluid" alt="Import Icon"> on the Reference pane toolbar &gt; select file containing Ground Control Points coordinates in the Open dialog.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/import_GCP.webp" class="img-fluid figure-img"></p>
-<figcaption>Import GCP</figcaption>
-</figure>
-</div>
+<p>Click Import button <img src="images/import_icon.webp" class="img-fluid" width="25"> on the Reference pane toolbar &gt; select the file containing Ground Control Points (<code>GCP_3.txt</code>) coordinates in the Open dialog.</p>
+<p><img src="images/import_GCP.webp" class="img-fluid"></p>
 <p>Make sure that the columns are named properly – you can adjust their placement by indicating column number (top right of dialog box). This time you uncheck the <em>Rotation</em> box since GCPs are stationary and do not need determining yaw pitch and roll angles.</p>
 <p>The window with the message: <em>Can’t find match for ‘UAV 3’ entry. Create new marker?</em> will pop up.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/no_match_new_marker.webp" class="img-fluid figure-img"></p>
-<figcaption>No Match New Marker</figcaption>
-</figure>
-</div>
+<p><img src="images/no_match_new_marker.webp" class="img-fluid"></p>
 <p>Choose ‘Yes to All’ – it will create new marker for each of the named GCPs from the file. They will be listed in Reference pane under the list of photos.</p>
 </section>
 <section id="indicating-gcps-on-the-pictures" class="level4">
 <h4 class="anchored" data-anchor-id="indicating-gcps-on-the-pictures">Indicating GCPs on the pictures</h4>
 <p>Now you need to find each of the GCPs and indicate its localization on all photos depicting it. You can also see the process on the <a href="https://www.youtube.com/watch?v=nnKJWev7Jyc">instructional video</a>.</p>
-<p>The Model pane shows approximate positions of GCPs, it is better visible if the ‘Show cameras’ option is disabled (Menu &gt; View &gt; Show/Hide Items &gt; Show cameras).</p>
+<p>The Model pane shows approximate positions of GCPs, it is better visible if the ‘Show cameras’ option is disabled (<em>Menu &gt; View &gt; Show/Hide Items &gt; Show cameras</em>).</p>
 <p><img src="images/gcps_cameras.webp" class="img-fluid" alt="GCPs Cameras"> <img src="images/gcps_photo.webp" class="img-fluid" alt="GCPs Photo"></p>
-<p>Choose in the context menu of the selected point on the list (right click) &gt; Filter Photos by Marker.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/filter_photos_by_marker.webp" class="img-fluid figure-img"></p>
-<figcaption>Filter Photos by Marker</figcaption>
-</figure>
-</div>
+<p>Choose in the context menu of the selected point on the list (right click) &gt; <code>Filter Photos by Marker</code>.</p>
+<p><img src="images/filter_photos_by_marker.webp" class="img-fluid"></p>
 <p>In the Photos pane appear only the images in which the currently selected GCP is probably* visible.</p>
-<p>*This is possible because our pictures are geotagged (log indicates the position of each photo), if you will be working with the pictures that are not geotagged or in the area that you don’t know and are not able to “guess” which photo depicts which GCP, it is useful to build the dense point cloud or even mesh and texture (see the following steps) to see the preliminary model of the area in the Model pane, not just a sparse cloud (this is depicted on the figures above).</p>
-<p>Open an image by double clicking the thumbnail. It will open in a tab next to the Model pane. The GCP will appear as a grey icon <img src="images/gcp_gray.webp" class="img-fluid" alt="GCP Gray">. This icon needs to be moved to the middle of GCP visible on the photo.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/gcp_reposition.webp" class="img-fluid figure-img"></p>
-<figcaption>GCP Reposition</figcaption>
-</figure>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>*This is possible because our pictures are geotagged (log indicates the position of each photo), if you will be working with the pictures that are not geotagged or in the area that you don’t know and are not able to “guess” which photo depicts which GCP, it is useful to build the dense point cloud or even mesh and texture (see the following steps) to see the preliminary model of the area in the Model pane, not just a sparse cloud (this is depicted on the figures above).</p>
+</div>
+</div>
+<p>Open an image by double clicking the thumbnail. It will open in a tab next to the Model pane. The GCP will appear as a grey icon <img src="images/gcp_gray.webp" class="img-fluid" width="45" alt="GCP Gray">. This icon needs to be moved to the middle of GCP visible on the photo.</p>
+<p><img src="images/gcp_reposition.webp" class="img-fluid"></p>
 <p>Drag the marker to the correct measurement position. At that point, the marker will appear as a green flag, meaning it is enabled and will be used for further processing.</p>
 <p>Double click on the next photo and repeat the steps. As soon as the GCP marker position has already been indicated on at least two images, the proposed position will almost exactly match the point of measurement. You can now slightly drag the marker to enable it (turning it into a green flag) or leave it unchanged (gray marker icon) to exclude it from processing.</p>
 <p>Filter photos by each marker again. Agisoft adjusts the GCPs positions on the run, so you can locate the GCP on additional images that will appear in the Photos pane.</p>
-<p>In this sample processing we will include 4 GCPs. Mathematically, you need to indicate marker positions for at least 3 GCPs. Accurate error estimates can be calculated with at least 4 GCPs, while often at least 5 are needed to cover the center of the project as well, which reduces the chance of error propagation and resulting terrain distortions especially on flat or undulating terrain types.</p>
-<p>Click Save <img src="images/save_icon.webp" class="img-fluid" alt="Save Icon"> in the toolbar.</p>
+<p>In this sample processing we will include 3 GCPs. Mathematically, you need to indicate marker positions for at least 3 GCPs. Accurate error estimates can be calculated with at least 4 GCPs, while often at least 5 are needed to cover the center of the project as well, which reduces the chance of error propagation and resulting terrain distortions especially on flat or undulating terrain types.</p>
+<p>Click Save <img src="images/save_icon.webp" class="img-fluid" width="25" alt="Save Icon"> in the toolbar.</p>
 </section>
 <section id="optimizing-alignment" class="level4">
 <h4 class="anchored" data-anchor-id="optimizing-alignment">Optimizing alignment</h4>
-<p>You can see the errors by clicking on the View Errors icon <img src="images/view_errors_icon.webp" class="img-fluid" alt="View Errors Icon">. Best results are obtained when the alignment is first optimized based on the camera coordinates only, and a second time based on the GCP only.</p>
-<p>Click Optimize icon <img src="images/optimize_icon.webp" class="img-fluid" alt="Optimize Icon"> in the Ground Control toolbar (check all the boxes).</p>
+<p>You can see the errors by clicking on the View Errors icon <img src="images/view_errors_icon.webp" class="img-fluid" width="25" alt="View Errors Icon">. Best results are obtained when the alignment is first optimized based on the camera coordinates only, and a second time based on the GCP only.</p>
+<p>Click Optimize icon <img src="images/optimize_icon.webp" class="img-fluid" width="25" alt="Optimize Icon"> in the Ground Control toolbar (check all the boxes).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depending on the version of Metashap the optimize icon may appear as a star.</p>
+</div>
+</div>
 </section>
 <section id="optimizing-based-on-the-gcp-markers" class="level4">
 <h4 class="anchored" data-anchor-id="optimizing-based-on-the-gcp-markers">Optimizing based on the GCP Markers</h4>
 <p>In the Ground Control pane:</p>
 <ul>
-<li>disable all the camera coordinates (select one &gt; press Ctrl+A &gt; right-click &gt; choose Uncheck).</li>
-<li>enable all the GCP Marker coordinates (select one &gt; press Ctrl+A &gt; right-click &gt; choose Check).</li>
+<li>disable all the camera coordinates (<em>select one &gt; press Ctrl+A &gt; right-click &gt; <code>choose Uncheck</code></em>).</li>
+<li>enable all the GCP Marker coordinates (<em>select one &gt; press Ctrl+A &gt; right-click &gt; <code>choose Check</code></em>).</li>
 </ul>
-<p>Click Settings icon <img src="images/settings_icon.webp" class="img-fluid" alt="Settings Icon"> in the Ground Control toolbar:</p>
+<p>Click Settings icon <img src="images/settings_icon.webp" class="img-fluid" width="25" alt="Settings Icon"> in the Ground Control toolbar:</p>
 <ul>
 <li>leave the default values (Marker accuracy (m) = 0.005 m)</li>
 </ul>
-<p>Click Optimize icon <img src="images/optimize_icon.webp" class="img-fluid" alt="Optimize Icon"> in the Ground Control toolbar (leave all options at the default).</p>
-<p>Click Save <img src="images/save_icon.webp" class="img-fluid" alt="Save Icon"> in the toolbar.</p>
-<p>You can now see how much the errors were reduced through optimization by clicking on the View Errors icon <img src="images/view_errors_icon.webp" class="img-fluid" alt="View Errors Icon">.</p>
+<p>Click Optimize icon <img src="images/optimize_icon.webp" class="img-fluid" width="25" alt="Optimize Icon"> in the Ground Control toolbar (leave all options at the default).</p>
+<p>Click Save <img src="images/save_icon.webp" class="img-fluid" width="25" alt="Save Icon"> in the toolbar.</p>
+<p>You can now see how much the errors were reduced through optimization by clicking on the View Errors icon <img src="images/view_errors_icon.webp" class="img-fluid" width="25" alt="View Errors Icon">.</p>
 </section>
 </section>
-<section id="stage-3-building-complex-geometry-for-quality-processing" class="level3">
-<h3 class="anchored" data-anchor-id="stage-3-building-complex-geometry-for-quality-processing">Stage 3: Building complex geometry (for quality processing)</h3>
+<section id="stage-3-building-complex-geometry" class="level3">
+<h3 class="anchored" data-anchor-id="stage-3-building-complex-geometry">Stage 3: Building complex geometry</h3>
 <p>Before starting the Build Dense Cloud step it is recommended to check the bounding box of the reconstruction (to make sure that it includes the whole region of interest, in all dimensions). The bounding box should also not be too large (increased processing time and memory requirements).</p>
-<p>The bounding box can be adjusted using the Resize Region <img src="images/resize_region.webp" class="img-fluid" alt="Resize Region"> and the Rotate Region <img src="images/rotate_region.webp" class="img-fluid" alt="Rotate Region"> tool from the toolbar. Make sure that the base (red plane) is at the bottom.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/rotated_view.webp" class="img-fluid figure-img"></p>
-<figcaption>Rotated View</figcaption>
-</figure>
-</div>
-<p>The next steps will be time consuming (depending on the desired quality and number of pictures). You can execute them one step at the time, what would be explained below. You can also set a batch processing that does not require user interaction until the end of geoprocessing (especially useful in case of Ultra High quality that requires even several days of processing). The batch processing will be explained at the end of this section.</p>
-<p>Menu &gt; Workflow &gt; Build Dense Cloud</p>
+<p>The bounding box can be adjusted using the Resize Region <img src="images/resize_region.webp" class="img-fluid" width="25" alt="Resize Region"> and the Rotate Region <img src="images/rotate_region.webp" class="img-fluid" width="25" alt="Rotate Region"> tool from the toolbar. Make sure that the base (red plane) is at the bottom.</p>
+<p><img src="images/rotated_view.webp" class="img-fluid"></p>
+<p>The next steps will be time consuming (depending on the desired quality and number of pictures). You can execute them one step at the time or you can also set a batch processing that does not require user interaction until the end of geoprocessing (especially useful in case of Ultra High quality that requires even several days of processing). The batch processing will be explained at the end of this section.</p>
+<section id="menu-workflow-build-dense-cloud-build-point-cloud" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-build-dense-cloud-build-point-cloud">Menu &gt; Workflow &gt; Build Dense Cloud (Build Point Cloud)</h5>
 <ul>
-<li>Quality = Medium*
-<ul>
-<li>Medium (will downsample the images to get a 3D coordinate every 4 pixels)</li>
-<li>High (will downsample the images to get a 3D coordinate every 2 pixels; typically takes several hours but will give acceptable results for most cases)</li>
-<li>Ultra high (will calculate a 3D coordinate for every pixel in original imagery; may take more than a day or several days)</li>
-</ul></li>
-<li>Depth filtering = Aggressive</li>
+<li>Quality: <code>Medium</code></li>
+<li>Depth filtering: <code>Aggressive</code></li>
 </ul>
-<p>*When working with large datasets take into consideration the RAM size requirements for the different target qualities with respect to the number of images (in appendix in the <a href="https://www.agisoft.com/pdf/metashape-pro_1_5_en.pdf">manual</a> or in <a href="http://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/04_Imagery_Processing.html#/40">lecture slides</a>).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/agi_build_dense_cloud.webp" class="img-fluid figure-img"></p>
-<figcaption>Build Dense Cloud</figcaption>
-</figure>
-</div>
-<p>Click Save <img src="images/save_icon.webp" class="icon img-fluid"> in the toolbar</p>
-<p>Menu &gt; Workflow &gt; Build Mesh</p>
+<blockquote class="blockquote">
 <ul>
-<li>Surface type: Height field</li>
-<li>Source data: Dense cloud</li>
-<li>Face count: Medium</li>
+<li><code>Medium</code> (will downsample the images to get a 3D coordinate every 4 pixels)</li>
+<li><code>High</code> (will downsample the images to get a 3D coordinate every 2 pixels; typically takes several hours but will give acceptable results for most cases)</li>
+<li><code>Ultra high</code> (will calculate a 3D coordinate for every pixel in original imagery; may take more than a day or several days)</li>
+</ul>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When working with large datasets take into consideration the RAM size requirements for the different target qualities with respect to the number of images (in appendix in the <a href="https://www.agisoft.com/pdf/metashape-pro_2_1_en.pdf">manual</a>).</p>
+</div>
+</div>
+<p><img src="images/agi_build_dense_cloud.webp" class="img-fluid"></p>
+<p>Click Save <img src="images/save_icon.webp" class="img-fluid" width="25"> in the toolbar</p>
+</section>
+<section id="menu-workflow-build-mesh-build-model" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-build-mesh-build-model">Menu &gt; Workflow &gt; Build Mesh (Build Model)</h5>
+<ul>
+<li>Source data: <code>Dense cloud</code> or <code>Point cloud</code></li>
+<li>Surface type: <code>Height field</code></li>
+<li>Face count: <code>Medium</code></li>
 <li>Advanced options: leave default</li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><em>Face count set at “0” means that Metashape will determine an optimum number of faces (but this may not be enough to describe all the features on terrain)</em></p>
+</div>
+</div>
 <p><img src="images/agi_build_mesh.webp" class="img-fluid"></p>
-<p>Menu &gt; Workflow &gt; Build Texture</p>
+</section>
+<section id="menu-workflow-build-texture" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-build-texture">Menu &gt; Workflow &gt; Build Texture</h5>
 <ul>
-<li>Mapping mode: Orthophoto</li>
-<li>Blending mode: Mosaic (default)</li>
-<li>Texture size/count: 4096</li>
-<li>Enable color correction: disabled (unchecked)</li>
+<li>Texture Type: <code>Diffuse Map</code></li>
+<li>Source Data: <code>Images</code></li>
+<li>Mapping mode: <code>Orthophoto</code></li>
+<li>Blending mode: <code>Mosaic (default)</code></li>
+<li>Texture size/count: <code>4096</code></li>
+<li>Enable color correction: <code>disabled (unchecked)</code> (Not visible in all versions)</li>
 </ul>
-<p>Click Save <img src="images/save_icon.webp" class="icon img-fluid"> in the toolbar</p>
+<p>Click Save <img src="images/save_icon.webp" class="img-fluid" width="25"> in the toolbar</p>
 <p><img src="images/agi_build_texture.webp" class="img-fluid"></p>
+</section>
 <section id="editing-geometry" class="level4">
 <h4 class="anchored" data-anchor-id="editing-geometry">Editing geometry</h4>
 <p>Sometimes it is necessary to edit geometry before building texture atlas and exporting the model.</p>
 <p>If the overlap of the original images was not sufficient, the model can contain holes. In this case, to obtain a holeless model, use the Close Holes command. It is crucial if you want to perform any volume calculations - in this case, 100% holes need to be closed.</p>
-<p>Menu &gt; Tools &gt; Mesh &gt; Close Holes</p>
-<p>In the Close Holes dialog, select the size of the largest hole to be closed (in percentage of the total model size). <strong>DO NOT CHOOSE 100% unless you are calculating volumes (then you have to close 100% holes)</strong></p>
+<section id="menu-tools-mesh-model-close-holes" class="level5">
+<h5 class="anchored" data-anchor-id="menu-tools-mesh-model-close-holes">Menu &gt; Tools &gt; Mesh (Model) &gt; Close Holes</h5>
+<p>In the Close Holes dialog, select the size of the largest hole to be closed (in percentage of the total model size).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>DO not choose 100% unless you are calculating volumes (then you have to close 100% holes)</p>
+</div>
+</div>
 <p><img src="images/agi_close_holes.webp" class="img-fluid"></p>
 <p>This does not apply to our data, since we have sufficient image overlap. But due to strong dependency on weather conditions, the holes in data are common with UAS.</p>
 </section>
+</section>
 <section id="building-dem" class="level4">
 <h4 class="anchored" data-anchor-id="building-dem">Building DEM</h4>
-<p>Menu &gt; Workflow &gt; Build DEM</p>
+<section id="menu-workflow-build-dem" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-build-dem">Menu &gt; Workflow &gt; Build DEM</h5>
 <p>In this step, the parameters of the exported DEM are determined. In order to work in the commonly used in NC reference system, we will not keep the project’s WGS84 system, but change it to NC State Plane (ESPG:3358).</p>
 <p><img src="images/build_dem.webp" class="img-fluid"></p>
 </section>
+</section>
 <section id="building-orthophoto" class="level4">
 <h4 class="anchored" data-anchor-id="building-orthophoto">Building Orthophoto</h4>
-<p>Menu &gt; Workflow &gt; Build Orthophoto</p>
+<section id="menu-workflow-build-orthophoto-orthomosaic" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-build-orthophoto-orthomosaic">Menu &gt; Workflow &gt; Build Orthophoto (Orthomosaic)</h5>
 <p>Orthophoto can be built only in the same coordinate system as the DEM.</p>
 <p><img src="images/build_ortho.webp" class="img-fluid"></p>
 </section>
+</section>
 <section id="batch-processing" class="level4">
 <h4 class="anchored" data-anchor-id="batch-processing">Batch processing</h4>
-<p>Menu &gt; Workflow &gt; Batch process &gt; Add</p>
+<section id="menu-workflow-batch-process-add" class="level5">
+<h5 class="anchored" data-anchor-id="menu-workflow-batch-process-add">Menu &gt; Workflow &gt; Batch process &gt; Add</h5>
 <p>Batch processing allows setting multiple processes in the preset order and executing them one after another without user intervention. All the parameters should be set the same as explained above.</p>
 <ol type="1">
-<li>Optimize Alignment (if the GCPs were placed but the optimization not performed, otherwise: skip)</li>
-<li>Build Dense Cloud</li>
-<li>Build Mesh</li>
+<li>Optimize Alignment (Align Photos) - if the GCPs were placed but the optimization not performed, otherwise: skip</li>
+<li>Build Dense Cloud (Point cloud)</li>
+<li>Build Mesh (Build Model)</li>
 <li>Build Texture</li>
 <li>Build DEM</li>
-<li>Build Orthophoto</li>
+<li>Build Orthophoto (Build Orthomosaic)</li>
 </ol>
 <p><img src="images/batch.webp" class="img-fluid"></p>
 <!--
@@ -448,62 +584,309 @@ In order to do that, right-click on any of the pictures in the Pictures pane and
 -->
 </section>
 </section>
+</section>
 <section id="stage-4-exporting-results" class="level3">
 <h3 class="anchored" data-anchor-id="stage-4-exporting-results">Stage 4: Exporting results</h3>
 <p>This option will be disabled if you are working in the demo version.</p>
 <section id="orthomosaic" class="level4">
 <h4 class="anchored" data-anchor-id="orthomosaic">Orthomosaic</h4>
-<p>File &gt; Export Orthophoto &gt; Export JPEG/TIFF/PNG…</p>
+<section id="file-export-orthophoto-export-jpegtiffpng" class="level5">
+<h5 class="anchored" data-anchor-id="file-export-orthophoto-export-jpegtiffpng">File &gt; Export Orthophoto &gt; Export JPEG/TIFF/PNG</h5>
 <ul>
-<li>Projection Type = geographic (default)</li>
-<li>Datum = WGS 1984</li>
+<li>Projection Type: <code>geographic (default)</code></li>
+<li>Datum: <code>WGS 1984</code></li>
 <li>Write KML file (footprint) and World file (.tfw) = check if desired (if left unchecked, georeferencing information will still be contained in the GeoTIFF .tif file)</li>
-<li>Blending mode = Mosaic (default)</li>
-<li>Pixel size: leave default</li>
+<li>Blending mode: <code>Mosaic (default)</code></li>
+<li>Pixel size: <code>leave default</code></li>
 </ul>
 <p><img src="images/export_ortho.webp" class="img-fluid"></p>
 <p>Leave default values. Fill out the desired name and save as type TIFF/GeoTIFF (*.tif).</p>
 </section>
+</section>
 <section id="digital-surface-model" class="level4">
 <h4 class="anchored" data-anchor-id="digital-surface-model">Digital surface model</h4>
-<p>Menu &gt; File &gt; Export DEM…</p>
+<section id="menu-file-export-dem" class="level5">
+<h5 class="anchored" data-anchor-id="menu-file-export-dem">Menu &gt; File &gt; Export DEM</h5>
 <p><img src="images/export_dem.webp" class="img-fluid"></p>
 <p>Leave default values. Fill out the desired name and save as type TIFF/GeoTIFF (*.tif).</p>
 </section>
+</section>
 <section id="generating-report" class="level4">
 <h4 class="anchored" data-anchor-id="generating-report">Generating report</h4>
-<p>Menu &gt; File &gt; Generate report</p>
+<section id="menu-file-generate-report" class="level5">
+<h5 class="anchored" data-anchor-id="menu-file-generate-report">Menu &gt; File &gt; Generate report</h5>
 <p>Indicate the name and path for the PDF file.</p>
 <hr>
 <p>Processing outputs from OPTION 1 (downsampled images) are provided <a href="https://drive.google.com/open?id=19z1wIMJ2Ehjdey4gHt1q9uZm0ZMWcfbL">here</a>.</p>
 <hr>
 <p>The following export steps are optional.</p>
 </section>
+</section>
 <section id="model" class="level4">
 <h4 class="anchored" data-anchor-id="model">Model</h4>
-<p>Menu &gt; File &gt; Export model &gt; OBJ/FBX/KMZ…</p>
+<section id="menu-file-export-model-objfbxkmz" class="level5">
+<h5 class="anchored" data-anchor-id="menu-file-export-model-objfbxkmz">Menu &gt; File &gt; Export model &gt; OBJ/FBX/KMZ</h5>
 <p>Indicate the name, path, and format of the output model.</p>
 <p>Metashape supports model export in the following formats: Wavefront OBJ, 3DS file format, VRML, COLLADA, Stanford PLY, STL models, Autodesk FBX, Autodesk DXF, Google Earth KMZ, U3D, Adobe PDF. Some file formats (OBJ, 3DS, VRML, COLLADA, PLY, FBX) save texture images in a separate file. The texture file should be kept in the same directory as the main file describing the geometry.</p>
 <p>3D Models are a great visualization tool. <a href="https://skfb.ly/69oyL">Model generated by following the assignment instructions</a> as well as <a href="https://skfb.ly/TEnq">model from full flight processing</a> can be viewed on Sketchfab.</p>
 </section>
+</section>
 <section id="point-cloud" class="level4">
 <h4 class="anchored" data-anchor-id="point-cloud">Point cloud</h4>
-<p>Menu &gt; File &gt; Export points…</p>
+<section id="menu-file-export-points" class="level5">
+<h5 class="anchored" data-anchor-id="menu-file-export-points">Menu &gt; File &gt; Export points</h5>
 <p>Indicate the name, path, and format of the output file.</p>
 <p>Metashape supports point cloud export in the following formats: Wavefront OBJ, Stanford PLY, XYZ text file format, ASPRS LAS, ASTM E57, U3D, Potree, Metashape OC3, PDF.</p>
 </section>
+</section>
 <section id="camera-calibration-and-orientation-data" class="level4">
 <h4 class="anchored" data-anchor-id="camera-calibration-and-orientation-data">Camera calibration and orientation data</h4>
-<p>Menu &gt; Tools &gt; Export &gt; Export Cameras</p>
+<section id="menu-tools-export-export-cameras" class="level5">
+<h5 class="anchored" data-anchor-id="menu-tools-export-export-cameras">Menu &gt; Tools &gt; Export &gt; Export Cameras</h5>
 <p>Indicate the name, path, and format of the output file.</p>
 <p>Metashape supports camera data export in the following formats: Metashape structure file format (XML based), Bundler OUT file format, CHAN file format, Boujou TXT file format, Omega phi Kappa text file format, PATB Exterior orientation, BINGO Exterior orientation, AeroSys Exterior orientation, Inpho project file.</p>
-
-
 </section>
 </section>
+</section>
+</section>
+<section id="render-3d-model" class="level2">
+<h2 class="anchored" data-anchor-id="render-3d-model">Render 3D Model</h2>
+<p>Here is an exmaple of the rendered 3D model exported as a <a href="https://www.khronos.org/glTF">gltf</a> file using <a href="https://threejs.org/">Three.js</a></p>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="384" data-source-offset="-24"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 383;"><span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="dv">800</span><span class="op">;</span></span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a>THREE <span class="op">=</span> {</span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> THREE <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="at">THREE</span> <span class="op">=</span> <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/build/three.min.js"</span>)<span class="op">;</span></span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/examples/js/controls/OrbitControls.js"</span>)<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/examples/js/loaders/OBJLoader.js"</span>)<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/examples/js/loaders/GLTFLoader.js"</span>)<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> THREE<span class="op">;</span></span>
+<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a><span class="co">// Initialize scene</span></span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a>scene <span class="op">=</span> {</span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> scene <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Scene</span>()<span class="op">;</span></span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scene<span class="op">;</span></span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a><span class="co">// Initialize renderer</span></span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a>renderer <span class="op">=</span> {</span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> renderer <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">WebGLRenderer</span>({ <span class="dt">antialias</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a>    renderer<span class="op">.</span><span class="fu">setSize</span>(width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> renderer<span class="op">;</span></span>
+<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a>controls <span class="op">=</span> {</span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> controls <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">OrbitControls</span>(camera<span class="op">,</span> renderer<span class="op">.</span><span class="at">domElement</span>)<span class="op">;</span></span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a>    controls<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"change"</span><span class="op">,</span> () <span class="kw">=&gt;</span> renderer<span class="op">.</span><span class="fu">render</span>(scene<span class="op">,</span> camera))<span class="op">;</span></span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a>    invalidation<span class="op">.</span><span class="fu">then</span>(() <span class="kw">=&gt;</span> (controls<span class="op">.</span><span class="fu">dispose</span>()<span class="op">,</span> renderer<span class="op">.</span><span class="fu">dispose</span>()))<span class="op">;</span></span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> controls<span class="op">;</span></span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a>lights <span class="op">=</span> {</span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Create a directional light with increased intensity</span></span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> directionalLight <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">DirectionalLight</span>(<span class="bn">0xffffff</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>  <span class="co">// Intensity set to 2 (brighter)</span></span>
+<span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a>    directionalLight<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">.</span><span class="fu">normalize</span>()<span class="op">;</span></span>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>    scene<span class="op">.</span><span class="fu">add</span>(directionalLight)<span class="op">;</span></span>
+<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add ambient light for soft overall illumination</span></span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> ambientLight <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">AmbientLight</span>(<span class="bn">0xffffff</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span>  <span class="co">// Intensity set to 0.5 (softer ambient light)</span></span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a>    scene<span class="op">.</span><span class="fu">add</span>(ambientLight)<span class="op">;</span></span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { directionalLight<span class="op">,</span> ambientLight }<span class="op">;</span></span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a><span class="co">// Initialize camera</span></span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a>camera <span class="op">=</span> {</span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> camera <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">PerspectiveCamera</span>(<span class="dv">85</span><span class="op">,</span> width <span class="op">/</span> height<span class="op">,</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true" tabindex="-1"></a>    camera<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb1-433"><a href="#cb1-433" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Resize the camera aspect when the window is resized</span></span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true" tabindex="-1"></a>    <span class="bu">window</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'resize'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-435"><a href="#cb1-435" aria-hidden="true" tabindex="-1"></a>        camera<span class="op">.</span><span class="at">aspect</span> <span class="op">=</span> width <span class="op">/</span> height<span class="op">;</span></span>
+<span id="cb1-436"><a href="#cb1-436" aria-hidden="true" tabindex="-1"></a>        camera<span class="op">.</span><span class="fu">updateProjectionMatrix</span>()<span class="op">;</span></span>
+<span id="cb1-437"><a href="#cb1-437" aria-hidden="true" tabindex="-1"></a>        renderer<span class="op">.</span><span class="fu">setSize</span>(width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb1-438"><a href="#cb1-438" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb1-439"><a href="#cb1-439" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> camera<span class="op">;</span></span>
+<span id="cb1-440"><a href="#cb1-440" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-441"><a href="#cb1-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-442"><a href="#cb1-442" aria-hidden="true" tabindex="-1"></a><span class="co">// Function to center the camera on the model</span></span>
+<span id="cb1-443"><a href="#cb1-443" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">centerViewOnModel</span>(model<span class="op">,</span> camera) {</span>
+<span id="cb1-444"><a href="#cb1-444" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Compute the bounding box of the model</span></span>
+<span id="cb1-445"><a href="#cb1-445" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> box <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Box3</span>()<span class="op">.</span><span class="fu">setFromObject</span>(model)<span class="op">;</span></span>
+<span id="cb1-446"><a href="#cb1-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-447"><a href="#cb1-447" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get the center of the model</span></span>
+<span id="cb1-448"><a href="#cb1-448" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> center <span class="op">=</span> box<span class="op">.</span><span class="fu">getCenter</span>(<span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Vector3</span>())<span class="op">;</span></span>
+<span id="cb1-449"><a href="#cb1-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-450"><a href="#cb1-450" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get the size of the model (distance between min and max corners)</span></span>
+<span id="cb1-451"><a href="#cb1-451" aria-hidden="true" tabindex="-1"></a>    <span class="co">// const size = box.getSize(new THREE.Vector3());</span></span>
+<span id="cb1-452"><a href="#cb1-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-453"><a href="#cb1-453" aria-hidden="true" tabindex="-1"></a>    <span class="co">// // Move the camera based on the size of the model</span></span>
+<span id="cb1-454"><a href="#cb1-454" aria-hidden="true" tabindex="-1"></a>    <span class="co">// const maxDim = Math.max(size.x, size.y, size.z);</span></span>
+<span id="cb1-455"><a href="#cb1-455" aria-hidden="true" tabindex="-1"></a>    <span class="co">// const fov = camera.fov * (Math.PI / 180);  // Convert vertical FOV to radians</span></span>
+<span id="cb1-456"><a href="#cb1-456" aria-hidden="true" tabindex="-1"></a>    <span class="co">// let cameraZ = Math.abs(maxDim / (2 * Math.tan(fov / 2)));  // Distance from the object</span></span>
+<span id="cb1-457"><a href="#cb1-457" aria-hidden="true" tabindex="-1"></a>    <span class="co">// cameraZ *= 0.5; // Optionally add some padding</span></span>
+<span id="cb1-458"><a href="#cb1-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-459"><a href="#cb1-459" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set the camera position</span></span>
+<span id="cb1-460"><a href="#cb1-460" aria-hidden="true" tabindex="-1"></a>    camera<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(center<span class="op">.</span><span class="at">x</span><span class="op">,</span> center<span class="op">.</span><span class="at">y</span> <span class="op">+</span> <span class="dv">200</span><span class="op">,</span> center<span class="op">.</span><span class="at">z</span>)<span class="op">;</span></span>
+<span id="cb1-461"><a href="#cb1-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-462"><a href="#cb1-462" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Make the camera look at the center of the model</span></span>
+<span id="cb1-463"><a href="#cb1-463" aria-hidden="true" tabindex="-1"></a>    camera<span class="op">.</span><span class="fu">lookAt</span>(center)<span class="op">;</span></span>
+<span id="cb1-464"><a href="#cb1-464" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-465"><a href="#cb1-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-466"><a href="#cb1-466" aria-hidden="true" tabindex="-1"></a>importedObj <span class="op">=</span> {</span>
+<span id="cb1-467"><a href="#cb1-467" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> url <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">'data/model.glb'</span>)<span class="op">.</span><span class="fu">url</span>()</span>
+<span id="cb1-468"><a href="#cb1-468" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">loadObject</span>(url)</span>
+<span id="cb1-469"><a href="#cb1-469" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-470"><a href="#cb1-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-471"><a href="#cb1-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-472"><a href="#cb1-472" aria-hidden="true" tabindex="-1"></a>loadObject <span class="op">=</span> (url) <span class="kw">=&gt;</span> <span class="kw">new</span> <span class="bu">Promise</span> ((resolve<span class="op">,</span>reject) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-473"><a href="#cb1-473" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> loader <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">GLTFLoader</span>()<span class="op">;</span></span>
+<span id="cb1-474"><a href="#cb1-474" aria-hidden="true" tabindex="-1"></a>  <span class="co">// instantiate a loader</span></span>
+<span id="cb1-475"><a href="#cb1-475" aria-hidden="true" tabindex="-1"></a>  loader<span class="op">.</span><span class="fu">load</span>(</span>
+<span id="cb1-476"><a href="#cb1-476" aria-hidden="true" tabindex="-1"></a>      <span class="co">// resource URL</span></span>
+<span id="cb1-477"><a href="#cb1-477" aria-hidden="true" tabindex="-1"></a>    url<span class="op">,</span></span>
+<span id="cb1-478"><a href="#cb1-478" aria-hidden="true" tabindex="-1"></a>    <span class="co">// called when resource is loaded</span></span>
+<span id="cb1-479"><a href="#cb1-479" aria-hidden="true" tabindex="-1"></a>    <span class="kw">function</span> ( gltf ) {</span>
+<span id="cb1-480"><a href="#cb1-480" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> model <span class="op">=</span> gltf<span class="op">.</span><span class="at">scene</span><span class="op">;</span></span>
+<span id="cb1-481"><a href="#cb1-481" aria-hidden="true" tabindex="-1"></a>      scene<span class="op">.</span><span class="fu">add</span>(model)<span class="op">;</span></span>
+<span id="cb1-482"><a href="#cb1-482" aria-hidden="true" tabindex="-1"></a>      <span class="fu">centerViewOnModel</span>(model<span class="op">,</span> camera)<span class="op">;</span></span>
+<span id="cb1-483"><a href="#cb1-483" aria-hidden="true" tabindex="-1"></a>      <span class="fu">resolve</span>(model)<span class="op">;</span></span>
+<span id="cb1-484"><a href="#cb1-484" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb1-485"><a href="#cb1-485" aria-hidden="true" tabindex="-1"></a>      <span class="co">// called when loading is in progresses</span></span>
+<span id="cb1-486"><a href="#cb1-486" aria-hidden="true" tabindex="-1"></a>      <span class="kw">function</span> ( xhr ) {</span>
+<span id="cb1-487"><a href="#cb1-487" aria-hidden="true" tabindex="-1"></a>          <span class="cf">return</span> ( xhr<span class="op">.</span><span class="at">loaded</span> <span class="op">/</span> xhr<span class="op">.</span><span class="at">total</span> <span class="op">*</span> <span class="dv">100</span> ) <span class="op">+</span> <span class="st">'% loaded'</span> <span class="op">;</span></span>
+<span id="cb1-488"><a href="#cb1-488" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb1-489"><a href="#cb1-489" aria-hidden="true" tabindex="-1"></a>      <span class="co">// called when loading has errors</span></span>
+<span id="cb1-490"><a href="#cb1-490" aria-hidden="true" tabindex="-1"></a>      <span class="kw">function</span> ( error ) {</span>
+<span id="cb1-491"><a href="#cb1-491" aria-hidden="true" tabindex="-1"></a>        <span class="fu">reject</span> (<span class="st">"Error in loading"</span>)</span>
+<span id="cb1-492"><a href="#cb1-492" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb1-493"><a href="#cb1-493" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb1-494"><a href="#cb1-494" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-495"><a href="#cb1-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-496"><a href="#cb1-496" aria-hidden="true" tabindex="-1"></a><span class="co">// Render loop</span></span>
+<span id="cb1-497"><a href="#cb1-497" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-498"><a href="#cb1-498" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
+<span id="cb1-499"><a href="#cb1-499" aria-hidden="true" tabindex="-1"></a>    <span class="fu">requestAnimationFrame</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb1-500"><a href="#cb1-500" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Rotate the scene slightly</span></span>
+<span id="cb1-501"><a href="#cb1-501" aria-hidden="true" tabindex="-1"></a>    <span class="co">//   scene.rotation.y += 0.001;</span></span>
+<span id="cb1-502"><a href="#cb1-502" aria-hidden="true" tabindex="-1"></a>    <span class="co">//   scene.rotation.z -= 0.001;</span></span>
+<span id="cb1-503"><a href="#cb1-503" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Render the scene with the camera</span></span>
+<span id="cb1-504"><a href="#cb1-504" aria-hidden="true" tabindex="-1"></a>      renderer<span class="op">.</span><span class="fu">render</span>(scene<span class="op">,</span> camera)<span class="op">;</span></span>
+<span id="cb1-505"><a href="#cb1-505" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb1-506"><a href="#cb1-506" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(<span class="dv">16</span>)<span class="op">;</span> <span class="co">// Delay of ~16ms for smooth animation (60fps)</span></span>
+<span id="cb1-507"><a href="#cb1-507" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-508"><a href="#cb1-508" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-8" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-9" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-10" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-11" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-12" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="511" data-source-offset="-3873"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 510;"><span id="cb2-511"><a href="#cb2-511" aria-hidden="true" tabindex="-1"></a>renderer<span class="op">.</span><span class="at">domElement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-13" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIERlZmluZSBjYW52YXMgaGVpZ2h0XG5oZWlnaHQgPSA2MDA7XG53aWR0aCA9IDgwMDtcblxuVEhSRUUgPSB7XG4gIGNvbnN0IFRIUkVFID0gd2luZG93LlRIUkVFID0gYXdhaXQgcmVxdWlyZShcInRocmVlQDAuMTMwLjAvYnVpbGQvdGhyZWUubWluLmpzXCIpO1xuICBhd2FpdCByZXF1aXJlKFwidGhyZWVAMC4xMzAuMC9leGFtcGxlcy9qcy9jb250cm9scy9PcmJpdENvbnRyb2xzLmpzXCIpLmNhdGNoKCgpID0+IHt9KTtcbiAgYXdhaXQgcmVxdWlyZShcInRocmVlQDAuMTMwLjAvZXhhbXBsZXMvanMvbG9hZGVycy9PQkpMb2FkZXIuanNcIikuY2F0Y2goKCkgPT4ge30pO1xuICBhd2FpdCByZXF1aXJlKFwidGhyZWVAMC4xMzAuMC9leGFtcGxlcy9qcy9sb2FkZXJzL0dMVEZMb2FkZXIuanNcIikuY2F0Y2goKCkgPT4ge30pO1xuICByZXR1cm4gVEhSRUU7XG59XG5cbi8vIEluaXRpYWxpemUgc2NlbmVcbnNjZW5lID0ge1xuICAgIGNvbnN0IHNjZW5lID0gbmV3IFRIUkVFLlNjZW5lKCk7XG4gICAgcmV0dXJuIHNjZW5lO1xufVxuXG4vLyBJbml0aWFsaXplIHJlbmRlcmVyXG5yZW5kZXJlciA9IHtcbiAgICBjb25zdCByZW5kZXJlciA9IG5ldyBUSFJFRS5XZWJHTFJlbmRlcmVyKHsgYW50aWFsaWFzOiB0cnVlIH0pO1xuICAgIHJlbmRlcmVyLnNldFNpemUod2lkdGgsIGhlaWdodCk7XG4gICAgcmV0dXJuIHJlbmRlcmVyO1xufVxuXG5jb250cm9scyA9IHtcbiAgICBjb25zdCBjb250cm9scyA9IG5ldyBUSFJFRS5PcmJpdENvbnRyb2xzKGNhbWVyYSwgcmVuZGVyZXIuZG9tRWxlbWVudCk7XG4gICAgY29udHJvbHMuYWRkRXZlbnRMaXN0ZW5lcihcImNoYW5nZVwiLCAoKSA9PiByZW5kZXJlci5yZW5kZXIoc2NlbmUsIGNhbWVyYSkpO1xuICAgIGludmFsaWRhdGlvbi50aGVuKCgpID0+IChjb250cm9scy5kaXNwb3NlKCksIHJlbmRlcmVyLmRpc3Bvc2UoKSkpO1xuICAgIHJldHVybiBjb250cm9scztcbn1cblxuXG5saWdodHMgPSB7XG4gICAgLy8gQ3JlYXRlIGEgZGlyZWN0aW9uYWwgbGlnaHQgd2l0aCBpbmNyZWFzZWQgaW50ZW5zaXR5XG4gICAgY29uc3QgZGlyZWN0aW9uYWxMaWdodCA9IG5ldyBUSFJFRS5EaXJlY3Rpb25hbExpZ2h0KDB4ZmZmZmZmLCAyKTsgIC8vIEludGVuc2l0eSBzZXQgdG8gMiAoYnJpZ2h0ZXIpXG4gICAgZGlyZWN0aW9uYWxMaWdodC5wb3NpdGlvbi5zZXQoMCwgMTAsIDEwKS5ub3JtYWxpemUoKTtcbiAgICBzY2VuZS5hZGQoZGlyZWN0aW9uYWxMaWdodCk7XG5cbiAgICAvLyBBZGQgYW1iaWVudCBsaWdodCBmb3Igc29mdCBvdmVyYWxsIGlsbHVtaW5hdGlvblxuICAgIGNvbnN0IGFtYmllbnRMaWdodCA9IG5ldyBUSFJFRS5BbWJpZW50TGlnaHQoMHhmZmZmZmYsIDEpOyAgLy8gSW50ZW5zaXR5IHNldCB0byAwLjUgKHNvZnRlciBhbWJpZW50IGxpZ2h0KVxuICAgIHNjZW5lLmFkZChhbWJpZW50TGlnaHQpO1xuICAgIFxuICAgIHJldHVybiB7IGRpcmVjdGlvbmFsTGlnaHQsIGFtYmllbnRMaWdodCB9O1xufVxuXG4vLyBJbml0aWFsaXplIGNhbWVyYVxuY2FtZXJhID0ge1xuICAgIGNvbnN0IGNhbWVyYSA9IG5ldyBUSFJFRS5QZXJzcGVjdGl2ZUNhbWVyYSg4NSwgd2lkdGggLyBoZWlnaHQsIDAuMSwgMTAwMCk7XG4gICAgY2FtZXJhLnBvc2l0aW9uLnNldCgwLCAyMCwgMjApO1xuICAgIC8vIFJlc2l6ZSB0aGUgY2FtZXJhIGFzcGVjdCB3aGVuIHRoZSB3aW5kb3cgaXMgcmVzaXplZFxuICAgIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdyZXNpemUnLCAoKSA9PiB7XG4gICAgICAgIGNhbWVyYS5hc3BlY3QgPSB3aWR0aCAvIGhlaWdodDtcbiAgICAgICAgY2FtZXJhLnVwZGF0ZVByb2plY3Rpb25NYXRyaXgoKTtcbiAgICAgICAgcmVuZGVyZXIuc2V0U2l6ZSh3aWR0aCwgaGVpZ2h0KTtcbiAgICB9KTtcbiAgICByZXR1cm4gY2FtZXJhO1xufVxuXG4vLyBGdW5jdGlvbiB0byBjZW50ZXIgdGhlIGNhbWVyYSBvbiB0aGUgbW9kZWxcbmZ1bmN0aW9uIGNlbnRlclZpZXdPbk1vZGVsKG1vZGVsLCBjYW1lcmEpIHtcbiAgICAvLyBDb21wdXRlIHRoZSBib3VuZGluZyBib3ggb2YgdGhlIG1vZGVsXG4gICAgY29uc3QgYm94ID0gbmV3IFRIUkVFLkJveDMoKS5zZXRGcm9tT2JqZWN0KG1vZGVsKTtcblxuICAgIC8vIEdldCB0aGUgY2VudGVyIG9mIHRoZSBtb2RlbFxuICAgIGNvbnN0IGNlbnRlciA9IGJveC5nZXRDZW50ZXIobmV3IFRIUkVFLlZlY3RvcjMoKSk7XG5cbiAgICAvLyBHZXQgdGhlIHNpemUgb2YgdGhlIG1vZGVsIChkaXN0YW5jZSBiZXR3ZWVuIG1pbiBhbmQgbWF4IGNvcm5lcnMpXG4gICAgLy8gY29uc3Qgc2l6ZSA9IGJveC5nZXRTaXplKG5ldyBUSFJFRS5WZWN0b3IzKCkpO1xuXG4gICAgLy8gLy8gTW92ZSB0aGUgY2FtZXJhIGJhc2VkIG9uIHRoZSBzaXplIG9mIHRoZSBtb2RlbFxuICAgIC8vIGNvbnN0IG1heERpbSA9IE1hdGgubWF4KHNpemUueCwgc2l6ZS55LCBzaXplLnopO1xuICAgIC8vIGNvbnN0IGZvdiA9IGNhbWVyYS5mb3YgKiAoTWF0aC5QSSAvIDE4MCk7ICAvLyBDb252ZXJ0IHZlcnRpY2FsIEZPViB0byByYWRpYW5zXG4gICAgLy8gbGV0IGNhbWVyYVogPSBNYXRoLmFicyhtYXhEaW0gLyAoMiAqIE1hdGgudGFuKGZvdiAvIDIpKSk7ICAvLyBEaXN0YW5jZSBmcm9tIHRoZSBvYmplY3RcbiAgICAvLyBjYW1lcmFaICo9IDAuNTsgLy8gT3B0aW9uYWxseSBhZGQgc29tZSBwYWRkaW5nXG5cbiAgICAvLyBTZXQgdGhlIGNhbWVyYSBwb3NpdGlvblxuICAgIGNhbWVyYS5wb3NpdGlvbi5zZXQoY2VudGVyLngsIGNlbnRlci55ICsgMjAwLCBjZW50ZXIueik7XG5cbiAgICAvLyBNYWtlIHRoZSBjYW1lcmEgbG9vayBhdCB0aGUgY2VudGVyIG9mIHRoZSBtb2RlbFxuICAgIGNhbWVyYS5sb29rQXQoY2VudGVyKTtcbn1cblxuaW1wb3J0ZWRPYmogPSB7XG4gIGNvbnN0IHVybCA9IGF3YWl0IEZpbGVBdHRhY2htZW50KCdkYXRhL21vZGVsLmdsYicpLnVybCgpXG4gIHJldHVybiBsb2FkT2JqZWN0KHVybClcbn1cblxuXG5sb2FkT2JqZWN0ID0gKHVybCkgPT4gbmV3IFByb21pc2UgKChyZXNvbHZlLHJlamVjdCkgPT4ge1xuICBjb25zdCBsb2FkZXIgPSBuZXcgVEhSRUUuR0xURkxvYWRlcigpO1xuICAvLyBpbnN0YW50aWF0ZSBhIGxvYWRlclxuICBsb2FkZXIubG9hZChcblx0ICAvLyByZXNvdXJjZSBVUkxcbiAgICB1cmwsXG4gIFx0Ly8gY2FsbGVkIHdoZW4gcmVzb3VyY2UgaXMgbG9hZGVkXG5cdGZ1bmN0aW9uICggZ2x0ZiApIHtcbiAgICAgIGNvbnN0IG1vZGVsID0gZ2x0Zi5zY2VuZTtcbiAgICAgIHNjZW5lLmFkZChtb2RlbCk7XG4gICAgICBjZW50ZXJWaWV3T25Nb2RlbChtb2RlbCwgY2FtZXJhKTtcbiAgICAgIHJlc29sdmUobW9kZWwpO1xuICBcdH0sXG5cdCAgLy8gY2FsbGVkIHdoZW4gbG9hZGluZyBpcyBpbiBwcm9ncmVzc2VzXG5cdCAgZnVuY3Rpb24gKCB4aHIgKSB7XG5cdFx0ICByZXR1cm4gKCB4aHIubG9hZGVkIC8geGhyLnRvdGFsICogMTAwICkgKyAnJSBsb2FkZWQnIDtcbiAgXHR9LFxuXHQgIC8vIGNhbGxlZCB3aGVuIGxvYWRpbmcgaGFzIGVycm9yc1xuXHQgIGZ1bmN0aW9uICggZXJyb3IgKSB7XG4gICAgICAgIHJlamVjdCAoXCJFcnJvciBpbiBsb2FkaW5nXCIpXG5cdCAgfVxuICApO1xufSlcblxuLy8gUmVuZGVyIGxvb3BcbntcbiAgd2hpbGUgKHRydWUpIHtcbiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4ge1xuICAgICAgLy8gUm90YXRlIHRoZSBzY2VuZSBzbGlnaHRseVxuICAgIC8vICAgc2NlbmUucm90YXRpb24ueSArPSAwLjAwMTtcbiAgICAvLyAgIHNjZW5lLnJvdGF0aW9uLnogLT0gMC4wMDE7XG4gICAgICAvLyBSZW5kZXIgdGhlIHNjZW5lIHdpdGggdGhlIGNhbWVyYVxuICAgICAgcmVuZGVyZXIucmVuZGVyKHNjZW5lLCBjYW1lcmEpO1xuICAgIH0pO1xuICAgIGF3YWl0IFByb21pc2VzLmRlbGF5KDE2KTsgLy8gRGVsYXkgb2YgfjE2bXMgZm9yIHNtb290aCBhbmltYXRpb24gKDYwZnBzKVxuICB9XG59XG5cbi8vIFJlbmRlcmVyIERPTSBlbGVtZW50IHRvIGRpc3BsYXkgdGhlIGNhbnZhc1xucmVuZGVyZXIuZG9tRWxlbWVudFxuIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../course/topics/topic_2_sfm/assignments";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../../../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
