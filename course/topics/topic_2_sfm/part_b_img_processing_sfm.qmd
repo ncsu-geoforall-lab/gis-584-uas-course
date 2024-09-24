@@ -463,7 +463,6 @@ Prepare report on generating orthomosaic and Digital Surface Model using images 
     </script>
 </body>
 </html>
-
 ```
 
 
