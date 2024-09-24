@@ -1,1 +1,0 @@
-Sitemap: https://ncsu-geoforall-lab.github.io/gis-584-uas-course/sitemap.xml

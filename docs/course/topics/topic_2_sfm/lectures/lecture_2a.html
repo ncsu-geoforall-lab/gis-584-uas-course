@@ -9,10 +9,10 @@
 <link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Justyna Jeziorska, Helena Mitasova &amp; Corey White">
-  <title>GIS/MEA 584: UAS Mapping and Analytics - Photogrammetry and Structure from Motion Concepts</title>
+  <title>GIS/MEA 584: UAS Mapping and Analytics – Photogrammetry and Structure from Motion Concepts</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -448,8 +448,7 @@ Photogrammetric process
 <p><img data-src="../images/geometry_side.webp"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/geometry.webp"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 <h3 id="why-do-we-need-to-process-the-images">Why do we need to process the images?</h3>
@@ -459,8 +458,7 @@ Photogrammetric process
 <p><img data-src="../images/pespective_vs_orthographic.webp"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/scale.webp"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 <h3 id="why-do-we-need-to-process-the-images-1">Why do we need to process the images?</h3>
@@ -470,8 +468,7 @@ Photogrammetric process
 <p><img data-src="../images/pespective_vs_orthographic_image_plane.webp"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/disortion.webp"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 <h3 id="orthorectification---perspective-and-relief-distortion">Orthorectification - Perspective and relief distortion</h3>
@@ -486,8 +483,7 @@ Photogrammetric process
 <p>from a photograph or digital image</p>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/DSM_ortho.webp"> <img data-src="../images/ortho_example.webp"></p>
-</div>
-</div>
+</div></div>
 The resulting image - an <strong>orthophoto</strong>&nbsp;or&nbsp;<strong>orthoimage</strong>.
 </section>
 <section>
@@ -542,8 +538,7 @@ Orthorectification
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/ortho_example_measure.webp"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 <h3 id="how-do-we-get-there">How do we get there?</h3>
@@ -553,8 +548,7 @@ Orthorectification
 <p>Now: digital <img data-src="../images/digital.webp" style="width:70.0%"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/orthophoto_how.webp"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section class="smaller">
 <h3>
@@ -592,8 +586,7 @@ Parameters 2,3,4 can be estimated from the images - see lecture on Imagery proce
 <p><img data-src="../images/multiview.webp" class="fragment"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/camera_sensor.webp" class="fragment" style="width:75.0%"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section class="smaller">
 <h3 id="location-of-the-photo">Location of the photo</h3>
@@ -606,8 +599,7 @@ Parameters 2,3,4 can be estimated from the images - see lecture on Imagery proce
 <li>In theory, every part of a picture can be tied to a geographic location, but in the most typical application, only <strong>the position of the sensor</strong> is associated with the <strong>entire digital image</strong>.</li>
 <li>GPS in the camera or UAS measures location with very low accuracy.</li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 <h2>
@@ -644,8 +636,7 @@ Geotagging
 <p><strong>Photo Identifiable:</strong> - Any feature on the ground, - Specific (e.g., corners) - Unmovable - Not covered by vegetation - It can be surveyed later on.</p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/GCPs.webp"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 </section>
@@ -657,8 +648,7 @@ Geotagging
 <p><img data-src="../images/GCP_sketch.webp" class="fragment" style="width:75.0%"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/GCP_photo.webp" class="fragment"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 <h2>
@@ -1116,18 +1106,7 @@ What process allows us to extract 3D data from series of overlapping 2D images
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1159,7 +1138,47 @@ What process allows us to extract 3D data from series of overlapping 2D images
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1196,7 +1215,11 @@ What process allows us to extract 3D data from series of overlapping 2D images
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

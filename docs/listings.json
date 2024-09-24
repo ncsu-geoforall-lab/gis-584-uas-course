@@ -2,14 +2,5 @@
   {
     "listing": "/course/schedule.html",
     "items": []
-  },
-  {
-    "listing": "/backup.html",
-    "items": [
-      "/course/topics/topic_1_uas_basics/part_a_introduction.html",
-      "/course/topics/topic_1_uas_basics/part_b_rules_regs.html",
-      "/course/topics/topic_2_sfm/part_a_images_to_3d.html",
-      "/course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html"
-    ]
   }
 ]

@@ -16,7 +16,7 @@ Course Forum, assignment submissions, project material, and grades are handled i
 
 ### Assignments
 
-- Most topics include hands-on assignment - the links to assignments are provided at each topic's web page - you can access them through [Moodle]({{< var course_params.moodle >}}) or the course [schedule](schedule.qmd).
+- Most topics include hands-on assignment - the links to assignments are provided at each topic's web page - you can access them through the course [schedule](schedule.qmd).
 - Following the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:
   - **Introduction**: task, problem
   - **Methods**: general description of methods and concepts

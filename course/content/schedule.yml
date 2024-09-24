@@ -100,7 +100,7 @@ schedule:
     subtopic: "[4A. Analysis of UAS data processing results](topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.qmd)"
     details:
       - "Mon: lecture"
-      - "Wed: [In Class Assignments](topics/topic_4_GIS_analytics/assignments/assignment_1a.qmd)"
+      - "Wed: [In Class Assignments](topics/topic_4_GIS_analytics/assignments/assignment_4a.qmd)"
     due_date: "Oct. 23"
     no_class: false
 
