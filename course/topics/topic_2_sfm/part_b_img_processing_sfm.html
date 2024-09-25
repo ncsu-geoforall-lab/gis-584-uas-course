@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -68,6 +102,8 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script type="module" src="../../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
 </head>
@@ -216,432 +252,447 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="structure-from-motion-example" class="level2">
 <h2 class="anchored" data-anchor-id="structure-from-motion-example">Structure from Motion Example</h2>
-<pre class="{html}"><code>&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Structure from Motion Visualization - Correctly Positioned Anchor Points&lt;/title&gt;
-    &lt;style&gt;
-        /* body {
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            /* background-color: #000; */
-        } */
-
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"&gt;&lt;/script&gt;
-    &lt;script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"&gt;&lt;/script&gt;
-    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"&gt;&lt;/script&gt;
-    &lt;!-- &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"&gt;&lt;/script&gt; --&gt;
-    &lt;script&gt;
-
-        // Create a GUI
-        // const gui = new dat.GUI();
-
-        // Parameters object
-        const params = {
-            numAnchorPoints: 10, // Default number of anchor points
-            terrainSize: 100 // Default terrain size
-        };
-
-        // Add controls to the GUI
-        // gui.add(params, 'numAnchorPoints', 1, 100).name('Anchor Points').onChange(updateAnchorPoints);
-        // gui.add(params, 'terrainSize', 10, 500).name('Terrain Size').onChange(updateTerrain);
-
-        // Function to update anchor points
-        // function updateAnchorPoints(value) {
-        //     // Logic to update the number of anchor points
-        //     // For example, regenerate anchor points based on the new value
-        //     anchorPoints = createAnchorPoints(geometry, value, terrain);
-        // }
-
-        // // Function to update terrain
-        // function updateTerrain(value) {
-        //     // Logic to update the terrain size
-        //     // For example, regenerate the terrain based on the new value
-        //     generateTerrain(value);
-        // }
-
-        // Set up the scene, camera, and renderer
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        // Add ambient light
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-
-        // Add directional light
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(5, 5, 5).normalize();
-        scene.add(directionalLight);
-
-        // Simplex noise instance
-        const simplex = new SimplexNoise();
-
-        // Create a DSM using PlaneBufferGeometry and subtle simplex noise
-        const widthSegments = 100;
-        const heightSegments = 100;
-        const geometry = new THREE.PlaneBufferGeometry(10, 10, widthSegments, heightSegments);
-
-        // Modify the z-coordinates of the vertices using simplex noise with reduced amplitude
-        const vertices = geometry.attributes.position.array;
-        for (let i = 0; i &lt; vertices.length; i += 3) {
-            const x = vertices[i];
-            const y = vertices[i + 1];
-            vertices[i + 2] = simplex.noise2D(x * 0.3, y * 0.3) / 2.0; // Reduced amplitude for a more subtle terrain
-        }
-
-        const elevationColors = [
-            { value: 0.0, color: new THREE.Color(0x00bfbf) }, // 0% 0 191 191
-            { value: 0.2, color: new THREE.Color(0x00ff00) }, // 20% 0 255 0
-            { value: 0.4, color: new THREE.Color(0xffff00) }, // 40% 255 255 0
-            { value: 0.6, color: new THREE.Color(0xff7f00) }, // 60% 255 127 0
-            { value: 0.8, color: new THREE.Color(0xbf7f3f) }, // 80% 191 127 63
-            { value: 1.0, color: new THREE.Color(0xc8c8c8) }  // 100% 200 200 200
-        ];
-
-        const vertexShader = `
-            varying float vElevation;
-            void main() {
-                vElevation = position.z;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            }
-        `;
-
-        const fragmentShader = `
-            uniform vec3 elevationColors[3];
-            varying float vElevation;
-            void main() {
-                vec3 color;
-                if (vElevation &lt; 0.5) {
-                    color = mix(elevationColors[0], elevationColors[1], vElevation * 2.0);
-                } else {
-                    color = mix(elevationColors[1], elevationColors[2], (vElevation - 0.5) * 2.0);
-                }
-                gl_FragColor = vec4(color, 1.0);
-            }
-        `;
-
-        geometry.computeVertexNormals(); // Recompute normals after modifying vertices
-
-        // Colored Terrain
-        // const shaderMaterial = new THREE.ShaderMaterial({
-        //     vertexShader: vertexShader,
-        //     fragmentShader: fragmentShader,
-        //     uniforms: {
-        //         elevationColors: { value: elevationColors.map(e =&gt; e.color) }
-        //     }
-        // });
-        // const terrain = new THREE.Mesh(geometry, shaderMaterial);
-
-        // Wired Terrain
-        const material = new THREE.MeshStandardMaterial({ color: 0x228b22, wireframe: true });
-        const terrain = new THREE.Mesh(geometry, material);
-
-        
-        terrain.rotation.x = -Math.PI / 2; // Rotate to make it horizontal
-        scene.add(terrain);
-
-        // Function to create anchor points directly on the DSM's surface
-        function createAnchorPoints(bufferGeometry, numPoints, terrain) {
-            const positions = bufferGeometry.attributes.position.array;
-            const points = [];
-
-            for (let i = 0; i &lt; numPoints; i++) {
-                // Randomly select a vertex from the geometry
-                const index = Math.floor(Math.random() * (positions.length / 3)) * 3;
-
-                // Create a point at this vertex
-                const point = new THREE.Vector3(
-                    positions[index],
-                    positions[index + 1],
-                    positions[index + 2]
-                );
-
-                // Apply the terrain's rotation to the anchor points
-                point.applyMatrix3(terrain.matrixWorld);
-
-                points.push(point);
-            }
-            return points;
-        }
-
-        // Correctly place anchor points on the terrain surface after rotation
-        const anchorPoints = createAnchorPoints(geometry, 50, terrain);
-        const anchorMaterial = new THREE.PointsMaterial({ color: 0xff0000, size: 0.25 });
-        const anchorGeometry = new THREE.BufferGeometry().setFromPoints(anchorPoints);
-
-        const anchorMesh = new THREE.Points(anchorGeometry, anchorMaterial);
-        scene.add(anchorMesh);
-
-        // Function to create a camera representation
-        function createCameraRepresentation(position, color = 0x0000ff) {
-            const cameraGeometry = new THREE.SphereGeometry(0.1, 32, 32);
-            const cameraMaterial = new THREE.MeshBasicMaterial({ color });
-            const cameraMesh = new THREE.Mesh(cameraGeometry, cameraMaterial);
-            cameraMesh.position.copy(position);
-            scene.add(cameraMesh);
-            return cameraMesh;
-        }
-
-        // Create a UAV camera path for two passes
-        // const uavPath1 = [];
-        // const uavPath2 = [];
-        // for (let i = 0; i &lt;= 1; i += 0.01) {
-        //     const x = 5 * (i * 2 - 1);
-        //     const z = 5 * (i * 2 - 1);
-        //     uavPath1.push(new THREE.Vector3(x, 3, z));
-        //     uavPath2.push(new THREE.Vector3(x, 3.5, -z));
-        // }
-
-         // Create realistic UAV camera paths (grid pattern)
-        // const uavPath1 = [];
-        // const uavPath2 = [];
-        // for (let i = -5; i &lt;= 5; i += 0.25) {
-        //     for (let j = -5; j &lt;= 5; j += 0.25) {
-        //         uavPath1.push(new THREE.Vector3(3, 3, j));
-        //         uavPath2.push(new THREE.Vector3(i, 3.5, j));
-        //     }
-        // }const uavCamera2 = createCameraRepresentation(uavPath2[0], 0xff0000);
-
-        // Define the boundaries and step sizes
-        const startX = -5;
-        const endX = 5;
-        const startY = 3;
-        const endY = 3;
-        const startZ = -5;
-        const endZ = 5;
-        const stepSize = 0.25;
-        const rowDistance = 0.25;
-
-        // Create realistic UAV camera paths (lawnmower pattern)
-        const uavPath1 = [];
-        const uavPath2 = [];
-
-        let direction = 1; // 1 for forward, -1 for backward
-
-        for (let z = startZ; z &lt;= endZ; z += rowDistance) {
-            if (direction === 1) {
-                for (let x = startX; x &lt;= endX; x += stepSize) {
-                    uavPath1.push(new THREE.Vector3(x, startY, z));
-                    uavPath2.push(new THREE.Vector3(x, endY, z));
-                }
-            } else {
-                for (let x = endX; x &gt;= startX; x -= stepSize) {
-                    uavPath1.push(new THREE.Vector3(x, startY, z));
-                    uavPath2.push(new THREE.Vector3(x, endY, z));
-                }
-            }
-            direction *= -1; // Change direction at the end of each row
-        }
-
-        // Create geometry and add points from uavPath1
-        const uavlineGeometry = new THREE.BufferGeometry().setFromPoints(uavPath1[0]);
-
-        // Create a dashed line material
-        const uavlineMaterial = new THREE.LineDashedMaterial({
-            color: 0xff0000, // Red color
-            dashSize: 0.1, // Length of dashes
-            gapSize: 0.1, // Length of gaps between dashes
-        });
-
-        // Create the line object
-        const uavLine = new THREE.Line(uavlineGeometry, uavlineMaterial);
-        uavLine.computeLineDistances(); // Required for dashed lines
-
-        // Add the line to the scene
-        scene.add(uavLine);
-
-        // Create a box to represent the UAV's field of view
-        // const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-        // const boxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-        // const uavFOVBox = new THREE.Mesh(boxGeometry, boxMaterial);
-        // scene.add(uavFOVBox);
-
-        // Create a plane to represent the UAV's field of view
-        const planeGeometry = new THREE.PlaneGeometry(2, 2); // Adjust size as needed
-        const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide }); // Solid fill color
-        const uavFOVPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-        scene.add(uavFOVPlane);
-
-        // // Create a plane to represent the UAV's field of view
-        //     const aggPlaneGeometry = new THREE.PlaneGeometry(2, 2); // Adjust size as needed
-        //     const aggPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide, wireframe: true }); // Solid fill color
-        //     const aggUavFOVPlane = new THREE.Mesh(aggPlaneGeometry, aggPlaneMaterial);
-        //     scene.add(aggUavFOVPlane)
-
-        // Define initial position and rotation
-        const initialPosition = new THREE.Vector3(0, 0, 0);
-        const initialRotation = new THREE.Euler(-Math.PI / 2, 0, 0);
-
-        let uavIndex = 0;
-        const uavCamera1 = createCameraRepresentation(uavPath1[0], 0xff0000);
-        const uavCamera2 = createCameraRepresentation(uavPath2[0], 0x0000ff);
-        
-
-        // Camera frustum visualization for UAV cameras
-        const uavFrustum1 = new THREE.CameraHelper(camera);
-        const uavFrustum2 = new THREE.CameraHelper(camera);
-        scene.add(uavFrustum1);
-        scene.add(uavFrustum2);
-
-        // Function to create and return line between two points
-        function createLine(pointA, pointB, color = 0xffffff) {
-            const geometry = new THREE.BufferGeometry().setFromPoints([pointA, pointB]);
-            const material = new THREE.LineBasicMaterial({ color });
-            const line = new THREE.Line(geometry, material);
-            scene.add(line);
-            return line;
-        }
-
-        // Store the lines for each pass
-        const linesPass1 = [];
-        const linesPass2 = [];
-
-        // Create lines from the UAV cameras to anchor points
-        anchorPoints.forEach(point =&gt; {
-            linesPass1.push(createLine(uavPath1[0], point, 0xff00ff));
-            linesPass2.push(createLine(uavPath2[0], point, 0x00ffff));
-        });
-
-        // Simulate feature matching between passes
-        function createFeatureMatchingLines(pointsA, pointsB, color = 0xffd700) {
-            pointsA.forEach((pointA, index) =&gt; {
-                const pointB = pointsB[index];
-                const lineGeometry = new THREE.BufferGeometry().setFromPoints([pointA, pointB]);
-                const lineMaterial = new THREE.LineBasicMaterial({ color });
-                const line = new THREE.Line(lineGeometry, lineMaterial);
-                scene.add(line);
-            });
-        }
-
-        // Create feature matching lines between two UAV passes
-        createFeatureMatchingLines(anchorPoints, anchorPoints);
-
-        // OrbitControls for user interaction
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.25;
-        controls.enableZoom = true;
-
-        camera.position.z = 15;
-
-        let lastUpdateTime = 0;
-        const updateInterval = 50; // Time in milliseconds between updates
-        function animate(t) {
-            requestAnimationFrame(animate);
-            // Calculate the time elapsed since the last update
-            const elapsedTime = t - lastUpdateTime;
-
-            if (elapsedTime &gt;= updateInterval) {
-            // Move the UAV cameras along their paths
-            uavIndex = (uavIndex + 1) % uavPath1.length;
-            uavCamera1.position.copy(uavPath1[uavIndex]);
-            uavCamera2.position.copy(uavPath2[uavIndex]);
-
-            if (uavIndex &lt; uavPath1.length - 1) {
-                uavIndex++;
-                const newPoints = uavPath1.slice(0, uavIndex + 1);
-                uavlineGeometry.setFromPoints(newPoints);
-                uavLine.computeLineDistances(); // Required for dashed lines
-            }
-
-            // Update the positions of the lines to keep them connected to the moving UAV cameras
-            linesPass1.forEach((line, index) =&gt; {
-                const linePositions = line.geometry.attributes.position.array;
-                const anchorPoint = anchorPoints[index];
-
-                // Update the line's start point (UAV camera position)
-                linePositions[0] = uavCamera1.position.x;
-                linePositions[1] = uavCamera1.position.y;
-                linePositions[2] = uavCamera1.position.z;
-
-                // Update the line's endpoint (anchor point on the terrain)
-                linePositions[3] = anchorPoint.x;
-                linePositions[4] = anchorPoint.y;
-                linePositions[5] = anchorPoint.z;
-
-                line.geometry.attributes.position.needsUpdate = true;
-            });
-
-            linesPass2.forEach((line, index) =&gt; {
-                const linePositions = line.geometry.attributes.position.array;
-                const anchorPoint = anchorPoints[index];
-
-                // Update the line's start point (UAV camera position)
-                linePositions[0] = uavCamera2.position.x;
-                linePositions[1] = uavCamera2.position.y;
-                linePositions[2] = uavCamera2.position.z;
-
-                // Update the line's endpoint (anchor point on the terrain)
-                linePositions[3] = anchorPoint.x;
-                linePositions[4] = anchorPoint.y;
-                linePositions[5] = anchorPoint.z;
-
-                line.geometry.attributes.position.needsUpdate = true;
-            });
-
-            // // Update the UAV's field of view box position
-            // uavFOVBox.position.copy(uavCamera1.position);
-
-            //  // Create a plane to represent the UAV's field of view
-            const aggPlaneGeometry = new THREE.PlaneGeometry(2, 2); // Adjust size as needed
-            const aggPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide, wireframe: true }); // Solid fill color
-            const aggUavFOVPlane = new THREE.Mesh(aggPlaneGeometry, aggPlaneMaterial);
-            scene.add(aggUavFOVPlane);
-
-            // TODO: Figure out how to reset the aggUavFOVPlane at the end of the uav path
-    
-
-            // Update the UAV's field of view plane position and orientation
-            aggUavFOVPlane.position.set(uavCamera1.position.x, 0, uavCamera1.position.z); // Set y to 0 to place it on the terrain surface
-            aggUavFOVPlane.rotation.x = -Math.PI / 2; // Rotate to align with the terrain surface
-
-            // Update the UAV's field of view plane position and orientation
-            uavFOVPlane.position.set(uavCamera1.position.x, 0, uavCamera1.position.z); // Set y to 0 to place it on the terrain surface
-            uavFOVPlane.rotation.x = -Math.PI / 2; // Rotate to align with the terrain surface
-
-           
-            // Update the last update time
-            lastUpdateTime = t;
-            }
-  
-             controls.update();
-            renderer.render(scene, camera);
-            
-        }
-
-        window.addEventListener('resize', () =&gt; {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        });
-
-        animate();
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<div class="cell" data-eval="true" data-warning="false" data-error="false">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="59" data-source-offset="-27"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 58;"><span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="dv">800</span><span class="op">;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>THREE <span class="op">=</span> {</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> THREE <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="at">THREE</span> <span class="op">=</span> <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/build/three.min.js"</span>)<span class="op">;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/examples/js/controls/OrbitControls.js"</span>)<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/examples/js/loaders/OBJLoader.js"</span>)<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"three@0.130.0/examples/js/loaders/GLTFLoader.js"</span>)<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> THREE<span class="op">;</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>SimplexNoise <span class="op">=</span> {</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> SimplexNoise <span class="op">=</span> <span class="bu">window</span><span class="op">.</span><span class="at">SimplexNoise</span> <span class="op">=</span> <span class="cf">await</span> <span class="pp">require</span>(<span class="st">"simplex-noise@2.4.0/simplex-noise.js"</span>)<span class="op">;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> SimplexNoise<span class="op">;</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="co">// Create the renderer</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>renderer <span class="op">=</span> {</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> renderer <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">WebGLRenderer</span>({ <span class="dt">antialias</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  renderer<span class="op">.</span><span class="fu">setSize</span>(width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> renderer<span class="op">;</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co">// Set up scene, camera, and light</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>scene <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Scene</span>()<span class="op">;</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>camera <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">PerspectiveCamera</span>(<span class="dv">75</span><span class="op">,</span> width <span class="op">/</span> height<span class="op">,</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>camera<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-8" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="86" data-source-offset="-925"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 85;"><span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(<span class="kw">new</span> THREE<span class="op">.</span><span class="fu">AmbientLight</span>(<span class="bn">0xffffff</span><span class="op">,</span> <span class="fl">0.5</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-9" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="87" data-source-offset="-992"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 86;"><span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>directionalLight <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">DirectionalLight</span>(<span class="bn">0xffffff</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>directionalLight<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">.</span><span class="fu">normalize</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-10" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-11" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="89" data-source-offset="-1104"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 88;"><span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(directionalLight)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-12" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="92" data-source-offset="-1153"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 91;"><span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>controls <span class="op">=</span> {</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> controls <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">OrbitControls</span>(camera<span class="op">,</span> renderer<span class="op">.</span><span class="at">domElement</span>)<span class="op">;</span></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>  controls<span class="op">.</span><span class="at">enableDamping</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>  controls<span class="op">.</span><span class="at">dampingFactor</span> <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>  controls<span class="op">.</span><span class="at">enableZoom</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> controls<span class="op">;</span></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a><span class="co">// Create the terrain using Simplex Noise</span></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>terrainGeometry <span class="op">=</span> {</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> widthSegments <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> heightSegments <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> geometry <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">PlaneGeometry</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> widthSegments<span class="op">,</span> heightSegments)<span class="op">;</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> simplex <span class="op">=</span> <span class="kw">new</span> <span class="fu">SimplexNoise</span>()<span class="op">;</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> vertices <span class="op">=</span> geometry<span class="op">.</span><span class="at">attributes</span><span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">array</span><span class="op">;</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Modify the z-coordinates of the vertices using Simplex Noise</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> vertices<span class="op">.</span><span class="at">length</span><span class="op">;</span> i <span class="op">+=</span> <span class="dv">3</span>) {</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> x <span class="op">=</span> vertices[i]<span class="op">;</span></span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> y <span class="op">=</span> vertices[i <span class="op">+</span> <span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>    vertices[i <span class="op">+</span> <span class="dv">2</span>] <span class="op">=</span> simplex<span class="op">.</span><span class="fu">noise2D</span>(x <span class="op">*</span> <span class="fl">0.3</span><span class="op">,</span> y <span class="op">*</span> <span class="fl">0.3</span>) <span class="op">/</span> <span class="fl">2.0</span><span class="op">;</span> <span class="co">// Reduce amplitude</span></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>  geometry<span class="op">.</span><span class="fu">computeVertexNormals</span>()<span class="op">;</span> <span class="co">// Recompute normals after modifying vertices</span></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> geometry<span class="op">;</span></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="co">// Create the terrain mesh</span></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>terrain <span class="op">=</span> {</span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> material <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">MeshStandardMaterial</span>({ <span class="dt">color</span><span class="op">:</span> <span class="bn">0x228b22</span><span class="op">,</span> <span class="dt">wireframe</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> mesh <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Mesh</span>(terrainGeometry<span class="op">,</span> material)<span class="op">;</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>  mesh<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="op">-</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// Rotate to make horizontal</span></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>  scene<span class="op">.</span><span class="fu">add</span>(mesh)<span class="op">;</span></span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mesh<span class="op">;</span></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a><span class="co">// Anchor points on the terrain surface, adjusted for terrain rotation</span></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>anchorPoints <span class="op">=</span> {</span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> positions <span class="op">=</span> terrainGeometry<span class="op">.</span><span class="at">attributes</span><span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">array</span><span class="op">;</span></span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> points <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">50</span><span class="op">;</span> i<span class="op">++</span>) { <span class="co">// Create 50 random anchor points</span></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> index <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">*</span> (positions<span class="op">.</span><span class="at">length</span> <span class="op">/</span> <span class="dv">3</span>)) <span class="op">*</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> point <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Vector3</span>(positions[index]<span class="op">,</span> positions[index <span class="op">+</span> <span class="dv">1</span>]<span class="op">,</span> positions[index <span class="op">+</span> <span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Correct for terrain rotation</span></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>    point<span class="op">.</span><span class="fu">applyMatrix3</span>(terrain<span class="op">.</span><span class="at">matrixWorld</span>)<span class="op">;</span></span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>    points<span class="op">.</span><span class="fu">push</span>(point)<span class="op">;</span></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> anchorMaterial <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">PointsMaterial</span>({ <span class="dt">color</span><span class="op">:</span> <span class="bn">0xff0000</span><span class="op">,</span> <span class="dt">size</span><span class="op">:</span> <span class="fl">0.25</span> })<span class="op">;</span></span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> anchorGeometry <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">BufferGeometry</span>()<span class="op">.</span><span class="fu">setFromPoints</span>(points)<span class="op">;</span></span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> anchorMesh <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Points</span>(anchorGeometry<span class="op">,</span> anchorMaterial)<span class="op">;</span></span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a>  scene<span class="op">.</span><span class="fu">add</span>(anchorMesh)<span class="op">;</span></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> points<span class="op">;</span></span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a><span class="co">// Create the line material and add the lines to the scene</span></span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a>uavlineMaterial <span class="op">=</span> {</span>
+<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> uavlineMaterial <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">LineDashedMaterial</span>({</span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>    <span class="dt">color</span><span class="op">:</span> <span class="bn">0xff0000</span><span class="op">,</span> <span class="co">// Red color</span></span>
+<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a>    <span class="dt">dashSize</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="co">// Length of dashes</span></span>
+<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a>    <span class="dt">gapSize</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="co">// Length of gaps between dashes</span></span>
+<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> uavlineMaterial<span class="op">;</span></span>
+<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a><span class="co">// UAV path and camera representation, with paths as lines</span></span>
+<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a>uavCameras <span class="op">=</span> {</span>
+<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> uavPath1 <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> stepSize <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span>
+<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rowDistance <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span>
+<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> startX <span class="op">=</span> <span class="op">-</span><span class="dv">5</span><span class="op">,</span> endX <span class="op">=</span> <span class="dv">5</span><span class="op">,</span> startZ <span class="op">=</span> <span class="op">-</span><span class="dv">5</span><span class="op">,</span> endZ <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> startY <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> endY <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> direction <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> z <span class="op">=</span> startZ<span class="op">;</span> z <span class="op">&lt;=</span> endZ<span class="op">;</span> z <span class="op">+=</span> rowDistance) {</span>
+<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (direction <span class="op">===</span> <span class="dv">1</span>) {</span>
+<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (<span class="kw">let</span> x <span class="op">=</span> startX<span class="op">;</span> x <span class="op">&lt;=</span> endX<span class="op">;</span> x <span class="op">+=</span> stepSize) {</span>
+<span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a>        uavPath1<span class="op">.</span><span class="fu">push</span>(<span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Vector3</span>(x<span class="op">,</span> startY<span class="op">,</span> z))<span class="op">;</span></span>
+<span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (<span class="kw">let</span> x <span class="op">=</span> endX<span class="op">;</span> x <span class="op">&gt;=</span> startX<span class="op">;</span> x <span class="op">-=</span> stepSize) {</span>
+<span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a>        uavPath1<span class="op">.</span><span class="fu">push</span>(<span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Vector3</span>(x<span class="op">,</span> endY<span class="op">,</span> z))<span class="op">;</span></span>
+<span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a>    direction <span class="op">*=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> uavLineGeometry <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">BufferGeometry</span>()<span class="op">;</span></span>
+<span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a>  uavLineGeometry<span class="op">.</span><span class="fu">setFromPoints</span>(uavPath1)<span class="op">;</span></span>
+<span id="cb5-187"><a href="#cb5-187" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> uavLine1 <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Line</span>(uavLineGeometry<span class="op">,</span> uavlineMaterial)<span class="op">;</span></span>
+<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a>  uavLine1<span class="op">.</span><span class="fu">computeLineDistances</span>()<span class="op">;</span> <span class="co">// Required for dashed lines</span></span>
+<span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a>  scene<span class="op">.</span><span class="fu">add</span>(uavLine1)<span class="op">;</span></span>
+<span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Create UAV camera mesh representations</span></span>
+<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cameraMaterial1 <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">MeshBasicMaterial</span>({ <span class="dt">color</span><span class="op">:</span> <span class="bn">0xff0000</span> })<span class="op">;</span></span>
+<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-194"><a href="#cb5-194" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cameraGeometry <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">SphereGeometry</span>(<span class="fl">0.1</span><span class="op">,</span> <span class="dv">32</span><span class="op">,</span> <span class="dv">32</span>)<span class="op">;</span></span>
+<span id="cb5-195"><a href="#cb5-195" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> uavCamera1 <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Mesh</span>(cameraGeometry<span class="op">,</span> cameraMaterial1)<span class="op">;</span></span>
+<span id="cb5-196"><a href="#cb5-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-197"><a href="#cb5-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a>  scene<span class="op">.</span><span class="fu">add</span>(uavCamera1)<span class="op">;</span></span>
+<span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { uavCamera1<span class="op">,</span> uavPath1<span class="op">,</span> uavLine1<span class="op">,</span> uavLineGeometry }<span class="op">;</span></span>
+<span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a>uavFrustum1 <span class="op">=</span> {</span>
+<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> uavFrustum1 <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">CameraHelper</span>(camera)<span class="op">;</span></span>
+<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a>    <span class="co">// scene.add(uavFrustum1);</span></span>
+<span id="cb5-208"><a href="#cb5-208" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> uavFrustum1<span class="op">;</span></span>
+<span id="cb5-209"><a href="#cb5-209" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">createLine</span>(pointA<span class="op">,</span> pointB<span class="op">,</span> color <span class="op">=</span> <span class="bn">0xffffff</span>) {</span>
+<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> geometry <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">BufferGeometry</span>()<span class="op">.</span><span class="fu">setFromPoints</span>([pointA<span class="op">,</span> pointB])<span class="op">;</span></span>
+<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> material <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">LineBasicMaterial</span>({ color })<span class="op">;</span></span>
+<span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> line <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Line</span>(geometry<span class="op">,</span> material)<span class="op">;</span></span>
+<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a>    scene<span class="op">.</span><span class="fu">add</span>(line)<span class="op">;</span></span>
+<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> line<span class="op">;</span></span>
+<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a>linesPass1 <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb5-222"><a href="#cb5-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-223"><a href="#cb5-223" aria-hidden="true" tabindex="-1"></a>linePass1 <span class="op">=</span> {</span>
+<span id="cb5-224"><a href="#cb5-224" aria-hidden="true" tabindex="-1"></a>    anchorPoints<span class="op">.</span><span class="fu">forEach</span>(point <span class="kw">=&gt;</span> {</span>
+<span id="cb5-225"><a href="#cb5-225" aria-hidden="true" tabindex="-1"></a>        linesPass1<span class="op">.</span><span class="fu">push</span>(<span class="fu">createLine</span>(uavCameras<span class="op">.</span><span class="at">uavPath1</span>[<span class="dv">0</span>]<span class="op">,</span> point<span class="op">,</span> <span class="bn">0x00ffff</span>))<span class="op">;</span></span>
+<span id="cb5-226"><a href="#cb5-226" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb5-227"><a href="#cb5-227" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> linesPass1<span class="op">;</span></span>
+<span id="cb5-228"><a href="#cb5-228" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Create lines from the UAV cameras to anchor points</span></span>
+<span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a>uavFOVPlane <span class="op">=</span> {</span>
+<span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a>     <span class="co">// Create a plane to represent the UAV's field of view</span></span>
+<span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> planeGeometry <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">PlaneGeometry</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span> <span class="co">// Adjust size as needed</span></span>
+<span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> planeMaterial <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">MeshBasicMaterial</span>({ <span class="dt">color</span><span class="op">:</span> <span class="bn">0x00ff00</span><span class="op">,</span> <span class="dt">side</span><span class="op">:</span> THREE<span class="op">.</span><span class="at">DoubleSide</span> })<span class="op">;</span> <span class="co">// Solid fill color</span></span>
+<span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> uavFOVPlane <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Mesh</span>(planeGeometry<span class="op">,</span> planeMaterial)<span class="op">;</span></span>
+<span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a>    scene<span class="op">.</span><span class="fu">add</span>(uavFOVPlane)<span class="op">;</span></span>
+<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> uavFOVPlane<span class="op">;</span></span>
+<span id="cb5-239"><a href="#cb5-239" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a><span class="co">// Animation loop, moving the UAVs along their paths</span></span>
+<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-243"><a href="#cb5-243" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> uavIndex <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> lastUpdateTime <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> updateInterval <span class="op">=</span> <span class="dv">50</span><span class="op">;</span> <span class="co">// Milliseconds between updates</span></span>
+<span id="cb5-246"><a href="#cb5-246" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
+<span id="cb5-248"><a href="#cb5-248" aria-hidden="true" tabindex="-1"></a>    <span class="fu">requestAnimationFrame</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> { uavCamera1<span class="op">,</span> uavPath1<span class="op">,</span> uavLine1<span class="op">,</span> uavLineGeometry } <span class="op">=</span> uavCameras<span class="op">;</span></span>
+<span id="cb5-250"><a href="#cb5-250" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Move UAV cameras along the path</span></span>
+<span id="cb5-251"><a href="#cb5-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Move the UAV cameras along their paths</span></span>
+<span id="cb5-253"><a href="#cb5-253" aria-hidden="true" tabindex="-1"></a>            uavIndex <span class="op">=</span> (uavIndex <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> uavPath1<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a>            uavCamera1<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">copy</span>(uavPath1[uavIndex])<span class="op">;</span></span>
+<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a>            <span class="co">// uavCamera2.position.copy(uavPath2[uavIndex]);</span></span>
+<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (uavIndex <span class="op">&lt;</span> uavPath1<span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>) {</span>
+<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a>                uavIndex<span class="op">++;</span></span>
+<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a>                <span class="kw">const</span> newPoints <span class="op">=</span> uavPath1<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> uavIndex <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb5-260"><a href="#cb5-260" aria-hidden="true" tabindex="-1"></a>                uavLineGeometry<span class="op">.</span><span class="fu">setFromPoints</span>(newPoints)<span class="op">;</span></span>
+<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a>                uavLine1<span class="op">.</span><span class="fu">computeLineDistances</span>()<span class="op">;</span> <span class="co">// Required for dashed lines</span></span>
+<span id="cb5-262"><a href="#cb5-262" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb5-263"><a href="#cb5-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-264"><a href="#cb5-264" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Update the positions of the lines to keep them connected to the moving UAV cameras</span></span>
+<span id="cb5-265"><a href="#cb5-265" aria-hidden="true" tabindex="-1"></a>            linesPass1<span class="op">.</span><span class="fu">forEach</span>((line<span class="op">,</span> index) <span class="kw">=&gt;</span> {</span>
+<span id="cb5-266"><a href="#cb5-266" aria-hidden="true" tabindex="-1"></a>                <span class="kw">const</span> linePositions <span class="op">=</span> line<span class="op">.</span><span class="at">geometry</span><span class="op">.</span><span class="at">attributes</span><span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">array</span><span class="op">;</span></span>
+<span id="cb5-267"><a href="#cb5-267" aria-hidden="true" tabindex="-1"></a>                <span class="kw">const</span> anchorPoint <span class="op">=</span> anchorPoints[index]<span class="op">;</span></span>
+<span id="cb5-268"><a href="#cb5-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-269"><a href="#cb5-269" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Update the line's start point (UAV camera position)</span></span>
+<span id="cb5-270"><a href="#cb5-270" aria-hidden="true" tabindex="-1"></a>                linePositions[<span class="dv">0</span>] <span class="op">=</span> uavCamera1<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">x</span><span class="op">;</span></span>
+<span id="cb5-271"><a href="#cb5-271" aria-hidden="true" tabindex="-1"></a>                linePositions[<span class="dv">1</span>] <span class="op">=</span> uavCamera1<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">y</span><span class="op">;</span></span>
+<span id="cb5-272"><a href="#cb5-272" aria-hidden="true" tabindex="-1"></a>                linePositions[<span class="dv">2</span>] <span class="op">=</span> uavCamera1<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">z</span><span class="op">;</span></span>
+<span id="cb5-273"><a href="#cb5-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-274"><a href="#cb5-274" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Update the line's endpoint (anchor point on the terrain)</span></span>
+<span id="cb5-275"><a href="#cb5-275" aria-hidden="true" tabindex="-1"></a>                linePositions[<span class="dv">3</span>] <span class="op">=</span> anchorPoint<span class="op">.</span><span class="at">x</span><span class="op">;</span></span>
+<span id="cb5-276"><a href="#cb5-276" aria-hidden="true" tabindex="-1"></a>                linePositions[<span class="dv">4</span>] <span class="op">=</span> anchorPoint<span class="op">.</span><span class="at">y</span><span class="op">;</span></span>
+<span id="cb5-277"><a href="#cb5-277" aria-hidden="true" tabindex="-1"></a>                linePositions[<span class="dv">5</span>] <span class="op">=</span> anchorPoint<span class="op">.</span><span class="at">z</span><span class="op">;</span></span>
+<span id="cb5-278"><a href="#cb5-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-279"><a href="#cb5-279" aria-hidden="true" tabindex="-1"></a>                line<span class="op">.</span><span class="at">geometry</span><span class="op">.</span><span class="at">attributes</span><span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">needsUpdate</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb5-280"><a href="#cb5-280" aria-hidden="true" tabindex="-1"></a>            })<span class="op">;</span></span>
+<span id="cb5-281"><a href="#cb5-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-282"><a href="#cb5-282" aria-hidden="true" tabindex="-1"></a>            <span class="co">// // Update the UAV's field of view plane position and orientation</span></span>
+<span id="cb5-283"><a href="#cb5-283" aria-hidden="true" tabindex="-1"></a>            uavFOVPlane<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(uavCamera1<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">x</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> uavCamera1<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="at">z</span>)<span class="op">;</span> <span class="co">// Set y to 0 to place it on the terrain surface</span></span>
+<span id="cb5-284"><a href="#cb5-284" aria-hidden="true" tabindex="-1"></a>            uavFOVPlane<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="op">-</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// Rotate to align with the terrain surface</span></span>
+<span id="cb5-285"><a href="#cb5-285" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-286"><a href="#cb5-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-287"><a href="#cb5-287" aria-hidden="true" tabindex="-1"></a>      controls<span class="op">.</span><span class="fu">update</span>()<span class="op">;</span> <span class="co">// Update orbit controls</span></span>
+<span id="cb5-288"><a href="#cb5-288" aria-hidden="true" tabindex="-1"></a>      renderer<span class="op">.</span><span class="fu">render</span>(scene<span class="op">,</span> camera)<span class="op">;</span> <span class="co">// Render scene</span></span>
+<span id="cb5-289"><a href="#cb5-289" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb5-290"><a href="#cb5-290" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(updateInterval)<span class="op">;</span></span>
+<span id="cb5-291"><a href="#cb5-291" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-292"><a href="#cb5-292" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-13" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-14" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-15" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-16" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-17" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-18" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-19" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-20" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-21" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-22" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-23" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-24" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="295" data-source-offset="-7932"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 294;"><span id="cb6-295"><a href="#cb6-295" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb6-296"><a href="#cb6-296" aria-hidden="true" tabindex="-1"></a>  <span class="bu">window</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'resize'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-297"><a href="#cb6-297" aria-hidden="true" tabindex="-1"></a>    renderer<span class="op">.</span><span class="fu">setSize</span>(width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb6-298"><a href="#cb6-298" aria-hidden="true" tabindex="-1"></a>    camera<span class="op">.</span><span class="at">aspect</span> <span class="op">=</span> width <span class="op">/</span> height<span class="op">;</span></span>
+<span id="cb6-299"><a href="#cb6-299" aria-hidden="true" tabindex="-1"></a>    camera<span class="op">.</span><span class="fu">updateProjectionMatrix</span>()<span class="op">;</span></span>
+<span id="cb6-300"><a href="#cb6-300" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb6-301"><a href="#cb6-301" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-25" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="303" data-source-offset="-8142"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 302;"><span id="cb7-303"><a href="#cb7-303" aria-hidden="true" tabindex="-1"></a>renderer<span class="op">.</span><span class="at">domElement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-26" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
 </section>
 
 </main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuXG5cbi8vIERlZmluZSBjYW52YXMgaGVpZ2h0XG5oZWlnaHQgPSA2MDA7XG53aWR0aCA9IDgwMDtcblxuVEhSRUUgPSB7XG4gIGNvbnN0IFRIUkVFID0gd2luZG93LlRIUkVFID0gYXdhaXQgcmVxdWlyZShcInRocmVlQDAuMTMwLjAvYnVpbGQvdGhyZWUubWluLmpzXCIpO1xuICBhd2FpdCByZXF1aXJlKFwidGhyZWVAMC4xMzAuMC9leGFtcGxlcy9qcy9jb250cm9scy9PcmJpdENvbnRyb2xzLmpzXCIpLmNhdGNoKCgpID0+IHt9KTtcbiAgYXdhaXQgcmVxdWlyZShcInRocmVlQDAuMTMwLjAvZXhhbXBsZXMvanMvbG9hZGVycy9PQkpMb2FkZXIuanNcIikuY2F0Y2goKCkgPT4ge30pO1xuICBhd2FpdCByZXF1aXJlKFwidGhyZWVAMC4xMzAuMC9leGFtcGxlcy9qcy9sb2FkZXJzL0dMVEZMb2FkZXIuanNcIikuY2F0Y2goKCkgPT4ge30pO1xuICByZXR1cm4gVEhSRUU7XG59XG5cblNpbXBsZXhOb2lzZSA9IHtcbiAgICBjb25zdCBTaW1wbGV4Tm9pc2UgPSB3aW5kb3cuU2ltcGxleE5vaXNlID0gYXdhaXQgcmVxdWlyZShcInNpbXBsZXgtbm9pc2VAMi40LjAvc2ltcGxleC1ub2lzZS5qc1wiKTtcbiAgICByZXR1cm4gU2ltcGxleE5vaXNlO1xufVxuXG4vLyBDcmVhdGUgdGhlIHJlbmRlcmVyXG5yZW5kZXJlciA9IHtcbiAgY29uc3QgcmVuZGVyZXIgPSBuZXcgVEhSRUUuV2ViR0xSZW5kZXJlcih7IGFudGlhbGlhczogdHJ1ZSB9KTtcbiAgcmVuZGVyZXIuc2V0U2l6ZSh3aWR0aCwgaGVpZ2h0KTtcbiAgcmV0dXJuIHJlbmRlcmVyO1xufVxuXG4vLyBTZXQgdXAgc2NlbmUsIGNhbWVyYSwgYW5kIGxpZ2h0XG5zY2VuZSA9IG5ldyBUSFJFRS5TY2VuZSgpO1xuY2FtZXJhID0gbmV3IFRIUkVFLlBlcnNwZWN0aXZlQ2FtZXJhKDc1LCB3aWR0aCAvIGhlaWdodCwgMC4xLCAxMDAwKTtcbmNhbWVyYS5wb3NpdGlvbi5zZXQoMCwgMTUsIDE1KTsgLy8gQWRqdXN0IHRvIGxvb2sgZG93biBhdCB0aGUgc2NlbmVcbnNjZW5lLmFkZChuZXcgVEhSRUUuQW1iaWVudExpZ2h0KDB4ZmZmZmZmLCAwLjUpKTsgLy8gQW1iaWVudCBsaWdodFxuZGlyZWN0aW9uYWxMaWdodCA9IG5ldyBUSFJFRS5EaXJlY3Rpb25hbExpZ2h0KDB4ZmZmZmZmLCAxKTtcbmRpcmVjdGlvbmFsTGlnaHQucG9zaXRpb24uc2V0KDUsIDUsIDUpLm5vcm1hbGl6ZSgpO1xuc2NlbmUuYWRkKGRpcmVjdGlvbmFsTGlnaHQpO1xuXG4vLyBTZXQgdXAgY29udHJvbHNcbmNvbnRyb2xzID0ge1xuICBjb25zdCBjb250cm9scyA9IG5ldyBUSFJFRS5PcmJpdENvbnRyb2xzKGNhbWVyYSwgcmVuZGVyZXIuZG9tRWxlbWVudCk7XG4gIGNvbnRyb2xzLmVuYWJsZURhbXBpbmcgPSB0cnVlO1xuICBjb250cm9scy5kYW1waW5nRmFjdG9yID0gMC4yNTtcbiAgY29udHJvbHMuZW5hYmxlWm9vbSA9IHRydWU7XG4gIHJldHVybiBjb250cm9scztcbn1cblxuLy8gQ3JlYXRlIHRoZSB0ZXJyYWluIHVzaW5nIFNpbXBsZXggTm9pc2VcbnRlcnJhaW5HZW9tZXRyeSA9IHtcbiAgY29uc3Qgd2lkdGhTZWdtZW50cyA9IDEwMDtcbiAgY29uc3QgaGVpZ2h0U2VnbWVudHMgPSAxMDA7XG4gIGNvbnN0IGdlb21ldHJ5ID0gbmV3IFRIUkVFLlBsYW5lR2VvbWV0cnkoMTAsIDEwLCB3aWR0aFNlZ21lbnRzLCBoZWlnaHRTZWdtZW50cyk7XG4gIFxuICBjb25zdCBzaW1wbGV4ID0gbmV3IFNpbXBsZXhOb2lzZSgpO1xuICBjb25zdCB2ZXJ0aWNlcyA9IGdlb21ldHJ5LmF0dHJpYnV0ZXMucG9zaXRpb24uYXJyYXk7XG5cbiAgLy8gTW9kaWZ5IHRoZSB6LWNvb3JkaW5hdGVzIG9mIHRoZSB2ZXJ0aWNlcyB1c2luZyBTaW1wbGV4IE5vaXNlXG4gIGZvciAobGV0IGkgPSAwOyBpIDwgdmVydGljZXMubGVuZ3RoOyBpICs9IDMpIHtcbiAgICBjb25zdCB4ID0gdmVydGljZXNbaV07XG4gICAgY29uc3QgeSA9IHZlcnRpY2VzW2kgKyAxXTtcbiAgICB2ZXJ0aWNlc1tpICsgMl0gPSBzaW1wbGV4Lm5vaXNlMkQoeCAqIDAuMywgeSAqIDAuMykgLyAyLjA7IC8vIFJlZHVjZSBhbXBsaXR1ZGVcbiAgfVxuICBcbiAgZ2VvbWV0cnkuY29tcHV0ZVZlcnRleE5vcm1hbHMoKTsgLy8gUmVjb21wdXRlIG5vcm1hbHMgYWZ0ZXIgbW9kaWZ5aW5nIHZlcnRpY2VzXG4gIHJldHVybiBnZW9tZXRyeTtcbn1cblxuLy8gQ3JlYXRlIHRoZSB0ZXJyYWluIG1lc2hcbnRlcnJhaW4gPSB7XG4gIGNvbnN0IG1hdGVyaWFsID0gbmV3IFRIUkVFLk1lc2hTdGFuZGFyZE1hdGVyaWFsKHsgY29sb3I6IDB4MjI4YjIyLCB3aXJlZnJhbWU6IHRydWUgfSk7XG4gIGNvbnN0IG1lc2ggPSBuZXcgVEhSRUUuTWVzaCh0ZXJyYWluR2VvbWV0cnksIG1hdGVyaWFsKTtcbiAgbWVzaC5yb3RhdGlvbi54ID0gLU1hdGguUEkgLyAyOyAvLyBSb3RhdGUgdG8gbWFrZSBob3Jpem9udGFsXG4gIHNjZW5lLmFkZChtZXNoKTtcbiAgcmV0dXJuIG1lc2g7XG59XG5cbi8vIEFuY2hvciBwb2ludHMgb24gdGhlIHRlcnJhaW4gc3VyZmFjZSwgYWRqdXN0ZWQgZm9yIHRlcnJhaW4gcm90YXRpb25cbmFuY2hvclBvaW50cyA9IHtcbiAgY29uc3QgcG9zaXRpb25zID0gdGVycmFpbkdlb21ldHJ5LmF0dHJpYnV0ZXMucG9zaXRpb24uYXJyYXk7XG4gIGNvbnN0IHBvaW50cyA9IFtdO1xuICBcbiAgZm9yIChsZXQgaSA9IDA7IGkgPCA1MDsgaSsrKSB7IC8vIENyZWF0ZSA1MCByYW5kb20gYW5jaG9yIHBvaW50c1xuICAgIGNvbnN0IGluZGV4ID0gTWF0aC5mbG9vcihNYXRoLnJhbmRvbSgpICogKHBvc2l0aW9ucy5sZW5ndGggLyAzKSkgKiAzO1xuICAgIGNvbnN0IHBvaW50ID0gbmV3IFRIUkVFLlZlY3RvcjMocG9zaXRpb25zW2luZGV4XSwgcG9zaXRpb25zW2luZGV4ICsgMV0sIHBvc2l0aW9uc1tpbmRleCArIDJdKTtcbiAgICAvLyBDb3JyZWN0IGZvciB0ZXJyYWluIHJvdGF0aW9uXG4gICAgcG9pbnQuYXBwbHlNYXRyaXgzKHRlcnJhaW4ubWF0cml4V29ybGQpO1xuICAgIHBvaW50cy5wdXNoKHBvaW50KTtcbiAgfVxuXG4gIGNvbnN0IGFuY2hvck1hdGVyaWFsID0gbmV3IFRIUkVFLlBvaW50c01hdGVyaWFsKHsgY29sb3I6IDB4ZmYwMDAwLCBzaXplOiAwLjI1IH0pO1xuICBjb25zdCBhbmNob3JHZW9tZXRyeSA9IG5ldyBUSFJFRS5CdWZmZXJHZW9tZXRyeSgpLnNldEZyb21Qb2ludHMocG9pbnRzKTtcbiAgY29uc3QgYW5jaG9yTWVzaCA9IG5ldyBUSFJFRS5Qb2ludHMoYW5jaG9yR2VvbWV0cnksIGFuY2hvck1hdGVyaWFsKTtcbiAgc2NlbmUuYWRkKGFuY2hvck1lc2gpO1xuICBcbiAgcmV0dXJuIHBvaW50cztcbn1cblxuLy8gQ3JlYXRlIHRoZSBsaW5lIG1hdGVyaWFsIGFuZCBhZGQgdGhlIGxpbmVzIHRvIHRoZSBzY2VuZVxudWF2bGluZU1hdGVyaWFsID0ge1xuICAgIGNvbnN0IHVhdmxpbmVNYXRlcmlhbCA9IG5ldyBUSFJFRS5MaW5lRGFzaGVkTWF0ZXJpYWwoe1xuICAgIGNvbG9yOiAweGZmMDAwMCwgLy8gUmVkIGNvbG9yXG4gICAgZGFzaFNpemU6IDAuMSwgLy8gTGVuZ3RoIG9mIGRhc2hlc1xuICAgIGdhcFNpemU6IDAuMSwgLy8gTGVuZ3RoIG9mIGdhcHMgYmV0d2VlbiBkYXNoZXNcbiAgfSk7XG4gIHJldHVybiB1YXZsaW5lTWF0ZXJpYWw7XG59XG5cbi8vIFVBViBwYXRoIGFuZCBjYW1lcmEgcmVwcmVzZW50YXRpb24sIHdpdGggcGF0aHMgYXMgbGluZXNcbnVhdkNhbWVyYXMgPSB7XG4gIGNvbnN0IHVhdlBhdGgxID0gW107XG4gIFxuICBcbiAgY29uc3Qgc3RlcFNpemUgPSAwLjI1O1xuICBjb25zdCByb3dEaXN0YW5jZSA9IDAuMjU7XG4gIGNvbnN0IHN0YXJ0WCA9IC01LCBlbmRYID0gNSwgc3RhcnRaID0gLTUsIGVuZFogPSA1O1xuICBjb25zdCBzdGFydFkgPSAzO1xuICBjb25zdCBlbmRZID0gMztcbiAgbGV0IGRpcmVjdGlvbiA9IDE7XG5cbiAgZm9yIChsZXQgeiA9IHN0YXJ0WjsgeiA8PSBlbmRaOyB6ICs9IHJvd0Rpc3RhbmNlKSB7XG4gICAgaWYgKGRpcmVjdGlvbiA9PT0gMSkge1xuICAgICAgZm9yIChsZXQgeCA9IHN0YXJ0WDsgeCA8PSBlbmRYOyB4ICs9IHN0ZXBTaXplKSB7XG4gICAgICAgIHVhdlBhdGgxLnB1c2gobmV3IFRIUkVFLlZlY3RvcjMoeCwgc3RhcnRZLCB6KSk7XG4gICAgICB9XG4gICAgfSBlbHNlIHtcbiAgICAgIGZvciAobGV0IHggPSBlbmRYOyB4ID49IHN0YXJ0WDsgeCAtPSBzdGVwU2l6ZSkge1xuICAgICAgICB1YXZQYXRoMS5wdXNoKG5ldyBUSFJFRS5WZWN0b3IzKHgsIGVuZFksIHopKTtcbiAgICAgIH1cbiAgICB9XG4gICAgZGlyZWN0aW9uICo9IC0xO1xuICB9XG5cbiAgY29uc3QgdWF2TGluZUdlb21ldHJ5ID0gbmV3IFRIUkVFLkJ1ZmZlckdlb21ldHJ5KCk7XG4gIHVhdkxpbmVHZW9tZXRyeS5zZXRGcm9tUG9pbnRzKHVhdlBhdGgxKTtcbiAgY29uc3QgdWF2TGluZTEgPSBuZXcgVEhSRUUuTGluZSh1YXZMaW5lR2VvbWV0cnksIHVhdmxpbmVNYXRlcmlhbCk7XG4gIHVhdkxpbmUxLmNvbXB1dGVMaW5lRGlzdGFuY2VzKCk7IC8vIFJlcXVpcmVkIGZvciBkYXNoZWQgbGluZXNcbiAgc2NlbmUuYWRkKHVhdkxpbmUxKTtcblxuICAvLyBDcmVhdGUgVUFWIGNhbWVyYSBtZXNoIHJlcHJlc2VudGF0aW9uc1xuICBjb25zdCBjYW1lcmFNYXRlcmlhbDEgPSBuZXcgVEhSRUUuTWVzaEJhc2ljTWF0ZXJpYWwoeyBjb2xvcjogMHhmZjAwMDAgfSk7XG5cbiAgY29uc3QgY2FtZXJhR2VvbWV0cnkgPSBuZXcgVEhSRUUuU3BoZXJlR2VvbWV0cnkoMC4xLCAzMiwgMzIpO1xuICBjb25zdCB1YXZDYW1lcmExID0gbmV3IFRIUkVFLk1lc2goY2FtZXJhR2VvbWV0cnksIGNhbWVyYU1hdGVyaWFsMSk7XG5cblxuICBzY2VuZS5hZGQodWF2Q2FtZXJhMSk7XG5cbiAgcmV0dXJuIHsgdWF2Q2FtZXJhMSwgdWF2UGF0aDEsIHVhdkxpbmUxLCB1YXZMaW5lR2VvbWV0cnkgfTtcbn1cblxuXG5cbnVhdkZydXN0dW0xID0ge1xuICAgIGNvbnN0IHVhdkZydXN0dW0xID0gbmV3IFRIUkVFLkNhbWVyYUhlbHBlcihjYW1lcmEpO1xuICAgIC8vIHNjZW5lLmFkZCh1YXZGcnVzdHVtMSk7XG4gICAgcmV0dXJuIHVhdkZydXN0dW0xO1xufVxuXG5cblxuZnVuY3Rpb24gY3JlYXRlTGluZShwb2ludEEsIHBvaW50QiwgY29sb3IgPSAweGZmZmZmZikge1xuICAgIGNvbnN0IGdlb21ldHJ5ID0gbmV3IFRIUkVFLkJ1ZmZlckdlb21ldHJ5KCkuc2V0RnJvbVBvaW50cyhbcG9pbnRBLCBwb2ludEJdKTtcbiAgICBjb25zdCBtYXRlcmlhbCA9IG5ldyBUSFJFRS5MaW5lQmFzaWNNYXRlcmlhbCh7IGNvbG9yIH0pO1xuICAgIGNvbnN0IGxpbmUgPSBuZXcgVEhSRUUuTGluZShnZW9tZXRyeSwgbWF0ZXJpYWwpO1xuICAgIHNjZW5lLmFkZChsaW5lKTtcbiAgICByZXR1cm4gbGluZTtcbn1cblxubGluZXNQYXNzMSA9IFtdO1xuXG5saW5lUGFzczEgPSB7XG4gICAgYW5jaG9yUG9pbnRzLmZvckVhY2gocG9pbnQgPT4ge1xuICAgICAgICBsaW5lc1Bhc3MxLnB1c2goY3JlYXRlTGluZSh1YXZDYW1lcmFzLnVhdlBhdGgxWzBdLCBwb2ludCwgMHgwMGZmZmYpKTtcbiAgICB9KTtcbiAgICByZXR1cm4gbGluZXNQYXNzMTtcbn1cbiAgICAgICAgLy8gQ3JlYXRlIGxpbmVzIGZyb20gdGhlIFVBViBjYW1lcmFzIHRvIGFuY2hvciBwb2ludHNcblxuXG51YXZGT1ZQbGFuZSA9IHtcbiAgICAgLy8gQ3JlYXRlIGEgcGxhbmUgdG8gcmVwcmVzZW50IHRoZSBVQVYncyBmaWVsZCBvZiB2aWV3XG4gICAgY29uc3QgcGxhbmVHZW9tZXRyeSA9IG5ldyBUSFJFRS5QbGFuZUdlb21ldHJ5KDIsIDIpOyAvLyBBZGp1c3Qgc2l6ZSBhcyBuZWVkZWRcbiAgICBjb25zdCBwbGFuZU1hdGVyaWFsID0gbmV3IFRIUkVFLk1lc2hCYXNpY01hdGVyaWFsKHsgY29sb3I6IDB4MDBmZjAwLCBzaWRlOiBUSFJFRS5Eb3VibGVTaWRlIH0pOyAvLyBTb2xpZCBmaWxsIGNvbG9yXG4gICAgY29uc3QgdWF2Rk9WUGxhbmUgPSBuZXcgVEhSRUUuTWVzaChwbGFuZUdlb21ldHJ5LCBwbGFuZU1hdGVyaWFsKTtcbiAgICBzY2VuZS5hZGQodWF2Rk9WUGxhbmUpO1xuICAgIHJldHVybiB1YXZGT1ZQbGFuZTtcbn1cblxuLy8gQW5pbWF0aW9uIGxvb3AsIG1vdmluZyB0aGUgVUFWcyBhbG9uZyB0aGVpciBwYXRoc1xue1xuICBsZXQgdWF2SW5kZXggPSAwO1xuICBsZXQgbGFzdFVwZGF0ZVRpbWUgPSAwO1xuICBjb25zdCB1cGRhdGVJbnRlcnZhbCA9IDUwOyAvLyBNaWxsaXNlY29uZHMgYmV0d2VlbiB1cGRhdGVzXG4gIFxuICB3aGlsZSAodHJ1ZSkge1xuICAgIHJlcXVlc3RBbmltYXRpb25GcmFtZSgoKSA9PiB7XG4gICAgICBjb25zdCB7IHVhdkNhbWVyYTEsIHVhdlBhdGgxLCB1YXZMaW5lMSwgdWF2TGluZUdlb21ldHJ5IH0gPSB1YXZDYW1lcmFzO1xuICAgICAgLy8gTW92ZSBVQVYgY2FtZXJhcyBhbG9uZyB0aGUgcGF0aFxuXG4gICAgICAgICAgICAvLyBNb3ZlIHRoZSBVQVYgY2FtZXJhcyBhbG9uZyB0aGVpciBwYXRoc1xuICAgICAgICAgICAgdWF2SW5kZXggPSAodWF2SW5kZXggKyAxKSAlIHVhdlBhdGgxLmxlbmd0aDtcbiAgICAgICAgICAgIHVhdkNhbWVyYTEucG9zaXRpb24uY29weSh1YXZQYXRoMVt1YXZJbmRleF0pO1xuICAgICAgICAgICAgLy8gdWF2Q2FtZXJhMi5wb3NpdGlvbi5jb3B5KHVhdlBhdGgyW3VhdkluZGV4XSk7XG5cbiAgICAgICAgICAgIGlmICh1YXZJbmRleCA8IHVhdlBhdGgxLmxlbmd0aCAtIDEpIHtcbiAgICAgICAgICAgICAgICB1YXZJbmRleCsrO1xuICAgICAgICAgICAgICAgIGNvbnN0IG5ld1BvaW50cyA9IHVhdlBhdGgxLnNsaWNlKDAsIHVhdkluZGV4ICsgMSk7XG4gICAgICAgICAgICAgICAgdWF2TGluZUdlb21ldHJ5LnNldEZyb21Qb2ludHMobmV3UG9pbnRzKTtcbiAgICAgICAgICAgICAgICB1YXZMaW5lMS5jb21wdXRlTGluZURpc3RhbmNlcygpOyAvLyBSZXF1aXJlZCBmb3IgZGFzaGVkIGxpbmVzXG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIC8vIFVwZGF0ZSB0aGUgcG9zaXRpb25zIG9mIHRoZSBsaW5lcyB0byBrZWVwIHRoZW0gY29ubmVjdGVkIHRvIHRoZSBtb3ZpbmcgVUFWIGNhbWVyYXNcbiAgICAgICAgICAgIGxpbmVzUGFzczEuZm9yRWFjaCgobGluZSwgaW5kZXgpID0+IHtcbiAgICAgICAgICAgICAgICBjb25zdCBsaW5lUG9zaXRpb25zID0gbGluZS5nZW9tZXRyeS5hdHRyaWJ1dGVzLnBvc2l0aW9uLmFycmF5O1xuICAgICAgICAgICAgICAgIGNvbnN0IGFuY2hvclBvaW50ID0gYW5jaG9yUG9pbnRzW2luZGV4XTtcblxuICAgICAgICAgICAgICAgIC8vIFVwZGF0ZSB0aGUgbGluZSdzIHN0YXJ0IHBvaW50IChVQVYgY2FtZXJhIHBvc2l0aW9uKVxuICAgICAgICAgICAgICAgIGxpbmVQb3NpdGlvbnNbMF0gPSB1YXZDYW1lcmExLnBvc2l0aW9uLng7XG4gICAgICAgICAgICAgICAgbGluZVBvc2l0aW9uc1sxXSA9IHVhdkNhbWVyYTEucG9zaXRpb24ueTtcbiAgICAgICAgICAgICAgICBsaW5lUG9zaXRpb25zWzJdID0gdWF2Q2FtZXJhMS5wb3NpdGlvbi56O1xuXG4gICAgICAgICAgICAgICAgLy8gVXBkYXRlIHRoZSBsaW5lJ3MgZW5kcG9pbnQgKGFuY2hvciBwb2ludCBvbiB0aGUgdGVycmFpbilcbiAgICAgICAgICAgICAgICBsaW5lUG9zaXRpb25zWzNdID0gYW5jaG9yUG9pbnQueDtcbiAgICAgICAgICAgICAgICBsaW5lUG9zaXRpb25zWzRdID0gYW5jaG9yUG9pbnQueTtcbiAgICAgICAgICAgICAgICBsaW5lUG9zaXRpb25zWzVdID0gYW5jaG9yUG9pbnQuejtcblxuICAgICAgICAgICAgICAgIGxpbmUuZ2VvbWV0cnkuYXR0cmlidXRlcy5wb3NpdGlvbi5uZWVkc1VwZGF0ZSA9IHRydWU7XG4gICAgICAgICAgICB9KTtcblxuICAgICAgICAgICAgLy8gLy8gVXBkYXRlIHRoZSBVQVYncyBmaWVsZCBvZiB2aWV3IHBsYW5lIHBvc2l0aW9uIGFuZCBvcmllbnRhdGlvblxuICAgICAgICAgICAgdWF2Rk9WUGxhbmUucG9zaXRpb24uc2V0KHVhdkNhbWVyYTEucG9zaXRpb24ueCwgMCwgdWF2Q2FtZXJhMS5wb3NpdGlvbi56KTsgLy8gU2V0IHkgdG8gMCB0byBwbGFjZSBpdCBvbiB0aGUgdGVycmFpbiBzdXJmYWNlXG4gICAgICAgICAgICB1YXZGT1ZQbGFuZS5yb3RhdGlvbi54ID0gLU1hdGguUEkgLyAyOyAvLyBSb3RhdGUgdG8gYWxpZ24gd2l0aCB0aGUgdGVycmFpbiBzdXJmYWNlXG4gICAgICAgIFxuXG4gICAgICBjb250cm9scy51cGRhdGUoKTsgLy8gVXBkYXRlIG9yYml0IGNvbnRyb2xzXG4gICAgICByZW5kZXJlci5yZW5kZXIoc2NlbmUsIGNhbWVyYSk7IC8vIFJlbmRlciBzY2VuZVxuICAgIH0pO1xuICAgIGF3YWl0IFByb21pc2VzLmRlbGF5KHVwZGF0ZUludGVydmFsKTtcbiAgfVxufVxuXG4vLyBIYW5kbGUgd2luZG93IHJlc2l6aW5nXG57XG4gIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdyZXNpemUnLCAoKSA9PiB7XG4gICAgcmVuZGVyZXIuc2V0U2l6ZSh3aWR0aCwgaGVpZ2h0KTtcbiAgICBjYW1lcmEuYXNwZWN0ID0gd2lkdGggLyBoZWlnaHQ7XG4gICAgY2FtZXJhLnVwZGF0ZVByb2plY3Rpb25NYXRyaXgoKTtcbiAgfSk7XG59XG4vLyBSZW5kZXJlciBET00gZWxlbWVudCB0byBkaXNwbGF5IHRoZSBjYW52YXNcbnJlbmRlcmVyLmRvbUVsZW1lbnRcbiJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../course/topics/topic_2_sfm";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
