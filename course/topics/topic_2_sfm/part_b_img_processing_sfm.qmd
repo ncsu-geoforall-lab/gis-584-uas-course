@@ -26,6 +26,7 @@ format:
 
 * Lecture Slides: [Photogrammetry and SfM](lectures/lecture_2b.qmd)
 * Lecture Recording: [Fall 2024]({{< var recordings.topic2.lecture2b >}}) (NCSU Only)
+* Assignment Recordign: [Fall 2024]({{< var recordings.topic2.assignment2b >}})
 
 ##  Supplemental materials
 
