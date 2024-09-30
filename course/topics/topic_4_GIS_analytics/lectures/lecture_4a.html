@@ -376,17 +376,17 @@ Objectives
 </li>
 </ul>
 </section>
-<section>
+<section class="text-center">
 <h2>
 Flights Oct.&nbsp;6th 2015
 </h2>
 <img class="fragment" src="../images/group_photo.webp" width="80%">
 </section>
-<section>
+<section class="text-center">
 <h2>
 Flight Feb.&nbsp;6th 2018
 </h2>
-<img class="fragment" src="../images/group_photo2018.webp">
+<img class="fragment" src="../images/group_photo2018.webp" width="80%">
 </section>
 <section>
 <h2>
@@ -394,7 +394,7 @@ Flights Oct.&nbsp;6th 2015
 </h2>
 <img class="fragment" src="../images/both_flights.webp">
 </section>
-<section class="smaller">
+<section class="">
 <h3 id="analyzing-the-processing-report">Analyzing the processing report</h3>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -403,12 +403,13 @@ Flights Oct.&nbsp;6th 2015
 <li>Orthophoto and digital elevation model sketch;</li>
 <li>Camera parameters and survey scheme</li>
 <li>Tie points data export (matching points and panoramas)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
 <li>Image overlap statistics</li>
 <li>Camera positioning error estimates</li>
 <li>Ground control point error estimates</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/Agisoft_report.webp"></p>
 </div></div>
 </section>
 <section>
@@ -495,7 +496,7 @@ Camera calibration report
 </h2>
 <img src="../images/camera7.webp">
 </section>
-<section>
+<section class="smaller">
 <h3 id="analyzing-the-processing-report-1">Analyzing the processing report</h3>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -594,41 +595,41 @@ DSMs comparison -GCPs
 ‘Bowl effect’
 </h2>
 <p class="fragment">
-effect can be introduced during photo alignment, in case camera calibration estimates are inaccurate
+effect can be introduced during photo alignment, in cases where camera calibration estimates are inaccurate
 </p>
 <img class="fragment" src="../images/flights_bowl.webp">
 </section>
-<section>
-<h2>
-‘Bowl effect’
-</h2>
-<p>
-effect can be introduced during photo alignment, in case camera calibration estimates are inaccurate
-</p>
-<img class="left fragment" src="../images/pix4d_gcp-pix4d_noGCP_bowl.webp" width="50%"> <img class="right fragment" src="../images/sample_DSM_bowl_effect.webp" width="50%">
-</section>
+<!-- <section>
+    <h2>'Bowl effect'</h2>
+<p >effect can be introduced during photo alignment, in case camera calibration estimates are inaccurate</p>
+<img class="left fragment" src="../images/pix4d_gcp-pix4d_noGCP_bowl.webp" width="50%">
+<img class="right fragment" src="../images/sample_DSM_bowl_effect.webp" width="50%">
+</section> -->
 <section>
 <h2>
 ‘Bowl effect’- solutions to the problem
 </h2>
-<ol>
-<li class="fragment">
-If camera calibration is known in advance- it can be loaded in PhotoScan and fixed during photo alignment
-</li>
-<li class="fragment">
-Optimization procedure - recommended approach
 <ul>
 <li>
-based on camera or GCP coordinates
+Use GCPs or RTK (GPS)
 </li>
 <li>
-performed after photo alignment
+Improve Camera Calibration
 </li>
 <li>
-is recommended to perform optimization based on ground control data in any case, even if precalibrated cameras are used
+Increase flight overlaps
 </li>
+<li>
+Post-processing
+</li>
+<!-- <li class="fragment"> If camera calibration is known in advance-  it can be loaded in PhotoScan and fixed during photo alignment</li>
+    <li class="fragment"> Optimization procedure - recommended approach
+     <ul>
+      <li>based on camera or GCP coordinates</li>
+      <li>performed after photo alignment</li>
+      <li>is recommended to perform optimization based on ground control data in any case, even if precalibrated cameras are used</li> -->
 </ul>
-</li></ol></section>
+</section>
 <section>
 <h2>
 Optimization
@@ -654,18 +655,13 @@ Optimization helps to significantly improve accuracy of the final solution
 More on the bowl effect in <a href="http://onlinelibrary.wiley.com/doi/10.1002/esp.3609/epdf">this article</a>
 </p>
 </section>
-<section>
-<h2>
-Software related issues
-</h2>
-<p class="fragment">
-Pix4D - Trimble, Agisoft - Trimble
-</p>
-<img class="left fragment" src="../images/pix4d-trimble_zoom.webp" width="50%"> <img class="right fragment" src="../images/agi-trimble_zoom.webp" width="50%">
-<p class="fragment">
-artifacts on Trimble DSM - “tiles” pattern visible for both cases
-</p>
-</section>
+<!-- <section>
+<h2> Software related issues</h2>
+<p class="fragment"> Pix4D - Trimble, Agisoft - Trimble</p>
+ <img class="left fragment" src="../images/pix4d-trimble_zoom.webp" width="50%">
+ <img class="right fragment" src="../images/agi-trimble_zoom.webp" width="50%">
+<p class="fragment"> artifacts on Trimble DSM - "tiles" pattern visible for both cases</p>
+</section> -->
 <section>
 <h2>
 Measurements in Agisoft Photoscan
@@ -709,7 +705,16 @@ Terrain analysis in GRASS GIS
 <p>
 computing <a href="https://grass.osgeo.org/grass64/manuals/r.slope.aspect.html">aspect, slope</a>
 </p>
-<img class="left fragment" src="../images/analysis_aspect_GCP.webp" width="50%"> <img class="right fragment" src="../images/analysis_slope_GCP.webp" width="50%">
+<img class="left fragment" src="../images/analysis_aspect_GCP.webp" width="50%">
+</section>
+<section>
+<h2>
+Terrain analysis in GRASS GIS
+</h2>
+<p>
+computing <a href="https://grass.osgeo.org/grass64/manuals/r.slope.aspect.html">aspect, slope</a>
+</p>
+<img class="right fragment" src="../images/analysis_slope_GCP.webp" width="50%">
 </section>
 <section>
 <h2>
@@ -718,16 +723,34 @@ Terrain analysis in GRASS GIS
 <p class="fragment">
 computing <a href="https://grass.osgeo.org/grass64/manuals/r.slope.aspect.html">curvature</a> and <a href="https://grass.osgeo.org/grass70/manuals/r.relief.html">shaded relief</a> maps
 </p>
-<img class="left fragment" src="../images/analysis_curvature_GCP.webp" width="50%"> <img class="right fragment" src="../images/analysis_relief_GCP.webp" width="50%">
+<img class="left fragment" src="../images/analysis_curvature_GCP.webp" width="50%">
+</section>
+<section>
+<h2>
+Terrain analysis in GRASS GIS
+</h2>
+<p class="fragment">
+computing <a href="https://grass.osgeo.org/grass64/manuals/r.slope.aspect.html">curvature</a> and <a href="https://grass.osgeo.org/grass70/manuals/r.relief.html">shaded relief</a> maps
+</p>
+<img class="right fragment" src="../images/analysis_relief_GCP.webp" width="50%">
 </section>
 <section>
 <h2>
 Advanced terrain analysis
 </h2>
 <p class="fragment">
-computing <a href="https://grass.osgeo.org/grass70/manuals/addons/r.local.relief.html">local relief</a>, <a href="https://grass.osgeo.org/grass70/manuals/addons/r.skyview.html">skyview</a>
+computing <a href="https://grass.osgeo.org/grass84/manuals/addons/r.local.relief.html">local relief</a>, <a href="https://grass.osgeo.org/grass70/manuals/addons/r.skyview.html">skyview</a>
 </p>
-<img class="left fragment" src="../images/analysis_local_relief.webp" width="50%"> <img class="right fragment" src="../images/analysis_skyview.webp" width="50%">
+<img class="left fragment" src="../images/analysis_local_relief.webp" width="50%">
+</section>
+<section>
+<h2>
+Advanced terrain analysis
+</h2>
+<p class="fragment">
+computing <a href="https://grass.osgeo.org/grass84/manuals/addons/r.local.relief.html">local relief</a>, <a href="https://grass.osgeo.org/grass84/manuals/addons/r.skyview.html">skyview</a>
+</p>
+<img class="right fragment" src="../images/analysis_skyview.webp" width="50%">
 </section>
 <section>
 <h2>
