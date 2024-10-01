@@ -3,11 +3,12 @@ title: "Assignment 4A - Volumes"
 subtitle: "Analysis of UAS data processing results"
 assignment-due-date: 10/21/2024
 format: html
+toc-depth: 4
 ---
 
 ## Measurements in Agisoft Metashape
 
-### Task:
+### Task
 
 Perform measurements in Agisoft Metashape: 
 
