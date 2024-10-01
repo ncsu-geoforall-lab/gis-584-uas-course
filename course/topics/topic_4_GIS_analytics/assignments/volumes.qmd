@@ -35,7 +35,7 @@ All you have to do is to indicate the new location of the pictures.
 
 In order to do that right clik on any of the pictures in the Pictures pane and choose *Change Path...* and in the dialog window mark the *All cameras* option. This will automatically apply the updated location to all the pictures in the project.
 
-<figure><img src="img/geoprocessing/agi_change_path.jpg"> </figure>
+![](images/agi_change_path.webp){width=50% fig-align="center"}
 
 #### Distance measurement
 
@@ -51,7 +51,7 @@ To measure distance between two markers in Agisoft:
 ::: {.callout-note}
 In order to see the estimated values, you need to be in the estimates display - on the Reference pane, following button needs to be active
 
-![](img/volumes/agi_view_estimates.png) { width=25 }
+![](images/agi_view_estimates.webp){width=50% fig-align="center"}
 
 :::
 
