@@ -18,11 +18,11 @@ In this assignment, we analyze the DSMs derived from the UAS imagery in terms of
 
 ### Data
 
-- [Lake Wheeler data set (formatted as GRASS location): Lake_Wheeler_NCspm](https://drive.google.com/open?id=0B1AfQGDB8tPXNXVpOEdyejlpbEE) (you should already have it from previous assignments)
+- [Lake Wheeler data set (formatted as GRASS location): Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (you should already have it from previous assignments)
 
 ### DSMs comparison - influence of GCPs
 
-In order to detect the bowl effect, an additional DSM needs to be computed. This time GCPs should not be used in the processing. You can repeat all the steps in Agisoft from the [Imagery processing assignment](../assignments/geoprocessing.html).
+In order to detect the bowl effect, an additional DSM needs to be computed. This time GCPs should not be used in the processing. You can repeat all the steps in Agisoft from the [Imagery processing assignment](../../topic_2_sfm/assignments/assignment_2b.qmd).
 
 Batch processing commands should be in this order:
 
@@ -32,7 +32,9 @@ Batch processing commands should be in this order:
 4. Generate DEM
 
 Now you should have two DSMs:
-- [One generated in processing with 3 GCPs](https://drive.google.com/open?id=1RnYuH8_dhRyjfQ4rmqvnSO6uz-EuXqam) in the [Imagery processing assignment](../assignments/geoprocessing.html)
+
+- [One generated in processing with 3 GCPs](https://drive.google.com/open?id=1RnYuH8_dhRyjfQ4rmqvnSO6uz-EuXqam) in the [Imagery processing assignment](../../topic_2_sfm/assignments/assignment_2b.qmd)
+
 - [One generated in processing without GCPs](https://drive.google.com/open?id=1j324mmeqtaYYpCgRLIfC6TE45sIGxghT)
 
 Packs are provided for those working in DEMO mode; save them in your working directory.
@@ -235,8 +237,8 @@ Note the accuracy of the DSM along the roads, interpret the observed gain and lo
 
 Use orthophotos from:
 
-- [Nov 2015](https://drive.google.com/open?id=1HikUJ9XlJaFlwOmMCatYlQK_Pg37KVuN)
-- [March 2017](https://drive.google.com/open?id=1xa7mTNGvPu2y4hPbqC2PhGZJ3AmzeDsR)
-- [June 2016](https://drive.google.com/open?id=1Y9OuQLFyuA7n4oO5z9YJo0jPKiwoS-um)
+- [Nov 2015]({{< var.data.lake_wheeler_flight_Nov_2015_orthos >}})
+- [March 2017]({{< var.data.lake_wheeler_flight_Mar_2017_orthos >}})
+- [June 2017]({{< var.data.lake_wheeler_flight_Jun_2017_orthos >}})
 
 

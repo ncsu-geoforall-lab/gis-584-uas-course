@@ -39,3 +39,9 @@ data:
   gcp_12_degrees_url: https://storage.googleapis.com/gis-course-data/gis584/GCP_12_degrees.geojson
   downsized_samples_url: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/092216/downsized_samples.zip
   downsized_samples_results_url: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/092216/RESULTS_Sample_downsized.zip
+  lake_wheeler_flight_2018_flight_data: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip
+  lake_wheeler_flight_2018_agisoft_project_files: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip
+  imagery_2017: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip
+  lake_wheeler_flight_Nov_2015_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/112415/ortho_2015_11_24.pack
+  lake_wheeler_flight_Jun_2017_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack
+  lake_wheeler_flight_Mar_2017_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/032917/ortho_2017_03_29.pack

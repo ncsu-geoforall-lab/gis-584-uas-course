@@ -18,16 +18,16 @@ Perform measurements in Agisoft Metashape:
 
 ### Data
 
-- [Imagery from 02/06/2018 Lake Wheeler flight](https://drive.google.com/open?id=1FnJ32Wxa5fI29dZUdNSAkc4erAsFchLH)
-- [Agisoft project files with processed data](https://drive.google.com/open?id=1FpMmWy3zpzyOso3RT2W4bhqdK-wptFK2)
-- [Imagery for the volume and area measurements](https://drive.google.com/open?id=1FVtkOLLfkDojrXakIOUJgsrgci4gOFbR) acquired 07/02/2017 at Wake Waste Transfer [(check localizations)[https://goo.gl/maps/hkYqDxZHcpT2]]
+- [Imagery from 02/06/2018 Lake Wheeler flight]({{< var data.lake_wheeler_flight_2018_flight_data >}})
+- [Agisoft project files with processed data]({{< var data.lake_wheeler_flight_2018_agisoft_project_files >}})
+- [Imagery for the volume and area measurements]({{< var data.imagery_2017 >}}) acquired 07/02/2017 at Wake Waste Transfer [(check localizations)[https://goo.gl/maps/hkYqDxZHcpT2]]
 
 
 ### Performing measurements on a model
 
 #### Data Preparation
 
-In the first part of the assignment you will be working with [data from 02/06/2018 Lake Wheeler flight](https://drive.google.com/open?id=1FnJ32Wxa5fI29dZUdNSAkc4erAsFchLH). Because the processing is very time consuming, the processed data (stored in the [Agisoft project files](https://drive.google.com/open?id=1FpMmWy3zpzyOso3RT2W4bhqdK-wptFK2) is provided).
+In the first part of the assignment you will be working with [data from 02/06/2018 Lake Wheeler flight]({{< var data.lake_wheeler_flight_2018_flight_data >}}). Because the processing is very time consuming, the processed data (stored in the [Agisoft project files]({{< var data.lake_wheeler_flight_2018_agisoft_project_files >}}) is provided).
 
 After opening the **2010_02_06_assignment.psx** file, you should see generated orthomosaic and DSM in the Workspace pane.
 
@@ -105,13 +105,13 @@ Choose some interesting place for cross section (you can see from the contours w
 
 ### Volume  and area measurements
 
-In this part of the assignment you will be working with [imagery acquired 07/02/2017 at Wake Waste Transfer](https://drive.google.com/open?id=1FVtkOLLfkDojrXakIOUJgsrgci4gOFbR).
+In this part of the assignment you will be working with [imagery acquired 07/02/2017 at Wake Waste Transfer]({{< var data.imagery_2017 >}}).
 
 **Calculate the volume and the area of the "waste pile"** (for excact location see [Google Maps](https://goo.gl/maps/hkYqDxZHcpT2))
 
 #### Tips
 
-- Follow the Agisoft's [tutorial on volume measurements](http://www.agisoft.com/pdf/PS_1.1_Tutorial%20(IL)%20-%20Volume%20measurements.pdf)
+- Follow the Agisoft's [tutorial on volume measurements](https://www.agisoft.com/pdf/PS_1.4_Tutorial%20(IL)%20-%20Measurements%20(DEM).pdf)
 - the delimitation of the pile is up to you - you can examine whatever part of the pile you want to process
 - use a high (or custom) face count setting in mesh generation to have detailed mesh
 - remember to close mesh holes (level 100%)
