@@ -40,6 +40,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../../../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -191,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip">Imagery from 02/06/2018 Lake Wheeler flight</a></li>
 <li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip">Agisoft project files with processed data</a></li>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip">Imagery for the volume and area measurements</a> acquired 07/02/2017 at Wake Waste Transfer [(check localizations)[https://goo.gl/maps/hkYqDxZHcpT2]]</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip">Imagery for the volume and area measurements</a> acquired 07/02/2017 at Wake Waste Transfer <a href="https://goo.gl/maps/hkYqDxZHcpT2">check localizations</a></li>
 </ul>
 </section>
 <section id="performing-measurements-on-a-model" class="level3">
@@ -201,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In the first part of the assignment you will be working with <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip">data from 02/06/2018 Lake Wheeler flight</a>. Because the processing is very time consuming, the processed data (stored in the <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip">Agisoft project files</a> is provided).</p>
 <p>After opening the <strong>2010_02_06_assignment.psx</strong> file, you should see generated orthomosaic and DSM in the Workspace pane.</p>
 <p>All you have to do is to indicate the new location of the pictures.</p>
-<p>In order to do that right clik on any of the pictures in the Pictures pane and choose <em>Change Path…</em> and in the dialog window mark the <em>All cameras</em> option. This will automatically apply the updated location to all the pictures in the project.</p>
+<p>In order to do that <strong>right clik</strong> on any of the pictures in the Pictures pane and choose <code>Change Path...</code> and in the dialog window mark the <code>All cameras</code> option. This will automatically apply the updated location to all the pictures in the project.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/agi_change_path.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
@@ -210,14 +241,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="distance-measurement" class="level4">
 <h4 class="anchored" data-anchor-id="distance-measurement">Distance measurement</h4>
-<p>Using the Ruler instrument for the toolbar menu calculate the length of the longer side of the bigger building.</p>
+<p>Using the <strong>Ruler</strong> instrument for the toolbar menu calculate the length of the longer side of the bigger building.</p>
 </section>
 <section id="distance-between-gcps" class="level4">
 <h4 class="anchored" data-anchor-id="distance-between-gcps">Distance between GCPs</h4>
 <p>To measure distance between two markers in Agisoft:</p>
 <ul>
-<li>Select both markers to be used for distance measurements on the Reference pane using <em>Ctrl</em> button</li>
-<li>Select Create Scale Bar command form the 3D view context menu. The scale bar will be created and an instant added to the Scale Bar list on the Reference pane.</li>
+<li>Select both markers to be used for distance measurements on the Reference pane using <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> button</li>
+<li>Select Create Scale Bar command form the 3D view context menu (<em>Right click on the marker</em>). The scale bar will be created and an instant added to the Scale Bar list on the Reference pane.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -272,8 +303,17 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Remember to take into account elevation difference in your calculations. <em>Show your work</em></p>
+<p>Remember to take into account elevation difference in your calculations. <strong>Show your work</strong></p>
 <p>How much (in meters/percentage) do these values differ?</p>
+<p>Euclidean Distance formula: <span class="math display">\[
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}
+\]</span></p>
+<p>Calculate distance in meters: <span class="math display">\[
+\text{Difference in meters} = \left| \text{Metashape distance} - \text{Calculated distance} \right|
+\]</span></p>
+<p>Calculate percent difference: <span class="math display">\[
+\text{Percentage difference} = \left( \frac{\text{Difference}}{\text{Calculated distance}} \right) \times 100
+\]</span></p>
 </div>
 </div>
 </section>
@@ -281,7 +321,7 @@ Note
 <h4 class="anchored" data-anchor-id="distance-between-cameras">Distance between cameras</h4>
 <p>To measure distance between two cameras in Agisoft:</p>
 <ul>
-<li>Select the two cameras on the Workspace or Reference pane using <em>Ctrl</em> button. Alternatively, the cameras can be selected in the Model view window using selecting tools from the Toolbar.</li>
+<li>Select the two cameras on the Workspace or Reference pane using <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> button. Alternatively, the cameras can be selected in the Model view window using selecting tools from the Toolbar.</li>
 <li>Select Create Scale Bar command form the 3D view context menu. The scale bar will be created and an instant added to the Scale Bar list on the Reference pane.</li>
 </ul>
 <p>Measure distance between cameras <strong>DSC03341</strong> and <strong>DSC03752</strong>.</p>
@@ -292,7 +332,20 @@ Note
 <p>Switch to Ortho view (double click on the Orthomosaic in the Workspace pane)</p>
 <section id="point-and-distance-measurement" class="level4">
 <h4 class="anchored" data-anchor-id="point-and-distance-measurement">Point and distance measurement:</h4>
-<p>In the western part of the area, close to the forest edge, there are some sheaves</p>
+<p>In the western part of the area, close to the forest edge, there are some sheaves.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>sheaf (sheaves)</em> - a bundle of grain stalks laid lengthwise and tied together after reaping.</p>
+</div>
+</div>
 <ul>
 <li>Using Ruler instrument or Draw Polyline from the Toolbar of the Ortho view estimate the diameter and height of the very north sheaf.</li>
 </ul>
@@ -300,9 +353,9 @@ Note
 <section id="contours" class="level4">
 <h4 class="anchored" data-anchor-id="contours">Contours:</h4>
 <ul>
-<li>Select <em>Generate Contours…</em> command from Tools menu.</li>
+<li>Select <code>Generate Contours...</code> command from Tools menu.</li>
 <li>Set round values for Minimal altitude, Maximal altitude parameters as well as the Interval for the contours.</li>
-<li>Set the transparency for the contours for 50% and do not display the labels. (You can do it in <em>Preferences</em> in the Contours context menu in the Workspace pane (contours are in the Shapes folder))</li>
+<li>Set the transparency for the contours for 50% and do not display the labels. (You can do it in <code>Preferences</code> in the Contours context menu in the Workspace pane (contours are in the Shapes folder))</li>
 </ul>
 </section>
 <section id="cross-section" class="level4">
@@ -310,7 +363,7 @@ Note
 <p>Choose some interesting place for cross section (you can see from the contours where are some variations in terrain)</p>
 <ul>
 <li>Indicate a line to make a cut of the model using Draw Polyline tool from the Ortho view toolbar (double click ends the line).</li>
-<li>Right button click on the polyline/polygon and select <em>Measure…</em>* command from the context menu.</li>
+<li>Right button click on the polyline/polygon and select <code>Measure...</code> command from the context menu.</li>
 <li>Include in the report your profile with the and its location.</li>
 </ul>
 </section>
