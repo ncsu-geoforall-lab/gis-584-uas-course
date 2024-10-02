@@ -212,12 +212,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <ul>
-<li><a href="https://drive.google.com/open?id=0B1AfQGDB8tPXNXVpOEdyejlpbEE">Lake Wheeler data set (formatted as GRASS location): Lake_Wheeler_NCspm</a> (you should already have it from previous assignments)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler data set (formatted as GRASS location): Lake_Wheeler_NCspm</a> (you should already have it from previous assignments)</li>
 </ul>
 </section>
 <section id="dsms-comparison---influence-of-gcps" class="level3">
 <h3 class="anchored" data-anchor-id="dsms-comparison---influence-of-gcps">DSMs comparison - influence of GCPs</h3>
-<p>In order to detect the bowl effect, an additional DSM needs to be computed. This time GCPs should not be used in the processing. You can repeat all the steps in Agisoft from the <a href="../assignments/geoprocessing.html">Imagery processing assignment</a>.</p>
+<p>In order to detect the bowl effect, an additional DSM needs to be computed. This time GCPs should not be used in the processing. You can repeat all the steps in Agisoft from the <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">Imagery processing assignment</a>.</p>
 <p>Batch processing commands should be in this order:</p>
 <ol type="1">
 <li>Align Photos</li>
@@ -225,7 +225,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Build Dense Point cloud (quality: medium)</li>
 <li>Generate DEM</li>
 </ol>
-<p>Now you should have two DSMs: - <a href="https://drive.google.com/open?id=1RnYuH8_dhRyjfQ4rmqvnSO6uz-EuXqam">One generated in processing with 3 GCPs</a> in the <a href="../assignments/geoprocessing.html">Imagery processing assignment</a> - <a href="https://drive.google.com/open?id=1j324mmeqtaYYpCgRLIfC6TE45sIGxghT">One generated in processing without GCPs</a></p>
+<p>Now you should have two DSMs:</p>
+<ul>
+<li><p><a href="https://drive.google.com/open?id=1RnYuH8_dhRyjfQ4rmqvnSO6uz-EuXqam">One generated in processing with 3 GCPs</a> in the <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">Imagery processing assignment</a></p></li>
+<li><p><a href="https://drive.google.com/open?id=1j324mmeqtaYYpCgRLIfC6TE45sIGxghT">One generated in processing without GCPs</a></p></li>
+</ul>
 <p>Packs are provided for those working in DEMO mode; save them in your working directory.</p>
 <section id="calculate-differences-between-processed-sample-data" class="level4">
 <h4 class="anchored" data-anchor-id="calculate-differences-between-processed-sample-data">Calculate differences between processed sample data</h4>
@@ -372,9 +376,9 @@ Important
 <p>Note the accuracy of the DSM along the roads, interpret the observed gain and loss in elevation.</p>
 <p>Use orthophotos from:</p>
 <ul>
-<li><a href="https://drive.google.com/open?id=1HikUJ9XlJaFlwOmMCatYlQK_Pg37KVuN">Nov 2015</a></li>
-<li><a href="https://drive.google.com/open?id=1xa7mTNGvPu2y4hPbqC2PhGZJ3AmzeDsR">March 2017</a></li>
-<li><a href="https://drive.google.com/open?id=1Y9OuQLFyuA7n4oO5z9YJo0jPKiwoS-um">June 2016</a></li>
+<li><a href="{{< var.data.lake_wheeler_flight_Nov_2015_orthos  >}}">Nov 2015</a></li>
+<li><a href="{{< var.data.lake_wheeler_flight_Mar_2017_orthos  >}}">March 2017</a></li>
+<li><a href="{{< var.data.lake_wheeler_flight_Jun_2017_orthos  >}}">June 2017</a></li>
 </ul>
 
 
