@@ -132,7 +132,7 @@ Change the color map to better see the differences. You can experiment with your
 75 blue
 ```
 ::: {.callout-important}
-Which software does generate larger bowl effect?
+Which software generated a larger bowl effect?
 :::
 
 ```bash
