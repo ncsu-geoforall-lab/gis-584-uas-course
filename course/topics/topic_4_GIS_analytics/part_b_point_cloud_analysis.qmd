@@ -18,7 +18,7 @@ assignment-due-date: 10/23/2024
 - Voxel-based analysis and vertical profiles
 
 ## Lecture
-- [Lecture slides](../lectures/point_clouds.html)
+- [Lecture slides](./lectures/lecture_4b.qmd)
 
 
 ## Supplemental materials
