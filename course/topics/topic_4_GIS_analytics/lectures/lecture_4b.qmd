@@ -1,0 +1,387 @@
+---
+title: "Point cloud data analysis"
+subtitle: "Center for Geospatial Analytics at North Carolina State University"
+author: "Justyna Jeziorska, Helena Mitasova & Corey White"
+format:
+    revealjs:
+        theme: [simple, ../../../../theme.scss]
+---
+
+## Outline
+
+- Characteristics of UAS and lidar-based point cloud data
+- Point cloud data processing, visualization, and analysis
+- Computing DEM / DSM, and topographic parameters
+- Voxel-based analysis and vertical profiles
+
+## What are point clouds?
+
+- Dense set of points (x,y,z) defined in 3D space:
+  - Directly measured using lidar
+  - Derived from overlapping images using SfM (see previous lectures)
+
+![UAS SfM derived point cloud from Midpines viewed at Hunt library](../images/hunt_uavpointcloud_bldg.webp){width=50%}
+
+## Lidar point cloud acquisition {.smaller}
+
+- Measured time of pulse return is converted to distance
+- Georeferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform
+
+![](../images/airborne_lidar_scann.webp){width=30%}
+![](../images/lidar_secref_3d.webp){width=65%}
+
+## Multiple return lidar point cloud
+
+Lidar pulse can penetrate the tree canopy leading to multiple pulse returns
+
+![](../images/lidarmrpts3dcolored.webp){width=85%}
+
+*yellow: first return, dark brown: second return*
+
+## Multiple return point cloud profiles
+
+Multiple return point cloud profile view of returns
+
+![](../images/Lect_lidar_returns.webp){width=80%}
+
+<!-- <section>
+   <h2>Lidar point cloud data</h2>
+<p>
+Set of <i>[x, y, z, (r, i, c, ...)]</i> measured points reflected
+from Earth surface or objects on or above it, where:
+<ul>
+<li> <i>[x, y, z]</i> are georeferenced coordinates,
+<li><i>r</i> &nbsp; is the return number,
+<li><i>i</i> &nbsp; is intensity,
+<li><i>c</i> &nbsp; is class
+</ul>
+<p>
+Additional data: R:G:B, scan direction
+</section> -->
+
+## Lidar point cloud data
+
+Set of *[x, y, z, (r, i, c, ...)]* measured points reflected from Earth surface or objects on or above it, where:
+
+- *[x, y, z]* are georeferenced coordinates
+- *r* is the return number
+- *i* is intensity
+- *c* is class
+
+Additional data: R:G:B, scan direction
+
+## Lidar point cloud preview
+
+- Visible swath overlap
+
+![](../images/midpines_lidar_plasviewco.webp){width=90%}
+
+## Lidar point cloud preview
+
+- Points distributed throughout canopy
+- No points on the wall of the building
+
+![](../images/midpines_lidar_plasviewcozoom.webp){width=70%}
+
+## SfM-derived point cloud data
+
+Set of *[x, y, z, (R, G, B)]* points derived from overlapping imagery using Structure from Motion technique:
+
+- *[x, y, z]* are georeferenced coordinates
+- *R, G, B* are Red, Green, Blue channels derived from imagery
+
+Additional data depend on sensor
+
+## UAS SfM point cloud preview
+
+- Only top of tree canopy captured
+- Building densely sampled including the wall
+
+![](../images/midpines_uas_plasviewco2.webp){width=90%}
+
+### UAS SfM point cloud preview
+
+- Much higher density of points with R:G:B included
+
+![](../images/midpines_uas_plasviewrgb.webp){width=82%}
+
+## Point cloud data formats
+
+- ASCII x,y,z, ... format - older data
+- Binary LAS format (header, record information, x,y,z,i, ... ), industry lidar data exchange format
+- Compressed LAZ format
+- Proprietary formats, especially for waveform data
+
+Learn more at [ASPRS LAS1.4 Specification](https://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf)  
+and [USGS Lidar Base Specification](https://pubs.usgs.gov/tm/11b4/pdf/tm11-B4.pdf)
+
+## Point cloud data processing
+
+- Preview and analysis of point distribution
+- Filtering outliers
+- Bare earth point extraction
+- Classification: canopy, buildings ...
+- Decimation (point cloud thinning)
+- Transformation to surfaces or 3D objects
+
+
+## Analysis of point distribution
+
+Binning: point statistics for each grid cell at selected resolution
+
+- Number of points per grid cell - map of point densities
+- Range, stddv of z-values - map of within cell vertical variability
+- Identify data gaps, potential for artifacts
+- Use to select appropriate supported resolution for DEM
+
+## Analysis of point distribution: lidar
+
+Increased densities along swath overlaps or close to terrestrial station position
+
+![](../images/lid2013_1r_n_3ftb.webp){height=210}
+![](../images/lid2013_be_n_3ftb.webp){height=210}
+![](../images/Ssecr_110309_ptdensity_20cm.webp){height=210}
+
+*County-wide 2013 lidar: all returns and bare earth, terrestrial lidar*
+
+## Analysis of point distribution: lidar
+
+Change in pattern along swath overlaps
+
+![](../images/count_1m_lid_all.webp){height=320}
+![](../images/count_1m_lid_ground.webp){height=320}
+
+*Midpines: number of points per 1m grid cell: for all returns and ground*
+
+## Analysis of point distribution: SfM
+
+High point densities around trees and building edges
+
+![](../images/count_1m_uas.webp){height=420}
+
+*Midpines: number of SfM-derived points per 1m grid cell*
+
+## Analysis of within cell z-range
+
+Maps of z-values range within 3m grid cell
+
+![](../images/lidar_range3m_zoom.webp){height=310}
+![](../images/uas_range3m_sample.webp){height=310}
+
+*Midpines z-range lidar and UAS, lidar provides better data about the trees than the denser UAS point cloud*
+
+## Outliers {.smaller}
+
+- Lidar: birds, particles, material properties
+- SfM: errors in point matching
+- Filtered by using local z-min, z-max or range thresholds
+
+![](../images/lid2013_793016_1ret_3ft.webp){height=310}
+
+*Centennial Parkway - outlier present even in processed data*
+
+## Bare ground and feature extraction {.smaller}
+
+- Multiple returns help but not necessary
+- Feature or surface needs to be sampled by sufficient number of points
+- Multiscale curvature-based algorithm by Evans and Hudak
+- Progressive morphological filter by Zhang
+
+![](../images/mcc_default_smaller.webp){height=250}
+
+*Midpines: above ground point cloud from lidar by MCC in GRASS*
+
+## Decimation {.smaller}
+
+- Thinning of point cloud - subsampling
+- Reduces the point cloud size - easier to manage data
+- Thinning threshold should be based on features that need to be preserved
+- Count-based decimation: preserves variations in density
+- Grid-based decimation: removes variations in density
+- Distance and geometry based decimation: more computationally intensive
+
+## Decimation: count-based
+
+![](../images/decimation_secref_full.webp){height=350}
+![](../images/decimation_secref_preserve_3.webp){height=350}
+
+*Preserves relative point densities*
+
+## Decimation: grid-based
+
+![](../images/decimation_secref_full.webp){height=350}
+![](../images/decimation_secref_grid_10.webp){height=350}
+
+*Removes variations in point densities*
+
+## Computing DEM: binning
+
+- Per cell statistics: mean, min, max, or nearest point z-value
+- Sufficient for many applications
+- No need to import the points, on-fly raster generation
+- May be noisy, with no-data areas
+
+## Computing DEM: TIN
+
+Meshes are standard in 3D engineering and design systems:
+
+- Variable resolution based on terrain complexity
+- Variable level of detail visualization
+- 2D triangulation leads to TIN geometry not optimal for 3D, e.g. triangles on roads, artificial dams in valleys
+- Harder to combine with other geospatial data
+- Limited analytics available
+- Harder to share - limited exchange formats
+
+## Computing DEM: interpolation to raster
+
+- Supports resolution higher than point density
+- Results depend on the method used, but most methods work because of high point densities
+- High resolution raster DEMs can be massive - works for most analytics, converts to TIN for 3D visualization
+- Easy to share
+
+## Jockey's Ridge lidar 1999
+
+Binning at 1m resolution: many NULL cells
+
+![](../images/lidstorast1m.webp){height=400}
+
+## Jockey's Ridge lidar 1999
+
+Binning at 3m resolution
+
+![](../images/lidstorast.webp){height=400}
+
+## Jockey's Ridge lidar 1999
+
+Interpolation at 1m resolution
+
+![](../images/liddfdm1e.webp){height=400}
+
+You can try TIN for comparison - provide data
+
+## Midpines UAS SfM
+
+Low density TIN
+
+![](../images/lowdensity_tin.webp){height=400}
+
+## Midpines's UAS SfM
+
+High density TIN
+
+![](../images/highdensity_tin.webp){height=400}
+
+## Midpines's UAS SfM
+
+Smoothed high density TIN
+
+![](../images/smoothedHDtin.webp){height=400}
+
+## Midpines UAS SfM
+
+High density point cloud imported to GRASS GIS and interpolated by spline method
+
+![](../images/agisoft_detail.webp){height=300}
+
+## Midpines interpolated DSM
+
+Lidar and UAS SfM based DSM
+
+![](../images/lidar_dsm_zoom.webp){width=45%}
+![](../images/uas_dsm3d_sample.webp){width=45%}
+
+## Topographic analysis
+
+Deriving topographic parameters from point cloud based DEMs has challenges:
+
+- DEMs are often noisy and parameters can reflect noise or scan pattern rather than actual topography
+- High resolution leads to representation of landforms by 10s or 100s of points or grid cells
+- Standard topographic analysis using 3x3 neighborhood leads to noisy patterns of topographic parameters or bias towards point distribution pattern
+
+## Topographic analysis using splines {.smaller}
+
+Simultaneous computation of parameters with interpolation
+
+- Parameters derived from original points rather than raster
+- Explicit equations for partial derivatives: RST
+- Tens or hundreds of points can be used
+- Tuning the level of detail by tension and smoothing parameters
+
+::: {.callout-note}
+*Reference*
+
+- [H.Mitasova, H., Mitas, L. and Harmon, R.S., 2005, Simultaneous spline interpolation and topographic analysis for lidar elevation data: methods for Open source GIS, IEEE GRSL 2(4), pp. 375- 379.](https://www4.ncsu.edu/~hmitaso/gmslab/papers/IEEEGRSL2005.pdf)
+:::
+
+
+## Topographic analysis using splines {.text-center}
+
+Tuning the level of detail with tension parameter
+
+![](../images/curvatures_tension.webp){height=450}
+
+## Topographic analysis using splines {.text-center}
+
+Tuning the level of detail with tension parameter
+
+![](../images/lidar_tension_curv.webp){height=450}
+
+*Profile curvature and slope maps draped over 1m res. DEM*
+
+## Vertical point cloud analysis {.text-center}
+
+Voxel-based point analysis and 3D fragmentation index
+
+![](../images/profiles_points_and_ff.webp){height=400}
+
+## Vertical point cloud analysis {.text-center}
+
+3D visualization of vertical fragmentation index cross-sections
+
+![](../images/profiles3d.webp){height=450}
+
+## Mamoth Cave Park: data
+
+- Classified point cloud in las format
+- Raw full waveform in lwv format
+- Imagery
+
+![](../images/Lidar_waveformALPS_1LG.webp){height=350}
+
+## Mamoth Cave Park: canopy {.text-center}
+
+![](../images/mamothcave_canopy.webp){height=450}
+
+## Mamoth Cave Park: bare earth {.text-center}
+
+![](../images/mamothcave_bare.webp){width=90%}
+
+## Voxel models {.smaller .text-center}
+
+![](../images/raster_3d_slices.webp){width=45%}
+![](../images/red_green_3d_labels.webp){width=45%}
+
+::: {.callout-note}
+- *Petras, V; Petrasova, A; Jeziorska, J; Mitasova, H, 2016, Processing UAV and lidar point clouds in GRASS GIS, ISPRS Archives.*
+:::
+
+
+## Advances in lidar data acquisition {.smaller}
+
+- Waveform, single photon and multispectral lidar
+- Velodyne (lidar array - small and light)
+- Lidar is available for large UAS and helicopters, new small systems are still being tested for accuracy
+
+## Lidar data sources {.smaller}
+
+Public data sources (see the links [here](https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/resources/data_providers.html)):
+
+- National map elevation data - used to be CLICK: raw point clouds usually in LAS format
+- NOAA Digital Coast: coastal point clouds with on-fly binning
+- NC Floodplain Mapping: bare Earth: points, 20ft DEM and 50ft DEM with carved channels
+- NC data portal QL2 lidar and derived products
+- OpenTopography: NCALM data
+
+More about lidar in GRASS at [https://grasswiki.osgeo.org/wiki/LIDAR](https://grasswiki.osgeo.org/wiki/LIDAR)
+
+
