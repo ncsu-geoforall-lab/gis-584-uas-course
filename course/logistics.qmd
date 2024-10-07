@@ -31,6 +31,12 @@ Course Forum, assignment submissions, project material, and grades are handled i
 - [Agisoft Metashape]({{< var software.agisoft.website >}}) (provided at NCSU) - you can work on the demo version.
 - [OpenDroneMap](http://opendronemap.org/)
 
+### Computational Resources
+
+- NCSU students may use VCL (Virtual Computing Lab)[https://vcl.ncsu.edu/]
+
+Make a reservation using the `Agisoft Metashape & GRASS GIS - Ubuntu` environment.
+
 ### Other resources
 
 - [MicMac](https://github.com/micmacIGN/micmac) documentation can be found [here](https://github.com/micmacIGN/Documentation/blob/master/DocMicMac.pdf), not used in this course.

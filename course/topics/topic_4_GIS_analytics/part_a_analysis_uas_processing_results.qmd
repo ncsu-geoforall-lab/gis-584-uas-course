@@ -18,6 +18,8 @@ assignment-due-date: 10/23/2024
 
 ## Lecture
 - [Lecture Slides](lectures/lecture_4a.qmd)
+- Lecture Recording: [Fall 2024]({{< var recordings.topic4.lecture4a >}}) (NCSU Only)
+- In-Class Recording: [Fall 2024]({{< var recordings.topic4.assignment4a >}}) (NCSU Only)
 
 ## Supplemental materials
 - Bowl effect explained: [Mitigating systematic error in topographic models derived from UAV and ground-based image networks](https://onlinelibrary.wiley.com/doi/10.1002/esp.3609/epdf)

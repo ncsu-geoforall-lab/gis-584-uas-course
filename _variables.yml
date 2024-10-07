@@ -29,6 +29,10 @@ recordings:
   topic3:
     lecture3: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=094b5155-03b5-4f07-9dd1-b1c101665bec&start=1758.223763
     assignment3: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d7c12ad4-9eb0-4e3f-9e6b-b1c1016663c8&start=288
+  topic4:
+    lecture4a: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=f4bb168b-f378-42f0-a447-b1c101666e56
+    assignment4a: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ca781288-30f8-4a9a-957a-b1c1016670cf
+    lecture4b: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a44403c8-9d1e-4ea8-bd55-b1c101667364
 
 data:
   lake_wheeler_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip

@@ -99,7 +99,7 @@ schedule:
     topic: "Topic 4: Geospatial Analytics"
     subtopic: "[4A. Analysis of UAS data processing results](topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.qmd)"
     details:
-      - "Mon: lecture"
+      - "Mon: [Lecture](topics/topic_4_GIS_analytics/lectures/lecture_2a.qmd)"
       - "Wed: [In Class Assignments](topics/topic_4_GIS_analytics/assignments/assignment_4a.qmd)"
     due_date: "Oct. 23"
     no_class: false
@@ -108,7 +108,7 @@ schedule:
     topic: "Topic 4: Geospatial Analytics"
     subtopic: "[4B. Point cloud data analysis](topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.qmd)"
     details:
-      - "Mon: lecture"
+      - "Mon: [Lecture](topics/topic_4_GIS_analytics/lectures/lecture_2b.qmd)"
       - "Wed: assignment: analysis of errors and distortions in Photoscan and GRASS GIS"
       - "Project: Data processing"
     due_date: "Oct. 23"
