@@ -33,12 +33,14 @@ recordings:
     lecture4a: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=f4bb168b-f378-42f0-a447-b1c101666e56
     assignment4a: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ca781288-30f8-4a9a-957a-b1c1016670cf
     lecture4b: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a44403c8-9d1e-4ea8-bd55-b1c101667364
+    assignment4b: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=17242a21-4f1b-4cf8-8574-b1c1016675d0
 
 data:
   lake_wheeler_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip
   mid_pines_lidar_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las
   mid_pines_copc_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_copc_2013.laz
   mid_pines_2015_las_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/2015_06_sample_points_NCspm.las
+  gcp_12_decimal_pack_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/GCP_12_decimal.pack
   flight_path_kml_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path1.kml
   flight_path_kml_2_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path2.kml
   gcp_12_degrees_url: https://storage.googleapis.com/gis-course-data/gis584/GCP_12_degrees.geojson

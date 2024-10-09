@@ -127,8 +127,13 @@ Later, we will examine the density using v.outlier and imported vector points.
 ### Lidar point cloud: raster binning and classification
 
 Compute different surfaces by binning.
-Explore what different returns and classes show.<br>
-Create a raster map of classes: 1 - ground, 2 - vegetation, 3 - buildings.
+Explore what different returns and classes show.
+
+Create a raster map of classes:
+
+* 1 - ground
+* 2 - vegetation
+* 3 - buildings
 
 Create DSM:
 
@@ -137,8 +142,14 @@ g.region n=220218 s=218694 e=637795 w=636271 res=2 -pa
 r.in.lidar -o input=mid_pines_spm_2013.las output=mid_pines_all_max method=max resolution=3 class_filter=1,2
 ```
 
-Create surface based on last return (represents canopy, last return is only
-where there are multiple returns):
+Create surface based on last return 
+
+::: {.callout-caution}
+Last return with `r.in.lidar` represents canopy because it filters last return where there are multiple returns.
+
+In general, *last return* represents the overall last return from the lidar pulse an is commonly used to identify ground.
+:::
+
 
 ```bash
 r.in.lidar -o input=mid_pines_spm_2013.las output=mid_pines_last_mean method=mean return_filter=last class_filter=1,2
@@ -150,13 +161,17 @@ Create surface representing ground based on already classified points:
 r.in.lidar -o input=mid_pines_spm_2013.las output=mid_pines_ground_mean class_filter=2
 ```
 
-Combine surfaces and create classes: 1 - ground, 2 - vegetation, 3 - buildings:
+Combine surfaces and create classes: 
+
+* 1 - ground
+* 2 - vegetation
+* 3 - buildings
 
 ```bash
 r.mapcalc "classes = if( not(isnull(mid_pines_last_mean)), 2, if( not(isnull(mid_pines_ground_mean)), 1, if( not(isnull(mid_pines_all_max)), 3, null())))"
 ```
 
-Set colors with r.colors (right click on classes layer - Set color table),
+Set colors with `r.colors` (right click on classes layer - Set color table),
 copy and paste the following color rules into "or enter values directly" text field located in Define tab (option rules):
 
 ```bash
@@ -207,10 +222,8 @@ You can recompute it with higher npmin=150 to reduce artifacts from segmentation
 
 Visualize DEM and DSM in 3D view, use cross-sections.
 
-Leave just raster map 'mid_pines_surface_elev' in Layer Manager, hide legend,
-zoom to computational region.
+Leave just raster map 'mid_pines_surface_elev' in Layer Manager, hide legend, zoom to computational region.
 Go to 3D view, set surface resolution 1 and color to map 'classes'. Save images.
-
 
 
 ### Compute the difference of lidar DEM and GCP heights
