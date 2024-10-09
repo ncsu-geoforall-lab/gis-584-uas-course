@@ -299,17 +299,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="lidar-point-cloud-raster-binning-and-classification" class="level3">
 <h3 class="anchored" data-anchor-id="lidar-point-cloud-raster-binning-and-classification">Lidar point cloud: raster binning and classification</h3>
-<p>Compute different surfaces by binning. Explore what different returns and classes show.<br> Create a raster map of classes: 1 - ground, 2 - vegetation, 3 - buildings.</p>
+<p>Compute different surfaces by binning. Explore what different returns and classes show.</p>
+<p>Create a raster map of classes:</p>
+<ul>
+<li>1 - ground</li>
+<li>2 - vegetation</li>
+<li>3 - buildings</li>
+</ul>
 <p>Create DSM:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=220218 s=218694 e=637795 w=636271 res=2 <span class="at">-pa</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.lidar</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_all_max method=max resolution=3 class_filter=1,2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Create surface based on last return (represents canopy, last return is only where there are multiple returns):</p>
+<p>Create surface based on last return</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Last return with <code>r.in.lidar</code> represents canopy because it filters last return where there are multiple returns.</p>
+<p>In general, <em>last return</em> represents the overall last return from the lidar pulse an is commonly used to identify ground.</p>
+</div>
+</div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.lidar</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_last_mean method=mean return_filter=last class_filter=1,2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Create surface representing ground based on already classified points:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.lidar</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_ground_mean class_filter=2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Combine surfaces and create classes: 1 - ground, 2 - vegetation, 3 - buildings:</p>
+<p>Combine surfaces and create classes:</p>
+<ul>
+<li>1 - ground</li>
+<li>2 - vegetation</li>
+<li>3 - buildings</li>
+</ul>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"classes = if( not(isnull(mid_pines_last_mean)), 2, if( not(isnull(mid_pines_ground_mean)), 1, if( not(isnull(mid_pines_all_max)), 3, null())))"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Set colors with r.colors (right click on classes layer - Set color table), copy and paste the following color rules into “or enter values directly” text field located in Define tab (option rules):</p>
+<p>Set colors with <code>r.colors</code> (right click on classes layer - Set color table), copy and paste the following color rules into “or enter values directly” text field located in Define tab (option rules):</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 220:220:180</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> 0:180:0</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> 150:0:0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -338,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="compute-the-difference-of-lidar-dem-and-gcp-heights" class="level3">
 <h3 class="anchored" data-anchor-id="compute-the-difference-of-lidar-dem-and-gcp-heights">Compute the difference of lidar DEM and GCP heights</h3>
-<p>First, download the <a href="?var:data.gcp_12_decimal_pack_url">GCP_12_decimal pack file</a></p>
+<p>First, download the <a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/GCP_12_decimal.pack">GCP_12_decimal pack file</a></p>
 <p>and unpack it to GRASS</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.unpack</span> GCP_12_decimal.pack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then, add the columns:</p>
