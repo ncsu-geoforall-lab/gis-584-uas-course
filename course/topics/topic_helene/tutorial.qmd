@@ -1,0 +1,102 @@
+---
+title: Helene Photogrametery
+description: This tutorial demonstrates how download images from ArcGIS Server into GRASS GIS.
+format: html
+author: Corey T. White
+date: '2024-10-9'
+keep-ipynb: false
+toc: true
+toc-depth: 4
+categories: [geospatial, helene]
+page-layout: full
+title-block-banner: true
+draft: false
+---
+
+# Download Flight Data
+
+## Set up environment
+```{python}
+import os
+import sys
+import subprocess
+from pathlib import Path
+from IPython.display import display
+
+import requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
+```
+## Download images for processing
+
+```{python}
+#| eval: false
+
+def query_feature_service(flight_id):
+    """Query FeatureService by flight_id"""
+    try:
+        rest_url = 'https://services.arcgis.com/XG15cJAlne2vxtgt/ArcGIS/rest/services/Image_Points_view/FeatureServer/3/query'
+
+        query = f"project='CAP - H-TS Helene 2024' AND mission='24-1-5849' AND flight='{flight_id}'"
+
+        params = {
+            'where': query,
+            'outFields': '*',
+            'f': 'json',
+            'returnGeometry': 'false'
+        }
+        response = requests.get(rest_url, params=params)
+        json_data = response.json()
+        url_list = list(map(lambda feat: feat.get('url'), json_data['features']))
+        return url_list
+    except requests.RequestException as e:
+        print(f"Error fetching data from FeatureService: {e}")
+
+# Function to download an image from a URL
+def download_image(url, save_path, session):
+    """Download and save image from a url"""
+    try:
+        response = session.get(url)
+        response.raise_for_status()  # Check for HTTP errors
+        with open(save_path, 'wb') as file:
+            file.write(response.content)
+        print(f"Downloaded {url} to {save_path}")
+    except requests.RequestException as e:
+        print(f"Failed to download {url}: {e}")
+
+# Main function to set up the thread pool and download images
+def run(image_urls, save_dir, num_threads=4):
+    """Creates thread pool and download images from a list of urls"""
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    with ThreadPoolExecutor(max_workers=num_threads) as executor:
+        with requests.Session() as session:
+            futures = []
+            for url in image_urls:
+                filename = os.path.basename(url)
+                save_path = os.path.join(save_dir, filename)
+                futures.append(executor.submit(download_image, url, save_path, session))
+
+            for future in as_completed(futures):
+                future.result()  # This will raise 
+
+```
+
+### Run the download command
+
+Make sure to set appropriate threads for your system.
+
+```{python}
+#| eval: false
+url_list = query_feature_service(flight_id='A0046B')
+
+run(urls=url_list, save_dir="imagery_data/nadir/{flight}", num_threads=32)
+```
+
+### Run data in your favorite photogrametry software
+
+- WebODM
+- Agisoft Metashape
+
+
+
