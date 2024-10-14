@@ -1,7 +1,6 @@
 ---
 title: Helene Photogrametery
 description: This tutorial demonstrates how download images from ArcGIS Server into GRASS GIS.
-format: html
 author: Corey T. White
 date: '2024-10-9'
 keep-ipynb: false
@@ -9,7 +8,6 @@ toc: true
 toc-depth: 4
 categories: [geospatial, helene]
 page-layout: full
-title-block-banner: true
 draft: false
 ---
 
