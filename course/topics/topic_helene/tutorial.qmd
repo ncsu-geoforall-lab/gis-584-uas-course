@@ -17,6 +17,8 @@ draft: false
 
 ## Set up environment
 ```{python}
+#| eval: false
+
 import os
 import sys
 import subprocess
