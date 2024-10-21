@@ -15,6 +15,7 @@ assignment-due-date: 11/06/2024
 
 ## Lecture
 - [Lecture Slides](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/fusion_uas_lidar_view.html#/)
+- [Lecture Slides](lectures/lecture_5a.qmd)
 
 ## Supplemental materials
 - [Drone LiDAR vs Photogrammetry](https://www.geoweeknews.com/news/drone-lidar-vs-photogrammetry-technical-guide): A Technical Guide, brief article from SPAR3D (online news on 3D technology: sensing, processing and visualization)
