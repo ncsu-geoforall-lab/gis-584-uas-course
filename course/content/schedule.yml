@@ -131,9 +131,9 @@ schedule:
   
   - date_range: "Oct. 21-25"
     topic: "Topic 5: Advanced Analytics"
-    subtopic: "5A. UAS and Lidar Data: Comparison, Fusion and Analysis"
+    subtopic: "[5A. UAS and Lidar Data: Comparison, Fusion and Analysis](topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)"
     details:
-      - "Mon: Lecture"
+      - "Mon: [Lecture](topics/topic_5_Advanced Analytics/lectures/lecture_5a.qmd)"
       - "Wed: Dr. William Reckling ([LinkedIn](https://www.linkedin.com/in/william-reckling/))"
       # - "Wed: assignment: comparing lidar and UAS derived surfaces, differencing and profiles, fusion, overland flow"
       - "Project: Workflow development and testing"
