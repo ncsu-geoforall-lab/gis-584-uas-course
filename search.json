@@ -959,13 +959,6 @@
     "text": "Assignment & Homework\n\nPrepare report on mapping plant growth, viewsheds and water flow patterns using ultrahigh resolution DEMs."
   },
   {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#uas-and-lidar-data-comparison-fusion-and-analysis",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#uas-and-lidar-data-comparison-fusion-and-analysis",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "text": "UAS and Lidar Data: Comparison, Fusion, and Analysis\n\nGIS/MEA 584: Mapping and Analysis Using UAS\n\n\nHelena Mitasova, Anna Petrasova, Justyna Jeziorska\nCenter for Geospatial Analytics,\nNorth Carolina State University"
-  },
-  {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#outline",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#outline",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
@@ -977,21 +970,21 @@
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-lidar",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Point Clouds from Lidar",
-    "text": "Point Clouds from Lidar\n\nMeasured variable is the time of return for each pulse\nGeoreferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform\n(x, y, z) is derived from time, GPS positioning, and INS parameters\n\n\n\n\nPoint cloud visualization from Lidar"
+    "text": "Point Clouds from Lidar\n\nMeasured variable is the time of return for each pulse\nGeoreferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform\n(x, y, z) is derived from time, GPS positioning, and INS parameters\n\n\nPoint cloud visualization from Lidar"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Point Clouds from SfM",
-    "text": "Point Clouds from SfM\n\nMeasured variable is reflected energy captured as imagery\nGeoreferencing can be done entirely from GCPs\n(x, y, z) is derived from overlapping images and GCPs\nAlternatively: GPS and INS for the position and orientation of images and camera parameters\n\n\n\n\nPoint cloud visualization from SfM"
+    "text": "Point Clouds from SfM\n\nMeasured variable is reflected energy captured as imagery\nGeoreferencing can be done entirely from GCPs\n(x, y, z) is derived from overlapping images and GCPs\nAlternatively: GPS and INS for the position and orientation of images and camera parameters\n\n\nPoint cloud visualization from SfM"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Comparison of Point Cloud Properties",
-    "text": "Comparison of Point Cloud Properties\n\nAirborne Lidar:\n\nPasses through vegetation, multiple returns\nShifts between swaths, corduroy effect\nRegional coverage\nHigh cost\n\n\n\nUAS SfM:\n\nVery high point density\nLimited capability to map under vegetation\nInfluenced by cast shadows\nLow cost but limited area\n\nDifferent distribution of errors and distortions:\nLidar and SfM provide an independent set of measurements."
+    "text": "Comparison of Point Cloud Properties\n\n\nAirborne Lidar:\n\nPasses through vegetation, multiple returns\nShifts between swaths, corduroy effect\nRegional coverage\nHigh cost\n\n\nUAS SfM:\n\nVery high point density\nLimited capability to map under vegetation\nInfluenced by cast shadows\nLow cost but limited area\n\n\nDifferent distribution of errors and distortions:\nLidar and SfM provide an independent set of measurements."
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#motivation-for-lidar-and-uas-sfm-fusion",
@@ -1019,35 +1012,35 @@
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-distortions-due-to-processing",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Identify Distortions Due to Processing",
-    "text": "Identify Distortions Due to Processing\n\nIdentify the spatial pattern of distortions\nDifference maps between Lidar DSM and UAS SfM DSMs: different distortions from AGISOFT and PIX4D"
+    "text": "Identify Distortions Due to Processing\n\nIdentify the spatial pattern of distortions\nDifference maps between Lidar DSM and UAS SfM DSMs\n\n\n\nAgisoft\n\n\n\nDifference Maps\n\n\n\nPix4D\n\n\n\nDifference Maps"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-changes-in-topography",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-changes-in-topography",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Identify Changes in Topography",
-    "text": "Identify Changes in Topography\n\nVegetation growth or removal\nChange in elevation surface due to erosion processes\nUAS SfM - lidar difference maps with custom color"
+    "text": "Identify Changes in Topography\n\nVegetation growth or removal\nChange in elevation surface due to erosion processes\nUAS SfM - lidar difference maps with custom color\n\n\n\n\n\n\nElevation Difference Maps\n\n\n\n\n\n\nField Image"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-fields",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-fields",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Comparing Profiles: Fields",
-    "text": "Comparing Profiles: Fields\n\nIdentify systematic errors (vertical shifts)\nDifferences due to vegetation growth, erosion/deposition\n\n\n\n\nProfiles Comparison Fields"
+    "text": "Comparing Profiles: Fields\n\nIdentify systematic errors (vertical shifts)\nDifferences due to vegetation growth, erosion/deposition\n\n\nProfiles Comparison Fields"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-building",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-building",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Comparing Profiles: Building",
-    "text": "Comparing Profiles: Building\n\nHigh accuracy, lower level of detail in lidar data\nNegligible systematic error\n\n\n\n\nProfiles Comparison Building"
+    "text": "Comparing Profiles: Building\n\nHigh accuracy, lower level of detail in lidar data\nNegligible systematic error\n\n\nProfiles Comparison Building"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-road",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-road",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Comparing Profiles: Road",
-    "text": "Comparing Profiles: Road\n\nRelatively easy to identify stable features\nHigh accuracy - differences between lidar and UAS SfM within 4cm\n\n\n\n\nProfiles Comparison Road"
+    "text": "Comparing Profiles: Road\n\nRelatively easy to identify stable features\nHigh accuracy - differences between lidar and UAS SfM within 4cm\n\n\nProfiles Comparison Road"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#correct-for-systematic-error-and-distortions",
@@ -1061,70 +1054,70 @@
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Updating Lidar DEM by Patching",
-    "text": "Updating Lidar DEM by Patching\n\nReplace the grid cells in the updated area by UAS DEM\nAverage over an overlap\nUsually creates an edge - requires post-processing\n\n \nImages by Brendan Harmon"
+    "text": "Updating Lidar DEM by Patching\n\nReplace the grid cells in the updated area by UAS DEM\nAverage over an overlap\nUsually creates an edge - requires post-processing\n\n\n\n\n\n\nPatching Results\n\n\n\n\n\n\nPatching Results\n\n\n\nImages by Brendan Harmon"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Updating Lidar DEM by Patching",
-    "text": "Updating Lidar DEM by Patching\nEdge between lidar and UAS SfM DEMs\n\n\n\nEdge Visualization"
+    "text": "Updating Lidar DEM by Patching\nEdge between lidar and UAS SfM DEMs\n\nEdge Visualization"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#smooth-fusion",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#smooth-fusion",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Smooth Fusion",
-    "text": "Smooth Fusion\n\nDerive overlap raster\nWeighted smoothing based on the distance from the edge"
+    "text": "Smooth Fusion\n\nDerive overlap raster\nWeighted smoothing based on the distance from the edge\n\n\n\n\n\n\nFusion Results\n\n\n\n\n\n\nFusion Results"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-method",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-method",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Fusion Method",
-    "text": "Fusion Method\nLinear combination of elevation surfaces ( z_{A} ) and ( z_{B} ) with weights given by overlap width ( s ) and distance ( d ) to the edge of ( z_{A} ):\n\\[\nz_{AB} = z_{A} w + z_{B}(1 - w),\n\\\\[10pt]\nw = f(s, d) =\n\\begin{cases}\n  \\frac{d}{s} & 0 \\leq d &lt; s \\\\\n  1 & d \\geq s\n\\end{cases}\n\\]\n\n\n\nFusion Method Schema"
+    "text": "Fusion Method\nLinear combination of elevation surfaces \\(z_{A}\\) and \\(z_{B}\\) with weights given by overlap width \\(s\\) and distance \\(d\\) to the edge of \\(z_{A}\\):\n\n\n\\[\nz_{AB} = z_{A} w + z_{B}(1 - w),\n\\\\[10pt]\nw = f(s, d) =\n\\begin{cases}\n  \\frac{d}{s} & 0 \\leq d &lt; s \\\\\n  1 & d \\geq s\n\\end{cases}\n\\]\n\n\n\n\nFusion Method Schema"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Influence of Overlap Width ( s )",
-    "text": "Influence of Overlap Width ( s )\n\n\n\nOverlap Influence"
+    "section": "Influence of Overlap Width \\(s\\)",
+    "text": "Influence of Overlap Width \\(s\\)\n\nOverlap Influence"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion with Spatially Variable ( s )",
-    "text": "Fusion with Spatially Variable ( s )\nBy taking into account spatially variable differences ( z ) between DEMs ( A ) and ( B ) along the overlap: - We get a more gradual transition where differences are high - We preserve subtle features of both DEMs where differences are small\n\n\n\nSpatially Variable Fusion"
+    "section": "Fusion with Spatially Variable \\(s\\)",
+    "text": "Fusion with Spatially Variable \\(s\\)\nBy taking into account spatially variable differences \\(\\Delta z\\) between DEMs \\(A\\) and \\(B\\) along the overlap:\n\n\n\nWe get a more gradual transition where differences are high\nWe preserve subtle features of both DEMs where differences are small\n\n\n\n\n\nSpatially Variable Fusion"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion with Spatially Variable ( s )",
-    "text": "Fusion with Spatially Variable ( s )\nAbsolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.\n\n\n\nFusion Visualization"
+    "section": "Fusion with Spatially Variable \\(s\\)",
+    "text": "Fusion with Spatially Variable \\(s\\)\nAbsolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.\n\nFusion Visualization"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Lidar and UAS SfM Patching and Fusion",
-    "text": "Lidar and UAS SfM Patching and Fusion\n \nSimply patched vs. fused UAS and lidar DSMs with overlap width ( s = 20 m )"
+    "text": "Lidar and UAS SfM Patching and Fusion\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\nSimply patched vs. fused UAS and lidar DSMs with overlap width \\(s = 20\\ m\\)"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Fusing Vegetated Patch with Bare Ground",
-    "text": "Fusing Vegetated Patch with Bare Ground\n \nVegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM."
+    "text": "Fusing Vegetated Patch with Bare Ground\n\n\n\n\n\nBare Ground Fused\n\n\n\n\n\n\nBare Ground Fused\n\n\n\nVegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM."
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#spatially-variable-overlap",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#spatially-variable-overlap",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Spatially Variable Overlap",
-    "text": "Spatially Variable Overlap\n\n\n\nSpatial Overlap\n\n\nBare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap"
+    "text": "Spatially Variable Overlap\n\nSpatial OverlapBare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#modeling-overland-flow",
@@ -1138,35 +1131,35 @@
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#path-sampling-method",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Path Sampling Method",
-    "text": "Path Sampling Method\nStochastic method for solving flow continuity equations\n \nMitasova et al., 2005"
+    "text": "Path Sampling Method\nStochastic method for solving flow continuity equations\n\n\n\n\n\nFlow Animation\n\n\n\n\n\n\nFlow Animation\n\n\n\n\nMitasova et al., 2005"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Flow Over UAS Mapped Field",
-    "text": "Flow Over UAS Mapped Field\nCrop surface creates barrier leading to artificial ponding\n\n\n\nFlow Over Mapped Field"
+    "text": "Flow Over UAS Mapped Field\nCrop surface creates barrier leading to artificial ponding\n\nFlow Over Mapped Field"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-patched-dems",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-patched-dems",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Flow Over Patched DEMs",
-    "text": "Flow Over Patched DEMs\n \nReplacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution"
+    "text": "Flow Over Patched DEMs\nReplacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution\n\n\n\n\n\nFlow Pattern\n\n\n\n\n\n\nFlow Pattern"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Example from Assignment",
-    "text": "Example from Assignment\n \nWater flow on DSM created by simple patching vs. smooth patching"
+    "text": "Example from Assignment\nWater flow on DSM created by simple patching vs. smooth patching\n\n\n\n\n\nFlow Comparison\n\n\n\n\n\n\nFlow Comparison"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment-1",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment-1",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Example from Assignment",
-    "text": "Example from Assignment\n \nWater flow on DSM vs. bare ground fused from UAS DSM and lidar DEM"
+    "text": "Example from Assignment\nWater flow on DSM vs. bare ground fused from UAS DSM and lidar DEM\n\n\n\n\n\nFlow on DSM vs. Bare Ground\n\n\n\n\n\n\nFlow on DSM vs. Bare Ground"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#what-did-we-learn",
@@ -1174,34 +1167,6 @@
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "What Did We Learn?",
     "text": "What Did We Learn?\n\nEvaluation and interpretation of differences between lidar and UAS SfM DEMs\nTechniques for smooth fusion of high-resolution DEMs\nImpact of fusion technique on overland flow modeling"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#intro-to-python-in-grass-gis",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#intro-to-python-in-grass-gis",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Intro to Python in GRASS GIS",
-    "text": "Intro to Python in GRASS GIS"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#motivation",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#motivation",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Motivation",
-    "text": "Motivation\n\nWhat is scripting good for?\n\nRunning tasks and workflows repeatedly on many datasets\nSharing your workflow with colleagues\nMaking your work reproducible (for your own benefit)\n\n\n\nWhy Python?\n\nMost widely used language in geospatial applications\nEasy to learn\nActive community, many libraries"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#running-python-in-grass",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#running-python-in-grass",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Running Python in GRASS",
-    "text": "Running Python in GRASS\n\n\n\nPython Editor\n\n\nPython shell for one-line statements, editor for scripts"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#grass-python-scripting-library",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#grass-python-scripting-library",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "GRASS Python Scripting Library",
-    "text": "GRASS Python Scripting Library\n\nEnables running GRASS GIS modules\nImport:\n\nimport grass.script as gs"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#task",
@@ -1894,7 +1859,7 @@
     "href": "course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#lecture",
     "title": "A. UAS and lidar data: comparison, fusion and analysis",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides"
+    "text": "Lecture\n\nLecture Slides\nLecture Slides"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#supplemental-materials",
