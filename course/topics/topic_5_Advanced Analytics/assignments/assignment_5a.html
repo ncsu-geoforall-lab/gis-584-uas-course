@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Anna Petrasova">
+<meta name="author" content="Corey White">
 
 <title>Assignment 5A – GIS/MEA 584: UAS Mapping and Analytics</title>
 <style>
@@ -162,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
-  <li><a href="#workflow-overview" id="toc-workflow-overview" class="nav-link" data-scroll-target="#workflow-overview">Workflow overview</a>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
   <ul>
   <li><a href="#analyze-the-difference-between-the-lidar-and-uas-dsm" id="toc-analyze-the-difference-between-the-lidar-and-uas-dsm" class="nav-link" data-scroll-target="#analyze-the-difference-between-the-lidar-and-uas-dsm">1. Analyze the difference between the lidar and UAS DSM</a></li>
   <li><a href="#patch-and-fuse-the-lidar-and-uas-dsm" id="toc-patch-and-fuse-the-lidar-and-uas-dsm" class="nav-link" data-scroll-target="#patch-and-fuse-the-lidar-and-uas-dsm">2. Patch and fuse the lidar and UAS DSM</a></li>
@@ -193,9 +194,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
              <p>Anna Petrasova </p>
+             <p>Corey White </p>
           </div>
   </div>
     
@@ -233,8 +235,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Install <a href="https://grass.osgeo.org/grass84/manuals/addons/r.patch.smooth.html">r.patch.smooth</a> with the following command:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.patch.smooth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="workflow-overview" class="level2">
-<h2 class="anchored" data-anchor-id="workflow-overview">Workflow overview</h2>
+<section id="workflow" class="level2">
+<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
 <p>First we need to evaluate the DSMs to find out which are suitable for fusion</p>
 <ol type="1">
 <li>Compute the difference between a selected lidar DSM and selected UAS DSMs: entire raster, along a stable linear feature (road and roof).</li>
