@@ -35,7 +35,7 @@ recordings:
     lecture4b: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a44403c8-9d1e-4ea8-bd55-b1c101667364
     assignment4b: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=17242a21-4f1b-4cf8-8574-b1c1016675d0
   topic5:
-    lecture5: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a5da365c-e33c-464a-aa6d-b1c101667b47
+    lecture5a: https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a5da365c-e33c-464a-aa6d-b1c101667b47
 
 data:
   lake_wheeler_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip
@@ -54,3 +54,4 @@ data:
   lake_wheeler_flight_Nov_2015_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/112415/ortho_2015_11_24.pack
   lake_wheeler_flight_Jun_2017_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack
   lake_wheeler_flight_Mar_2017_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/032917/ortho_2017_03_29.pack
+  secref_mid_pines_spm_elev: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip

@@ -16,15 +16,15 @@ assignment-due-date: 11/06/2024
 ## Lecture
 - [Lecture Slides](lectures/lecture_5a.qmd)
 - Lecture Recording: [Fall 2024]({{< var recordings.topic5.lecture5a >}}) (NCSU Only)
-<!-- - In-Class Recording: [Fall 2024]({{< var recordings.topic5.assignment5a >}}) (NCSU Only) -->
+- In-Class Recording: NA
 
 ## Supplemental materials
 - [Drone LiDAR vs Photogrammetry](https://www.geoweeknews.com/news/drone-lidar-vs-photogrammetry-technical-guide): A Technical Guide, brief article from SPAR3D (online news on 3D technology: sensing, processing and visualization)
-- Fusion of multi-scale DEMs using a regularized super-resolution method. Linwei Yue , Huanfeng Shen , Qiangqiang Yuan , Liangpei Zhang. International Journal of Geographical Information Science. Vol. 29, Iss. 12, 2015
+- [Fusion of multi-scale DEMs using a regularized super-resolution method](https://www-tandfonline-com.prox.lib.ncsu.edu/doi/full/10.1080/13658816.2015.1063639). Linwei Yue , Huanfeng Shen , Qiangqiang Yuan , Liangpei Zhang. International Journal of Geographical Information Science. Vol. 29, Iss. 12, 2015
 - [Petrasova et al. 2017, Fusion of high-resolution DEMs for water flow modeling.](https://opengeospatialdata.springeropen.com/articles/10.1186/s40965-017-0019-2) Open Geospatial Data, Software and Standards 2:6.
 
 ## Assignment & Homework
 
-[Assignment 5A](assignments/assignment_5a.qmd)
--[Fusion of UAS and lidar data](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/fusion_uas_lidar.html)
+[Assignment 5A: Fusion of UAS and lidar data](assignments/assignment_5a.qmd)
+
 - Optional, advanced topic: [Python Scripting for UAS/lidar analysis in GRASS GIS](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/python.html)
