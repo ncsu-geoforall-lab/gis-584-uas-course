@@ -2,138 +2,142 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/index.html</loc>
-    <lastmod>2024-10-22T17:40:37.715Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.697Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/schedule.html</loc>
-    <lastmod>2024-10-22T17:40:37.499Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.477Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html</loc>
-    <lastmod>2024-10-22T17:40:37.659Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.637Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/assignments/point_clouds.html</loc>
-    <lastmod>2024-10-22T17:40:37.659Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.637Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/assignments/volumes.html</loc>
-    <lastmod>2024-10-22T17:40:37.659Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.637Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html</loc>
-    <lastmod>2024-10-22T17:40:37.695Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.677Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html</loc>
-    <lastmod>2024-10-22T17:40:37.695Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.677Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_3_flight_planning/assignments/assignment_1a_grass.html</loc>
-    <lastmod>2024-10-22T17:40:37.643Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.621Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_3_flight_planning/lectures/lecture_3a.html</loc>
-    <lastmod>2024-10-22T17:40:37.659Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.637Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_2_sfm/assignments/assignment_2a.html</loc>
-    <lastmod>2024-10-22T17:40:37.519Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.497Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_2_sfm/part_b_img_processing_sfm.html</loc>
-    <lastmod>2024-10-22T17:40:37.643Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.621Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_2_sfm/lectures/lecture_2b.html</loc>
-    <lastmod>2024-10-22T17:40:37.643Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.621Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.html</loc>
-    <lastmod>2024-10-22T17:40:37.711Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.693Z</lastmod>
   </url>
   <url>
-    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html</loc>
-    <lastmod>2024-10-22T17:40:37.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/assignments/assignment_1a.html</loc>
-    <lastmod>2024-10-22T17:40:37.499Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/part_a_introduction.html</loc>
-    <lastmod>2024-10-22T17:40:37.519Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/lectures/lecture_1b.html</loc>
-    <lastmod>2024-10-22T17:40:37.519Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/logistics.html</loc>
-    <lastmod>2024-10-22T17:40:37.499Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/lectures/lecture_1a.html</loc>
-    <lastmod>2024-10-22T17:40:37.519Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/part_b_rules_regs.html</loc>
-    <lastmod>2024-10-22T17:40:37.519Z</lastmod>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html</loc>
+    <lastmod>2024-10-27T16:57:27.677Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/assignments/assignment_1b.html</loc>
-    <lastmod>2024-10-22T17:40:37.499Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.477Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/part_b_rules_regs.html</loc>
+    <lastmod>2024-10-27T16:57:27.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/lectures/lecture_1a.html</loc>
+    <lastmod>2024-10-27T16:57:27.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/logistics.html</loc>
+    <lastmod>2024-10-27T16:57:27.477Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/lectures/lecture_1b.html</loc>
+    <lastmod>2024-10-27T16:57:27.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/part_a_introduction.html</loc>
+    <lastmod>2024-10-27T16:57:27.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_1_uas_basics/assignments/assignment_1a.html</loc>
+    <lastmod>2024-10-27T16:57:27.477Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html</loc>
+    <lastmod>2024-10-27T16:57:27.693Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html</loc>
-    <lastmod>2024-10-22T17:40:37.711Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.693Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_2_sfm/lectures/lecture_2a.html</loc>
-    <lastmod>2024-10-22T17:40:37.643Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.617Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_2_sfm/part_a_images_to_3d.html</loc>
-    <lastmod>2024-10-22T17:40:37.643Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.621Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_2_sfm/sfm_demo.html</loc>
-    <lastmod>2024-10-22T17:40:37.643Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.621Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_2_sfm/assignments/assignment_2b.html</loc>
-    <lastmod>2024-10-22T17:40:37.519Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.497Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html</loc>
-    <lastmod>2024-10-22T17:40:37.659Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.637Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_helene/tutorial.html</loc>
-    <lastmod>2024-10-22T17:40:37.711Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.693Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/lectures/lecture_4a.html</loc>
-    <lastmod>2024-10-22T17:40:37.695Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.677Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html</loc>
-    <lastmod>2024-10-22T17:40:37.695Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.677Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/assignments/analysis.html</loc>
-    <lastmod>2024-10-22T17:40:37.659Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.637Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html</loc>
-    <lastmod>2024-10-22T17:40:37.659Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.637Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/topics.html</loc>
-    <lastmod>2024-10-22T17:40:37.499Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.477Z</lastmod>
   </url>
   <url>
     <loc>https://ncsu-geoforall-lab.github.io/gis-584-uas-course/course/projects.html</loc>
-    <lastmod>2024-10-22T17:40:37.499Z</lastmod>
+    <lastmod>2024-10-27T16:57:27.477Z</lastmod>
   </url>
 </urlset>

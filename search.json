@@ -959,263 +959,347 @@
     "text": "Assignment & Homework\n\nPrepare report on mapping plant growth, viewsheds and water flow patterns using ultrahigh resolution DEMs."
   },
   {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#outline",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#outline",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "objectID": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#outline",
+    "href": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#outline",
+    "title": "Assignment 5A",
     "section": "Outline",
-    "text": "Outline\n\nMotivation for combining lidar and UAS SfM data\nAnalysis of lidar and UAS SfM DSMs differences\nPatching and smooth fusion of UAS and lidar DSM\nOverland flow simulation on fused DEM"
+    "text": "Outline\n\nanalyze the differences between the lidar (2013, 2015 surveys) and UAS DEM/DSM\nfuse selected lidar and UAS DSM\nevaluate impact of fusion technique on water flow simulation"
   },
   {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-lidar",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-lidar",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Point Clouds from Lidar",
-    "text": "Point Clouds from Lidar\n\nMeasured variable is the time of return for each pulse\nGeoreferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform\n(x, y, z) is derived from time, GPS positioning, and INS parameters\n\n\nPoint cloud visualization from Lidar"
+    "objectID": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#data",
+    "href": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#data",
+    "title": "Assignment 5A",
+    "section": "Data",
+    "text": "Data\nYou should have everything already for Mid Pines area, get anything missing from the Course logistics web page\n\nGRASS Project: LakeWheeler_NCspm\n2013 lidar interpolated DEM and DSM: download, use r.unpack."
   },
   {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Point Clouds from SfM",
-    "text": "Point Clouds from SfM\n\nMeasured variable is reflected energy captured as imagery\nGeoreferencing can be done entirely from GCPs\n(x, y, z) is derived from overlapping images and GCPs\nAlternatively: GPS and INS for the position and orientation of images and camera parameters\n\n\nPoint cloud visualization from SfM"
+    "objectID": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#tools",
+    "href": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#tools",
+    "title": "Assignment 5A",
+    "section": "Tools",
+    "text": "Tools\n\nGRASS GIS 8.4\nGRASS Addon: r.patch.smooth\n\nInstall r.patch.smooth with the following command:\ng.extension r.patch.smooth"
   },
   {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparison of Point Cloud Properties",
-    "text": "Comparison of Point Cloud Properties\n\n\nAirborne Lidar:\n\nPasses through vegetation, multiple returns\nShifts between swaths, corduroy effect\nRegional coverage\nHigh cost\n\n\nUAS SfM:\n\nVery high point density\nLimited capability to map under vegetation\nInfluenced by cast shadows\nLow cost but limited area\n\n\nDifferent distribution of errors and distortions:\nLidar and SfM provide an independent set of measurements."
+    "objectID": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#workflow-overview",
+    "href": "course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html#workflow-overview",
+    "title": "Assignment 5A",
+    "section": "Workflow overview",
+    "text": "Workflow overview\nFirst we need to evaluate the DSMs to find out which are suitable for fusion\n\nCompute the difference between a selected lidar DSM and selected UAS DSMs: entire raster, along a stable linear feature (road and roof).\nUse the results to evaluate whether there is a significant systematic error, such as vertical shift in profiles along the road.\nUse the raster differences to identify distortions, look for unexpected patterns, verify with profile, and exclude distorted areas from study area.\nYou have lidar DEM, DSM and a low-distortion subset of UAS DSM:\n\nCreate a new DSM for the entire area using two approaches and compare how the two approaches work for water flow modeling.\nCombine parts of UAS and lidar DEM to create bare ground, model water flow and compare with water flow modeled on DSM.\n\n\n\n1. Analyze the difference between the lidar and UAS DSM\nDownload the suggested color table for differences, used in the workflow as dif_lidar_uav.txt.\nIf you run r.colors from command line, make sure the color table file is in your current working directory.\n -40 red\n -1 orange\n -0.5 yellow\n -0.1 grey\n 0 white\n 0.1 grey\n 0.5 cyan\n 1 aqua\n 35 blue\nDownload lidar DSM and DEMs if you haven’t done already, unzip it in your working directory and unpack:\nr.unpack -o input=mid_pines_lidar2013_dsm.pack\nr.unpack -o input=mid_pines_lidar2013_dem.pack\nCompute the differences between the lidar and UAS DSMs and evaluate their spatial distribution and\nsummary statistical properties:\ng.region rast=mid_pines_lidar2013_dsm -p\nr.mapcalc \"diff_lidardsm_agi_june = mid_pines_lidar2013_dsm - 2015_06_20_DSM_agi_11GCP\"\nr.colors diff_lidardsm_agi_june rules=dif_lidar_uav.txt\nr.univar diff_lidardsm_agi_june\nr.mapcalc \"diff_lidardsm_pix4d_june = mid_pines_lidar2013_dsm - 2015_06_20_pix4d_11GCP_dsm\"\nr.colors diff_lidardsm_pix4d_june rules=dif_lidar_uav.txt\nr.univar diff_lidardsm_pix4d_june\nEvaluate possible systematic shift along stable features using the following commands:\nr.profile -g input=diff_lidardsm_agi_june output=road.txt coordinates=637208,219491,637059,219734\nv.in.ascii input=road.txt output=profile_road separator=space columns=\"x double,y double,profile double,diff double\"\nv.univar map=profile_road column=diff\nFor more visual comparison use GUI Profile Tool. In Map Display toolbar, find Analyze map - Profile surface map and select raster maps mid_pines_lidar2013_dsm, 2015_06_20_DSM_agi_11GCP, and 2015_06_20_pix4d_11GCP_dsm. In Profile toolbar, use the second tool Draw transect in map display window` and then click in Map Display on the road where you want to start the profile and then where you want to end it. Use Plot options** to show legend and to set colors of the DSM profiles (look for the yellow wheel icon).\n\n\n\n\n\n\nWarning\n\n\n\nWhy are the distortions / errors low along the road but high in the fields?\n\n\nBecause the shift in the lidar and UAS DSM is small we will ignore it in our first set of fusion examples, but we will use the analysis above to select the region with minimal distortion in the UAS DSM and compute a clipped DSM:\ng.region n=219720.9 s=219257.1 w=636762.9 e=637190.4 res=0.3 -p\nr.mapcalc \"2015_06_20_DSM_agi_11GCP_cl = 2015_06_20_DSM_agi_11GCP\"\n\n\n2. Patch and fuse the lidar and UAS DSM\nFor the rest of the assignment we will use rasters 2015_06_20_DSM_agi_11GCP_cl, mid_pines_lidar2013_dsm, and mid_pines_lidar2013_dem. To make the instructions more readable, we will create a copy of these rasters with short names:\ng.copy raster=2015_06_20_DSM_agi_11GCP_cl,uas\ng.copy raster=mid_pines_lidar2013_dsm,lidar_dsm\ng.copy raster=mid_pines_lidar2013_dem,lidar_dem\nPatch UAS DSM with lidar DSM to cover the entire Mid Pines study area and use shaded relief to check for edges:\ng.region rast=lidar_dsm -p\nr.patch uas,lidar_dsm out=lid_uas_patch\nr.relief lid_uas_patch out=lid_uas_patch_relief zscale=5\nWe have visible discontinuity along the patch edges. Therefore we will use weighted average to smooth out the overlap with the following workflow. We will use two different overlap widths — 5 and 20 meters — compare the results and try to explain how the smoothing works in your report:\nr.grow.distance -n input=uas distance=distance\nr.mapcalc \"patched_smooth_5 = if(distance &gt; 5, uas, if(distance == 0, lidar_dsm, (1 - distance/5) * lidar_dsm + (distance/5 * uas)))\"\nr.mapcalc \"patched_smooth_20 = if(distance &gt; 20, uas, if(distance == 0, lidar_dsm, (1 - distance/20) * lidar_dsm + (distance/20 * uas)))\"\nr.relief patched_smooth_5 out=patched_smooth_5_relief zscale=5\nr.relief patched_smooth_20 out=patched_smooth_20_relief zscale=5\n\n\n3. Create bare ground by fusing UAS DSM and lidar DEM\nTo properly model water flow on the UAS DSM, we replace vegetation captured in the DSM with lidar bare ground (lidar_dem). We extract only those parts of UAS DSM where it is higher than lidar ground by 30 cm:\ng.region rast=uas -p\nr.mapcalc \"uas_ground = if(uas - lidar_dem &lt; 0.3, uas, null())\"\nNow we will fuse lidar and the UAS ground using the same method as above. This time, we will use addon r.patch.smooth:\ng.extension r.patch.smooth\nIn the first case we will use overlap width 10m:\ng.region rast=lidar_dsm -p\nr.patch.smooth input_a=uas_ground input_b=lidar_dem output=lidar_uas_ground_smooth smooth_dist=10\nr.relief lidar_uas_ground_smooth out=lidar_uas_ground_smooth_relief zscale=5\nIn the second case we will use an alternative approach (using -s flag) which uses spatially variable overlap width based on the elevation differences along the borders (see r.patch.smooth manual):\nr.patch.smooth -s input_a=uas_ground input_b=lidar_dem output=lidar_uas_ground_smooth2 overlap=overlap transition_angle=1.3 parallel_smoothing=13\nr.relief lidar_uas_ground_smooth2 out=lidar_uas_ground_smooth2_relief zscale=5\nAdd raster overlap to see the spatially variable overlap.\n\n\n4. Compare surface flow pattern on patched and fused DSMs\nThe aim of the processing is to investigate the flow pattern simulated on different DSMs and DEMs. The lidar 2013 and the timeseries of UAS-based DSMs will be used as input for simulations using r.sim.water.\nFirst, we examine the watershed boundaries to see which area to include:\ng.region rast=lidar_dem -p\nr.watershed elevation=lidar_dem threshold=50000 accumulation=flowacc basin=basin\nr.to.vect -t input=basin output=basin type=area\nWe will compute water flow on our fused DEM within our selected region. We need first order spatial derivatives which can be derived either using r.slope.aspect or during interpolation phase with v.surf.rst.\ng.region n=219728.7 s=219435 w=636708.9 e=637122.6 res=0.3 -pa\nr.slope.aspect elevation=lid_uas_patch dx=lid_uas_patch_dx dy=lid_uas_patch_dy\nThe simulation writes water depth and discharge raster maps so we can look at first results soon although the simulation takes a lot of time. Depending on your processing power, you can make the region smaller.\nr.sim.water -t elevation=lid_uas_patch dx=lid_uas_patch_dx dy=lid_uas_patch_dy rain_value=30 man_value=0.15 depth=lid_uas_patch_depth discharge=lid_uas_patch_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nNow we will compute the water flow simulation on the DSM patched using smooth fusion:\nr.slope.aspect elevation=patched_smooth_20 dx=patched_smooth_20_dx dy=patched_smooth_20_dy\nr.sim.water -t elevation=patched_smooth_20 dx=patched_smooth_20_dx dy=patched_smooth_20_dy rain_value=30 man_value=0.15 depth=patched_smooth_20_depth discharge=patched_smooth_20_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nNow compare the results (lid_uas_patch_depth.20 and patched_smooth_20_depth.20) at the edge of the datasets.\nFinally, we will simulate water flow on the bare ground fused from UAV DSM and lidar DEM:\nr.slope.aspect elevation=lidar_uas_ground_smooth dx=lidar_uas_ground_smooth_dx dy=lidar_uas_ground_smooth_dy\nr.sim.water -t elevation=lidar_uas_ground_smooth dx=lidar_uas_ground_smooth_dx dy=lidar_uas_ground_smooth_dy rain_value=30 man_value=0.15 depth=ground_depth discharge=ground_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nCompare ground_depth.20 with the previous results.\n\nAnimation and visualisation the results\nGRASS GIS Animation Tool allows to create animations from series of raster and vector maps and export animated gifs.\nPick one or more of the simulated flows and load all the corresponding *_depth maps to the animation tool. The water flow pattern is better visible in 2d when it’s draped over a shaded relief, so add corresponding relief raster and set its transparency to 50% (last icon in Add new animation/Edit animation dialog).\n\nExport the animation as GIF file.\nLook at this youtube video to see how to control Animation Tool."
   },
   {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#motivation-for-lidar-and-uas-sfm-fusion",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#motivation-for-lidar-and-uas-sfm-fusion",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Motivation for Lidar and UAS SfM Fusion",
-    "text": "Motivation for Lidar and UAS SfM Fusion\n\nLow-cost DEM updates in rapidly changing landscapes (e.g., construction sites)\nReplacing vegetated areas in UAS SfM with bare ground\nWatershed analysis when only part of the watershed was mapped by UAS\nImprove accuracy and level of detail over stable features (buildings, bridges)\nAdd your suggestion"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-techniques",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-techniques",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion Techniques",
-    "text": "Fusion Techniques\n\nMerge the point clouds, decimate or bin at high resolution, interpolate: computationally demanding\nInterpolate DEMs, randomly sample, patch, and reinterpolate: loss of detail, time-consuming\nInterpolate DEMs and patch: sharp edges\nSmooth fusion - requires DEMs at the same resolution"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#workflow",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#workflow",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Workflow",
-    "text": "Workflow\n\nEvaluate the point clouds, select resolution\nInterpolate lidar and UAS DEMs at the same resolution\nEvaluate the differences between the lidar and UAS DEMs\nIf applicable, identify errors and apply corrections\nApply smooth fusion"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-distortions-due-to-processing",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-distortions-due-to-processing",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Identify Distortions Due to Processing",
-    "text": "Identify Distortions Due to Processing\n\nIdentify the spatial pattern of distortions\nDifference maps between Lidar DSM and UAS SfM DSMs\n\n\n\nAgisoft\n\n\n\nDifference Maps\n\n\n\nPix4D\n\n\n\nDifference Maps"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-changes-in-topography",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-changes-in-topography",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Identify Changes in Topography",
-    "text": "Identify Changes in Topography\n\nVegetation growth or removal\nChange in elevation surface due to erosion processes\nUAS SfM - lidar difference maps with custom color\n\n\n\n\n\n\nElevation Difference Maps\n\n\n\n\n\n\nField Image"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-fields",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-fields",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparing Profiles: Fields",
-    "text": "Comparing Profiles: Fields\n\nIdentify systematic errors (vertical shifts)\nDifferences due to vegetation growth, erosion/deposition\n\n\nProfiles Comparison Fields"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-building",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-building",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparing Profiles: Building",
-    "text": "Comparing Profiles: Building\n\nHigh accuracy, lower level of detail in lidar data\nNegligible systematic error\n\n\nProfiles Comparison Building"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-road",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-road",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparing Profiles: Road",
-    "text": "Comparing Profiles: Road\n\nRelatively easy to identify stable features\nHigh accuracy - differences between lidar and UAS SfM within 4cm\n\n\nProfiles Comparison Road"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#correct-for-systematic-error-and-distortions",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#correct-for-systematic-error-and-distortions",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Correct for Systematic Error and Distortions",
-    "text": "Correct for Systematic Error and Distortions\n\nSystematic error: if due to GPS shift, use median difference\nSystematic error: if tilt, use regression function\nComplex UAS SfM distortions can be reduced using interpolated GCP differences or differencing with lidar\nImportance of well-distributed, accurate GCPs"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Updating Lidar DEM by Patching",
-    "text": "Updating Lidar DEM by Patching\n\nReplace the grid cells in the updated area by UAS DEM\nAverage over an overlap\nUsually creates an edge - requires post-processing\n\n\n\n\n\n\nPatching Results\n\n\n\n\n\n\nPatching Results\n\n\n\nImages by Brendan Harmon"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Updating Lidar DEM by Patching",
-    "text": "Updating Lidar DEM by Patching\nEdge between lidar and UAS SfM DEMs\n\nEdge Visualization"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#smooth-fusion",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#smooth-fusion",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Smooth Fusion",
-    "text": "Smooth Fusion\n\nDerive overlap raster\nWeighted smoothing based on the distance from the edge\n\n\n\n\n\n\nFusion Results\n\n\n\n\n\n\nFusion Results"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-method",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-method",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion Method",
-    "text": "Fusion Method\nLinear combination of elevation surfaces \\(z_{A}\\) and \\(z_{B}\\) with weights given by overlap width \\(s\\) and distance \\(d\\) to the edge of \\(z_{A}\\):\n\n\n\\[\nz_{AB} = z_{A} w + z_{B}(1 - w),\n\\\\[10pt]\nw = f(s, d) =\n\\begin{cases}\n  \\frac{d}{s} & 0 \\leq d &lt; s \\\\\n  1 & d \\geq s\n\\end{cases}\n\\]\n\n\n\n\nFusion Method Schema"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Influence of Overlap Width \\(s\\)",
-    "text": "Influence of Overlap Width \\(s\\)\n\nOverlap Influence"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion with Spatially Variable \\(s\\)",
-    "text": "Fusion with Spatially Variable \\(s\\)\nBy taking into account spatially variable differences \\(\\Delta z\\) between DEMs \\(A\\) and \\(B\\) along the overlap:\n\n\n\nWe get a more gradual transition where differences are high\nWe preserve subtle features of both DEMs where differences are small\n\n\n\n\n\nSpatially Variable Fusion"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion with Spatially Variable \\(s\\)",
-    "text": "Fusion with Spatially Variable \\(s\\)\nAbsolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.\n\nFusion Visualization"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Lidar and UAS SfM Patching and Fusion",
-    "text": "Lidar and UAS SfM Patching and Fusion\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\nSimply patched vs. fused UAS and lidar DSMs with overlap width \\(s = 20\\ m\\)"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusing Vegetated Patch with Bare Ground",
-    "text": "Fusing Vegetated Patch with Bare Ground\n\n\n\n\n\nBare Ground Fused\n\n\n\n\n\n\nBare Ground Fused\n\n\n\nVegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM."
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#spatially-variable-overlap",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#spatially-variable-overlap",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Spatially Variable Overlap",
-    "text": "Spatially Variable Overlap\n\nSpatial OverlapBare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#modeling-overland-flow",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#modeling-overland-flow",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Modeling Overland Flow",
-    "text": "Modeling Overland Flow\nMicrotopography captured at ultra-high resolution by UAS SfM poses special challenges to flow routing:\n\nReal depressions are important features\nComplex pattern of ponding, overflow of barriers is not supported by standard tools\nNoisy surface requires a robust algorithm"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#path-sampling-method",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#path-sampling-method",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Path Sampling Method",
-    "text": "Path Sampling Method\nStochastic method for solving flow continuity equations\n\n\n\n\n\nFlow Animation\n\n\n\n\n\n\nFlow Animation\n\n\n\n\nMitasova et al., 2005"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Flow Over UAS Mapped Field",
-    "text": "Flow Over UAS Mapped Field\nCrop surface creates barrier leading to artificial ponding\n\nFlow Over Mapped Field"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-patched-dems",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-patched-dems",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Flow Over Patched DEMs",
-    "text": "Flow Over Patched DEMs\nReplacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution\n\n\n\n\n\nFlow Pattern\n\n\n\n\n\n\nFlow Pattern"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Example from Assignment",
-    "text": "Example from Assignment\nWater flow on DSM created by simple patching vs. smooth patching\n\n\n\n\n\nFlow Comparison\n\n\n\n\n\n\nFlow Comparison"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment-1",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment-1",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Example from Assignment",
-    "text": "Example from Assignment\nWater flow on DSM vs. bare ground fused from UAS DSM and lidar DEM\n\n\n\n\n\nFlow on DSM vs. Bare Ground\n\n\n\n\n\n\nFlow on DSM vs. Bare Ground"
-  },
-  {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#what-did-we-learn",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#what-did-we-learn",
-    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "What Did We Learn?",
-    "text": "What Did We Learn?\n\nEvaluation and interpretation of differences between lidar and UAS SfM DEMs\nTechniques for smooth fusion of high-resolution DEMs\nImpact of fusion technique on overland flow modeling"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#task",
-    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#task",
-    "title": "Assignment 1A",
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#task",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#task",
+    "title": "Assignment 1B",
     "section": "Task",
-    "text": "Task\nDuring the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.\nThe presentation should be 7 - 10 minutes long and include the following:\n\nName of the UAS\nPhoto and/or diagram of its components\nType\nPlace (country) and year of manufacture\nTechnical specifications (size, weight, endurance, wingspan, payload….)\nMain applications\nCase study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained\n\nTry to find something relevant to your research interest or just something unique that will be worth sharing."
+    "text": "Task\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#homework",
-    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#homework",
-    "title": "Assignment 1A",
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
+    "title": "Assignment 1B",
     "section": "Homework",
-    "text": "Homework\nUpload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule."
+    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation."
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
-    "title": "A. Introduction to Unmanned Aerial Systems",
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
+    "title": "B. Rules and regulations for UAS operations",
     "section": "Outline",
-    "text": "Outline\n\noverview of UAS technology, system’s classifications\nUAS components and operations\nUAS applications\nin class demonstration of selected systems"
+    "text": "Outline\n\nlevels of regulatory authority\nSmall UAS Rule (Part 107)\nUAS authorizations to fly\ntypes of airspace and restrictions to flight\ncurrent information resources"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
-    "title": "A. Introduction to Unmanned Aerial Systems",
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
+    "title": "B. Rules and regulations for UAS operations",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides: Introduction to UAS\nLecture Recording: Fall 2024 (NCSU Only)\nPast Videos (2017)\n\nPart 1\nPart 2\nPart 3\nPart 4\nPart 5\nPart 6"
+    "text": "Lecture\n\nLecture Slides: Rules and Regulations\nLecture Recording: Fall 2024 (NCSU Only)\nPast Videos (2017)\n\nPart 1\nPart 2\nPart 3\nPart 4\nPart 5\n\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nWhere can I find study materials for the Part 107 aeronautical knowledge test?\nOperating UAS in North Carolina\nUAS Activities at NC State: Rules and Regulations\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA Data Portal\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
-    "title": "A. Introduction to Unmanned Aerial Systems",
-    "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nSystems\n\nFixed wing\n\nsenseFly\neBee Classic\neBee Plus\neBee SQ\n\n\n\nRotary wing\n\nZX5 by Trimble\nInspire 2 by DJI\nMavic 2 by DJI\nPhantom 4 Pro by DJI"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
-    "title": "A. Introduction to Unmanned Aerial Systems",
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
+    "title": "B. Rules and regulations for UAS operations",
     "section": "Assignment",
-    "text": "Assignment\n\nUAS: systems and applications"
+    "text": "Assignment\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
-    "title": "A. Introduction to Unmanned Aerial Systems",
+    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
+    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
+    "title": "B. Rules and regulations for UAS operations",
     "section": "Homework",
-    "text": "Homework\nPrepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. (Assignment 1A)"
+    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation."
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#objectives",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#objectives",
+    "title": "Introduction to UAS",
+    "section": "Objectives",
+    "text": "Objectives\n\n\nUse the proper terminology and understand its meaning\nDescribe the elements of UAS\nClassify different UAS according to their make and characteristics\nDescribe different classes of the UAS\nUnderstand the current state of the UAS development\nDescribe the objectives beyond the use of the UAS"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-an-uav",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-an-uav",
+    "title": "Introduction to UAS",
+    "section": "What is an UAV?",
+    "text": "What is an UAV?\nFor the brief summary read the overview article"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone",
+    "title": "Introduction to UAS",
+    "section": "UAS or UAV? Or maybe a drone?",
+    "text": "UAS or UAV? Or maybe a drone?\n\n\nUAV = Unmanned Aerial Vehicle\nUAS = Unmanned Aerial Systems\nDrone = Dynamic Remotely Operated Navigation Equipment\nRPA = Remotely Piloted Aircraft"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-unmanned-aircraft-system",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-unmanned-aircraft-system",
+    "title": "Introduction to UAS",
+    "section": "UAS: Unmanned Aircraft System",
+    "text": "UAS: Unmanned Aircraft System\n\n\n\nUnmanned = without a person onboard (operated by automatic or remote control)\nAircraft = able to fly\nSystem = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)\n\n\n\nConsists of three elements:\n\nUnmanned Aircraft\nControl Station\nData Link"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
+    "title": "Introduction to UAS",
+    "section": "UAS or UAV? Or maybe a drone?",
+    "text": "UAS or UAV? Or maybe a drone?\n\n\nUnmanned Aerial Vehicle (UAV)\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\n\nMore about terminology in the article: Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-does-a-uas-look-like",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-does-a-uas-look-like",
+    "title": "Introduction to UAS",
+    "section": "What does a UAS look like?",
+    "text": "What does a UAS look like?\nTypes and classification of UAS"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-shapes-and-sizes",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-shapes-and-sizes",
+    "title": "Introduction to UAS",
+    "section": "Different shapes and sizes",
+    "text": "Different shapes and sizes"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-designs",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-designs",
+    "title": "Introduction to UAS",
+    "section": "Different Designs",
+    "text": "Different Designs"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-classifications",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-classifications",
+    "title": "Introduction to UAS",
+    "section": "Different Classifications",
+    "text": "Different Classifications\n\n\n\nPhysical size\nWeight\nEndurance\nAltitude\nWing loading\nEngine type\nRange\nPerformance\nCapabilities\nType\n\n\n\n\n\nMore about classification in the article: Perspectives on Unmanned Aircraft Classification for Civil Airworthiness Standards"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#simplified-classifications",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#simplified-classifications",
+    "title": "Introduction to UAS",
+    "section": "Simplified classifications",
+    "text": "Simplified classifications\n\n\n\n\n\n\nMore (much much more) about classifications in the article\nCondensed basics including classification can be found in Unmanned Aircraft Systems for Civilian Missions"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#how-does-a-uas-work",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#how-does-a-uas-work",
+    "title": "Introduction to UAS",
+    "section": "How does a UAS work?",
+    "text": "How does a UAS work?\nSystem elements"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#generic-unmanned-aircraft-system",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#generic-unmanned-aircraft-system",
+    "title": "Introduction to UAS",
+    "section": "Generic Unmanned Aircraft System",
+    "text": "Generic Unmanned Aircraft System\n\n\n\nAir vehicle\nMission planning element\nCommand and control element\nCommunication link\nLaunch and recovery element (for some of them)\nPayload"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors",
+    "title": "Introduction to UAS",
+    "section": "Sensors",
+    "text": "Sensors"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors-1",
+    "title": "Introduction to UAS",
+    "section": "Sensors",
+    "text": "Sensors"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-sensors-for-mapping",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-sensors-for-mapping",
+    "title": "Introduction to UAS",
+    "section": "UAS sensors for mapping",
+    "text": "UAS sensors for mapping\n\nRGB cameras\nInfrared sensors\nMultispectral and hyperspectral sensors\nLaser scanners\nThermal sensors"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#rgb-natural-color-cameras",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#rgb-natural-color-cameras",
+    "title": "Introduction to UAS",
+    "section": "RGB (natural color) cameras",
+    "text": "RGB (natural color) cameras\n\n\n\nMost common payload for consumer-grade UAS\nPhoto or video mode\nMapping (orthophoto and DSM generation) possible even with non-photogrammetric cameras\nVariety of cameras, lenses, and mounting systems - some suitable for 3D modeling"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#multispectral-and-hyperspectral-cameras",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#multispectral-and-hyperspectral-cameras",
+    "title": "Introduction to UAS",
+    "section": "Multispectral and hyperspectral cameras",
+    "text": "Multispectral and hyperspectral cameras\n\n\n\nMiniaturization is challenging in terms of optics and sensor calibration\nWeight, cost, data quality has improved; spectral bands, resolution need improvements\nCameras with NIR band: agriculture and vegetation mapping (for NDVI)\nThe more bands the more information, but also higher price of the sensor\n\n$$ multispectral - couple thousands\n$$$ hyperspectral - tens of thousands"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#active-sensors---lidar-and-sar",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#active-sensors---lidar-and-sar",
+    "title": "Introduction to UAS",
+    "section": "Active sensors - LiDAR and SAR",
+    "text": "Active sensors - LiDAR and SAR\n\n\n\nActive sensors can reach below-canopy ground surface\nLarge trade-offs between performance and size or cost of LiDAR\nLiDAR now common on UAS thanks to miniaturization\nSAR (Synthetic Aperture Radar) used experimentally, still faces challenges in adaptation to UAS"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#thermal-imaging",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#thermal-imaging",
+    "title": "Introduction to UAS",
+    "section": "Thermal imaging",
+    "text": "Thermal imaging\n\n\n\nUsed in forest fire monitoring, search and rescue missions\nFor mapping purposes coupled with visible band sensors (see example FLIR DUO)"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensor-and-platform-integration",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensor-and-platform-integration",
+    "title": "Introduction to UAS",
+    "section": "Sensor and platform integration",
+    "text": "Sensor and platform integration\nThe optimal combination of carrier (Unmanned Vehicle) and sensing payload needs to be determined based on:\n\n\n\nVolume, size, and weight specifications\nSpecific application requirements\nMounting: integrated by manufacturer or custom solutions\nThe sensors must be adapted to the carrier and vice versa"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#who-uses-uas",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#who-uses-uas",
+    "title": "Introduction to UAS",
+    "section": "Who uses UAS?",
+    "text": "Who uses UAS?\nTypes of UAV Operations"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#types-of-uas-operations",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#types-of-uas-operations",
+    "title": "Introduction to UAS",
+    "section": "Types of UAS Operations",
+    "text": "Types of UAS Operations\n\nPublic Operations\nGovernmental, limited by federal statute to certain government operations within U.S. Airspace;\nCivil Operations\nNon-Governmental, must be conducted in accordance with all Federal Aviation Administration (FAA) regulations;\nModel Aircraft\nHobby or Recreation only."
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#faa-federal-aviation-administration",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#faa-federal-aviation-administration",
+    "title": "Introduction to UAS",
+    "section": "FAA – Federal Aviation Administration",
+    "text": "FAA – Federal Aviation Administration\n\n\nNAS – National Airspace System\nThe common network of U.S. airspace:\n\nair navigation facilities, equipment, and services;\nairports or landing areas;\naeronautical charts, information and services;\nrules, regulations, and procedures;\ntechnical information; and manpower and material."
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#integration-of-uas-into-the-nas",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#integration-of-uas-into-the-nas",
+    "title": "Introduction to UAS",
+    "section": "Integration of UAS into the NAS",
+    "text": "Integration of UAS into the NAS\n\nreview of current policies, regulations, environmental impact, privacy considerations, standards, and procedures;\nidentification of gaps in current UAS technologies and regulations, standards, policies, or procedures;\ndevelopment of new technologies and new or revised regulations, standards, policies, and procedures;\nand the associated development of guidance material, training, and certification of aircraft systems, propulsion systems, and airmen."
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#can-i-use-it",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#can-i-use-it",
+    "title": "Introduction to UAS",
+    "section": "Can I use it?",
+    "text": "Can I use it?\nRegulations, standards, policies, and procedures"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#know-before-you-fly",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#know-before-you-fly",
+    "title": "Introduction to UAS",
+    "section": "Know before you fly",
+    "text": "Know before you fly\n\n“Know Before You Fly” is an educational campaign that provides prospective unmanned aircraft users with the information and guidance they need to fly safely and responsibly.\nDifferent rules apply to recreational and business users and government entities\nNew regulations (effective on August 29, 2016) known as “Part 107”"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-are-uas-used-for",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-are-uas-used-for",
+    "title": "Introduction to UAS",
+    "section": "What are UAS used for?",
+    "text": "What are UAS used for?"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
+    "title": "Introduction to UAS",
+    "section": "Army and Government",
+    "text": "Army and Government\n\n\n\n\nDepartment of Agriculture\nDepartment of Commerce\nDepartment of Defence\nDepartment of Energy\nDepartment of Homeland Security\nDepartment of Interior\nDepartment of Justice\nNASA\nNOAA\nState Universities\nState Law Enforcement\n\n\n\n\n\nMilitary Use"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#civilian-application-fields",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#civilian-application-fields",
+    "title": "Introduction to UAS",
+    "section": "Civilian Application Fields",
+    "text": "Civilian Application Fields"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
+    "title": "Introduction to UAS",
+    "section": "Application Examples (1)",
+    "text": "Application Examples (1)\n\n\n\nAgriculture:\n\nUAS equipped with fertilizer and pesticide dispersing equipment can be used to spray over large fields;\n\nTelecommunications:\n\nAs mobile relay platforms, e.g., in disaster zones for emergency telecommunications"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
+    "title": "Introduction to UAS",
+    "section": "Application Examples (2)",
+    "text": "Application Examples (2)\n\n\n\nNews Broadcasting:\n\nIn providing aerial video feeds for news events;\n\nAir Traffic Control and Ground Traffic Control:\n\nTo monitor traffic and accidents over highways and streets, capture violation of traffic rules;"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
+    "title": "Introduction to UAS",
+    "section": "Application Examples (3)",
+    "text": "Application Examples (3)\n\n\n\nMineral Exploration:\n\nIn aerial survey, to find minerals in hard-to-reach regions;\nIn existing mines, to map extracted material volumes;\n\nCoastal Monitoring:\n\nMapping dynamic shorelines and post-storm assessment"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
+    "title": "Introduction to UAS",
+    "section": "UAS for Remote Sensing (1)",
+    "text": "UAS for Remote Sensing (1)\n\n\n\nAgriculture and Environment:\n\nCrop monitoring, vegetation mapping, forest fire monitoring, animals detection;\n\nIntelligence, Surveillance, and Reconnaissance:\n\nDetection of lost persons in difficult-to-access situations, support fire brigades in real-time crisis management, rapid disaster management;"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
+    "title": "Introduction to UAS",
+    "section": "UAS for Remote Sensing (2)",
+    "text": "UAS for Remote Sensing (2)\n\n\n\nAerial Monitoring in Engineering:\n\nInfrastructure inspections, distributed wind measurement, landslide monitoring;\n\nCultural Heritage:\n\nOrthophotos of archaeological sites, 3D models of man-made structures;"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-3",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-3",
+    "title": "Introduction to UAS",
+    "section": "UAS for Remote Sensing (3)",
+    "text": "UAS for Remote Sensing (3)\n\n\n\nGeneral surveying, mapping, and photogrammetry, cadastral applications:\n\nCadastral surveying, alternative to traditional surveying, high-precision parcel boundary determination;"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#use-your-imagination",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#use-your-imagination",
+    "title": "Introduction to UAS",
+    "section": "Use your imagination!",
+    "text": "Use your imagination!"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#why-should-you-know-how-to-use-uas",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#why-should-you-know-how-to-use-uas",
+    "title": "Introduction to UAS",
+    "section": "Why should you know how to use UAS?",
+    "text": "Why should you know how to use UAS?\nHow to obtain spatial data?"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#barriers",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#barriers",
+    "title": "Introduction to UAS",
+    "section": "Barriers",
+    "text": "Barriers\n\nConstantly changing legislation and regulations\nPolitical and societal acceptance\n\n… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?"
+  },
+  {
+    "objectID": "course/logistics.html",
+    "href": "course/logistics.html",
+    "title": "Logistics",
+    "section": "",
+    "text": "Course website and Moodle\nThe course material can be accessed on the Schedule web page.\nCourse Forum, assignment submissions, project material, and grades are handled in Moodle.\n\n\nLectures\n\nFocus of lectures is on principles, theory, concepts, methods and lectures are mostly software independent.\nLecture slides and video are available at each topic’s web page - you can access them through Schedule or Moodle.\nTopics webpages also include links to addition reading and other resources.\nNCSU Panopto: Fall 2024 Letcure Recordings\n\n\n\nAssignments\n\nMost topics include hands-on assignment - the links to assignments are provided at each topic’s web page - you can access them through the course schedule.\nFollowing the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:\n\nIntroduction: task, problem\nMethods: general description of methods and concepts\nResults: present the results, including maps, graphs, tables with comments\nDiscussion: was there anything unexpected or problematic in the results? Were there any issues related to the methodology or software? Include suggestions for improvements here.\nConclusion: 1-2 sentences on what you have learned\n\nSubmit your report through Moodle in pdf format, use naming convention LastnameFirstname_HW#.pdf.\n\n\n\nSoftware\n\nGRASS GIS 8.4 (you can use these instructions to install it)\nAgisoft Metashape (provided at NCSU) - you can work on the demo version.\nOpenDroneMap\n\n\n\nComputational Resources\n\nNCSU students may use VCL (Virtual Computing Lab)[https://vcl.ncsu.edu/]\n\nMake a reservation using the Agisoft Metashape & GRASS GIS - Ubuntu environment.\n\n\nOther resources\n\nMicMac documentation can be found here, not used in this course.\nPDAL - Point Data Abstraction Library\nLibLAS and LAStools for managing the .las files in GRASS\nNCSU Virtual Computing Lab (VCL)\n\n\n\nData\n\nGeneral resources\n\nNorth Carolina dataset (formatted as GRASS location)\n\n\n\nUAS data\n\nMany of these links are currently broken and in the process of being migrated to a new hosting serivce.\n\n\nBoundaries of all COAs obtained by NGAT in North Carolina (google maps, shp)\nStudy site (Lake Wheeler): COA boundaries (shp, kml), GCP coordinates (txt, kml), also included in the GRASS location (see processed data)\nSurvey data: down-sampled pictures and log from the flight 06/20/2015, sample pictures and log from the flight 09/22/2016, all pictures and log (full flight) from the flight 09/22/2016\nProcessed data:\n\nMid Pines dataset (formatted as GRASS location): LakeWheeler_NCspm with timeseries of DSMs from 2015 flights\nSmaller sample point cloud: 2015_06_sample_points_NCsmp.las\nMid Pines point clouds (limited extent)\nOptional (very large files: 1GB+)\n\nMid Pines point clouds from 2015 flights in las, obj and txt formats\nPoint clouds for the gully area at Midpines (high density, from 2015 flights)\n\n\n\n\n\nLidar data\n\nClassified lidar point cloud in LAS format for Mid_Pines\nSecref and Mid Pines interpolated DEM/DSM (use r.unpack)\n\n\n\nOrthophotography\n\nOrthophotos as GRASS GIS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)"
   },
   {
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#objectives",
@@ -1533,319 +1617,263 @@
     "text": "Resources\n\n\n\nU.S. Air Space map\nKnow Before you Fly website\nRegister your drone\nOperating UAS in North Carolina\nAviation Weather Center"
   },
   {
-    "objectID": "course/logistics.html",
-    "href": "course/logistics.html",
-    "title": "Logistics",
-    "section": "",
-    "text": "Course website and Moodle\nThe course material can be accessed on the Schedule web page.\nCourse Forum, assignment submissions, project material, and grades are handled in Moodle.\n\n\nLectures\n\nFocus of lectures is on principles, theory, concepts, methods and lectures are mostly software independent.\nLecture slides and video are available at each topic’s web page - you can access them through Schedule or Moodle.\nTopics webpages also include links to addition reading and other resources.\nNCSU Panopto: Fall 2024 Letcure Recordings\n\n\n\nAssignments\n\nMost topics include hands-on assignment - the links to assignments are provided at each topic’s web page - you can access them through the course schedule.\nFollowing the Schedule, you will submit a brief (2 pages minimum, including images and tables) paper for each topic with the following paragraphs:\n\nIntroduction: task, problem\nMethods: general description of methods and concepts\nResults: present the results, including maps, graphs, tables with comments\nDiscussion: was there anything unexpected or problematic in the results? Were there any issues related to the methodology or software? Include suggestions for improvements here.\nConclusion: 1-2 sentences on what you have learned\n\nSubmit your report through Moodle in pdf format, use naming convention LastnameFirstname_HW#.pdf.\n\n\n\nSoftware\n\nGRASS GIS 8.4 (you can use these instructions to install it)\nAgisoft Metashape (provided at NCSU) - you can work on the demo version.\nOpenDroneMap\n\n\n\nComputational Resources\n\nNCSU students may use VCL (Virtual Computing Lab)[https://vcl.ncsu.edu/]\n\nMake a reservation using the Agisoft Metashape & GRASS GIS - Ubuntu environment.\n\n\nOther resources\n\nMicMac documentation can be found here, not used in this course.\nPDAL - Point Data Abstraction Library\nLibLAS and LAStools for managing the .las files in GRASS\nNCSU Virtual Computing Lab (VCL)\n\n\n\nData\n\nGeneral resources\n\nNorth Carolina dataset (formatted as GRASS location)\n\n\n\nUAS data\n\nMany of these links are currently broken and in the process of being migrated to a new hosting serivce.\n\n\nBoundaries of all COAs obtained by NGAT in North Carolina (google maps, shp)\nStudy site (Lake Wheeler): COA boundaries (shp, kml), GCP coordinates (txt, kml), also included in the GRASS location (see processed data)\nSurvey data: down-sampled pictures and log from the flight 06/20/2015, sample pictures and log from the flight 09/22/2016, all pictures and log (full flight) from the flight 09/22/2016\nProcessed data:\n\nMid Pines dataset (formatted as GRASS location): LakeWheeler_NCspm with timeseries of DSMs from 2015 flights\nSmaller sample point cloud: 2015_06_sample_points_NCsmp.las\nMid Pines point clouds (limited extent)\nOptional (very large files: 1GB+)\n\nMid Pines point clouds from 2015 flights in las, obj and txt formats\nPoint clouds for the gully area at Midpines (high density, from 2015 flights)\n\n\n\n\n\nLidar data\n\nClassified lidar point cloud in LAS format for Mid_Pines\nSecref and Mid Pines interpolated DEM/DSM (use r.unpack)\n\n\n\nOrthophotography\n\nOrthophotos as GRASS GIS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#objectives",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#objectives",
-    "title": "Introduction to UAS",
-    "section": "Objectives",
-    "text": "Objectives\n\n\nUse the proper terminology and understand its meaning\nDescribe the elements of UAS\nClassify different UAS according to their make and characteristics\nDescribe different classes of the UAS\nUnderstand the current state of the UAS development\nDescribe the objectives beyond the use of the UAS"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-an-uav",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-an-uav",
-    "title": "Introduction to UAS",
-    "section": "What is an UAV?",
-    "text": "What is an UAV?\nFor the brief summary read the overview article"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone",
-    "title": "Introduction to UAS",
-    "section": "UAS or UAV? Or maybe a drone?",
-    "text": "UAS or UAV? Or maybe a drone?\n\n\nUAV = Unmanned Aerial Vehicle\nUAS = Unmanned Aerial Systems\nDrone = Dynamic Remotely Operated Navigation Equipment\nRPA = Remotely Piloted Aircraft"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-unmanned-aircraft-system",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-unmanned-aircraft-system",
-    "title": "Introduction to UAS",
-    "section": "UAS: Unmanned Aircraft System",
-    "text": "UAS: Unmanned Aircraft System\n\n\n\nUnmanned = without a person onboard (operated by automatic or remote control)\nAircraft = able to fly\nSystem = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)\n\n\n\nConsists of three elements:\n\nUnmanned Aircraft\nControl Station\nData Link"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
-    "title": "Introduction to UAS",
-    "section": "UAS or UAV? Or maybe a drone?",
-    "text": "UAS or UAV? Or maybe a drone?\n\n\nUnmanned Aerial Vehicle (UAV)\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\n\nMore about terminology in the article: Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-does-a-uas-look-like",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-does-a-uas-look-like",
-    "title": "Introduction to UAS",
-    "section": "What does a UAS look like?",
-    "text": "What does a UAS look like?\nTypes and classification of UAS"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-shapes-and-sizes",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-shapes-and-sizes",
-    "title": "Introduction to UAS",
-    "section": "Different shapes and sizes",
-    "text": "Different shapes and sizes"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-designs",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-designs",
-    "title": "Introduction to UAS",
-    "section": "Different Designs",
-    "text": "Different Designs"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-classifications",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-classifications",
-    "title": "Introduction to UAS",
-    "section": "Different Classifications",
-    "text": "Different Classifications\n\n\n\nPhysical size\nWeight\nEndurance\nAltitude\nWing loading\nEngine type\nRange\nPerformance\nCapabilities\nType\n\n\n\n\n\nMore about classification in the article: Perspectives on Unmanned Aircraft Classification for Civil Airworthiness Standards"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#simplified-classifications",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#simplified-classifications",
-    "title": "Introduction to UAS",
-    "section": "Simplified classifications",
-    "text": "Simplified classifications\n\n\n\n\n\n\nMore (much much more) about classifications in the article\nCondensed basics including classification can be found in Unmanned Aircraft Systems for Civilian Missions"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#how-does-a-uas-work",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#how-does-a-uas-work",
-    "title": "Introduction to UAS",
-    "section": "How does a UAS work?",
-    "text": "How does a UAS work?\nSystem elements"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#generic-unmanned-aircraft-system",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#generic-unmanned-aircraft-system",
-    "title": "Introduction to UAS",
-    "section": "Generic Unmanned Aircraft System",
-    "text": "Generic Unmanned Aircraft System\n\n\n\nAir vehicle\nMission planning element\nCommand and control element\nCommunication link\nLaunch and recovery element (for some of them)\nPayload"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors",
-    "title": "Introduction to UAS",
-    "section": "Sensors",
-    "text": "Sensors"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors-1",
-    "title": "Introduction to UAS",
-    "section": "Sensors",
-    "text": "Sensors"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-sensors-for-mapping",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-sensors-for-mapping",
-    "title": "Introduction to UAS",
-    "section": "UAS sensors for mapping",
-    "text": "UAS sensors for mapping\n\nRGB cameras\nInfrared sensors\nMultispectral and hyperspectral sensors\nLaser scanners\nThermal sensors"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#rgb-natural-color-cameras",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#rgb-natural-color-cameras",
-    "title": "Introduction to UAS",
-    "section": "RGB (natural color) cameras",
-    "text": "RGB (natural color) cameras\n\n\n\nMost common payload for consumer-grade UAS\nPhoto or video mode\nMapping (orthophoto and DSM generation) possible even with non-photogrammetric cameras\nVariety of cameras, lenses, and mounting systems - some suitable for 3D modeling"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#multispectral-and-hyperspectral-cameras",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#multispectral-and-hyperspectral-cameras",
-    "title": "Introduction to UAS",
-    "section": "Multispectral and hyperspectral cameras",
-    "text": "Multispectral and hyperspectral cameras\n\n\n\nMiniaturization is challenging in terms of optics and sensor calibration\nWeight, cost, data quality has improved; spectral bands, resolution need improvements\nCameras with NIR band: agriculture and vegetation mapping (for NDVI)\nThe more bands the more information, but also higher price of the sensor\n\n$$ multispectral - couple thousands\n$$$ hyperspectral - tens of thousands"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#active-sensors---lidar-and-sar",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#active-sensors---lidar-and-sar",
-    "title": "Introduction to UAS",
-    "section": "Active sensors - LiDAR and SAR",
-    "text": "Active sensors - LiDAR and SAR\n\n\n\nActive sensors can reach below-canopy ground surface\nLarge trade-offs between performance and size or cost of LiDAR\nLiDAR now common on UAS thanks to miniaturization\nSAR (Synthetic Aperture Radar) used experimentally, still faces challenges in adaptation to UAS"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#thermal-imaging",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#thermal-imaging",
-    "title": "Introduction to UAS",
-    "section": "Thermal imaging",
-    "text": "Thermal imaging\n\n\n\nUsed in forest fire monitoring, search and rescue missions\nFor mapping purposes coupled with visible band sensors (see example FLIR DUO)"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensor-and-platform-integration",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensor-and-platform-integration",
-    "title": "Introduction to UAS",
-    "section": "Sensor and platform integration",
-    "text": "Sensor and platform integration\nThe optimal combination of carrier (Unmanned Vehicle) and sensing payload needs to be determined based on:\n\n\n\nVolume, size, and weight specifications\nSpecific application requirements\nMounting: integrated by manufacturer or custom solutions\nThe sensors must be adapted to the carrier and vice versa"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#who-uses-uas",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#who-uses-uas",
-    "title": "Introduction to UAS",
-    "section": "Who uses UAS?",
-    "text": "Who uses UAS?\nTypes of UAV Operations"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#types-of-uas-operations",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#types-of-uas-operations",
-    "title": "Introduction to UAS",
-    "section": "Types of UAS Operations",
-    "text": "Types of UAS Operations\n\nPublic Operations\nGovernmental, limited by federal statute to certain government operations within U.S. Airspace;\nCivil Operations\nNon-Governmental, must be conducted in accordance with all Federal Aviation Administration (FAA) regulations;\nModel Aircraft\nHobby or Recreation only."
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#faa-federal-aviation-administration",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#faa-federal-aviation-administration",
-    "title": "Introduction to UAS",
-    "section": "FAA – Federal Aviation Administration",
-    "text": "FAA – Federal Aviation Administration\n\n\nNAS – National Airspace System\nThe common network of U.S. airspace:\n\nair navigation facilities, equipment, and services;\nairports or landing areas;\naeronautical charts, information and services;\nrules, regulations, and procedures;\ntechnical information; and manpower and material."
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#integration-of-uas-into-the-nas",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#integration-of-uas-into-the-nas",
-    "title": "Introduction to UAS",
-    "section": "Integration of UAS into the NAS",
-    "text": "Integration of UAS into the NAS\n\nreview of current policies, regulations, environmental impact, privacy considerations, standards, and procedures;\nidentification of gaps in current UAS technologies and regulations, standards, policies, or procedures;\ndevelopment of new technologies and new or revised regulations, standards, policies, and procedures;\nand the associated development of guidance material, training, and certification of aircraft systems, propulsion systems, and airmen."
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#can-i-use-it",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#can-i-use-it",
-    "title": "Introduction to UAS",
-    "section": "Can I use it?",
-    "text": "Can I use it?\nRegulations, standards, policies, and procedures"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#know-before-you-fly",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#know-before-you-fly",
-    "title": "Introduction to UAS",
-    "section": "Know before you fly",
-    "text": "Know before you fly\n\n“Know Before You Fly” is an educational campaign that provides prospective unmanned aircraft users with the information and guidance they need to fly safely and responsibly.\nDifferent rules apply to recreational and business users and government entities\nNew regulations (effective on August 29, 2016) known as “Part 107”"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-are-uas-used-for",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-are-uas-used-for",
-    "title": "Introduction to UAS",
-    "section": "What are UAS used for?",
-    "text": "What are UAS used for?"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
-    "title": "Introduction to UAS",
-    "section": "Army and Government",
-    "text": "Army and Government\n\n\n\n\nDepartment of Agriculture\nDepartment of Commerce\nDepartment of Defence\nDepartment of Energy\nDepartment of Homeland Security\nDepartment of Interior\nDepartment of Justice\nNASA\nNOAA\nState Universities\nState Law Enforcement\n\n\n\n\n\nMilitary Use"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#civilian-application-fields",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#civilian-application-fields",
-    "title": "Introduction to UAS",
-    "section": "Civilian Application Fields",
-    "text": "Civilian Application Fields"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
-    "title": "Introduction to UAS",
-    "section": "Application Examples (1)",
-    "text": "Application Examples (1)\n\n\n\nAgriculture:\n\nUAS equipped with fertilizer and pesticide dispersing equipment can be used to spray over large fields;\n\nTelecommunications:\n\nAs mobile relay platforms, e.g., in disaster zones for emergency telecommunications"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
-    "title": "Introduction to UAS",
-    "section": "Application Examples (2)",
-    "text": "Application Examples (2)\n\n\n\nNews Broadcasting:\n\nIn providing aerial video feeds for news events;\n\nAir Traffic Control and Ground Traffic Control:\n\nTo monitor traffic and accidents over highways and streets, capture violation of traffic rules;"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
-    "title": "Introduction to UAS",
-    "section": "Application Examples (3)",
-    "text": "Application Examples (3)\n\n\n\nMineral Exploration:\n\nIn aerial survey, to find minerals in hard-to-reach regions;\nIn existing mines, to map extracted material volumes;\n\nCoastal Monitoring:\n\nMapping dynamic shorelines and post-storm assessment"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
-    "title": "Introduction to UAS",
-    "section": "UAS for Remote Sensing (1)",
-    "text": "UAS for Remote Sensing (1)\n\n\n\nAgriculture and Environment:\n\nCrop monitoring, vegetation mapping, forest fire monitoring, animals detection;\n\nIntelligence, Surveillance, and Reconnaissance:\n\nDetection of lost persons in difficult-to-access situations, support fire brigades in real-time crisis management, rapid disaster management;"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
-    "title": "Introduction to UAS",
-    "section": "UAS for Remote Sensing (2)",
-    "text": "UAS for Remote Sensing (2)\n\n\n\nAerial Monitoring in Engineering:\n\nInfrastructure inspections, distributed wind measurement, landslide monitoring;\n\nCultural Heritage:\n\nOrthophotos of archaeological sites, 3D models of man-made structures;"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-3",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-3",
-    "title": "Introduction to UAS",
-    "section": "UAS for Remote Sensing (3)",
-    "text": "UAS for Remote Sensing (3)\n\n\n\nGeneral surveying, mapping, and photogrammetry, cadastral applications:\n\nCadastral surveying, alternative to traditional surveying, high-precision parcel boundary determination;"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#use-your-imagination",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#use-your-imagination",
-    "title": "Introduction to UAS",
-    "section": "Use your imagination!",
-    "text": "Use your imagination!"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#why-should-you-know-how-to-use-uas",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#why-should-you-know-how-to-use-uas",
-    "title": "Introduction to UAS",
-    "section": "Why should you know how to use UAS?",
-    "text": "Why should you know how to use UAS?\nHow to obtain spatial data?"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#barriers",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#barriers",
-    "title": "Introduction to UAS",
-    "section": "Barriers",
-    "text": "Barriers\n\nConstantly changing legislation and regulations\nPolitical and societal acceptance\n\n… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?"
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
-    "title": "B. Rules and regulations for UAS operations",
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
+    "title": "A. Introduction to Unmanned Aerial Systems",
     "section": "Outline",
-    "text": "Outline\n\nlevels of regulatory authority\nSmall UAS Rule (Part 107)\nUAS authorizations to fly\ntypes of airspace and restrictions to flight\ncurrent information resources"
+    "text": "Outline\n\noverview of UAS technology, system’s classifications\nUAS components and operations\nUAS applications\nin class demonstration of selected systems"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
-    "title": "B. Rules and regulations for UAS operations",
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
+    "title": "A. Introduction to Unmanned Aerial Systems",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides: Rules and Regulations\nLecture Recording: Fall 2024 (NCSU Only)\nPast Videos (2017)\n\nPart 1\nPart 2\nPart 3\nPart 4\nPart 5\n\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nWhere can I find study materials for the Part 107 aeronautical knowledge test?\nOperating UAS in North Carolina\nUAS Activities at NC State: Rules and Regulations\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA Data Portal\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources"
+    "text": "Lecture\n\nLecture Slides: Introduction to UAS\nLecture Recording: Fall 2024 (NCSU Only)\nPast Videos (2017)\n\nPart 1\nPart 2\nPart 3\nPart 4\nPart 5\nPart 6"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
-    "title": "B. Rules and regulations for UAS operations",
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
+    "title": "A. Introduction to Unmanned Aerial Systems",
+    "section": "Supplemental materials",
+    "text": "Supplemental materials\n\nSystems\n\nFixed wing\n\nsenseFly\neBee Classic\neBee Plus\neBee SQ\n\n\n\nRotary wing\n\nZX5 by Trimble\nInspire 2 by DJI\nMavic 2 by DJI\nPhantom 4 Pro by DJI"
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
+    "title": "A. Introduction to Unmanned Aerial Systems",
     "section": "Assignment",
-    "text": "Assignment\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions"
+    "text": "Assignment\n\nUAS: systems and applications"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
-    "title": "B. Rules and regulations for UAS operations",
+    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
+    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
+    "title": "A. Introduction to Unmanned Aerial Systems",
     "section": "Homework",
-    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation."
+    "text": "Homework\nPrepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. (Assignment 1A)"
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#task",
-    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#task",
-    "title": "Assignment 1B",
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#task",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#task",
+    "title": "Assignment 1A",
     "section": "Task",
-    "text": "Task\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions"
+    "text": "Task\nDuring the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.\nThe presentation should be 7 - 10 minutes long and include the following:\n\nName of the UAS\nPhoto and/or diagram of its components\nType\nPlace (country) and year of manufacture\nTechnical specifications (size, weight, endurance, wingspan, payload….)\nMain applications\nCase study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained\n\nTry to find something relevant to your research interest or just something unique that will be worth sharing."
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
-    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
-    "title": "Assignment 1B",
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#homework",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#homework",
+    "title": "Assignment 1A",
     "section": "Homework",
-    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation."
+    "text": "Homework\nUpload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule."
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#outline",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#outline",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Outline",
+    "text": "Outline\n\nMotivation for combining lidar and UAS SfM data\nAnalysis of lidar and UAS SfM DSMs differences\nPatching and smooth fusion of UAS and lidar DSM\nOverland flow simulation on fused DEM"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-lidar",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-lidar",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Point Clouds from Lidar",
+    "text": "Point Clouds from Lidar\n\nMeasured variable is the time of return for each pulse\nGeoreferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform\n(x, y, z) is derived from time, GPS positioning, and INS parameters\n\n\nPoint cloud visualization from Lidar"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Point Clouds from SfM",
+    "text": "Point Clouds from SfM\n\nMeasured variable is reflected energy captured as imagery\nGeoreferencing can be done entirely from GCPs\n(x, y, z) is derived from overlapping images and GCPs\nAlternatively: GPS and INS for the position and orientation of images and camera parameters\n\n\nPoint cloud visualization from SfM"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Comparison of Point Cloud Properties",
+    "text": "Comparison of Point Cloud Properties\n\n\nAirborne Lidar:\n\nPasses through vegetation, multiple returns\nShifts between swaths, corduroy effect\nRegional coverage\nHigh cost\n\n\nUAS SfM:\n\nVery high point density\nLimited capability to map under vegetation\nInfluenced by cast shadows\nLow cost but limited area\n\n\nDifferent distribution of errors and distortions:\nLidar and SfM provide an independent set of measurements."
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#motivation-for-lidar-and-uas-sfm-fusion",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#motivation-for-lidar-and-uas-sfm-fusion",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Motivation for Lidar and UAS SfM Fusion",
+    "text": "Motivation for Lidar and UAS SfM Fusion\n\nLow-cost DEM updates in rapidly changing landscapes (e.g., construction sites)\nReplacing vegetated areas in UAS SfM with bare ground\nWatershed analysis when only part of the watershed was mapped by UAS\nImprove accuracy and level of detail over stable features (buildings, bridges)\nAdd your suggestion"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-techniques",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-techniques",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Fusion Techniques",
+    "text": "Fusion Techniques\n\nMerge the point clouds, decimate or bin at high resolution, interpolate: computationally demanding\nInterpolate DEMs, randomly sample, patch, and reinterpolate: loss of detail, time-consuming\nInterpolate DEMs and patch: sharp edges\nSmooth fusion - requires DEMs at the same resolution"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#workflow",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#workflow",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Workflow",
+    "text": "Workflow\n\nEvaluate the point clouds, select resolution\nInterpolate lidar and UAS DEMs at the same resolution\nEvaluate the differences between the lidar and UAS DEMs\nIf applicable, identify errors and apply corrections\nApply smooth fusion"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-distortions-due-to-processing",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-distortions-due-to-processing",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Identify Distortions Due to Processing",
+    "text": "Identify Distortions Due to Processing\n\nIdentify the spatial pattern of distortions\nDifference maps between Lidar DSM and UAS SfM DSMs\n\n\n\nAgisoft\n\n\n\nDifference Maps\n\n\n\nPix4D\n\n\n\nDifference Maps"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-changes-in-topography",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#identify-changes-in-topography",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Identify Changes in Topography",
+    "text": "Identify Changes in Topography\n\nVegetation growth or removal\nChange in elevation surface due to erosion processes\nUAS SfM - lidar difference maps with custom color\n\n\n\n\n\n\nElevation Difference Maps\n\n\n\n\n\n\nField Image"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-fields",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-fields",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Comparing Profiles: Fields",
+    "text": "Comparing Profiles: Fields\n\nIdentify systematic errors (vertical shifts)\nDifferences due to vegetation growth, erosion/deposition\n\n\nProfiles Comparison Fields"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-building",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-building",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Comparing Profiles: Building",
+    "text": "Comparing Profiles: Building\n\nHigh accuracy, lower level of detail in lidar data\nNegligible systematic error\n\n\nProfiles Comparison Building"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-road",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#comparing-profiles-road",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Comparing Profiles: Road",
+    "text": "Comparing Profiles: Road\n\nRelatively easy to identify stable features\nHigh accuracy - differences between lidar and UAS SfM within 4cm\n\n\nProfiles Comparison Road"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#correct-for-systematic-error-and-distortions",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#correct-for-systematic-error-and-distortions",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Correct for Systematic Error and Distortions",
+    "text": "Correct for Systematic Error and Distortions\n\nSystematic error: if due to GPS shift, use median difference\nSystematic error: if tilt, use regression function\nComplex UAS SfM distortions can be reduced using interpolated GCP differences or differencing with lidar\nImportance of well-distributed, accurate GCPs"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Updating Lidar DEM by Patching",
+    "text": "Updating Lidar DEM by Patching\n\nReplace the grid cells in the updated area by UAS DEM\nAverage over an overlap\nUsually creates an edge - requires post-processing\n\n\n\n\n\n\nPatching Results\n\n\n\n\n\n\nPatching Results\n\n\n\nImages by Brendan Harmon"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Updating Lidar DEM by Patching",
+    "text": "Updating Lidar DEM by Patching\nEdge between lidar and UAS SfM DEMs\n\nEdge Visualization"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#smooth-fusion",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#smooth-fusion",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Smooth Fusion",
+    "text": "Smooth Fusion\n\nDerive overlap raster\nWeighted smoothing based on the distance from the edge\n\n\n\n\n\n\nFusion Results\n\n\n\n\n\n\nFusion Results"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-method",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-method",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Fusion Method",
+    "text": "Fusion Method\nLinear combination of elevation surfaces \\(z_{A}\\) and \\(z_{B}\\) with weights given by overlap width \\(s\\) and distance \\(d\\) to the edge of \\(z_{A}\\):\n\n\n\\[\nz_{AB} = z_{A} w + z_{B}(1 - w),\n\\\\[10pt]\nw = f(s, d) =\n\\begin{cases}\n  \\frac{d}{s} & 0 \\leq d &lt; s \\\\\n  1 & d \\geq s\n\\end{cases}\n\\]\n\n\n\n\nFusion Method Schema"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Influence of Overlap Width \\(s\\)",
+    "text": "Influence of Overlap Width \\(s\\)\n\nOverlap Influence"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Fusion with Spatially Variable \\(s\\)",
+    "text": "Fusion with Spatially Variable \\(s\\)\nBy taking into account spatially variable differences \\(\\Delta z\\) between DEMs \\(A\\) and \\(B\\) along the overlap:\n\n\n\nWe get a more gradual transition where differences are high\nWe preserve subtle features of both DEMs where differences are small\n\n\n\n\n\nSpatially Variable Fusion"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Fusion with Spatially Variable \\(s\\)",
+    "text": "Fusion with Spatially Variable \\(s\\)\nAbsolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.\n\nFusion Visualization"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Lidar and UAS SfM Patching and Fusion",
+    "text": "Lidar and UAS SfM Patching and Fusion\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\nSimply patched vs. fused UAS and lidar DSMs with overlap width \\(s = 20\\ m\\)"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Fusing Vegetated Patch with Bare Ground",
+    "text": "Fusing Vegetated Patch with Bare Ground\n\n\n\n\n\nBare Ground Fused\n\n\n\n\n\n\nBare Ground Fused\n\n\n\nVegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM."
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#spatially-variable-overlap",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#spatially-variable-overlap",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Spatially Variable Overlap",
+    "text": "Spatially Variable Overlap\n\nSpatial OverlapBare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#modeling-overland-flow",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#modeling-overland-flow",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Modeling Overland Flow",
+    "text": "Modeling Overland Flow\nMicrotopography captured at ultra-high resolution by UAS SfM poses special challenges to flow routing:\n\nReal depressions are important features\nComplex pattern of ponding, overflow of barriers is not supported by standard tools\nNoisy surface requires a robust algorithm"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#path-sampling-method",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#path-sampling-method",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Path Sampling Method",
+    "text": "Path Sampling Method\nStochastic method for solving flow continuity equations\n\n\n\n\n\nFlow Animation\n\n\n\n\n\n\nFlow Animation\n\n\n\n\nMitasova et al., 2005"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Flow Over UAS Mapped Field",
+    "text": "Flow Over UAS Mapped Field\nCrop surface creates barrier leading to artificial ponding\n\nFlow Over Mapped Field"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-patched-dems",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#flow-over-patched-dems",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Flow Over Patched DEMs",
+    "text": "Flow Over Patched DEMs\nReplacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution\n\n\n\n\n\nFlow Pattern\n\n\n\n\n\n\nFlow Pattern"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Example from Assignment",
+    "text": "Example from Assignment\nWater flow on DSM created by simple patching vs. smooth patching\n\n\n\n\n\nFlow Comparison\n\n\n\n\n\n\nFlow Comparison"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment-1",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#example-from-assignment-1",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Example from Assignment",
+    "text": "Example from Assignment\nWater flow on DSM vs. bare ground fused from UAS DSM and lidar DEM\n\n\n\n\n\nFlow on DSM vs. Bare Ground\n\n\n\n\n\n\nFlow on DSM vs. Bare Ground"
+  },
+  {
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#what-did-we-learn",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html#what-did-we-learn",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "What Did We Learn?",
+    "text": "What Did We Learn?\n\nEvaluation and interpretation of differences between lidar and UAS SfM DEMs\nTechniques for smooth fusion of high-resolution DEMs\nImpact of fusion technique on overland flow modeling"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#outline",
@@ -1859,7 +1887,7 @@
     "href": "course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#lecture",
     "title": "A. UAS and lidar data: comparison, fusion and analysis",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides\nLecture Recording: Fall 2024 (NCSU Only)"
+    "text": "Lecture\n\nLecture Slides\nLecture Recording: Fall 2024 (NCSU Only)\nIn-Class Recording: NA"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#supplemental-materials",
@@ -1873,7 +1901,7 @@
     "href": "course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#assignment-homework",
     "title": "A. UAS and lidar data: comparison, fusion and analysis",
     "section": "Assignment & Homework",
-    "text": "Assignment & Homework\nAssignment 5A -Fusion of UAS and lidar data - Optional, advanced topic: Python Scripting for UAS/lidar analysis in GRASS GIS"
+    "text": "Assignment & Homework\nAssignment 5A: Fusion of UAS and lidar data\n\nOptional, advanced topic: Python Scripting for UAS/lidar analysis in GRASS GIS"
   },
   {
     "objectID": "course/topics/topic_2_sfm/lectures/lecture_2a.html#ground-control-points-1",
