@@ -2,25 +2,23 @@
 topic: "Topic 5: Advanced Analytics"
 title: "B. Analysis of multitemporal UAS data and its applications"
 subtitle: "Topic 5: Advanced Analytics"
-date: 9/23/2024
-assignment-due-date: 10/23/2024
+date: 10/30/2024
+assignment-due-date: 11/06/2024
 ---
 
-# Analysis of multitemporal UAS data and its applications
-
-## mapping plant growth, soil erosion and other phenomena, temporal data framework, python
-
 ## Outline
+
 - monitoring landscape changes using UAS
 - introduction to temporal data framework
 - basic analysis of 3D time series
 - applications: monitoring plant growth, coastal erosion, soil erosion, flooding
 
 ## Lecture
-- [Lecture slides](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/multitemp_uas.html#/)
 
+- [Lecture slides](lectures/lecture_5b.qmd)
 
 ## Supplemental materials
+
 - [Spatio-temporal data handling and visualization in GRASS GIS](https://ncsu-geoforall-lab.github.io/grass-temporal-workshop/) (FOSS4G 2014 workshop)
 - [GIS-based Analysis of Coastal Lidar Time-Series](https://link.springer.com/book/10.1007/978-1-4939-1835-5), Springer brief available for free through NCSU libraries
 
@@ -30,4 +28,7 @@ assignment-due-date: 10/23/2024
 
 
 ## Assignment & Homework
-- [Prepare report on mapping plant growth, viewsheds and water flow patterns using ultrahigh resolution DEMs.](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/uas_timeseries.html)
+
+Prepare report on mapping plant growth, viewsheds and water flow patterns using ultrahigh resolution DEMs.
+
+[Assignment](assignments/assignment_5b.qmd)
