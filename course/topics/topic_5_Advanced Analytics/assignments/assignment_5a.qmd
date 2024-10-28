@@ -99,12 +99,11 @@ v.in.ascii input=road.txt output=profile_road separator=space columns="x double,
 v.univar map=profile_road column=diff
 ```
 
-For more visual comparison use GUI Profile Tool.
-In Map Display toolbar, find **Analyze map - Profile surface map**
-and select raster maps `mid_pines_lidar2013_dsm`, `2015_06_20_DSM_agi_11GCP`, and `2015_06_20_pix4d_11GCP_dsm`.
-In Profile toolbar, use the second tool **Draw transect in map display window`
-and then click in Map Display on the road where you want to start the profile and then
-where you want to end it. Use **Plot options** to show legend and to set colors of the DSM profiles (look for the yellow wheel icon).
+For more visual comparison use **GUI Profile Tool**.
+
+1. In Map Display toolbar, find **Analyze map - Profile surface map** and select raster maps `mid_pines_lidar2013_dsm`, `2015_06_20_DSM_agi_11GCP`, and `2015_06_20_pix4d_11GCP_dsm`.
+2. In Profile toolbar, use the second tool **Draw transect** in map display window and then click in Map Display on the road where you want to start the profile and then where you want to end it. 
+3. Use **Plot options** to show legend and to set colors of the DSM profiles (look for the yellow wheel icon).
 
 ::: {.callout-warning}
 Why are the distortions / errors low along the road but high in the fields?
