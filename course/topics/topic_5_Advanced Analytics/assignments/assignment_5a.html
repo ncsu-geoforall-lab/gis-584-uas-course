@@ -277,7 +277,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.profile</span> <span class="at">-g</span> input=diff_lidardsm_agi_june output=road.txt coordinates=637208,219491,637059,219734</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.in.ascii</span> input=road.txt output=profile_road separator=space columns=<span class="st">"x double,y double,profile double,diff double"</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">v.univar</span> map=profile_road column=diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For more visual comparison use GUI Profile Tool. In Map Display toolbar, find <strong>Analyze map - Profile surface map</strong> and select raster maps <code>mid_pines_lidar2013_dsm</code>, <code>2015_06_20_DSM_agi_11GCP</code>, and <code>2015_06_20_pix4d_11GCP_dsm</code>. In Profile toolbar, use the second tool <strong>Draw transect in map display window` and then click in Map Display on the road where you want to start the profile and then where you want to end it. Use </strong>Plot options** to show legend and to set colors of the DSM profiles (look for the yellow wheel icon).</p>
+<p>For more visual comparison use <strong>GUI Profile Tool</strong>.</p>
+<ol type="1">
+<li>In Map Display toolbar, find <strong>Analyze map - Profile surface map</strong> and select raster maps <code>mid_pines_lidar2013_dsm</code>, <code>2015_06_20_DSM_agi_11GCP</code>, and <code>2015_06_20_pix4d_11GCP_dsm</code>.</li>
+<li>In Profile toolbar, use the second tool <strong>Draw transect</strong> in map display window and then click in Map Display on the road where you want to start the profile and then where you want to end it.</li>
+<li>Use <strong>Plot options</strong> to show legend and to set colors of the DSM profiles (look for the yellow wheel icon).</li>
+</ol>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
