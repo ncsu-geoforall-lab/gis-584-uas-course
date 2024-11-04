@@ -1894,21 +1894,21 @@
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#uas-for-monitoring-changes",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "UAS for monitoring changes",
-    "text": "UAS for monitoring changes\nLow cost and rapid deployment: excellent for monitoring changes at local scale (fields, small watersheds)\n\ncrop monitoring: growth, disease, stress\nerosion processes: coastal, stream bank, rills and gullies\nnatural disasters: flooding, landslides, fire\nmining, construction sites"
+    "text": "UAS for monitoring changes\nLow cost and rapid deployment: excellent for monitoring changes at local scale (fields, small watersheds)\n\ncrop monitoring: growth, disease, stress\nerosion processes: coastal, stream bank, rills and gullies\nnatural disasters: flooding, landslides, fire\nIndustrial: mining, construction sites"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#monitoring-design",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#monitoring-design",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "Monitoring design",
-    "text": "Monitoring design\nAssess:\n\nmetrics to quantify changes: relative height, volume, feature migration\nspatial resolution needed to capture the changes\ntemporal resolution: regular intervals, events\naccessibility: flying over people, line of sight, suitable GCPs\ngeoreferencing, rectification: GCPs distribution and survey"
+    "text": "Monitoring design\n\nMetrics to quantify changes: relative height, volume, feature migration\nSpatial resolution: needed to capture the changes\nTemporal resolution: regular intervals, events\nAccessibility: flying over people, line of sight, suitable GCPs\nGeoreferencing, rectification: GCPs distribution and survey"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#processing-time-series",
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#processing-time-series",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "Processing time series",
-    "text": "Processing time series\n\nanalyze and interpolate point clouds: DSMs with aligned, common resolution grids\nraster DSMs are more suitable for time series than TIN\nuse GCPs and permanent features to evaluate accuracy, correct errors and distortions\nassign time stamps and register raster DSMs within GIS-based temporal data framework"
+    "text": "Processing time series\n\nAnalyze and interpolate point clouds: DSMs with aligned, common resolution grids\nData: raster DSMs are more suitable for time series than TIN\nAccuracy: use GCPs and permanent features to evaluate accuracy, correct errors and distortions\nTemporal data: assign time stamps and register raster DSMs within GIS-based temporal data framework"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#temporal-data-framework",
@@ -1918,11 +1918,11 @@
     "text": "Temporal data framework\n\nsupports efficient processing, management and analysis of space-time data sets\nspace-time dataset is a set of maps (raster, vector) registered in a temporal database\nspace-time dataset may represent a dynamic process\nindividual maps represent the states of the dynamic system at a given time\n\nGebbert, S. and Pebesma, E. (2014). A temporal GIS for field based environmental modeling. Environmental Modelling and Software, 53, 1–12."
   },
   {
-    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#time-stamp-type",
-    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#time-stamp-type",
+    "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#timestamp-type",
+    "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#timestamp-type",
     "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Time stamp type",
-    "text": "Time stamp type\n\ntime stamp: assigns time to an individual map in space-time data set\ntime instant - snapshot at given time: 2013-10-15 13:00:00 (absolute time)\ntime interval - defined by start and end time: day, month, year (relative time)\na single UAS survey represents a snapshot (state) which can be agreggated into intervals"
+    "section": "Timestamp type",
+    "text": "Timestamp type\n\nTimestamp: assigns time to an individual map in space-time data set\ntime instant: snapshot at given time: 2013-10-15 13:00:00 (absolute time)\ntime interval: defined by start and end time: day, month, year (relative time)\nTemporal Aggregation: a single UAS survey represents a snapshot (state) which can be agreggated by time intervals"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#registered-time-series",
@@ -1964,7 +1964,7 @@
     "href": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#basic-time-series-analysis-core-envelope",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "Basic time series analysis: core, envelope",
-    "text": "Basic time series analysis: core, envelope\n\nCore surface: min. elevation measured for each cell\nEnvelope: max. elevation measured for each cell\n\nExample: cutting plane with lidar, core and envelope"
+    "text": "Basic time series analysis: core, envelope\n\nCore surface: minimum elevation measured for each cell\nEnvelope: maximum elevation measured for each cell\n\nExample: cutting plane with lidar, core and envelope"
   },
   {
     "objectID": "course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html#detecting-surveys-with-large-distortions",

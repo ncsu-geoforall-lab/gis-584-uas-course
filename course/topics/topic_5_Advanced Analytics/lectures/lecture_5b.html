@@ -354,30 +354,29 @@ Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White
 <h2>UAS for monitoring changes</h2>
 <p>Low cost and rapid deployment: excellent for monitoring changes at local scale (fields, small watersheds)</p>
 <ul>
-<li>crop monitoring: growth, disease, stress</li>
-<li>erosion processes: coastal, stream bank, rills and gullies</li>
-<li>natural disasters: flooding, landslides, fire</li>
-<li>mining, construction sites</li>
+<li><strong>crop monitoring:</strong> growth, disease, stress</li>
+<li><strong>erosion processes:</strong> coastal, stream bank, rills and gullies</li>
+<li><strong>natural disasters:</strong> flooding, landslides, fire</li>
+<li><strong>Industrial:</strong> mining, construction sites</li>
 </ul>
 </section>
-<section id="monitoring-design" class="slide level2">
+<section id="monitoring-design" class="slide level2 smaller">
 <h2>Monitoring design</h2>
-<h4 id="assess">Assess:</h4>
 <ul>
-<li>metrics to quantify changes: relative height, volume, feature migration</li>
-<li>spatial resolution needed to capture the changes</li>
-<li>temporal resolution: regular intervals, events</li>
-<li>accessibility: flying over people, line of sight, suitable GCPs</li>
-<li>georeferencing, rectification: GCPs distribution and survey</li>
+<li><strong>Metrics to quantify changes:</strong> relative height, volume, feature migration</li>
+<li><strong>Spatial resolution:</strong> needed to capture the changes</li>
+<li><strong>Temporal resolution:</strong> regular intervals, events</li>
+<li><strong>Accessibility:</strong> flying over people, line of sight, suitable GCPs</li>
+<li><strong>Georeferencing, rectification:</strong> GCPs distribution and survey</li>
 </ul>
 </section>
-<section id="processing-time-series" class="slide level2">
+<section id="processing-time-series" class="slide level2 smaller">
 <h2>Processing time series</h2>
 <ul>
-<li>analyze and interpolate point clouds: DSMs with aligned, common resolution grids</li>
-<li>raster DSMs are more suitable for time series than TIN</li>
-<li>use GCPs and permanent features to evaluate accuracy, correct errors and distortions</li>
-<li>assign time stamps and register raster DSMs within GIS-based temporal data framework</li>
+<li><strong>Analyze and interpolate point clouds:</strong> DSMs with aligned, common resolution grids</li>
+<li><strong>Data:</strong> raster DSMs are more suitable for time series than TIN</li>
+<li><strong>Accuracy:</strong> use GCPs and permanent features to evaluate accuracy, correct errors and distortions</li>
+<li><strong>Temporal data:</strong> assign time stamps and register raster DSMs within GIS-based temporal data framework</li>
 </ul>
 </section>
 <section id="temporal-data-framework" class="slide level2 smaller">
@@ -390,13 +389,13 @@ Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White
 </ul>
 <p><em>Gebbert, S. and Pebesma, E. (2014). <a href="https://www.sciencedirect.com/science/article/pii/S136481521300282X">A temporal GIS for field based environmental modeling.</a> Environmental Modelling and Software, 53, 1–12.</em></p>
 </section>
-<section id="time-stamp-type" class="slide level2 smaller">
-<h2>Time stamp type</h2>
+<section id="timestamp-type" class="slide level2 smaller">
+<h2>Timestamp type</h2>
 <ul>
-<li>time stamp: assigns time to an individual map in space-time data set</li>
-<li>time instant - snapshot at given time: 2013-10-15 13:00:00 (absolute time)</li>
-<li>time interval - defined by start and end time: day, month, year (relative time)</li>
-<li>a single UAS survey represents a snapshot (state) which can be agreggated into intervals</li>
+<li><strong>Timestamp:</strong> assigns time to an individual map in space-time data set</li>
+<li><strong>time instant:</strong> snapshot at given time: 2013-10-15 13:00:00 (absolute time)</li>
+<li><strong>time interval:</strong> defined by start and end time: day, month, year (relative time)</li>
+<li><strong>Temporal Aggregation:</strong> a single UAS survey represents a snapshot (state) which can be agreggated by time intervals</li>
 </ul>
 
 <img data-src="../images/st_dataset.webp" class="r-stretch"></section>
@@ -415,8 +414,8 @@ Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White
 <section id="temporal-count-and-intersection" class="slide level2 smaller">
 <h2>Temporal count and intersection</h2>
 <ul>
-<li>Count: number of maps (temporal snapshots) where the given cell has non-null value (overlap)</li>
-<li>Intersection: grid cells with non-null values from each map in time series</li>
+<li><strong>Count:</strong> number of maps (temporal snapshots) where the given cell has non-null value (overlap)</li>
+<li><strong>Intersection:</strong> grid cells with non-null values from each map in time series</li>
 </ul>
 <p><img data-src="../images/series_overlap_count.webp" style="width:45.0%"> <img data-src="../images/intersection.webp" style="width:45.0%"></p>
 </section>
@@ -442,8 +441,8 @@ Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White
 <section id="basic-time-series-analysis-core-envelope" class="slide level2">
 <h2>Basic time series analysis: core, envelope</h2>
 <ul>
-<li>Core surface: min. elevation measured for each cell</li>
-<li>Envelope: max. elevation measured for each cell</li>
+<li><strong>Core surface:</strong> minimum elevation measured for each cell</li>
+<li><strong>Envelope:</strong> maximum elevation measured for each cell</li>
 </ul>
 <p>Example: cutting plane with lidar, core and envelope</p>
 <p><img data-src="../images/cutplane1.webp" style="width:47.0%"> <img data-src="../images/cutplane2.webp" style="width:47.0%"></p>
