@@ -183,7 +183,7 @@ Find the minimum elevation (core) - how close it is to lidar bare ground?
 :::
 
 ```bash
-t.rast.series input=uas_dsm@PERMANENT method=minimum output=minimum
+t.rast.series input=uas_dsm method=minimum output=minimum
 r.mapcalc "diff_lidar_uas = mid_pines_lidar2013_dem - minimum"
 r.colors map=diff_lidar_uas color=differences
 d.rast diff_lidar_uas
@@ -239,7 +239,7 @@ We assume crop is anything higher than 0.3 and lower than 2 m (to exclude the bu
 
 ```bash
 r.unpack -o fields.pack
-t.rast.mapcalc inputs=uas_dsm@assignment5b expression="if (fields, if(uas_dsm - mid_pines_lidar2013_dem > 0.3 &amp;&amp; uas_dsm - mid_pines_lidar2013_dem < 2, uas_dsm - mid_pines_lidar2013_dem, null()))" output=veg_uas_lidar basename=veg_uas_lidar
+t.rast.mapcalc inputs=uas_dsm@assignment5b expression="if (fields, if(uas_dsm - mid_pines_lidar2013_dem > 0.3 && uas_dsm - mid_pines_lidar2013_dem < 2, uas_dsm - mid_pines_lidar2013_dem, null()))" output=veg_uas_lidar basename=veg_uas_lidar
 t.rast.univar input=veg_uas_lidar where="start_time < '2015-07-01' or start_time > '2015-09-01'"
 d.rast veg_uas_lidar_2
 r.report -n map=veg_uas_lidar_2 units=me nsteps=1
