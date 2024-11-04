@@ -344,7 +344,7 @@ Note
 <p>Find the minimum elevation (core) - how close it is to lidar bare ground?</p>
 </div>
 </div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm@PERMANENT method=minimum output=minimum</span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=minimum output=minimum</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"diff_lidar_uas = mid_pines_lidar2013_dem - minimum"</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=diff_lidar_uas color=differences</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> diff_lidar_uas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -371,7 +371,7 @@ Note
 <p>You can use get the <a href="./resources/fields.pack">packed raster representation of fields</a> (link is at the top).</p>
 <p>We assume crop is anything higher than 0.3 and lower than 2 m (to exclude the building for example):</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> fields.pack</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.mapcalc</span> inputs=uas_dsm@assignment5b expression=<span class="st">"if (fields, if(uas_dsm - mid_pines_lidar2013_dem &gt; 0.3 &amp;amp;&amp;amp; uas_dsm - mid_pines_lidar2013_dem &lt; 2, uas_dsm - mid_pines_lidar2013_dem, null()))"</span> output=veg_uas_lidar basename=veg_uas_lidar</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.mapcalc</span> inputs=uas_dsm@assignment5b expression=<span class="st">"if (fields, if(uas_dsm - mid_pines_lidar2013_dem &gt; 0.3 &amp;&amp; uas_dsm - mid_pines_lidar2013_dem &lt; 2, uas_dsm - mid_pines_lidar2013_dem, null()))"</span> output=veg_uas_lidar basename=veg_uas_lidar</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.univar</span> input=veg_uas_lidar where=<span class="st">"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'"</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> veg_uas_lidar_2</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=veg_uas_lidar_2 units=me nsteps=1</span>
