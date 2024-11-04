@@ -23,32 +23,27 @@ format:
 
 Low cost and rapid deployment: excellent for monitoring changes at local scale (fields, small watersheds)
 
-- crop monitoring: growth, disease, stress
-- erosion processes: coastal, stream bank, rills and gullies
-- natural disasters: flooding, landslides, fire
-- mining, construction sites
+- **crop monitoring:** growth, disease, stress
+- **erosion processes:** coastal, stream bank, rills and gullies
+- **natural disasters:** flooding, landslides, fire
+- **Industrial:** mining, construction sites
 
 
+## Monitoring design {.smaller}
+
+- **Metrics to quantify changes:** relative height, volume, feature migration
+- **Spatial resolution:** needed to capture the changes
+- **Temporal resolution:** regular intervals, events
+- **Accessibility:** flying over people, line of sight, suitable GCPs
+- **Georeferencing, rectification:** GCPs distribution and survey
 
 
-## Monitoring design
+## Processing time series {.smaller}
 
-#### Assess:
-
-- metrics to quantify changes: relative height, volume, feature migration
-- spatial resolution needed to capture the changes
-- temporal resolution: regular intervals, events
-- accessibility: flying over people, line of sight, suitable GCPs
-- georeferencing, rectification: GCPs distribution and survey
-
-
-## Processing time series
-
-- analyze and interpolate point clouds: DSMs with aligned, common resolution grids
-- raster DSMs are more suitable for time series than TIN
-- use GCPs and permanent features to evaluate accuracy, correct errors and distortions
-- assign time stamps and register raster DSMs within GIS-based temporal data framework
-
+- **Analyze and interpolate point clouds:** DSMs with aligned, common resolution grids
+- **Data:** raster DSMs are more suitable for time series than TIN
+- **Accuracy:** use GCPs and permanent features to evaluate accuracy, correct errors and distortions
+- **Temporal data:** assign time stamps and register raster DSMs within GIS-based temporal data framework
 
 ## Temporal data framework {.smaller}
 
@@ -60,12 +55,12 @@ Low cost and rapid deployment: excellent for monitoring changes at local scale (
 *Gebbert, S. and Pebesma, E. (2014). [A temporal GIS for field based environmental modeling.](https://www.sciencedirect.com/science/article/pii/S136481521300282X) Environmental Modelling and Software, 53, 1–12.*
 
 
-## Time stamp type {.smaller}
+## Timestamp type {.smaller}
 
-- time stamp: assigns time to an individual map in space-time data set
-- time instant - snapshot at given time: 2013-10-15 13:00:00 (absolute time)
-- time interval - defined by start and end time: day, month, year (relative time)
-- a single UAS survey represents a snapshot (state) which can be agreggated into intervals
+- **Timestamp:** assigns time to an individual map in space-time data set
+- **time instant:** snapshot at given time: 2013-10-15 13:00:00 (absolute time)
+- **time interval:** defined by start and end time: day, month, year (relative time)
+- **Temporal Aggregation:** a single UAS survey represents a snapshot (state) which can be agreggated by time intervals
 
 ![](../images/st_dataset.webp)
 
@@ -86,8 +81,8 @@ Timeline tool: time and spatial extent of registered maps
 
 ## Temporal count and intersection {.smaller}
 
-- Count: number of maps (temporal snapshots) where the given cell has non-null value (overlap)
-- Intersection: grid cells with non-null values from each map in time series
+- **Count:** number of maps (temporal snapshots) where the given cell has non-null value (overlap)
+- **Intersection:** grid cells with non-null values from each map in time series
 
 ![](../images/series_overlap_count.webp){width=45%}
 ![](../images/intersection.webp){width=45%}
@@ -113,8 +108,8 @@ Per cell statistics computed for each cell over the time series:
 
 ## Basic time series analysis: core, envelope
 
-- Core surface: min. elevation measured for each cell
-- Envelope: max. elevation measured for each cell
+- **Core surface:** minimum elevation measured for each cell
+- **Envelope:** maximum elevation measured for each cell
 
 Example: cutting plane with lidar, core and envelope
 
