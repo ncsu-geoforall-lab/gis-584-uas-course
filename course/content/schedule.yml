@@ -136,7 +136,7 @@ schedule:
       - "Mon: [Lecture 5A](topics/topic_5_Advanced Analytics/lectures/lecture_5a.qmd)"
       - "Wed: Dr. William Reckling ([LinkedIn](https://www.linkedin.com/in/william-reckling/))"
       - "Project: Workflow development and testing"
-    due_date: "Nov. 6"
+    due_date: "Nov. 13"
     no_class: false
   
   - date_range: "Oct. 28 - Nov. 1"
@@ -144,26 +144,28 @@ schedule:
     subtopic: "[5B. Analysis of Multitemporal UAS Data and its Applications](topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.qmd)"
     details:
       - "Mon: [Assignment 5A: Multitemporal UAS data analysis](topics/topic_5_Advanced Analytics/assignments/assignment_5a.qmd)"
-      - "Wed: [Lecture 5B](topics/topic_5_Advanced Analytics/lectures/lecture_5b.qmd)"
-    due_date: "Nov. 6"
+      # - "Wed: [Lecture 5B](topics/topic_5_Advanced Analytics/lectures/lecture_5b.qmd)"
+    due_date: "Nov. 13"
+    no_class: false
+
+  - date_range: "Nov. 4-8"
+    topic: "Topic 5: Advanced Analytics"
+    subtopic: "[5B. Analysis of Multitemporal UAS Data and its Applications](topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.qmd)"
+    details:
+      - "Mon: [Lecture 5B](topics/topic_5_Advanced Analytics/lectures/lecture_5b.qmd)"
+      - "Wed: [Assignment 5B: Multitemporal UAS data analysis](topics/topic_5_Advanced Analytics/assignments/assignment_5b.qmd)"
+      
+    due_date: "Nov. 13"
     no_class: false
   
-  - date_range: "Nov. 4-8"
+  - date_range: "Nov. 11-15"
     topic: "Topic 6: Imagery processing and SfM with Open Source Solutions"
     subtopic: "6A. OpenDroneMap and WebODM"
     details:
       - "Mon: Lecture"
       - "Wed: Assignment: Processing with ODM or WebODM, high performance computing"
       - "Project: Perform analysis and/or modeling"
-    due_date: "Nov. 13"
-    no_class: false
-  
-  - date_range: "Nov. 11-15"
-    topic: "Topic 7: 3D Modeling and Geovisualization"
-    details:
-      - "Mon: Lecture"
-      - "Wed: Assignment: TBD"
-    due_date: "Dec. 4"
+    due_date: "Nov. 20"
     no_class: false
   
   - date_range: "Nov. 18-22"
@@ -171,10 +173,18 @@ schedule:
     details:
       - "Mon: Guest Speaker: Mitchell DuRant - Cypress Creek Renewables ([LinkedIn](https://www.linkedin.com/in/mitchell-durant/))"
       - "Wed: Project help session"
-      - "Project: Visualize results, work on presentation"
-      - "[Project presentation and paper requirements, final project titles](projects.html)"
-    due_date: ""
+    due_date: "Dec. 4"
     no_class: false
+  
+  # - date_range: "Nov. 18-22"
+  #   topic: "Guest Speaker & Project help sessions"
+  #   details:
+  #     - "Mon: Guest Speaker: Mitchell DuRant - Cypress Creek Renewables ([LinkedIn](https://www.linkedin.com/in/mitchell-durant/))"
+  #     - "Wed: Project help session"
+  #     - "Project: Visualize results, work on presentation"
+  #     - "[Project presentation and paper requirements, final project titles](projects.html)"
+  #   due_date: ""
+  #   no_class: false
   
   - date_range: "Nov. 25-29"
     topic: "Thanksgiving break: No Class"
