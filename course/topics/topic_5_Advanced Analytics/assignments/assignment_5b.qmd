@@ -249,8 +249,8 @@ r.univar map=veg_uas_lidar_2
 Use Python shell (*tab in Layer Manager*) to compute the biomass volume for June (*paste each line into Python shell and press Enter*):
 
 ```bash
-sum = grass.parse_command('r.univar', map='veg_uas_lidar_2', flags='g')['sum']
-float(sum) * grass.region()['nsres'] * grass.region()['ewres']
+sum = gs.parse_command('r.univar', map='veg_uas_lidar_2', flags='g')['sum']
+float(sum) * gs.region()['nsres'] * gs.region()['ewres']
 ```
 
 Remove the mask before we proceed in further analysis:
