@@ -158,16 +158,26 @@ schedule:
     due_date: "Nov. 13"
     no_class: false
   
+  # - date_range: "Nov. 11-15"
+  #   topic: "Topic 6: Imagery processing and SfM with Open Source Solutions"
+  #   subtopic: "6A. OpenDroneMap and WebODM"
+  #   details:
+  #     - "Mon: Lecture"
+  #     - "Wed: Assignment: Processing with ODM or WebODM, high performance computing"
+  #     - "Project: Perform analysis and/or modeling"
+  #   due_date: "Nov. 20"
+  #   no_class: false
+  
   - date_range: "Nov. 11-15"
-    topic: "Topic 6: Imagery processing and SfM with Open Source Solutions"
-    subtopic: "6A. OpenDroneMap and WebODM"
+    topic: "Topic 6: UAS-based Change Detection"
+    subtopic: "6A. Urban Change Detection with UAS Data"
     details:
-      - "Mon: Lecture"
-      - "Wed: Assignment: Processing with ODM or WebODM, high performance computing"
+      - "Mon: [Lecture 5B](topics/topic_6_change_detection/lectures/lecture_6a.qmd)"
+      - "Wed: Assignment: Urban Change Detection with UAS Data"
       - "Project: Perform analysis and/or modeling"
     due_date: "Nov. 20"
     no_class: false
-  
+
   - date_range: "Nov. 18-22"
     topic: "Guest Speaker & Project help sessions"
     details:

@@ -1,0 +1,247 @@
+---
+title: "UAS-based Change Detection"
+subtitle: "[Center for Geospatial Analytics](https://geospatial.ncsu.edu/) [at North Carolina State University](http://www.ncsu.edu/)"
+author: "Corey White"
+format:
+    revealjs:
+        theme: [simple, ../../../../theme.scss]
+---
+
+## Outline
+
+- Selection of spatial-temporal resolution
+- Determination of processing time step
+- Sensor and environmental considerations
+- Selection of classification schema
+- Feature engineering
+- Data Sampling
+- Selection of classification and change detection methodology
+
+## What is Change Detection?
+
+![](../images/animated_sat.gif)
+
+## Why does it Matter? {.smaller}
+
+![](../images/remotesensing-14-01718-ag.png)
+
+::: {.small}
+- White CT, Reckling W, Petrasova A, Meentemeyer RK, Mitasova H. Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion. Remote Sensing. 2022; 14(7):1718. https://doi.org/10.3390/rs14071718
+:::
+
+## Process of Interest
+
+- **What process are you interested in montioring?**
+    - Is it naturally occuring?
+    - Is it man made?
+    - Is it fast changing?
+    - Is it slow changing?
+
+## Spatial Resolution - Continous Data {.smaller}
+
+![Continous Data](../images/dem_spatial_scale.png)
+
+:::{.small}
+- Corey White, & Petras, V. (2024). tomorrownow/intro-to-geoprocessing-workshop: Zendo Release (Version 0.1.1) [Computer software]. https://doi.org/10.5281/zenodo.10764926 
+:::
+
+## Spatial Resolution - Discrete Data {.smaller}
+
+![Discrete](../images/lc_spatial_scale.png)
+
+::: {.small}
+- Corey White, & Petras, V. (2024). tomorrownow/intro-to-geoprocessing-workshop: Zendo Release (Version 0.1.1) [Computer software]. https://doi.org/10.5281/zenodo.10764926 
+:::
+
+## Temporal Resolution {.smaller}
+
+:::{.columns}
+:::{.column width=40%}
+
+#### Minutes
+![Continous: Depth (m)](../images/clay-center_depth_1_1_s_prob.webp)
+:::
+:::{.column width=60%}
+#### Years
+![Discrete: Land Cover Change](../images/BearCreek1.gif)
+:::
+:::
+
+## Process Time Step {.smaller}
+
+:::{.columns}
+:::{.column width=50%}
+- **Phenological considerations**
+    - Natural variation (e.g. seasonal, extreme weather event)
+    - Anthroprogentic change (e.g. construction, harvest)
+:::
+:::{.column width=50%}
+- **Discrete Time Step**
+    - Hourly
+    - Daily
+    - Weekly
+    - Monthly
+    - Seasonally
+    - Annually
+    - Bi-annually
+- **Continous**
+    - Live video feed
+:::
+:::
+
+## Sensor and Environmental Considerations {.smaller}
+
+:::{.columns}
+:::{.column width=50%}
+
+#### Sensor
+
+- Spatial Resolution
+- Spectral Resolution
+- Radiometric
+
+:::
+:::{.column width=50%}
+
+#### Environmental
+- Sun azimuth
+- Sun elevation
+- Cloud coverage
+- Off-nadir
+- Temporal resolution
+- Phenological cycles
+:::
+:::
+
+:::{.callout-tip}
+Best if conditions are as similar as possible
+:::
+
+## Classification Schemas {.smaller}
+
+:::{.columns}
+:::{.column width=40%}
+- **Land Cover/Land Use**
+    - NLCD (National Land Cover Dataset)
+    - NWALT (U.S. Conterminous Wall-to-Wall Anthropogenic Land Use Trends)
+
+- **Custom**
+:::
+:::{.column width=60%}
+![https://www.usgs.gov/centers/eros](../images/Annual%20NLCD%20CONUS%20with%20updated%20legend.png)
+:::
+:::
+
+
+
+
+
+## Feature Engineering {.smaller}
+
+:::{.columns}
+:::{.column width=60%}
+- **Normalized Indices**
+    - NDVI, NDWI, VARI, etc..
+- **Low and High Pass Filters**
+    - Low Pass - Smoothing Kernal
+    - High Pass - Edge Detection
+- **Textural features**
+    - Grey level co-occurrence matrix (GLCM)
+        - Angular Second Moment
+        - Contrast
+        - Correlation
+- **Principal component analysis (PCA)**
+:::
+:::{.column width=40%}
+![VARI](../images/vari_drone.png)
+$$
+VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
+$$
+:::
+:::
+
+
+## Sampling Methods
+
+- **Random Sample**
+    - Sample the entire spatial extent $n$ number of locations
+- **Stratified Random Sample**
+    - Sample by different classes (e.g. Developed, Undeveloped) 
+
+
+## Classification and Change Detection {.smaller}
+
+1. **Change Detection Method**
+    - Binary / Thematic
+2. **Image Classification**
+    - Supervised
+    - Unsupervised
+3. **Classification Validation**
+    - Confusion Matrix
+    - Overall Accuarcy
+    - Kappa
+
+
+## Binary Change Detection {.smaller}
+
+Identify Change or no change
+
+### Methods
+- Visual change detection
+- Thresholds (e.g. Image Differencing)
+- PCA (Principle Component Analysis)
+- Logistic Classification
+
+## Thematic Change Dection
+
+#### Post-Classification Change Detection
+```{mermaid}
+flowchart TB
+  A[Thematic Change Detection] --> B{Spatial Resolution}
+  B -- Low Resolution --> C(Pixel-based)
+  B -- High Resolution --> D(Object-based)
+```
+
+## Pixel-based
+
+- Medium to low resolution data
+- Track per-pixel changes over time
+
+## Object-based
+
+- Very high resolution (VHR) data (UAS data!)
+- Image Segmentation
+- Track objects over time
+
+## Classification Methods
+
+:::{.columns}
+:::{.column width=50%}
+
+#### Supervised Classification
+
+- Needs labeled training data
+
+**Algorithms**
+- Random Forest
+- Support Vector Machine (SVN)
+- Maximum Likelihood Classification (MLC)
+- Artifical Neural Networks (ANN)
+
+:::
+:::{.column width=50%}
+
+#### Unsupervised Classification
+
+- No training data needed
+- Classify the results
+
+**Algorithms**
+- K-Means Clustering
+- Iterative Self-Organizing Data Analysis (ISODATA)
+- Spectral Change Vector Analysis
+
+:::
+:::
+
+## Review
