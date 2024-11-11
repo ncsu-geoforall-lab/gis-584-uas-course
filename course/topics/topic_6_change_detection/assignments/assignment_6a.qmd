@@ -1,0 +1,46 @@
+---
+subtitle: "UAS Image Classification"
+title: "Assignment 6A"
+assignment-due-date: 11/06/2024
+author:
+    - Corey White
+# date: 11/4/24
+format: html
+toc-depth: 4
+---
+
+## Outline
+
+- 
+- 
+- 
+
+## Data
+
+Download imagery data from March and June flights during 2017.
+
+- [Orthos March 2017]({{< var.data.lake_wheeler_flight_Mar_2017_orthos >}})
+- [Orthos June 2017]({{< var.data.lake_wheeler_flight_Jun_2017_orthos >}})
+
+Unpack the data using the `r.unpack` command.
+
+```bash
+r.unpack -o input=ortho_2017_03_29.pack
+r.unpack -o input=ortho_2017_06_02.pack
+```
+
+## Workflow
+
+### Image differencing
+
+```bash
+r.mapcalc expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  -  ortho_2017_06_02@GIS_584_6a
+r.colors -e map=rgb_diff@GIS_584_6a color=bcyr
+```
+
+### Create Imagery Group
+
+```bash
+i.group group=vis_bands subgroup=vis_bands input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30
+```
+

@@ -71,21 +71,29 @@ format:
 
 :::{.columns}
 :::{.column width=50%}
-- **Phenological considerations**
-    - Natural variation (e.g. seasonal, extreme weather event)
-    - Anthroprogentic change (e.g. construction, harvest)
+
+#### Phenological considerations
+
+- Natural variation (e.g. seasonal, extreme weather event)
+- Anthroprogentic change (e.g. construction, harvest)
+
 :::
 :::{.column width=50%}
-- **Discrete Time Step**
-    - Hourly
-    - Daily
-    - Weekly
-    - Monthly
-    - Seasonally
-    - Annually
-    - Bi-annually
-- **Continous**
-    - Live video feed
+
+#### Discrete Time Step
+
+- Hourly
+- Daily
+- Weekly
+- Monthly
+- Seasonally
+- Annually
+- Bi-annually
+
+#### Continous
+
+- Live video feed
+
 :::
 :::
 
@@ -121,20 +129,29 @@ Best if conditions are as similar as possible
 
 :::{.columns}
 :::{.column width=40%}
+
 - **Land Cover/Land Use**
     - NLCD (National Land Cover Dataset)
     - NWALT (U.S. Conterminous Wall-to-Wall Anthropogenic Land Use Trends)
 
 - **Custom**
+
 :::
 :::{.column width=60%}
 ![https://www.usgs.gov/centers/eros](../images/Annual%20NLCD%20CONUS%20with%20updated%20legend.png)
 :::
 :::
 
+## Spectral Bands {.text-center}
 
+#### RGB
+![red](../images/ortho_r.png){width=25%}
+![green](../images/ortho_g.png){width=25%}
+![blue](../images/ortho_b.png){width=25%}
 
+#### Mulispectral (N-separated bands)
 
+#### Hyperspectral (Continous Spectrum)
 
 ## Feature Engineering {.smaller}
 
@@ -165,6 +182,8 @@ $$
 
 - **Random Sample**
     - Sample the entire spatial extent $n$ number of locations
+- **Cluster Sampling**
+    - Sample by different clusters
 - **Stratified Random Sample**
     - Sample by different classes (e.g. Developed, Undeveloped) 
 
@@ -192,14 +211,27 @@ Identify Change or no change
 - PCA (Principle Component Analysis)
 - Logistic Classification
 
+![](../images/rgb_diff.png){width=25%}
+![](../images/rgb_diff_binary.png){width=25%}
+
 ## Thematic Change Dection
 
 #### Post-Classification Change Detection
 ```{mermaid}
-flowchart TB
+flowchart LR
   A[Thematic Change Detection] --> B{Spatial Resolution}
   B -- Low Resolution --> C(Pixel-based)
   B -- High Resolution --> D(Object-based)
+  C --> I1(Date 1)
+  C --> I2(Date 2)
+  D --> I1
+  D --> I2
+  I1 --> M1(Model 1)
+  I2 --> M2(Model 2)
+  M1 --> C1(Classified 1)
+  M2 --> C2(Classified 2)
+  C1 --> T[Thematic Change]
+  C2 --> T
 ```
 
 ## Pixel-based
@@ -213,7 +245,7 @@ flowchart TB
 - Image Segmentation
 - Track objects over time
 
-## Classification Methods
+## Classification Methods {.smaller}
 
 :::{.columns}
 :::{.column width=50%}
@@ -221,12 +253,6 @@ flowchart TB
 #### Supervised Classification
 
 - Needs labeled training data
-
-**Algorithms**
-- Random Forest
-- Support Vector Machine (SVN)
-- Maximum Likelihood Classification (MLC)
-- Artifical Neural Networks (ANN)
 
 :::
 :::{.column width=50%}
@@ -236,7 +262,26 @@ flowchart TB
 - No training data needed
 - Classify the results
 
-**Algorithms**
+:::
+:::
+
+## Classification Methods {.smaller}
+
+:::{.columns}
+:::{.column width=50%}
+
+#### Supervised Classification Algorithms
+
+- Random Forest
+- Support Vector Machine (SVN)
+- Maximum Likelihood Classification (MLC)
+- Artifical Neural Networks (ANN)
+
+:::
+:::{.column width=50%}
+
+#### Unsupervised Classification Algorithms
+
 - K-Means Clustering
 - Iterative Self-Organizing Data Analysis (ISODATA)
 - Spectral Change Vector Analysis
@@ -244,4 +289,10 @@ flowchart TB
 :::
 :::
 
-## Review
+## Thematic Change {.smaller}
+
+![](../images/remotesensing-14-01718-thematic.png)
+
+::: {.small}
+- White CT, Reckling W, Petrasova A, Meentemeyer RK, Mitasova H. Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion. Remote Sensing. 2022; 14(7):1718. https://doi.org/10.3390/rs14071718
+:::

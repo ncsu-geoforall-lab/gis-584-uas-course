@@ -46,6 +46,14 @@ For example, this code converts the images found in the lecture_2b.qmd file to w
 
 The site is deployed to GitHub Pages using the `gh-pages` branch. The site will be automatically deployed when changes are pushed to the `main` branch.
 
+## Install Python Dependencies
+
+```bash
+python3 -m venv gis584-env
+source gis584-env/bin/activate
+pip3 install -r requirements.txt
+```
+
 ## Authors
 
 Copyright 2024
