@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Corey White">
-<meta name="dcterms.date" content="2024-11-08">
 
-<title>A. Change Detection – GIS/MEA 584: UAS Mapping and Analytics</title>
+<title>Assignment 6A – GIS/MEA 584: UAS Mapping and Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +21,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../favicon.ico" rel="icon">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -80,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">GIS/MEA 584: UAS Mapping and Analytics</span>
     </a>
   </div>
@@ -91,23 +124,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/schedule.html"> 
+    <a class="nav-link" href="../../../../course/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/logistics.html"> 
+    <a class="nav-link" href="../../../../course/logistics.html"> 
 <span class="menu-text">Logistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/topics.html"> 
+    <a class="nav-link" href="../../../../course/topics.html"> 
 <span class="menu-text">Topics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/projects.html"> 
+    <a class="nav-link" href="../../../../course/projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -126,12 +159,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#uas-change-detectio" id="toc-uas-change-detectio" class="nav-link active" data-scroll-target="#uas-change-detectio">UAS Change Detectio</a>
-  <ul class="collapse">
-  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
-  <li><a href="#supplemental-materials" id="toc-supplemental-materials" class="nav-link" data-scroll-target="#supplemental-materials">Supplemental materials</a></li>
-  <li><a href="#assignment-homework" id="toc-assignment-homework" class="nav-link" data-scroll-target="#assignment-homework">Assignment &amp; Homework</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
+  <ul>
+  <li><a href="#image-differencing" id="toc-image-differencing" class="nav-link" data-scroll-target="#image-differencing">Image differencing</a></li>
+  <li><a href="#create-imagery-group" id="toc-create-imagery-group" class="nav-link" data-scroll-target="#create-imagery-group">Create Imagery Group</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -140,13 +173,13 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 <!-- banner.html -->
 <div class="banner-image">
-    <img src="../../../includes/images/banner.jpg" alt="Banner">
+    <img src="../../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">A. Change Detection</h1>
-<p class="subtitle lead">Topic 6: Advanced Analytics</p>
+<h1 class="title">Assignment 6A</h1>
+<p class="subtitle lead">UAS Image Classification</p>
 </div>
 
 
@@ -160,12 +193,6 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 8, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -175,35 +202,35 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="uas-change-detectio" class="level1">
-<h1>UAS Change Detectio</h1>
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <ul>
-<li>Understand the different types of change detection</li>
-<li>Image Classification</li>
-<li>Impacts of spatial-temporal scale</li>
-<li>Environmental Consideration</li>
+<li></li>
+<li></li>
+<li></li>
 </ul>
 </section>
-<section id="lecture" class="level2">
-<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Download imagery data from March and June flights during 2017.</p>
 <ul>
-<li><a href="../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html">Lecture Slides</a></li>
-<li>Lecture Recording: <a href="?var:recordings.topic6.lecture6a">Fall 2024</a> (NCSU Only)</li>
-<li>In-Class Recording: NA</li>
+<li><a href="{{< var.data.lake_wheeler_flight_Mar_2017_orthos  >}}">Orthos March 2017</a></li>
+<li><a href="{{< var.data.lake_wheeler_flight_Jun_2017_orthos  >}}">Orthos June 2017</a></li>
 </ul>
+<p>Unpack the data using the <code>r.unpack</code> command.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=ortho_2017_03_29.pack</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=ortho_2017_06_02.pack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="supplemental-materials" class="level2">
-<h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
-<ul>
-<li><a href="https://www.mdpi.com/2072-4292/14/7/1718">Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion</a></li>
-<li>Jensen, J.R. Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed.; Prentice Hall Press: Upper Saddle River, NJ, USA, 2015.</li>
-</ul>
+<section id="workflow" class="level2">
+<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
+<section id="image-differencing" class="level3">
+<h3 class="anchored" data-anchor-id="image-differencing">Image differencing</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  <span class="at">-</span>  ortho_2017_06_02@GIS_584_6a</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=rgb_diff@GIS_584_6a color=bcyr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="assignment-homework" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-homework">Assignment &amp; Homework</h2>
-<p><a href="../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A: Urban Change Detection</a></p>
+<section id="create-imagery-group" class="level3">
+<h3 class="anchored" data-anchor-id="create-imagery-group">Create Imagery Group</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=vis_bands subgroup=vis_bands input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

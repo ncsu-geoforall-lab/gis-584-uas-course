@@ -422,16 +422,13 @@ Corey White
 <h2>Process Time Step</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<ul>
-<li><strong>Phenological considerations</strong>
+<h4 id="phenological-considerations">Phenological considerations</h4>
 <ul>
 <li>Natural variation (e.g.&nbsp;seasonal, extreme weather event)</li>
 <li>Anthroprogentic change (e.g.&nbsp;construction, harvest)</li>
-</ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<ul>
-<li><strong>Discrete Time Step</strong>
+<h4 id="discrete-time-step">Discrete Time Step</h4>
 <ul>
 <li>Hourly</li>
 <li>Daily</li>
@@ -440,11 +437,10 @@ Corey White
 <li>Seasonally</li>
 <li>Annually</li>
 <li>Bi-annually</li>
-</ul></li>
-<li><strong>Continous</strong>
+</ul>
+<h4 id="continous">Continous</h4>
 <ul>
 <li>Live video feed</li>
-</ul></li>
 </ul>
 </div></div>
 </section>
@@ -504,6 +500,13 @@ Corey White
 </div>
 </div></div>
 </section>
+<section id="spectral-bands" class="slide level2 text-center">
+<h2>Spectral Bands</h2>
+<h4 id="rgb">RGB</h4>
+<p><img data-src="../images/ortho_r.png" style="width:25.0%" alt="red"> <img data-src="../images/ortho_g.png" style="width:25.0%" alt="green"> <img data-src="../images/ortho_b.png" style="width:25.0%" alt="blue"></p>
+<h4 id="mulispectral-n-separated-bands">Mulispectral (N-separated bands)</h4>
+<h4 id="hyperspectral-continous-spectrum">Hyperspectral (Continous Spectrum)</h4>
+</section>
 <section id="feature-engineering" class="slide level2 smaller">
 <h2>Feature Engineering</h2>
 <div class="columns">
@@ -542,6 +545,10 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <ul>
 <li>Sample the entire spatial extent <span class="math inline">\(n\)</span> number of locations</li>
 </ul></li>
+<li><strong>Cluster Sampling</strong>
+<ul>
+<li>Sample by different clusters</li>
+</ul></li>
 <li><strong>Stratified Random Sample</strong>
 <ul>
 <li>Sample by different classes (e.g.&nbsp;Developed, Undeveloped)</li>
@@ -578,6 +585,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <li>PCA (Principle Component Analysis)</li>
 <li>Logistic Classification</li>
 </ul>
+<p><img data-src="../images/rgb_diff.png" style="width:25.0%"> <img data-src="../images/rgb_diff_binary.png" style="width:25.0%"></p>
 </section>
 <section id="thematic-change-dection" class="slide level2">
 <h2>Thematic Change Dection</h2>
@@ -587,10 +595,20 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart TB
+<pre class="mermaid mermaid-js">flowchart LR
   A[Thematic Change Detection] --&gt; B{Spatial Resolution}
   B -- Low Resolution --&gt; C(Pixel-based)
   B -- High Resolution --&gt; D(Object-based)
+  C --&gt; I1(Date 1)
+  C --&gt; I2(Date 2)
+  D --&gt; I1
+  D --&gt; I2
+  I1 --&gt; M1(Model 1)
+  I2 --&gt; M2(Model 2)
+  M1 --&gt; C1(Classified 1)
+  M2 --&gt; C2(Classified 2)
+  C1 --&gt; T[Thematic Change]
+  C2 --&gt; T
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -613,7 +631,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <li>Track objects over time</li>
 </ul>
 </section>
-<section id="classification-methods" class="slide level2">
+<section id="classification-methods" class="slide level2 smaller">
 <h2>Classification Methods</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -621,18 +639,42 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <ul>
 <li>Needs labeled training data</li>
 </ul>
-<p><strong>Algorithms</strong> - Random Forest - Support Vector Machine (SVN) - Maximum Likelihood Classification (MLC) - Artifical Neural Networks (ANN)</p>
 </div><div class="column" style="width:50%;">
 <h4 id="unsupervised-classification">Unsupervised Classification</h4>
 <ul>
 <li>No training data needed</li>
 <li>Classify the results</li>
 </ul>
-<p><strong>Algorithms</strong> - K-Means Clustering - Iterative Self-Organizing Data Analysis (ISODATA) - Spectral Change Vector Analysis</p>
 </div></div>
 </section>
-<section id="review" class="slide level2">
-<h2>Review</h2>
+<section id="classification-methods-1" class="slide level2 smaller">
+<h2>Classification Methods</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="supervised-classification-algorithms">Supervised Classification Algorithms</h4>
+<ul>
+<li>Random Forest</li>
+<li>Support Vector Machine (SVN)</li>
+<li>Maximum Likelihood Classification (MLC)</li>
+<li>Artifical Neural Networks (ANN)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="unsupervised-classification-algorithms">Unsupervised Classification Algorithms</h4>
+<ul>
+<li>K-Means Clustering</li>
+<li>Iterative Self-Organizing Data Analysis (ISODATA)</li>
+<li>Spectral Change Vector Analysis</li>
+</ul>
+</div></div>
+</section>
+<section id="thematic-change" class="slide level2 smaller">
+<h2>Thematic Change</h2>
+
+<img data-src="../images/remotesensing-14-01718-thematic.png" class="r-stretch"><div class="small">
+<ul>
+<li>White CT, Reckling W, Petrasova A, Meentemeyer RK, Mitasova H. Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion. Remote Sensing. 2022; 14(7):1718. https://doi.org/10.3390/rs14071718</li>
+</ul>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
