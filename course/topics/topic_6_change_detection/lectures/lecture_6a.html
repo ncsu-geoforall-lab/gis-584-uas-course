@@ -573,6 +573,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <li>Overall Accuarcy</li>
 <li>Kappa</li>
 </ul></li>
+<li><strong>Thematic Change</strong></li>
 </ol>
 </section>
 <section id="binary-change-detection" class="slide level2 smaller">
@@ -589,32 +590,10 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 </section>
 <section id="thematic-change-dection" class="slide level2">
 <h2>Thematic Change Dection</h2>
-<h4 id="post-classification-change-detection">Post-Classification Change Detection</h4>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A[Thematic Change Detection] --&gt; B{Spatial Resolution}
-  B -- Low Resolution --&gt; C(Pixel-based)
-  B -- High Resolution --&gt; D(Object-based)
-  C --&gt; I1(Date 1)
-  C --&gt; I2(Date 2)
-  D --&gt; I1
-  D --&gt; I2
-  I1 --&gt; M1(Model 1)
-  I2 --&gt; M2(Model 2)
-  M1 --&gt; C1(Classified 1)
-  M2 --&gt; C2(Classified 2)
-  C1 --&gt; T[Thematic Change]
-  C2 --&gt; T
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
+<ul>
+<li>Pixel-based Post-Classification Thematic Change Detection</li>
+<li>Object-based Post-Classification Thematic Change Detection</li>
+</ul>
 </section>
 <section id="pixel-based" class="slide level2">
 <h2>Pixel-based</h2>
@@ -667,8 +646,102 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 </ul>
 </div></div>
 </section>
-<section id="thematic-change" class="slide level2 smaller">
-<h2>Thematic Change</h2>
+<section id="model-validation" class="slide level2 smaller">
+<h2>Model Validation</h2>
+<h4 id="confusion-matrix">Confusion Matrix</h4>
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 16%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Reference &nbsp;Predicted</th>
+<th>Forest</th>
+<th>Water</th>
+<th>Urban</th>
+<th>Agriculture</th>
+<th>User’s Accuracy (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Forest</strong></td>
+<td>50</td>
+<td>2</td>
+<td>3</td>
+<td>0</td>
+<td>90.9</td>
+</tr>
+<tr class="even">
+<td><strong>Water</strong></td>
+<td>1</td>
+<td>45</td>
+<td>0</td>
+<td>4</td>
+<td>88.2</td>
+</tr>
+<tr class="odd">
+<td><strong>Urban</strong></td>
+<td>2</td>
+<td>1</td>
+<td>40</td>
+<td>7</td>
+<td>80.0</td>
+</tr>
+<tr class="even">
+<td><strong>Agriculture</strong></td>
+<td>0</td>
+<td>3</td>
+<td>5</td>
+<td>42</td>
+<td>85.7</td>
+</tr>
+<tr class="odd">
+<td><strong>Producer’s Accuracy (%)</strong></td>
+<td>94.3</td>
+<td>86.5</td>
+<td>83.3</td>
+<td>79.2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="math inline">\(Overall\ Accuarcy = \frac{Correctly\ classified\ samples}{Total\ samples}\)</span></li>
+<li>Kappa coefficient (Cohen’s Kappa): inter-rater agreement</li>
+</ul>
+</section>
+<section id="post-classification-change-detection" class="slide level2">
+<h2>Post-Classification Change Detection</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  A[Image - Date 1]
+  B[Image - Date 2]
+  A --&gt; AF[Feature Engineering]
+  B --&gt; BF[Feature Engineering]
+  AF -- Pixel or Object --&gt; AC[Classification]
+  BF -- Pixel or Object --&gt; BC[Classification]
+  AC --&gt; CM[Change Map]
+  BC --&gt; CM
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="thematic-change-from-to" class="slide level2 smaller">
+<h2>Thematic Change (from-to)</h2>
 
 <img data-src="../images/remotesensing-14-01718-thematic.png" class="r-stretch"><div class="small">
 <ul>

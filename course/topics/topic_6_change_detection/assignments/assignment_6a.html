@@ -164,6 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
   <ul>
   <li><a href="#image-differencing" id="toc-image-differencing" class="nav-link" data-scroll-target="#image-differencing">Image differencing</a></li>
+  <li><a href="#image-segmentation" id="toc-image-segmentation" class="nav-link" data-scroll-target="#image-segmentation">Image Segmentation</a></li>
   <li><a href="#create-imagery-group" id="toc-create-imagery-group" class="nav-link" data-scroll-target="#create-imagery-group">Create Imagery Group</a></li>
   </ul></li>
   </ul>
@@ -228,9 +229,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  <span class="at">-</span>  ortho_2017_06_02@GIS_584_6a</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=rgb_diff@GIS_584_6a color=bcyr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="image-segmentation" class="level3">
+<h3 class="anchored" data-anchor-id="image-segmentation">Image Segmentation</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.superpixels.slic</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=lsat output=superpixels num_pixels=2000</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.to.vect</span> input=superpixels output=superpixels type=area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="create-imagery-group" class="level3">
 <h3 class="anchored" data-anchor-id="create-imagery-group">Create Imagery Group</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=vis_bands subgroup=vis_bands input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=vis_bands subgroup=vis_bands input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
