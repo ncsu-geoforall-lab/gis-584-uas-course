@@ -170,7 +170,7 @@ schedule:
   
   - date_range: "Nov. 11-15"
     topic: "Topic 6: UAS-based Change Detection"
-    subtopic: "6A. Urban Change Detection with UAS Data"
+    subtopic: "[6A. Change Detection with UAS Data](topics/topic_6_change_detection/part_6a.qmd)"
     details:
       - "Mon: [Lecture 5B](topics/topic_6_change_detection/lectures/lecture_6a.qmd)"
       - "Wed: Assignment: Urban Change Detection with UAS Data"

@@ -199,6 +199,7 @@ $$
     - Confusion Matrix
     - Overall Accuarcy
     - Kappa
+4. **Thematic Change**
 
 
 ## Binary Change Detection {.smaller}
@@ -216,23 +217,8 @@ Identify Change or no change
 
 ## Thematic Change Dection
 
-#### Post-Classification Change Detection
-```{mermaid}
-flowchart LR
-  A[Thematic Change Detection] --> B{Spatial Resolution}
-  B -- Low Resolution --> C(Pixel-based)
-  B -- High Resolution --> D(Object-based)
-  C --> I1(Date 1)
-  C --> I2(Date 2)
-  D --> I1
-  D --> I2
-  I1 --> M1(Model 1)
-  I2 --> M2(Model 2)
-  M1 --> C1(Classified 1)
-  M2 --> C2(Classified 2)
-  C1 --> T[Thematic Change]
-  C2 --> T
-```
+- Pixel-based Post-Classification Thematic Change Detection
+- Object-based Post-Classification Thematic Change Detection
 
 ## Pixel-based
 
@@ -289,7 +275,38 @@ flowchart LR
 :::
 :::
 
-## Thematic Change {.smaller}
+## Model Validation {.smaller}
+
+#### Confusion Matrix
+
+| Reference \ Predicted | Forest | Water | Urban | Agriculture | User's Accuracy (%) |
+|-----------------------|--------|-------|-------|-------------|---------------------|
+| **Forest**            | 50     | 2     | 3     | 0           | 90.9                |
+| **Water**             | 1      | 45    | 0     | 4           | 88.2                |
+| **Urban**             | 2      | 1     | 40    | 7           | 80.0                |
+| **Agriculture**       | 0      | 3     | 5     | 42          | 85.7                |
+| **Producer's Accuracy (%)** | 94.3 | 86.5 | 83.3 | 79.2 |                     |
+
+- $Overall\ Accuarcy = \frac{Correctly\ classified\ samples}{Total\ samples}$
+- Kappa coefficient (Cohen's Kappa): inter-rater agreement
+
+## Post-Classification Change Detection
+
+```{mermaid}
+
+flowchart TB
+  A[Image - Date 1]
+  B[Image - Date 2]
+  A --> AF[Feature Engineering]
+  B --> BF[Feature Engineering]
+  AF -- Pixel or Object --> AC[Classification]
+  BF -- Pixel or Object --> BC[Classification]
+  AC --> CM[Change Map]
+  BC --> CM
+
+```
+
+## Thematic Change (from-to) {.smaller}
 
 ![](../images/remotesensing-14-01718-thematic.png)
 

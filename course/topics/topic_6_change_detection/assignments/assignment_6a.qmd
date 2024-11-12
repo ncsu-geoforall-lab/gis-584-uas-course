@@ -38,6 +38,14 @@ r.mapcalc expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  -  ortho_2017_06_02
 r.colors -e map=rgb_diff@GIS_584_6a color=bcyr
 ```
 
+### Image Segmentation
+
+```bash
+g.extension i.superpixels.slic
+i.superpixels.slic input=lsat output=superpixels num_pixels=2000
+r.to.vect input=superpixels output=superpixels type=area
+```
+
 ### Create Imagery Group
 
 ```bash

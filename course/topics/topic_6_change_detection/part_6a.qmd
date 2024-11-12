@@ -1,5 +1,5 @@
 ---
-topic: "Topic 6: Change Detection"
+topic: "Topic 6: Image Classification and Change Detection"
 title: "A. Change Detection"
 subtitle: "Topic 6: Advanced Analytics"
 date: 11/8/2024
@@ -21,7 +21,7 @@ author: Corey White
 
 - [Lecture Slides](lectures/lecture_6a.qmd)
 - Lecture Recording: [Fall 2024]({{< var recordings.topic6.lecture6a >}}) (NCSU Only)
-- In-Class Recording: NA
+- In-Class Assignment Recording: [Fall 2024]({{< var recordings.topic6.assignment6a >}}) (NCSU Only)
 
 ## Supplemental materials
 

@@ -17,6 +17,7 @@ assignment-due-date: 11/06/2024
 
 - [Lecture slides](lectures/lecture_5b.qmd)
 - Lecture Recording: [Fall 2024]({{< var recordings.topic5.lecture5b >}}) (NCSU Only)
+- In-Class Assignment Recording: [Fall 2024]({{< var recordings.topic5.assignment5b >}}) (NCSU Only)
 
 ## Supplemental materials
 
