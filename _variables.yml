@@ -60,4 +60,7 @@ data:
   lake_wheeler_flight_Nov_2015_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/112415/ortho_2015_11_24.pack
   lake_wheeler_flight_Jun_2017_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack
   lake_wheeler_flight_Mar_2017_orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/032917/ortho_2017_03_29.pack
+  lake_wheeler_flight_July_17_2024_flight_data: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/flight_data.zip
+  lake_wheeler_flight_July_17_2024_orthophoto: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif
+  lake_wheeler_flight_July_17_2024_dsm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif
   secref_mid_pines_spm_elev: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip

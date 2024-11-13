@@ -30,4 +30,4 @@ author: Corey White
 
 ## Assignment & Homework
 
-[Assignment 6A: Urban Change Detection](assignments/assignment_6a.qmd)
+[Assignment 6A: Image Classification](assignments/assignment_6a.qmd)

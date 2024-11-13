@@ -11,25 +11,60 @@ toc-depth: 4
 
 ## Outline
 
-- 
-- 
-- 
+- Visual Change
+- Binary Change
+- Feature Engineering
+- Image Classification
+- Validation
+- Thematic Change
 
 ## Data
 
 Download imagery data from March and June flights during 2017.
 
-- [Orthos March 2017]({{< var.data.lake_wheeler_flight_Mar_2017_orthos >}})
-- [Orthos June 2017]({{< var.data.lake_wheeler_flight_Jun_2017_orthos >}})
-
-Unpack the data using the `r.unpack` command.
-
-```bash
-r.unpack -o input=ortho_2017_03_29.pack
-r.unpack -o input=ortho_2017_06_02.pack
-```
+<!-- - [Orthos June 2017]({{< var data.lake_wheeler_flight_Jun_2017_orthos >}}) -->
+- [Orthos July 2024]({{< var data.lake_wheeler_flight_July_17_2024_orthophoto >}})
+- [DSM July 2024]({{< var data.lake_wheeler_flight_July_17_2024_dsm >}})
 
 ## Workflow
+
+Create a new mapset within your `Lake_Wheeler_NCspm` project and set your working directory.
+
+Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is save as a [*Cloud Optimized GeoTIFF (COG)*](http://cogeo.org/) which allows us to directory import the data using r.import with needing to download the data beforehand.
+
+```bash
+r.import input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif resample=nearest output=odm_071724_ortho
+```
+
+Let's set the compuational region to the ortho imagery.
+
+```bash
+g.region raster=odm_071724_ortho.1
+```
+
+:::{.callout-important}
+**Task:** What is the spatial resolution and how many pixels are include in the compuational region?
+:::
+
+### Find overlaping areas
+
+```bash
+  r.series input="ortho_2017_06_02,ortho_2017_06_02" output="series_count" method=count
+```
+
+:::{.callout-important}
+**Task:** Create a raster mask using raster algebra (`r.mapcalc`) to generate a raster where if both rasters overlap set the new raster to equal `1` else `null`.
+:::
+
+### Visual Change Detection
+
+Map Swipe Tool `File -> Map Swipe` select your top left raster map and bottom/right raster map and press `OK`. Use the slider to examine the differences between to two dates.
+
+:::{.callout-important}
+**Task:** Describe the difference you see between the two dates.
+:::
+
+### Binary Change Detection
 
 ### Image differencing
 
@@ -38,17 +73,220 @@ r.mapcalc expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  -  ortho_2017_06_02
 r.colors -e map=rgb_diff@GIS_584_6a color=bcyr
 ```
 
+### Thematic Change Detection
+
+Let's create an RGB color composite from our ortho bands.
+
+```bash
+r.composite -d red=odm_071724_ortho.1 green=odm_071724_ortho.2 blue=odm_071724_ortho.3 output=odm_071724_ortho.rgb
+```
+
+### Feature Extraction
+
+#### Spectral Indices
+
+Calculate `VARI` index
+
+```bash
+r.mapcalc expression="vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"
+```
+
+Let's look at the univariate statistics of our `vari_2024` raster.
+
+```bash
+r.univar vari_2024
+```
+
+:::{.callout-important}
+**Task:** What is the range from the `vari_2024` univariate statistics?
+:::
+
+Now let's look at the metadata for each of our bands.
+
+```bash
+r.info odm_071724_ortho.1
+r.info odm_071724_ortho.2
+r.info odm_071724_ortho.3
+```
+
+Our original ortho bands were unsigned 8bit integers (a `CELL` data type in GRASS) ranging from 0-255 in value. However, when we calulate VARI the data is expected to be scaled from 0-1. To do this we must rescale our band data and cast our output data to Float32.
+
+```bash
+r.mapcalc expression="odm_071724_ortho.red = if(isnull(odm_071724_ortho.1), null(), float(odm_071724_ortho.1) / 255.0)"
+r.mapcalc expression="odm_071724_ortho.green = if(isnull(odm_071724_ortho.2), null(), float(odm_071724_ortho.2) / 255.0)"
+r.mapcalc expression="odm_071724_ortho.blue = if(isnull(odm_071724_ortho.3), null(), float(odm_071724_ortho.3) / 255.0)"
+```
+
+Now let's compute VARI for our dataset.
+
+$$
+VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
+$$
+
+```bash
+r.mapcalc expression="odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"
+
+# Use the same color palette as NDVI
+r.colors map=odm_071724_ortho.vari color=ndvi
+```
+
+![VARI Example](../images/lake_wheeler_vari.png){width=45%}
+
+#### Low Pass Filters
+
+We will now compute a *smooth* layer to remove noise from our data with the [r.neighbors](https://grass.osgeo.org/grass84/manuals/r.neighbors.html) tool. To do this we will compute the mean value for each pixel using a 27x27 moving window.
+
+```bash
+r.neighbors input=odm_071724_ortho.red size=27 method=average output=odm_071724_ortho.red.27x27mean
+```
+
+#### High Pass Filters
+
+We will now create a layer to define our edges using the `zero-crossings` edge detection method implemented as [i.zc](https://grass.osgeo.org/grass-stable/manuals/i.zc.html) in GRASS GIS.
+
+```bash
+i.zc --overwrite input=odm_071724_ortho.vari output=odm_071724_ortho.vari.zc threshold=0.5
+```
+
+```bash
+r.neighbors -c input=odm_071724_ortho.green size=7 method=variance output=odm_071724_ortho.green.7x7variance
+```
+
+![](../images/high_pass_filter_variance_moving_window_green.png){width=40%}
+![](../images/high_pass_filter_variance_moving_window_green2.png){width=40%}
+
+:::{.callout-important}
+**Task:** Find a nice color scheme to display `odm_071724_ortho.green.7x7variance` and describe what information can be derived from the map.
+:::
+<!-- ```bash
+r.neighbors -c input=odm_071724_ortho.green size=7 method=range output=odm_071724_ortho.green.range
+``` -->
+
+<!-- ```bash
+r.neighbors -c input=odm_071724_dsm size=3 method=range output=odm_071724_dsm.3x3range
+r.neighbors -c input=odm_071724_dsm size=3 method=stddev output=odm_071724_dsm.3x3stddev
+r.neighbors -c input=odm_071724_dsm size=3 method=maximum output=odm_071724_dsm.3x3maximum
+``` -->
+
+#### Texture Features
+
+Now we will calcuate texture features for our green band using [r.texture](https://grass.osgeo.org/grass-stable/manuals/r.texture.html) which implements Haralick et al. (1973) Grey level co-occurrence matrix (GLCM).
+
+```bash
+r.texture odm_071724_ortho.green output=odm_071724_ortho.green_texture method="asm,contrast,corr" -s
+```
+
+#### Topographic Data
+
+```bash
+r.import resample=bilinear extent=region input=dsm.tif output=odm_071724_dsm
+r.colors map=odm_071724_dsm color=elevation
+```
+
+Calculate slope and aspect
+
+```bash
+r.slope.aspect elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv dx=odm_071724_dx dy=odm_071724_dy
+```
+
+Now let's derive terrain forms form the the DSM using [r.geomorphon](https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html).
+
+```bash
+r.geomorphon elevation=odm_071724_dsm@GIS_584_6a forms=geomorphon search=3 skip=0 flat=1 dist=0
+```
+
+#### Create Imagery Group
+
+GRASS GIS uses imagery groups to manage imagery data.
+
+```bash
+i.group group=vis_bands subgroup=vis_bands input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue
+```
+
+```bash
+i.group group=analy_bands subgroup=analy_bands input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue,odm_071724_ortho.vari,odm_071724_ortho.blue,odm_071724_ortho.red.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,odm_071724_pcurv,odm_071724_tcurv,geomorphon,odm_071724_ortho.green.7x7variance
+```
+
 ### Image Segmentation
+
+Install [i.superpixels.slic](https://grass.osgeo.org/grass-stable/manuals/addons/i.superpixels.slic.html) GRASS Addon using the `g.extension` command.
 
 ```bash
 g.extension i.superpixels.slic
-i.superpixels.slic input=lsat output=superpixels num_pixels=2000
-r.to.vect input=superpixels output=superpixels type=area
 ```
-
-### Create Imagery Group
 
 ```bash
-i.group group=vis_bands subgroup=vis_bands input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30
+i.superpixels.slic input=vis_bands output=superpixels num_pixels=2000
+# r.to.vect input=superpixels output=superpixels type=area
 ```
 
+Let's see if we can improve our segmentation to capture individual crops in the field.
+
+```bash
+i.superpixels.slic input=analy_bands output=superpixels_analy step=7 compactness=0.8 minsize=15 memory=2000
+```
+
+We can now evaluate our segments statistics.
+
+For example we can calculate the mean VARI value for each vector segment.
+
+```bash
+v.rast.stats map=superpixels_analy raster=odm_071724_ortho.vari column_prefix=vari method=average
+```
+
+Let's viusalize the result.
+
+```bash
+g.copy vector=superpixels,superpixels_color
+v.colors map=superpixels_color use=attr column=vari_average color=ndvi
+d.vect map=superpixels_color width=2 icon=basic/point
+d.vect map=superpixels fill_color=none
+```
+
+For our object based classification we will use [i.segment.stats](https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html) to generate multiple statistics about our segments at once.
+
+To do this we must first install [i.segment.stats](https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html).
+
+```bash
+g.extension i.segment.stats
+```
+
+We will now compute the mean, standard deviation, and sum for each feature per segment. We also compute details about the geomertry of each segment such as the area, perimeter, and compactness.   
+
+```bash
+i.segment.stats map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue,odm_071724_ortho.vari raster_statistics="mean,stddev,sum" vectormap=segment_stats processes=3
+
+```
+### Classification
+
+#### Sampling
+
+#### Train Model
+
+[r.learn.ml2](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml2.html)
+
+```bash
+g.region raster=landclass96 -p
+r.random input=landclass96 npoints=1000 raster=training_pixels
+```
+
+#### Run Model
+
+```bash
+# train a random forest classification model using r.learn.train
+r.learn.train group=analy_bands training_map=training_pixels \
+	model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz
+
+# perform prediction using r.learn.predict
+r.learn.predict group=lsat7_2000 load_model=rf_model.gz output=rf_classification
+
+# check raster categories - they are automatically applied to the classification output
+r.category rf_classification
+
+# copy color scheme from landclass training map to result
+r.colors rf_classification raster=training_pixels
+```
+
+#### Model Validation
+
+### Post-Classifcation Thematic Change
