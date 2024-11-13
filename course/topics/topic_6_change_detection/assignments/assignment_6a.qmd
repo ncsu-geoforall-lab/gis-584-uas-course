@@ -154,7 +154,7 @@ r.neighbors input=odm_071724_ortho.red size=27 method=average output=odm_071724_
 We will now create a layer to define our edges using the `zero-crossings` edge detection method implemented as [i.zc](https://grass.osgeo.org/grass-stable/manuals/i.zc.html) in GRASS GIS.
 
 ```bash
-i.zc --overwrite input=odm_071724_ortho.vari output=odm_071724_ortho.vari.zc threshold=0.5
+i.zc --overwrite input=odm_071724_ortho.green output=odm_071724_ortho.green.zc threshold=0.5
 ```
 
 ```bash
@@ -204,11 +204,15 @@ r.colors map=odm_071724_dsm color=elevation
 r.relief input=odm_071724_dsm output=dsm_relief
 ```
 
+#### Slope and Aspect
+
 Calculate slope and aspect using [r.slope.aspect](https://grass.osgeo.org/grass-stable/manuals/r.slope.aspect.html)
 
 ```bash
 r.slope.aspect elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv
 ```
+
+#### Terrain Forms
 
 Now let's derive terrain forms form the the DSM using [r.geomorphon](https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html).
 
@@ -216,7 +220,7 @@ Now let's derive terrain forms form the the DSM using [r.geomorphon](https://gra
 r.geomorphon elevation=odm_071724_dsm@GIS_584_6a forms=geomorphon search=3 skip=0 flat=1 dist=0
 ```
 
-#### Create Imagery Group
+### Create Imagery Group
 
 GRASS GIS uses imagery groups ([i.group](https://grass.osgeo.org/grass84/manuals/i.group.html)) to manage imagery data.
 
@@ -249,14 +253,8 @@ g.extension i.superpixels.slic
 Let's see if we can segment the fields.
 
 ```bash
-i.superpixels.slic input=vis_bands output=superpixels num_pixels=2000
-# r.to.vect input=superpixels output=superpixels type=area
-```
-
-Let's see if we can improve our segmentation to capture individual crops in the field.
-
-```bash
-i.superpixels.slic input=odm_071724_ortho output=superpixels_analysis step=7 compactness=0.8 minsize=15 memory=2000
+i.superpixels.slic input=vis_bands output=superpixels num_pixels=10000
+r.to.vect input=superpixels output=superpixels type=area
 ```
 
 We can now evaluate our segments statistics.
@@ -267,13 +265,10 @@ For example we can calculate the mean VARI value for each vector segment.
 v.rast.stats map=superpixels_analy raster=odm_071724_ortho.vari column_prefix=vari method=average
 ```
 
-Let's viusalize the result.
+Let's see if we can improve our segmentation to capture individual crops in the field.
 
 ```bash
-g.copy vector=superpixels_analy,superpixels_color
-v.colors map=superpixels_color use=attr column=vari_average color=ndvi
-d.vect map=superpixels_color width=2 icon=basic/point
-d.vect map=superpixels fill_color=none
+i.superpixels.slic input=odm_071724_ortho output=superpixels_analysis step=7 compactness=0.8 minsize=15 memory=2000
 ```
 
 For our object based classification we will use [i.segment.stats](https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html) to generate multiple statistics about our segments at once.
@@ -284,10 +279,10 @@ To do this we must first install [i.segment.stats](https://grass.osgeo.org/grass
 g.extension i.segment.stats
 ```
 
-We will now compute the mean, standard deviation, and sum for each feature per segment. We also compute details about the geomertry of each segment such as the area, perimeter, and compactness.   
+Compute the mean, standard deviation, and sum for each feature per segment. We also compute details about the geomertry of each segment such as the area, perimeter, and compactness.   
 
 ```bash
-i.segment.stats map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue,odm_071724_ortho.vari raster_statistics="mean,stddev,sum" vectormap=segment_stats processes=3
+i.segment.stats map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue raster_statistics="mean,stddev,sum" vectormap=segment_stats processes=3
 ```
 ### Classification
 
@@ -303,23 +298,26 @@ One benifit of using the RandomForest classification model is that it utilizes a
 
 #### Train Model
 
-[r.learn.train](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html)
+To train the model you will use [r.learn.train](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html). The random forest model requires us to provide a [training_map](resources/training.gpkg) and our imagery group. To save time use our `rgb_group`, but in practice you should using the `odm_071724_ortho` group that contains the additional features you created.
+
+Training data can be downloaded here: [Download Training Data](resources/training.gpkg) or you can create your own using the `g.gui.iclass` tool found at `Imagery -> Classify image -> Interactive input for supervised classification`.
+
 
 :::{.callout-warning}
 Model training can take a long time to run. If you are having issues running on your local machine try resampling the data to 1m resolution.
 :::
 
 ```bash
-# train a random forest classification model using r.learn.train
 r.learn.train group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3
 ```
 
+The trained model will be save as `rf_model.gz`.
+
 #### Run Model
 
-[r.learn.predict](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.predict.html)
+To use the model run [r.learn.predict](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.predict.html) by loading the model (`rf_model.gz`) you create during training.
 
 ```bash
-# perform prediction using r.learn.predict
 r.learn.predict group=rgb_group load_model=rf_model.gz output=rf_basic_classification
 ```
 
