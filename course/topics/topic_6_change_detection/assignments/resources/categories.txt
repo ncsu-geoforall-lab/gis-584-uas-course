@@ -1,0 +1,9 @@
+1:buildings
+2:trees
+3:fields
+4:ground
+5:road
+6:car
+7:crop
+8:farm_equipment
+9:bale

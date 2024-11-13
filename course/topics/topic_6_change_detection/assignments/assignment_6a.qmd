@@ -11,12 +11,12 @@ toc-depth: 4
 
 ## Outline
 
-- Visual Change
-- Binary Change
+<!-- - Visual Change
+- Binary Change -->
 - Feature Engineering
+- Segmentation
 - Image Classification
 - Validation
-- Thematic Change
 
 ## Data
 
@@ -46,34 +46,34 @@ g.region raster=odm_071724_ortho.1
 **Task:** What is the spatial resolution and how many pixels are include in the compuational region?
 :::
 
-### Find overlaping areas
+<!-- ### Find overlaping areas
 
 ```bash
   r.series input="ortho_2017_06_02,ortho_2017_06_02" output="series_count" method=count
-```
+``` -->
 
-:::{.callout-important}
+<!-- :::{.callout-important}
 **Task:** Create a raster mask using raster algebra (`r.mapcalc`) to generate a raster where if both rasters overlap set the new raster to equal `1` else `null`.
-:::
+::: -->
 
-### Visual Change Detection
+<!-- ### Visual Change Detection
 
-Map Swipe Tool `File -> Map Swipe` select your top left raster map and bottom/right raster map and press `OK`. Use the slider to examine the differences between to two dates.
+Map Swipe Tool `File -> Map Swipe` select your top left raster map and bottom/right raster map and press `OK`. Use the slider to examine the differences between to two dates. -->
 
-:::{.callout-important}
+<!-- :::{.callout-important}
 **Task:** Describe the difference you see between the two dates.
-:::
+::: -->
 
-### Binary Change Detection
+<!-- ### Binary Change Detection -->
 
-### Image differencing
+<!-- ### Image differencing
 
 ```bash
 r.mapcalc expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  -  ortho_2017_06_02@GIS_584_6a
 r.colors -e map=rgb_diff@GIS_584_6a color=bcyr
-```
+``` -->
 
-### Thematic Change Detection
+### Image Classification
 
 Let's create an RGB color composite from our ortho bands.
 
@@ -81,7 +81,14 @@ Let's create an RGB color composite from our ortho bands.
 r.composite -d red=odm_071724_ortho.1 green=odm_071724_ortho.2 blue=odm_071724_ortho.3 output=odm_071724_ortho.rgb
 ```
 
-### Feature Extraction
+Let's create a raster mask for our analysis.
+
+```bash
+r.mapcalc expression="img_mask = if( odm_071724_ortho.rgb@GIS_584_6a, 1, null())"
+r.mask raster=img_mask
+```
+
+### Spectral Feature Extraction
 
 #### Spectral Indices
 
@@ -140,6 +147,8 @@ We will now compute a *smooth* layer to remove noise from our data with the [r.n
 r.neighbors input=odm_071724_ortho.red size=27 method=average output=odm_071724_ortho.red.27x27mean
 ```
 
+![27x27 Moving Window Mean](../images/low_pass_filter_mean_moving_window_red.png){width=45%}
+
 #### High Pass Filters
 
 We will now create a layer to define our edges using the `zero-crossings` edge detection method implemented as [i.zc](https://grass.osgeo.org/grass-stable/manuals/i.zc.html) in GRASS GIS.
@@ -170,23 +179,35 @@ r.neighbors -c input=odm_071724_dsm size=3 method=maximum output=odm_071724_dsm.
 
 #### Texture Features
 
-Now we will calcuate texture features for our green band using [r.texture](https://grass.osgeo.org/grass-stable/manuals/r.texture.html) which implements Haralick et al. (1973) Grey level co-occurrence matrix (GLCM).
+Now we will calcuate the texture features Angular Second Moment (asm), Correlation (corr), and Contrast (con)
+ for our green band using [r.texture](https://grass.osgeo.org/grass-stable/manuals/r.texture.html) which implements Haralick et al. (1973) Grey level co-occurrence matrix (GLCM).
+
+
 
 ```bash
 r.texture odm_071724_ortho.green output=odm_071724_ortho.green_texture method="asm,contrast,corr" -s
 ```
 
-#### Topographic Data
+![Angular Second Moment](../images/glcm_asm45.png){width=25%}
+![Correlation](../images/glcm_cor45.png){width=25%}
+![Contrast](../images/glcm_contr45.png){width=25%}
+
+### Topographic Features Extraction
+
+Let's now import our DSM data from the UAS flight.
 
 ```bash
-r.import resample=bilinear extent=region input=dsm.tif output=odm_071724_dsm
+r.import resample=bilinear extent=region input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif output=odm_071724_dsm
+
+# (Optional) Set the color table and create a relief map for viusalization
 r.colors map=odm_071724_dsm color=elevation
+r.relief input=odm_071724_dsm output=dsm_relief
 ```
 
-Calculate slope and aspect
+Calculate slope and aspect using [r.slope.aspect](https://grass.osgeo.org/grass-stable/manuals/r.slope.aspect.html)
 
 ```bash
-r.slope.aspect elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv dx=odm_071724_dx dy=odm_071724_dy
+r.slope.aspect elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv
 ```
 
 Now let's derive terrain forms form the the DSM using [r.geomorphon](https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html).
@@ -197,14 +218,24 @@ r.geomorphon elevation=odm_071724_dsm@GIS_584_6a forms=geomorphon search=3 skip=
 
 #### Create Imagery Group
 
-GRASS GIS uses imagery groups to manage imagery data.
+GRASS GIS uses imagery groups ([i.group](https://grass.osgeo.org/grass84/manuals/i.group.html)) to manage imagery data.
+
+Let's start by creating a new imagery group called `odm_071724_othro` with the subgroup `vis_bands` and add the red, green, and blue bands to the group/subgroup.
 
 ```bash
-i.group group=vis_bands subgroup=vis_bands input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue
+i.group group=rgb_group subgroup=vis_bands input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue
 ```
 
+You can now check that it worked by viewing which rasters are in the group (`odm_071724_ortho`) and subgroup (`vis_bands`).
+
 ```bash
-i.group group=analy_bands subgroup=analy_bands input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue,odm_071724_ortho.vari,odm_071724_ortho.blue,odm_071724_ortho.red.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,odm_071724_pcurv,odm_071724_tcurv,geomorphon,odm_071724_ortho.green.7x7variance
+i.group -l group=rgb_group subgroup=vis_bands
+```
+
+Let's now add some of our other derived features to the group (`odm_071724_ortho`) in a new subgroup called `analysis_bands`.
+
+```bash
+i.group group=odm_071724_ortho subgroup=analysis_bands input=odm_071724_ortho.vari,odm_071724_ortho.blue,odm_071724_ortho.red.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,geomorphon,odm_071724_ortho.green.7x7variance
 ```
 
 ### Image Segmentation
@@ -215,6 +246,8 @@ Install [i.superpixels.slic](https://grass.osgeo.org/grass-stable/manuals/addons
 g.extension i.superpixels.slic
 ```
 
+Let's see if we can segment the fields.
+
 ```bash
 i.superpixels.slic input=vis_bands output=superpixels num_pixels=2000
 # r.to.vect input=superpixels output=superpixels type=area
@@ -223,7 +256,7 @@ i.superpixels.slic input=vis_bands output=superpixels num_pixels=2000
 Let's see if we can improve our segmentation to capture individual crops in the field.
 
 ```bash
-i.superpixels.slic input=analy_bands output=superpixels_analy step=7 compactness=0.8 minsize=15 memory=2000
+i.superpixels.slic input=odm_071724_ortho output=superpixels_analysis step=7 compactness=0.8 minsize=15 memory=2000
 ```
 
 We can now evaluate our segments statistics.
@@ -237,7 +270,7 @@ v.rast.stats map=superpixels_analy raster=odm_071724_ortho.vari column_prefix=va
 Let's viusalize the result.
 
 ```bash
-g.copy vector=superpixels,superpixels_color
+g.copy vector=superpixels_analy,superpixels_color
 v.colors map=superpixels_color use=attr column=vari_average color=ndvi
 d.vect map=superpixels_color width=2 icon=basic/point
 d.vect map=superpixels fill_color=none
@@ -255,38 +288,140 @@ We will now compute the mean, standard deviation, and sum for each feature per s
 
 ```bash
 i.segment.stats map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue,odm_071724_ortho.vari raster_statistics="mean,stddev,sum" vectormap=segment_stats processes=3
-
 ```
 ### Classification
 
+For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS GIS addon [r.learn.ml](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml.html) which gives us access to models from the [scikit learn](https://scikit-learn.org/stable/) python library.
+
+```bash
+g.extension r.learn.ml
+```
+
 #### Sampling
+
+One benifit of using the RandomForest classification model is that it utilizes a sampling strategy know as *bootstraping*. It does this by using out-of-bag samples (OOB) for each decision tree in the model. The OOB samples are used to calculate error, which works as a cross-validation mechanism and helps maintain diversity between decision trees.  
 
 #### Train Model
 
-[r.learn.ml2](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml2.html)
+[r.learn.train](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html)
+
+:::{.callout-warning}
+Model training can take a long time to run. If you are having issues running on your local machine try resampling the data to 1m resolution.
+:::
 
 ```bash
-g.region raster=landclass96 -p
-r.random input=landclass96 npoints=1000 raster=training_pixels
+# train a random forest classification model using r.learn.train
+r.learn.train group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3
 ```
 
 #### Run Model
 
+[r.learn.predict](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.predict.html)
+
 ```bash
-# train a random forest classification model using r.learn.train
-r.learn.train group=analy_bands training_map=training_pixels \
-	model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz
-
 # perform prediction using r.learn.predict
-r.learn.predict group=lsat7_2000 load_model=rf_model.gz output=rf_classification
+r.learn.predict group=rgb_group load_model=rf_model.gz output=rf_basic_classification
+```
 
+Now we can check the categories and set the colors.
+
+You can download the color table here [category_colors.txt](resources/category_colors.txt) or copy the rules here
+
+```bash
+1 255:0:0
+2 0:128:0
+3 255:255:0
+4 139:105:20
+5 127:127:127
+6 128:0:128
+7 144:238:144
+8 165:42:42
+9 255:165:0
+nv white
+```
+
+```bash
 # check raster categories - they are automatically applied to the classification output
 r.category rf_classification
-
-# copy color scheme from landclass training map to result
-r.colors rf_classification raster=training_pixels
+r.colors map=rf_basic_classification rules=category_colors.txt
 ```
+![](../images/basic_classification.png)
 
 #### Model Validation
 
-### Post-Classifcation Thematic Change
+We will now evaluate our model by looking at the models confussion matrix, overvall accuracy, and kappa coefficient using the GRASS addon [r.confusionmatrix](https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html).
+
+To begin we first need to install the addon.
+
+```bash
+g.extension r.confusionmatrix
+```
+
+Now run [r.confusionmatrix](https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html)  
+
+```bash
+r.confusionmatrix classification=rf_basic_classification raster_reference=training_rf -m -d
+```
+
+The output for our classified model will look similar to below
+
+**Overall accuracy**
+
+Number of correct pixels / total number of pixels
+
+`Overall Accuracy, 97.07`
+
+
+**User Accuracy**
+
+* From the perspective of the user of the classified map, how accurate is the map?
+* For a given class, how many of the pixels on the map are actually what they say they are?
+* Calculated as: Number correctly identified in a given map class / Number claimed to be in that map class
+
+**Producer Accuracy**
+
+* From the perspective of the maker of the classified map, how accurate is the map?
+* For a given class in reference plots, how many of the pixels on the map are labeled correctly?
+* Calculated as: Number correctly identified in ref. plots of a given class / Number actually in that reference class
+
+**Commission Error**
+
+Commission error refers to sites that are classified as to reference sites that were left out (or omitted) from the correct class in the classified map. Commission errors are calculated by reviewing the classified sites for incorrect classifications.
+
+Commission Error = 100 % - User Accuracy
+
+**Omission Error**
+
+Omission error refers to reference sites that were left out (or omitted) from the correct class in the classified map. The real land cover type was left out or omitted from the classified map.
+
+Omission Error = 100 % - Producer Accuracy
+
+**Kappa coefficient**
+
+It characterizes the degree of matching between reference data set and classification.
+
+- **Kappa = 0**: indicates that obtained agreement equals chance agreement.
+- **Kappa > 0**: indicates that obtained agreement is greater than chance agreement.
+- **Kappa < 0**: indicates that obtained agreement is smaller than chance agreement.
+- **Kappa = 1**: is perfect agreement.
+
+`Kappa coefficient, 0.85`
+
+:::{.callout-important}
+**Task:** Interpret how well the model is performing. Which classes are performing well? Which need to be improved?
+:::
+
+|       Category         | buildings            | trees               | fields               | ground               | road               | car               | crop               |  	farm equipment               | bale               | User Accuracy   | Commission Error |
+|----------------|---------------|-----------------|-----------------|----------------|---------------|-----------------|-----------------|---------------|-----------------|-----------------|
+|   buildings     | 80379           | 63              | 22              | 6               | 70              | 27              | 1               | 34              | 24              | 99.69           | 0.31            |
+|   trees         | 118             | 264667          | 25671           | 0               | 237             | 2               | 105             | 44              | 0               | 91.0            | 9.0             |
+|                 fields        | 610             | 77160           | 6187667         | 16564           | 53766           | 268             | 762             | 2636            | 133             | 97.6            | 2.4             |
+|                 ground        | 57              | 1               | 8871            | 45799           | 3132            | 1               | 2               | 151             | 0               | 78.94           | 21.06           |
+|                 road          | 409             | 58              | 7070            | 1559            | 221794          | 1709            | 1               | 395             | 77              | 95.16           | 4.84            |
+|                 car           | 75              | 2               | 38              | 0               | 2694            | 19216           | 0               | 18              | 1095            | 83.05           | 16.95           |
+|                 crop          | 0               | 1               | 2               | 0               | 2               | 0               | 36              | 0               | 0               | 87.8            | 12.2            |
+|                 farm equipment| 32              | 9               | 88              | 5               | 46              | 19              | 0               | 4311            | 1               | 95.57           | 4.43            |
+|                 bale          | 20              | 0               | 2               | 0               | 5               | 2               | 0               | 1               | 719             | 95.99           | 4.01            |
+|                 Producer Accuracy | 98.38       | 77.4            | 99.33           | 71.64           | 78.72           | 90.45           | 3.97            | 56.8            | 35.09                   |
+
+
