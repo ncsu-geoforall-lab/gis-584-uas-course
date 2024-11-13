@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -163,9 +192,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
   <ul>
+  <li><a href="#find-overlaping-areas" id="toc-find-overlaping-areas" class="nav-link" data-scroll-target="#find-overlaping-areas">Find overlaping areas</a></li>
+  <li><a href="#visual-change-detection" id="toc-visual-change-detection" class="nav-link" data-scroll-target="#visual-change-detection">Visual Change Detection</a></li>
+  <li><a href="#binary-change-detection" id="toc-binary-change-detection" class="nav-link" data-scroll-target="#binary-change-detection">Binary Change Detection</a></li>
   <li><a href="#image-differencing" id="toc-image-differencing" class="nav-link" data-scroll-target="#image-differencing">Image differencing</a></li>
-  <li><a href="#image-segmentation" id="toc-image-segmentation" class="nav-link" data-scroll-target="#image-segmentation">Image Segmentation</a></li>
+  <li><a href="#thematic-change-detection" id="toc-thematic-change-detection" class="nav-link" data-scroll-target="#thematic-change-detection">Thematic Change Detection</a></li>
+  <li><a href="#feature-extraction" id="toc-feature-extraction" class="nav-link" data-scroll-target="#feature-extraction">Feature Extraction</a>
+  <ul class="collapse">
+  <li><a href="#spectral-indices" id="toc-spectral-indices" class="nav-link" data-scroll-target="#spectral-indices">Spectral Indices</a></li>
+  <li><a href="#low-pass-filters" id="toc-low-pass-filters" class="nav-link" data-scroll-target="#low-pass-filters">Low Pass Filters</a></li>
+  <li><a href="#high-pass-filters" id="toc-high-pass-filters" class="nav-link" data-scroll-target="#high-pass-filters">High Pass Filters</a></li>
+  <li><a href="#texture-features" id="toc-texture-features" class="nav-link" data-scroll-target="#texture-features">Texture Features</a></li>
+  <li><a href="#topographic-data" id="toc-topographic-data" class="nav-link" data-scroll-target="#topographic-data">Topographic Data</a></li>
   <li><a href="#create-imagery-group" id="toc-create-imagery-group" class="nav-link" data-scroll-target="#create-imagery-group">Create Imagery Group</a></li>
+  </ul></li>
+  <li><a href="#image-segmentation" id="toc-image-segmentation" class="nav-link" data-scroll-target="#image-segmentation">Image Segmentation</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a>
+  <ul class="collapse">
+  <li><a href="#sampling" id="toc-sampling" class="nav-link" data-scroll-target="#sampling">Sampling</a></li>
+  <li><a href="#train-model" id="toc-train-model" class="nav-link" data-scroll-target="#train-model">Train Model</a></li>
+  <li><a href="#run-model" id="toc-run-model" class="nav-link" data-scroll-target="#run-model">Run Model</a></li>
+  <li><a href="#model-validation" id="toc-model-validation" class="nav-link" data-scroll-target="#model-validation">Model Validation</a></li>
+  </ul></li>
+  <li><a href="#post-classifcation-thematic-change" id="toc-post-classifcation-thematic-change" class="nav-link" data-scroll-target="#post-classifcation-thematic-change">Post-Classifcation Thematic Change</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -206,38 +255,242 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <ul>
-<li></li>
-<li></li>
-<li></li>
+<li>Visual Change</li>
+<li>Binary Change</li>
+<li>Feature Engineering</li>
+<li>Image Classification</li>
+<li>Validation</li>
+<li>Thematic Change</li>
 </ul>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <p>Download imagery data from March and June flights during 2017.</p>
+<!-- - [Orthos June 2017](https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack) -->
 <ul>
-<li><a href="{{< var.data.lake_wheeler_flight_Mar_2017_orthos  >}}">Orthos March 2017</a></li>
-<li><a href="{{< var.data.lake_wheeler_flight_Jun_2017_orthos  >}}">Orthos June 2017</a></li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif">Orthos July 2024</a></li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif">DSM July 2024</a></li>
 </ul>
-<p>Unpack the data using the <code>r.unpack</code> command.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=ortho_2017_03_29.pack</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=ortho_2017_06_02.pack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="workflow" class="level2">
 <h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
+<p>Create a new mapset within your <code>Lake_Wheeler_NCspm</code> project and set your working directory.</p>
+<p>Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is save as a <a href="http://cogeo.org/"><em>Cloud Optimized GeoTIFF (COG)</em></a> which allows us to directory import the data using r.import with needing to download the data beforehand.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif resample=nearest output=odm_071724_ortho</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s set the compuational region to the ortho imagery.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=odm_071724_ortho.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task:</strong> What is the spatial resolution and how many pixels are include in the compuational region?</p>
+</div>
+</div>
+<section id="find-overlaping-areas" class="level3">
+<h3 class="anchored" data-anchor-id="find-overlaping-areas">Find overlaping areas</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">r.series</span> input=<span class="st">"ortho_2017_06_02,ortho_2017_06_02"</span> output=<span class="st">"series_count"</span> method=count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task:</strong> Create a raster mask using raster algebra (<code>r.mapcalc</code>) to generate a raster where if both rasters overlap set the new raster to equal <code>1</code> else <code>null</code>.</p>
+</div>
+</div>
+</section>
+<section id="visual-change-detection" class="level3">
+<h3 class="anchored" data-anchor-id="visual-change-detection">Visual Change Detection</h3>
+<p>Map Swipe Tool <code>File -&gt; Map Swipe</code> select your top left raster map and bottom/right raster map and press <code>OK</code>. Use the slider to examine the differences between to two dates.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task:</strong> Describe the difference you see between the two dates.</p>
+</div>
+</div>
+</section>
+<section id="binary-change-detection" class="level3">
+<h3 class="anchored" data-anchor-id="binary-change-detection">Binary Change Detection</h3>
+</section>
 <section id="image-differencing" class="level3">
 <h3 class="anchored" data-anchor-id="image-differencing">Image differencing</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  <span class="at">-</span>  ortho_2017_06_02@GIS_584_6a</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=rgb_diff@GIS_584_6a color=bcyr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  <span class="at">-</span>  ortho_2017_06_02@GIS_584_6a</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=rgb_diff@GIS_584_6a color=bcyr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="thematic-change-detection" class="level3">
+<h3 class="anchored" data-anchor-id="thematic-change-detection">Thematic Change Detection</h3>
+<p>Let’s create an RGB color composite from our ortho bands.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.composite</span> <span class="at">-d</span> red=odm_071724_ortho.1 green=odm_071724_ortho.2 blue=odm_071724_ortho.3 output=odm_071724_ortho.rgb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="feature-extraction" class="level3">
+<h3 class="anchored" data-anchor-id="feature-extraction">Feature Extraction</h3>
+<section id="spectral-indices" class="level4">
+<h4 class="anchored" data-anchor-id="spectral-indices">Spectral Indices</h4>
+<p>Calculate <code>VARI</code> index</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s look at the univariate statistics of our <code>vari_2024</code> raster.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> vari_2024</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task:</strong> What is the range from the <code>vari_2024</code> univariate statistics?</p>
+</div>
+</div>
+<p>Now let’s look at the metadata for each of our bands.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.info</span> odm_071724_ortho.1</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.info</span> odm_071724_ortho.2</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.info</span> odm_071724_ortho.3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Our original ortho bands were unsigned 8bit integers (a <code>CELL</code> data type in GRASS) ranging from 0-255 in value. However, when we calulate VARI the data is expected to be scaled from 0-1. To do this we must rescale our band data and cast our output data to Float32.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.red = if(isnull(odm_071724_ortho.1), null(), float(odm_071724_ortho.1) / 255.0)"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.green = if(isnull(odm_071724_ortho.2), null(), float(odm_071724_ortho.2) / 255.0)"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.blue = if(isnull(odm_071724_ortho.3), null(), float(odm_071724_ortho.3) / 255.0)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now let’s compute VARI for our dataset.</p>
+<p><span class="math display">\[
+VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
+\]</span></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the same color palette as NDVI</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_ortho.vari color=ndvi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/lake_wheeler_vari.png" class="img-fluid figure-img" style="width:45.0%"></p>
+<figcaption>VARI Example</figcaption>
+</figure>
+</div>
+</section>
+<section id="low-pass-filters" class="level4">
+<h4 class="anchored" data-anchor-id="low-pass-filters">Low Pass Filters</h4>
+<p>We will now compute a <em>smooth</em> layer to remove noise from our data with the <a href="https://grass.osgeo.org/grass84/manuals/r.neighbors.html">r.neighbors</a> tool. To do this we will compute the mean value for each pixel using a 27x27 moving window.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=odm_071724_ortho.red size=27 method=average output=odm_071724_ortho.red.27x27mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="high-pass-filters" class="level4">
+<h4 class="anchored" data-anchor-id="high-pass-filters">High Pass Filters</h4>
+<p>We will now create a layer to define our edges using the <code>zero-crossings</code> edge detection method implemented as <a href="https://grass.osgeo.org/grass-stable/manuals/i.zc.html">i.zc</a> in GRASS GIS.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.zc</span> <span class="at">--overwrite</span> input=odm_071724_ortho.vari output=odm_071724_ortho.vari.zc threshold=0.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> <span class="at">-c</span> input=odm_071724_ortho.green size=7 method=variance output=odm_071724_ortho.green.7x7variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="../images/high_pass_filter_variance_moving_window_green.png" class="img-fluid" style="width:40.0%"> <img src="../images/high_pass_filter_variance_moving_window_green2.png" class="img-fluid" style="width:40.0%"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task:</strong> Find a nice color scheme to display <code>odm_071724_ortho.green.7x7variance</code> and describe what information can be derived from the map.</p>
+</div>
+</div>
+<!-- ```bash
+r.neighbors -c input=odm_071724_ortho.green size=7 method=range output=odm_071724_ortho.green.range
+``` -->
+<!-- ```bash
+r.neighbors -c input=odm_071724_dsm size=3 method=range output=odm_071724_dsm.3x3range
+r.neighbors -c input=odm_071724_dsm size=3 method=stddev output=odm_071724_dsm.3x3stddev
+r.neighbors -c input=odm_071724_dsm size=3 method=maximum output=odm_071724_dsm.3x3maximum
+``` -->
+</section>
+<section id="texture-features" class="level4">
+<h4 class="anchored" data-anchor-id="texture-features">Texture Features</h4>
+<p>Now we will calcuate texture features for our green band using <a href="https://grass.osgeo.org/grass-stable/manuals/r.texture.html">r.texture</a> which implements Haralick et al.&nbsp;(1973) Grey level co-occurrence matrix (GLCM).</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.texture</span> odm_071724_ortho.green output=odm_071724_ortho.green_texture method=<span class="st">"asm,contrast,corr"</span> <span class="at">-s</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="topographic-data" class="level4">
+<h4 class="anchored" data-anchor-id="topographic-data">Topographic Data</h4>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> resample=bilinear extent=region input=dsm.tif output=odm_071724_dsm</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_dsm color=elevation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calculate slope and aspect</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv dx=odm_071724_dx dy=odm_071724_dy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now let’s derive terrain forms form the the DSM using <a href="https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html">r.geomorphon</a>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.geomorphon</span> elevation=odm_071724_dsm@GIS_584_6a forms=geomorphon search=3 skip=0 flat=1 dist=0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="create-imagery-group" class="level4">
+<h4 class="anchored" data-anchor-id="create-imagery-group">Create Imagery Group</h4>
+<p>GRASS GIS uses imagery groups to manage imagery data.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=vis_bands subgroup=vis_bands input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=analy_bands subgroup=analy_bands input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue,odm_071724_ortho.vari,odm_071724_ortho.blue,odm_071724_ortho.red.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,odm_071724_pcurv,odm_071724_tcurv,geomorphon,odm_071724_ortho.green.7x7variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="image-segmentation" class="level3">
 <h3 class="anchored" data-anchor-id="image-segmentation">Image Segmentation</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.superpixels.slic</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=lsat output=superpixels num_pixels=2000</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.to.vect</span> input=superpixels output=superpixels type=area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Install <a href="https://grass.osgeo.org/grass-stable/manuals/addons/i.superpixels.slic.html">i.superpixels.slic</a> GRASS Addon using the <code>g.extension</code> command.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.superpixels.slic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=vis_bands output=superpixels num_pixels=2000</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># r.to.vect input=superpixels output=superpixels type=area</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s see if we can improve our segmentation to capture individual crops in the field.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=analy_bands output=superpixels_analy step=7 compactness=0.8 minsize=15 memory=2000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can now evaluate our segments statistics.</p>
+<p>For example we can calculate the mean VARI value for each vector segment.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.rast.stats</span> map=superpixels_analy raster=odm_071724_ortho.vari column_prefix=vari method=average</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s viusalize the result.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> vector=superpixels,superpixels_color</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.colors</span> map=superpixels_color use=attr column=vari_average color=ndvi</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> map=superpixels_color width=2 icon=basic/point</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> map=superpixels fill_color=none</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For our object based classification we will use <a href="https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html">i.segment.stats</a> to generate multiple statistics about our segments at once.</p>
+<p>To do this we must first install <a href="https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html">i.segment.stats</a>.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.segment.stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We will now compute the mean, standard deviation, and sum for each feature per segment. We also compute details about the geomertry of each segment such as the area, perimeter, and compactness.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.segment.stats</span> map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue,odm_071724_ortho.vari raster_statistics=<span class="st">"mean,stddev,sum"</span> vectormap=segment_stats processes=3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="create-imagery-group" class="level3">
-<h3 class="anchored" data-anchor-id="create-imagery-group">Create Imagery Group</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=vis_bands subgroup=vis_bands input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="classification" class="level3">
+<h3 class="anchored" data-anchor-id="classification">Classification</h3>
+<section id="sampling" class="level4">
+<h4 class="anchored" data-anchor-id="sampling">Sampling</h4>
+</section>
+<section id="train-model" class="level4">
+<h4 class="anchored" data-anchor-id="train-model">Train Model</h4>
+<p><a href="https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml2.html">r.learn.ml2</a></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=landclass96 <span class="at">-p</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.random</span> input=landclass96 npoints=1000 raster=training_pixels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-model" class="level4">
+<h4 class="anchored" data-anchor-id="run-model">Run Model</h4>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># train a random forest classification model using r.learn.train</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=analy_bands training_map=training_pixels <span class="dt">\</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># perform prediction using r.learn.predict</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=lsat7_2000 load_model=rf_model.gz output=rf_classification</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># check raster categories - they are automatically applied to the classification output</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> rf_classification</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># copy color scheme from landclass training map to result</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> rf_classification raster=training_pixels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="model-validation" class="level4">
+<h4 class="anchored" data-anchor-id="model-validation">Model Validation</h4>
+</section>
+</section>
+<section id="post-classifcation-thematic-change" class="level3">
+<h3 class="anchored" data-anchor-id="post-classifcation-thematic-change">Post-Classifcation Thematic Change</h3>
 
 
 </section>
