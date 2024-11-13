@@ -1,5 +1,5 @@
 ---
-topic: "Topic 6: Image Classification and Change Detection"
+topic: "Topic 6: UAS Image Classification and Change Detection"
 title: "A. Change Detection"
 subtitle: "Topic 6: Advanced Analytics"
 date: 11/8/2024
@@ -7,7 +7,7 @@ assignment-due-date: 11/13/2024
 author: Corey White
 ---
 
-# UAS Change Detectio
+# UAS Image Classification and Change Detection
 
 ## Outline
 
