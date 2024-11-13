@@ -14,3 +14,4 @@ folium==0.17.0
 scikit-learn==
 segment-geospatial==0.12.2
 scikit-learn==1.5.2
+ultralytics
