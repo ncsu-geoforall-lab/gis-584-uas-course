@@ -310,15 +310,15 @@ Map Swipe Tool `File -> Map Swipe` select your top left raster map and bottom/ri
 <!-- ### Image differencing
 
 ```bash
-r.mapcalc expression=rgb_diff = ortho_2017_03_29@GIS_584_6a  -  ortho_2017_06_02@GIS_584_6a
-r.colors -e map=rgb_diff@GIS_584_6a color=bcyr
+r.mapcalc expression=rgb_diff = ortho_2017_03_29  -  ortho_2017_06_02
+r.colors -e map=rgb_diff color=bcyr
 ``` -->
 <section id="image-classification" class="level3">
 <h3 class="anchored" data-anchor-id="image-classification">Image Classification</h3>
 <p>Let’s create an RGB color composite from our ortho bands.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.composite</span> <span class="at">-d</span> red=odm_071724_ortho.1 green=odm_071724_ortho.2 blue=odm_071724_ortho.3 output=odm_071724_ortho.rgb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s create a raster mask for our analysis.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"img_mask = if( odm_071724_ortho.rgb@GIS_584_6a, 1, null())"</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"img_mask = if( odm_071724_ortho.rgb, 1, null())"</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> raster=img_mask</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="spectral-feature-extraction" class="level3">
@@ -428,7 +428,7 @@ r.neighbors -c input=odm_071724_dsm size=3 method=maximum output=odm_071724_dsm.
 <section id="terrain-forms" class="level4">
 <h4 class="anchored" data-anchor-id="terrain-forms">Terrain Forms</h4>
 <p>Now derive terrain forms form the the DSM using <a href="https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html">r.geomorphon</a>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.geomorphon</span> elevation=odm_071724_dsm@GIS_584_6a forms=geomorphon search=3 skip=0 flat=1 dist=0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.geomorphon</span> elevation=odm_071724_dsm forms=geomorphon search=3 skip=0 flat=1 dist=0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="create-imagery-group" class="level3">
@@ -509,7 +509,7 @@ Caution
 </div>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=https://storage.googleapis.com/stac-data/Spatial_Data/LandUse/NLCD_Land_Cover_L48/nlcd_2019_cog/nlcd_2019_cog.tif output=nlcd_2019 extent=region resolution=region resample=nearest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Start by sampling 1000 points from <code>nlcd_2019</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.random</span> input=nlcd_2019 npoints=1000 raster=nlcd_2019_random_pixels vector=nlcd_2019_random_pixels</span>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.random</span> <span class="at">-s</span> input=nlcd_2019 npoints=1000 raster=nlcd_2019_random_pixels vector=nlcd_2019_random_pixels</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the sample data</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> nlcd_2019_random_pixels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
