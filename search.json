@@ -1085,6 +1085,13 @@
     "text": "Classification Methods\n\n\nSupervised Classification Algorithms\n\nRandom Forest\nSupport Vector Machine (SVN)\nMaximum Likelihood Classification (MLC)\nArtifical Neural Networks (ANN)\n\n\nUnsupervised Classification Algorithms\n\nK-Means Clustering\nIterative Self-Organizing Data Analysis (ISODATA)\nSpectral Change Vector Analysis"
   },
   {
+    "objectID": "course/topics/topic_6_change_detection/lectures/lecture_6a.html#classification-results",
+    "href": "course/topics/topic_6_change_detection/lectures/lecture_6a.html#classification-results",
+    "title": "UAS-based Change Detection",
+    "section": "Classification Results",
+    "text": "Classification Results"
+  },
+  {
     "objectID": "course/topics/topic_6_change_detection/lectures/lecture_6a.html#model-validation",
     "href": "course/topics/topic_6_change_detection/lectures/lecture_6a.html#model-validation",
     "title": "UAS-based Change Detection",
