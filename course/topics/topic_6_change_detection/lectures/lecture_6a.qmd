@@ -275,6 +275,10 @@ Identify Change or no change
 :::
 :::
 
+## Classification Results
+
+![](../images/basic_classification.png){width=75%}
+
 ## Model Validation {.smaller}
 
 #### Confusion Matrix
