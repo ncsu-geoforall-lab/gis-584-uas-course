@@ -92,7 +92,7 @@ r.mask raster=img_mask
 
 #### Spectral Indices
 
-Calculate `VARI` index
+Calculate `VARI (Visible Atmospherically Resistant Index)` index [Gitelson et al. (2002)](https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&context=natrespapers).
 
 ```bash
 r.mapcalc expression="vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"
@@ -131,11 +131,57 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 $$
 
 ```bash
-r.mapcalc expression="odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"
+r.mapcalc --overwrite expression="odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"
 
 # Use the same color palette as NDVI
 r.colors map=odm_071724_ortho.vari color=ndvi
 ```
+
+Let's examine the univariate statistics.
+
+```bash
+r.univar odm_071724_ortho.vari
+```
+
+We can see that our `min`, `max`, and `variatoin coefficient` are quite extreme as we would expect the results to fall within the range -1.0 - 1.0.
+
+This may be casued by outliers in our data where values in our denominator are zero or very close to zero. To fix this we can add a small constant to our denominator called `epsilon` to avoid an possible divison by zero errors.
+
+```bash
+r.mapcalc --overwrite expression="odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue + 0.01)"
+
+# Use the same color palette as NDVI
+r.colors map=odm_071724_ortho.vari color=ndvi
+```
+
+Now let's recheck the univariate statistics.
+
+```bash
+r.univar odm_071724_ortho.vari
+```
+
+Although the `min`, `max`, and `variatoin coefficient` have improved they are still indicating outliers are skewing our data.
+
+To address this create a mask for cells where the denominator is greater than 0.1. 
+
+```bash
+r.mapcalc --overwrite expression="vari_mask = if((odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue) > 0.3, 1, null())"
+
+r.mapcalc --overwrite expression="odm_071724_ortho.vari = if(vari_mask, (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue), null())"
+```
+
+Now examine the univariate statistics again.
+
+```bash
+r.univar odm_071724_ortho.vari
+d.rast odm_071724_ortho.vari
+d.rast vari_mask
+```
+
+:::{.callout-important}
+**Task:** Examine areas that were excluded by the `vari_mask`. What type of things are responsible for the outliers? How else might you address these issues?
+:::
+
 
 ![VARI Example](../images/lake_wheeler_vari.png){width=45%}
 
