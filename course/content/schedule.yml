@@ -172,8 +172,8 @@ schedule:
     topic: "Topic 6: UAS-based Change Detection"
     subtopic: "[6A. Change Detection with UAS Data](topics/topic_6_change_detection/part_6a.qmd)"
     details:
-      - "Mon: [Lecture 5B](topics/topic_6_change_detection/lectures/lecture_6a.qmd)"
-      - "Wed: Assignment: Urban Change Detection with UAS Data"
+      - "Mon: [Lecture 6A](topics/topic_6_change_detection/lectures/lecture_6a.qmd)"
+      - "Wed: [Assignment 6A: UAS Image Classification](topics/topic_6_change_detection/assignments/assignment_6a.qmd)"
       - "Project: Perform analysis and/or modeling"
     due_date: "Nov. 20"
     no_class: false
