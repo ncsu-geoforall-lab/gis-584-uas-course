@@ -325,7 +325,7 @@ r.colors -e map=rgb_diff color=bcyr
 <h3 class="anchored" data-anchor-id="spectral-feature-extraction">Spectral Feature Extraction</h3>
 <section id="spectral-indices" class="level4">
 <h4 class="anchored" data-anchor-id="spectral-indices">Spectral Indices</h4>
-<p>Calculate <code>VARI</code> index</p>
+<p>Calculate <code>VARI (Visible Atmospherically Resistant Index)</code> index <a href="https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&amp;context=natrespapers">Gitelson et al.&nbsp;(2002)</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s look at the univariate statistics of our <code>vari_2024</code> raster.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> vari_2024</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -354,10 +354,42 @@ Important
 <p><span class="math display">\[
 VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 \]</span></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"</span></span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the same color palette as NDVI</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_ortho.vari color=ndvi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s examine the univariate statistics.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> odm_071724_ortho.vari</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can see that our <code>min</code>, <code>max</code>, and <code>variatoin coefficient</code> are quite extreme as we would expect the results to fall within the range -1.0 - 1.0.</p>
+<p>This may be casued by outliers in our data where values in our denominator are zero or very close to zero. To fix this we can add a small constant to our denominator called <code>epsilon</code> to avoid an possible divison by zero errors.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue + 0.01)"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the same color palette as NDVI</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_ortho.vari color=ndvi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now let’s recheck the univariate statistics.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> odm_071724_ortho.vari</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Although the <code>min</code>, <code>max</code>, and <code>variatoin coefficient</code> have improved they are still indicating outliers are skewing our data.</p>
+<p>To address this create a mask for cells where the denominator is greater than 0.1.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"vari_mask = if((odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue) &gt; 0.3, 1, null())"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"odm_071724_ortho.vari = if(vari_mask, (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue), null())"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now examine the univariate statistics again.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> odm_071724_ortho.vari</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> odm_071724_ortho.vari</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> vari_mask</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Task:</strong> Examine areas that were excluded by the <code>vari_mask</code>. What type of things are responsible for the outliers? How else might you address these issues?</p>
+</div>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/lake_wheeler_vari.png" class="img-fluid figure-img" style="width:45.0%"></p>
@@ -368,7 +400,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <section id="low-pass-filters" class="level4">
 <h4 class="anchored" data-anchor-id="low-pass-filters">Low Pass Filters</h4>
 <p>We will now compute a <em>smooth</em> layer to remove noise from our data with the <a href="https://grass.osgeo.org/grass84/manuals/r.neighbors.html">r.neighbors</a> tool. To do this we will compute the mean value for each pixel using a 27x27 moving window.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=odm_071724_ortho.red size=27 method=average output=odm_071724_ortho.red.27x27mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=odm_071724_ortho.red size=27 method=average output=odm_071724_ortho.red.27x27mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/low_pass_filter_mean_moving_window_red.png" class="img-fluid figure-img" style="width:45.0%"></p>
@@ -379,8 +411,8 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <section id="high-pass-filters" class="level4">
 <h4 class="anchored" data-anchor-id="high-pass-filters">High Pass Filters</h4>
 <p>We will now create a layer to define our edges using the <code>zero-crossings</code> edge detection method implemented as <a href="https://grass.osgeo.org/grass-stable/manuals/i.zc.html">i.zc</a> in GRASS GIS.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.zc</span> <span class="at">--overwrite</span> input=odm_071724_ortho.green output=odm_071724_ortho.green.zc threshold=0.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> <span class="at">-c</span> input=odm_071724_ortho.green size=7 method=variance output=odm_071724_ortho.green.7x7variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.zc</span> <span class="at">--overwrite</span> input=odm_071724_ortho.green output=odm_071724_ortho.green.zc threshold=0.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> <span class="at">-c</span> input=odm_071724_ortho.green size=7 method=variance output=odm_071724_ortho.green.7x7variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="../images/high_pass_filter_variance_moving_window_green.png" class="img-fluid" style="width:40.0%"> <img src="../images/high_pass_filter_variance_moving_window_green2.png" class="img-fluid" style="width:40.0%"></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -407,7 +439,7 @@ r.neighbors -c input=odm_071724_dsm size=3 method=maximum output=odm_071724_dsm.
 <section id="texture-features" class="level4">
 <h4 class="anchored" data-anchor-id="texture-features">Texture Features</h4>
 <p>Now we will calcuate the texture features Angular Second Moment (asm), Correlation (corr), and Contrast (con) for our green band using <a href="https://grass.osgeo.org/grass-stable/manuals/r.texture.html">r.texture</a> which implements Haralick et al.&nbsp;(1973) Grey level co-occurrence matrix (GLCM).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.texture</span> odm_071724_ortho.green output=odm_071724_ortho.green_texture method=<span class="st">"asm,contrast,corr"</span> <span class="at">-s</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.texture</span> odm_071724_ortho.green output=odm_071724_ortho.green_texture method=<span class="st">"asm,contrast,corr"</span> <span class="at">-s</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="../images/glcm_asm45.png" class="img-fluid" style="width:25.0%" alt="Angular Second Moment"> <img src="../images/glcm_cor45.png" class="img-fluid" style="width:25.0%" alt="Correlation"> <img src="../images/glcm_contr45.png" class="img-fluid" style="width:25.0%" alt="Contrast"></p>
 </section>
 </section>
@@ -415,39 +447,39 @@ r.neighbors -c input=odm_071724_dsm size=3 method=maximum output=odm_071724_dsm.
 <h3 class="anchored" data-anchor-id="topographic-features-extraction">Topographic Features Extraction</h3>
 <p>Not all features need to come from spectal data! You can use data from the DSM to provide more data when training your classification model.</p>
 <p>To start import the DSM data from the July, 2024 flight.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> resample=bilinear extent=region input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif output=odm_071724_dsm</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Set the color table and create a relief map for viusalization</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_dsm color=elevation</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=odm_071724_dsm output=dsm_relief</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> resample=bilinear extent=region input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif output=odm_071724_dsm</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Set the color table and create a relief map for viusalization</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_dsm color=elevation</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=odm_071724_dsm output=dsm_relief</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="slope-and-aspect" class="level4">
 <h4 class="anchored" data-anchor-id="slope-and-aspect">Slope and Aspect</h4>
 <p>Calculate slope and aspect using <a href="https://grass.osgeo.org/grass-stable/manuals/r.slope.aspect.html">r.slope.aspect</a></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="terrain-forms" class="level4">
 <h4 class="anchored" data-anchor-id="terrain-forms">Terrain Forms</h4>
 <p>Now derive terrain forms form the the DSM using <a href="https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html">r.geomorphon</a>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.geomorphon</span> elevation=odm_071724_dsm forms=geomorphon search=3 skip=0 flat=1 dist=0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.geomorphon</span> elevation=odm_071724_dsm forms=geomorphon search=3 skip=0 flat=1 dist=0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="create-imagery-group" class="level3">
 <h3 class="anchored" data-anchor-id="create-imagery-group">Create Imagery Group</h3>
 <p>GRASS GIS uses imagery groups (<a href="https://grass.osgeo.org/grass84/manuals/i.group.html">i.group</a>) to manage imagery data.</p>
 <p>Let’s start by creating a new imagery group called <code>rgb_group</code> with the subgroup <code>rgb_group</code> and add the red, green, and blue bands to the group/subgroup.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=rgb_group subgroup=rgb_group input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=rgb_group subgroup=rgb_group input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can now check that it worked by viewing which rasters are in the group (<code>rgb_group</code>) and subgroup (<code>rgb_group</code>).</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> <span class="at">-l</span> group=rgb_group subgroup=rgb_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> <span class="at">-l</span> group=rgb_group subgroup=rgb_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s now add some of our other derived features to the group (<code>analysis_bands</code>) in a new subgroup called <code>analysis_bands</code>.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=analysis_bands subgroup=analysis_bands input=odm_071724_ortho.vari,odm_071724_ortho.blue,odm_071724_ortho.red.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,geomorphon,odm_071724_ortho.green.7x7variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=analysis_bands subgroup=analysis_bands input=odm_071724_ortho.vari,odm_071724_ortho.blue,odm_071724_ortho.red.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,geomorphon,odm_071724_ortho.green.7x7variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="image-segmentation" class="level3">
 <h3 class="anchored" data-anchor-id="image-segmentation">Image Segmentation</h3>
 <p>Install <a href="https://grass.osgeo.org/grass-stable/manuals/addons/i.superpixels.slic.html">i.superpixels.slic</a> GRASS Addon using the <code>g.extension</code> command.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.superpixels.slic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.superpixels.slic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s see if we can segment the fields.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=rgb_group output=superpixels num_pixels=10000</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.to.vect</span> input=superpixels output=superpixels type=area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=rgb_group output=superpixels num_pixels=10000</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.to.vect</span> input=superpixels output=superpixels type=area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can now evaluate our segments statistics.</p>
 <p>For example we can calculate the mean VARI value for each vector segment.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -463,12 +495,12 @@ Caution
 <p>If you run this command as givin it will take a long time to run. Try to reduce the number of segments to speed things up.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.rast.stats</span> map=superpixels_analy raster=odm_071724_ortho.vari column_prefix=vari method=average</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.rast.stats</span> map=superpixels_analy raster=odm_071724_ortho.vari column_prefix=vari method=average</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s see if we can improve our segmentation to capture individual crops in the field.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=analysis_bands output=superpixels_analysis step=7 compactness=0.8 minsize=15 memory=2000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=analysis_bands output=superpixels_analysis step=7 compactness=0.8 minsize=15 memory=2000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For our object based classification we will use <a href="https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html">i.segment.stats</a> to generate multiple statistics about our segments at once.</p>
 <p>To do this we must first install <a href="https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html">i.segment.stats</a>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.segment.stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.segment.stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Compute the mean, standard deviation, and sum for each feature per segment. We also compute details about the geomertry of each segment such as the area, perimeter, and compactness.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -483,12 +515,12 @@ Caution
 <p>If you run this command as givin it will take a long time to run. Try to reduce the number of segments to speed things up.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.segment.stats</span> map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue raster_statistics=<span class="st">"mean,stddev,sum"</span> vectormap=segment_stats processes=3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.segment.stats</span> map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue raster_statistics=<span class="st">"mean,stddev,sum"</span> vectormap=segment_stats processes=3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="classification" class="level3">
 <h3 class="anchored" data-anchor-id="classification">Classification</h3>
 <p>For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS GIS addon <a href="https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml.html">r.learn.ml</a> which gives us access to models from the <a href="https://scikit-learn.org/stable/">scikit learn</a> python library.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.learn.ml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.learn.ml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="sampling" class="level4">
 <h4 class="anchored" data-anchor-id="sampling">Sampling</h4>
 <p>One benifit of using the RandomForest classification model is that it utilizes a sampling strategy know as <em>bootstraping</em>. It does this by using out-of-bag samples (OOB) for each decision tree in the model. The OOB samples are used to calculate error, which works as a cross-validation mechanism and helps maintain diversity between decision trees.</p>
@@ -507,20 +539,20 @@ Caution
 <p>When importing COGs make sure to set the <code>extent=region</code> to make sure you are only downloading the data you need.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=https://storage.googleapis.com/stac-data/Spatial_Data/LandUse/NLCD_Land_Cover_L48/nlcd_2019_cog/nlcd_2019_cog.tif output=nlcd_2019 extent=region resolution=region resample=nearest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=https://storage.googleapis.com/stac-data/Spatial_Data/LandUse/NLCD_Land_Cover_L48/nlcd_2019_cog/nlcd_2019_cog.tif output=nlcd_2019 extent=region resolution=region resample=nearest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Start by sampling 1000 points from <code>nlcd_2019</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.random</span> <span class="at">-s</span> input=nlcd_2019 npoints=1000 raster=nlcd_2019_random_pixels vector=nlcd_2019_random_pixels</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the sample data</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> nlcd_2019_random_pixels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.random</span> <span class="at">-s</span> input=nlcd_2019 npoints=1000 raster=nlcd_2019_random_pixels vector=nlcd_2019_random_pixels</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the sample data</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> nlcd_2019_random_pixels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now do a stratified random sample using <a href="https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html">r.sample.category</a>.</p>
 <p>First download the addon</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.sample.category</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.sample.category</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now run the command to take 1000 samples from each land cover class.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.sample.category</span> input=nlcd_2019 output=nlcd_2019_strat_samples npoints=1000</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the sample data</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> nlcd_2019_strat_samples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.sample.category</span> input=nlcd_2019 output=nlcd_2019_strat_samples npoints=1000</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the sample data</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> nlcd_2019_strat_samples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="train-model" class="level4">
 <h4 class="anchored" data-anchor-id="train-model">Train Model</h4>
@@ -539,7 +571,7 @@ Warning
 <p>Model training can take a long time to run. If you are having issues running on your local machine try resampling the data to 1m resolution.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3 fimp_file=feature_importance.csv <span class="at">-f</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3 fimp_file=feature_importance.csv <span class="at">-f</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The trained model will be save as <code>rf_model.gz</code>.</p>
 </section>
 <section id="feature-importance" class="level4">
@@ -550,31 +582,31 @@ Warning
 <section id="run-model" class="level4">
 <h4 class="anchored" data-anchor-id="run-model">Run Model</h4>
 <p>To use the model run <a href="https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.predict.html">r.learn.predict</a> by loading the model (<a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/rf_model.gz"><code>rf_model.gz</code></a>) you create during training.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=rgb_group load_model=rf_model.gz output=rf_basic_classification</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=rgb_group load_model=rf_model.gz output=rf_basic_classification</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we can check the categories and set the colors.</p>
 <p>You can download the color table here <a href="resources/category_colors.txt">category_colors.txt</a> or copy the rules here</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 255:0:0</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> 0:128:0</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> 255:255:0</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> 139:105:20</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> 127:127:127</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="ex">6</span> 128:0:128</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="ex">7</span> 144:238:144</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="ex">8</span> 165:42:42</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="ex">9</span> 255:165:0</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="ex">nv</span> white</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check raster categories - they are automatically applied to the classification output</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> rf_classification</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=rf_basic_classification rules=category_colors.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 255:0:0</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> 0:128:0</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> 255:255:0</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> 139:105:20</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> 127:127:127</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="ex">6</span> 128:0:128</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="ex">7</span> 144:238:144</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="ex">8</span> 165:42:42</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="ex">9</span> 255:165:0</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="ex">nv</span> white</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check raster categories - they are automatically applied to the classification output</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> rf_classification</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=rf_basic_classification rules=category_colors.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="../images/basic_classification.png" class="img-fluid"></p>
 </section>
 <section id="model-validation" class="level4">
 <h4 class="anchored" data-anchor-id="model-validation">Model Validation</h4>
 <p>We will now evaluate our model by looking at the models confussion matrix, overvall accuracy, and kappa coefficient using the GRASS addon <a href="https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a>.</p>
 <p>To begin we first need to install the addon.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.confusionmatrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.confusionmatrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now run <a href="https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> classification=rf_basic_classification raster_reference=training_rf <span class="at">-m</span> <span class="at">-d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> classification=rf_basic_classification raster_reference=training_rf <span class="at">-m</span> <span class="at">-d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The output for our classified model will look similar to below</p>
 <p><strong>Overall accuracy</strong></p>
 <p>Number of correct pixels / total number of pixels</p>
