@@ -520,7 +520,7 @@ Caution
 <section id="classification" class="level3">
 <h3 class="anchored" data-anchor-id="classification">Classification</h3>
 <p>For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS GIS addon <a href="https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml.html">r.learn.ml</a> which gives us access to models from the <a href="https://scikit-learn.org/stable/">scikit learn</a> python library.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.learn.ml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.learn.ml2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="sampling" class="level4">
 <h4 class="anchored" data-anchor-id="sampling">Sampling</h4>
 <p>One benifit of using the RandomForest classification model is that it utilizes a sampling strategy know as <em>bootstraping</em>. It does this by using out-of-bag samples (OOB) for each decision tree in the model. The OOB samples are used to calculate error, which works as a cross-validation mechanism and helps maintain diversity between decision trees.</p>
