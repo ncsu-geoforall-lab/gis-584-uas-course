@@ -345,7 +345,7 @@ i.segment.stats map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.gr
 For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS GIS addon [r.learn.ml](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml.html) which gives us access to models from the [scikit learn](https://scikit-learn.org/stable/) python library.
 
 ```bash
-g.extension r.learn.ml
+g.extension extension=r.learn.ml2
 ```
 
 #### Sampling
