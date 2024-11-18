@@ -93,7 +93,7 @@ Make sure to set appropriate threads for your system.
 #| eval: false
 url_list = query_feature_service(flight_id='A0046B')
 
-run(image_urls=url_list, save_dir="imagery_data/nadir/{flight}", num_threads=32)
+run(image_urls=url_list, save_dir="imagery_data/nadir/{flight}")
 ```
 
 ```{python}
