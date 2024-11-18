@@ -64,10 +64,13 @@ def download_image(url, save_path, session):
         print(f"Failed to download {url}: {e}")
 
 # Main function to set up the thread pool and download images
-def run(image_urls, save_dir, num_threads=4):
+def run(image_urls, save_dir, num_threads=None):
     """Creates thread pool and download images from a list of urls"""
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
+
+    if num_threads is None:
+        num_threads = os.cpu_count() * 2
 
     with ThreadPoolExecutor(max_workers=num_threads) as executor:
         with requests.Session() as session:
@@ -90,7 +93,12 @@ Make sure to set appropriate threads for your system.
 #| eval: false
 url_list = query_feature_service(flight_id='A0046B')
 
-run(urls=url_list, save_dir="imagery_data/nadir/{flight}", num_threads=32)
+run(image_urls=url_list, save_dir="imagery_data/nadir/{flight}", num_threads=32)
+```
+
+```{python}
+max_threads = os.cpu_count()
+print(f"Maximum usable threads: {max_threads}")
 ```
 
 ### Run data in your favorite photogrametry software
