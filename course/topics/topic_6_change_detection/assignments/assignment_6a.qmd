@@ -396,6 +396,17 @@ To train the model you will use [r.learn.train](https://grass.osgeo.org/grass-st
 
 Training data can be downloaded here: [Download Training Data](resources/training.gpkg) or you can create your own using the `g.gui.iclass` tool found at `Imagery -> Classify image -> Interactive input for supervised classification`.
 
+To use the downloaded training data you need to fisrt import `training.gpkg` into GRASS.
+
+```bash
+input=training.gpkg layer=training output=training
+```
+
+The training module [r.learn.train](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html) expects the `training_map` parameter to be a raster, so you need to convert the training data to raster where the raster values matches each categories class.
+
+```bash
+v.to.rast input=training output=training_rf use=attr attribute_column=cat_ label_column=class
+```
 
 :::{.callout-warning}
 Model training can take a long time to run. If you are having issues running on your local machine try resampling the data to 1m resolution.
