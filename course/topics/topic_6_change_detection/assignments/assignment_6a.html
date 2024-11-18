@@ -558,6 +558,10 @@ Caution
 <h4 class="anchored" data-anchor-id="train-model">Train Model</h4>
 <p>To train the model you will use <a href="https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html">r.learn.train</a>. The random forest model requires us to provide a <a href="resources/training.gpkg">training_map</a> and our imagery group. To save time use our <code>rgb_group</code>, but in practice you should using the <code>analysis_bands</code> group that contains the additional features you created.</p>
 <p>Training data can be downloaded here: <a href="resources/training.gpkg">Download Training Data</a> or you can create your own using the <code>g.gui.iclass</code> tool found at <code>Imagery -&gt; Classify image -&gt; Interactive input for supervised classification</code>.</p>
+<p>To use the downloaded training data you need to fisrt import <code>training.gpkg</code> into GRASS.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="va">input</span><span class="op">=</span>training.gpkg <span class="va">layer</span><span class="op">=</span>training <span class="va">output</span><span class="op">=</span>training</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The training module <a href="https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html">r.learn.train</a> expects the <code>training_map</code> parameter to be a raster, so you need to convert the training data to raster where the raster values matches each categories class.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.to.rast</span> input=training output=training_rf use=attr attribute_column=cat_ label_column=class</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -571,7 +575,7 @@ Warning
 <p>Model training can take a long time to run. If you are having issues running on your local machine try resampling the data to 1m resolution.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3 fimp_file=feature_importance.csv <span class="at">-f</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3 fimp_file=feature_importance.csv <span class="at">-f</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The trained model will be save as <code>rf_model.gz</code>.</p>
 </section>
 <section id="feature-importance" class="level4">
@@ -582,31 +586,31 @@ Warning
 <section id="run-model" class="level4">
 <h4 class="anchored" data-anchor-id="run-model">Run Model</h4>
 <p>To use the model run <a href="https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.predict.html">r.learn.predict</a> by loading the model (<a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/rf_model.gz"><code>rf_model.gz</code></a>) you create during training.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=rgb_group load_model=rf_model.gz output=rf_basic_classification</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=rgb_group load_model=rf_model.gz output=rf_basic_classification</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we can check the categories and set the colors.</p>
 <p>You can download the color table here <a href="resources/category_colors.txt">category_colors.txt</a> or copy the rules here</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 255:0:0</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> 0:128:0</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> 255:255:0</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> 139:105:20</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> 127:127:127</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="ex">6</span> 128:0:128</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="ex">7</span> 144:238:144</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="ex">8</span> 165:42:42</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="ex">9</span> 255:165:0</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="ex">nv</span> white</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check raster categories - they are automatically applied to the classification output</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> rf_classification</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=rf_basic_classification rules=category_colors.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 255:0:0</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> 0:128:0</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> 255:255:0</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> 139:105:20</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> 127:127:127</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="ex">6</span> 128:0:128</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="ex">7</span> 144:238:144</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="ex">8</span> 165:42:42</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="ex">9</span> 255:165:0</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="ex">nv</span> white</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check raster categories - they are automatically applied to the classification output</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> rf_classification</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=rf_basic_classification rules=category_colors.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="../images/basic_classification.png" class="img-fluid"></p>
 </section>
 <section id="model-validation" class="level4">
 <h4 class="anchored" data-anchor-id="model-validation">Model Validation</h4>
 <p>We will now evaluate our model by looking at the models confussion matrix, overvall accuracy, and kappa coefficient using the GRASS addon <a href="https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a>.</p>
 <p>To begin we first need to install the addon.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.confusionmatrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.confusionmatrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now run <a href="https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> classification=rf_basic_classification raster_reference=training_rf <span class="at">-m</span> <span class="at">-d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> classification=rf_basic_classification raster_reference=training_rf <span class="at">-m</span> <span class="at">-d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The output for our classified model will look similar to below</p>
 <p><strong>Overall accuracy</strong></p>
 <p>Number of correct pixels / total number of pixels</p>
