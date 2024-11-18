@@ -399,7 +399,7 @@ Training data can be downloaded here: [Download Training Data](resources/trainin
 To use the downloaded training data you need to fisrt import `training.gpkg` into GRASS.
 
 ```bash
-input=training.gpkg layer=training output=training
+v.import input=training.gpkg layer=training output=training
 ```
 
 The training module [r.learn.train](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html) expects the `training_map` parameter to be a raster, so you need to convert the training data to raster where the raster values matches each categories class.
