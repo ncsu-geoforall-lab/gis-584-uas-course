@@ -96,10 +96,6 @@ url_list = query_feature_service(flight_id='A0046B')
 run(image_urls=url_list, save_dir="imagery_data/nadir/{flight}")
 ```
 
-```{python}
-max_threads = os.cpu_count()
-print(f"Maximum usable threads: {max_threads}")
-```
 
 ### Run data in your favorite photogrametry software
 
