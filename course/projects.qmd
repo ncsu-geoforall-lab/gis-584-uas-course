@@ -47,6 +47,28 @@ In the pre-proposal please define the scope of the project, the project location
 
 ## Past Projects
 
+### Projects Spring 2024
+
+- Jessica R. Baumann: Evaluating novel invasive aquatic plant management operations using true color and multispectral UAS imagery
+- Clayton Burleson: UAS Derived Time Series for Point Beach, Wisconsin,
+2020
+- Kenneth Dunn: Mapping Landcover Changes in Horry County South Carolina
+- Lisa Fraley-McNeal: Investigating the use of UAS Footage as a Cost-Effective Method to Support Post-Construction Restoration Monitorin
+- Christopher Franz: Hurricane Helene SfM DEM Generation for Boone, NC
+- Benjamin Grimes: Impacts of the El Dorado Fire on Vegetation in Ford Canyon, California (2018-2020)
+- Truffaut Harper: Utilization of UAV Orthophotography for High Resolution Land Use Classification
+- Hannah Kyung: Hurricane Helene SfM DEM Generation for Henderson and Madison County, NC.
+- William LaForce: Generation of a 1m Digital Terrain Model from an Aerial Survey over Spruce Pine, NC in the Aftermath of Hurricane Helene
+- Richard Lee: Mapping Shoreline Erosion near North Topsail Beach
+- Hanne Parks: UAV for Fuel Flammability Analysis
+- Skylar Penney: Modeling Erosion and Dune Migration off North Carolinas' Coastline using UAS data and Geospatial Analytics
+- Will Rose: Supervised Classification Using Maximum Likelihood Algorithm and Different Sized Training Polygons at Lake Wheeler in Raleigh, NC
+- Christopher Stephens: Utilizing UAS to Monitor Avalanche Hazards
+- Isabella Thayer: Processing Post-Hurricane Imagery: Hurricane Helene in Western NC
+- Amelia G. Woodall: Structure from Motion (SfM) Processing in Areas Impacted by Hurricane Helene – Generation of a 1m DTM in Blowing Rock,
+North Carolina
+- Kyle Zampongna: Using UAS to investigate damage in a mountain town following Hurricane Helene
+
 ### Projects 2021
 
 - Bartenfelder, Amy: Areal Changes at LAke Wheeler Field After the 2017 Hurricane Season
