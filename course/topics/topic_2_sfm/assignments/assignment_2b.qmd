@@ -96,6 +96,15 @@ Click the settings icon ![Settings Icon](images/settings_icon.webp){width=25} > 
 
 ![](images/agi_reference.webp)
 
+::: {.callout-note}
+- **Camera accuracy (m):** Refers to the positional accuracy of camera geotags (lat/lon), typically 2.5–10 meters with standard GPS, or better with high-grade equipment.
+- **Camera accuracy (deg):** Relates to yaw, pitch, roll; set higher (e.g., 2°) if not measured precisely.
+- **Marker accuracy (m):** Indicates ground control point accuracy, usually 0.01–0.05 m, can specify x/y/z separately (e.g., 0.01/0.05).
+- **Scale bar accuracy (m):** Accuracy of measured distances between markers, often very precise (e.g., 0.001 m).
+- **Marker accuracy (pixels):** How precisely you can place a marker in an image; 0.1 px for targets, 0.5 px for natural features.
+- **Keypoint accuracy (pixels):** Weight for automatically detected points; typically 0.5–1 px due to variability in appearance.
+:::
+
 #### Loading camera positions
 
 Click Import button ![Import Icon](images/import_icon.webp){width=25} on the Reference pane toolbar > select file containing camera positions information (`2016_09_22_sample.txt`) in the Open dialog.
