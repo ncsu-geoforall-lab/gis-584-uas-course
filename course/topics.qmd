@@ -26,9 +26,9 @@ title: "Topics"
 
 ## Topic 5: Advanced Analytics
 
-[A. UAS and lidar data: comparison, fusion and analysis]"(topics\topic_5_Advanced Analytics\part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)
+[A. UAS and lidar data: comparison, fusion and analysis](topics\topic_5_advanced_analytics\part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)
 
-[B. Analysis of multitemporal UAS data and its applications](topics\topic_5_Advanced Analytics\part_b_Analysis_multitemporal_UAS_data_applications.qmd)
+[B. Analysis of multitemporal UAS data and its applications](topics\topic_5_advanced_analytics\part_b_Analysis_multitemporal_UAS_data_applications.qmd)
 
 ## Topic 6: Machine Learning/AI
 

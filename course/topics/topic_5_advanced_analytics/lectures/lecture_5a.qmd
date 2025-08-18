@@ -3,8 +3,8 @@ title: "UAS and Lidar Data: Comparison, Fusion, and Analysis"
 subtitle: "[Center for Geospatial Analytics](https://geospatial.ncsu.edu/) [at North Carolina State University](http://www.ncsu.edu/)"
 author: "Helena Mitasova, Anna Petrasova, Justyna Jeziorska & Corey White"
 format:
-    revealjs:
-        theme: [simple, ../../../../theme.scss]
+  revealjs:
+    theme: [simple, ../../../../theme.scss]
 ---
 
 ## Outline
