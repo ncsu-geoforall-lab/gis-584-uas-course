@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  render: 
+    - "*.qmd"
 website:
   favicon: favicon.ico
   title: "UAS Mapping and Analytics"
@@ -16,26 +18,11 @@ website:
       - course/topics.qmd
       - course/projects.qmd
 
-  # sidebar:
-    # - contents: auto
-    # - contents:
-    #   - section: Topic 1 - UAS Basics
-    #     contents:
-    #       - href: course/topics/topic_1_uas_basics/1A_introduction/index.qmd
-    #         text: "1A - Introduction to Unmanned Aerial Systems"
-    #         contents:
-    #           - href: course/topics/topic_1_uas_basics/1A_introduction/lectures/lecture_1a.qmd
-    #             text: "Lecture 1A - Introduction to UAS"
-    #           - href: course/topics/topic_1_uas_basics/1A_introduction/assignments/assignment_1a.qmd
-    #             text: "Assignment 1A - UAS Basics Presentations"
-          
-    #       - href: course/topics/topic_1_uas_basics/1B_rules_and_regulations/index.qmd
-    #         text: "1B - Rules and regulations for UAS operations"
-    #         contents:
-    #           - href: course/topics/topic_1_uas_basics/1B_rules_and_regulations/lectures/lecture_1b.qmd
-    #             text: "Lecture 1B - Rules and Regulations"
-    #           - href: course/topics/topic_1_uas_basics/1B_rules_and_regulations/assignments/assignment_1b.qmd
-    #             text: "Assignment 1B - Rules and Regulations"
+  sidebar:
+    - contents: course/topics/**/part_*.qmd
+      title: Topics
+      depth: 2
+      numbered: true
 
   page-footer: 
     center: 
