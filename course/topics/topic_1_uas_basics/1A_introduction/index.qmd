@@ -1,12 +1,10 @@
 ---
-topic: "Topic 1A: UAS Basics"
-title: "Introduction to UAS"
+topic: "Topic 1: UAS Basics"
+title: "1A - Introduction to Unmanned Aerial Systems"
 subtitle: "Topic 1A: UAS Basics"
 date: 8/18/2025
 activity: Lecture
 ---
-
-# Introduction to Unmanned Aerial Systems
 
 ## Outline
 

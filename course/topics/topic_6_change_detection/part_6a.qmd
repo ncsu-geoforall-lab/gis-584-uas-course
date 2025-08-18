@@ -1,13 +1,14 @@
 ---
-topic: "Topic 6: UAS Image Classification and Change Detection"
-title: "A. Change Detection"
-subtitle: "Topic 6: Advanced Analytics"
-date: 11/8/2024
-assignment-due-date: 11/13/2024
+topic: "Topic 6: Machine Learning/AI"
+title: "Image Classification and Change Detection"
+subtitle: "Topic 6: Machine Learning/AI"
+date: 10/27/2025
+# assignment-due-date: 11/13/2025
 author: Corey White
+activity: Lecture
 ---
 
-# UAS Image Classification and Change Detection
+# Image Classification and Change Detection
 
 ## Outline
 

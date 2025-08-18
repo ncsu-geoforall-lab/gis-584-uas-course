@@ -1,6 +1,6 @@
 <blockquote>Schedule will be adjusted as needed during the semester.</blockquote>
 <% for (const item of items.pop().schedule) { %>
-<h4> <%= item.date_range %> | <%= item.topic %></h4>
+<h2> <%= item.date_range %> | <%= item.topic %></h2>
 <% if (item.subtopic) { %>
 <p> <%= item.subtopic %> </p>
 <% } %>

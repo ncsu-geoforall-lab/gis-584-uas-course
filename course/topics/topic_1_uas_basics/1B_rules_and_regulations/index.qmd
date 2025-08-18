@@ -4,6 +4,8 @@ title: "Rules and regulations for UAS operations"
 subtitle: "Topic 1B: UAS Basics"
 date: 8/25/2025
 activity: Lecture
+hide-from-listing: true
+draft: true
 ---
 
 ## Outline

@@ -1,7 +1,11 @@
 ---
+topic: "Topic 3: UAS Flight Planning"
 subtitle: "Terrain Analysis of the flight site using GIS tools"
 title: "Assignment 3"
-assignment-due-date: 9/23/2024
+date: 9/15/2025
+assignment-due-date: 10/1/2025
+activity: Assignment/Lab
+hide-from-listing: true
 ---
 
 ## Task
