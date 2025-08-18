@@ -6,12 +6,13 @@ format:
   html:
     toc: false
 listing:
-- id: schedule
-  type: custom
-  template: templates/schedule.ejs
-  contents: content/schedule.yml
+# - id: schedule
+#   type: custom
+#   template: templates/schedule.ejs
+#   contents: content/schedule.yml
 - id: topics
   type: table
+  categories: true
   contents: 
     - topics/**/part_*.qmd
     - topics/**/assignments/assignment_*.qmd
@@ -23,18 +24,20 @@ listing:
     title: "Description"
     topic: "Topic"
     activity: "Activity"
-    assignment-due-date: "Due"
-  date-format: medium
+    assignment-due-date: "Due Date"
+  date-format: short
   fields: [date, topic, activity, title, assignment-due-date]
   sort:
     - "date"
     - "topic desc"
+  sort-ui: [date, assignment-due-date, activity, topic]
 ---
+
+> Schedule will be adjusted as needed during the semester.
 
 :::{#topics}
 :::
 
 If you are looking for what is the next step, here are some [related courses](https://geospatial.ncsu.edu/geoforall/courses.html).
 
-:::{#schedule}
-:::
+

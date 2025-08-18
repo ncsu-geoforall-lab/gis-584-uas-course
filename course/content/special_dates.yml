@@ -1,5 +1,5 @@
 - date: 8/27/2025
-  activity: "Presentations"
+  activity: "Assignment Due"
   topic: "Topic 1: UAS Basics"
   title: "Assignment 1A - UAS Basics Presentations"
 
@@ -28,6 +28,12 @@
   topic: "Topic 3: UAS Flight Planning"
   title: "UAS Flight at Lake Wheeler"
 
+- date: 9/29/2025
+  activity: "Assignment Due"
+  topic: "Project"
+  title: "Project proposal due"
+  assignment-due-date: 9/29/25
+
 - date: 10/13/25
   topic: "Fall Break"
   title: "Fall Break - No Class"
@@ -36,6 +42,12 @@
   activity: "Guest Speaker"
   topic: "TBD"
   title: "TBD"
+
+- date: 10/22/25
+  topic: "Project"
+  title: "Submit project progress report to the [project discussions forum](https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=200843)"
+  acitvity: "Assignment Due"
+  assignment-due-date: 10/22/25
 
 - date: 11/3/25
   topic: "Topic 6: Machine Learning/AI"
@@ -61,14 +73,16 @@
   topic: "Project"
   title: "Project presentations"
   assignment-due-date: 12/1/25
-  
+  activity: "Assignment Due"
 
 - date: 12/3/25
   topic: "Project"
   title: "Project presentations"
   assignment-due-date: 12/1/25
+  activity: "Assignment Due"
 
 - date: 12/8/25
   topic: "Project"
   title: "Project Report Due"
   assignment-due-date: 12/8/25
+  activity: "Assignment Due"
