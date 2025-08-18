@@ -1,15 +1,16 @@
-on:
-  workflow_dispatch:
-  push:
-    branches: main
+name: Quarto PR Check
 
-name: Quarto Publish
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -37,25 +38,17 @@ jobs:
 
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
-        env:
-          QUARTO_PROFILE: production
+
+      - name: Check if rendering succeeded
+        run: |
+          # Ensure the site folder is created
+          if [ ! -d "docs" ]; then
+            echo "Rendering failed: docs folder does not exist."
+            exit 1
+          fi
 
       - name: Upload static files as artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: rendered-site
           path: docs/
-
-  # Deployment job
-  deploy:
-    permissions:
-      id-token: write
-      pages: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

@@ -33,7 +33,7 @@ toc-depth: 4
 In the assignment we will be using GRASS GIS {{< var software.grass.version >}} or higher, libLAS (included in GRASS GIS
 package for MS Windows and Ubuntu), and a web-based point cloud viewer [plas.io](https://plas.io) 
 (might not work with older browsers, most functionality is available in Chrome).
-Please refer to the [Course logistics webpage](/course/logistics.rmd) for links to software in case you don't have it installed already.
+Please refer to the [Course logistics webpage](/course/logistics.qmd) for links to software in case you don't have it installed already.
 
 
 ## Quick data exploration in web browser

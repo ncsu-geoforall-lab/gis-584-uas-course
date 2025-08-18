@@ -51,7 +51,7 @@ Recommended books:
 
 ### Software
 
-See Course [logistics](course/logistics.qmd) web page.
+See Course [logistics](/course/logistics.qmd) web page.
 
 ## Grading policy
 

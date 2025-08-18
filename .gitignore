@@ -2,6 +2,9 @@
 _site/
 _site_libs/
 .quarto/
+_freeze/
+/.quarto/
+docs/
 
 # R-related files (if you're using R with Quarto)
 .Rhistory
@@ -41,8 +44,31 @@ Thumbs.db
 # Other unnecessary files
 *~
 
-/.quarto/
-docs/
+# dotenv
+.env
 
-venv    
+# virtualenv
 .venv
+venv/
+ENV/
+
+# Prevents committing locally rendered site
+docs
+*.Rproj
+*.Rhistory
+.Rproj.user
+
+/.luarc.json
+
+# VSCode
+.vscode
+
+# Quarto generated
+_build/
+.quarto/
+/.quarto/
+index.ipynb
+index.md
+index_files/
+index.tex
+/_*.local
