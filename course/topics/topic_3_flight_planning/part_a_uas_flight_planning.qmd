@@ -2,8 +2,9 @@
 topic: "Topic 3: UAS Flight Planning"
 title: "UAS Flight Planning"
 subtitle: "Topic 3: UAS Flight Planning"
-date: 9/16/2024
-assignment-due-date: 8/23/2024
+date: 9/15/2025
+activity: Lecture/Assignment
+assignment-due-date: 10/1/2025
 ---
 
 ## Outline

@@ -1,7 +1,10 @@
 ---
+topic: "Topic 2A: Structure from Motion"
 title: "Assignment 2A"
 subtitle: "Laboratory experiment: 3D reconstruction from multiple photos"
-assignment-due-date: 9/30/2024
+date: 9/3/2025
+assignment-due-date: 9/24/2025
+activity: Assignment/Lab
 ---
 
 Perform an experiment to investigate the impact of the number and orientation of photos, light, as well as the shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.

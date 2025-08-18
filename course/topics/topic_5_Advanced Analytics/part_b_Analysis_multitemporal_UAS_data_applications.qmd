@@ -1,9 +1,9 @@
 ---
 topic: "Topic 5: Advanced Analytics"
-title: "B. Analysis of multitemporal UAS data and its applications"
+title: "Analysis of multitemporal UAS data and its applications"
 subtitle: "Topic 5: Advanced Analytics"
-date: 10/30/2024
-assignment-due-date: 11/06/2024
+date: 10/20/2025
+activity: Lecture
 ---
 
 ## Outline

@@ -1,42 +1,36 @@
 schedule:
-  - date_range: "Aug. 19"
-    topic: "Introduction to the Course"
-    subtopic: ""
-    details: 
-      - "Course logistics: [link](logistics.qmd) (Course instructions, management, and resources)"
-      - "Course Moodle site: [link](https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4084&bp=s)"
-    due_date: ""
-    no_class: false
-  
-  - date_range: "Aug. 19-23"
-    topic: "Topic 1: UAS Basics"
+
+  - date_range: "Aug 17-23"
+    topic: "Introduction to the Course & Topic 1: UAS Basics"
     subtopic: "[1A. Introduction to Unmanned Aerial Systems](topics/topic_1_uas_basics/part_a_introduction.qmd)"
     details:
+      - "Course logistics: [link](logistics.qmd) (Course instructions, management, and resources)"
+      - "Course Moodle site: [link](https://moodle-courses2527.wolfware.ncsu.edu/course/view.php?id=1768&bp=s)"
       - "Mon: [Lecture](topics/topic_1_uas_basics/lectures/lecture_1a.qmd)"
       - "Wed: Work on assingment 1A in class"
       - "[Assignment 1A: prepare presentation on UAS applications](topics/topic_1_uas_basics/assignments/assignment_1a.qmd)"
-    due_date: "Aug. 28"
+    due_date: "Aug 27"
     no_class: false
   
-  - date_range: "Aug. 26-30"
+  - date_range: "Aug 24-30"
     topic: "Topic 1: UAS Basics"
     subtopic:  "[1B. Rules and regulations for UAS operations](topics/topic_1_uas_basics/part_b_rules_regs.qmd)"
     details:
       - "Mon: [Lecture](topics/topic_1_uas_basics/lectures/lecture_1b.qmd)"
       - "Wed: Student presentations of UAS applications"
       - "[Assignment: 1B UAS Rule Part 107 test subset](topics/topic_1_uas_basics/assignments/assignment_1b.qmd)"
-    due_date: "Sep. 4"
+    due_date: "Sep 3"
     no_class: false
 
-  - date_range: "Sep. 2-6"
-    topic: "Topic 3: UAS Flight Planning (Revised)"
-    subtopic: "[3. UAS flight planning](topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd)"
+  - date_range: "Aug 31 - Sep 6"
+    topic: "Topic 2: Structure from Motion (Revised)"
+    subtopic: "[2A. From images to 3D models: Photogrammetry and Structure from Motion concepts](topics/topic_2_sfm/part_a_images_to_3d.qmd)"
     details:
       - "**Mon: Labor Day - No Class**"
-      - "Wed: [Lecture](topics/topic_3_flight_planning/lectures/lecture_3a.qmd)"
-      # - "Wed: In Class Assignment - [Prepare and analyze a flight plan](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
-    due_date: "Sep. 25"
-    no_class: false
+      - "Mon: [Lecture](topics/topic_2_sfm/lectures/lecture_2a.qmd)"
+      - "Wed: [Assignment 2A: 3D models from indoor photos](topics/topic_2_sfm/assignments/assignment_2a.qmd)"
+      - "Project: [submit proposal](https://moodle-courses2425.wolfware.ncsu.edu/mod/assign/view.php?id=429376)"
+
 
   # - date_range: "Sep. 2-6"
   #   topic: "Topic 2: Structure from Motion"
@@ -49,22 +43,22 @@ schedule:
   #   due_date: "Sep. 30"
   #   no_class: false
 
-  - date_range: "Sep. 9"
+  - date_range: "Sep 8"
     topic: "Pre-Proposal Due"
     subtopic: "[Projects Page](projects.html)"
     details:
       - "Submit brief Idea to the [project discussions forum](https://moodle-courses2425.wolfware.ncsu.edu/mod/forum/view.php?id=429301)"
-    due_date: "Sep. 9"
+    due_date: "Sep 8"
     no_class: false
 
-  - date_range: "Sep. 9-13"
-    topic: "Topic 2: Structure from Motion (Revised)"
-    subtopic: "[2A. From images to 3D models: Photogrammetry and Structure from Motion concepts](topics/topic_2_sfm/part_a_images_to_3d.qmd)"
+  - date_range: "Sep 7-13"
+    topic: "Topic 3: UAS Flight Planning"
+    subtopic: "[3. UAS flight planning](topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd)"
     details:
-      - "Mon: [Lecture](topics/topic_2_sfm/lectures/lecture_2a.qmd)"
-      - "Wed: [Assignment 2A: 3D models from indoor photos](topics/topic_2_sfm/assignments/assignment_2a.qmd)"
-      - "Project: [submit proposal](https://moodle-courses2425.wolfware.ncsu.edu/mod/assign/view.php?id=429376)"
-    due_date: "Sep. 30"
+      - "**Mon: Labor Day - No Class**"
+      - "Wed: [Lecture](topics/topic_3_flight_planning/lectures/lecture_3a.qmd)"
+      # - "Wed: In Class Assignment - [Prepare and analyze a flight plan](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
+    due_date: "Sep 25"
     no_class: false
   
   # - date_range: "Sep. 9-13"
@@ -76,7 +70,7 @@ schedule:
   #   due_date: "Sep. 23"
   #   no_class: false
   
-  - date_range: "Sep. 16-20"
+  - date_range: "Sep 14-20"
     topic: "UAS FLIGHT"
     details:
       - "Mon: [Assignment 3. UAS flight planning](topics/topic_3_flight_planning/assignments/assignment_1a_grass.qmd)"
@@ -86,7 +80,7 @@ schedule:
     due_date: "Sep. 25"
     no_class: false
   
-  - date_range: "Sep. 23-27"
+  - date_range: "Sep 21-27"
     topic: "Topic 2: Structure from Motion"
     subtopic: "[2B. UAS Imagery processing](topics/topic_2_sfm/part_b_img_processing_sfm.qmd)"
     details:
@@ -95,23 +89,23 @@ schedule:
     due_date: "Sep. 30"
     no_class: false
   
-  - date_range: "Sep. 30 - Oct. 4"
+  - date_range: "Sep 28 - Oct 4"
     topic: "Topic 4: Geospatial Analytics"
     subtopic: "[4A. Analysis of UAS data processing results](topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.qmd)"
     details:
       - "Mon: [Lecture](topics/topic_4_GIS_analytics/lectures/lecture_2a.qmd)"
       - "Wed: [In Class Assignments](topics/topic_4_GIS_analytics/assignments/assignment_4a.qmd)"
-    due_date: "Oct. 23"
+    due_date: "Oct 23"
     no_class: false
 
-  - date_range: "Oct. 7-11"
+  - date_range: "Oct 5-11"
     topic: "Topic 4: Geospatial Analytics"
     subtopic: "[4B. Point cloud data analysis](topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.qmd)"
     details:
       - "Mon: [Lecture](topics/topic_4_GIS_analytics/lectures/lecture_2b.qmd)"
       - "Wed: [In Class Assignments](topics/topic_4_GIS_analytics/assignments/assignment_4b.qmd)"
       - "Project: Data processing"
-    due_date: "Oct. 23"
+    due_date: "Oct 23"
     no_class: false
 
   # - date_range: "Oct. 14-15"
@@ -120,7 +114,7 @@ schedule:
   #   due_date: ""
   #   no_class: true
   
-  - date_range: "Oct. 14-18"
+  - date_range: "Oct 12-18"
     topic: "Fall Break - Guest Speaker"
     details:
       - "Mon: **Fall break - (No Class)**"
@@ -129,7 +123,7 @@ schedule:
     due_date: "Oct. 23"
     no_class: false
   
-  - date_range: "Oct. 21-25"
+  - date_range: "Oct 19-25"
     topic: "Topic 5: Advanced Analytics"
     subtopic: "[5A. UAS and Lidar Data: Comparison, Fusion and Analysis](topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)"
     details:
@@ -139,7 +133,7 @@ schedule:
     due_date: "Nov. 13"
     no_class: false
   
-  - date_range: "Oct. 28 - Nov. 1"
+  - date_range: "Oct 26 - Nov 1"
     topic: "Topic 5: Advanced Analytics"
     subtopic: "[5B. Analysis of Multitemporal UAS Data and its Applications](topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.qmd)"
     details:
@@ -148,7 +142,7 @@ schedule:
     due_date: "Nov. 13"
     no_class: false
 
-  - date_range: "Nov. 4-8"
+  - date_range: "Nov. 2-8"
     topic: "Topic 5: Advanced Analytics"
     subtopic: "[5B. Analysis of Multitemporal UAS Data and its Applications](topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.qmd)"
     details:
@@ -168,7 +162,7 @@ schedule:
   #   due_date: "Nov. 20"
   #   no_class: false
   
-  - date_range: "Nov. 11-15"
+  - date_range: "Nov 9-15"
     topic: "Topic 6: UAS-based Change Detection"
     subtopic: "[6A. Change Detection with UAS Data](topics/topic_6_change_detection/part_6a.qmd)"
     details:
@@ -178,7 +172,7 @@ schedule:
     due_date: "Nov. 20"
     no_class: false
 
-  - date_range: "Nov. 18-22"
+  - date_range: "Nov 16-22"
     topic: "Guest Speaker & Project help sessions"
     details:
       - "Mon: Guest Speaker: Mitchell DuRant - Cypress Creek Renewables ([LinkedIn](https://www.linkedin.com/in/mitchell-durant/))"
@@ -196,7 +190,7 @@ schedule:
   #   due_date: ""
   #   no_class: false
   
-  - date_range: "Nov. 25-29"
+  - date_range: "Nov 23-29"
     topic: "Thanksgiving break: No Class"
     details:
       - "Work on project: visualize results, work on presentation"
@@ -204,7 +198,7 @@ schedule:
     due_date: ""
     no_class: true
   
-  - date_range: "Dec. 2-6"
+  - date_range: "Nov 30 - Dec 6"
     topic: "Project presentations ([See the requirements and project titles](projects.html))"
     details:
       - "DE section: To record your presentation, use [Open Broadcaster Software](https://obsproject.com/index) ([tutorial](http://www.howtogeek.com/183231/how-to-record-your-desktop-and-create-a-screencast-on-windows/)), MS Powerpoint, Libre Office, or any other software with similar recording functionality."
@@ -214,7 +208,7 @@ schedule:
     due_date: "Dec. 4"
     no_class: false
   
-  - date_range: "Dec. 9-13"
+  - date_range: "Dec 7-13"
     topic: "Finish project paper and upload it to Moodle as a pdf file `LastnameFirstname_Paper.pdf`"
     details:
       - "For archiving purposes also submit a complete coursework in a ZIP file"

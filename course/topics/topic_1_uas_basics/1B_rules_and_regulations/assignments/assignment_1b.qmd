@@ -3,9 +3,11 @@ topic: "Topic 1B: UAS Basics"
 title: "Assignment 1B"
 subtitle: "UAS Rule Part 107 test subset"
 date: 8/25/2025
-assignment-due-date: 9/10/2025
+assignment-due-date: 9/8/2025
 file-modified: modified
 activity: Assignment/Lab
+hide-from-listing: true
+draft: true
 ---
 
 ## Task

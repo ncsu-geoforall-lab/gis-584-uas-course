@@ -1,9 +1,9 @@
 ---
-topic: "Topic 4: GIS Analytics"
-title: "B. Point cloud data analysis"
+topic: "Topic 4B: GIS Analytics"
+title: "Point cloud data analysis"
 subtitle: "Topic 4: GIS Analytics"
-date: 9/23/2024
-assignment-due-date: 10/23/2024
+date: 9/29/2025
+activity: Lecture
 ---
 
 # Point cloud data analysis
