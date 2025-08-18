@@ -1,15 +1,11 @@
 ---
 title: "Schedule"
 search: true
-# sidebar: false
+sidebar: false
 format:
   html:
     toc: false
 listing:
-# - id: schedule
-#   type: custom
-#   template: templates/schedule.ejs
-#   contents: content/schedule.yml
 - id: topics
   type: table
   categories: true
