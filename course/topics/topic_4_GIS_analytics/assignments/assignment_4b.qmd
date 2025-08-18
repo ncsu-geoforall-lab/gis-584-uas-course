@@ -1,7 +1,10 @@
 ---
+topic: "Topic 4B: GIS Analytics"
 subtitle: "Analysis of UAS data processing results"
 title: "Assignment 4B"
-assignment-due-date: 10/21/2024
+date: 10/1/2025
+assignment-due-date: 10/17/2025
+activity: Assignment/Lab
 ---
 
 ## Task

@@ -1,16 +1,16 @@
 ---
-Topic: "Topic 2: Structure from Motion"
-title: "B. Imagery processing and structure from motion (SfM)"
+topic: "Topic 2B: Structure from Motion"
+title: "Imagery processing and Sructure from motion (SfM)"
 subtitle: "Topic 2: Structure from Motion"
-date: 8/28/2024
-"Assignment Due Date": 9/30/2024
+date: 9/8/2025
+activity: Lecture
 format: 
     html:
         toc: true
 
 ---
 
-# From images to 3D models: Photogrammetry and Structure from Motion concepts
+# Photogrammetry and Structure from Motion concepts
 
 ## Outline
 

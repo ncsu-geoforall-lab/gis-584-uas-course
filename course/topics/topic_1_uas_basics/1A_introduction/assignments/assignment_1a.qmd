@@ -5,8 +5,9 @@ title: "Assignment 1A"
 date: 8/20/2025
 assignment-due-date: 8/27/2025
 activity: Assignment/Lab
+hide-from-listing: true
+draft: true
 ---
-
 
 ## Task
 

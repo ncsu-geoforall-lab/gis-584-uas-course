@@ -6,7 +6,7 @@ Course website for GIS/MAE 584 Mapping and Analytics Using UAS
 
 ## Requirements
 
-[Quarto: v1.5.57](https://quarto.org/docs/get-started/)
+[Quarto: v1.7.32](https://quarto.org/docs/get-started/)
 
 ## Configuration
 
@@ -49,8 +49,8 @@ The site is deployed to GitHub Pages using the `gh-pages` branch. The site will 
 ## Install Python Dependencies
 
 ```bash
-python3 -m venv gis584-env
-source gis584-env/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 

@@ -1,9 +1,10 @@
 ---
 title: "Assignment 4A - Analysis"
 subtitle: "Analyzing and Visualizing surfaces from multiple return lidar data"
-assignment-due-date: 10/21/2024
+assignment-due-date: 10/17/2025
+hide-from-listing: true
 author: Corey T. White
-date: 10/4/24
+date: 9/24/25
 format: html
 toc-depth: 4
 ---

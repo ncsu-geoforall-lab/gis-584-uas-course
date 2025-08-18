@@ -7,12 +7,17 @@ subtitle: "NCSU GIS/MEA 584"
 
 The course starts with a brief overview of the UAS mapping technology and its rules and regulations. The principles of UAS data collection are explained along with hands-on practice in flight planning and execution. The main focus of this course is on processing the collected imagery using structure from motion technique and deriving orthophoto mosaics and ultra-high resolution digital elevation models of land surface, vegetation and structures. More advanced topics include multitemporal 3D data analysis, fusion with lidar data and 3D visualization with applications in natural resources. 
 
-## Instructor
+## Instructors
 
-Dr. Corey T. White
+- Dr. Corey T. White
+  * Office hours: 	by appointment
+  * Email: 	[ctwhite@ncsu.edu](ctwhite@ncsu.edu)
 
-Office hours: 	by appointment
-Email: 	[ctwhite@ncsu.edu](ctwhite@ncsu.edu)
+## Teaching Assistants
+
+- Pratikshya Regmi
+  * Office hours: TBD
+  * Email: [pregmi3@ncsu.edu](pregmi3@ncsu.edu)
 
 ## Prerequisites
 

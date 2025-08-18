@@ -1,7 +1,10 @@
 ---
+topic: "Topic 2B: Structure from Motion"
 title: "Assignment 2B"
-subtitle: "B. Imagery processing and structure from motion (SfM)"
-assignment-due-date: 9/30/2024
+subtitle: "Imagery processing and structure from motion (SfM)"
+date: 9/10/2025
+assignment-due-date: 9/24/2025
+activity: Assignment/Lab
 format: 
     html:
         toc: true
