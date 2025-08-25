@@ -9,21 +9,18 @@ format:
 
 ## Objectives
 
-::: {.incremental}
 - **Understand** the role of the Federal Aviation Administration (FAA) in ensuring safety in National Airspace System (NAS)
 - **Recognize** the 3 main types of UAS operations and distinguish between them
 - **Name** the requirements for legal operations of commercial purposes in the U.S. Both in regard to the pilot and to the UAS
 - **Outline** safety guidelines for recreational use of UAS
-:::
+
 
 ## Objectives
 
-::: {.incremental}
 - **Know** operating rules for commercial use of UAS (Part 107)
 - **Recognize** permanent and temporary "no-drone-zones" and knows where to find information about them
 - **Understand** the role of Certificate of Authorization and the process of obtaining it
 - **Recognize** when the educational use of UAS can be classified as recreational and when commercial
-:::
 
 ## Federal Aviation Administration (FAA) {.smaller}
 
@@ -96,8 +93,7 @@ format:
 ::: {.columns}
 ::: {.column width="60%"}
 - Do not intentionally fly over unprotected persons or moving vehicles, and remain **at least 25 feet away** from individuals and vulnerable property.
-- Contact the airport and control tower before flying within **5 miles** of an airport
-:::
+    * No longer need a waiver (as long as specific requirements are met).
 ::: {.column width="40%"}
 ![](../images/cartoon3.webp)
 :::
@@ -292,7 +288,7 @@ Any commercial use in connection with a business, including:
 - Can fly over people without additional restrictions.
 
 **Example UAS**
-- DJI Mavic Mini / Mini 2 / Mini 3 Pro
+- DJI Neo / DJI Mavic Mini / Mini 2 / Mini 3 Pro
 
 
 ## Class 2 {.smaller}
