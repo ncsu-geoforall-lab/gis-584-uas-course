@@ -16,7 +16,7 @@ The course starts with a brief overview of the UAS mapping technology and its ru
 ## Teaching Assistants
 
 - Pratikshya Regmi
-  * Office hours: TBD
+  * Office hours: Every Wednesday 9-10 AM, Jordan Hall 5103A
   * Email: [pregmi3@ncsu.edu](pregmi3@ncsu.edu)
 
 ## Prerequisites
