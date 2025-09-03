@@ -1,0 +1,264 @@
+---
+title: "UAS Mapping & Analytics — Photogrammetry & Structure from Motion (SfM)"
+subtitle: "Center for Geospatial Analytics · NC State University"
+author: "Justyna Jeziorska · Helena Mitasova · Corey White"
+date: "September 2, 2025"
+format:
+  revealjs:
+    theme: [simple, ../../../../theme.scss]
+    slide-number: true
+    controls: true
+    progress: true
+    transition: slide
+    center: true
+    code-overflow: wrap
+    width: 1400
+    height: 800
+    chalkboard: true
+execute:
+  echo: false
+---
+
+**Photogrammetry & Structure from Motion (SfM) Concepts**  
+GIS 584 · UAS Mapping & Analytics
+
+::: notes
+Welcome everyone. Today we’ll connect the dots between *images* you capture with a drone and the *metrics* you can trust—orthophotos, point clouds, and elevation models.  
+By the end, you’ll understand why raw photos can’t be measured directly, what orthorectification does, and how SfM reconstructs 3D from overlapping 2D images.
+We’ll keep this practical and tie each idea to UAS field work and data QA.
+:::
+
+---
+
+## Objectives
+
+:::{.incremental}
+- Understand how remote sensing & photogrammetry support geospatial data acquisition
+- Recognize aerial photo types and the measurement challenges they introduce
+- Explain why image processing (orthorectification) is needed for measurements
+- Grasp SfM concepts for creating 3D models from 2D images
+:::
+
+::: notes
+These are the takeaways. We’ll move from fundamentals to workflow design.  
+Keep thinking about two questions: *What do you want to measure?* and *What accuracy do you need?*  
+Those answers determine flight planning, ground control, and processing parameters.
+:::
+
+---
+
+## What is Remote Sensing?
+
+- Sensing without contact: acquire data from a distance  
+- **Passive** sensors: measure reflected/emitted energy (RGB, multispectral, thermal)  
+- **Active** sensors: emit energy and measure returns (LiDAR, radar, sonar)
+
+::: notes
+Remote sensing gives us information without touching the surface.  
+Drones typically carry passive RGB or multispectral cameras; LiDAR UAS are active sensors and directly measure range.  
+Keep this distinction in mind—SfM uses *passive* imagery but *infers* depth from parallax.
+:::
+
+---
+
+## Photogrammetry (Why it matters)
+
+- 3D coordinate measurement using photographs
+- Two broad modes: *aerial* vs *terrestrial (close-range)*
+- Historically crucial for mapping; now democratized via UAS
+
+::: notes
+Photogrammetry is the science of turning photos into measurements.  
+With UAS, we’ve moved from expensive manned flights to frequent, targeted surveys—faster iteration, but also new pitfalls like rolling shutter and lens distortions we must correct.
+:::
+
+---
+
+## Aerial Image Types
+
+:::{.incremental}
+- **Vertical**: camera nadir-pointing; lower perspective distortion; better for mapping
+- **Oblique**: camera tilted; richer façades/context; higher distortion; good for 3D
+:::
+
+::: notes
+Vertical images are standard for map accuracy and uniform scale.  
+Obliques capture façades and undercuts but bring strong perspective effects—useful for 3D context and texture, less for planimetric measurements unless carefully modeled.
+:::
+
+---
+
+## Why Raw Photos Mislead
+
+:::{.incremental}
+- Perspective projection (not orthographic)
+- Relief displacement: elevated features “lean” away from nadir
+- Lens and platform distortions (rolling shutter, radial/tangential lens errors)
+:::
+
+::: notes
+If you try to measure distances on a raw photo, elevation and tilt cause scale to vary across the image.  
+Orthorectification corrects these effects so you can trust the geometry.
+:::
+
+---
+
+## Orthorectification (What it does)
+
+- Removes perspective & relief distortion  
+- Compensates optical distortions (camera model)  
+- Produces a uniform-scale **orthophoto** suitable for measurement
+
+::: notes
+Think of orthorectification as “unwarping” the image onto a known surface using camera parameters and elevation.  
+The output is metrically reliable—*if* the inputs and models are correct.
+:::
+
+---
+
+## What We Need (Inputs)
+
+:::{.incremental}
+1. Digital imagery with sufficient **overlap** (≥70% forward, ≥60% side as a baseline)
+2. **DEM/DTM** to remove relief distortion (or derive via SfM)
+3. **Exterior orientation** (IMU/PPK/RTK or estimated in bundle adjustment)
+4. **Camera calibration** (intrinsics: focal length, principal point, distortion)
+5. **Ground Control Points (GCPs)** for georeferencing & accuracy assessment
+6. Software implementing **collinearity equations** / bundle adjustment (SfM)
+:::
+
+::: notes
+Overlap enables feature matching; more texture yields stronger geometry.  
+IMU/RTK help, but even with them, you’ll want checkpoints to validate accuracy.  
+Bundle adjustment simultaneously refines camera poses and 3D feature locations.
+:::
+
+---
+
+## Geotagging (Limits & Use)
+
+- Embeds camera position in EXIF (approximate location/altitude)
+- Useful for *initialization*, not precision georeferencing
+- Expect meter-level errors without RTK/PPK or GCPs
+
+::: notes
+Geotags get you in the right neighborhood.  
+For survey-grade outputs, you still need either high-quality GNSS (RTK/PPK) or well-placed GCPs and checkpoints to quantify accuracy.
+:::
+
+---
+
+## Ground Control Points (GCPs)
+
+:::{.incremental}
+- Marked or photo-identifiable, stable, and well-distributed
+- Known **X, Y, Z** with survey-grade accuracy
+- Essential to improve precision and to **validate** results (use checkpoints)
+:::
+
+::: notes
+Separate **GCPs** (to constrain the solution) from **checkpoints** (to evaluate it).  
+Distribute both across the project area—edges and varying elevations—to avoid biased solutions and inflated accuracy claims.
+:::
+
+---
+
+## From 2D Images to 3D (SfM)
+
+- Automated **feature matching** across overlapping images
+- **Bundle adjustment** estimates camera intrinsics/extrinsics + sparse 3D
+- Densification (stereo matching) → point cloud → mesh/DSM/orthophoto
+
+::: notes
+SfM recovers relative 3D structure from parallax; scale and orientation come from geotags, RTK/PPK, or GCPs.  
+Quality hinges on image texture, overlap, camera model, and outlier handling.
+:::
+
+---
+
+## Multiple-View Geometry (Intuition)
+
+:::{.incremental}
+- **Correspondence**: find the same feature in different views
+- **Triangulation**: intersect rays from multiple cameras → 3D point
+- **Camera geometry**: solve for poses that best explain all matches
+:::
+
+::: notes
+Every matched pixel defines a ray in 3D; with two or more rays we triangulate a point.  
+The optimization balances all matches, minimizing reprojection error while refining camera parameters—this is the heart of SfM accuracy.
+:::
+
+---
+
+## UAS Photogrammetric Workflow
+
+:::{.incremental}
+1. Mission planning (GSD target, overlap, altitude, speed, lighting, safety)
+2. Field ops (calibrated camera settings, consistent exposure, RTK/PPK optional)
+3. Control survey (GCPs + checkpoints; stable, visible, distributed)
+4. Processing (feature match → bundle adjust → densify)
+5. Products (orthophoto, DSM/DTM, contours) + **QA/QC** (residuals, RMSE/NMAD)
+:::
+
+::: notes
+Treat QA/QC as a product: report accuracy on **independent checkpoints**.  
+Inspect residuals, look for systematic tilt or doming, and check for artifacts on low-texture surfaces (water, uniform crops, snow).
+:::
+
+---
+
+## Common Pitfalls & Fixes
+
+:::{.incremental}
+- **Low texture / repetitive patterns** → add obliques; fly lower; diversify look angles
+- **Rolling shutter** → shorter exposure, slower speed, global shutter if possible
+- **Doming / bowl surfaces** → stronger control (GCPs/RTK), better geometry
+- **Vegetation canopy bias** → model as DSM; don’t compare to DTM
+- **Shadowing/lighting changes** → plan time of day; manual exposure
+:::
+
+::: notes
+Most failures are geometric or radiometric: improve image geometry or stabilize exposure.  
+Always separate DSM vs DTM use-cases—don’t mistake canopy for ground.
+:::
+
+---
+
+## What We’ve Learned (Recap)
+
+:::{.incremental}
+- Remote sensing basics; passive vs. active sensors
+- Why orthorectification is required for measurement
+- Inputs needed for reliable mapping (overlap, calibration, control)
+- How SfM recovers 3D and when it succeeds or fails
+:::
+
+::: notes
+You should now be able to plan a flight for a target GSD, choose control, and defend the accuracy of your products with checkpoints and transparent QA.
+:::
+
+---
+
+## Quick Activity (In-Class)
+
+- Define a site, target GSD, and map scale
+- Pick overlap, altitude, and speed
+- Decide GCP count & placement + independent checkpoints
+- List expected products and accuracy targets (e.g., RMSE\_XY/Z)
+
+::: notes
+Work in teams for five minutes and sketch a plan.  
+We’ll compare choices and discuss trade-offs—this mirrors real pre-flight planning.
+:::
+
+---
+
+## References & Credits
+
+- Adapted from course slides: *UAS Mapping and Analytics – Photogrammetry and Structure from Motion Concepts* (NC State CGA)  
+
+---
+
+
+

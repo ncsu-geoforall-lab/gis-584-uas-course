@@ -10,35 +10,28 @@ format:
 <section>
     <h2>Objectives</h2>
     <ul>
-        <li class="fragment"><strong>Understand</strong> the role of remote sensing and photogrammetry in geospatial data aquisition</li>
-        <li class="fragment"><strong>Describe</strong> different types of aerial photography and associated challenges for measurements</li>
-        <li class="fragment"><strong>Understand</strong> why photogrammetry needs to be used to make measurements from aerial photographs</li>
-        <li class="fragment"><strong>Understand</strong> Structure from Motion concepts in creating 3D models from 2D images</li>
+        <li>Understand the role of remote sensing and photogrammetry in geospatial data aquisition</li>
+        <li>Describe different types of aerial photography and associated challenges for measurements</li>
+        <li>Understand why photogrammetry needs to be used to make measurements from aerial photographs</li>
+        <li>Understand Structure from Motion (SfM) concepts in creating 3D models from 2D images</li>
     </ul>
 </section>
 
 <section>
     <h2>What is Remote Sensing?</h2>
-    <ul>
-        <li>Sensing without contact</li>
-        <li>Acquiring data from a distance</li>
-        <li>Passive sensors: sensor captures reflected rays</li>
-        <li>Active sensors: sensor sends out rays and captures the return signal (lidar, radar, sonar)</li>
-    </ul> 
-    <!-- <img src="../images/remote_sensing_photogrammetry.webp" alt="Remote Sensing Photogrammetry"> -->
-   
-</section>
-
-<section>
-    <h2>Remote sensing for mapping explained</h2>
-    <a href="https://www.youtube.com/watch?v=3iaFzafWJQE"><img src="../images/movie_remote.webp"></a>
-</section>
-
-<section>
-    <h2>Remote sensing, photogrammerty and GIS</h2>
-    <img class= "fragment" src="../images/remote_sensing_vs_photogrammertry.webp" width="70%">
-    <img class= "fragment" src="../images/rs_to_GIS.webp" width="60%">
-    <p class="small fragment"> Source of diagrams: Schenk (2005), modified </p>
+::: {.columns}
+:::{.column width="60%"}
+::: {.incremental}
+- Sensing without contact
+- Acquiring data from a distance
+- Passive sensors: sensor captures reflected rays
+- Active sensors: sensor sends out rays and captures the return signal (lidar, radar, sonar)
+:::
+:::
+:::{.column width="40%"}
+![](../images/remote_sensing_photogrammetry.webp){width="100%"}
+:::
+:::
 </section>
 
 <section>

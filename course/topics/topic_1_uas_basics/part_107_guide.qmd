@@ -1,0 +1,90 @@
+---
+topic: "Topic 1A: UAS Basics"
+title: "Step-by-Step Guide to Getting FAA Part 107 License"
+subtitle: "Step-by-Step Guide to Getting FAA Part 107 License"
+date: 8/18/2025
+author: 
+    - Pratikshya Regmi
+    - Corey T. White
+---
+
+## **1\. Eligibility Requirements**
+
+* Be at least 16 years old.  
+* Be able to read, speak, write, and understand English.  
+* Be physically and mentally fit to safely operate a drone.  
+* Pass the FAA Knowledge Test.
+
+## **2\. Create an IACRA Account**
+
+* **IACRA (Integrated Airman Certification and Rating Application)** is the FAA’s online system for applying for certifications.  
+* Go to the [IACRA website](https://iacra.faa.gov/IACRA/Default.aspx) and click on **Register**.  
+* **Select the 'Applicant' role** during registration.  
+* Complete the personal information form and create a username and password.  
+* After registering, **log in to your IACRA account** and make sure your information is correct.
+
+## **3\. Get an FAA Tracking Number (FTN)**
+
+* When you create your IACRA account, you will receive an **FAA Tracking Number (FTN)**, which is a unique identifier for you in the FAA system.  
+* Keep this number as you will need it when scheduling your knowledge test.
+
+## **4\. Study for the FAA Knowledge Test**
+
+* **Study materials**: The Part 107 test covers a variety of topics such as airspace classification, drone operations, aviation weather, and regulations. You can find study guides, courses, and practice exams through online resources or from drone training companies.  
+* **Recommended study resources**:  
+  * FAA’s free [Remote Pilot Small Unmanned Aircraft Systems Study Guide](https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/remote_pilot_study_guide.pdf)  
+  * FAA’s [Part 107 Sample Questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf)  
+  * Online courses from drone training providers like [Drone Pilot Ground School](https://www.dronepilotgroundschool.com/), [Pilot Institute](https://pilotinstitute.com/?gad_source=1&gclid=CjwKCAjw_4S3BhAAEiwA_64YhsGKQ4_2WffJluNGbU3ouqpU9NA6VTprI7W1PGdJIAE9i56t4LfQqBoCXnQQAvD_BwE), [Gold Seal](https://groundschool.com/), etc.
+
+## **5\. Schedule the FAA Part 107 Knowledge Test**
+
+* After studying, you will need to **schedule your test** at an FAA-approved testing center.  
+* Go to the [PSI Exams website](https://faa.psiexams.com/FAA/login) (the FAA’s official test provider).  
+* **Sign up or log in** to your account.  
+* **Search for testing centers** near you by entering your zip code or city.  
+* **Choose a test date and time** from the available options.  
+* Pay the exam fee (usually around $175).
+
+## **6\. Take the FAA Part 107 Knowledge Test**
+
+* Arrive at the test center with the required documentation:  
+  * **Government-issued photo ID** (e.g., driver’s license or passport).  
+  * **FAA Tracking Number (FTN)** from IACRA.  
+* The test consists of **60 multiple-choice questions** and you have **2 hours** to complete it.  
+* You must score at least **70%** to pass.
+
+## **7\. Receive Your Test Results**
+
+* After completing the test, you will receive your score immediately at the testing center.  
+* If you pass, your results will be automatically uploaded to the FAA system. If you fail, you can retake the test after 14 days (you’ll have to pay the exam fee again).
+
+## **8\. Complete the FAA Form 8710-13 in IACRA**
+
+* After passing the test, return to the IACRA website and log in.  
+* Select **'Start New Application'** and fill out **Form 8710-13** for a Remote Pilot Certificate.  
+* Enter your **knowledge test ID** (from your test results) and submit the form.
+
+## **9\. Background Check and Temporary Certificate**
+
+* The FAA will conduct a **background check**, which may take a few weeks.  
+* Once cleared, you will receive an email from IACRA with your **temporary remote pilot certificate**.  
+* You can now legally fly drones commercially.
+
+## **10\. Receive Your Permanent Remote Pilot Certificate**
+
+* Your **permanent certificate** will be mailed to you in about **6-8 weeks** after you pass the background check.  
+* Until then, use your **temporary certificate** to conduct your operations.
+
+## **11\. Recurrency Requirement**
+
+* The Part 107 Remote Pilot Certificate is valid for **24 months**.  
+* To continue flying commercially, you will need to pass a **recurrency test** every two years.
+
+## **Key Points to Remember:**
+
+* **Cost**: The Part 107 test usually costs around **$175**.  
+* **Time to complete**: The entire process from studying to receiving your certificate can take about **1-2 months**.  
+* **Test Duration**: The knowledge test lasts **2 hours**.  
+* **Passing Score**: You must achieve at least **70%** to pass the test.
+
+Good luck on your journey to becoming an FAA-certified remote pilot\!
