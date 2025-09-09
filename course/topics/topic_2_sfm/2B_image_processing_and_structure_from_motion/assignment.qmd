@@ -1,0 +1,524 @@
+---
+topic: "Topic 2B: Structure from Motion"
+title: "Assignment 2B"
+subtitle: "Imagery processing and structure from motion (SfM)"
+date: 9/10/2025
+assignment-due-date: 9/24/2025
+activity: Assignment/Lab
+format: 
+    html:
+        toc: true
+        toc-depth: 4
+---
+
+## Geoprocessing of the UAS data
+
+Completing this assignment you will generate orthomosaic and Digital Surface Model using pictures taken from the UAS Trimble UX5 Rover (Flight mission executed on September 22<sup>nd</sup> 2016). The Study area is located at [Lake Wheeler COA](https://www.google.com/maps/d/edit?mid=zi8EsFDQAyqo.kr7lL7Germeo). Additionally you will be able to see the processing results in the generated report and optionally you will be able to export also 3D model and Point cloud as well as Camera calibration and orientation data.
+
+The process can be very time consuming (depending on computational power of your device and desired quality). In order to minimize the processing time, we will process only fraction of the data collected and we will use imagery downsampled by 50%. It will allow us to generate outputs in the classroom. 
+
+<!-- The resolution of ortophoto and DSM will be lower, but the high quality and full extent output of the processing are provided [here](https://drive.google.com/open?id=0B1AfQGDB8tPXcHlzM01lY0pEd00). -->
+
+### General workflow (with GCPs)
+
+**Preparation**
+
+- [Stage 1](#stage-1-aligning-photos): Building simple geometry (in order to place GCPs)
+- [Stage 2](#stage-2-placing-gcps): Placing GCPs
+- [Stage 3](#stage-3-building-complex-geometry): Building complex geometry
+- [Stage 4](#stage-4-exporting-results): Exporting results
+
+### Preparation
+
+#### Data
+  
+##### OPTION 1 - Small area 
+
+You can use a smaller area to accelerate processing. The photos are not downsampled in order to obtain the highest resolution of the outputs.
+
+- [download data](https://drive.google.com/open?id=1pKD7N0dzOZLQSWD4cj98UWrvrR62pxVW) - photos, log and coordinates of 3 GCPs
+    
+##### OPTION 2 - Full flight, photos original resolution 
+::: {.callout-warning}
+**LONG PROCESSING TIME!**
+:::
+
+- [download data](https://drive.google.com/file/d/13wPTiJcBaxX2AZjibT9N7QIffHddoaqZ) - photos, log and coordinates of 12 GCPs
+
+##### OPTION 3: You can use your own data
+
+#### Software
+
+- Agisoft Metashape Professional ([installer](http://www.agisoft.com/downloads/installer/))
+
+#### Preferences
+
+When launching Metashape for the first time, some settings need to be adjusted to optimize performance. These settings need to be done only once, at the first use of Metashape, and are loaded by default in subsequent sessions.
+
+##### Menu > Tools > Preferences
+
+**General tab:**
+
+- Leave default (optional – write log to file: enabled, if you want to save the txt log file)
+
+**GPU tab:**
+
+- Check the `USE CPU when performing GPU accelerated processing` option at the bottom
+
+**Appearance Tab:**
+
+- Leave default (or adjust to personal taste)
+
+**Navigation Tab:**
+
+- Leave default (or adjust to personal taste)
+
+**Advanced tab:**
+
+- Project Files
+    - Keep key points: `disabled`
+    - Keep depth maps: `disabled`
+    - Store absolute image paths: `disabled`
+- Export/Import: `enable all`
+- Miscellaneous:
+    - Enable fine level task division: `enabled`
+
+![Preferences](images/agi_preferences.webp)
+
+### Stage 1: Aligning Photos
+
+In order to localize the GCPs first a preliminary simple model needs to be built.
+
+#### Adding photos
+
+##### Menu > Workflow > Add Photos
+
+Indicate the path to the folder (downloaded data) containing photos and select them all. In the Reference pane, you can see that the photos have been loaded, but the coordinate system indicates local coordinates. It can be changed in the Settings.
+
+Click the settings icon ![Settings Icon](images/settings_icon.webp){width=25} > change coordinate system to `WGS 84 (EPSG:4326)`.
+
+![](images/agi_reference.webp)
+
+::: {.callout-note}
+- **Camera accuracy (m):** Refers to the positional accuracy of camera geotags (lat/lon), typically 2.5–10 meters with standard GPS, or better with high-grade equipment.
+- **Camera accuracy (deg):** Relates to yaw, pitch, roll; set higher (e.g., 2°) if not measured precisely.
+- **Marker accuracy (m):** Indicates ground control point accuracy, usually 0.01–0.05 m, can specify x/y/z separately (e.g., 0.01/0.05).
+- **Scale bar accuracy (m):** Accuracy of measured distances between markers, often very precise (e.g., 0.001 m).
+- **Marker accuracy (pixels):** How precisely you can place a marker in an image; 0.1 px for targets, 0.5 px for natural features.
+- **Keypoint accuracy (pixels):** Weight for automatically detected points; typically 0.5–1 px due to variability in appearance.
+:::
+
+#### Loading camera positions
+
+Click Import button ![Import Icon](images/import_icon.webp){width=25} on the Reference pane toolbar > select file containing camera positions information (`2016_09_22_sample.txt`) in the Open dialog.
+
+![](images/log_load.webp)
+
+::: {.callout-note}
+Agisoft supports the camera orientation files in 5 formats: .csv, .txt, .tel, .xml, and .log. The default format of the Trimble Aerial Imaging log is .jxl. In order to convert the Trimble .jxl log file please run [script by Vaclav Petras](https://github.com/wenzeslaus/jxl2csv) or use **provided already converted log in .txt format**.
+:::
+
+Make sure that the columns are named properly – you can adjust their placement by indicating column number (top right of dialog box).
+
+#### Aligning photos
+
+- Accuracy: `Low`
+- Check: `Reference preselection`
+- Key point limit: `default`
+- Tie point limit: `default`
+- Adaptive camera model fitting: `enabled`
+
+##### Menu > Workflow > Align Photos
+
+![](images/align_photos.webp)
+
+Click Save ![](images/save_icon.webp){width=25} in the toolbar.
+
+### Stage 2: Placing GCPs
+
+#### Loading the GCPs coordinates
+
+Click Import button ![](images/import_icon.webp){width=25} on the Reference pane toolbar > select the file containing Ground Control Points (`GCP_3.txt`) coordinates in the Open dialog.
+
+![](images/import_GCP.webp)
+
+Make sure that the columns are named properly – you can adjust their placement by indicating column number (top right of dialog box). This time you uncheck the *Rotation* box since GCPs are stationary and do not need determining yaw pitch and roll angles.
+
+The window with the message: *Can’t find match for ‘UAV 3’ entry. Create new marker?* will pop up.
+
+![](images/no_match_new_marker.webp)
+
+Choose ‘Yes to All’ – it will create new marker for each of the named GCPs from the file. They will be listed in Reference pane under the list of photos.
+
+#### Indicating GCPs on the pictures
+
+Now you need to find each of the GCPs and indicate its localization on all photos depicting it. You can also see the process on the [instructional video](https://www.youtube.com/watch?v=nnKJWev7Jyc).
+
+The Model pane shows approximate positions of GCPs, it is better visible if the ‘Show cameras’ option is disabled (*Menu > View > Show/Hide Items > Show cameras*).
+
+![GCPs Cameras](images/gcps_cameras.webp)
+![GCPs Photo](images/gcps_photo.webp)
+
+Choose in the context menu of the selected point on the list (right click) > `Filter Photos by Marker`.
+
+![](images/filter_photos_by_marker.webp)
+
+In the Photos pane appear only the images in which the currently selected GCP is probably* visible.
+
+::: {.callout-note}
+*This is possible because our pictures are geotagged (log indicates the position of each photo), if you will be working with the pictures that are not geotagged or in the area that you don't know and are not able to "guess" which photo depicts which GCP, it is useful to build the dense point cloud or even mesh and texture (see the following steps) to see the preliminary model of the area in the Model pane, not just a sparse cloud (this is depicted on the figures above).
+:::
+
+Open an image by double clicking the thumbnail. It will open in a tab next to the Model pane. The GCP will appear as a grey icon ![GCP Gray](images/gcp_gray.webp){width=45}. This icon needs to be moved to the middle of GCP visible on the photo.
+
+![](images/gcp_reposition.webp)
+
+Drag the marker to the correct measurement position. At that point, the marker will appear as a green flag, meaning it is enabled and will be used for further processing.
+
+Double click on the next photo and repeat the steps. As soon as the GCP marker position has already been indicated on at least two images, the proposed position will almost exactly match the point of measurement. You can now slightly drag the marker to enable it (turning it into a green flag) or leave it unchanged (gray marker icon) to exclude it from processing.
+
+Filter photos by each marker again. Agisoft adjusts the GCPs positions on the run, so you can locate the GCP on additional images that will appear in the Photos pane.
+
+In this sample processing we will include 3 GCPs. Mathematically, you need to indicate marker positions for at least 3 GCPs. Accurate error estimates can be calculated with at least 4 GCPs, while often at least 5 are needed to cover the center of the project as well, which reduces the chance of error propagation and resulting terrain distortions especially on flat or undulating terrain types.
+
+Click Save ![Save Icon](images/save_icon.webp){width=25} in the toolbar.
+
+#### Optimizing alignment
+
+You can see the errors by clicking on the View Errors icon ![View Errors Icon](images/view_errors_icon.webp){width=25}. Best results are obtained when the alignment is first optimized based on the camera coordinates only, and a second time based on the GCP only.
+
+Click Optimize icon ![Optimize Icon](images/optimize_icon.webp){width=25} in the Ground Control toolbar (check all the boxes).
+
+::: {.callout-warning}
+Depending on the version of Metashap the optimize icon may appear as a star.
+:::
+
+#### Optimizing based on the GCP Markers
+
+In the Ground Control pane:
+
+- disable all the camera coordinates (*select one > press Ctrl+A > right-click > `choose Uncheck`*).
+- enable all the GCP Marker coordinates (*select one > press Ctrl+A > right-click > `choose Check`*).
+
+Click Settings icon ![Settings Icon](images/settings_icon.webp){width=25} in the Ground Control toolbar:
+
+- leave the default values (Marker accuracy (m) = 0.005 m)
+
+Click Optimize icon ![Optimize Icon](images/optimize_icon.webp){width=25} in the Ground Control toolbar (leave all options at the default).
+
+Click Save ![Save Icon](images/save_icon.webp){width=25} in the toolbar.
+
+You can now see how much the errors were reduced through optimization by clicking on the View Errors icon ![View Errors Icon](images/view_errors_icon.webp){width=25}.
+
+### Stage 3: Building complex geometry
+
+Before starting the Build Dense Cloud step it is recommended to check the bounding box of the reconstruction (to make sure that it includes the whole region of interest, in all dimensions). The bounding box should also not be too large (increased processing time and memory requirements).
+
+The bounding box can be adjusted using the Resize Region ![Resize Region](images/resize_region.webp){width=25} and the Rotate Region ![Rotate Region](images/rotate_region.webp){width=25} tool from the toolbar. Make sure that the base (red plane) is at the bottom.
+
+![](images/rotated_view.webp)
+
+The next steps will be time consuming (depending on the desired quality and number of pictures). You can execute them one step at the time or you can also set a batch processing that does not require user interaction until the end of geoprocessing (especially useful in case of Ultra High quality that requires even several days of processing). The batch processing will be explained at the end of this section.
+
+##### Menu > Workflow > Build Dense Cloud (Build Point Cloud)
+
+- Quality: `Medium`
+- Depth filtering: `Aggressive`
+
+> - `Medium` (will downsample the images to get a 3D coordinate every 4 pixels)
+  - `High` (will downsample the images to get a 3D coordinate every 2 pixels; typically takes several hours but will give acceptable results for most cases)
+  - `Ultra high` (will calculate a 3D coordinate for every pixel in original imagery; may take more than a day or several days)
+
+::: {.callout-note}
+When working with large datasets take into consideration the RAM size requirements for the different target qualities with respect to the number of images (in appendix in the [manual](https://www.agisoft.com/pdf/metashape-pro_2_1_en.pdf)).
+:::
+
+![](images/agi_build_dense_cloud.webp)
+
+Click Save ![](images/save_icon.webp){width=25} in the toolbar
+
+##### Menu > Workflow > Build Mesh (Build Model)
+
+- Source data: `Dense cloud` or `Point cloud`
+- Surface type: `Height field`
+- Face count: `Medium`
+- Advanced options: leave default
+
+:::{.callout-note}
+*Face count set at “0” means that Metashape will determine an optimum number of faces (but this may not be enough to describe all the features on terrain)*
+:::
+
+![](images/agi_build_mesh.webp)
+
+##### Menu > Workflow > Build Texture
+
+- Texture Type: `Diffuse Map`
+- Source Data: `Images`
+- Mapping mode: `Orthophoto`
+- Blending mode: `Mosaic (default)`
+- Texture size/count: `4096`
+- Enable color correction: `disabled (unchecked)` (Not visible in all versions)
+
+Click Save ![](images/save_icon.webp){width=25} in the toolbar
+
+![](images/agi_build_texture.webp)
+
+#### Editing geometry
+
+Sometimes it is necessary to edit geometry before building texture atlas and exporting the model.
+
+If the overlap of the original images was not sufficient, the model can contain holes. In this case, to obtain a holeless model, use the Close Holes command. It is crucial if you want to perform any volume calculations - in this case, 100% holes need to be closed.
+
+##### Menu > Tools > Mesh (Model) > Close Holes
+
+In the Close Holes dialog, select the size of the largest hole to be closed (in percentage of the total model size).
+
+::: {.callout-warning}
+DO not choose 100% unless you are calculating volumes (then you have to close 100% holes)
+:::
+
+![](images/agi_close_holes.webp)
+
+This does not apply to our data, since we have sufficient image overlap. But due to strong dependency on weather conditions, the holes in data are common with UAS.
+
+#### Building DEM
+
+##### Menu > Workflow > Build DEM
+
+In this step, the parameters of the exported DEM are determined. In order to work in the commonly used in NC reference system, we will not keep the project's WGS84 system, but change it to NC State Plane (ESPG:3358).
+
+![](images/build_dem.webp)
+
+#### Building Orthophoto
+
+##### Menu > Workflow > Build Orthophoto (Orthomosaic)
+
+Orthophoto can be built only in the same coordinate system as the DEM.
+
+![](images/build_ortho.webp)
+
+#### Batch processing
+
+##### Menu > Workflow > Batch process > Add
+
+Batch processing allows setting multiple processes in the preset order and executing them one after another without user intervention. All the parameters should be set the same as explained above.
+
+1. Optimize Alignment (Align Photos) - if the GCPs were placed but the optimization not performed, otherwise: skip
+2. Build Dense Cloud (Point cloud)
+3. Build Mesh (Build Model)
+4. Build Texture
+5. Build DEM
+6. Build Orthophoto (Build Orthomosaic)
+
+![](images/batch.webp)
+
+<!--
+If the process takes really long time on your device, you can cancel the processing and work with the project files saved on the [google drive](https://drive.google.com/open?id=0B1AfQGDB8tPXVlQxT0J5Z0prSlE). The only adjustment you need to make is to change the path of the pictures to the localization of downloaded images on your computer.
+
+In order to do that, right-click on any of the pictures in the Pictures pane and choose *Change Path...* and in the dialog window mark the *All cameras* option. This will automatically apply the updated location to all the pictures in the project.
+
+![](images/agi_change_path.webp)
+-->
+
+### Stage 4: Exporting results
+
+This option will be disabled if you are working in the demo version.
+
+#### Orthomosaic
+
+##### File > Export Orthophoto > Export JPEG/TIFF/PNG
+
+- Projection Type: `geographic (default)`
+- Datum: `WGS 1984`
+- Write KML file (footprint) and World file (.tfw) = check if desired (if left unchecked, georeferencing information will still be contained in the GeoTIFF .tif file)
+- Blending mode: `Mosaic (default)`
+- Pixel size: `leave default`
+
+![](images/export_ortho.webp)
+
+Leave default values. Fill out the desired name and save as type TIFF/GeoTIFF (*.tif).
+
+#### Digital surface model
+
+##### Menu > File > Export DEM
+
+![](images/export_dem.webp)
+
+Leave default values. Fill out the desired name and save as type TIFF/GeoTIFF (*.tif).
+
+#### Generating report
+
+##### Menu > File > Generate report
+
+Indicate the name and path for the PDF file.
+
+---
+
+Processing outputs from OPTION 1 (downsampled images) are provided [here](https://drive.google.com/open?id=19z1wIMJ2Ehjdey4gHt1q9uZm0ZMWcfbL).
+
+---
+
+The following export steps are optional.
+
+#### Model
+
+##### Menu > File > Export model > OBJ/FBX/KMZ
+
+Indicate the name, path, and format of the output model.
+
+Metashape supports model export in the following formats: Wavefront OBJ, 3DS file format, VRML, COLLADA, Stanford PLY, STL models, Autodesk FBX, Autodesk DXF, Google Earth KMZ, U3D, Adobe PDF. Some file formats (OBJ, 3DS, VRML, COLLADA, PLY, FBX) save texture images in a separate file. The texture file should be kept in the same directory as the main file describing the geometry.
+
+3D Models are a great visualization tool. [Model generated by following the assignment instructions](https://skfb.ly/69oyL) as well as [model from full flight processing](https://skfb.ly/TEnq) can be viewed on Sketchfab.
+
+#### Point cloud
+
+##### Menu > File > Export points
+
+Indicate the name, path, and format of the output file.
+
+Metashape supports point cloud export in the following formats: Wavefront OBJ, Stanford PLY, XYZ text file format, ASPRS LAS, ASTM E57, U3D, Potree, Metashape OC3, PDF.
+
+#### Camera calibration and orientation data
+
+##### Menu > Tools > Export > Export Cameras
+
+Indicate the name, path, and format of the output file.
+
+Metashape supports camera data export in the following formats: Metashape structure file format (XML based), Bundler OUT file format, CHAN file format, Boujou TXT file format, Omega phi Kappa text file format, PATB Exterior orientation, BINGO Exterior orientation, AeroSys Exterior orientation, Inpho project file.
+
+## Render 3D Model
+
+Here is an exmaple of the rendered 3D model exported as a [gltf](https://www.khronos.org/glTF) file using [Three.js](https://threejs.org/)
+
+```{ojs}
+//| echo: false
+// Define canvas height
+height = 600;
+width = 800;
+
+THREE = {
+  const THREE = window.THREE = await require("three@0.130.0/build/three.min.js");
+  await require("three@0.130.0/examples/js/controls/OrbitControls.js").catch(() => {});
+  await require("three@0.130.0/examples/js/loaders/OBJLoader.js").catch(() => {});
+  await require("three@0.130.0/examples/js/loaders/GLTFLoader.js").catch(() => {});
+  return THREE;
+}
+
+// Initialize scene
+scene = {
+    const scene = new THREE.Scene();
+    return scene;
+}
+
+// Initialize renderer
+renderer = {
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    return renderer;
+}
+
+controls = {
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.addEventListener("change", () => renderer.render(scene, camera));
+    invalidation.then(() => (controls.dispose(), renderer.dispose()));
+    return controls;
+}
+
+
+lights = {
+    // Create a directional light with increased intensity
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);  // Intensity set to 2 (brighter)
+    directionalLight.position.set(0, 10, 10).normalize();
+    scene.add(directionalLight);
+
+    // Add ambient light for soft overall illumination
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);  // Intensity set to 0.5 (softer ambient light)
+    scene.add(ambientLight);
+    
+    return { directionalLight, ambientLight };
+}
+
+// Initialize camera
+camera = {
+    const camera = new THREE.PerspectiveCamera(85, width / height, 0.1, 1000);
+    camera.position.set(0, 20, 20);
+    // Resize the camera aspect when the window is resized
+    window.addEventListener('resize', () => {
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+    });
+    return camera;
+}
+
+// Function to center the camera on the model
+function centerViewOnModel(model, camera) {
+    // Compute the bounding box of the model
+    const box = new THREE.Box3().setFromObject(model);
+
+    // Get the center of the model
+    const center = box.getCenter(new THREE.Vector3());
+
+    // Get the size of the model (distance between min and max corners)
+    // const size = box.getSize(new THREE.Vector3());
+
+    // // Move the camera based on the size of the model
+    // const maxDim = Math.max(size.x, size.y, size.z);
+    // const fov = camera.fov * (Math.PI / 180);  // Convert vertical FOV to radians
+    // let cameraZ = Math.abs(maxDim / (2 * Math.tan(fov / 2)));  // Distance from the object
+    // cameraZ *= 0.5; // Optionally add some padding
+
+    // Set the camera position
+    camera.position.set(center.x, center.y + 200, center.z);
+
+    // Make the camera look at the center of the model
+    camera.lookAt(center);
+}
+
+importedObj = {
+  const url = await FileAttachment('data/model.glb').url()
+  return loadObject(url)
+}
+
+
+loadObject = (url) => new Promise ((resolve,reject) => {
+  const loader = new THREE.GLTFLoader();
+  // instantiate a loader
+  loader.load(
+	  // resource URL
+    url,
+  	// called when resource is loaded
+	function ( gltf ) {
+      const model = gltf.scene;
+      scene.add(model);
+      centerViewOnModel(model, camera);
+      resolve(model);
+  	},
+	  // called when loading is in progresses
+	  function ( xhr ) {
+		  return ( xhr.loaded / xhr.total * 100 ) + '% loaded' ;
+  	},
+	  // called when loading has errors
+	  function ( error ) {
+        reject ("Error in loading")
+	  }
+  );
+})
+
+// Render loop
+{
+  while (true) {
+    requestAnimationFrame(() => {
+      // Rotate the scene slightly
+    //   scene.rotation.y += 0.001;
+    //   scene.rotation.z -= 0.001;
+      // Render the scene with the camera
+      renderer.render(scene, camera);
+    });
+    await Promises.delay(16); // Delay of ~16ms for smooth animation (60fps)
+  }
+}
+
+// Renderer DOM element to display the canvas
+renderer.domElement
+```

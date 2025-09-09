@@ -24,7 +24,7 @@ format:
 
 ## Lecture
 
-* Lecture Slides: [Photogrammetry and SfM](lectures/lecture_2b.qmd)
+* Lecture Slides: [Photogrammetry and SfM](2B_image_processing_and_structure_from_motion/lecture.qmd)
 * Lecture Recording: [Fall 2024]({{< var recordings.topic2.lecture2b >}}) (NCSU Only)
 * Assignment Recordign: [Fall 2024]({{< var recordings.topic2.assignment2b >}})
 

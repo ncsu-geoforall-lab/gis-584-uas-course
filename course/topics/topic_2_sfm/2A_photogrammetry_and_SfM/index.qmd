@@ -1,0 +1,43 @@
+---
+topic: "Topic 2A: Structure from Motion"
+title: "Photogrammetry and Structure from Motion concepts"
+subtitle: "Topic 2: Structure from Motion"
+date: 9/3/2025
+activity: Lecture
+---
+
+## Outline:
+
+* principles of photogrammetry
+* UAS low range flight and consumer camera image acquisition
+* lateral and forward overlap, stereoscopic coverage
+* principles of Structure from Motion
+* 3D reconstruction from multiple overlapping imagery
+
+## Lecture
+
+* Lecture Slides: [Photogrammetry and SfM](lectures/lecture_2a.qmd)
+* Lecture Recording: [Fall 2024]({{< var recordings.topic2.lecture2a >}}) (NCSU Only)
+* In-Class Recording: [Fall 2024]({{< var recordings.topic2.assignment2a >}}) (NCSU Only)
+
+##  Supplemental materials
+
+* [Demo Visualization](sfm_demo.qmd)
+* [Lecture Slides 2016](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/02_Aerial_Photogrammetry_Concepts.html#/), learn about history of aerial mapping
+* [ISPRS 2016 paper on Reconstruction of Palmyra from tourist photos](https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/III-5/81/2016/)
+* [ISPRS 2016 paper on Reconstruction of popular monuments from crowdsourced photos](https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/III-3/51/2016/)
+* [Open Heritage - 3D models of iconic locations](https://artsandculture.google.com/project/cyark)
+
+## Assignment
+
+Perform an experiment to investigate impact of the number and orientation of photos, light, as well as shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.
+
+* [Lab Experiment](assignments/assignment_2a.qmd): 3D reconstruction from multiple overlapping imagery
+
+## Homework
+
+Prepare short report on your 3D modeling experiment.
+
+3D models from previous courses are available on [OsgeoLab Skechfab account](https://sketchfab.com/osgeolab/collections/classroom-models). If you would like your model to be added to the collectionl please indicate at the end of your report
+"I agree for my 3D model to be uploaded to the OsgeoLab Skechfab collection and I want(/don't want) my name to be listed as an author in the model description"
+and submit on through moodle your 3D model (preferably in the .obj format with accompaning .mtl and .jpg files, or check [other formats supported by Sketchfab](https://help.sketchfab.com/hc/en-us/articles/202508396-3D-File-Formats?page=3#3d-formats)) 

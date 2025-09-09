@@ -1,11 +1,24 @@
 /*-- scss:defaults --*/
 // Base document colors
 $primary: #006600;
-$body-bg: #ffffff;
+$secondary: #660066;
+$body-bg: #f2f2f2;
 $no-class: hsl(0, 84%, 57%);
-$body-color: rgb(10, 10, 10);
+$body-color: rgb(62, 62, 62);
 $link-color: $primary;
 $presentation-heading-color: $primary;
+
+$custom-mermaid-body-color: #adb0b0;
+$mermaid-bg-color: $body-bg;
+$mermaid-edge-color: $secondary;
+$mermaid-node-fg-color: $custom-mermaid-body-color;
+$mermaid-fg-color: $custom-mermaid-body-color;
+$mermaid-fg-color--lighter: lighten($custom-mermaid-body-color, 10%);
+$mermaid-fg-color--lightest: lighten($custom-mermaid-body-color, 20%);
+$mermaid-label-bg-color: $body-bg;
+$mermaid-label-fg-color: $primary;
+$mermaid-node-bg-color: rgba($primary, 0.1);
+$mermaid-node-fg-color: $primary;
 
 .text-center {
     text-align: center;

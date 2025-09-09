@@ -1,0 +1,38 @@
+---
+title: "Topics"
+---
+
+## Topic 1: UAS Basics
+
+[A. Introduction to Unmanned Aerial Systems](topic_1_uas_basics/part_a_introduction.qmd)
+
+[B. Rules and regulations for UAS operations](topic_1_uas_basics/part_b_rules_regs.qmd)
+
+## Topic 2: Structure from Motion
+
+[A.From images to 3D models: Photogrammetry and Structure from Motion concepts](topic_2_sfm/part_a_images_to_3d.qmd)
+
+[B. UAS Imagery processing](topic_2_sfm/part_b_img_processing_sfm.qmd)
+
+## Topic 3: UAS Flight Planning
+
+[A. UAS Flight Planning](topic_3_flight_planning/part_a_uas_flight_planning.qmd)
+
+## Topic 4: GIS Analysis
+
+[A. Analysis of UAS data processing results](topic_4_GIS_analytics\part_a_analysis_uas_processing_results.qmd)
+
+[B. Point cloud data analysis: point clouds, surfaces, and voxel models](topic_4_GIS_analytics\part_b_point_cloud_analysis.qmd)
+
+## Topic 5: Advanced Analytics
+
+[A. UAS and lidar data: comparison, fusion and analysis](topic_5_advanced_analytics\part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)
+
+[B. Analysis of multitemporal UAS data and its applications](topic_5_advanced_analytics\part_b_Analysis_multitemporal_UAS_data_applications.qmd)
+
+## Topic 6: Machine Learning/AI
+
+[A. Topic 6: Image Classification and Change Detection](topic_6_change_detection/part_6a.qmd)
+
+
+<!-- ## Topic 7: 3D Modeling and Geovisualization -->

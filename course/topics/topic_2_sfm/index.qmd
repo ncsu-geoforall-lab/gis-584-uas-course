@@ -1,0 +1,12 @@
+---
+topic: "Topic 2: Structure from Motion"
+title: "Structure from Motion"
+subtitle: "Topic 2: Structure from Motion"
+date: 9/3/2025
+activity: Topic
+---
+
+## [2A: Photogrammetry and Structure from Motion (SfM)](2A_photogrammetry_and_SfM/index.qmd)
+
+## [2B: UAS Image Processing](2B_image_processing_and_structure_from_motion/index.qmd)
+

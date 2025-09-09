@@ -1,24 +1,34 @@
 ---
-title: "Imagery Processing"
+title: "UAS Imagery Processing"
 subtitle: "Center for Geospatial Analytics at North Carolina State University"
 author: "Justyna Jeziorska, Helena Mitasova & Corey White"
 format:
   revealjs:
     theme: [simple, ../../../../theme.scss]
+    slide-number: true
+    controls: true
+    progress: true
+    transition: slide
+    center: true
+    code-overflow: wrap
+    width: 1400
+    height: 800
+    chalkboard: true
+    footer: "[Return Home](../2B_image_processing_and_structure_from_motion/index.qmd)"
+execute:
+  echo: false
 ---
 
 ## Objectives
 
-- **Understand** the photogrammetric data processing as a multistep process;
-- **Indicate** data needed for orthophoto/DTM generation from aerial imagery;
-- **Understand** the difference between interior and exterior orientation of the photo;
-- **Describe** the workflow of geoprocessing of aerial imagery in designated software (Agisoft Metashape Professional);
+- **Understand** the photogrammetric data processing as a multistep process
+- **Indicate** data needed for orthophoto/DTM generation from aerial imagery
+- **Understand** the difference between interior and exterior orientation of the photo
+- **Describe** the workflow of geoprocessing of aerial imagery
 
----
-
-## Photogrammetric process
-
-![](../images/photogrammetric_proces.webp)
+::: notes
+Today we’ll walk the full photogrammetric pipeline as a multistep process. By the end, you’ll know exactly what data are needed to produce an orthophoto and DTM/DSM from aerial imagery, the difference between interior and exterior orientation, and how to run the complete workflow in Agisoft Metashape Professional.
+:::
 
 ---
 
@@ -26,9 +36,79 @@ format:
 
 ![](../images/flowchart_processing.webp)
 
+::: notes
+This diagram is the big picture of the photogrammety process. We plan our flight,
+perform collect our data, process our data, and finally we are able to analyze our results.
+
+And today we are going to be focusing on data processing.
+
+So of you might be wondering why we are jumping ahead to data processing if we haven't done flight planning or our flight yet...that is a good question, and the answer is that in order to better understand flght planning we first need to know how the data will be processed.
+:::
+
+---
+
 ## Data processing
 
-![](../images/flowchart_processing_plain.webp)
+```{mermaid}
+%% Photogrammetric big-picture workflow
+flowchart LR
+    A["Pre-Processing"] --> B["Data Processing"]
+    B["Data Processing"] --> C["Data Analysis & Export"]
+
+```
+
+::: notes
+Photogrammetry with SfM include 3 main steps, pre-processing, data processing, and analysis  and export. Each step of course concains substeps which together form our full photogrammetric processing pipeline.
+:::
+
+---
+
+
+## Photogrammetric process
+
+```{mermaid}
+%% Photogrammetric big-picture workflow
+flowchart LR
+  subgraph A["Pre-Processing"]
+    IMAGES["(UAS Images)"]
+    LOG["(Flight Log / EO)"]
+    GCP["(GCPs)"]
+  end
+
+  subgraph B["Data Processing"]
+    MATCH[Feature Matching]
+    SOLVE["Camera Solving
+        (SfM / Bundle Adjustment)"]
+    DENSE[Dense Point Cloud]
+    MESH[Mesh / Surface]
+  end
+
+  subgraph C["Data Analysis & Export"]
+    ORTHO[Orthophoto]
+    DSM[DSM / DTM]
+    PCLOUD[Classified Point Cloud]
+    TEXMODEL[Textured 3D Model]
+    REPORT[Processing Report]
+  end
+
+  IMAGES --> MATCH --> SOLVE --> DENSE --> MESH
+  SOLVE -. Feedback loop .-> IMAGES
+  LOG --> SOLVE
+  GCP --> SOLVE
+  DENSE --> ORTHO
+  DENSE --> DSM
+  DENSE --> PCLOUD
+  MESH --> TEXMODEL
+  SOLVE --> REPORT
+  DENSE --> REPORT
+  GCP --> REPORT
+```
+
+::: notes
+This diagram is the big picture: images come in, features are matched, cameras are solved, dense geometry is built, cartographic products are exported. Keep this in mind; every button we click in software maps to one of these boxes.
+
+Note the feedback loops: if alignment is weak, we go back, clean images or add GCPs, then re-optimize. This is normal—not a failure—photogrammetry is iterative
+:::
 
 ---
 
@@ -38,6 +118,10 @@ format:
 
 ![](../images/uas_data.webp)
 
+::: notes
+So what do we get after the flight mission? You come home with three things: images, a flight log (often IMU/GNSS), and ideally GCP measurements. Everything else we’ll compute. The better these inputs, the less cleanup later.
+:::
+
 ---
 
 ## Digital imagery
@@ -45,19 +129,29 @@ format:
 ![](../images/digital_imagery.webp)
 
 - usually on the camera SD card
-- can be geotagged (depends on camera)
+- can be geotagged (depends on camera / UAS setup)
     - Camera lens location is "written into" each photo's EXIF file
-    - this is not necessarily the case...
+        - this not always the case..
+
+::: notes
+Images usually live on the SD card, if you don't forget to put it in the UAS before the flight, which is definately not something I've done before. Some cameras geotag photos; which is great for initial alignment, but treat tags as rough. We’ll still refine positions during bundle adjustment.
+:::
 
 ---
 
-## Flight log
+## Flight log {.smaller}
 
 - Onboard Inertial Measurement Unit (IMU) accurately measures the orientation of airborne sensors,
 - Information is logged into a text file (flight log),
-- Contains elements of exterior orientation (EO, more [later in the lecture](./2017_Imagery_Processing.html#/18))
+- Contains elements of exterior orientation (EO)
 
 ![](../images/log.webp){ width=80% }
+
+> Flight attitude - describes an aircrafts orientation in space (yaw, pitch, roll)
+
+::: notes
+The UAV’s IMU/GNSS writes a text log: attitude, altitude, and time. This provides exterior orientation hints. We’ll import these to seed alignment—then let bundle adjustment tighten them.
+:::
 
 ---
 
@@ -76,7 +170,11 @@ format:
 ![](../images/GCPs.webp)
 
 ::: 
-::: 
+:::
+
+::: notes
+GCPs are known points surveyed in the field. They anchor the model to a coordinate system and let us quantify accuracy. Always record the CRS you surveyed in and keep metadata tidy.
+:::
 
 ---
 
@@ -100,6 +198,10 @@ format:
 - There are two different types of coordinate reference systems: Geographic Coordinate Systems and Projected Coordinate Systems
 - [Spatial reference list (EPSG codes for coordinate reference systems)](http://spatialreference.org/ref/epsg/)
 
+::: notes
+CRS defines how map coordinates relate to the earth. We’ll choose a projected CRS appropriate to our area, not a global one unless we need it. Remember: GCS = lat/long, PCS = meters/feet.
+:::
+
 ---
 
 ## UAS data processing outputs
@@ -107,6 +209,10 @@ format:
 ### What do we get after processing the data?
 
 ![](../images/processing_outputs.webp)
+
+::: notes
+From processing we get: orthophoto, DSM/DTM, point cloud, mesh/texture, and a processing report. Think of the orthophoto as your basemap and the DSM/DTM as your analysis surface.
+:::
 
 ---
 
@@ -124,13 +230,15 @@ format:
 ![](../images/ortho_example.webp)
 
 ::: 
-::: 
+:::
+
+::: notes
+An orthophoto is imagery corrected for perspective and terrain, so scale is uniform. It’s just a raster (RGB bands), but every pixel is in the right place for measurement.
+:::
 
 ---
 
 ## Digital Surface Model {.smaller}
-
-
 
 - **DEM/DTM - Digital Elevation Model / Digital Terrain Model**
     - Representation of a terrain's elevation
@@ -140,6 +248,11 @@ format:
     - Captures the natural and built features on the Earth’s surface
 
 ![](../images/dtm_dsm.webp){ width=100% }
+
+::: notes
+DTM/DEM: bare ground surface.
+DSM: the surface you see—trees, buildings, cars. SfM produces a DSM by default; getting a DTM requires classification and filtering.
+:::
 
 ---
 
@@ -163,6 +276,10 @@ format:
 ::: 
 ::: 
 
+::: notes
+A point cloud is a collection 3D of points (x, y, z, plus color/intensity). It’s not quite raster or vector—think of it as raw geometric evidence. We can classify, thin, and grid it to surfaces.
+:::
+
 ---
 
 ## Multiple-view geometry
@@ -174,18 +291,32 @@ format:
 - **Camera geometry (motion):**  
   Given a set of corresponding points in two or more images, what are the camera matrices for these views?
 
+::: notes
+Multiple view geomoetry comes from the field of computer vision and gives us the tools to describe the spatial relationship between multiple images in a scence allowing us to construct
+3D structure from 2D views.
+
+- The scenece geometry gives us structure -- where are 3D points?
+- Stereo matching gives us Correspondence -- which pixels match across images?
+- And the Camera geometry allows us to infer Motion -- where were the cameras? 
+
+SfM solves these together by minimizing reprojection error.
+:::
+
 ---
 
-## What do we need?
+## What do we need? {.smaller}
 
-1. Digital **imagery**;
-2. (Digital elevation model or topographic dataset);
-3. Exterior **orientation parameters** from aerial triangulation or IMU;
-4. (Camera calibration report);
-5. (Ground Control Points parameters);
-6. Photogrammetric **processing software** that utilizes collinearity equations.
+1. Digital **imagery**
+2. (Digital elevation model or topographic dataset)
+3. Exterior **orientation parameters** from aerial triangulation or IMU
+4. Optional(Camera calibration report)
+5. Optional(Ground Control Points parameters)
+6. Photogrammetric **processing software** that utilizes collinearity equations
 
-<p class="small">Items in brackets are optional</p>
+
+::: notes
+Required: images, EO hints (IMU/triangulation), and software that implements collinearity equations. Optional but recommended: DEM, camera calibration, and GCPs for accuracy.
+:::
 
 ---
 
@@ -203,12 +334,23 @@ format:
 
 ![](../images/camera_sensor.webp){ width=80% }
 
+
 ::: 
-::: 
+:::
+
+::: notes
+When we capture images, we’re always dealing with perspective projection. With a short focal length and close distance, we have full perspective — objects closer to the camera appear much larger, so scale varies dramatically across the image. This increases distortions, especially around the edges.
+
+As we increase the focal length and move the camera farther away, we approach a weak perspective model. Here, perspective rays are nearly parallel, so objects maintain a more uniform scale across the image. This reduces distortion and simplifies photogrammetric calculations, but of course requires higher altitude or zoom lenses.
+
+For UAS mapping, we’re often somewhere between these extremes. Wide-angle action cameras emphasize full perspective, while higher-altitude mapping with a longer focal length lens gets us closer to weak perspective — which is why flight height and lens choice both matter for geometry and accuracy.
+
+And remember: overlap is still king — ~75–85% forward and 60–80% side — to give Structure from Motion enough redundancy to solve geometry robustly.
+:::
 
 ---
 
-<!-- ## Digital Elevation Model {.smaller}
+## Digital Elevation Model {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -223,9 +365,13 @@ format:
 **Now:** Computed automatically by Structure from Motion
 
 ::: 
-::: 
+:::
 
---- -->
+::: notes
+Historically we needed a DEM to remove relief displacement. Modern SfM estimates both terrain and cameras together—still, a good a priori DEM can stabilize tricky projects.
+:::
+
+---
 
 ## Structure from Motion (SfM) {.smaller}
 
@@ -244,31 +390,53 @@ format:
 ::: 
 ::: 
 
+::: notes
+SfM extracts 3D structure from multiple overlapping 2D images. It’s paired with MVS (multi-view stereo) to densify the model. Quality inputs = better tie points = better geometry.
+:::
+
 ---
 
 ## Exterior orientation (EO) {.smaller}
 
-**EO =** Position and orientation in the object space
+Position and orientation in the object space
 
-6 elements **necessary** for any photogrammetric processing:
+
 
 ::: {.columns}
-::: {.column width="50%"}
+::: {.column width="60%"}
 
-- X, Y, and Z of the exposure station position (latitude, longitude, and altitude of the camera)
-- Angular orientation: ω, φ, and κ (yaw, pitch, and roll)
+#### 6 elements **necessary** for any photogrammetric processing:
+
+The cameras:
+
+- X (Latitude) 
+- Y (Longitude)
+- Z (Altitude)
+
+and Angular orientation:
+
+| Photogrammetry | Aviation analogy | Axis   | Motion                   |
+| -------------- | ---------------- | ------ | ------------------------ |
+| **ω (omega)**  | Roll             | x | Tilt forward/back        |
+| **φ (phi)**    | Pitch            | y | Tilt side-to-side        |
+| **κ (kappa)**  | Yaw              | z | Rotation around vertical |
+
 
 ::: 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ![](../images/orientation.webp)
 
 ::: 
-::: 
+:::
+
+::: notes
+Exterior orientation camera position (X, Y, Z) and yaw, pitch, roll. Logs/EXIF provide first guesses; bundle adjustment refines them to millimeter-to-centimeter pixel fits.
+:::
 
 ---
 
-## Flight log {.smaller}
+## Flight log (Again) {.smaller}
 
 - Log file contains elements of exterior orientation that are measured by onboard Inertial Measurement Unit (IMU) and written into a text file
 
@@ -276,6 +444,10 @@ format:
 
 - Sometimes (most DJI products) exterior orientation parameters are saved in photos' EXIF file
 - Log contains information about the location of the camera, not the location of the depicted object - [more info in this section of lecture 3](./HM_Photogrammetry_and_SfM.html#/25)
+
+::: notes
+Remember: logs tell you where the camera was, not the object. We’ll still need tie points and, ideally, GCPs to anchor the scene in the real world.
+:::
 
 ---
 
@@ -297,6 +469,10 @@ format:
 
 - Can be automatically derived using Structure from Motion (SfM) methods
 
+::: notes
+IO = camera intrinsics: focal length, principal point, lens distortion. Older workflows used lab calibration; modern SfM does self-calibration as part of alignment.
+:::
+
 ---
 
 ## Ground Control Points {.smaller}
@@ -314,40 +490,57 @@ format:
 ![](../images/GCP_girls.webp)
 
 ::: 
-::: 
+:::
+
+::: notes
+GCPs with known X/Y/Z reduce bias (like doming) and let us report RMSE against independent check points. Place them across the full extents and elevation range.
+:::
 
 ---
 
-## Processing options
-
-![](../images/processing_options.webp)
-
----
-
-## Processing options
+## Processing options {.smaller}
 
 Everything boils down to... money (and time)
+
+::: {.columns}
+::: {.column width="50%"}
 
 - What is my starting budget and equipment?
 - How frequently will I fly?
 - Do I have the experience/training necessary for processing (or am I able to hire people who do)?
 - Do I have time to process the data by myself?
+:::
+::: {.column width="50%"}
+![](../images/processing_options.webp)
+:::
+:::
 
+::: notes
+Your constraints: budget, flight frequency, team expertise, and compute time. Cloud services can offload compute; local runs give more control and transparency.
+:::
 ---
 
 ## Processing options - software
 
 - [Agisoft Metashape](http://www.agisoft.com/)
+- [OpenDroneMap](http://opendronemap.org/)
+
 - [Pix4D](https://pix4d.com/)
-- [Trimble Business Center](http://uas.trimble.com/tbc-am) - Aerial Photogrammetry Module
+- [DroneDeploy](https://www.dronedeploy.com/)
+- [Trimble Inpho UASMaster](https://geospatial.trimble.com/en/products/software/trimble-inpho-uasmaster)
 - [Drone2Map (ESRI)](http://www.esri.com/products/drone2map)
 - [DroneMapper](https://dronemapper.com/)
-- [OpenDroneMap](http://opendronemap.org/)
+
 - many many more...
+
+
+::: notes
+There are many commerial and open source processing software avaliable. We will be learning with both Agisoft Metashape (proprietry) and WebODM (Open Source options).
+:::
 
 ---
 
-<!-- ## Agisoft Metashape Professional {.smaller}
+## Agisoft Metashape {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -370,13 +563,15 @@ Everything boils down to... money (and time)
 ![](../images/Agisoft_Logo.webp){ width=30% }
 
 ::: 
-::: 
+:::
+
+::: notes
+Metashape is robust for uncontrolled, real-world imagery. It automates alignment and reconstruction but still benefits from good inputs and sensible settings. Keep the manual handy.
+:::
 
 ---
 
 ## Processing workflow {.smaller}
-
-![](../images/flowchart_processing_plain.webp)
 
 ### Preprocessing stage:
 
@@ -384,6 +579,10 @@ Everything boils down to... money (and time)
 
 - Loading photos into Metashape
 - Inspecting loaded images, removing unnecessary images
+
+::: notes
+Load photos, inspect for blur/over-exposure, and remove bad frames. If you have camera positions, import them now—they’ll seed alignment and save time.
+:::
 
 ---
 
@@ -401,14 +600,28 @@ Everything boils down to... money (and time)
 4. Generating texture
 5. Building DSM and orthomosaic
 
+::: notes
+- Align photos (tie points + bundle adjustment).
+- Dense point cloud (depth maps).
+- Optional mesh + texture.
+- Build DSM and orthomosaic.
+
+At each step: check diagnostics before continuing.
+:::
+
 ---
 
-## Exporting results
+## Exporting results {.text-center}
 
-![](../images/flowchart_processing_ex.webp)
+![](../images/flowchart_processing_ex.webp){width="75%"}
 
-![](../images/processing_outputs.webp)
+![](../images/processing_outputs.webp){width="75%"}
 
+::: notes
+We’ll export GeoTIFFs for DSM/ortho, LAS/LAZ for point clouds, and optionally OBJ/PLY for meshes. Always keep a Metashape report with parameters and errors for reproducibility.
+
+We also have the option to export cloud optimized formats such as COGS and COPCs
+:::
 ---
 
 ## Preprocessing
@@ -418,6 +631,10 @@ Everything boils down to... money (and time)
 - If the EO is in the photos EXIF file, the parameters will load automatically
 
 ![](../images/camera_positions.webp){ width=70% }
+
+::: notes
+If EXIF contains EO, Metashape loads it automatically. If not, import the flight log with the correct time offset and CRS. Verify positions overlay your area.
+:::
 
 ---
 
@@ -438,7 +655,11 @@ At this stage, Agisoft Metashape implements SfM algorithms to monitor the moveme
 ![](../images/aligning_photos_funny.webp){ width=60% }
 
 ::: 
-::: 
+:::
+
+::: notes
+Alignment finds features, matches them, and solves for cameras. The output is a sparse point cloud and camera poses. If coverage is weak, revisit image quality or overlap.
+:::
 
 ---
 
@@ -457,7 +678,11 @@ At this stage, Agisoft Metashape implements SfM algorithms to monitor the moveme
 ![](../images/bundle_block_adjustment.webp)
 
 ::: 
-::: 
+:::
+
+::: notes
+BBA is the math heart: a nonlinear least-squares that minimizes reprojection error of tie points by adjusting IO and EO together. GCPs strengthen the solution.
+:::
 
 ---
 
@@ -475,57 +700,65 @@ At this stage, Agisoft Metashape implements SfM algorithms to monitor the moveme
 ![](../images/Bundle_Block_Adjustment2.webp)
 
 ::: 
-::: 
+:::
+
+::: notes
+We monitor point tracks across images to estimate 3D feature locations. The result is a coherent sparse cloud—our sanity check before investing time in densification.
+:::
 
 ---
 
 ## Aligning cameras in Metashape {.smaller}
 
 ::: {.columns}
-::: {.column width="50%"}
-
-![](../images/aligned_photos.webp){ width=58.5% }
-
-::: 
-::: {.column width="50%"}
-
-![](../images/sparse_cloud.webp){ width=39% }
-
-<p class="small"><strong>Sparse point cloud</strong> generation</p>
-
-::: 
-::: 
-
+::: {.column width="55%"}
 **Accuracy**
 
-- **High** accuracy setting > more accurate camera position estimates (time-consuming)
-- **Low** accuracy setting > rough camera positions
+- **Higher accuracy** > more accurate camera position estimates (time-consuming)
+- **Lower accuracy** > rough camera positions (less-time consuming)
+
+Works by upscaling or downscaling images when identifying tie points.
+::: 
+::: {.column width="45%"}
+![](../images/aligned_photos.webp){}
+::: 
+::: 
+
+::: notes
+Accuracy settings: High gives tighter camera estimates but takes longer; Low is useful for triage. Start High, downsample only if the project is truly huge.
+:::
 
 ---
 
-## Building dense point cloud {.smaller}
+## Building dense point cloud (Depth Maps) {.smaller}
 
 At the stage of dense point cloud generation, Agisoft calculates depth maps for every image
 
 - Quality: **Highest, High, Medium, Low, Lower** > the higher quality, the more accurate camera position estimates, but the process is more time-consuming
 
 ![](../images/sparse_cloud.webp){ width=40% }
-
 ![](../images/arrows.webp){ width=10% }
-
 ![](../images/dense_cloud.webp){ width=40% }
+
+::: notes
+Metashape computes a depth map per image, then fuses them. Quality levels trade time for detail. For class labs, High is a good balance; Highest only when needed.
+:::
 
 ---
 
-## Building dense point cloud {.smaller}
+## Building dense point cloud (Depth Filtering Modes) {.smaller}
 
 ### Depth Filtering modes
 
 Algorithms sorting outliers (due to some factors, like poor texture of some elements of the scene, noisy or badly focused images)
 
 - **Mild** depth filtering mode > for **complex geometry** (numerous small details on the foreground), for important features not to be sorted out
-- **Aggressive** depth filtering mode > sorting out most of the outliers
 - **Moderate** depth filtering mode > results in between the Mild and Aggressive
+- **Aggressive** depth filtering mode > sorting out most of the outliers (Recommended for aerial data processing)
+
+::: notes
+Filtering prunes outliers. Mild preserves fine structure, Aggressive removes noise but may erase detail, Moderate is a safe default. Choose based on scene complexity.
+:::
 
 ---
 
@@ -551,6 +784,10 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ::: 
 ::: 
 
+::: notes
+Clean with masks and selection tools. In sparse cloud, use reprojection error, reconstruction uncertainty, and image count filters to remove weak tie points, then re-optimize.
+:::
+
 ---
 
 ## Building mesh {.smaller}
@@ -562,46 +799,44 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
   - Should be selected for closed objects (statues, buildings, etc.)
   - Memory consumption: high
 
-::: 
-::: {.column width="50%"}
-
-![](../images/mesh.webp){ width=65% }
-
-::: 
-::: 
-
-::: {.columns}
-::: {.column width="50%"}
-
 - **High field** > for modeling of planar surfaces
   - Should be selected for aerial photography
   - Memory consumption: low
   - Allows for larger data sets processing
 
-::: 
-::: 
-
----
-
-## Building mesh {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
 - **Source data** > the source for the mesh generation
   - **Sparse cloud** > fast 3D model generation (low quality)
   - **Dense cloud** > high-quality output based on the previously reconstructed dense point cloud
-- **Face count** > the maximum face count in the final mesh
 
 ::: 
 ::: {.column width="50%"}
 
-![](../images/mesh_low.webp)
+![](../images/mesh.webp){ width=65% }
+:::
+:::
 
-![](../images/mesh_high.webp)
+::: notes
+Use Arbitrary for closed objects—high memory but best geometry for statues/buildings. For aerial scenes we’ll prefer the next option. Use Height Field for terrain—lower memory and scalable. Choose Dense cloud as the source for quality results; Sparse is only for quick previews.
+:::
 
+---
+
+## Building mesh (Face Count) {.smaller}
+
+**Face count** > the maximum face count in the final mesh
+
+::: {.columns}
+::: {.column width="50%"}
+![low face count](../images/mesh_low.webp)
 ::: 
+::: {.column width="50%"}
+![high face count](../images/mesh_high.webp)
 ::: 
+:::
+
+::: notes
+Control face count to manage memory and export size. Generate a high-res master, then decimate copies for web or VR as needed.
+:::
 
 ---
 
@@ -613,6 +848,8 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 - **Close Holes tool** > repairs your model if the reconstruction procedure resulted in a mesh with several holes, due to **insufficient image overlap**
   - Necessary step for **volumes calculation**
 
+- **Decimation tool** > decreases the geometric resolution of the model by replacing a high-resolution mesh with a lower resolution one
+
 ::: 
 ::: {.column width="50%"}
 
@@ -621,7 +858,9 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ::: 
 ::: 
 
-- **Decimation tool** > decreases the geometric resolution of the model by replacing a high-resolution mesh with a lower resolution one
+::: notes
+If overlap was thin, expect holes. Use Close Holes before computing volumes—open meshes give nonsense volume numbers.
+:::
 
 ---
 
@@ -647,7 +886,11 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ![](../images/mesh_editing2.webp){ width=80% }
 
 ::: 
-::: 
+:::
+
+::: notes
+Filter by component size or polygon size to remove floaters. For heavy edits, export to a DCC tool (e.g., Blender), fix topology, then import back.
+:::
 
 ---
 
@@ -671,9 +914,12 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
   - Spherical
   - Single photo
   - Keep uv
+::: 
+:::
 
-::: 
-::: 
+::: notes
+Texture quality affects realism. The mapping mode controls how imagery is packed into the texture atlas. For terrain, Adaptive orthophoto or Orthophoto are typically best.
+:::
 
 ---
 
@@ -690,6 +936,10 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
   while vertical regions textured separately to maintain accurate texture representation in such regions
 - More compact texture representation for nearly planar scenes + good texture quality 
   for vertical surfaces
+
+::: notes
+Generic seeks uniform texture; good all-purpose. Adaptive orthophoto splits flat vs. vertical faces—great for near-planar scenes with facades.
+:::
 
 ---
 
@@ -714,6 +964,10 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 - Generates texture atlas using current texture parametrization; Rebuilding current texture with different resolution or generating
   the atlas parametrized in the external software
 
+::: notes
+Orthophoto is compact but weaker on verticals. Spherical is niche. Single photo is for controlled cases. Keep UV preserves external UVs if you authored them elsewhere.
+:::
+
 ---
 
 ## Generating DSM {.smaller}
@@ -734,7 +988,11 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
   - Enabled (recommended): Interpolation mode - Agisoft will calculate DEM for all areas of the scene that are visible on at least one image.
 
 ::: 
-::: 
+:::
+
+::: notes
+Build DSM from the dense cloud. With Interpolation Off, you’ll get only observed areas—good for accuracy checks. With On (recommended), gaps are filled where at least one image saw the ground.
+:::
 
 ---
 
@@ -759,9 +1017,13 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ::: 
 ::: 
 
+::: notes
+Set Surface = DEM so drape follows terrain. Blending: Mosaic is the usual choice; Average can reduce noise; Disabled chooses the most nadir, often increasing seam visibility.
+:::
+
 ---
 
-## Exporting results & saving intermediate results
+## Exporting results & saving intermediate results {.text-center}
 
 #### Orthophoto export
 
@@ -773,23 +1035,31 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ::: 
 ::: 
 
+::: notes
+Export as GeoTIFF or COG, check the CRS, and include overviews for fast display.
+Keep a world file if your GIS expects one.
+:::
 ---
 
-## Exporting results & saving intermediate results
+## Exporting results & saving intermediate results {.text-center}
 
 #### DEM export
 
 ::: {.columns}
 ::: {.column width="50%"}
 
-![](../images/DSM.webp){ width=150% }
+![](../images/DSM.webp)
 
 ::: 
 ::: 
+
+::: notes
+Export the DSM/DTM as GeoTIFF or COG. Verify units and vertical datum. Document cell size and interpolation choices in your report.
+:::
 
 ---
 
-## Exporting results & saving intermediate results
+## Exporting results & saving intermediate results {.text-center}
 
 #### 3D model export
 
@@ -801,9 +1071,12 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ::: 
 ::: 
 
+::: notes
+Export OBJ/PLY/GLB depending on downstream tools. For web sharing, decimate to manageable size and consider GLB for portability.
+:::
 ---
 
-## Exporting results & saving intermediate results
+## Exporting results & saving intermediate results {.text-center}
 
 #### Point cloud export
 
@@ -815,21 +1088,31 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ::: 
 ::: 
 
+::: notes
+Export LAS/LAZ or COPC with CRS tags. If you plan to classify later, preserve RGB and intensity attributes—they’re useful for ground/non-ground separation or if you already classified points export all or only selected classes.
+:::
 ---
 
-## Exporting results & saving intermediate results {.smaller}
+## Exporting results & saving intermediate results {.text-center}
 
 ### Processing report generation
 
 ::: {.columns}
 ::: {.column width="50%"}
 
-![](../images/report_1.webp){ width=60% }
+![](../images/report_1.webp){ width=100% }
 
-![](../images/report_2.webp){ width=60% }
+:::
+::: {.column width="50%"}
 
-::: 
-::: 
+![](../images/report_2.webp){ width=100% }
+
+:::
+:::
+
+::: notes
+Always generate the Metashape report. It captures camera calibration, tie point statistics, overlap maps, and GCP/check-point errors—critical for QA/QC and reproducibility.
+:::
 
 ---
 
@@ -853,7 +1136,11 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 ![](../images/Agisoft_report.webp){ width=90% }
 
 ::: 
-::: 
+:::
+
+::: notes
+Look for image overlap, camera error bars, and GCP vs. check-point RMSE. If check-point error is much higher than GCP error, you’re over-fitting—revisit weighting and distribution.
+:::
 
 ---
 
@@ -861,6 +1148,9 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 
 ![](../images/Agisoft_batch.webp)
 
+::: notes
+For larger jobs, set up batches so stages run unattended. Save after each stage so you can rollback without recomputing everything.
+:::
 ---
 
 ## Quality processing with GCPs {.smaller}
@@ -874,10 +1164,17 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
     - Marker-based chunk alignment
 - More on GCP placing and processing in Agisoft see [intro to the assignment](./2017_Imagery_Processing_assignment_intro.html)
 
---- -->
+::: notes
+Place markers, reproject on multiple photos, then optimize alignment with GCPs. Rebuild dense cloud/DSM/ortho afterward—optimization changes the geometry.
+:::
+---
 
 ## What did we learn?
 
 - What is a general workflow for UAS imagery processing
 - How do we transform UAS data into orthophoto, DSM, 3D model, and point cloud
-<!-- - How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program -->
+- How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program
+
+::: notes
+You saw the end-to-end workflow: inputs → alignment → densification → surfaces → exports. You can now produce orthophotos, DSM/DTM, point clouds, and meshes in Metashape, and you know where IO/EO, GCPs, and CRS fit in.
+:::

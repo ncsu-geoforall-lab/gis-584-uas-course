@@ -15,7 +15,7 @@ website:
 
       - course/schedule.qmd
       - course/logistics.qmd
-      - course/topics.qmd
+      - course/topics/index.qmd
       - course/projects.qmd
 
   sidebar:
