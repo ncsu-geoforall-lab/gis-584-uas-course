@@ -12,7 +12,7 @@ hide-from-listing: true
 
 In order to execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Also remember that the ground altitude is measured in the take off localization and does not take into account local relief. It can be crucial in the mountainous areas. In our case trees, buildings and other man-made structures are more of a concern. Because both – terrain data (from lidar) and planned flight path are available, the elevation difference between the flight ceiling and the surface can be computed using GIS tools.
 
-*If you are unfamiliar with GRASS GIS - visit the OSgeoLab youtube channel and watch at least the [Getting started with GRASS GIS GUI](https://youtu.be/xqsnwtlP-2Y) video.*
+*If you are unfamiliar with GRASS - visit the OSgeoLab youtube channel and watch at least the [Getting started with GRASS GUI](https://youtu.be/xqsnwtlP-2Y) video.*
 
 #### General workflow:
 
@@ -29,7 +29,7 @@ In order to execute a safe flight, you need to make sure that the flight path wi
 
 #### Software
 
-- [GRASS GIS](http://grass.osgeo.org/)
+- [GRASS](http://grass.osgeo.org/)
 
 ### Compute a raster for elevation of the flight path
 

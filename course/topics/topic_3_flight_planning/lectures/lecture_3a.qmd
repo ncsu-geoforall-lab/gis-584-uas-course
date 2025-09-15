@@ -58,9 +58,8 @@ Throughout the whole process, it is important to remember:
 
 ![](../images/flowchart_project.webp)
 
-- Define the area and resolution based on:
+- Define the area (extent) and resolution based on:
   - UAS and sensor capabilities
-  - Spatial extent of the mapping area
   - Terrain constraints
   - Project requirements
 
@@ -165,7 +164,7 @@ $$
 
 Where:
 
-- A: Flight Altitude (m)
+- A: Flight Altitude (m) (*AGL* - *Above Ground Level*)
 - S: Sensor(hight, width) (mm)
 - F: Focal Length (mm)
 - D: Image Dimensions (height, width) (pixels)
@@ -209,8 +208,6 @@ Where:
 ::: {.columns}
 ::: {.column width="60%"}
 
-[NCDOT Unmanned Aircraft Systems Program](https://www.ncdot.gov/divisions/aviation/uas/Pages/default.aspx)
-
 - The checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor
 - In case that is not available, a standard Flight Checklist should be made and followed by the flight crew
 
@@ -232,7 +229,7 @@ Where:
 
 ![](../images/flowchart_control.webp)
 
-- The UAS RPIC should **launch, operate, and recover** from **preset locations** so that the aircraft will fly according to the mission plan.
+- The UAS **RPIC** should **launch, operate, and recover** from **preset locations** so that the aircraft will fly according to the mission plan.
 - **Visual Line of Sight (VLOS)** - the flight crew should have a clear view of the aircraft at all times, called . 
 - Observation locations should be selected for the **maximum line of sight** throughout the planned flight operations area (Part 107.31).
 
@@ -242,8 +239,9 @@ Where:
 
 ![](../images/flowchart_control.webp)
 
-- **RP (Remote Pilot)**, **PMC (Person Manipulating the Flight Controls)**, and **VO (Visual Observer)** (if used)
-    - must be able to maintain effective communication with each other at all times (Part 107.33).
+- **RP (Remote Pilot)**
+- **PMC (Person Manipulating the Flight Controls)**, - - **VO (Visual Observer)** 
+  - (if used): must be able to maintain effective communication with each other at all times (Part 107.33).
 - Upon any failure during the flight or any loss of visual contact with the UAS, the RPIC should command the aircraft back to the recovery location or utilize the built-in fail-safe features to recover the aircraft.
 
 ---
@@ -254,9 +252,9 @@ Where:
 ![](../images/LW_google.webp){width="80%"}
 
 
-## Lake Wheeler - Aeronautical chart
+<!-- ## Lake Wheeler - Aeronautical chart
 
-![](../images/lake_wheeler1.webp){width="80%"}
+![](../images/lake_wheeler1.webp){width="80%"} -->
 
 
 ## Lake Wheeler test site

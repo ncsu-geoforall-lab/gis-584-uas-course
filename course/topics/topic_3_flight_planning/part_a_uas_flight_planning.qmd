@@ -53,7 +53,7 @@ assignment-due-date: 10/1/2025
 Prepare a flight plan:
 
 <!-- - [Flight planning in eMotion 3 software]() -->
-- [Flight plan analysis in GRASS GIS](assignments/assignment_1a_grass.qmd)
+- [Flight plan analysis in GRASS](assignments/assignment_1a_grass.qmd)
 
 ## Homework
 
