@@ -3,8 +3,18 @@ title: "Flight Planning"
 subtitle: "Center for Geospatial Analytics at North Carolina State University"
 author: "Justyna Jeziorska, Helena Mitasova & Corey White"
 format:
-    revealjs:
-        theme: [simple, ../../../../theme.scss]
+  revealjs:
+      theme: [simple, ../../../../theme.scss]
+      slide-number: true
+      controls: true
+      progress: true
+      transition: slide
+      center: true
+      code-overflow: wrap
+      width: 1400
+      height: 800
+      chalkboard: true
+      footer: "[Return Home](../part_a_uas_flight_planning.qmd)"
 ---
 
 ## Objectives
@@ -20,14 +30,16 @@ format:
 
 ---
 
-## UAS Photogrammetric process
+## Pre-flight Considerations
 
 ![](../images/photogrammetric_process.webp)
 
 Throughout the whole process, it is important to remember:
 
-- **What** is the aim or the project?
-- **What** will be the data used for?
+- What is the aim of the project?
+- What is the required resolution?
+- Flight regulations
+- Weather
 
 ---
 
@@ -35,7 +47,7 @@ Throughout the whole process, it is important to remember:
 
 ![](../images/flowchart_project.webp)
 
-- Defining the scope of the project
+- Define spatial scale (spatial resolution and extent)
 - Choosing UAS and sensor
 - Assessing the cost, labor, and time consumption
 - Collecting information about terrain
