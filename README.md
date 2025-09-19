@@ -20,6 +20,32 @@ To start the development server, run:
 quarto preview
 ```
 
+## Structure
+
+The course is organized into topics, each containing lectures and labs. The main sections are:
+
+### Topics
+
+- course/topics/topic_1_introduction
+- course/topics/topic_2_sfm
+- course/topics/topic_3_flight_planning
+
+#### Custom Headers
+
+The schedule listing is generated from the front matter in each topic's index.qmd file. The following fields are used to populate the schedule:
+
+- date
+- topic
+- activity
+- title
+- assignment-due-date
+
+### Special Files
+
+- **_variables.yml**: Contains global variables used throughout the course.
+- **_quarto.yml**: Quarto project configuration file.
+- **course/content/specical_dates.yml**: Contains important dates for the course.
+
 ### Optimize Images
 
 Convert images to webp format using the following commands:
