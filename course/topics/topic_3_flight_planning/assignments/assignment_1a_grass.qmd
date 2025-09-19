@@ -6,6 +6,10 @@ date: 9/15/2025
 assignment-due-date: 10/1/2025
 activity: Assignment/Lab
 hide-from-listing: true
+notebook-view:
+  - notebook: assignment_3a.ipynb
+    title: "Terrain Analysis of the flight site using GIS tools"
+    url: https://colab.research.google.com/drive/15oIWegngRpV4q13INV5uXzFC15ZTi-VO?usp=sharing
 ---
 
 ## Task
@@ -107,15 +111,23 @@ r.grow -m input=flight_path_altitude_rast output=flight_path_wide radius=2.5
 2. Set region to your study area using g.region or using the zoom function for setting the region
 3. Import lidar data to GRASS
 
-Windows
+::: {.panel-tabset}
+
+## Windows
+
 ```bash
-r.in.lidar mid_pines_spm_2013.las output=mid_pines_surface_max method=max class_filter=1,2 return_filter=first resolution=3 -oe 
+r.in.lidar mid_pines_spm_2013.las output=mid_pines_surface_max method=max \
+ class_filter=1,2 return_filter=first resolution=3 -oe 
 ```
 
-Mac/Linux
+## Mac/Linux
+
 ```bash
-r.in.pdal mid_pines_spm_2013.las output=mid_pines_surface_max method=max class_filter=1,2 return_filter=first resolution=3 -oe 
+r.in.pdal mid_pines_spm_2013.las output=mid_pines_surface_max method=max \ 
+ class_filter=1,2 return_filter=first resolution=3 -oe 
 ```
+:::
+
 > NOTE - If you have any issues with the command r.in.lidar - you can download the interpolated DSMs for Mid Pines and use `r.unpack` to unpack the rasters.
 
 ### Calculate the elevation difference between the flight path and surface
