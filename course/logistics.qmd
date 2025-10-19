@@ -27,7 +27,7 @@ Course Forum, assignment submissions, project material, and grades are handled i
 
 ### Software
 
-- [GRASS GIS {{< var software.grass.version >}}]({{< var software.grass.website >}}) (you can use [these instructions to install it](https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software))
+- [GRASS {{< var software.grass.version >}}]({{< var software.grass.website >}}) (you can use [these instructions to install it](https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software))
 - [Agisoft Metashape]({{< var software.agisoft.website >}}) (provided at NCSU) - you can work on the demo version.
 - [OpenDroneMap](http://opendronemap.org/)
 
@@ -40,36 +40,52 @@ Make a reservation using the `Agisoft Metashape & GRASS GIS - Ubuntu` environmen
 ### Other resources
 
 - [MicMac](https://github.com/micmacIGN/micmac) documentation can be found [here](https://github.com/micmacIGN/Documentation/blob/master/DocMicMac.pdf), not used in this course.
-- [PDAL](https://pdal.io/en/2.7.2/) - Point Data Abstraction Library
+- [PDAL](https://pdal.io/en/stable/) - Point Data Abstraction Library
 - [LibLAS](https://liblas.org/) and [LAStools](https://lastools.github.io/) for managing the .las files in GRASS
 - [NCSU Virtual Computing Lab (VCL)](https://vcl.ncsu.edu/scheduling/)
 
-### Data
+## Data
 
-#### General resources
+### GRASS Projects
 
-- [North Carolina dataset (formatted as GRASS location)](https://grass.osgeo.org/sampledata/north_carolina/nc_spm_08_grass7.zip) 
+- [GRASS North Carolina dataset](https://grass.osgeo.org/sampledata/north_carolina/nc_spm_08_grass7.zip)
 
-#### UAS data
+### GCP (Ground Control Points)
 
-> Many of these links are currently broken and in the process of being migrated to a new hosting serivce.
+#### Midpines
 
-- Boundaries of all COAs obtained by NGAT in North Carolina ([google maps](https://www.google.com/maps/d/edit?mid=zi8EsFDQAyqo.kr7lL7Germeo), [shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU))
-- Study site (Lake Wheeler): COA boundaries ([shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU), [kml](https://drive.google.com/open?id=0B1AfQGDB8tPXOFdwR3VoTUloX0k)), GCP coordinates ([txt](https://drive.google.com/open?id=0B1AfQGDB8tPXN2FHTzlicWRENUU), [kml](https://drive.google.com/open?id=0B1AfQGDB8tPXb2c1bTF4QXhfT1k)), also included in the GRASS location (see processed data)
-- Survey data: [down-sampled pictures](https://drive.google.com/a/ncsu.edu/file/d/1xYhNBBDVPP4UG2aiSjcZ_tTOm4gnQcMz/view?usp=sharing) and [log](https://drive.google.com/open?id=0B1AfQGDB8tPXTWdfdGJWZ0pkOWc) from the flight 06/20/2015, [sample pictures and log](https://drive.google.com/open?id=0B1AfQGDB8tPXYlVyM2x5YTNqTjg) from the flight 09/22/2016, [all pictures and log (full flight)](https://drive.google.com/drive/folders/0B1AfQGDB8tPXOXBRSHlJUmZZQmM?resourcekey=0-CSu2NTf4BxeHPfF7Q0ljww&usp) from the flight 09/22/2016
-- Processed data:
-  - [Mid Pines dataset (formatted as GRASS location): LakeWheeler_NCspm](https://drive.google.com/open?id=0B1AfQGDB8tPXNXVpOEdyejlpbEE) with timeseries of DSMs from 2015 flights
-  - [Smaller sample point cloud: 2015_06_sample_points_NCsmp.las](https://drive.google.com/open?id=0B1AfQGDB8tPXaUZGU0FPSW5DNWM)
-  - [Mid Pines point clouds](https://drive.google.com/open?id=0B1AfQGDB8tPXUlc5N2pNQlR1T0E) (limited extent)
-  - Optional (very large files: 1GB+)
+These are 12 GCP taken at midpines.
+
+- [GRASS pack]({{< var data.gcp_12_decimal_pack_url >}})
+- [GeoJSON]({{< var data.gcp_12_degrees_url >}})
+
+
+### UAS data
+
+
+
+<!-- - Boundaries of all COAs obtained by NGAT in North Carolina ([google maps](https://www.google.com/maps/d/edit?mid=zi8EsFDQAyqo.kr7lL7Germeo), [shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU))
+- Study site (Lake Wheeler): COA boundaries ([shp](https://drive.google.com/open?id=0B1AfQGDB8tPXa3lLYmg5VU9FdEU), [kml](https://drive.google.com/open?id=0B1AfQGDB8tPXOFdwR3VoTUloX0k)), GCP coordinates ([GRASS pack]({{< var data.gcp_12_decimal_pack_url >}}), [GeoJSON]({{< var data.gcp_12_degrees_url >}})), also included in the GRASS location (see processed data) -->
+<!-- - Survey data: [down-sampled pictures]({{< var data.downsized_samples_url >}}) and [log](https://drive.google.com/open?id=0B1AfQGDB8tPXTWdfdGJWZ0pkOWc) from the flight 06/20/2015, [sample pictures and log](https://drive.google.com/open?id=0B1AfQGDB8tPXYlVyM2x5YTNqTjg) from the flight 09/22/2016, [all pictures and log (full flight)](https://drive.google.com/drive/folders/0B1AfQGDB8tPXOXBRSHlJUmZZQmM?resourcekey=0-CSu2NTf4BxeHPfF7Q0ljww&usp) from the flight 09/22/2016 -->
+
+### Processed data
+- [LakeWheeler_NCspm]({{< var data.lake_wheeler_url >}}) Mid Pines Project  with timeseries of DSMs from 2015 flights.
+- [Smaller sample point cloud: 2015_06_sample_points_NCsmp.las]({{< var data.mid_pines_2015_las_url >}})
+  <!-- - [Mid Pines point clouds](https://drive.google.com/open?id=0B1AfQGDB8tPXUlc5N2pNQlR1T0E) (limited extent) -->
+  <!-- - Optional (very large files: 1GB+)
     - [Mid Pines point clouds from 2015 flights in las, obj and txt formats](https://drive.google.com/open?id=0B1AfQGDB8tPXfk1IZlhLZ2FhNksyQ1VfX1o3YVFpZ19MOVRTWE9PNnpySXNtRTdJN2pFNlU)
-    - [Point clouds for the gully area at Midpines](https://drive.google.com/open?id=0B1AfQGDB8tPXSDdSZGpJSktXM3c) (high density, from 2015 flights)
+    - [Point clouds for the gully area at Midpines](https://drive.google.com/open?id=0B1AfQGDB8tPXSDdSZGpJSktXM3c) (high density, from 2015 flights) -->
 
-#### Lidar data
+### Lidar data
 
-- [Classified lidar point cloud in LAS format for Mid_Pines](http://fatra.cnr.ncsu.edu/uav-lidar-analytics-course/mid_pines_spm_2013.las)
-- [Secref and Mid Pines interpolated DEM/DSM (use r.unpack)](http://fatra.cnr.ncsu.edu/uav-lidar-analytics-course/secref_mid_pines_spm_elev.zip)
+- [Classified lidar point cloud in LAS format for Mid_Pines]({{< data.mid_pines_lidar_url >}})
+- [Secref and Mid Pines interpolated DEM/DSM (use r.unpack)]({{< data.secref_mid_pines_spm_elev >}})
 
-#### Orthophotography
+### Orthoimagery
 
-- [Orthophotos](https://drive.google.com/drive/folders/0B1AfQGDB8tPXd05tSTVLZUZBd00) as GRASS GIS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)
+Orthophotos as GRASS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)
+
+- [Nov 2015 (pack)]({{< data.lake_wheeler_flight_Nov_2015_orthos >}})
+- [Jun 2017 (pack)]({{< data.lake_wheeler_flight_Jun_2017_orthos >}})
+- [Mar 2017 (pack)]({{< data.lake_wheeler_flight_Mar_2017_orthos >}})
+- [Jul 2024 (COG)]({{< data.lake_wheeler_flight_July_17_2024_orthophoto >}})
