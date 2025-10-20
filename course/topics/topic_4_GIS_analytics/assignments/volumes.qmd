@@ -30,7 +30,7 @@ Perform measurements in Agisoft Metashape:
 
 In the first part of the assignment you will be working with [data from 02/06/2018 Lake Wheeler flight]({{< var data.lake_wheeler_flight_2018_flight_data >}}). Because the processing is very time consuming, the processed data (stored in the [Agisoft project files]({{< var data.lake_wheeler_flight_2018_agisoft_project_files >}}) is provided).
 
-After opening the **2010_02_06_assignment.psx** file, you should see generated orthomosaic and DSM in the Workspace pane.
+After opening the **2018_02_06_assignment.psx** file, you should see generated orthomosaic and DSM in the Workspace pane.
 
 All you have to do is to indicate the new location of the pictures.
 
@@ -126,7 +126,7 @@ Choose some interesting place for cross section (you can see from the contours w
 
 ### Volume  and area measurements
 
-In this part of the assignment you will be working with [imagery acquired 07/02/2017 at Wake Waste Transfer]({{< var data.imagery_2017 >}}).
+In this part of the assignment you will be working with [imagery acquired Feb 2017 at Wake Waste Transfer]({{< var data.imagery_2017 >}}).
 
 **Calculate the volume and the area of the "waste pile"** (for excact location see [Google Maps](https://goo.gl/maps/hkYqDxZHcpT2))
 

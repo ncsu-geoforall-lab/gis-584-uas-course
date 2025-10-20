@@ -36,16 +36,16 @@ The process can be very time consuming (depending on computational power of your
 
 You can use a smaller area to accelerate processing. The photos are not downsampled in order to obtain the highest resolution of the outputs.
 
-- [download data](https://drive.google.com/open?id=1pKD7N0dzOZLQSWD4cj98UWrvrR62pxVW) - photos, log and coordinates of 3 GCPs
+- [download data]({{< var data.downsized_samples_url >}}) - photos, log and coordinates of 3 GCPs.
     
-##### OPTION 2 - Full flight, photos original resolution 
+<!-- ##### OPTION 2 - Full flight, photos original resolution 
 ::: {.callout-warning}
 **LONG PROCESSING TIME!**
 :::
 
-- [download data](https://drive.google.com/file/d/13wPTiJcBaxX2AZjibT9N7QIffHddoaqZ) - photos, log and coordinates of 12 GCPs
+- [download data]({{< var data.downsized_samples_url >}}) - photos, log and coordinates of 12 GCPs -->
 
-##### OPTION 3: You can use your own data
+##### OPTION 2: You can use your own data
 
 #### Software
 

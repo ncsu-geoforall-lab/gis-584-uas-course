@@ -10,6 +10,7 @@ date: 10/22/25
 format: html
 toc-depth: 4
 activity: Assignment/Lab
+tags: [ GRASS ]
 ---
 
 ## Outline

@@ -50,6 +50,7 @@ data:
   mid_pines_lidar_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las
   mid_pines_copc_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.laz
   mid_pines_2015_las_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/2015_06_sample_points_NCspm.las
+  secref_mid_pines_spm_elev: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip
   gcp_12_decimal_pack_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/GCP_12_decimal.pack
   flight_path_kml_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path1.kml
   flight_path_kml_2_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path2.kml
@@ -68,4 +69,37 @@ data:
   lake_wheeler_flight_Sept_17_2025_dsm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif
   lake_wheeler_flight_Sept_17_2025_flight_data: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/091725.tar.xz
   lake_wheeler_flight_Sept_17_2025_point_cloud: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/points_fall_25.copc.laz
-  secref_mid_pines_spm_elev: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip
+  wake_waster_transfer_center:
+    2017:
+      02:
+        images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Wake%20Waste%20Transfer%20Center/070217/Flight_data.ziphttps://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip
+  lake_wheeler:
+    2013:
+      lidar:
+        las: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las
+        laz: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.laz
+    2015:
+      11:
+        orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/112415/ortho_2015_11_24.pack
+    2017:
+      03:
+        orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/032917/ortho_2017_03_29.pack
+      06:
+        orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack 
+    2018:
+      02:
+        images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip
+        agisoft_project_files: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip
+    2024:
+      07:
+        images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/flight_data.zip
+        orthophoto: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif
+        dsm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif
+    2025:
+      09:
+        dsm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif
+        images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/091725.tar.xz
+        copc: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/points_fall_25.copc.laz
+     
+
+  
