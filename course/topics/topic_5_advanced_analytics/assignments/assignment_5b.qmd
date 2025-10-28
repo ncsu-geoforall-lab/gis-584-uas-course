@@ -2,7 +2,8 @@
 topic: "Topic 5: Advanced Analytics"
 subtitle: "Analysis of multitemporal UAS data and its applications"
 title: "Assignment 5B"
-assignment-due-date: 11/05/2025
+original-assignment-due-date: 11/05/2025
+assignment-due-date: 11/12/2025
 author: 
     - Anna Petrasova
     - Corey White
@@ -34,7 +35,7 @@ You should have everything already for Mid Pines area, get anything missing from
 
 ## Tools
 
-- GRASS GIS {{< var software.grass.version >}}
+- GRASS {{< var software.grass.version >}}
 - GRASS Addon: [r.patch.smooth](https://grass.osgeo.org/grass84/manuals/addons/r.patch.smooth.html)
 
 Install [r.patch.smooth](https://grass.osgeo.org/grass84/manuals/addons/r.patch.smooth.html) with the following command:
@@ -47,7 +48,7 @@ g.extension r.patch.smooth
 
 ### Create a new mapset and copy the UAS DSMs
 
-Start GRASS GIS in Lake_Wheeler_NCspm Location and create a new mapset "assignment5b". Open GRASS GIS in this mapset
+Start GRASS in Lake_Wheeler_NCspm project and create a new mapset. Open GRASS in this mapset
 
 ```bash
 g.copy raster=2015_03_18_DSM_agi_6GCP@PERMANENT,2015_03_18_DSM_agi_6GCP
@@ -112,8 +113,8 @@ We can set common color table to all maps in the dataset:
 
 ```bash
 t.rast.colors input=uas_dsm color=elevation
-d.rast 2015_06_20_DSM_agi_11GCP@assignment5b
-d.rast 2015_10_06_DSM_agi_8GCPs@assignment5b
+d.rast 2015_06_20_DSM_agi_11GCP
+d.rast 2015_10_06_DSM_agi_8GCPs
 ```
 
 To get better idea about the dates and spatial extents, we can use *Timeline tool*
@@ -134,7 +135,7 @@ You should see a plot of elevation values. Try different places (road, field, bu
 We will find area mapped by all surveys. First we will set the extent to the maximum bounding box, use t.info to get the values:
 
 ```bash
-t.info input=uas_dsm@assignment5b -g
+t.info input=uas_dsm -g
 g.region n=219942 s=219037 e=637439 w=636456 -pa res=0.3
 ```
 
@@ -144,15 +145,15 @@ we create masking raster representing the intersection of all DSMs, and then we 
 region to the extent of its non-null bounding box:
 
 ```bash
-t.rast.series input=uas_dsm@assignment5b method=count output=count
-t.rast.series input=uas_dsm@assignment5b method=count output=intersection -n
+t.rast.series input=uas_dsm method=count output=count
+t.rast.series input=uas_dsm method=count output=intersection -n
 d.rast count
 d.rast intersection
 g.region zoom=intersection -p
 r.mask raster=intersection
 ```
 
-:::{.callout-note}
+:::{.callout-tip title="Question"}
 How large is the area? (use r.report)
 :::
 
@@ -161,14 +162,14 @@ How large is the area? (use r.report)
 Our space-time raster dataset contains two DSMs from September:
 
 ```bash
-t.rast.list input=uas_dsm@assignment5b columns=name,start_time
+t.rast.list input=uas_dsm columns=name,start_time
 ```
 
 We will temporally aggregate the dataset by month by averaging all DSMs within each month
 (in this case averaging the September DSMs):
 
 ```bash
-t.rast.aggregate input=uas_dsm@assignment5b output=uas_dsm_aggr basename=uas_dsm_aggr suffix=time granularity="1 months" method=average
+t.rast.aggregate input=uas_dsm output=uas_dsm_aggr basename=uas_dsm_aggr suffix=time granularity="1 months" method=average
 t.rast.list input=uas_dsm_aggr columns=name,start_time
 ```
 
@@ -181,7 +182,7 @@ r.unpack -o input=mid_pines_lidar2013_dsm.pack
 r.unpack -o input=mid_pines_lidar2013_dem.pack
 ```
 
-:::{.callout-note}
+:::{.callout-tip title="Question"}
 Find the minimum elevation (core) - how close it is to lidar bare ground?
 :::
 
@@ -195,7 +196,7 @@ d.rast diff_lidar_uas
 Parts of the minimum raster are significantly below lidar ground, find out which DSM is causing it:
 
 ```bash
-t.rast.series input=uas_dsm@assignment5b method=min_raster output=min_raster
+t.rast.series input=uas_dsm method=min_raster output=min_raster
 d.rast min_raster
 ```
 
@@ -209,21 +210,36 @@ r.what map=min_raster coordinates=637232,219651
 ```
 
 Value 2 represents third (numbering starts with 0) raster in our time series.
-Since there is some problem with the third and fourth raster (`2015_07_27_DSM_agi_2GCP_4ID, 2015_08_14_DSM_agi_3GCP_4ID@assignment5b`), we will exclude them from the analysis:
+Since there is some problem with the third and fourth raster (`2015_07_27_DSM_agi_2GCP_4ID, 2015_08_14_DSM_agi_3GCP_4ID`), we will exclude them from the analysis:
 
 ```bash
-t.rast.series input=uas_dsm@assignment5b method=minimum output=minimum where="start_time < '2015-07-01' or start_time > '2015-09-01'" --o
+t.rast.series input=uas_dsm method=minimum output=minimum where="start_time < '2015-07-01' or start_time > '2015-09-01'" --o
 r.mapcalc "diff_lidar_uas = mid_pines_lidar2013_dem - minimum" --o
 r.colors map=diff_lidar_uas color=differences
 ```
 
 Apply now the color table [dif_lidar_uav.txt](./resources/dif_lidar.uav.txt) we used for highlighting differences in the last assignment:
 
+```text
+ -40 red
+ -1 orange
+ -0.5 yellow
+ -0.1 grey
+ 0 white
+ 0.1 grey
+ 0.5 cyan
+ 1 aqua
+ 40 blue
+```
+
 ```bash
 r.colors map=diff_lidar_uas rules=dif_lidar_uav.txt
 ```
 
+
+:::{.callout-tip title="Question"}
 Explain what you see.
+:::
 
 Let's look now which temporal datasets we have:
 
@@ -242,7 +258,7 @@ We assume crop is anything higher than 0.3 and lower than 2 m (to exclude the bu
 
 ```bash
 r.unpack -o fields.pack
-t.rast.mapcalc inputs=uas_dsm@assignment5b expression="if (fields, if(uas_dsm - mid_pines_lidar2013_dem > 0.3 && uas_dsm - mid_pines_lidar2013_dem < 2, uas_dsm - mid_pines_lidar2013_dem, null()))" output=veg_uas_lidar basename=veg_uas_lidar
+t.rast.mapcalc inputs=uas_dsm expression="if (fields, if(uas_dsm - mid_pines_lidar2013_dem > 0.3 && uas_dsm - mid_pines_lidar2013_dem < 2, uas_dsm - mid_pines_lidar2013_dem, null()))" output=veg_uas_lidar basename=veg_uas_lidar
 t.rast.univar input=veg_uas_lidar where="start_time < '2015-07-01' or start_time > '2015-09-01'"
 d.rast veg_uas_lidar_2
 r.report -n map=veg_uas_lidar_2 units=me nsteps=1
@@ -295,7 +311,7 @@ Since we need the webcam to capture the field during entire year we can run [t.r
 
 ```bash
 g.region raster=mid_pines_lidar2013_dsm
-t.rast.series input=uas_dsm@assignment5b method=maximum output=maximum where="start_time < '2015-07-01' or start_time > '2015-09-01'"
+t.rast.series input=uas_dsm method=maximum output=maximum where="start_time < '2015-07-01' or start_time > '2015-09-01'"
 ```
 
 We need to update the lidar-based DSM with the  UAS envelope data and analyze the viewshed while taking into account the corn growing in the field. First we need to make sure that we take into account entire field
@@ -307,7 +323,10 @@ r.patch.smooth input_a=maximum_clip input_b=mid_pines_lidar2013_dsm output=lidar
 r.relief lidar_maximum_dsm out=lidar_maximum_dsm_relief zscale=5
 d.rast lidar_maximum_dsm_relief
 ```
+
+:::{.callout-tip title="Question"}
 Look at the relief map around the building - where do people park their cars?
+:::
 
 
 Now we selected a location based on the cumulative viewshed and look at the difference between the viewshed based on lidar and the envelope surface:
@@ -322,7 +341,7 @@ r.colors viewshed_maximum co=greens
 
 To compare the viewsheds display the resulting maps with transparency.
 
-:::{.callout-note}
+:::{.callout-tip title="Question"}
 Discuss the result. Can you find a better place for the webcam? Would placing the webcam higher help?
 :::
 
@@ -341,7 +360,7 @@ Now we compute the volume
 ```bash
 r.volume input=building clump=building_mask
 ```
-:::{.callout-note}
+:::{.callout-tip title="Question"}
 What is the volume of the building?
 :::
 
