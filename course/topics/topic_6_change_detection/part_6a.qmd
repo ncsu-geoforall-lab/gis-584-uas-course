@@ -1,7 +1,7 @@
 ---
-topic: "Topic 6: Machine Learning/AI"
+topic: "Topic 6: Machine Learning & AI"
 title: "Image Classification"
-subtitle: "Topic 6: Machine Learning/AI"
+subtitle: "Topic 6: Machine Learning & AI"
 date: 10/29/2025
 # assignment-due-date: 11/13/2025
 author: Corey White

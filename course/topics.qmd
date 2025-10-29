@@ -30,9 +30,11 @@ title: "Topics"
 
 [B. Analysis of multitemporal UAS data and its applications](topics\topic_5_advanced_analytics\part_b_Analysis_multitemporal_UAS_data_applications.qmd)
 
-## Topic 6: Machine Learning/AI
+## Topic 6: Machine Learning & AI
 
-[A. Topic 6: Image Classification and Change Detection](topics/topic_6_change_detection/part_6a.qmd)
+[A. Topic 6: Image Classification](topics/topic_6_change_detection/part_6a.qmd)
+
+[B. Topic 6: Change Detection](topics/topic_6_change_detection/part_6b.qmd)
 
 
 <!-- ## Topic 7: 3D Modeling and Geovisualization -->

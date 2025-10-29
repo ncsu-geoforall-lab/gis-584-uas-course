@@ -50,20 +50,38 @@
   assignment-due-date: 10/22/25
 
 - date: 11/3/25
-  topic: "Topic 6: Machine Learning/AI"
-  title: "TBD"
+  topic: "Midterm"
+  title: "Midterm Exam"
+  activity: "Exam"
+  assignment-due-date: 11/7/25
 
 - date: 11/5/25
-  topic: "Topic 6: Machine Learning/AI"
-  title: "Assignment 6B"
-
-- date: 11/10/25
-  topic: "Project"
-  title: "Project help session"
+  topic: "Midterm"
+  title: "Midterm Exam"
+  activity: "Exam"
+  assignment-due-date: 11/7/25
 
 - date: 11/12/25
-  topic: "Project"
-  title: "Project help session"
+  topic: "Topic 6: Machine Learning & AI"
+  title: "UAS-based Change Detection"
+  activity: Lecture
+  assignment-due-date: 12/1/25
+
+- date: 11/17/25
+  topic: "Topic 6: Machine Learning & AI"
+  title: "UAS-based Change Detection"
+  activity: Assignment/Lab
+  assignment-due-date: 12/1/25
+
+- date: 11/19/25
+  topic: "Topic 7: Open Drone Map (ODM)"
+  title: "Intro to WebODM and ODM"
+  activity: Lecture
+
+- date: 11/24/25
+  topic: "Topic 7: Open Drone Map (ODM)"
+  title: "Intro to WebODM and ODM"
+  activity: Assignment/Lab
 
 - date: 11/26/25
   topic: "Thanksgiving Break"

@@ -2,10 +2,11 @@
 topic: "Topic 6A: Machine Learning/AI"
 subtitle: "UAS Image Classification"
 title: "Assignment 6A"
-assignment-due-date: 11/06/2024
+original-assignment-due-date: 11/06/2024
+assignment-due-date: 12/1/2025
 author:
     - Corey White
-date: 10/29/25
+date: 11/10/25
 format: html
 toc-depth: 4
 activity: Assignment/Lab

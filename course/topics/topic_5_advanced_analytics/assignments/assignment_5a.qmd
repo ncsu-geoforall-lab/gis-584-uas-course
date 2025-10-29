@@ -6,7 +6,8 @@ author:
     - Anna Petrasova
     - Corey White
 date: 10/8/2025
-assignment-due-date: 11/5/2025
+original-assignment-due-date: 11/05/2025
+assignment-due-date: 11/12/2025
 format: html
 toc-depth: 4
 activity: Assignment/Lab
