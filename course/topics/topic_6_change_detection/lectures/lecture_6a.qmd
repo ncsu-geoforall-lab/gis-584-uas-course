@@ -142,52 +142,6 @@ Best if conditions are as similar as possible
 :::
 :::
 
-## Spectral Bands {.text-center}
-
-#### RGB
-![red](../images/ortho_r.png){width=25%}
-![green](../images/ortho_g.png){width=25%}
-![blue](../images/ortho_b.png){width=25%}
-
-#### Mulispectral (N-separated bands)
-
-#### Hyperspectral (Continous Spectrum)
-
-## Feature Engineering {.smaller}
-
-:::{.columns}
-:::{.column width=60%}
-- **Normalized Indices**
-    - NDVI, NDWI, VARI, etc..
-- **Low and High Pass Filters**
-    - Low Pass - Smoothing Kernal
-    - High Pass - Edge Detection
-- **Textural features**
-    - Grey level co-occurrence matrix (GLCM)
-        - Angular Second Moment
-        - Contrast
-        - Correlation
-- **Principal component analysis (PCA)**
-:::
-:::{.column width=40%}
-![VARI](../images/vari_drone.png)
-$$
-VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
-$$
-:::
-:::
-
-
-## Sampling Methods
-
-- **Random Sample**
-    - Sample the entire spatial extent $n$ number of locations
-- **Cluster Sampling**
-    - Sample by different clusters
-- **Stratified Random Sample**
-    - Sample by different classes (e.g. Developed, Undeveloped) 
-
-
 ## Classification and Change Detection {.smaller}
 
 1. **Change Detection Method**

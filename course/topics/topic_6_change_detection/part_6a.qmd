@@ -1,28 +1,24 @@
 ---
 topic: "Topic 6: Machine Learning/AI"
-title: "Image Classification and Change Detection"
+title: "Image Classification"
 subtitle: "Topic 6: Machine Learning/AI"
-date: 10/27/2025
+date: 10/29/2025
 # assignment-due-date: 11/13/2025
 author: Corey White
 activity: Lecture
 ---
 
-# Image Classification and Change Detection
-
 ## Outline
 
-- Understand the different types of change detection
-- Image Classification
-- Impacts of spatial-temporal scale
-- Environmental Consideration
-
+- Understand the principles of image classification in UAS mapping  
+- Differentiate between **supervised**, **unsupervised** learning methods
+- Learn how to apply classification workflows in **GRASS**  
+- Interpret and validate classification results using **accuracy assessment metrics**  
+- Explore real-world applications of UAS classification for **environmental monitoring**
 
 ## Lecture
 
-- [Lecture Slides](lectures/lecture_6a.qmd)
-- Lecture Recording: [Fall 2024]({{< var recordings.topic6.lecture6a >}}) (NCSU Only)
-- In-Class Assignment Recording: [Fall 2024]({{< var recordings.topic6.assignment6a >}}) (NCSU Only)
+- [Lecture Slides](lectures/image_classification.qmd)
 
 ## Supplemental materials
 
