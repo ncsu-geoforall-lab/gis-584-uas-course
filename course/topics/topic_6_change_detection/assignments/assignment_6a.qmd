@@ -548,10 +548,10 @@ It characterizes the degree of matching between reference data set and classific
 |                 bale          | 20              | 0               | 2               | 0               | 5               | 2               | 0               | 1               | 719             | 95.99           | 4.01            |
 |                 Producer Accuracy | 98.38       | 77.4            | 99.33           | 71.64           | 78.72           | 90.45           | 3.97            | 56.8            | 35.09                   |
 
-## Optional
+<!-- ## Optional
 
 ### LLM-based image segmentation with SAMGeo2
 
 ```bash
 g.extension r.confusionmatrix
-```
+``` -->
