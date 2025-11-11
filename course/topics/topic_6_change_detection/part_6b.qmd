@@ -11,13 +11,14 @@ activity: Lecture
 ## Outline
 
 - Understand the different types of change detection
-- Image Classification
 - Impacts of spatial-temporal scale
-- Environmental Consideration
+- Data co-registration
+- Environmental Considerations
+
 
 ## Lecture
 
-- [Lecture Slides](lectures/lecture_6a.qmd)
+- [Lecture Slides](lectures/lecture_6b.qmd)
 
 ## Supplemental materials
 
