@@ -1,0 +1,381 @@
+---
+title: "UAS Change Detection Methods"
+subtitle: "GIS 584: UAS Mapping & Analysis"
+author: "Corey White"
+bibliography: ../references.bib
+format:
+  revealjs:
+    theme: [simple, ../../../../theme.scss]
+    slide-number: true
+    controls: true
+    progress: true
+    transition: slide
+    center: true
+    code-overflow: wrap
+    width: 1400
+    height: 800
+    chalkboard: true
+    footer: "[Return Home](../part_6a.qmd)"
+execute:
+  echo: false
+---
+
+## Overview
+- Detecting and quantifying changes using multi-temporal UAS data
+- Focus areas:
+  - Pre-classification methods
+  - Feature and object-based methods
+  - Post-classification change detection
+  - Data co-registration and uncertainty
+
+::: notes
+Explain that change detection forms the foundation of time-series analysis using UAS. Students should appreciate that the ability to detect subtle geomorphic or ecological change relies heavily on both spatial precision and radiometric consistency. Emphasize that this lecture provides the conceptual background for their upcoming assignment.
+:::
+
+---
+
+## Why Change Detection? {.smaller}
+
+::: {.columns}
+
+::: {.column width=50%}
+- Assess temporal dynamics of landscapes and features
+- Monitor environmental and human processes:
+  - **Erosion, deposition, landslides**
+  - **Vegetation growth and stress**
+  - **Infrastructure development and construction monitoring**
+  - **Disaster impact and recovery (floods, hurricanes, fires)**
+:::
+::: {.column width=50%}
+![](../images/animated_sat.gif)
+:::
+
+:::
+---
+
+### UAS Advantages
+
+::: {.columns}
+
+::: {.column width=50%}
+- High spatial and temporal resolution compared to satellites
+- Flexible deployment for localized studies
+- Affordable repeat coverage for time series
+- Capability to integrate RGB, multispectral, and LiDAR payloads
+:::
+::: {.column width=50%}
+![Jockey's Ridge, NC -  2024 4m](../images/jr2024_uas_04m_east.jpg)
+:::
+
+:::
+
+::: notes
+Use examples of recent UAS missions from your research to show how repeated surveys reveal changes invisible in a single snapshot. Introduce the concept of temporal baselines—days, weeks, months—and how temporal resolution affects interpretability.
+:::
+
+---
+
+## Data Pre-Processing
+### Radiometric Correction
+- Normalizes brightness and spectral values across flights
+- Key steps:
+  - Apply **sensor calibration** and **reflectance panels**
+  - Adjust for illumination differences (sun angle, clouds)
+  - Correct vignetting and shadow effects
+- Enables meaningful spectral differencing and vegetation indices
+
+---
+
+## Data Pre-Processing
+### Geometric Correction & Co-registration
+- Ensures all datasets share the same coordinate reference and alignment
+- Methods:
+  - **GCP-based correction** (preferred for absolute accuracy)
+  - **Feature-based registration** (SIFT/SURF for automated tie points)
+  - **ICP alignment** for DEMs and point clouds
+- Evaluate accuracy using:
+  - RMSE, NCC, reprojection error
+
+::: notes
+Stress that co-registration errors directly translate to false change detection. A 5–10 cm horizontal misalignment can appear as a false change in vegetation or soil boundaries. Discuss the difference between absolute and relative accuracy.
+:::
+
+---
+
+## Co-registration in Practice
+
+- Orthomosaic alignment via tie-points and transformation models
+- DEM alignment: remove vertical bias and tilt
+- Common issues:
+  - Local warping, temporal parallax, surface deformation
+  - GCP mismatch or insufficient tie points
+- Best practices:
+  - Use **stable surfaces** (buildings, pavement) for control points
+  - Validate with visual overlays and difference histograms
+  - Compute NCC or correlation metrics for quality assurance
+
+::: notes
+Show before/after examples illustrating pixel shifts. Explain the concept of multi-temporal bundle adjustment in advanced workflows.
+:::
+
+---
+
+## Pre-Classification Change Detection
+
+### Image Differencing & Rationing
+- Simple and widely used for radiometrically stable imagery
+- Compute differences between bands, indices, or reflectance values:
+  - \( \Delta B = B_{t2} - B_{t1} \)
+- Apply thresholds:
+  - Manual (visual inspection)
+  - Automatic (Otsu’s method, ±1σ) [@sha_robust_2016]
+- Interpretation:
+  - Positive → increase in brightness or greenness
+  - Negative → decrease (e.g., vegetation loss)
+
+::: notes
+Explain how differencing is best for continuous-valued imagery (reflectance, NDVI) and less effective on categorical data. Discuss challenges from lighting and shadows.
+:::
+
+---
+
+## Pre-Classification Change Detection
+### Spectral Index Differencing
+- NDVI, VARI, NDRE, NDMI commonly used
+- Highlights vegetation or moisture change
+- Formula example:
+$$\Delta NDVI = NDVI_{t2} - NDVI_{t1}$$
+- Thresholds often set at ±0.1–0.2
+- Applications: crop stress detection, vegetation removal, regrowth analysis
+
+::: notes
+Remind students that spectral indices require consistent illumination and calibrated reflectance. Discuss the effect of soil background and phenology.
+:::
+
+---
+
+## Pre-Classification Change Detection
+### DEM of Difference (DoD)
+- Calculates elevation change:
+$$DoD = DEM_{t2} - DEM_{t1}$$
+- Quantifies erosion, deposition, or volumetric change
+- Requires vertical co-registration and uncertainty estimation
+- Error propagation:
+$$\sigma_{comb} = \sqrt{\sigma_{1}^2 + \sigma_{2}^2}$$
+- Minimum Level of Detection (LoD95) defines confidence threshold
+
+::: notes
+Use geomorphic examples like riverbank erosion or stockpile volume change. Highlight how vertical uncertainty dominates small changes.
+:::
+
+---
+
+## Pre-Classification Change Detection
+### Multi-Temporal Image Fusion
+- **Principal Component Analysis (PCA)** detects correlated multi-band change
+- **Change Vector Analysis (CVA)** measures magnitude and direction of spectral change
+- Sensitive to subtle multi-band variations
+- Useful for multi-sensor integration (e.g., RGB + multispectral)
+
+::: notes
+Provide intuition using 2D change vectors: the length indicates magnitude, direction indicates type of change. Encourage students to see CVA as a vector space approach.
+:::
+
+---
+
+## Feature-Based & Object-Based Change Detection (OBIA)
+
+### Segmentation & Object Generation
+- Divide imagery into homogeneous regions
+- Techniques: region-growing, edge-detection, watershed, multi-resolution segmentation
+- Scale parameter controls object granularity
+
+---
+
+## Feature-Based & Object-Based Change Detection (OBIA)
+### Feature Extraction
+- Derive attributes per object: mean NDVI, texture, shape, context
+
+## Object-Based Change Detection (OBIA)
+### Object Comparison
+- Compare across dates by overlap, centroid shift, or attribute change
+- Enables context-aware change analysis
+
+::: notes
+Contrast pixel-based and OBIA results visually. Mention that OBIA reduces salt-and-pepper noise and better represents real-world objects.
+:::
+
+---
+
+## Feature-Based & Object-Based Change Detection (OBIA)
+### Advantages & Limitations
+**Advantages:**
+- Reduces pixel noise
+- Captures spatial context
+- Integrates spectral + geometric information
+
+**Limitations:**
+- Segmentation parameter sensitivity
+- High computational cost
+- Object definition inconsistencies
+
+::: notes
+Encourage discussion on parameter tuning. Mention eCognition or open-source OBIA tools like Orfeo Toolbox and SAMGeo.
+:::
+
+---
+
+## Post-Classification Change Detection
+
+### Concept
+- Classify each epoch separately, then compare thematic results
+- Produces categorical transitions (e.g., Vegetation → Bare Soil)
+- Sensitive to classification consistency
+
+### Workflow
+1. Classify imagery for each date (RF, SVM, DL models)
+2. Align class maps
+3. Cross-tabulate transitions
+4. Derive change maps and summary statistics
+
+::: notes
+Explain that this is most robust when classes are stable and well-separated spectrally. Highlight potential confusion from inconsistent training data.
+:::
+
+---
+
+### Example Cross-Classification Matrix
+| Class (t1→t2) | Vegetation | Bare Soil | Built-up |
+|----------------|-------------|------------|-----------|
+| Vegetation     | 80% | 15% | 5% |
+| Bare Soil      | 10% | 85% | 5% |
+| Built-up       | 5% | 5% | 90% |
+
+- Off-diagonal values = change areas
+- Summarize transitions and map visually
+
+::: notes
+Discuss how to visualize this matrix in GIS and generate transition probability maps. Stress that interpretation depends on temporal spacing.
+:::
+
+---
+
+### Accuracy and Error Propagation
+- Misclassification at each date compounds
+- Evaluate using error matrices and Kappa coefficients
+- Apply conditional probability or Bayesian correction methods
+
+::: notes
+Show how overall accuracy may drop by half when two independent classifications each have 90% accuracy. Emphasize the need for consistent training data and features.
+:::
+
+---
+
+### Advanced Approaches
+- **Deep Learning** (U-Net, CNN) for semantic segmentation
+- **Temporal fusion networks** capture time-based patterns
+- **Ensemble methods** improve stability (RF + GBM)
+- Integration with LiDAR or radar for 3D + spectral change detection
+
+::: notes
+Preview emerging AI-based workflows that can process multi-temporal data automatically. Mention potential research directions.
+:::
+
+---
+
+## Uncertainty and Validation {.text-center}
+
+---
+
+### Sources of Uncertainty
+- Geometric misalignment
+- Radiometric inconsistencies
+- Shadowing and occlusion
+- Temporal aliasing (changes between acquisition dates)
+
+---
+
+### Quantifying Confidence
+- Use control points and stable areas
+- Propagate DEM and reflectance errors
+- Define LoD95 or 3σ thresholds for reporting change
+
+::: notes
+Encourage quantitative reasoning: discuss how uncertainty propagation affects volumetric estimates. Introduce concepts like error budgets and probabilistic thresholds.
+:::
+
+---
+
+## Case Studies & Applications {.text-center}
+
+---
+
+### Geomorphic Change
+- Riverbank erosion mapping using DoD
+- Landslide volume estimation
+- Coastal dune dynamics
+
+---
+
+### Vegetation Monitoring
+- Crop regrowth and stress detection
+- Post-fire recovery mapping
+- Invasive species monitoring
+
+---
+
+### Infrastructure & Disaster Response
+- Construction progress mapping
+- Post-flood damage assessment
+- Landslide and debris flow detection
+
+::: notes
+Provide several example studies (e.g., Fonstad et al. 2013, Wheaton et al. 2010) showing how UAS have revolutionized change analysis in geomorphology and ecology.
+:::
+
+---
+
+## Summary
+
+### Key Takeaways
+- Co-registration accuracy is the foundation of reliable change detection
+- Select method based on:
+  - Data type (spectral, elevation, categorical)
+  - Temporal frequency
+  - Change magnitude
+- Address uncertainty at every stage
+
+---
+
+### Looking Ahead
+- Real-time change detection pipelines (Edge + Cloud)
+- AI-assisted feature tracking
+- Integration of UAS with satellite time series for multi-scale change detection
+
+::: notes
+Summarize main method families and emphasize decision criteria. Encourage students to think critically about sources of error and method suitability.
+:::
+
+---
+
+## Discussion
+- What are the biggest challenges you’ve faced in multi-temporal UAS analysis?
+- How can we validate change when ground truth is unavailable?
+- What are promising research directions in automated change detection?
+
+::: notes
+Facilitate a 10–15 minute class discussion encouraging students to connect methods to their term projects. Suggest linking to forthcoming assignment.
+:::
+
+---
+
+## Next Session
+- **Assignment:** Apply DEM of Difference and NDVI differencing to provided datasets
+- Focus on:
+  - Co-registration and alignment accuracy
+  - Thresholding and LoD95 calculation
+  - Quantifying and visualizing uncertainty
+
+::: notes
+Preview assignment expectations. Mention that next week’s lab will implement these workflows in GRASS GIS or Colab notebooks.
+:::
