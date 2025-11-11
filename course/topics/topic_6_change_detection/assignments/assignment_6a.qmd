@@ -11,12 +11,14 @@ format: html
 toc-depth: 4
 activity: Assignment/Lab
 keep-ipynb: true
+notebook-view:
+  - notebook: Assignment6A.ipynb
+    title: "UAS Image Classification"
+    url: https://colab.research.google.com/drive/1sia6F1oPW1ISV8a-6YkEEhJhXriVrYdG?usp=sharing
 ---
 
 ## Outline
 
-<!-- - Visual Change
-- Binary Change -->
 - Feature Engineering
 - Segmentation
 - Image Classification
@@ -409,6 +411,33 @@ You can calculate the feature importance by using the `-f` flag and saving the r
 
 The features with higher the importance scores indicate they are more influential in making predictions. While features with  low importance, could potentially be removed to simplify the model.
 
+```{python}
+# Feature importance plot (requires pandas, seaborn, matplotlib)
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+fi = pd.read_csv("feature_importance_rf.csv")
+fi = fi.sort_values("importance", ascending=False)
+
+plt.figure(figsize=(7, 4))
+sns.barplot(
+    data=fi, x="importance", y="feature", orient="h", errorbar=None
+)  # std provided separately
+# Add error bars manually
+for i, (imp, std) in enumerate(zip(fi["importance"], fi["std"])):
+    plt.errorbar(
+        x=imp, y=i, xerr=std, fmt="none", ecolor="black", capsize=3, linewidth=0.8
+    )
+
+plt.xlabel("Importance")
+plt.ylabel("Feature")
+plt.title("Random Forest Feature Importance (± std)")
+plt.tight_layout()
+plt.savefig("../images/feature_importance_rf.png")
+```
+
+![](../images/feature_importance_rf.png)
 
 #### Run Model
 
@@ -518,3 +547,11 @@ It characterizes the degree of matching between reference data set and classific
 |                 farm equipment| 32              | 9               | 88              | 5               | 46              | 19              | 0               | 4311            | 1               | 95.57           | 4.43            |
 |                 bale          | 20              | 0               | 2               | 0               | 5               | 2               | 0               | 1               | 719             | 95.99           | 4.01            |
 |                 Producer Accuracy | 98.38       | 77.4            | 99.33           | 71.64           | 78.72           | 90.45           | 3.97            | 56.8            | 35.09                   |
+
+## Optional
+
+### LLM-based image segmentation with SAMGeo2
+
+```bash
+g.extension r.confusionmatrix
+```
