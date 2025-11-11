@@ -78,6 +78,24 @@ Use examples of recent UAS missions from your research to show how repeated surv
 
 ## Data Pre-Processing { .text-center }
 
+- Radiometric Correction
+- Geometric Correction & Co-registration
+
+---
+
+###  Jockey's Ridge { .text-center }
+#### 1932 - 2009 { .text-center }
+::: {.grid}
+![1932](../images/airphoto_1932.png)
+![1945](../images/airphoto_1945.png)
+![1988](../images/airphoto_1955.png)
+![1962](../images/airphoto_1962.png)
+![1974](../images/airphoto_1974.png)
+![1988](../images/airphoto_1988.png)
+![2007](../images/airphoto_2007.png)
+![2009](../images/airphoto_2009.png)
+:::
+
 ---
 
 ### Radiometric Correction
@@ -98,6 +116,7 @@ flowchart LR
 Enables meaningful spectral differencing and vegetation indices
 
 > Addidional Resources (@sampath_guidelines_2023)
+
 
 --- 
 
@@ -206,6 +225,8 @@ Use geomorphic examples like riverbank erosion or stockpile volume change. Highl
 
 - **Principal Component Analysis (PCA)** detects correlated multi-band change
 - **Change Vector Analysis (CVA)** measures magnitude and direction of spectral change
+
+#### Common issues:
 - Sensitive to subtle multi-band variations
 - Useful for multi-sensor integration (e.g., RGB + multispectral)
 
@@ -219,12 +240,12 @@ Provide intuition using 2D change vectors: the length indicates magnitude, direc
 
 ::: {.columns}
 ::: {.column width=50%}
-### Feature-Based
+#### Feature-Based
 - Segmentation & Object Generation
 - Feature Extraction
 :::
 ::: {.column width=50%}
-### Object-Based Change Detection (OBIA)
+#### Object-Based Change Detection (OBIA)
 - Object Comparison
 :::
 :::
@@ -264,13 +285,24 @@ Derive attributes per object:
 
 
 ## Object-Based Change Detection (OBIA)
-### Object Comparison
-- Compare across dates by
-  - overlap
-  - centroid shift
-  - attribute change
 
-Enables context-aware change analysis
+::: {.columns}
+::: {.column width=50%}
+
+### Object Comparison
+
+Compare across dates by
+
+- overlap
+- centroid shift
+- attribute change
+
+:::
+::: {.column width=50%}
+![@white_rapid-dem_2022](../images/remotesensing-14-01718-thematic.png)
+:::
+> Enables context-aware change analysis
+:::
 
 ::: notes
 Contrast pixel-based and OBIA results visually. Mention that OBIA reduces salt-and-pepper noise and better represents real-world objects.
@@ -304,12 +336,11 @@ Encourage discussion on parameter tuning. Mention eCognition or open-source OBIA
 
 ## Post-Classification Change Detection {.text-center}
 
----
-
-### Concept
 - Classify each epoch separately, then compare thematic results
 - Produces categorical transitions (e.g., Vegetation → Bare Soil)
 - Sensitive to classification consistency
+
+---
 
 ### Workflow
 1. Classify imagery for each date (RF, SVM, DL models)

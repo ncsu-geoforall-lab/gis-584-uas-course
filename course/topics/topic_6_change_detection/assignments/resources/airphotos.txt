@@ -1,0 +1,10 @@
+
+name|mapset|start_time
+airphoto_1932|Jockeys_Ridge|1932-1-1
+airphoto_1945|Jockeys_Ridge|1945-1-1
+airphoto_1955|Jockeys_Ridge|1955-1-1
+airphoto_1974|Jockeys_Ridge|1974-1-1
+airphoto_1988|Jockeys_Ridge|1988-1-1
+airphoto_1998|Jockeys_Ridge|1998-1-1
+airphoto_2007|Jockeys_Ridge|2007-1-1
+airphoto_2009|Jockeys_Ridge|2009-1-1

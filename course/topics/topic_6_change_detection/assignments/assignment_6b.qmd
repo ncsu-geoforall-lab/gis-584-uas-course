@@ -23,8 +23,152 @@ execute:
   output: true
 ---
 
-Apply DEM of Difference and NDVI differencing to provided datasets
-- Focus on:
-  - Co-registration and alignment accuracy
-  - Thresholding and LoD95 calculation
-  - Quantifying and visualizing uncertainty
+## Objective
+Apply DEM of Difference and NDVI differencing to provided datasets 
+
+Focus on:
+
+- Co-registration and alignment accuracy
+- Thresholding and LoD95 calculation
+- Quantifying and visualizing uncertainty
+
+```{python}
+
+# Import standard Python packages we need
+import sys
+import subprocess
+from pathlib import Path
+
+# Ask GRASS where its Python packages are to be able to run it from the notebook
+sys.path.append(
+    subprocess.check_output(["grass", "--config", "python_path"], text=True).strip()
+)
+
+```
+
+```{python}
+# Import the GRASS packages
+import grass.script as gs
+import grass.jupyter as gj
+```
+
+```{python}
+# Start GRASS in default project mapset
+home_directory = Path.home()
+grassdata = Path(home_directory, "grassdata", "northcarolina_coast_spm")
+session = gj.init(grassdata)
+```
+
+```{python}
+layers = gs.parse_command("g.list", type="all", format="json")
+
+for i in layers:
+    print(i)
+```
+
+```{python}
+gs.run_command("g.region", region="jrdunes_1m", flags="p")
+
+```
+
+```{python}
+m = gj.Map(filename="./../images/airphoto_1932.png")
+m.d_rast(map="airphoto_1932")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_1932_hist.png")
+m.d_histogram(map="airphoto_1932")
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_1945.png")
+m.d_rast(map="airphoto_1945")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_1955.png")
+m.d_rast(map="airphoto_1955")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_1962.png")
+m.d_rast(map="airphoto_1962")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_1974.png")
+m.d_rast(map="airphoto_1974")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_1988.png")
+m.d_rast(map="airphoto_1988")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_2007.png")
+m.d_rast(map="airphoto_2007")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_2009.png")
+m.d_rast(map="airphoto_2009")
+m.d_barscale()
+m.show()
+
+m = gj.Map(filename="./../images/airphoto_2009_hist.png")
+m.d_histogram(map="airphoto_2009")
+m.show()
+```
+
+```{python}
+gs.run_command("r.info", map="airphoto_2009")
+
+gs.run_command("r.rgb", input="airphoto_2009", red="airphoto_2009.r", green="airphoto_2009.g", blue="airphoto_2009.b")
+m = gj.Map(filename="./../images/airphoto_2009_r_hist.png")
+m.d_histogram(map="airphoto_2009.r")
+m.show()
+```
+
+```{python}
+# airphotos = [1932, 1945, 1955, 1962, 1974, 1988, 2007, 2009]
+
+gs.run_command("t.create",
+    type="strds",
+    temporaltype="absolute",
+    output="jr_airphotos",
+    title="Jockey's Ridge Air Photos",
+    description="Jockey's Ridge Air Photos from 1932 - 2009"
+)
+airphotos_list = gs.parse_command("g.list", type="raster", pattern="airphoto_*", format="json")
+airphotos = [i.get('fullname') for i in airphotos_list]
+gs.run_command(
+    "t.register",
+    type="raster",
+    input="jr_airphotos",
+    file="./resources/airphotos.txt"
+)
+
+```
+
+```{python}
+# gs.run_command("t.connect", flags="p")
+# gs.run_command("t.info", input="jr_airphotos")
+import sqlite3
+con = sqlite3.connect(Path(home_directory, "grassdata", "northcarolina_coast_spm", "PERMANENT", "tgis", "sqlite.db"))
+cur = con.cursor()
+# res = cur.execute("SELECT * FROM sqlite_master WHERE table = 'tgis_metadata'")
+for row in cur.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"):
+    print(row)
+
+# row = res.fetchone()
+# print(row)
+con.close()
+```
+
+```{python}
+m = gj.TimeSeriesMap()
+m.add_raster_series("jr_airphotos", fill_gaps=False)
+m.d_barscale()
+m.show()
+```
