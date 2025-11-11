@@ -17,6 +17,8 @@ notebook-view:
     url: https://colab.research.google.com/drive/1sia6F1oPW1ISV8a-6YkEEhJhXriVrYdG?usp=sharing
 ---
 
+[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1sia6F1oPW1ISV8a-6YkEEhJhXriVrYdG?usp=sharing)
+
 ## Outline
 
 - Feature Engineering
@@ -436,8 +438,6 @@ plt.title("Random Forest Feature Importance (± std)")
 plt.tight_layout()
 plt.savefig("../images/feature_importance_rf.png")
 ```
-
-![](../images/feature_importance_rf.png)
 
 #### Run Model
 
