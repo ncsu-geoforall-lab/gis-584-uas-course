@@ -10,6 +10,7 @@ date: 11/10/25
 format: html
 toc-depth: 4
 activity: Assignment/Lab
+keep-ipynb: true
 ---
 
 ## Outline
@@ -193,48 +194,44 @@ d.rast vari_mask
 We will now compute a *smooth* layer to remove noise from our data with the [r.neighbors](https://grass.osgeo.org/grass84/manuals/r.neighbors.html) tool. To do this we will compute the mean value for each pixel using a 27x27 moving window.
 
 ```bash
-r.neighbors input=odm_071724_ortho.red size=27 method=average output=odm_071724_ortho.red.27x27mean
+r.neighbors input=odm_071724_ortho.1 size=27 method=average output=odm_071724_ortho.1.27x27mean
 ```
 
 ![27x27 Moving Window Mean](../images/low_pass_filter_mean_moving_window_red.png){width=45%}
 
 #### High Pass Filters
 
-We will now create a layer to define our edges using the `zero-crossings` edge detection method implemented as [i.zc](https://grass.osgeo.org/grass-stable/manuals/i.zc.html) in GRASS GIS.
+We will now create a layer to define our edges using the `zero-crossings` edge detection method implemented as [i.zc](https://grass.osgeo.org/grass-devel/manuals/i.zc.html) in GRASS. The output raster will contain cells (edges) labeled 0-4 which represent the azimuth directions (similar to aspect).
 
 ```bash
-i.zc --overwrite input=odm_071724_ortho.green output=odm_071724_ortho.green.zc threshold=0.5
+i.zc --overwrite input=odm_071724_ortho.2 output=odm_071724_ortho.2.zc orientations=4 threshold=0.5
 ```
 
+![](../images/zero_crossing_4d.png){width=100%}
+
+We can also use descriptive neighborhood statistics, such as, the standard deviation to calculate edges in our data.
+
 ```bash
-r.neighbors -c input=odm_071724_ortho.green size=7 method=variance output=odm_071724_ortho.green.7x7variance
+r.neighbors -c input=odm_071724_ortho.2 size=7 method=stddev output=odm_071724_ortho.2.7x7stddev
 ```
 
 ![](../images/high_pass_filter_variance_moving_window_green.png){width=40%}
 ![](../images/high_pass_filter_variance_moving_window_green2.png){width=40%}
 
 :::{.callout-important}
-**Task:** Find a nice color scheme to display `odm_071724_ortho.green.7x7variance` and describe what information can be derived from the map.
+**Task:** Find a nice color scheme to display `odm_071724_ortho.2.7x7stddev` and describe what information can be derived from the map.
 :::
-<!-- ```bash
-r.neighbors -c input=odm_071724_ortho.green size=7 method=range output=odm_071724_ortho.green.range
-``` -->
 
-<!-- ```bash
-r.neighbors -c input=odm_071724_dsm size=3 method=range output=odm_071724_dsm.3x3range
-r.neighbors -c input=odm_071724_dsm size=3 method=stddev output=odm_071724_dsm.3x3stddev
-r.neighbors -c input=odm_071724_dsm size=3 method=maximum output=odm_071724_dsm.3x3maximum
-``` -->
 
 #### Texture Features
 
 Now we will calcuate the texture features Angular Second Moment (asm), Correlation (corr), and Contrast (con)
- for our green band using [r.texture](https://grass.osgeo.org/grass-stable/manuals/r.texture.html) which implements Haralick et al. (1973) Grey level co-occurrence matrix (GLCM).
+ for our green band using [r.texture](https://grass.osgeo.org/grass-devel/manuals/r.texture.html) which implements Haralick et al. (1973) Grey level co-occurrence matrix (GLCM).
 
 
 
 ```bash
-r.texture odm_071724_ortho.green output=odm_071724_ortho.green_texture method="asm,contrast,corr" -s
+r.texture odm_071724_ortho.2 output=odm_071724_ortho.green_texture method="asm,contrast,corr" -s
 ```
 
 ![Angular Second Moment](../images/glcm_asm45.png){width=25%}
@@ -257,7 +254,7 @@ r.relief input=odm_071724_dsm output=dsm_relief
 
 #### Slope and Aspect
 
-Calculate slope and aspect using [r.slope.aspect](https://grass.osgeo.org/grass-stable/manuals/r.slope.aspect.html)
+Calculate slope and aspect using [r.slope.aspect](https://grass.osgeo.org/grass-devel/manuals/r.slope.aspect.html)
 
 ```bash
 r.slope.aspect elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv
@@ -265,7 +262,7 @@ r.slope.aspect elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724
 
 #### Terrain Forms
 
-Now derive terrain forms form the the DSM using [r.geomorphon](https://grass.osgeo.org/grass-stable/manuals/r.geomorphon.html).
+Now derive terrain forms form the the DSM using [r.geomorphon](https://grass.osgeo.org/grass-devel/manuals/r.geomorphon.html).
 
 ```bash
 r.geomorphon elevation=odm_071724_dsm forms=geomorphon search=3 skip=0 flat=1 dist=0
@@ -273,12 +270,12 @@ r.geomorphon elevation=odm_071724_dsm forms=geomorphon search=3 skip=0 flat=1 di
 
 ### Create Imagery Group
 
-GRASS GIS uses imagery groups ([i.group](https://grass.osgeo.org/grass84/manuals/i.group.html)) to manage imagery data.
+GRASS uses imagery groups ([i.group](https://grass.osgeo.org/grass84/manuals/i.group.html)) to manage imagery data.
 
 Let's start by creating a new imagery group called `rgb_group` with the subgroup `rgb_group` and add the red, green, and blue bands to the group/subgroup.
 
 ```bash
-i.group group=rgb_group subgroup=rgb_group input=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue
+i.group group=rgb_group subgroup=rgb_group input=odm_071724_ortho.1,odm_071724_ortho.2,odm_071724_ortho.3
 ```
 
 You can now check that it worked by viewing which rasters are in the group (`rgb_group`) and subgroup (`rgb_group`).
@@ -290,12 +287,12 @@ i.group -l group=rgb_group subgroup=rgb_group
 Let's now add some of our other derived features to the group (`analysis_bands`) in a new subgroup called `analysis_bands`.
 
 ```bash
-i.group group=analysis_bands subgroup=analysis_bands input=odm_071724_ortho.vari,odm_071724_ortho.blue,odm_071724_ortho.red.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,geomorphon,odm_071724_ortho.green.7x7variance
+i.group group=analysis_bands subgroup=analysis_bands input=odm_071724_ortho.vari,odm_071724_ortho.3,odm_071724_ortho.1.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,odm_071724_pcurv,odm_071724_tcurv,geomorphon,odm_071724_ortho.2.7x7stddev
 ```
 
 ### Image Segmentation
 
-Install [i.superpixels.slic](https://grass.osgeo.org/grass-stable/manuals/addons/i.superpixels.slic.html) GRASS Addon using the `g.extension` command.
+Install [i.superpixels.slic](https://grass.osgeo.org/grass-devel/manuals/addons/i.superpixels.slic.html) GRASS Addon using the `g.extension` command.
 
 ```bash
 g.extension i.superpixels.slic
@@ -304,31 +301,20 @@ g.extension i.superpixels.slic
 Let's see if we can segment the fields.
 
 ```bash
-i.superpixels.slic input=rgb_group output=superpixels num_pixels=10000
-r.to.vect input=superpixels output=superpixels type=area
-```
-
-We can now evaluate our segments statistics.
-
-For example we can calculate the mean VARI value for each vector segment.
-
-:::{.callout-caution}
-If you run this command as givin it will take a long time to run. Try to reduce the number of segments to speed things up.
-:::
-
-```bash
-v.rast.stats map=superpixels_analy raster=odm_071724_ortho.vari column_prefix=vari method=average
+# Reduce the compuational region
+g.region n=219508.87 s=219309.09 w=636953.87 e=637210.35 res=0.07 -ap
+i.superpixels.slic input=analysis_bands output=superpixels num_pixels=200
 ```
 
 Let's see if we can improve our segmentation to capture individual crops in the field.
 
 ```bash
-i.superpixels.slic input=analysis_bands output=superpixels_analysis step=7 compactness=0.8 minsize=15 memory=2000
+i.superpixels.slic input=analysis_bands output=superpixels_analysis compactness=0.8 num_pixels=100000
 ```
 
-For our object based classification we will use [i.segment.stats](https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html) to generate multiple statistics about our segments at once.
+For our object based classification we will use [i.segment.stats](https://grass.osgeo.org/grass-devel/manuals/addons/i.segment.stats.html) to generate multiple statistics about our segments at once.
 
-To do this we must first install [i.segment.stats](https://grass.osgeo.org/grass-stable/manuals/addons/i.segment.stats.html).
+To do this we must first install [i.segment.stats](https://grass.osgeo.org/grass-devel/manuals/addons/i.segment.stats.html).
 
 ```bash
 g.extension i.segment.stats
@@ -341,11 +327,11 @@ If you run this command as givin it will take a long time to run. Try to reduce 
 :::
 
 ```bash
-i.segment.stats map=superpixels rasters=odm_071724_ortho.red,odm_071724_ortho.green,odm_071724_ortho.blue raster_statistics="mean,stddev,sum" vectormap=segment_stats processes=3
+i.segment.stats map=superpixels rasters=odm_071724_ortho.1,odm_071724_ortho.2,odm_071724_ortho.3 raster_statistics="mean,stddev,sum" vectormap=segment_stats processes=3
 ```
 ### Classification
 
-For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS GIS addon [r.learn.ml](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.ml.html) which gives us access to models from the [scikit learn](https://scikit-learn.org/stable/) python library.
+For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS addon [r.learn.ml](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.ml.html) which gives us access to models from the [scikit learn](https://scikit-learn.org/stable/) python library.
 
 ```bash
 g.extension extension=r.learn.ml2
@@ -355,7 +341,7 @@ g.extension extension=r.learn.ml2
 
 One benifit of using the RandomForest classification model is that it utilizes a sampling strategy know as *bootstraping*. It does this by using out-of-bag samples (OOB) for each decision tree in the model. The OOB samples are used to calculate error, which works as a cross-validation mechanism and helps maintain diversity between decision trees.  
 
-However, many models require you to sample your data independently. To do this you can perform and random sample using [r.random](https://grass.osgeo.org/grass-stable/manuals/r.random.html) or a stratified random sample using [r.sample.category](https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html).
+However, many models require you to sample your data independently. To do this you can perform and random sample using [r.random](https://grass.osgeo.org/grass-devel/manuals/r.random.html) or a stratified random sample using [r.sample.category](https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html).
 
 Let's import NLCD 2019 land cover data to perform the sampling.
 
@@ -367,18 +353,9 @@ When importing COGs make sure to set the `extent=region` to make sure you are on
 r.import input=https://storage.googleapis.com/stac-data/Spatial_Data/LandUse/NLCD_Land_Cover_L48/nlcd_2019_cog/nlcd_2019_cog.tif output=nlcd_2019 extent=region resolution=region resample=nearest
 ```
 
-Start by sampling 1000 points from `nlcd_2019`.
+Now we will perform a stratified random sample using [r.sample.category](https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html).
 
-```bash
-r.random -s input=nlcd_2019 npoints=1000 raster=nlcd_2019_random_pixels vector=nlcd_2019_random_pixels
-
-# Display the sample data
-d.vect nlcd_2019_random_pixels
-```
-
-Now do a stratified random sample using [r.sample.category](https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html).
-
-First download the addon
+However, we must first install the addon:
 
 ```bash
 g.extension r.sample.category
@@ -387,15 +364,20 @@ g.extension r.sample.category
 Now run the command to take 1000 samples from each land cover class.
 
 ```bash
+r.category map=nlcd_2019
 r.sample.category input=nlcd_2019 output=nlcd_2019_strat_samples npoints=1000
-
 # Display the sample data
+d.rast nlcd_2019
 d.vect nlcd_2019_strat_samples
 ```
 
+:::{.callout-important}
+**Task:** How many NLCD classes were sampled? Would these training points work well for classifying our dataset?
+:::
+
 #### Train Model
 
-To train the model you will use [r.learn.train](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html). The random forest model requires us to provide a [training_map](resources/training.gpkg) and our imagery group. To save time use our `rgb_group`, but in practice you should using the `analysis_bands` group that contains the additional features you created.
+To train the model you will use [r.learn.train](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.train.html). The random forest model requires us to provide a [training_map](resources/training.gpkg) and our imagery group. To save time use our `rgb_group`, but in practice you should using the `analysis_bands` group that contains the additional features you created.
 
 Training data can be downloaded here: [Download Training Data](resources/training.gpkg) or you can create your own using the `g.gui.iclass` tool found at `Imagery -> Classify image -> Interactive input for supervised classification`.
 
@@ -405,14 +387,14 @@ To use the downloaded training data you need to fisrt import `training.gpkg` int
 v.import input=training.gpkg layer=training output=training
 ```
 
-The training module [r.learn.train](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.train.html) expects the `training_map` parameter to be a raster, so you need to convert the training data to raster where the raster values matches each categories class.
+The training module [r.learn.train](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.train.html) expects the `training_map` parameter to be a raster, so you need to convert the training data to raster where the raster values matches each categories class.
 
 ```bash
 v.to.rast input=training output=training_rf use=attr attribute_column=cat_ label_column=class
 ```
 
 :::{.callout-warning}
-Model training can take a long time to run. If you are having issues running on your local machine try resampling the data to 1m resolution.
+Model training can take a long time to run. If you are having issues running on your local machine try shrinking the compuational region.
 :::
 
 ```bash
@@ -430,7 +412,7 @@ The features with higher the importance scores indicate they are more influentia
 
 #### Run Model
 
-To use the model run [r.learn.predict](https://grass.osgeo.org/grass-stable/manuals/addons/r.learn.predict.html) by loading the model ([`rf_model.gz`](https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/rf_model.gz)) you create during training.
+To use the model run [r.learn.predict](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.predict.html) by loading the model ([`rf_model.gz`](https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/rf_model.gz)) you create during training.
 
 ```bash
 r.learn.predict group=rgb_group load_model=rf_model.gz output=rf_basic_classification
@@ -536,5 +518,3 @@ It characterizes the degree of matching between reference data set and classific
 |                 farm equipment| 32              | 9               | 88              | 5               | 46              | 19              | 0               | 4311            | 1               | 95.57           | 4.43            |
 |                 bale          | 20              | 0               | 2               | 0               | 5               | 2               | 0               | 1               | 719             | 95.99           | 4.01            |
 |                 Producer Accuracy | 98.38       | 77.4            | 99.33           | 71.64           | 78.72           | 90.45           | 3.97            | 56.8            | 35.09                   |
-
-

@@ -32,7 +32,7 @@ title: "Topics"
 
 ## Topic 6: Machine Learning/AI
 
-[A. Topic 6: Image Classification and Change Detection](topic_6_change_detection/part_6a.qmd)
-
+[A. Topic 6: Image Classification](topic_6_change_detection/part_6a.qmd)
+[B. Topic 6: Change Detection](topic_6_change_detection/part_6b.qmd)
 
 <!-- ## Topic 7: 3D Modeling and Geovisualization -->
