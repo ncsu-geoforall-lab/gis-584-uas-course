@@ -1,0 +1,30 @@
+---
+topic: "Topic 6A: Machine Learning/AI"
+subtitle: "UAS Change Detection"
+title: "Assignment 6B"
+original-assignment-due-date: 11/06/2024
+assignment-due-date: 12/1/2025
+author:
+    - Corey White
+date: 11/10/25
+format: html
+toc-depth: 4
+activity: Assignment/Lab
+keep-ipynb: true
+notebook-view:
+  - notebook: Assignment6B.ipynb
+    title: "UAS Image Classification"
+    url: https://colab.research.google.com/drive/1sia6F1oPW1ISV8a-6YkEEhJhXriVrYdG?usp=sharing
+jupyter: python3
+execute: 
+  eval: false
+  enabled: true
+  freeze: auto
+  output: true
+---
+
+Apply DEM of Difference and NDVI differencing to provided datasets
+- Focus on:
+  - Co-registration and alignment accuracy
+  - Thresholding and LoD95 calculation
+  - Quantifying and visualizing uncertainty

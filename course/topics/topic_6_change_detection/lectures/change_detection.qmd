@@ -21,12 +21,13 @@ execute:
 ---
 
 ## Overview
-- Detecting and quantifying changes using multi-temporal UAS data
-- Focus areas:
-  - Pre-classification methods
-  - Feature and object-based methods
-  - Post-classification change detection
-  - Data co-registration and uncertainty
+Detecting and quantifying changes using multi-temporal UAS data
+
+#### Focus areas
+- Pre-classification methods
+- Feature and object-based methods
+- Post-classification change detection
+- Data co-registration and uncertainty
 
 ::: notes
 Explain that change detection forms the foundation of time-series analysis using UAS. Students should appreciate that the ability to detect subtle geomorphic or ecological change relies heavily on both spatial precision and radiometric consistency. Emphasize that this lecture provides the conceptual background for their upcoming assignment.
@@ -75,26 +76,49 @@ Use examples of recent UAS missions from your research to show how repeated surv
 
 ---
 
-## Data Pre-Processing
-### Radiometric Correction
-- Normalizes brightness and spectral values across flights
-- Key steps:
-  - Apply **sensor calibration** and **reflectance panels**
-  - Adjust for illumination differences (sun angle, clouds)
-  - Correct vignetting and shadow effects
-- Enables meaningful spectral differencing and vegetation indices
+## Data Pre-Processing { .text-center }
 
 ---
 
-## Data Pre-Processing
+### Radiometric Correction
+
+Normalizes brightness and spectral values across flights
+
+#### Key steps:
+```{mermaid}
+flowchart LR
+  calibrate["`Apply **sensor calibration**
+  and **reflectance panels**`"]
+  calibrate --> adjust["`Adjust for illumination
+  differences (sun angle, clouds)`"]
+  adjust --> correct["`Correct vignetting
+  and shadow effects`"]
+```
+
+Enables meaningful spectral differencing and vegetation indices
+
+> Addidional Resources (@sampath_guidelines_2023)
+
+--- 
+
 ### Geometric Correction & Co-registration
-- Ensures all datasets share the same coordinate reference and alignment
-- Methods:
-  - **GCP-based correction** (preferred for absolute accuracy)
-  - **Feature-based registration** (SIFT/SURF for automated tie points)
-  - **ICP alignment** for DEMs and point clouds
-- Evaluate accuracy using:
-  - RMSE, NCC, reprojection error
+
+Ensures all datasets share the same coordinate reference and alignment
+
+#### Methods
+  - **GCP-based correction** (preferred for absolute accuracy) (@mitasova_raster-based_2009)
+  - **Feature-based registration** (SIFT/SURF for automated tie points) (@sedaghat_high-resolution_2019)
+  - **ICP alignment** for DEMs and point clouds (@segal_generalized-icp_2009)
+  - **Nuth-Kääb Method** for DEMs (@nuth_co-registration_2011)
+
+---
+
+### Geometric Correction & Co-registration
+
+#### Evaluate accuracy using
+  - RMSE (root mean square error)
+  - NMAD (normalized median absolute deviation)
+  - reprojection error
 
 ::: notes
 Stress that co-registration errors directly translate to false change detection. A 5–10 cm horizontal misalignment can appear as a false change in vegetation or soil boundaries. Discuss the difference between absolute and relative accuracy.
@@ -106,10 +130,12 @@ Stress that co-registration errors directly translate to false change detection.
 
 - Orthomosaic alignment via tie-points and transformation models
 - DEM alignment: remove vertical bias and tilt
-- Common issues:
+
+#### Common issues:
   - Local warping, temporal parallax, surface deformation
   - GCP mismatch or insufficient tie points
-- Best practices:
+
+#### Best practices:
   - Use **stable surfaces** (buildings, pavement) for control points
   - Validate with visual overlays and difference histograms
   - Compute NCC or correlation metrics for quality assurance
@@ -139,7 +165,14 @@ Explain how differencing is best for continuous-valued imagery (reflectance, NDV
 
 ---
 
-## Pre-Classification Change Detection
+## Pre-Classification Change Detection { .text-center }
+
+- Spectral Index Differencing
+- DEM of Difference (DoD)
+- Multi-Temporal Image Fusion
+
+---
+
 ### Spectral Index Differencing
 - NDVI, VARI, NDRE, NDMI commonly used
 - Highlights vegetation or moisture change
@@ -154,7 +187,6 @@ Remind students that spectral indices require consistent illumination and calibr
 
 ---
 
-## Pre-Classification Change Detection
 ### DEM of Difference (DoD)
 - Calculates elevation change:
 $$DoD = DEM_{t2} - DEM_{t1}$$
@@ -170,8 +202,8 @@ Use geomorphic examples like riverbank erosion or stockpile volume change. Highl
 
 ---
 
-## Pre-Classification Change Detection
 ### Multi-Temporal Image Fusion
+
 - **Principal Component Analysis (PCA)** detects correlated multi-band change
 - **Change Vector Analysis (CVA)** measures magnitude and direction of spectral change
 - Sensitive to subtle multi-band variations
@@ -183,23 +215,62 @@ Provide intuition using 2D change vectors: the length indicates magnitude, direc
 
 ---
 
-## Feature-Based & Object-Based Change Detection (OBIA)
+## Feature-Based & Object-Based Change Detection (OBIA) { .text-centered }
 
-### Segmentation & Object Generation
-- Divide imagery into homogeneous regions
-- Techniques: region-growing, edge-detection, watershed, multi-resolution segmentation
-- Scale parameter controls object granularity
+::: {.columns}
+::: {.column width=50%}
+### Feature-Based
+- Segmentation & Object Generation
+- Feature Extraction
+:::
+::: {.column width=50%}
+### Object-Based Change Detection (OBIA)
+- Object Comparison
+:::
+:::
 
 ---
 
-## Feature-Based & Object-Based Change Detection (OBIA)
-### Feature Extraction
-- Derive attributes per object: mean NDVI, texture, shape, context
+### Feature-Based {.smaller}
+
+::: {.columns}
+::: {.column width=50%}
+#### Segmentation & Object Generation
+
+Divide imagery into homogeneous regions
+
+##### Techniques: 
+  - region-growing
+  - edge-detection
+  - watershed
+  - multi-resolution segmentation
+- Scale parameter controls object granularity
+:::
+::: {.column width=50%}
+
+#### Feature Extraction
+
+Derive attributes per object:
+
+- mean NDVI,
+- texture
+- shape
+- context
+
+:::
+:::
+
+---
+
 
 ## Object-Based Change Detection (OBIA)
 ### Object Comparison
-- Compare across dates by overlap, centroid shift, or attribute change
-- Enables context-aware change analysis
+- Compare across dates by
+  - overlap
+  - centroid shift
+  - attribute change
+
+Enables context-aware change analysis
 
 ::: notes
 Contrast pixel-based and OBIA results visually. Mention that OBIA reduces salt-and-pepper noise and better represents real-world objects.
@@ -208,16 +279,22 @@ Contrast pixel-based and OBIA results visually. Mention that OBIA reduces salt-a
 ---
 
 ## Feature-Based & Object-Based Change Detection (OBIA)
-### Advantages & Limitations
-**Advantages:**
+
+::: {.columns}
+::: {.column width=50%}
+#### Advantages
 - Reduces pixel noise
 - Captures spatial context
 - Integrates spectral + geometric information
-
-**Limitations:**
+:::
+::: {.column width=50%}
+#### Limitations
 - Segmentation parameter sensitivity
 - High computational cost
 - Object definition inconsistencies
+:::
+:::
+
 
 ::: notes
 Encourage discussion on parameter tuning. Mention eCognition or open-source OBIA tools like Orfeo Toolbox and SAMGeo.
@@ -225,7 +302,9 @@ Encourage discussion on parameter tuning. Mention eCognition or open-source OBIA
 
 ---
 
-## Post-Classification Change Detection
+## Post-Classification Change Detection {.text-center}
+
+---
 
 ### Concept
 - Classify each epoch separately, then compare thematic results
@@ -369,13 +448,3 @@ Facilitate a 10–15 minute class discussion encouraging students to connect met
 
 ---
 
-## Next Session
-- **Assignment:** Apply DEM of Difference and NDVI differencing to provided datasets
-- Focus on:
-  - Co-registration and alignment accuracy
-  - Thresholding and LoD95 calculation
-  - Quantifying and visualizing uncertainty
-
-::: notes
-Preview assignment expectations. Mention that next week’s lab will implement these workflows in GRASS GIS or Colab notebooks.
-:::
