@@ -1,9 +1,8 @@
 ---
 topic: "Topic 6: Machine Learning/AI"
 title: "Change Detection"
-subtitle: "Topic 6: Machine Learning/AI"
-date: 10/10/2025
-# assignment-due-date: 11/13/2025
+subtitle: "Topic 6B: Machine Learning/AI"
+date: 11/12/2025
 author: Corey White
 activity: Lecture
 ---
@@ -18,13 +17,13 @@ activity: Lecture
 
 ## Lecture
 
-- [Lecture Slides](lectures/image_classification.qmd)
+- [Lecture Slides](lectures/change_detection.qmd)
 
 ## Supplemental materials
 
 - [Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion](https://www.mdpi.com/2072-4292/14/7/1718)
 - Jensen, J.R. Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed.; Prentice Hall Press: Upper Saddle River, NJ, USA, 2015.
 
-## Assignment & Homework
+<!-- ## Assignment & Homework
 
-[Assignment 6B: Change Detection](assignments/assignment_6b.qmd)
+[Assignment 6B: Change Detection](assignments/assignment_6b.qmd) -->

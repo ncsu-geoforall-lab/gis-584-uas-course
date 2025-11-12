@@ -61,17 +61,17 @@
   activity: "Exam"
   assignment-due-date: 11/7/25
 
-- date: 11/12/25
-  topic: "Topic 6: Machine Learning & AI"
-  title: "UAS-based Change Detection"
-  activity: Lecture
-  assignment-due-date: 12/1/25
+# - date: 11/12/25
+#   topic: "Topic 6: Machine Learning & AI"
+#   title: "UAS-based Change Detection"
+#   activity: Lecture
+#   assignment-due-date: 12/1/25
 
-- date: 11/17/25
-  topic: "Topic 6: Machine Learning & AI"
-  title: "UAS-based Change Detection"
-  activity: Assignment/Lab
-  assignment-due-date: 12/1/25
+# - date: 11/17/25
+#   topic: "Topic 6: Machine Learning & AI"
+#   title: "UAS-based Change Detection"
+#   activity: Assignment/Lab
+#   assignment-due-date: 12/1/25
 
 - date: 11/19/25
   topic: "Topic 7: Open Drone Map (ODM)"
