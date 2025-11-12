@@ -18,7 +18,7 @@ activity: Lecture
 
 ## Lecture
 
-- [Lecture Slides](lectures/lecture_6b.qmd)
+- [Lecture Slides](lectures/image_classification.qmd)
 
 ## Supplemental materials
 

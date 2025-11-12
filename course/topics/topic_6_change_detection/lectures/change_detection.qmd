@@ -65,7 +65,7 @@ Explain that change detection forms the foundation of time-series analysis using
 - Capability to integrate RGB, multispectral, and LiDAR payloads
 :::
 ::: {.column width=50%}
-![Jockey's Ridge, NC -  2024 4m](../images/jr2024_uas_04m_east.jpg)
+![Jockey's Ridge, NC -  2024 4m](../images/remotesensing-14-01718-ag.png)
 :::
 
 :::
@@ -125,10 +125,11 @@ Enables meaningful spectral differencing and vegetation indices
 Ensures all datasets share the same coordinate reference and alignment
 
 #### Methods
-  - **GCP-based correction** (preferred for absolute accuracy) (@mitasova_raster-based_2009)
-  - **Feature-based registration** (SIFT/SURF for automated tie points) (@sedaghat_high-resolution_2019)
-  - **ICP alignment** for DEMs and point clouds (@segal_generalized-icp_2009)
-  - **Nuth-Kääb Method** for DEMs (@nuth_co-registration_2011)
+
+- **GCP-based correction** (preferred for absolute accuracy) (@mitasova_raster-based_2009)
+- **Feature-based registration** (SIFT/SURF for automated tie points) (@sedaghat_high-resolution_2019)
+- **ICP alignment** for DEMs and point clouds (@segal_generalized-icp_2009)
+- **Nuth-Kääb Method** for DEMs (@nuth_co-registration_2011)
 
 ---
 

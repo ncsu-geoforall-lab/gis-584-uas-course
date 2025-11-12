@@ -1,0 +1,264 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "dcc2f326",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "topic: \"Topic 6A: Machine Learning/AI\"\n",
+    "subtitle: \"UAS Change Detection\"\n",
+    "title: \"Assignment 6B\"\n",
+    "original-assignment-due-date: 11/06/2024\n",
+    "assignment-due-date: 12/1/2025\n",
+    "author:\n",
+    "    - Corey White\n",
+    "date: 11/10/25\n",
+    "format: html\n",
+    "toc-depth: 4\n",
+    "activity: Assignment/Lab\n",
+    "keep-ipynb: true\n",
+    "notebook-view:\n",
+    "  - notebook: Assignment6B.ipynb\n",
+    "    title: \"UAS Image Classification\"\n",
+    "    url: https://colab.research.google.com/drive/1sia6F1oPW1ISV8a-6YkEEhJhXriVrYdG?usp=sharing\n",
+    "jupyter: python3\n",
+    "execute: \n",
+    "  eval: false\n",
+    "  enabled: true\n",
+    "  freeze: auto\n",
+    "  output: true\n",
+    "draft: true\n",
+    "---\n",
+    "\n",
+    "## Objective\n",
+    "Apply DEM of Difference and NDVI differencing to provided datasets \n",
+    "\n",
+    "Focus on:\n",
+    "\n",
+    "- Co-registration and alignment accuracy\n",
+    "- Thresholding and LoD95 calculation\n",
+    "- Quantifying and visualizing uncertainty"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "3e0edf51",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import standard Python packages we need\n",
+    "import sys\n",
+    "import subprocess\n",
+    "from pathlib import Path\n",
+    "\n",
+    "# Ask GRASS where its Python packages are to be able to run it from the notebook\n",
+    "sys.path.append(\n",
+    "    subprocess.check_output([\"grass\", \"--config\", \"python_path\"], text=True).strip()\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "88e7fc20",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import the GRASS packages\n",
+    "import grass.script as gs\n",
+    "import grass.jupyter as gj"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "5306d42a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Start GRASS in default project mapset\n",
+    "home_directory = Path.home()\n",
+    "grassdata = Path(home_directory, \"grassdata\", \"northcarolina_coast_spm\")\n",
+    "session = gj.init(grassdata)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "2279a6ec",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "layers = gs.parse_command(\"g.list\", type=\"all\", format=\"json\")\n",
+    "\n",
+    "for i in layers:\n",
+    "    print(i)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "1fbfaebc",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gs.run_command(\"g.region\", region=\"jrdunes_1m\", flags=\"p\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "1de8e666",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "m = gj.Map(filename=\"./../images/airphoto_1932.png\")\n",
+    "m.d_rast(map=\"airphoto_1932\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_1932_hist.png\")\n",
+    "m.d_histogram(map=\"airphoto_1932\")\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_1945.png\")\n",
+    "m.d_rast(map=\"airphoto_1945\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_1955.png\")\n",
+    "m.d_rast(map=\"airphoto_1955\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_1962.png\")\n",
+    "m.d_rast(map=\"airphoto_1962\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_1974.png\")\n",
+    "m.d_rast(map=\"airphoto_1974\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_1988.png\")\n",
+    "m.d_rast(map=\"airphoto_1988\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_2007.png\")\n",
+    "m.d_rast(map=\"airphoto_2007\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_2009.png\")\n",
+    "m.d_rast(map=\"airphoto_2009\")\n",
+    "m.d_barscale()\n",
+    "m.show()\n",
+    "\n",
+    "m = gj.Map(filename=\"./../images/airphoto_2009_hist.png\")\n",
+    "m.d_histogram(map=\"airphoto_2009\")\n",
+    "m.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "714b2dd9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gs.run_command(\"r.info\", map=\"airphoto_2009\")\n",
+    "\n",
+    "gs.run_command(\"r.rgb\", input=\"airphoto_2009\", red=\"airphoto_2009.r\", green=\"airphoto_2009.g\", blue=\"airphoto_2009.b\")\n",
+    "m = gj.Map(filename=\"./../images/airphoto_2009_r_hist.png\")\n",
+    "m.d_histogram(map=\"airphoto_2009.r\")\n",
+    "m.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "ea64e51b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# airphotos = [1932, 1945, 1955, 1962, 1974, 1988, 2007, 2009]\n",
+    "\n",
+    "gs.run_command(\"t.create\",\n",
+    "    type=\"strds\",\n",
+    "    temporaltype=\"absolute\",\n",
+    "    output=\"jr_airphotos\",\n",
+    "    title=\"Jockey's Ridge Air Photos\",\n",
+    "    description=\"Jockey's Ridge Air Photos from 1932 - 2009\"\n",
+    ")\n",
+    "airphotos_list = gs.parse_command(\"g.list\", type=\"raster\", pattern=\"airphoto_*\", format=\"json\")\n",
+    "airphotos = [i.get('fullname') for i in airphotos_list]\n",
+    "gs.run_command(\n",
+    "    \"t.register\",\n",
+    "    type=\"raster\",\n",
+    "    input=\"jr_airphotos\",\n",
+    "    file=\"./resources/airphotos.txt\"\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "7f1559a3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# gs.run_command(\"t.connect\", flags=\"p\")\n",
+    "# gs.run_command(\"t.info\", input=\"jr_airphotos\")\n",
+    "import sqlite3\n",
+    "con = sqlite3.connect(Path(home_directory, \"grassdata\", \"northcarolina_coast_spm\", \"PERMANENT\", \"tgis\", \"sqlite.db\"))\n",
+    "cur = con.cursor()\n",
+    "# res = cur.execute(\"SELECT * FROM sqlite_master WHERE table = 'tgis_metadata'\")\n",
+    "for row in cur.execute(\"SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;\"):\n",
+    "    print(row)\n",
+    "\n",
+    "# row = res.fetchone()\n",
+    "# print(row)\n",
+    "con.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "3ea5f48f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "m = gj.TimeSeriesMap()\n",
+    "m.add_raster_series(\"jr_airphotos\", fill_gaps=False)\n",
+    "m.d_barscale()\n",
+    "m.show()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3",
+   "path": "/home/coreywhite/.local/share/jupyter/kernels/python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

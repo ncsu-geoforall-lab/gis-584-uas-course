@@ -21,6 +21,7 @@ execute:
   enabled: true
   freeze: auto
   output: true
+draft: true
 ---
 
 ## Objective
