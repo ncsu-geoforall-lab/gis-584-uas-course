@@ -1,13 +1,11 @@
 ---
-topic: "Topic 5: Advanced Analytics"
+topic: "Topic 5A: Advanced Analytics"
 title: "UAS and lidar data: comparison, fusion and analysis"
-subtitle: "Topic 5: Advanced Analytics"
+subtitle: "Topic 5A: Advanced Analytics"
 date: 10/6/2025
 # assignment-due-date: 11/06/2025
 activity: Lecture
 ---
-
-# UAS and lidar data: comparison, fusion and analysis
 
 ## Outline
 - Analysis of lidar and UAS DSMs differences

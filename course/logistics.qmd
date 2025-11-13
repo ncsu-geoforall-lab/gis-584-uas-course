@@ -78,14 +78,14 @@ These are 12 GCP taken at midpines.
 
 ### Lidar data
 
-- [Classified lidar point cloud in LAS format for Mid_Pines]({{< data.mid_pines_lidar_url >}})
-- [Secref and Mid Pines interpolated DEM/DSM (use r.unpack)]({{< data.secref_mid_pines_spm_elev >}})
+- [Classified lidar point cloud in LAS format for Mid_Pines]({{< var data.mid_pines_lidar_url >}})
+- [Secref and Mid Pines interpolated DEM/DSM (use r.unpack)]({{< var data.secref_mid_pines_spm_elev >}})
 
 ### Orthoimagery
 
 Orthophotos as GRASS packed rasters, use r.unpack from within the LakeWheeler_NCspm location to import them, run it with -o to override projection (it is just a different EPSG for HARN versus NAD83 datum, the difference is negligible)
 
-- [Nov 2015 (pack)]({{< data.lake_wheeler_flight_Nov_2015_orthos >}})
-- [Jun 2017 (pack)]({{< data.lake_wheeler_flight_Jun_2017_orthos >}})
-- [Mar 2017 (pack)]({{< data.lake_wheeler_flight_Mar_2017_orthos >}})
-- [Jul 2024 (COG)]({{< data.lake_wheeler_flight_July_17_2024_orthophoto >}})
+- [Nov 2015 (pack)]({{< var data.lake_wheeler_flight_Nov_2015_orthos >}})
+- [Jun 2017 (pack)]({{< var data.lake_wheeler_flight_Jun_2017_orthos >}})
+- [Mar 2017 (pack)]({{< var data.lake_wheeler_flight_Mar_2017_orthos >}})
+- [Jul 2024 (COG)]({{< var data.lake_wheeler_flight_July_17_2024_orthophoto >}})

@@ -39,7 +39,7 @@
         "- Thresholding and LoD95 calculation\n",
         "- Quantifying and visualizing uncertainty"
       ],
-      "id": "276e5aff"
+      "id": "c6352742"
     },
     {
       "cell_type": "code",
@@ -55,7 +55,7 @@
         "    subprocess.check_output([\"grass\", \"--config\", \"python_path\"], text=True).strip()\n",
         ")"
       ],
-      "id": "a0224399",
+      "id": "6b722497",
       "execution_count": null,
       "outputs": []
     },
@@ -67,7 +67,7 @@
         "import grass.script as gs\n",
         "import grass.jupyter as gj"
       ],
-      "id": "e118c9dc",
+      "id": "6557cf49",
       "execution_count": null,
       "outputs": []
     },
@@ -80,7 +80,7 @@
         "grassdata = Path(home_directory, \"grassdata\", \"northcarolina_coast_spm\")\n",
         "session = gj.init(grassdata)"
       ],
-      "id": "cb1aded0",
+      "id": "2af1e788",
       "execution_count": null,
       "outputs": []
     },
@@ -93,7 +93,7 @@
         "for i in layers:\n",
         "    print(i)"
       ],
-      "id": "13bd0272",
+      "id": "82889845",
       "execution_count": null,
       "outputs": []
     },
@@ -103,7 +103,7 @@
       "source": [
         "gs.run_command(\"g.region\", region=\"jrdunes_1m\", flags=\"p\")"
       ],
-      "id": "3ccc4775",
+      "id": "44ab2501",
       "execution_count": null,
       "outputs": []
     },
@@ -159,7 +159,7 @@
         "m.d_histogram(map=\"airphoto_2009\")\n",
         "m.show()"
       ],
-      "id": "bb196c02",
+      "id": "ade919b9",
       "execution_count": null,
       "outputs": []
     },
@@ -174,7 +174,7 @@
         "m.d_histogram(map=\"airphoto_2009.r\")\n",
         "m.show()"
       ],
-      "id": "5eb2a026",
+      "id": "2ef2aecc",
       "execution_count": null,
       "outputs": []
     },
@@ -200,7 +200,7 @@
         "    file=\"./resources/airphotos.txt\"\n",
         ")"
       ],
-      "id": "20363b18",
+      "id": "28b29f26",
       "execution_count": null,
       "outputs": []
     },
@@ -221,7 +221,7 @@
         "# print(row)\n",
         "con.close()"
       ],
-      "id": "fbfd741c",
+      "id": "07dc8498",
       "execution_count": null,
       "outputs": []
     },
@@ -234,7 +234,7 @@
         "m.d_barscale()\n",
         "m.show()"
       ],
-      "id": "df56dc7a",
+      "id": "c40718fa",
       "execution_count": null,
       "outputs": []
     }

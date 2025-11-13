@@ -12,6 +12,7 @@ listing:
   contents: 
     - topics/**/part_*.qmd
     - topics/**/assignments/assignment_*.qmd
+    - topics/midterm/index.qmd
     - content/special_dates.yml
   exclude:
     hide-from-listing: true

@@ -49,17 +49,17 @@
   acitvity: "Assignment Due"
   assignment-due-date: 10/22/25
 
-- date: 11/3/25
-  topic: "Midterm"
-  title: "Midterm Exam"
-  activity: "Exam"
-  assignment-due-date: 11/7/25
+# - date: 11/3/25
+#   topic: "Midterm"
+#   title: "Midterm Exam"
+#   activity: "Exam"
+#   assignment-due-date: 11/7/25
 
-- date: 11/5/25
-  topic: "Midterm"
-  title: "Midterm Exam"
-  activity: "Exam"
-  assignment-due-date: 11/7/25
+# - date: 11/5/25
+#   topic: "Midterm"
+#   title: "Midterm Exam"
+#   activity: "Exam"
+#   assignment-due-date: 11/7/25
 
 # - date: 11/12/25
 #   topic: "Topic 6: Machine Learning & AI"

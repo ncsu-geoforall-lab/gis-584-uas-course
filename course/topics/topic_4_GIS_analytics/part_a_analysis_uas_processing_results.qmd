@@ -1,12 +1,10 @@
 ---
 topic: "Topic 4A: GIS Analytics"
 title: "Analysis of UAS data processing results"
-subtitle: "Topic 4: GIS Analytics"
+subtitle: "Topic 4A: GIS Analytics"
 date: 9/22/2025
 activity: Lecture
 ---
-
-# Analysis of UAS data processing results
 
 ## Outline
 - Compare survey data and errors from different flights
@@ -18,8 +16,8 @@ activity: Lecture
 
 ## Lecture
 - [Lecture Slides](lectures/lecture_4a.qmd)
-- Lecture Recording: [Fall 2024]({{< var recordings.topic4.lecture4a >}}) (NCSU Only)
-- In-Class Recording: [Fall 2024]({{< var recordings.topic4.assignment4a >}}) (NCSU Only)
+<!-- - Lecture Recording: [Fall 2024]({{< var recordings.topic4.lecture4a >}}) (NCSU Only)
+- In-Class Recording: [Fall 2024]({{< var recordings.topic4.assignment4a >}}) (NCSU Only) -->
 
 ## Supplemental materials
 - Bowl effect explained: [Mitigating systematic error in topographic models derived from UAV and ground-based image networks](https://onlinelibrary.wiley.com/doi/10.1002/esp.3609/epdf)

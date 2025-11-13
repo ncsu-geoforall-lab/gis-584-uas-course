@@ -1,0 +1,19 @@
+---
+topic: "Midterm"
+title: "Midterm Exam"
+subtitle: "Midterm Exam"
+activity: Exam
+date: 11/5/2025
+assignment-due-date: 11/7/2025
+---
+
+## Details
+
+This is a take home, open book exam handled in [Moodle]({{< var course_params.moodle_link >}}), no on-campus presence needed. The exam is the same for the on-campus and distance sections. You can use any on-line and printed resources, but the responses should be your own work. Questions will be available in Moodle. See the Schedule for the dates.
+
+<!-- ## Sample questions
+
+- Generate a DSM and Orthoimagery from a subset of UAS data.
+- Create a flight plan for a UAS flight at a given location and UAS.
+- Quantitatively compare your DSM take at different dates.
+- Provide a detailed analysis of a processing report generated from Agisoft Metashape or WebODM. -->

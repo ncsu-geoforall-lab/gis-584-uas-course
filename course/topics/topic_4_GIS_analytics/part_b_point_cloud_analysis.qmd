@@ -1,12 +1,11 @@
 ---
 topic: "Topic 4B: GIS Analytics"
 title: "Point cloud data analysis"
-subtitle: "Topic 4: GIS Analytics"
+subtitle: "Topic 4B: GIS Analytics"
 date: 9/29/2025
 activity: Lecture
 ---
 
-# Point cloud data analysis
 
 ## Outline
 - Characteristics of UAS SfM and lidar-based point cloud data
@@ -19,8 +18,8 @@ activity: Lecture
 
 ## Lecture
 - [Lecture slides](./lectures/lecture_4b.qmd)
-- Lecture Recording: [Fall 2024]({{< var recordings.topic4.lecture4b >}}) (NCSU Only)
-- In-Class Recording: [Fall 2024]({{< var recordings.topic4.assignment4b >}}) (NCSU Only)
+<!-- - Lecture Recording: [Fall 2024]({{< var recordings.topic4.lecture4b >}}) (NCSU Only)
+- In-Class Recording: [Fall 2024]({{< var recordings.topic4.assignment4b >}}) (NCSU Only) -->
 
 ## Supplemental materials
 - [Processing point clouds in GRASS GIS](https://grasswiki.osgeo.org/wiki/Processing_lidar_and_UAV_point_clouds_in_GRASS_GIS_(workshop_at_FOSS4G_Boston_2017)), workshop presented at FOSS4G conference in Boston in 2017 (start with the section "Binning the point cloud").

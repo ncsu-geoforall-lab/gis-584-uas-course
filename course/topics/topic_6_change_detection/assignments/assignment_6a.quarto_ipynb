@@ -419,7 +419,7 @@
         "\n",
         "The features with higher the importance scores indicate they are more influential in making predictions. While features with  low importance, could potentially be removed to simplify the model."
       ],
-      "id": "293359f8"
+      "id": "85988b52"
     },
     {
       "cell_type": "code",
@@ -449,7 +449,7 @@
         "plt.tight_layout()\n",
         "plt.savefig(\"../images/feature_importance_rf.png\")"
       ],
-      "id": "cea4a3f4",
+      "id": "c66ed526",
       "execution_count": null,
       "outputs": []
     },
@@ -574,7 +574,7 @@
         "g.extension r.confusionmatrix\n",
         "``` -->"
       ],
-      "id": "3263f657"
+      "id": "2e5a124f"
     }
   ],
   "metadata": {

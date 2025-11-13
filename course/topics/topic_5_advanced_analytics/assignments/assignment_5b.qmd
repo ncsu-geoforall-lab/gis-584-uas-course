@@ -1,5 +1,5 @@
 ---
-topic: "Topic 5: Advanced Analytics"
+topic: "Topic 5B: Advanced Analytics"
 subtitle: "Analysis of multitemporal UAS data and its applications"
 title: "Assignment 5B"
 original-assignment-due-date: 11/05/2025

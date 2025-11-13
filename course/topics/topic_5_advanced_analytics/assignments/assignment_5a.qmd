@@ -1,5 +1,5 @@
 ---
-topic: "Topic 5: Advanced Analytics"
+topic: "Topic 5A: Advanced Analytics"
 subtitle: "Fusion of UAS and lidar data"
 title: "Assignment 5A"
 author:
