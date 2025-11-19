@@ -10,7 +10,7 @@ date: 11/10/25
 format: html
 toc-depth: 4
 activity: Assignment/Lab
-keep-ipynb: true
+keep-ipynb: false
 notebook-view:
   - notebook: Assignment6B.ipynb
     title: "UAS Image Classification"
@@ -21,10 +21,11 @@ execute:
   enabled: true
   freeze: auto
   output: true
-draft: true
+draft: false
 ---
 
 ## Objective
+
 Apply DEM of Difference and NDVI differencing to provided datasets 
 
 Focus on:
@@ -34,6 +35,7 @@ Focus on:
 - Quantifying and visualizing uncertainty
 
 ```{python}
+# | eval: true
 
 # Import standard Python packages we need
 import sys
@@ -48,12 +50,14 @@ sys.path.append(
 ```
 
 ```{python}
+# | eval: true
+
 # Import the GRASS packages
 import grass.script as gs
 import grass.jupyter as gj
 ```
 
-```{python}
+<!-- ```{python}
 # Start GRASS in default project mapset
 home_directory = Path.home()
 grassdata = Path(home_directory, "grassdata", "northcarolina_coast_spm")
@@ -65,9 +69,9 @@ layers = gs.parse_command("g.list", type="all", format="json")
 
 for i in layers:
     print(i)
-```
+``` -->
 
-```{python}
+<!-- ```{python}
 gs.run_command("g.region", region="jrdunes_1m", flags="p")
 
 ```
@@ -172,4 +176,437 @@ m = gj.TimeSeriesMap()
 m.add_raster_series("jr_airphotos", fill_gaps=False)
 m.d_barscale()
 m.show()
+``` 
+-->
+
+## Lake Wheeler - Ortho
+
+```{python}
+# | eval: true
+
+# Start GRASS in default project mapset
+home_directory = Path.home()
+grassdata = Path(home_directory, "grassdata", "Lake_Wheeler_NCspm", "assignment6b")
+session = gj.init(grassdata)
 ```
+
+## Data
+
+Import orthoimagery from Lake Wheeler from flights taken on 07/17/2024 and 09/17/2025.
+
+```{python}
+# Import Lake Wheeler orthophotos into GRASS directly from URLs using r.import
+import urllib.parse
+import re
+from pathlib import Path
+import grass.script as gs
+
+orthos = {
+    "ortho_2024_07_17": "https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif",
+    "ortho_2025_09_17": "https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho_2025_09_17.cog.tif",
+}
+
+
+# You can also write this to import the data in parallel
+def import_orthos(prefix, url):
+    print(f"\nProcessing {prefix}: {url}")
+
+    try:
+        gs.run_command("r.import", input=url, output=prefix, overwrite=True)
+    except Exception as e:
+        print(f"Import failed for {url}: {e}")
+
+    try:
+        print("Add semantic labels...")
+        bands = [f"{prefix}.{i + 1}" for i in range(3)]
+        gs.run_command("r.semantic.label", map=bands, semantic="r,g,b")
+    except Exception as e:
+        print(f"Semantic labeling failed {e}")
+
+
+for prefix, url in orthos.items():
+    import_orthos(prefix, url)
+
+```
+
+Check that the images were imported.
+
+```{python}
+# | label: table-raster-layers
+# | eval: true
+gs.run_command("g.list", type="raster", mapset="assignment6b")
+```
+
+Notice that the flights were imported each with four bands.
+
+| Name | Band | Semantic Label |
+|------|------|----------------|
+| ortho_2024_07_17 | 1 | red |
+| ortho_2024_07_17 | 2 | green |
+| ortho_2024_07_17 | 3 | blue |
+| ortho_2024_07_17 | 4 | alpha |
+| ortho_2025_09_17 | 1 | red |
+| ortho_2025_09_17 | 2 | green |
+| ortho_2025_09_17 | 3 | blue |
+| ortho_2025_09_17 | 4 | alpha |
+
+Visualize the composite RGB data.
+
+```{python}
+# | label: fig-rgb-orthos
+# | fig-cap:
+# |       - "2024"
+# |       - "2025"
+# | layout-ncol: 2
+# | eval: true
+m = gj.Map(width=600)
+m.d_rgb(red="ortho_2024_07_17.1", green="ortho_2024_07_17.2", blue="ortho_2024_07_17.3")
+m.d_barscale()
+m.show()
+
+m = gj.Map(width=600)
+m.d_rgb(red="ortho_2025_09_17.1", green="ortho_2025_09_17.2", blue="ortho_2025_09_17.3")
+m.d_barscale()
+m.show()
+```
+
+Examine the metadata of `ortho_2024_07_17.1` using `r.info`.
+
+```{python}
+# | eval: true
+
+gs.run_command("r.info", map="ortho_2024_07_17.1")
+```
+
+```{python}
+# | eval: true
+
+gs.run_command("r.info", map="ortho_2025_09_17.1")
+```
+
+::: {.callout-important}
+What is the spatial resolution of the orthoimagery.
+:::
+
+View the data as an interactive webmap.
+
+```{python}
+# | label: fig-elev-dod-web
+# | fig-cap:
+# |       - "DoD Web Map"
+# | layout-ncol: 1
+# | eval: false
+m = gj.InteractiveMap(use_region=False)
+m.add_raster("ortho_2024_07_17.1", opacity=0.6)
+m.show()
+```
+
+Set the computational region to $0.07 m$ with a spatial extent focused on a single field using the following command.
+
+```{python}
+# | eval: true
+
+gs.run_command(
+    "g.region", n=219488, s=219104, e=637233, w=636830, res="0.07", flags="pa"
+)
+```
+
+View the historams of the red bands.
+
+```{python}
+# | eval: true
+
+from grass.script import array as garray
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+red_25 = garray.array(mapname="ortho_2025_09_17.1")
+red_24 = garray.array(mapname="ortho_2024_07_17.1")
+# Plot raster histogram
+sns.histplot(data=red_25.ravel(), kde=True)
+sns.histplot(data=red_24.ravel(), kde=True)
+plt.show()
+```
+
+
+```{python}
+# | eval: true
+
+m = gj.Map(width=600, use_region=True)
+m.d_rgb(red="ortho_2024_07_17.1", green="ortho_2024_07_17.2", blue="ortho_2024_07_17.3")
+m.d_barscale()
+m.show()
+
+m = gj.Map(width=600, use_region=True)
+m.d_rgb(red="ortho_2025_09_17.1", green="ortho_2025_09_17.2", blue="ortho_2025_09_17.3")
+m.d_barscale()
+m.show()
+```
+
+```{python}
+gs.run_command(
+    "r.composite",
+    red="ortho_2025_09_17.1",
+    green="ortho_2025_09_17.2",
+    blue="ortho_2025_09_17.3",
+    output="ortho_2025_09_17.rgb",
+)
+```
+
+```{python}
+# | eval: true
+gs.run_command("r.univar", map="ortho_2024_07_17.1", flags="e")
+```
+
+```{python}
+# | eval: true
+gs.run_command("r.univar", map="ortho_2025_09_17.1", flags="e")
+```
+
+### VARI
+
+
+```{python}
+# | eval: true
+gs.run_command(
+    "r.mapcalc",
+    expression="vari_2024 = ((float(ortho_2024_07_17.2) / 255.0) - (float(ortho_2024_07_17.1) / 255.0)) / ((float(ortho_2024_07_17.2) / 255.0) + (float(ortho_2024_07_17.1) / 255.0) - (float(ortho_2024_07_17.3) / 255.0) + 0.175)",
+)
+
+gs.run_command("r.univar", map="vari_2024", flags="e")
+```
+
+```{python}
+# | eval: true
+gs.run_command("r.colors", map="vari_2024", color="ndvi", flags="")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="vari_2024")
+m.d_legend(raster="vari_2024")
+m.d_barscale()
+m.show()
+
+```
+
+```{python}
+# | eval: true
+gs.run_command(
+    "r.mapcalc",
+    expression="vari_2025 = ((float(ortho_2025_09_17.2) / 255.0) - (float(ortho_2025_09_17.1) / 255.0)) / ((float(ortho_2025_09_17.2) / 255.0) + (float(ortho_2025_09_17.1) / 255.0) - (float(ortho_2025_09_17.3) / 255.0) + 0.175)",
+)
+
+gs.run_command("r.univar", map="vari_2025", flags="e")
+```
+
+```{python}
+# | eval: true
+gs.run_command("r.colors", map="vari_2025", color="ndvi", flags="")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="vari_2025")
+m.d_legend(raster="vari_2025")
+m.d_barscale()
+m.show()
+```
+
+```{python}
+# | eval: true
+gs.run_command(
+    "r.mapcalc",
+    expression="vari_diff = vari_2025 - vari_2024",
+)
+
+gs.run_command("r.univar", map="vari_diff", flags="e")
+```
+
+```{python}
+# | eval: true
+gs.run_command("r.colors", map="vari_diff", color="difference", flags="")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="vari_diff")
+m.d_legend(raster="vari_diff")
+m.d_barscale()
+m.show()
+```
+
+## Redness Index
+
+Calculate redness index
+
+$$
+RI = \frac{Red^2}{Blue*Green^2}
+$$
+
+```{python}
+# | eval: true
+def ri(r, g, b, output):
+    gs.run_command(
+        "r.mapcalc",
+        expression=f"{output} = if(1.0 *(pow ( {r}, 2 ) )/( {b} * pow( {g} ,2)) >= 0.02, null(), 1.0 * (pow ( {r}, 2 ) )/( {b} * pow( {g} ,2)))",
+    )
+    return output
+
+```
+
+```{python}
+# | eval: true
+ri(
+    "ortho_2025_09_17.1",
+    "ortho_2025_09_17.2",
+    "ortho_2025_09_17.3",
+    "ortho_2025_09_17.ri",
+)
+gs.run_command("r.colors", map="ortho_2025_09_17.ri", color="gyr", flags="e")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="ortho_2025_09_17.ri")
+m.d_legend(raster="ortho_2025_09_17.ri", flags="d")
+m.d_barscale()
+m.show()
+```
+
+```{python}
+# | eval: true
+ri(
+    "ortho_2024_07_17.1",
+    "ortho_2024_07_17.2",
+    "ortho_2024_07_17.3",
+    "ortho_2024_07_17.ri",
+)
+gs.run_command("r.colors", map="ortho_2024_07_17.ri", color="magma", flags="e")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="ortho_2024_07_17.ri")
+m.d_legend(raster="ortho_2024_07_17.ri", flags="d")
+m.d_barscale()
+m.show()
+```
+
+## Visible Vegetation Index (VVI)
+
+$$
+VVI = (1 - \frac{Red - 30}{Red + 30})(1 - \frac{Green - 50}{Green + 50})(1 - \frac{Blue - 1}{Blue + 1})
+$$
+
+```{python}
+# | eval: true
+def vvi(r, g, b, output):
+    """
+    Visible Vegetation Index (VVI)
+    """
+    expression = f"{output} = (1.0 - ((float({r}) / 255.0 - 30.0) / (float({r}) / 255.0 + 30.0 + 0.000001))) * (1.0 - ((float({g}) / 255.0 - 50.0) / (float({g}) / 255.0 + 50.0 + 0.000001))) * (1.0 - ((float({b}) / 255.0 - 1.0) / (float({b}) / 255.0 + 1.0 + 0.000001)))"
+    gs.run_command("r.mapcalc", expression=expression)
+    return output
+```
+
+```{python}
+# | eval: true
+
+vvi(
+    r="ortho_2024_07_17.1",
+    g="ortho_2024_07_17.2",
+    b="ortho_2024_07_17.3",
+    output="ortho_2024_07_17.vvi",
+)
+gs.run_command("r.colors", map="ortho_2024_07_17.vvi", color="magma", flags="e")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="ortho_2024_07_17.vvi")
+m.d_legend(raster="ortho_2024_07_17.vvi", flags="db")
+m.d_barscale()
+m.show()
+```
+
+## Brightness Index (BI)
+
+$$
+BI = \frac{\sqrt{Red^2 + Green^2 + Blue^2}}{3}
+$$
+
+```{python}
+# | eval: true
+
+def bi(r, g, b, output):
+    """
+    Brightness Index (BI)
+    """
+    expression = f"{output} = sqrt(pow(float({r}),2)  + pow(float({g}),2) + pow(float({b}),2)) / 3.0"
+    gs.run_command("r.mapcalc", expression=expression)
+    return output
+```
+
+```{python}
+# | eval: true
+
+bi(
+    r="ortho_2024_07_17.1",
+    g="ortho_2024_07_17.2",
+    b="ortho_2024_07_17.3",
+    output="ortho_2024_07_17.bi",
+)
+gs.run_command("r.colors", map="ortho_2024_07_17.bi", color="wave", flags="")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="ortho_2024_07_17.bi")
+m.d_legend(raster="ortho_2024_07_17.bi", flags="d")
+m.d_barscale()
+m.show()
+```
+
+## Spectral Slope Saturation Index (SI)
+
+$$
+SI = \frac{(Red - Blue)}{(Red + Blue)}
+$$
+
+```{python}
+# | eval: true
+
+def si(r, b, output):
+    """
+    Compute SI = (R - B) / (R + B) with protection against division by zero.
+    r, b: raster names (band maps)
+    output: name of output raster
+    """
+    expr = (
+        f"{output} = if( (float({r}) + float({b})) == 0, null(), "
+        f"(float({r}) - float({b})) / (float({r}) + float({b}) + 0.00000001) )"
+    )
+    gs.run_command("r.mapcalc", expression=expr, overwrite=True)
+    return output
+```
+
+```{python}
+# | eval: true
+
+si(
+    r="ortho_2024_07_17.1",
+    b="ortho_2024_07_17.3",
+    output="ortho_2024_07_17.si",
+)
+gs.run_command("r.colors", map="ortho_2024_07_17.si", color="viridis", flags="e")
+m = gj.Map(width=600, use_region=True)
+m.d_rast(map="ortho_2024_07_17.si")
+m.d_legend(raster="ortho_2024_07_17.si", flags="db")
+m.d_barscale()
+m.show()
+```
+
+<!-- ```{python}
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+checkpoint = "HuggingFaceTB/SmolLM2-360M-Instruct"
+
+device = "cuda"  # for GPU usage or "cpu" for CPU usage
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+# for multiple GPUs install accelerate and do `model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map="auto")`
+model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
+
+messages = [
+    {
+        "role": "user",
+        "content": "What can you do?",
+    }
+]
+input_text = tokenizer.apply_chat_template(messages, tokenize=False)
+print(input_text)
+inputs = tokenizer.encode(input_text, return_tensors="pt").to(device)
+outputs = model.generate(
+    inputs, max_new_tokens=1000, temperature=0.2, top_p=0.9, do_sample=True
+)
+print(tokenizer.decode(outputs[0]))
+``` -->

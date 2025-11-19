@@ -1,0 +1,34 @@
+---
+topic: "Topic 7: Intro to WebODM and ODM"
+title: "Intro to WebODM and ODM"
+subtitle: "Topic 7: Intro to WebODM and ODM"
+date: 11/19/2025
+activity: Lecture
+---
+
+## Outline
+
+* principles of photogrammetry
+* UAS low range flight and consumer camera image acquisition
+* lateral and forward overlap, stereoscopic coverage
+* principles of Structure from Motion
+* 3D reconstruction from multiple overlapping imagery
+
+## Lecture
+
+* Lecture Slides: [Intro to OpenDroneMap](lecture.qmd)
+
+##  Supplemental materials
+
+- [Install Docker Desktop](https://docs.docker.com/desktop/)
+- [OpenDroneMap](https://opendronemap.org/)
+- [OpenDroneMap: The Missing Guide - 2nd Edition](https://odmbook.com/)
+- [WebODM Documentation](https://docs.webodm.org/)
+
+## Assignment
+
+* [Intro to WebODM](assignment.qmd): Learn how to install and run WebODM on your local machine.
+
+## Homework
+
+The assignment is optional, so you do not need to submit anything.

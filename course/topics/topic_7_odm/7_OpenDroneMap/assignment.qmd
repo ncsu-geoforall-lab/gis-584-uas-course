@@ -1,0 +1,121 @@
+---
+topic: "Topic 7: OpenDroneMap"
+subtitle: "WebODM"
+title: "OpenDroneMap"
+# assignment-due-date: 12/1/2025
+author:
+    - Corey White
+date: 11/24/25
+format: html
+# from: markdown+emoji
+toc-depth: 4
+activity: Assignment/Lab
+keep-ipynb: true
+---
+
+## Lab Objectives
+
+- Install and run WebODM
+- Process a UAS image set
+- Generate an orthomosaic, DSM, and point cloud
+- Import into GRASS
+
+## Install WebODM
+
+### Manual install
+
+
+
+```bash
+git clone https://github.com/OpenDroneMap/WebODM --config core.autocrlf=input
+cd WebODM
+./webodm.sh start
+```
+Access in browser at `http://localhost:8000`.
+
+### Purchase the WebODM Installer
+
+This is a good option if you do not feel comfortable with GitHub and Docker. It is a one-time purchase
+of **under $100.00** and all proceeds support the projcet {{< fa heart >}}.
+
+You can purchase the installer at [here](https://www.opendronemap.org/webodm/download/#installer).
+
+## Login to WebODM
+
+## Add Project
+
+Click the **Add Project** button on the top right corner of your screen.
+It will open a modal to add a **New Project**.
+
+Enter a **Project Name** and **Description** then click the "Create Project" button.
+
+![](images/webODM_new_project.png){.lightbox}
+
+The new project will be added to the top of the WebODM dashboard.
+
+![](images/webODM_project_list.png){.lightbox}
+
+
+## Load Images
+
+Use the subseted imagery from our flight on Sept 17, 2025.
+
+- Data: [Flight Images]({{< var data.lake_wheeler_flight_Sept_17_2025_flight_subset >}}) - photos.
+
+Once you have the data downloaded import click the **Select Images and GCP** button located to the right of the newly created project. Import the images.
+
+One that is done you should see your project open with **213** files selected and ready for you to create a processing task.
+
+![WebODM Project](images/webODM_project_task.png){.lightbox}
+
+## Process Task
+
+WebODM processes UAS data as processing *tasks*. Each task is assigned a **name**, **processing node**, **options**, and a setting to **resize images**.
+
+![](images/webODM_task_options.png){fig-align="center" .lightbox}
+
+A defualt processing node (`node-odm-1`) is created by default when starting WebODM, but other processing nodes can be added (e.g., MicMac, cloud-based). There are multiple default options provided by WebODM.
+
+### Default Options
+
+- Default
+- High Resolution
+- Fast Orthophoto
+- Field
+- DSM+DTM
+- Forest
+- Point of Interest
+- Buildings Ultra Quality
+- Buildings
+- 3D Model
+- Volume Analysis
+- Multispectral
+
+Or you may choose to use custom parameters by selecting the **Edit** button.
+
+![](images/webODM_edit_task_options.png){fig-align="center" .lightbox}
+
+Today we will use the **Field** preset for our analysis, but we will edit the
+options to include DSM and DTM generation.
+
+To do this select the **Field** option then click the edit button. Scroll down the **Edit Task Options**
+until you see the options for **dsm** and **dtm**. Enable both the **dsm** and **dtm** then click the **Save** button on the bottom of the **Edit Task Options** modal.
+
+Leave the **resize images** set to the defaults.
+
+Now click the **Review** button.
+
+The options should be set as:
+
+*Options* -  `dsm:true, dtm:true, fast-orthophoto:true, matcher-neighbors:4, sfm-algorithm:planar`
+
+![](images/webODM_task_review.png){fig-align="center" .lightbox}
+
+::: {.callout-warning}
+Processing time will vary depending on your computers hardware and Docker settings.
+:::
+
+Finally, press the **Start Processing** button.
+
+
+

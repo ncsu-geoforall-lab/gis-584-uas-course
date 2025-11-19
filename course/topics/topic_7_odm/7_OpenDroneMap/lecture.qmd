@@ -1,0 +1,274 @@
+---
+title: "Intro to OpenDroneMap"
+subtitle: "[Center for Geospatial Analytics](https://geospatial.ncsu.edu/) [at North Carolina State University](http://www.ncsu.edu/)"
+author: "Corey T. White"
+bibliography: ../references.bib
+format:
+  revealjs:
+    theme: [simple, ../../../../theme.scss]
+    slide-number: true
+    controls: true
+    progress: true
+    transition: slide
+    center: true
+    code-overflow: wrap
+    width: 1400
+    height: 800
+    chalkboard: true
+    footer: "[Return Home](index.qmd)"
+execute:
+  echo: false
+---
+
+## Overview
+
+- Why OpenDroneMap?
+- ODM architecture and pipeline
+- WebODM interface
+- Comparison with Agisoft Metashape
+- ODM + GRASS integration
+
+# **Why OpenDroneMap?**
+
+- Open-source photogrammetry ecosystem  
+- Replaces commercial tools (Agisoft, Pix4D) in many workflows  
+- Ideal for teaching, research, reproducibility  
+- Actively maintained
+- Community-driven (UAV4GEO, Public Lab, HOTOSM)
+
+## The Open-Source Photogrammetry Landscape
+
+::: {.columns}
+:::{.column width="50%"}
+
+### Commercial  
+- Agisoft Metashape  
+- Pix4D  
+- Correlator3D
+:::
+:::{.column width="50%"}
+### Open-Source
+- **OpenDroneMap (ODM)**
+- **WebODM**  
+- NodeODM  
+- MicMac 
+:::
+:::
+
+# **What is OpenDroneMap?**
+
+## ODM Ecosystem {.smaller}
+
+- [ODM](https://opendronemap.org/odm/) is a command-line photogrammetry processing engine [@opendronemap_odm_2020].
+- [NodeODM](https://opendronemap.org/nodeodm/) is a REST API to access ODM. 
+- [WebODM](https://opendronemap.org/webodm/) is a Web/GUI interface for ODM.
+- [CloudODM](https://opendronemap.org/cloudodm/) is a command line client to work with ODM with **NodeODM**.
+- [PyODM](https://opendronemap.org/pyodm/) is a Python SDK for scripting with ODM.
+- [ClusterODM](https://opendronemap.org/clusterodm/) is a NodeODM API compatible reverse proxy, load balancer and task tracker for easy horizontal scaling.
+- [NodeMICMAC](https://opendronemap.org/nodemicmac/) is a Node.js App and REST API to access [MicMac](https://github.com/micmacIGN/micmac).
+- [FIELDimage](https://www.opendronemap.org/fieldimager/) - is a Tool to Analyze Images From Agricultural Field Trials and Lab in R (@matias_fieldimager_2020, @pawar_fieldimagerextra_2023).
+- [Find-GCP](https://opendronemap.org/findgcp/) - Find ArUco markers in digital photos (@siki_automatic_2021).
+
+## ODM Architecture {.smaller}
+
+- [ODM](https://opendronemap.org/odm/) Command-line engine (@opendronemap_odm_2020)
+- Built from modular components:  
+  - [OpenSfM](https://opensfm.org/) -- SfM + Bundle Adjustment  
+  - [openMVS](https://github.com/cdcseacave/openMVS) -- Dense reconstruction
+  - [MicMac](https://github.com/micmacIGN/micmac) -- (Optional) photogrammetry processing engine
+  - [PDAL](https://pdal.io/en/stable/) -- Point cloud processing (@pdal_contributors_2025_2616780)
+  - [Entwine](https://entwine.io/en/latest/) -- Point cloud data organization library
+  - [GDAL](https://gdal.org/en/stable/) -- Raster operations 
+  - [PoissonRecon](https://github.com/mkazhdan/PoissonRecon) -- 3D mesh
+  - [MSV Texturing](https://github.com/nmoehrle/mvs-texturing) -- Mesh Texturing
+  - [GRASS](https://grass.osgeo.org/) -- geospatial compuational engine (@GRASS_Development_Team_and_Landa_GRASS_GIS)
+
+## Platform and Hardware Requirements {.smaller}
+
+### Platforms
+
+Through [Docker](https://docs.docker.com/get-started/get-docker/) ODM, NodeODM, and WebODM run on:
+
+- Windows
+- MacOS
+- Linux 
+
+::: {.callout-note}
+Docker is an open platform for developing, shipping, and running applications.
+For more information visit [What is Docker?](https://docs.docker.com/get-started/docker-overview/).
+:::
+
+*Recommendations from (@OpenDroneMapTheMissingGuide_2023)*
+
+
+## Hardware Requirements {.smaller}
+
+::: {.columns}
+:::{.column width="50%"}
+#### Minimum requirements
+
+- 64 bit CPU (manufactured post-2010)
+- 20 GB of disk space
+- 4 GB of RAM
+
+> Can process no more than 100-200 images.
+:::
+:::{.column width="50%"}
+#### Recommended requirements
+
+- Latest generation CPU
+- 100 GB disk space
+- 16 GB RAM
+:::
+:::
+
+::: {.callout-note}
+NVIDIA GPU can be used to speed up processing.
+:::
+
+*Recommendations from [@OpenDroneMapTheMissingGuide_2023]*
+
+## ODM Capabilities {.smaller}
+
+- Feature detection ([SIFT](https://scikit-image.org/docs/0.25.x/auto_examples/features_detection/plot_sift.html)-like)
+- Bundle adjustment
+- Dense cloud generation
+- DSM & DTM creation
+- Orthomosaic generation
+- Meshing & texturing
+- Ground/non-ground classification  
+- QC & reports  
+- GCP support
+
+---
+
+### ODM Processing Workflow {.smaller}
+
+```{mermaid}
+flowchart LR
+    subgraph Client
+        direction LR
+        A[Import Images]-->B[Quality Check]
+        B -.-> GCP["(Optional) GCP"]
+    end
+    subgraph SfM
+     direction TB
+        GCP --> C[Feature Detection & Matching]
+        B --> C[Feature Detection & Matching]
+        C --> D[Bundle Adjustment]
+        D --> E[Dense Point Cloud]
+    end
+    subgraph Processing
+     direction BT
+        E --> F[DSM/DTM Generation]
+        F --> G[Orthomosaic]
+        G --> H[Export Outputs]
+    end
+```
+
+# **WebODM** {.text-center}
+
+[![](images/webodm-icon-64x64.png)](https://www.opendronemap.org/webodm/){fig-align="center"}
+
+## WebODM Overview
+
+- Browser-based interface to ODM
+- Easy installation via Docker
+- Project-based workflow
+- Supports GCP import
+- Built-in 2D and 3D viewers
+- Plugin ecosystem (Contours, Volume, Reports)
+
+## Basic WebODM Workflow
+
+1. Create project
+2. Upload images
+3. (Optional) Upload GCP file
+4. Run processing
+5. Inspect outputs
+6. Export and analyze in GRASS
+
+---
+
+### WebODM Dashboard
+
+![](images/webODM_dashboard.png)
+
+---
+
+### WebODM - New Project
+
+![](images/webODM_new_project.png)
+
+---
+
+### Upload Images
+
+![](images/webODM_project.png)
+
+---
+
+### (Optional) Create GCP file
+
+![](images/webODM_gcp.png)
+
+---
+
+### Run Process
+
+![](images/webODM_run_process.png){width="50%"}
+
+---
+
+### Inspect outputs 2D
+
+![Map View](images/webODM_mapview.png)
+
+---
+
+### Inspect outputs 3D
+
+![Potree Viewer](images/webODM_3dview.png)
+
+---
+
+### Export Assets
+
+![](images/webODM_assets.png){fig-align="center"}
+
+---
+
+# *ODM vs Agisoft Metashape*
+
+## Strengths of ODM
+
+- 100% open-source
+- Transparent algorithms
+- Strong reproducibility
+- Easy scripting/automation
+- Works well with GRASS/QGIS
+- Excellent orthomosaics for natural scenes
+
+## Limitations of ODM
+
+- Slower than Metashape
+- Mesh reconstruction less refined
+- GUI less polished (WebODM improves this)
+- Multispectral workflows less robust
+- Struggles with highly oblique imagery
+
+## Comparison Table { .text-center }
+
+| Capability          | ODM        | WebODM       | Agisoft      |
+| ------------------- | ---------- | ------------ | ------------ |
+| Cost                | Free       | Free         | $$$          |
+| Orthomosaic         | Excellent  | Excellent    | Excellent    |
+| Dense Cloud Quality | Good       | Good         | Excellent    |
+| GUI                 | Basic CLI  | Browser GUI  | Professional |
+| Speed               | Slower     | Slower       | Very fast    |
+| Scripting           | Excellent  | Good         | Good         |
+| GCP Handling        | Good       | Good         | Excellent    |
+
+---
+
+## References
