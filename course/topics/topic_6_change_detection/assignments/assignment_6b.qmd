@@ -21,7 +21,7 @@ execute:
   enabled: true
   freeze: auto
   output: true
-draft: false
+draft: true
 ---
 
 ## Objective
@@ -35,7 +35,7 @@ Focus on:
 - Quantifying and visualizing uncertainty
 
 ```{python}
-# | eval: true
+# | eval: false
 
 # Import standard Python packages we need
 import sys
@@ -50,7 +50,7 @@ sys.path.append(
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 
 # Import the GRASS packages
 import grass.script as gs
@@ -182,7 +182,7 @@ m.show()
 ## Lake Wheeler - Ortho
 
 ```{python}
-# | eval: true
+# | eval: false
 
 # Start GRASS in default project mapset
 home_directory = Path.home()
@@ -233,7 +233,7 @@ Check that the images were imported.
 
 ```{python}
 # | label: table-raster-layers
-# | eval: true
+# | eval: false
 gs.run_command("g.list", type="raster", mapset="assignment6b")
 ```
 
@@ -258,7 +258,7 @@ Visualize the composite RGB data.
 # |       - "2024"
 # |       - "2025"
 # | layout-ncol: 2
-# | eval: true
+# | eval: false
 m = gj.Map(width=600)
 m.d_rgb(red="ortho_2024_07_17.1", green="ortho_2024_07_17.2", blue="ortho_2024_07_17.3")
 m.d_barscale()
@@ -273,13 +273,13 @@ m.show()
 Examine the metadata of `ortho_2024_07_17.1` using `r.info`.
 
 ```{python}
-# | eval: true
+# | eval: false
 
 gs.run_command("r.info", map="ortho_2024_07_17.1")
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 
 gs.run_command("r.info", map="ortho_2025_09_17.1")
 ```
@@ -304,7 +304,7 @@ m.show()
 Set the computational region to $0.07 m$ with a spatial extent focused on a single field using the following command.
 
 ```{python}
-# | eval: true
+# | eval: false
 
 gs.run_command(
     "g.region", n=219488, s=219104, e=637233, w=636830, res="0.07", flags="pa"
@@ -314,7 +314,7 @@ gs.run_command(
 View the historams of the red bands.
 
 ```{python}
-# | eval: true
+# | eval: false
 
 from grass.script import array as garray
 import seaborn as sns
@@ -330,7 +330,7 @@ plt.show()
 
 
 ```{python}
-# | eval: true
+# | eval: false
 
 m = gj.Map(width=600, use_region=True)
 m.d_rgb(red="ortho_2024_07_17.1", green="ortho_2024_07_17.2", blue="ortho_2024_07_17.3")
@@ -354,12 +354,12 @@ gs.run_command(
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command("r.univar", map="ortho_2024_07_17.1", flags="e")
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command("r.univar", map="ortho_2025_09_17.1", flags="e")
 ```
 
@@ -367,7 +367,7 @@ gs.run_command("r.univar", map="ortho_2025_09_17.1", flags="e")
 
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command(
     "r.mapcalc",
     expression="vari_2024 = ((float(ortho_2024_07_17.2) / 255.0) - (float(ortho_2024_07_17.1) / 255.0)) / ((float(ortho_2024_07_17.2) / 255.0) + (float(ortho_2024_07_17.1) / 255.0) - (float(ortho_2024_07_17.3) / 255.0) + 0.175)",
@@ -377,7 +377,7 @@ gs.run_command("r.univar", map="vari_2024", flags="e")
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command("r.colors", map="vari_2024", color="ndvi", flags="")
 m = gj.Map(width=600, use_region=True)
 m.d_rast(map="vari_2024")
@@ -388,7 +388,7 @@ m.show()
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command(
     "r.mapcalc",
     expression="vari_2025 = ((float(ortho_2025_09_17.2) / 255.0) - (float(ortho_2025_09_17.1) / 255.0)) / ((float(ortho_2025_09_17.2) / 255.0) + (float(ortho_2025_09_17.1) / 255.0) - (float(ortho_2025_09_17.3) / 255.0) + 0.175)",
@@ -398,7 +398,7 @@ gs.run_command("r.univar", map="vari_2025", flags="e")
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command("r.colors", map="vari_2025", color="ndvi", flags="")
 m = gj.Map(width=600, use_region=True)
 m.d_rast(map="vari_2025")
@@ -408,7 +408,7 @@ m.show()
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command(
     "r.mapcalc",
     expression="vari_diff = vari_2025 - vari_2024",
@@ -418,7 +418,7 @@ gs.run_command("r.univar", map="vari_diff", flags="e")
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 gs.run_command("r.colors", map="vari_diff", color="difference", flags="")
 m = gj.Map(width=600, use_region=True)
 m.d_rast(map="vari_diff")
@@ -436,7 +436,7 @@ RI = \frac{Red^2}{Blue*Green^2}
 $$
 
 ```{python}
-# | eval: true
+# | eval: false
 def ri(r, g, b, output):
     gs.run_command(
         "r.mapcalc",
@@ -447,7 +447,7 @@ def ri(r, g, b, output):
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 ri(
     "ortho_2025_09_17.1",
     "ortho_2025_09_17.2",
@@ -463,7 +463,7 @@ m.show()
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 ri(
     "ortho_2024_07_17.1",
     "ortho_2024_07_17.2",
@@ -485,7 +485,7 @@ VVI = (1 - \frac{Red - 30}{Red + 30})(1 - \frac{Green - 50}{Green + 50})(1 - \fr
 $$
 
 ```{python}
-# | eval: true
+# | eval: false
 def vvi(r, g, b, output):
     """
     Visible Vegetation Index (VVI)
@@ -496,7 +496,7 @@ def vvi(r, g, b, output):
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 
 vvi(
     r="ortho_2024_07_17.1",
@@ -519,7 +519,7 @@ BI = \frac{\sqrt{Red^2 + Green^2 + Blue^2}}{3}
 $$
 
 ```{python}
-# | eval: true
+# | eval: false
 
 def bi(r, g, b, output):
     """
@@ -531,7 +531,7 @@ def bi(r, g, b, output):
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 
 bi(
     r="ortho_2024_07_17.1",
@@ -554,7 +554,7 @@ SI = \frac{(Red - Blue)}{(Red + Blue)}
 $$
 
 ```{python}
-# | eval: true
+# | eval: false
 
 def si(r, b, output):
     """
@@ -571,7 +571,7 @@ def si(r, b, output):
 ```
 
 ```{python}
-# | eval: true
+# | eval: false
 
 si(
     r="ortho_2024_07_17.1",
