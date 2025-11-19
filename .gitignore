@@ -76,4 +76,6 @@ index.tex
 # Course specific
 *_model.gz
 course/topics/midterm/flight_subset.zip
-course/topics/midterm/fall2025.*
+# course/topics/midterm/fall2025.*
+*.dronelink
+flight_subset/
