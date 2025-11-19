@@ -82,7 +82,7 @@ pip3 install -r requirements.txt
 
 ## Authors
 
-Copyright 2024
+Copyright 2025
 
 - Corey T. White, NCSU GeoForAll Lab
 - Helena Mitasova, NCSU GeoForAll Lab
