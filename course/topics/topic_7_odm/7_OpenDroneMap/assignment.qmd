@@ -2,7 +2,7 @@
 topic: "Topic 7: OpenDroneMap"
 subtitle: "WebODM"
 title: "OpenDroneMap"
-# assignment-due-date: 12/1/2025
+bibliography: ../references.bib
 author:
     - Corey White
 date: 11/24/25
@@ -24,14 +24,52 @@ keep-ipynb: true
 
 ### Manual install
 
+For full install direction view the [WebODM Manual installation (Docker) Documentation](https://github.com/OpenDroneMap/WebODM/?tab=readme-ov-file#manual-installation-docker).
 
+#### Prerequisites
+
+To run WebODM you must first install
+
+- [Git](https://git-scm.com/install/) - distributed version control system
+- [Docker Desktop](https://docs.docker.com/desktop/) - collaborative containerization software for developers
+    - [Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
+    - [MacOS](https://docs.docker.com/desktop/setup/install/mac-install/)
+    - [Linux](https://docs.docker.com/desktop/setup/install/linux/)
+
+#### Windows Users
+
+You must be running at least Windows 10. 
+
+To run WebODM you need to make sure that **virtualization** is `enabled`. Virtualization
+allows you to run virtual machines (VMs) on your computer. You can check if virtualization 
+is enable in the **Task Manager**, under the **Performance** tab.
+
+### Download WebODM
+
+Two options are avaliable to download WebODM. 
+
+*Option 1.* 
+Download WebODM via the GitHub GUI at [OpenDroneMap/WebODM](https://github.com/OpenDroneMap/WebODM/)
+
+![WebODM Repository](images/webODM_github_download.png){.lightbox}
+
+*Option 2.* 
+
+Download WebODM using git.
 
 ```bash
 git clone https://github.com/OpenDroneMap/WebODM --config core.autocrlf=input
+```
+
+To launch WebODM first open your terminal and navigate to where you installed WebODM. Then
+run the script `./webodm.sh start` in the terminal.
+
+```bash
 cd WebODM
 ./webodm.sh start
 ```
-Access in browser at `http://localhost:8000`.
+If successful you should be able to access WebODM in browser 
+at [http://localhost:8000](http://localhost:8000).
 
 ### Purchase the WebODM Installer
 
@@ -95,11 +133,14 @@ Or you may choose to use custom parameters by selecting the **Edit** button.
 
 ![](images/webODM_edit_task_options.png){fig-align="center" .lightbox}
 
-Today we will use the **Field** preset for our analysis, but we will edit the
+Today we will use the **default** preset for our analysis, but we will edit the
 options to include DSM and DTM generation.
 
-To do this select the **Field** option then click the edit button. Scroll down the **Edit Task Options**
-until you see the options for **dsm** and **dtm**. Enable both the **dsm** and **dtm** then click the **Save** button on the bottom of the **Edit Task Options** modal.
+To do this select the **default** option then click the edit button. 
+
+::: {.callout-note}
+To speed up processing you can disable 3D mesh generation in the **Task Options**.
+:::
 
 Leave the **resize images** set to the defaults.
 
@@ -107,7 +148,7 @@ Now click the **Review** button.
 
 The options should be set as:
 
-*Options* -  `dsm:true, dtm:true, fast-orthophoto:true, matcher-neighbors:4, sfm-algorithm:planar`
+*Options* -  `dem-resolution:30, dsm:true, dtm:true, fast-orthophoto:true, matcher-neighbors:4, sfm-algorithm:planar`
 
 ![](images/webODM_task_review.png){fig-align="center" .lightbox}
 
@@ -117,5 +158,28 @@ Processing time will vary depending on your computers hardware and Docker settin
 
 Finally, press the **Start Processing** button.
 
+## View Results
+
+To view the processed results you can click **View Map**.
+
+### 2D Map View
+
+![](images/webODM_mapview.png){fig-align="center" .lightbox}
+
+### 3D Model View
+![](images/webODM_3dview.png){fig-align="center" .lightbox}
 
 
+## Export Data
+
+To export your results out of WebODM. Navigate to the project task from the WebODM Dashboard and select the task.
+Click the **Download Assets** button to open the dropdown.
+
+![](images/webODM_assets.png){fig-align="left" .lightbox} 
+
+You can download All assets as a zip file or select individual assets. To load your project into another instance of WebODM download a **Backup**.
+Download the **Quality Report** to evaluate your final products. If you see issues try to fine tune the parameters.
+
+::: {.callout-note}
+If you rerun a task you have the choice of where in the processing pipeline to start. This can significatly decrease the compute time.
+:::

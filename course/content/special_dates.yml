@@ -73,15 +73,15 @@
 #   activity: Assignment/Lab
 #   assignment-due-date: 12/1/25
 
-- date: 11/19/25
-  topic: "Topic 7: Open Drone Map (ODM)"
-  title: "Intro to WebODM and ODM"
-  activity: Lecture
+# - date: 11/19/25
+#   topic: "Topic 7: Open Drone Map (ODM)"
+#   title: "Intro to WebODM and ODM"
+#   activity: Lecture
 
 - date: 11/24/25
-  topic: "Topic 7: Open Drone Map (ODM)"
-  title: "Intro to WebODM and ODM"
-  activity: Assignment/Lab
+  topic: "Project"
+  title: "Work on project"
+  activity: Project Work Day
 
 - date: 11/26/25
   topic: "Thanksgiving Break"

@@ -12,6 +12,8 @@ listing:
   contents: 
     - topics/**/part_*.qmd
     - topics/**/assignments/assignment_*.qmd
+    - topics/topic_7_odm/7_OpenDroneMap/index.qmd
+    - topics/topic_7_odm/7_OpenDroneMap/assignment.qmd
     - topics/midterm/index.qmd
     - content/special_dates.yml
   exclude:
