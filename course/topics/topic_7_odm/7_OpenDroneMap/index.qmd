@@ -1,7 +1,7 @@
 ---
-topic: "Topic 7: Intro to WebODM and ODM"
-title: "Intro to WebODM and ODM"
-subtitle: "Topic 7: Intro to WebODM and ODM"
+topic: "Topic 7: OpenDroneMap"
+title: "OpenDroneMap"
+subtitle: "Topic 7: OpenDroneMap"
 date: 11/19/2025
 activity: Lecture
 ---
