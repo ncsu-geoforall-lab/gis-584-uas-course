@@ -1,0 +1,934 @@
+---
+topic: "Midterm: Fall 2025"
+title: "Midterm Rubric"
+subtitle: "Midterm Rubric"
+# date: 10/6/2025
+# activity: Lecture
+format: 
+  html:
+    page-layout: full
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+toc-depth: 4
+jupyter: python3
+execute:
+  eval: false
+  enabled: false
+  freeze: auto
+  output: true
+---
+
+## Report Format
+
+- Length: Minimum 4 pages, single-spaced, including text, tables, figures, and references.
+- Figures & Maps: Readable size; include scale and legends (and north arrow where appropriate).
+- Style: Clear, concise scientific writing; consistent citation style.
+- PDF written report <unityid_midterm_report.pdf>.
+
+### Introduction:
+- Prepare a brief introduction
+
+### Data & Study Area:
+- Report on Data Properties & Processing:   
+- Resolution, extent, CRS, accuracy;
+- summarize Agisoft and GRASS workflows.
+
+### Analysis / Methods: 
+Step-by-step DSM creation, import, co-registration, and DSM-to-DSM comparison; include a simple workflow diagram if helpful.
+
+### Results:
+Qualitative and quantitative findings with tables, graphs, and maps/images (readable legends, scale bars, north arrows).
+
+### Discussion:
+Impacts of flight conditions, data quality, and methods; uncertainty (vertical error propagation, alignment error, canopy effects); compare with related studies; open questions and next steps.
+
+### Conclusion:
+Key findings, methodological insights, and future work.
+
+### Appendix (optional):
+- Workflows, scripts, metadata, software commands, and notes on issues encountered.
+
+## Evaluatation Criteria
+
+### Point Summary
+| Category                      | Points  |
+| ----------------------------- | ------- |
+| [**Workflow Execution**](#workflow-execution-(import-comparison-30))        | 30      |
+| [**Reporting Quality**](#reporting-quality-(structure-clarity-citations-30))         | 30      |
+| [**Results & Interpretation**](#results-analysis-and-interpretation-30)  | 30      |
+| [**Figures / Maps / Appendix**](#figures-and-maps-(appendixscripts-10)) | 10      |
+| **Total**                     | **100** |
+
+### Workflow execution (import, comparison): 30%
+
+| Criteria                              | Excellent (27–30)                                                                                                                                                     | Strong (23–26)                                                             | Adequate (18–22)                                                            | Weak (0–17)                                             |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Metashape → GRASS import workflow** | Steps are correct, complete, replicable; CRS handling is explicitly documented; shows understanding of DEM resolution differences and metadata from the report.       | Mostly correct; minor missing details in import or CRS handling.           | Contains noticeable gaps; unclear steps or partially incorrect assumptions. | Major errors or missing workflow; cannot be replicated. |
+| **Co-registration / alignment**       | Describes a correct, methodologically sound co-registration approach; clearly identifies reference/target datasets; reports alignment parameters or error statistics. | Approach is mostly correct but missing some details or explanations.       | Process attempted but unclear or incorrect in major steps.                  | Not attempted or conceptually incorrect.                |
+| **DSM-to-DSM comparison**             | Correct method (e.g., raster algebra, r.mapcalc, r.series, or r.compare); includes preprocessing steps; notes resolution and alignment issues.                        | Comparison done with minor issues or missing explanation of preprocessing. | Comparison incomplete or method unclear.                                    | Absent or fully incorrect.                              |
+
+### Reporting quality (structure, clarity, citations): 30%
+
+| Criteria                       | Excellent (27–30)                                                                                                                   | Strong (23–26)                                       | Adequate (18–22)                                              | Weak (0–17)                                   |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------- |
+| **Organization & Formatting**  | Fully follows required structure: intro → data → methods → results → discussion → conclusion; ≥4 pages; single-spaced; smooth flow. | Minor structural issues; meets length requirement.   | Structure is choppy, sections incomplete or merged awkwardly. | Poorly structured; missing required sections. |
+| **Scientific writing clarity** | Clear, concise, technically accurate; proper terminology (e.g., tie points, reprojection error, resolution).                        | Mostly clear writing with minor clarity issues.      | Several unclear or inaccurate passages.                       | Writing unclear, inaccurate, or informal.     |
+| **Citations & references**     | Consistent citation style; references for methods, Metashape, GRASS modules, and comparative studies.                               | Inconsistent formatting or minor missing references. | Few citations; inconsistent or incorrect style.               | No citations or clearly inadequate.           |
+
+
+### Results, analysis, and interpretation: 30%
+
+| Criteria                        | Excellent (27–30)                                                                                                                                                                                    | Strong (23–26)                                                  | Adequate (18–22)                                          | Weak (0–17)                                  |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------------- |
+| **Use of quantitative results** | Includes stats (min/max, mean difference, RMSE/NMAD if computed); interprets tie point metrics, reprojection error, DEM resolution, canopy effects.                                                  | Good quantitative summary with minor omissions.                 | Limited quantitative results; interpretation superficial. | Minimal reporting; no quantitative analysis. |
+| **Qualitative assessment**      | Insightful interpretation of DEM quality, artifacts, misalignment, canopy influence, or noise; integrates details from the Metashape report (e.g., 0.92 pix reprojection error, 139 pts/m² density). | Reasonably good interpretation; some missed opportunities.      | Surface-level statements without deeper insight.          | Little to no interpretation.                 |
+| **Discussion & uncertainty**    | Clear discussion of uncertainty sources: alignment error, vertical propagation, vegetation, camera model, flight pattern, resolution matching, and processing choices.                               | Adequate discussion but missing 1–2 key uncertainty components. | Minimal discussion; generic statements.                   | No meaningful discussion.                    |
+
+### Figures and maps (appendix/scripts): 10%
+
+| Criteria                | Excellent (9–10)                                                                                                                                     | Strong (7–8)                                       | Adequate (5–6)                                                 | Weak (0–4)                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Figures & maps**      | High-quality maps with readable legends, scale bars, north arrows, color ramps; workflow diagram included; images properly captioned and referenced. | Mostly clear visuals; 1–2 small formatting issues. | Several readability issues (labels too small, unclear colors). | Poor or missing figures; violates basic map-making standards. |
+| **Appendix (optional) - Up to 10 points extra credit** | Helpful scripts, commands, and workflow notes included; well organized.                                                                              | Appendix included but minimal or disorganized.     | Sparse or marginally useful appendix.                          | No appendix or not useful.                                    |
+
+## Flight Plan
+
+Students didn't have this data but I'm including for completness.
+
+![DroneLink Flight Plan](./images/dronelink_flight_plan.png)
+
+| Setting | Value  |
+|:------|-------------:|
+| Lens | 4.36 mm |
+| Sensor | 6.17 mm x 4.65 mm |
+| Gimble Pitch | -60 degrees |
+| GSD | 4.11 cm/px |
+| Pattern | Normal |
+| Drone Heading | Forward |
+| Max Speed | 32.2 km/h |
+| AGL (m) | 100 |
+| Vert Overlap | 75% 
+| Horz Overlap | 75% 
+
+: DroneLink flight plan.
+
+## Agisoft Report
+
+![texture](./images/texture.jpg)
+
+Link to download the [Agisoft Report](https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/report.pdf).
+
+Students should report on the following components.
+
+- Provide simple site detail (where, when)
+- Mention image overlap (In this case we had excellent image overlap).
+- Report on flight statistics
+
+| Metric               | Value        | Comment |
+|:---------------------|-------------:|-------------:|
+| Number of images     | 1,108        | |
+| Camera stations      | 1,090        | |
+| Flying altitude      | 115 m        | Alt is 15 m higher than it should be. |
+| Tie points           | 288,071      |  |
+| Ground resolution    | 4.24 cm/px   |  GSD is good for UAS |
+| Projections          | 3,296,336    |  |
+| Coverage area        | 1.03 km²     |  |
+| Reprojection error   | 0.92 pix     | Reprojection error is in expect range  |
+
+> These values indicate a high-overlap, high-resolution UAS survey typical of mapping-grade workflows. The ~4 cm GSD and strong forward/side overlap (visible from Fig. 1 of the report) support robust feature matching.
+
+
+## DEM Comparison
+
+Summarize qualitative and quantitative changes between your generated DSM and the 2013 lidar DTM (mid_pines_lidar2013_dem).
+
+### GRASS Setup
+
+```{python}
+# | echo: false
+# | eval: true
+
+import sys
+import os
+import subprocess
+from pathlib import Path
+from urllib.parse import urlencode
+from IPython.display import display
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from PIL import Image
+import numpy as np
+
+v = sys.version_info
+print(f"We are using Python {v.major}.{v.minor}.{v.micro}")
+
+# Append GRASS to the python system path
+sys.path.append(
+    subprocess.check_output(["grass", "--config", "python_path"], text=True).strip()
+)
+
+# Import GRASS libraries
+import grass.script as gs
+import grass.jupyter as gj
+from grass.script.core import CalledModuleError
+from grass.script import array as garray
+from grass.tools import Tools
+
+# from grass.pygrass.vector import VectorTopo
+import io
+import json
+
+
+def pprint(in_json):
+    print(json.dumps(in_json, indent=2))
+
+
+import sys
+import atexit
+```
+
+Start a GRASS session.
+
+```{python}
+# | echo: true
+# | eval: true
+
+home_dir = Path.home()
+grassdata = "grassdata"
+project_name = "Lake_Wheeler_NCspm"
+mapset = "MidtermFall2025"
+
+
+data_path = Path(home_dir, grassdata, project_name, mapset)
+print(f"""
+Path: {data_path}
+Path Exists: {data_path.exists()}
+Is Directory: {data_path.is_dir()}
+""")
+# Start GRASS in the recently created project
+session = gj.init(data_path)
+tools = Tools(session=session)
+```
+
+Import Images from Lake Wheeler Flight Data
+
+```{python}
+uas_image_dir = Path(
+    home_dir,
+    "Documents",
+    "gis-course-data",
+    "gis584",
+    "uas-flight-data",
+    "Lake Wheeler - NCSU",
+    "091725",
+)
+```
+
+```{python}
+# | echo: false
+# | eval: false
+
+tools.v_flightplan(
+    input=uas_image_dir,
+    elevation="mid_pines_lidar2013_dem",
+    overlap_raster="overlap",
+    overlap_stats="overlap_stats.csv",
+    footprint_vector="footprints",
+    # flags="c",
+)
+```
+
+```{python}
+with gs.RegionManager(e="e+100", w="w-250", s="s-150"):
+    m = gj.Map(width=600, use_region=True)
+    m.d_rast(map="dtm_relief")
+    m.d_vect(map="footprints")
+    m.d_barscale()
+    m.d_legend(raster="mid_pines_lidar2013_dem", flags="b")
+    m.show()
+
+```
+
+```{python}
+# | echo: false
+# | eval: false
+tools.v_select(ainput=footprints, binput=fields, output=images_in_aoi)
+```
+
+```{python}
+# | echo: false
+# | eval: false
+from grass.pygrass.vector import Vector
+import zipfile
+from pathlib import Path
+
+with zipfile.ZipFile("flight_subset.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
+    with Vector("images_in_aoi") as vec:
+        for feature in vec:
+            if feature.attrs:  # Check if attributes exist for the feature
+                print(
+                    f"Category: {feature.cat}, Name: {dict(feature.attrs).get('filename')}"
+                )
+                filename = dict(feature.attrs).get("filename")
+                # Build the path from the previously defined uas_image_dir Path
+                file_path = Path(uas_image_dir) / filename
+
+                if not file_path.exists():
+                    print(f"Warning: file not found: {file_path}")
+                    continue
+
+                # Use arcname to store only the filename in the zip (avoid absolute paths)
+                zipf.write(str(file_path), arcname=filename)
+
+```
+
+### Set Computational Region
+
+The student can set the computational region to 0.3m (~ 1 ft) using the 
+spatial extent of the `mid_pines_lidar2013_dem`.
+
+```{python}
+# | eval: true
+tools.g_region(raster="mid_pines_lidar2013_dem", res=0.3, flags="pa")
+```
+
+### Display LiDAR DTM
+
+To confirm everything is working we can view our source LiDAR-DTM data and topographic derivatives (@fig-lidar-dtm).
+
+```{python}
+# | label: fig-lidar-dtm
+# | fig-cap:
+# |       - "LiDAR DTM"
+# |       - "Slope"
+# |       - "Aspect"
+# | layout-ncol: 2
+# | eval: true
+
+# Calculate derivatives
+tools.r_relief(input="mid_pines_lidar2013_dem", output="dtm_relief")
+tools.r_slope_aspect(
+    elevation="mid_pines_lidar2013_dem",
+    slope="dtm_slope",
+    aspect="dtm_aspect",
+    overwrite=True,
+)
+
+# Elevation Map
+m = gj.Map(width=600)
+m.d_shade(shade="dtm_relief", color="mid_pines_lidar2013_dem", brighten=30)
+m.d_barscale(flags="n")
+m.d_legend(raster="mid_pines_lidar2013_dem", flags="b")
+m.show()
+
+# Slope Map
+tools.r_colors(map="dtm_slope", color="sepia", flags="e")
+m = gj.Map(width=600)
+m.d_shade(shade="dtm_relief", color="dtm_slope", brighten=30)
+m.d_barscale(flags="n")
+m.d_legend(raster="dtm_slope", flags="b")
+m.show()
+
+# Aspect Map
+tools.r_colors(map="dtm_aspect", color="aspectcolr", flags="")
+m = gj.Map(width=600)
+m.d_rast(map="dtm_aspect")
+m.d_barscale(flags="n")
+m.d_legend(raster="dtm_aspect", flags="b")
+m.show()
+```
+
+### Import UAS DSM
+
+Import the UAS DSM data from the provide url. Students may either download the DSM data then import it into GRASS or directly download and improt using `r.import`.
+
+```{python}
+# | eval: false
+dsm = "https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif"
+tools.r_import(
+    input=dsm,
+    memory=3000,
+    output="agi_dsm_07_25",
+    resample="bilinear",
+    resolution="region",
+    extent="region",
+    title="Lake Wheeler DSM - 24 September 2025",
+    overwrite="true",
+)
+```
+
+### (Optional) Import UAS Ortho
+
+```{python}
+# | eval: false
+ortho_url = "https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho.cog.tif"
+tools.r_import(
+    input=ortho_url,
+    memory=3000,
+    output="agi_ortho_07_25",
+    resample="nearest",
+    title="Lake Wheeler Ortho - 24 September 2025",
+    overwrite=True,
+    verbose=True,
+)
+
+```
+
+
+### Resample UAS DSM to 0.3m
+
+We will explicity resample our UAS-DSM data to $0.3m$ using **bilinear** interpolation to the extent of the `mid_pines_lidar2013_dem`.
+
+```{python}
+with gs.RegionManager(raster="mid_pines_lidar2013_dem", res=0.3):
+    tools.r_resamp_interp(
+        input="agi_dsm_07_25", output="agi_dsm_07_25_03m", method="bilinear"
+    )
+```
+
+### Display UAS DSM
+
+The import UAS-DSM, ortho, and topographic derivatives can be view in figure @fig-ias-dsm.
+
+```{python}
+# | label: fig-uas-dsm
+# | fig-cap:
+# |       - "UAS DSM"
+# |       - "UAS RGB Ortho"
+# |       - "UAS DSM Slope"
+# |       - "UAS DSM Aspect"
+# | layout-ncol: 2
+# | eval: true
+
+# Calculate relief
+tools.r_relief(input="agi_dsm_07_25_03m", output="dsm_relief")
+tools.r_colors(map="agi_dsm_07_25_03m", color="elevation")
+
+# Calculate slope and aspect
+tools.r_slope_aspect(
+    elevation="agi_dsm_07_25_03m",
+    slope="dsm_slope",
+    aspect="dsm_aspect",
+    overwrite=True,
+)
+
+# Relief Map
+m = gj.Map()
+m.d_shade(shade="dsm_relief", color="agi_dsm_07_25_03m")
+m.d_barscale()
+m.d_legend(raster="agi_dsm_07_25_03m", flags="b")
+m.d_title(map="agi_dsm_07_25_03m")
+m.show()
+
+# Ortho Map
+m = gj.Map(width=600)
+m.d_rgb(red="agi_ortho_07_25.1", green="agi_ortho_07_25.2", blue="agi_ortho_07_25.3")
+m.d_barscale()
+m.show()
+
+# Slope Map
+tools.r_colors(map="dsm_slope", color="sepia", flags="e")
+m = gj.Map(width=600)
+m.d_shade(shade="dsm_relief", color="dsm_slope", brighten=30)
+m.d_barscale()
+m.d_legend(raster="dsm_slope", flags="b")
+m.show()
+
+# Aspect Map
+tools.r_colors(map="dsm_aspect", color="aspectcolr", flags="")
+m = gj.Map(width=600)
+m.d_rast(map="dsm_aspect")
+m.d_barscale()
+m.d_legend(raster="dsm_aspect", flags="b")
+m.show()
+```
+
+### Examine DTM and DSM data
+
+First look at the metadata using `r.info`.
+
+```{python}
+# | eval: true
+dsm_info = tools.r_info(map="agi_dsm_07_25", format="json").json
+dsm_03m_info = tools.r_info(map="agi_dsm_07_25_03m", format="json").json
+dem_info = tools.r_info(map="mid_pines_lidar2013_dem", format="json").json
+```
+
+```{python}
+# | label: fig-df-info
+# | fig-cap:
+# |       - "DEM metadata"
+# | eval: true
+# | echo: false
+
+df_info = pd.DataFrame(
+    [dsm_info, dsm_03m_info, dem_info], index=("DSM", "DSM_03m", "DTM")
+)
+df_info.T
+```
+
+Now compare the univariate statistics.
+
+```{python}
+# | eval: true
+
+dsm_univar = tools.r_univar(map="agi_dsm_07_25", format="json").json
+dsm_03m_univar = tools.r_univar(map="agi_dsm_07_25_03m", format="json").json
+dem_univar = tools.r_univar(map="mid_pines_lidar2013_dem", format="json").json
+```
+
+```{python}
+# | label: fig-df-univar
+# | fig-cap:
+# |       - "DEM Univariate Statistics"
+# | eval: true
+# | echo: false
+
+df_univar = pd.DataFrame(
+    [dsm_univar, dsm_03m_univar, dem_univar], index=("DSM", "DSM_03m", "DTM")
+)
+df_univar.round(1).T
+```
+
+We could also view our data as histograms. Students should comment that the datasets are not vertically alligned. 
+
+```{python}
+# | label: fig-df-elev-hist
+# | fig-cap:
+# |       - "DEM Elevation Histogram"
+# | eval: true
+
+dsm_03m_array = garray.array(mapname="agi_dsm_07_25_03m")
+dtm_array = garray.array(mapname="mid_pines_lidar2013_dem")
+# Plot raster histogram
+sns.histplot(data=dsm_03m_array.ravel(), kde=True)
+sns.histplot(data=dtm_array.ravel(), kde=True)
+plt.show()
+```
+
+Create a DEM of difference (DoD) between the UAS DSM and LiDAR DTM.
+
+```{python}
+tools.r_mapcalc(expression="raw_diff = agi_dsm_07_25_03m - mid_pines_lidar2013_dem")
+```
+
+Examine the map of the DoD.
+
+```{python}
+# | label: fig-raw-dod-map
+# | fig-cap:
+# |       - "Raw DoD map."
+# | eval: true
+tools.r_colors(map="raw_diff", color="difference", flags="e")
+m = gj.Map()
+m.d_rast(map="raw_diff")
+m.d_barscale()
+m.d_legend(raster="raw_diff", flags="b")
+m.d_title(map="raw_diff")
+m.show()
+```
+
+View the univariate statistics for the DoD.
+```{python}
+# | label: fig-df-raw-dod-univar
+# | fig-cap:
+# |       - "Raw DoD univariate statistics."
+# | eval: true
+raw_diff_univar = tools.r_univar(map="raw_diff", flags="e", format="json").json
+raw_diff_univar_mean = round(raw_diff_univar["mean"], 3)
+df_raw_diff_univar = pd.DataFrame([raw_diff_univar], index=["Raw DoD"])
+df_raw_diff_univar.round(1).T
+```
+
+The mean difference was `{python} raw_diff_univar_mean` m.
+
+### Co-Register the UAS DSM with the LiDAR DTM
+
+Here we used the road to as a stable feature to calculate our verticle shift.
+
+```{python}
+# | label: fig-elev-diff-profile
+# | fig-cap:
+# |       - "Elevation Difference Profile"
+# | layout-ncol: 1
+# | eval: true
+# | echo: false
+
+from grass.pygrass.vector import VectorTopo
+
+
+def point_profile_dataframe(profile, elevation):
+    with VectorTopo(profile, mode="r") as features:
+        profile_feature = features.read(1)
+        flattened_list = [f"{tup.x},{tup.y}" for tup in profile_feature]
+        try:
+            prof_json = tools.r_profile(
+                input=elevation,
+                coordinates=[
+                    "637197.0303195255,219514.52842047156",
+                    "637214.1301421694,219484.40416424698",
+                ],
+                format="json",
+                quiet=False,
+                output="-",
+            ).json
+
+            df_profile = pd.DataFrame(prof_json)
+            return df_profile
+        except CalledModuleError as e:
+            gs.fatal(_("Error setting generating profile: %s") % e.stderr)
+
+
+df_dsm_profile = point_profile_dataframe("midpines_rd", "agi_dsm_07_25_03m")
+df_dtm_profile = point_profile_dataframe("midpines_rd", "mid_pines_lidar2013_dem")
+
+plt.figure(figsize=(10, 10))
+
+sns.lineplot(
+    data=df_dsm_profile,
+    x="distance",
+    y="value",
+    color="#1f78b4",
+    label="SfM-DSM (Reg.)",
+)
+
+sns.lineplot(
+    data=df_dtm_profile,
+    x="distance",
+    y="value",
+    color="#b2df8a",
+    label="LiDAR-DSM",
+)
+
+```
+
+For the sake of the exam how the student determines the shift is less important than them just realizing a verticle shift is required.
+
+```{python}
+# | eval: true
+mean_shift = (df_dsm_profile["value"] - df_dtm_profile["value"]).mean()
+print(f"Mean shift: {mean_shift}")
+```
+
+The mean difference was `{python} mean_shift` m. So we can subtract the mean difference from the DSM.
+
+```{python}
+# | eval: true
+tools.r_mapcalc(expression=f"agi_dsm_07_25_03m_vs = agi_dsm_07_25_03m - {mean_shift}")
+```
+
+```{python}
+# | label: fig-dsm-reg
+# | fig-cap:
+# |       - "UAS DSM Registered Elevation."
+# |       - "LiDAR DTM Elevation."
+# | layout-ncol: 2
+# | eval: true
+
+# Set color tables to match
+tools.r_colors(
+    map=["agi_dsm_07_25_03m_vs", "mid_pines_lidar2013_dem"], color="elevation"
+)
+
+# UAS DSM
+m = gj.Map(width=600)
+m.d_shade(shade="dsm_relief", color="agi_dsm_07_25_03m_vs")
+m.d_barscale()
+m.d_legend(raster="agi_dsm_07_25_03m_vs", flags="b")
+m.d_title(map="agi_dsm_07_25_03m_vs")
+m.show()
+
+# LiDAR DTM Elevation Map
+m = gj.Map(width=600)
+m.d_shade(shade="dtm_relief", color="mid_pines_lidar2013_dem", brighten=30)
+m.d_barscale()
+m.d_legend(raster="mid_pines_lidar2013_dem", flags="b")
+m.show()
+```
+
+```{python}
+# | label: fig-df-reg-univar
+# | fig-cap:
+# |       - "DEM Registered Univariate Statistics"
+# | eval: true
+
+dsm_vs_univar = tools.r_univar(map="agi_dsm_07_25_03m_vs", format="json").json
+df_reg_univar = pd.DataFrame([dsm_vs_univar, dem_univar], index=("DSM Reg", "DTM"))
+df_reg_univar.round(1).T
+```
+
+```{python}
+tools.r_mapcalc(expression="dod = agi_dsm_07_25_03m_vs - mid_pines_lidar2013_dem")
+```
+
+```{python}
+# | label: fig-df-diff-univar
+# | fig-cap:
+# |       - "Co-Registered DoD Univariate Statistics"
+# | eval: true
+
+diff_univar = tools.r_univar(map="dod", format="json", flags="e").json
+df_diff_univar = pd.DataFrame([diff_univar])
+df_diff_univar.round(1).T
+```
+
+```{python}
+# | label: fig-reg-diff-map
+# | fig-cap:
+# |       - "Difference"
+# |       - "Difference (Hist Equalized)"
+# | layout-ncol: 2
+# | eval: true
+
+tools.r_colors(map="dod", color="difference", flags="")
+m = gj.Map()
+m.d_rast(map="dod")
+m.d_barscale()
+m.d_legend(raster="dod", flags="b")
+m.d_title(map="dod")
+m.show()
+
+
+tools.r_colors(map="dod", color="difference", flags="e")
+m = gj.Map()
+m.d_rast(map="dod")
+m.d_barscale()
+m.d_legend(raster="dod", flags="b")
+m.d_title(map="dod")
+m.show()
+
+```
+
+```{python}
+# | label: tab-dod-univar
+# | fig-cap:
+# |       - "DoD Univariate Statistics"
+# | layout-ncol: 1
+# | eval: true
+df_diff_profile = point_profile_dataframe("midpines_rd", "dod")
+df_diff_profile.describe()
+```
+
+```{python}
+# | label: fig-elev-midpines-profile
+# | fig-cap:
+# |       - "Elevation Profile Map"
+# |       - "Elevation Difference Profile"
+# | layout-ncol: 2
+# | eval: true
+with gs.RegionManager(vector="midpines_rd"):
+    m = gj.Map(width=600)
+    m.d_rgb(
+        red="agi_ortho_07_25.1", green="agi_ortho_07_25.2", blue="agi_ortho_07_25.3"
+    )
+
+    m.d_vect(map="midpines_rd", color="#06bcb9ff", fill_color="#06bcb9ff", width=3)
+    m.d_vect(map="midpines_rd", color="#00fdf9", fill_color="#00fdf9", width=2)
+    m.d_vect(map="midpines_rd", color="#f3f3f3", fill_color="#ededed", width=1)
+    m.d_barscale()
+    m.show()
+
+    df_dsm_reg_profile = point_profile_dataframe("midpines_rd", "agi_dsm_07_25_03m_vs")
+    df_dtm_profile = point_profile_dataframe("midpines_rd", "mid_pines_lidar2013_dem")
+
+    plt.figure(figsize=(10, 10))
+
+    sns.lineplot(
+        data=df_dsm_reg_profile,
+        x="distance",
+        y="value",
+        color="#1f78b4",
+        label="SfM-DSM (co-registered)",
+    )
+
+    sns.lineplot(
+        data=df_dtm_profile,
+        x="distance",
+        y="value",
+        color="#b2df8a",
+        label="LiDAR-DSM",
+    )
+    plt.show()
+
+```
+
+### Look closer at "Bowl Effect"
+
+```{python}
+# | label: fig-elev-dod-web
+# | fig-cap:
+# |       - "DoD Web Map"
+# | layout-ncol: 1
+# | eval: true
+m = gj.InteractiveMap(use_region=True)
+m.add_raster("dsm_relief")
+m.add_raster("agi_ortho_07_25.1", opacity=0.6)
+m.add_raster("dod", opacity=0.6)
+m.show()
+```
+
+Dome Profile
+
+```{python}
+# | label: fig-dome-profile
+# | fig-cap:
+# |       - "Elevation Profile Map"
+# |       - "DoD Map"
+# |       - "Elevation Difference Profile"
+# | layout-ncol: 2
+# | eval: true
+
+with gs.RegionManager(
+    vector="dome_profile",
+    n="n+100",
+    s="s-50",
+    e="e+100",
+    w="w-100"
+):
+    profile = "dome_profile"
+
+    # Ortho Map
+    m = gj.Map(width=600, use_region=True)
+    m.d_rgb(
+        red="agi_ortho_07_25.1", green="agi_ortho_07_25.2", blue="agi_ortho_07_25.3"
+    )
+    m.d_vect(map=profile, color="#06bcb9ff", fill_color="#06bcb9ff", width=3)
+    m.d_vect(map=profile, color="#00fdf9", fill_color="#00fdf9", width=2)
+    m.d_vect(map=profile, color="#f3f3f3", fill_color="#ededed", width=1)
+    m.d_barscale()
+    m.show()
+
+    # DoD Map
+    # tools.r_colors(map="dod", color="difference", flags="")
+    tools.r_colors_stddev(map="dod", flags="")
+    m = gj.Map(width=600, use_region=True)
+    m.d_shade(shade="dsm_relief", color="dod")
+    m.d_vect(map=profile, color="#06bcb9ff", fill_color="#06bcb9ff", width=3)
+    m.d_vect(map=profile, color="#00fdf9", fill_color="#00fdf9", width=2)
+    m.d_vect(map=profile, color="#f3f3f3", fill_color="#ededed", width=1)
+    m.d_barscale()
+    m.d_legend(raster="dod", flags="b")
+    m.d_title(map="dod")
+    m.show()
+
+    # Profile
+    df_dsm_reg_profile = point_profile_dataframe(profile, "agi_dsm_07_25_03m_vs")
+    df_dtm_profile = point_profile_dataframe(profile, "mid_pines_lidar2013_dem")
+
+    plt.figure(figsize=(10, 10))
+
+    sns.lineplot(
+        data=df_dsm_reg_profile,
+        x="distance",
+        y="value",
+        color="#1f78b4",
+        label="SfM-DSM (co-registered)",
+    )
+
+    sns.lineplot(
+        data=df_dtm_profile,
+        x="distance",
+        y="value",
+        color="#b2df8a",
+        label="LiDAR-DSM",
+    )
+    plt.show()
+
+```
+
+Buildings Profile
+
+```{python}
+# | label: fig-building-profile
+# | fig-cap:
+# |       - "Elevation Profile Map"
+# |       - "DoD Map"
+# |       - "Elevation Difference Profile"
+# | layout-ncol: 2
+# | eval: true
+
+with gs.RegionManager(
+    vector="buildings_profile", n="n+100", s="s-100", e="e+100", w="w-100"
+):
+    buildings_profile = "buildings_profile"
+
+    # Ortho Map
+    m = gj.Map(width=600, use_region=True)
+    m.d_rgb(
+        red="agi_ortho_07_25.1", green="agi_ortho_07_25.2", blue="agi_ortho_07_25.3"
+    )
+    m.d_vect(
+        map="buildings_profile", color="#06bcb9ff", fill_color="#06bcb9ff", width=3
+    )
+    m.d_vect(map="buildings_profile", color="#00fdf9", fill_color="#00fdf9", width=2)
+    m.d_vect(map="buildings_profile", color="#f3f3f3", fill_color="#ededed", width=1)
+    m.d_barscale()
+    m.show()
+
+    # DoD Map
+    # tools.r_colors(map="dod", color="difference", flags="")
+    tools.r_colors_stddev(map="dod", flags="")
+    m = gj.Map(width=600, use_region=True)
+    m.d_shade(shade="dsm_relief", color="dod")
+    m.d_vect(
+        map="buildings_profile", color="#06bcb9ff", fill_color="#06bcb9ff", width=3
+    )
+    m.d_vect(map="buildings_profile", color="#00fdf9", fill_color="#00fdf9", width=2)
+    m.d_vect(map="buildings_profile", color="#f3f3f3", fill_color="#ededed", width=1)
+    m.d_barscale()
+    m.d_legend(raster="dod", flags="b")
+    m.d_title(map="dod")
+    m.show()
+
+    # Profile
+    df_dsm_reg_profile = point_profile_dataframe(
+        "buildings_profile", "agi_dsm_07_25_03m_vs"
+    )
+    df_dtm_profile = point_profile_dataframe(
+        "buildings_profile", "mid_pines_lidar2013_dem"
+    )
+
+    import matplotlib as mpl
+
+    # Increase font sizes and line widths for larger, more readable text
+    mpl.rcParams.update(
+        {
+            "font.size": 16,
+            "axes.titlesize": 18,
+            "axes.labelsize": 16,
+            "xtick.labelsize": 14,
+            "ytick.labelsize": 14,
+            "legend.fontsize": 14,
+            "lines.linewidth": 2.5,
+        }
+    )
+
+    plt.figure(figsize=(10, 10))
+
+    sns.lineplot(
+        data=df_dsm_reg_profile,
+        x="distance",
+        y="value",
+        color="#1f78b4",
+        label="SfM-DSM (co-registered)",
+    )
+
+    sns.lineplot(
+        data=df_dtm_profile,
+        x="distance",
+        y="value",
+        color="#b2df8a",
+        label="LiDAR-DSM",
+    )
+
+    plt.xlabel("Distance (m)")
+    plt.ylabel("Elevation (m)")
+    plt.title("Elevation Profile")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+```
