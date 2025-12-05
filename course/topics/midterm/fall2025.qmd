@@ -391,7 +391,7 @@ with gs.RegionManager(raster="mid_pines_lidar2013_dem", res=0.3):
 
 ### Display UAS DSM
 
-The import UAS-DSM, ortho, and topographic derivatives can be view in figure @fig-ias-dsm.
+The import UAS-DSM, ortho, and topographic derivatives can be view in figure @fig-uas-dsm.
 
 ```{python}
 # | label: fig-uas-dsm
