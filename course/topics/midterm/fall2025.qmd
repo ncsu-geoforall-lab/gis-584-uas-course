@@ -7,10 +7,10 @@ subtitle: "Midterm Rubric"
 format: 
   html:
     page-layout: full
-  pdf:
-    toc: true
-    number-sections: true
-    colorlinks: true
+#   pdf:
+#     toc: true
+#     number-sections: true
+#     colorlinks: true
 toc-depth: 4
 jupyter: python3
 execute:
