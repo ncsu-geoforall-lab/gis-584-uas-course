@@ -82,6 +82,24 @@ See Course [logistics](/course/logistics.qmd) web page.
 * Analysis of ultra high resolution elevation models
 * Analysis of multitemporal UAS data and its applications
 
+## Course Goals
+By the end of this course, students will:
+
+Use UAS as a scientific instrument for high-resolution mapping and analysis.
+Plan, run, and document a UAS mapping mission while following FAA Part 107 rules.
+Process UAS imagery using Agisoft Metashape, WebODM, and GRASS.
+Apply UAS-derived data to problems in natural resources, the environment, and the built environment.
+Develop reproducible workflows and follow ethical practice in UAS data collection and analysis.
+
+### Course-Level Learning Objectives
+By the end of GIS/MEA 584, students will be able to:
+
+* **(Apply)** Plan and run (or simulate) a UAS mapping mission that follows FAA Part 107 and meets stated accuracy requirements.
+* **(Apply)** Process raw UAS imagery into georeferenced orthomosaics, digital surface models, and point clouds using Agisoft Metashape, WebODM, and GRASS.
+* **(Analyze)** Evaluate UAS-derived products against reference data using positional and surface accuracy metrics.
+* **(Evaluate)** Compare UAS Structure from Motion, airborne lidar, and fused datasets, and recommend an appropriate data source for a stated objective.
+* **(Create)** Design a complete UAS analysis workflow, from acquisition through interpretation, for a domain-specific problem and present the results in a project portfolio.
+
 ## Academic integrity
 
 [Overview](https://studentconduct.dasa.ncsu.edu/), [Policies](https://policies.ncsu.edu/), [Code of Student Conduct](https://policies.ncsu.edu/policy/pol-11-35-01/) 
