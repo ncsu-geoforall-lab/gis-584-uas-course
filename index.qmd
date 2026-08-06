@@ -7,6 +7,13 @@ subtitle: "NCSU GIS/MEA 584"
 
 The course starts with a brief overview of the UAS mapping technology and its rules and regulations. The principles of UAS data collection are explained along with hands-on practice in flight planning and execution. The main focus of this course is on processing the collected imagery using structure from motion technique and deriving orthophoto mosaics and ultra-high resolution digital elevation models of land surface, vegetation and structures. More advanced topics include multitemporal 3D data analysis, fusion with lidar data and 3D visualization with applications in natural resources. 
 
+## Course syllabus
+
+The official course syllabus is published through the NC State Class Search tool and posted in Moodle. It is the authoritative document for course goals, learning outcomes, grading, and required materials.
+
+* [Official syllabus (Class Search)]({{< var course_params.syllabus_link >}})
+* [Course Policies and Logistics](/course/policies.qmd)
+
 ## Instructors
 
 - Dr. Corey T. White
@@ -15,9 +22,13 @@ The course starts with a brief overview of the UAS mapping technology and its ru
 
 ## Teaching Assistants
 
-- Pratikshya Regmi
+- TBD
+<!-- - Pratikshya Regmi
   * Office hours: Every Wednesday 9-10 AM, Jordan Hall 5103A
-  * Email: [pregmi3@ncsu.edu](pregmi3@ncsu.edu)
+  * Email: [pregmi3@ncsu.edu](pregmi3@ncsu.edu) -->
+<!-- * [Name]
+  * Office hours: [day, time, location]
+  * Email: [unity id]@ncsu.edu -->
 
 ## Prerequisites
 
@@ -29,46 +40,9 @@ The course starts with a brief overview of the UAS mapping technology and its ru
 
 ## Class materials and schedule
 
-See instructions in Course [logistics](/course/logistics.qmd) and [schedule](/course/schedule.qmd)
-
-## Moodle
+See the course [schedule](/course/schedule.qmd) and [Course Policies and Logistics](/course/policies.qmd).
 
 Course Forum, assignment submissions, project material, and grades are handled in [Moodle]({{< var course_params.moodle_link >}}).
-
-### Textbooks
-
-No required textbook, on-line material is used.
-
-Recommended books:
-
-* [Amy Frazier, Kunwar Singh, 2021, Fundamentals of Capturing and Processing Drone Imagery and Data, CRC Press.](https://www.taylorfrancis.com/books/edit/10.1201/9780429283239/fundamentals-capturing-processing-drone-imagery-data-amy-frazier-kunwar-singh)
-
-* [Jonathan L. Carrivick, Mark W. Smith, and Duncan J. Quincey, 2016, Structure from Motion in the Geosciences, John Wiley & Sons, Ltd.](https://www.wiley.com/go/carrivick/structuremotiongeosciences)
-
-* [Paul Gerin Fahlstrom, Thomas James Gleason, 2012, Introduction to UAV Systems: Fourth Edition, John Wiley & Sons, Ltd.](https://onlinelibrary.wiley.com/book/10.1002/9781118396780)
-    
-* [Douglas M. Marshall, R. Kurt Barnhart, Eric Shappee, Michael Most, 2016, Introduction to unmanned aircraft systems: Second Edition, CRC Press](https://catalog.lib.ncsu.edu/record/NCSU3721828) 
-
-### Software
-
-See Course [logistics](/course/logistics.qmd) web page.
-
-## Grading policy
-
-60% homeworks, 40% project
-100% is the maximum number of points (total+extra credits) achieved in class. Points are taken off for late submissions.
-
-| Grade | Course and each HW |
-|-------|--------------------|
-| Max   | 100                |
-| A+    | 97                 |
-| A     | 93                 |
-| A-    | 90                 |
-| B+    | 87                 |
-| B     | 83                 |
-| B-    | 80                 |
-| C+    | 77                 |
-| C     | 73                 |
 
 ## Topics
 
@@ -100,18 +74,6 @@ By the end of GIS/MEA 584, students will be able to:
 * **(Evaluate)** Compare UAS Structure from Motion, airborne lidar, and fused datasets, and recommend an appropriate data source for a stated objective.
 * **(Create)** Design a complete UAS analysis workflow, from acquisition through interpretation, for a domain-specific problem and present the results in a project portfolio.
 
-## Academic integrity
+## Course policies
 
-[Overview](https://studentconduct.dasa.ncsu.edu/), [Policies](https://policies.ncsu.edu/), [Code of Student Conduct](https://policies.ncsu.edu/policy/pol-11-35-01/) 
-
-## Attendance policy
-
-in regular section, attendance is checked at each class, see also [attendance regulations and university definitions of excused absences](https://policies.ncsu.edu/regulation/reg-02-20-03)
-
-## Accommodation of students with disabilities
-
-[Disability Services Office](https://dso.dasa.ncsu.edu/)
-
-## Large Language Model (LLM) policy
-
-The use of LLMs in this course is permitted for the purposes of completing assignments and projects. However, the use of LLMs for the purposes of completing exams is strictly prohibited. Students are also required to cite the use of LLMs in their assignments and projects. Failure to do so will result in a violation of the courses academic integrity policy. Students are also to be aware that the use of LLMs in this course is not a substitute for learning the material. Assignments and projects must be properly cited and contain no plagerized materials. (The policy was created with the aid GitHub CoPilot)
+Grading, attendance, academic integrity, accommodations, and the LLM policy are covered in the official syllabus and expanded in [Course Policies and Logistics](/course/policies.qmd).

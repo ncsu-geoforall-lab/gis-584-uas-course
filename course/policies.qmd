@@ -1,0 +1,218 @@
+---
+title: "Course Policies and Logistics"
+subtitle: "GIS/MEA 584: Mapping and Analytics Using UAS, Fall 2026"
+---
+
+# Course Policies and Logistics
+
+**GIS/MEA 584: Mapping and Analytics Using UAS · Fall 2026**
+
+This document covers how the course runs day to day. It is not the syllabus. The
+official course syllabus is published through NC State's Class Search tool and
+is also posted in Moodle. Where the two documents overlap, the syllabus governs.
+
+## Instructors and Communication
+
+**Corey T. White, PhD**, Center for Geospatial Analytics
+ctwhite@ncsu.edu, office hours by appointment
+
+**Teaching Assistant: [name]**
+[unity id]@ncsu.edu, office hours [day, time, location]
+
+Use the Moodle forum for anything about assignments, software, or data, since
+the answer usually helps more than one person. Use email for anything personal
+or time sensitive. Expect a reply within [one business day] on weekdays. Put
+GIS584 in the subject line.
+
+Distance education students can meet with the instructor or TA over Zoom during
+the same office hours as on-campus students. Ask and a link will be sent.
+
+## Course Website and Moodle
+
+The course website at
+<https://ncsu-geoforall-lab.github.io/gis-584-uas-course/> holds the schedule,
+lecture slides, topic pages, assignments, and data links. The site is built with
+Quarto and Reveal.js, the source is at
+<https://github.com/ncsu-geoforall-lab/gis-584-uas-course>, and the material is
+licensed CC BY-SA 4.0.
+
+Moodle holds the course forum, assignment submissions, project material, and
+grades: [Moodle course link].
+
+## Lectures
+
+Lectures cover principles, theory, concepts, and methods, and are mostly
+software independent. Slides and video for each topic are linked from that
+topic's page, reachable through the course schedule or through Moodle. Topic
+pages also link to additional reading.
+
+Lecture recordings are posted to Panopto and linked from the schedule. Distance
+education students work from the same recordings and the same topic pages as the
+on-campus section.
+
+## Assignments
+
+Most topics include a hands-on assignment, linked from that topic's page on the
+course website.
+
+For each topic you submit a report of at least two pages, including images and
+tables, with these sections:
+
+- **Introduction:** the task and the problem
+- **Methods:** general description of the methods and concepts used
+- **Results:** the results, including maps, graphs, and tables, with comments
+- **Discussion:** anything unexpected or problematic in the results, any issues
+  with the methodology or software, and suggestions for improvement
+- **Conclusion:** one or two sentences on what you learned
+
+Submit through Moodle as a PDF using the naming convention
+`LastnameFirstname_HW#.pdf`.
+
+Reports are due [day of week] at [time] following the schedule on the course
+website. Late reports lose 10% per week or part of a week, with no credit after
+two weeks. If something comes up, tell me before the deadline rather than after.
+
+Extra credit is given for innovative solutions, creative problem solving, and
+extensions to the assigned tasks. Show the extension clearly in the report so it
+can be found.
+
+## Semester Project
+
+The project is a complete UAS analysis workflow applied to a problem you choose,
+from acquisition through interpretation, presented in your portfolio. It is
+worth 40% of the course grade.
+
+Milestones:
+
+- Project proposal, due [date]
+- In-progress presentation, [date]
+- Final report and portfolio, due [date]
+
+Milestones are hard deadlines and are not accepted late. The proposal and the
+presentation exist so you get feedback while there is still time to act on it,
+which a late submission cannot deliver. If you are going to miss one, contact me
+before the date.
+
+Project requirements and the rubric are on the Projects page of the course
+website.
+
+All course work is collected in an electronic portfolio that accumulates across
+your GIS courses.
+
+## Software
+
+- [GRASS 8.5](https://grass.osgeo.org/), installation instructions at
+  <https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software>
+- [Agisoft Metashape](https://www.agisoft.com/downloads/installer/), licensed by
+  NC State. The demo version is sufficient for the course work.
+- [OpenDroneMap](http://opendronemap.org/) and WebODM
+
+Additional tools referenced in the course, not required:
+[PDAL](https://pdal.io/en/stable/) for point cloud processing,
+[LAStools](https://lastools.github.io/) and [libLAS](https://liblas.org/) for
+managing LAS files with GRASS, and
+[MicMac](https://github.com/micmacIGN/micmac) as an alternative structure from
+motion package.
+
+## Computational Resources
+
+NC State students can reserve an environment in the [Virtual Computing Lab
+(VCL)](https://vcl.ncsu.edu/). Use the `Agisoft Metashape & GRASS GIS - Ubuntu`
+image. VCL is the fallback if your own machine cannot handle a processing job,
+and it is available to distance education students on the same terms as
+on-campus students.
+
+[Add WebODM server access details here once the CGA instance is provisioned.]
+
+If a processing run fails or takes an unreasonable amount of time, post the log
+to the forum rather than restarting it repeatedly.
+
+## Data
+
+Course datasets are hosted publicly and linked from the topic pages and the
+Logistics page of the course website. They include the GRASS North Carolina
+sample dataset, ground control points from Mid Pines, UAS orthophotos from Lake
+Wheeler for 2015, 2017, and 2024, classified lidar point clouds, and
+interpolated DEM and DSM products.
+
+Download data before class rather than during it.
+
+## Flight Operations and Field Safety
+
+Flight planning and execution are taught in Topic 3. Students are not required
+to hold a Part 107 remote pilot certificate to complete the course, and
+assignments can be completed with provided imagery or in simulation.
+
+Any student who does fly is responsible for operating under [FAA Part
+107](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot),
+including airspace authorization, visual line of sight, and altitude limits, and
+for following NC State policy on UAS operations on university property. Do not
+fly over people, do not fly a course exercise you have not planned in writing,
+and do not fly alone.
+
+## Attendance
+
+Attendance is recorded at each meeting of the on-campus section and does not
+carry points toward your grade. University definitions of excused absences are
+in [REG
+02.20.03](https://policies.ncsu.edu/regulation/reg-02-20-03-attendance-regulations/).
+Tell me in advance when you can.
+
+## Academic Integrity
+
+Students are bound by the [Code of Student
+Conduct](https://policies.ncsu.edu/policy/pol-11-35-01/). Discussing approaches
+with classmates is encouraged. Submitting someone else's processing results,
+figures, or text as your own is not. When you use code, a workflow, or a dataset
+you did not create, cite it.
+
+More information: [Student Conduct](https://studentconduct.dasa.ncsu.edu/) and
+[NC State Policies, Regulations, and Rules](https://policies.ncsu.edu/).
+
+## Use of Large Language Models
+
+Large language models may be used for assignments and projects. Cite the use,
+including which model and what you used it for, in the methods section of your
+report. Uncited use is an academic integrity violation. LLMs may not be used on
+exams.
+
+An LLM will produce confident, wrong GRASS syntax and confident, wrong
+photogrammetry advice. Check what it gives you against the documentation, and
+remember that you are responsible for what you submit.
+
+## Accommodations
+
+Reasonable accommodations are made for students with documented disabilities.
+Register with the [Disability Resource
+Office](https://dso.dasa.ncsu.edu/) and provide the accommodation letter as
+early in the semester as possible so arrangements can be made. See [REG
+02.20.01](https://policies.ncsu.edu/regulation/reg-02-20-01/).
+
+If any part of the course website, slides, or data is not accessible to you,
+tell me and it will be fixed.
+
+## Student Support
+
+- [Counseling Center](https://counseling.dasa.ncsu.edu/)
+- [Academic Success Center](https://asc.dasa.ncsu.edu/)
+- [Pack Essentials](https://dasa.ncsu.edu/students/pack-essentials/) for food,
+  housing, and financial support
+- [NC State Libraries](https://www.lib.ncsu.edu/)
+- [OIT Help Desk](https://help.ncsu.edu/) for computing problems
+
+## Course Evaluations
+
+ClassEval opens near the end of the semester. The UAS course changes every year
+based on what students report, so the comments are read and used.
+
+## Changes to This Document
+
+Anything that changes after the start of the term will be announced in Moodle
+and updated here. Changes to grading, assessment structure, course structure, or
+delivery will be communicated in writing at the time of the change.
+
+---
+
+*Course material for GIS/MEA 584 is licensed [CC BY-SA
+4.0](https://creativecommons.org/licenses/by-sa/4.0/) by the [NCSU GeoForAll
+Lab](https://geospatial.ncsu.edu/geoforall/).*

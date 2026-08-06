@@ -1,6 +1,7 @@
 course_params:
   term: "Fall 2025"
   course_website: "schedule.qmd"
+  syllabus_link: ""
   moodle_link: "https://moodle-courses2527.wolfware.ncsu.edu/course/view.php?id=1768&bp=s"
   moodle_forum_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=200840"
   moodle_project_pre_proposal_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=200843"
