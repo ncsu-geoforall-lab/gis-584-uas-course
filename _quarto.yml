@@ -14,7 +14,8 @@ website:
         text: Syllabus
 
       - course/schedule.qmd
-      - course/logistics.qmd
+      - href: course/policies.qmd
+        text: Logistics & Policies
       - course/topics/index.qmd
       - course/projects.qmd
 

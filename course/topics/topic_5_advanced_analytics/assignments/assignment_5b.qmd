@@ -25,7 +25,7 @@ tags: [ GRASS ]
 
 ## Data
 
-You should have everything already for Mid Pines area, get anything missing from the [Course logistics web page](/course/logistics.qmd):
+You should have everything already for Mid Pines area, get anything missing from the [Course logistics web page](/course/policies.qmd):
 
 - GRASS Project: [LakeWheeler_NCspm]({{< var data.lake_wheeler_url >}})
 - 2013 lidar interpolated DEM and DSM: [download]({{< var data.secref_mid_pines_spm_elev >}}),

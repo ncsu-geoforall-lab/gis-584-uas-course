@@ -1,11 +1,9 @@
 ---
 title: "Course Policies and Logistics"
 subtitle: "GIS/MEA 584: Mapping and Analytics Using UAS, Fall 2026"
+aliases:
+  - /course/logistics.html
 ---
-
-# Course Policies and Logistics
-
-**GIS/MEA 584: Mapping and Analytics Using UAS · Fall 2026**
 
 This document covers how the course runs day to day. It is not the syllabus. The
 official course syllabus is published through NC State's Class Search tool and
@@ -37,7 +35,7 @@ Quarto and Reveal.js, the source is at
 licensed CC BY-SA 4.0.
 
 Moodle holds the course forum, assignment submissions, project material, and
-grades: [Moodle course link].
+grades: [Moodle]({{< var course_params.moodle_link >}}).
 
 ## Lectures
 
@@ -46,9 +44,9 @@ software independent. Slides and video for each topic are linked from that
 topic's page, reachable through the course schedule or through Moodle. Topic
 pages also link to additional reading.
 
-Lecture recordings are posted to Panopto and linked from the schedule. Distance
-education students work from the same recordings and the same topic pages as the
-on-campus section.
+Lecture recordings are posted to [Panopto]({{< var course_params.panopto_link >}})
+and linked from each topic's pages. Distance education students work from the
+same recordings and the same topic pages as the on-campus section.
 
 ## Assignments
 
@@ -101,9 +99,9 @@ your GIS courses.
 
 ## Software
 
-- [GRASS 8.5](https://grass.osgeo.org/), installation instructions at
+- [GRASS {{< var software.grass.version >}}]({{< var software.grass.website >}}), installation instructions at
   <https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software>
-- [Agisoft Metashape](https://www.agisoft.com/downloads/installer/), licensed by
+- [Agisoft Metashape]({{< var software.agisoft.website >}}), licensed by
   NC State. The demo version is sufficient for the course work.
 - [OpenDroneMap](http://opendronemap.org/) and WebODM
 
@@ -129,13 +127,40 @@ to the forum rather than restarting it repeatedly.
 
 ## Data
 
-Course datasets are hosted publicly and linked from the topic pages and the
-Logistics page of the course website. They include the GRASS North Carolina
-sample dataset, ground control points from Mid Pines, UAS orthophotos from Lake
-Wheeler for 2015, 2017, and 2024, classified lidar point clouds, and
-interpolated DEM and DSM products.
-
+Course datasets are hosted publicly and linked from the topic pages and below.
 Download data before class rather than during it.
+
+### GRASS Projects
+
+- [GRASS North Carolina dataset](https://grass.osgeo.org/sampledata/north_carolina/nc_spm_08_grass7.zip)
+
+### Ground Control Points (Mid Pines)
+
+12 GCPs taken at Mid Pines:
+
+- [GRASS pack]({{< var data.gcp_12_decimal_pack_url >}})
+- [GeoJSON]({{< var data.gcp_12_degrees_url >}})
+
+### Processed data
+
+- [LakeWheeler_NCspm]({{< var data.lake_wheeler_url >}}) Mid Pines project with a timeseries of DSMs from 2015 flights
+- [Smaller sample point cloud: 2015_06_sample_points_NCsmp.las]({{< var data.mid_pines_2015_las_url >}})
+
+### Lidar data
+
+- [Classified lidar point cloud in LAS format for Mid Pines]({{< var data.mid_pines_lidar_url >}})
+- [Secref and Mid Pines interpolated DEM/DSM (use r.unpack)]({{< var data.secref_mid_pines_spm_elev >}})
+
+### Orthoimagery
+
+Orthophotos as GRASS packed rasters; use r.unpack from within the LakeWheeler_NCspm
+project to import them, with -o to override the projection (HARN versus NAD83 datum,
+the difference is negligible).
+
+- [Nov 2015 (pack)]({{< var data.lake_wheeler_flight_Nov_2015_orthos >}})
+- [Mar 2017 (pack)]({{< var data.lake_wheeler_flight_Mar_2017_orthos >}})
+- [Jun 2017 (pack)]({{< var data.lake_wheeler_flight_Jun_2017_orthos >}})
+- [Jul 2024 (COG)]({{< var data.lake_wheeler_flight_July_17_2024_orthophoto >}})
 
 ## Flight Operations and Field Safety
 
