@@ -1,0 +1,19 @@
+---
+title: "Topic 6: Machine Learning & AI"
+description: "Image classification and change detection with multitemporal UAS data using machine learning methods."
+order: 6
+---
+
+## Content
+
+- [6A: Image Classification](part_a_image_classification.qmd)
+- [6B: Change Detection](part_b_change_detection.qmd)
+
+## Slides
+
+- [Lecture 6A: Image Classification](lectures/lecture_6a.qmd)
+- [Lecture 6B: UAS Change Detection Methods](lectures/lecture_6b.qmd)
+
+## Assignments
+
+- [Assignment 6A: UAS Image Classification](assignments/assignment_6a.qmd)

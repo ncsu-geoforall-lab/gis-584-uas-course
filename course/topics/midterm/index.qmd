@@ -2,6 +2,8 @@
 topic: "Midterm"
 title: "Midterm Exam"
 subtitle: "Midterm Exam"
+description: "Take-home, open-book exam handled in Moodle."
+order: 8
 activity: Exam
 date: 11/5/2025
 assignment-due-date: 11/7/2025
@@ -10,6 +12,10 @@ assignment-due-date: 11/7/2025
 ## Details
 
 This is a take home, open book exam handled in [Moodle]({{< var course_params.moodle_link >}}), no on-campus presence needed. The exam is the same for the on-campus and distance sections. You can use any on-line and printed resources, but the responses should be your own work. Questions will be available in Moodle. See the Schedule for the dates.
+
+## Grading
+
+- [Midterm Rubric](fall2025.qmd)
 
 <!-- ## Sample questions
 

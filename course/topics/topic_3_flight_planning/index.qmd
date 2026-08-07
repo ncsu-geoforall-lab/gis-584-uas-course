@@ -1,0 +1,17 @@
+---
+title: "Topic 3: UAS Flight Planning"
+description: "Planning and executing UAS data collection: mission parameters, terrain analysis, and ground control."
+order: 3
+---
+
+## Content
+
+- [3A: UAS Flight Planning](part_a_uas_flight_planning.qmd)
+
+## Slides
+
+- [Lecture 3A: UAS Flight Planning](lectures/lecture_3a.qmd)
+
+## Assignments
+
+- [Assignment 3A: Terrain analysis of the flight site using GIS tools](assignments/assignment_3a.qmd)

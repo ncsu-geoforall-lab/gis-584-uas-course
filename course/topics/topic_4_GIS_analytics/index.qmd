@@ -1,0 +1,23 @@
+---
+title: "Topic 4: GIS Analytics"
+description: "GIS-based analysis of UAS processing outputs: DSM and orthophoto comparison, volumes, and point cloud analysis."
+order: 4
+---
+
+## Content
+
+- [4A: Analysis of UAS data processing results](part_a_analysis_uas_processing_results.qmd)
+- [4B: Point cloud data analysis: point clouds, surfaces, and voxel models](part_b_point_cloud_analysis.qmd)
+
+## Slides
+
+- [Lecture 4A: Analysis of UAS data processing results](lectures/lecture_4a.qmd)
+- [Lecture 4B: Point cloud data analysis](lectures/lecture_4b.qmd)
+
+## Assignments
+
+- [Assignment 4A: Analysis of UAS data processing results](assignments/assignment_4a.qmd)
+  - [Lab: Measuring volumes in Agisoft Metashape](assignments/lab_volumes.qmd)
+  - [Lab: Analysis of UAS-derived DSMs and orthophotos](assignments/lab_dsm_analysis.qmd)
+- [Assignment 4B: Processing lidar and UAS SfM point clouds](assignments/assignment_4b.qmd)
+  - [Lab: Processing lidar and UAS SfM point clouds](assignments/lab_point_clouds.qmd)

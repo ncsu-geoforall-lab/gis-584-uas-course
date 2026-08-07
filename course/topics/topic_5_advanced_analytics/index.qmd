@@ -1,0 +1,20 @@
+---
+title: "Topic 5: Advanced Analytics"
+description: "Comparing and fusing UAS and lidar data, and analyzing multitemporal UAS data for monitoring applications."
+order: 5
+---
+
+## Content
+
+- [5A: UAS and lidar data: comparison, fusion and analysis](part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)
+- [5B: Analysis of multitemporal UAS data and its applications](part_b_Analysis_multitemporal_UAS_data_applications.qmd)
+
+## Slides
+
+- [Lecture 5A: UAS and lidar data](lectures/lecture_5a.qmd)
+- [Lecture 5B: Multitemporal UAS data](lectures/lecture_5b.qmd)
+
+## Assignments
+
+- [Assignment 5A: Fusion of UAS and lidar data](assignments/assignment_5a.qmd)
+- [Assignment 5B: Analysis of multitemporal UAS data and its applications](assignments/assignment_5b.qmd)

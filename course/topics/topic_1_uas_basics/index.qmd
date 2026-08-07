@@ -1,0 +1,24 @@
+---
+title: "Topic 1: UAS Basics"
+description: "Introduction to Unmanned Aerial Systems, their applications, and the rules and regulations for UAS operations."
+order: 1
+---
+
+## Content
+
+- [1A: Introduction to Unmanned Aerial Systems](part_a_introduction.qmd)
+- [1B: Rules and regulations for UAS operations](part_b_rules_regs.qmd)
+
+## Slides
+
+- [Lecture 1A: Introduction to UAS](lectures/lecture_1a.qmd)
+- [Lecture 1B: Rules and Regulations](lectures/lecture_1b.qmd)
+
+## Assignments
+
+- [Assignment 1A: UAS systems and applications](assignments/assignment_1a.qmd)
+- [Assignment 1B: UAS Rule Part 107 test subset](assignments/assignment_1b.qmd)
+
+## Reference
+
+- [Step-by-Step Guide to Getting FAA Part 107 License](faa_part_107_guide.qmd)
