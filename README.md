@@ -1,6 +1,6 @@
 # GIS/MAE 584 Mapping and Analytics Using UAS
 
-[![pages-build-deployment](https://github.com/ncsu-geoforall-lab/gis-584-uas-course/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/ncsu-geoforall-lab/gis-584-uas-course/actions/workflows/pages/pages-build-deployment)
+[![Quarto Publish](https://github.com/ncsu-geoforall-lab/gis-584-uas-course/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/ncsu-geoforall-lab/gis-584-uas-course/actions/workflows/publish.yml)
 
 Course website for GIS/MAE 584 Mapping and Analytics Using UAS
 
@@ -26,13 +26,17 @@ The course is organized into topics, each containing lectures and labs. The main
 
 ### Topics
 
-- course/topics/topic_1_introduction
+- course/topics/topic_1_uas_basics
 - course/topics/topic_2_sfm
 - course/topics/topic_3_flight_planning
+- course/topics/topic_4_GIS_analytics
+- course/topics/topic_5_advanced_analytics
+- course/topics/topic_6_change_detection
+- course/topics/topic_7_odm
 
 #### Custom Headers
 
-The schedule listing is generated from the front matter in each topic's index.qmd file. The following fields are used to populate the schedule:
+The schedule listing is generated from the front matter of each topic's `part_*.qmd` and `assignments/assignment_*.qmd` files, plus `course/content/special_dates.yml`. The following fields are used to populate the schedule:
 
 - date
 - topic
@@ -44,7 +48,7 @@ The schedule listing is generated from the front matter in each topic's index.qm
 
 - **_variables.yml**: Contains global variables used throughout the course.
 - **_quarto.yml**: Quarto project configuration file.
-- **course/content/specical_dates.yml**: Contains important dates for the course.
+- **course/content/special_dates.yml**: Contains important dates for the course.
 
 ### Optimize Images
 
@@ -70,7 +74,7 @@ For example, this code converts the images found in the lecture_2b.qmd file to w
 
 ## Deployment
 
-The site is deployed to GitHub Pages using the `gh-pages` branch. The site will be automatically deployed when changes are pushed to the `main` branch.
+The site is deployed to GitHub Pages by the `Quarto Publish` workflow (`.github/workflows/publish.yml`) on every push to `main`. The workflow renders the site with the production profile (`QUARTO_PROFILE=production`, which disables freeze and re-executes all code cells) and deploys `docs/` with `actions/deploy-pages`. Pull requests to `main` are render-checked by `.github/workflows/pr-check.yml`.
 
 ## Install Python Dependencies
 
