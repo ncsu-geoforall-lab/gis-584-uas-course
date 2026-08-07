@@ -5,7 +5,7 @@ title: "OpenDroneMap"
 bibliography: ../references.bib
 author:
     - Corey White
-date: 11/24/2025
+date: 11/23/2026
 format: html
 # from: markdown+emoji
 toc-depth: 4

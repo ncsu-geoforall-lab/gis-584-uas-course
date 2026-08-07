@@ -2,7 +2,7 @@
 topic: "Topic 2A: Structure from Motion"
 title: "Photogrammetry and Structure from Motion concepts"
 subtitle: "Topic 2: Structure from Motion"
-date: 9/3/2025
+date: 9/2/2026
 activity: Lecture
 ---
 

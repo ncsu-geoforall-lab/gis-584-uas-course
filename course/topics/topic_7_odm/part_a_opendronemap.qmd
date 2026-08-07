@@ -2,7 +2,7 @@
 topic: "Topic 7A: OpenDroneMap"
 title: "OpenDroneMap"
 subtitle: "Topic 7: OpenDroneMap"
-date: 11/19/2025
+date: 11/18/2026
 activity: Lecture
 ---
 

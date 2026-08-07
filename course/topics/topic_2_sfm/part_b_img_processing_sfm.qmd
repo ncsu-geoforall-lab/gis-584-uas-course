@@ -2,7 +2,7 @@
 topic: "Topic 2B: Structure from Motion"
 title: "Imagery processing and Structure from Motion (SfM)"
 subtitle: "Topic 2: Structure from Motion"
-date: 9/8/2025
+date: 9/9/2026
 activity: Lecture
 format: 
     html:

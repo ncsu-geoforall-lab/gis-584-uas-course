@@ -2,8 +2,8 @@
 topic: "Topic 2A: Structure from Motion"
 title: "Assignment 2A"
 subtitle: "Laboratory experiment: 3D reconstruction from multiple photos"
-date: 9/3/2025
-assignment-due-date: 9/24/2025
+date: 9/2/2026
+assignment-due-date: 9/23/2026
 activity: Lab
 ---
 

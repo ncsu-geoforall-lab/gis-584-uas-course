@@ -2,11 +2,11 @@
 topic: "Topic 5B: Advanced Analytics"
 subtitle: "Analysis of multitemporal UAS data and its applications"
 title: "Assignment 5B"
-assignment-due-date: 11/12/2025
+assignment-due-date: 11/11/2026
 author: 
     - Anna Petrasova
     - Corey White
-date: 10/22/2025
+date: 10/21/2026
 format: html
 toc-depth: 4
 activity: Lab

@@ -2,7 +2,7 @@
 topic: "Topic 3A: UAS Flight Planning"
 title: "UAS Flight Planning"
 subtitle: "Topic 3: UAS Flight Planning"
-date: 9/15/2025
+date: 9/14/2026
 activity: "Lecture & Lab"
 ---
 

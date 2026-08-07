@@ -5,8 +5,8 @@ subtitle: "Midterm Exam"
 description: "Take-home, open-book exam handled in Moodle."
 order: 8
 activity: Exam
-date: 11/5/2025
-assignment-due-date: 11/7/2025
+date: 11/4/2026
+assignment-due-date: 11/6/2026
 ---
 
 ## Details

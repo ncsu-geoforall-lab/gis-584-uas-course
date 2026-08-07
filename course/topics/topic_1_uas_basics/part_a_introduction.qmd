@@ -2,7 +2,7 @@
 topic: "Topic 1A: UAS Basics"
 title: "Introduction to UAS"
 subtitle: "Topic 1A: UAS Basics"
-date: 8/18/2025
+date: 8/17/2026
 activity: Lecture
 ---
 

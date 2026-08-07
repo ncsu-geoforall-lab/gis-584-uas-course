@@ -82,9 +82,11 @@ worth 40% of the course grade.
 
 Milestones:
 
-- Project proposal, due [date]
-- In-progress presentation, [date]
-- Final report and portfolio, due [date]
+- Project pre-proposal, due September 9, 2026
+- Project proposal, due September 28, 2026
+- Progress report, due October 21, 2026
+- Project presentations, November 30 and December 1, 2026
+- Final report and portfolio, due December 7, 2026
 
 Milestones are hard deadlines and are not accepted late. The proposal and the
 presentation exist so you get feedback while there is still time to act on it,

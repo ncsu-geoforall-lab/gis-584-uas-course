@@ -2,7 +2,7 @@
 topic: "Topic 4B: GIS Analytics"
 title: "Point cloud data analysis"
 subtitle: "Topic 4B: GIS Analytics"
-date: 9/29/2025
+date: 9/28/2026
 activity: Lecture
 ---
 

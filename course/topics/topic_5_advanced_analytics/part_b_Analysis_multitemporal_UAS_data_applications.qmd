@@ -2,7 +2,7 @@
 topic: "Topic 5B: Advanced Analytics"
 title: "Analysis of multitemporal UAS data and its applications"
 subtitle: "Topic 5B: Advanced Analytics"
-date: 10/20/2025
+date: 10/21/2026
 activity: Lecture
 ---
 

@@ -2,8 +2,8 @@
 topic: "Topic 1A: UAS Basics"
 subtitle: "UAS systems and applications"
 title: "Assignment 1A"
-date: 8/20/2025
-assignment-due-date: 8/27/2025
+date: 8/19/2026
+assignment-due-date: 8/26/2026
 activity: Lab
 ---
 

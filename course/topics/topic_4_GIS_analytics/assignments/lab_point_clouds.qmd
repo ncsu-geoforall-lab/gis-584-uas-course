@@ -2,7 +2,6 @@
 title: "Lab: Processing lidar and UAS SfM point clouds"
 subtitle: "Analyzing and Visualizing surfaces from multiple return lidar data"
 author: Corey T. White
-date: 9/24/2025
 format: html
 toc-depth: 4
 ---

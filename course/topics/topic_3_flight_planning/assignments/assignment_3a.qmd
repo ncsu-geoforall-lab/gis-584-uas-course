@@ -2,8 +2,8 @@
 topic: "Topic 3A: UAS Flight Planning"
 subtitle: "Terrain Analysis of the flight site using GIS tools"
 title: "Assignment 3A"
-date: 9/15/2025
-assignment-due-date: 10/1/2025
+date: 9/14/2026
+assignment-due-date: 9/30/2026
 activity: Lab
 notebook-view:
   - notebook: flight_plan_analysis.ipynb
