@@ -2,10 +2,12 @@
   activity: "Assignment Due"
   topic: "Topic 1: UAS Basics"
   title: "Assignment 1A - UAS Basics Presentations"
+  assignment-due-date: 8/27/2025
 
 - date: 9/1/2025
   topic: "Labor Day"
   title: "Labor Day - No Class"
+  activity: "No Class"
   description: "University closed for Labor Day"
 
 # - date: 9/3/2025
@@ -22,6 +24,7 @@
 - date: 9/16/2025
   topic: "Wellness Day"
   title: "Wellness Day - No Class"
+  activity: "No Class"
 
 - date: 9/17/2025
   activity: "Field Trip"
@@ -37,6 +40,7 @@
 - date: 10/13/2025
   topic: "Fall Break"
   title: "Fall Break - No Class"
+  activity: "No Class"
 
 - date: 10/15/2025
   activity: "Guest Speaker"
@@ -81,11 +85,12 @@
 - date: 11/24/2025
   topic: "Project"
   title: "Work on project"
-  activity: Project Work Day
+  activity: Project
 
 - date: 11/26/2025
   topic: "Thanksgiving Break"
   title: "Thanksgiving Break - No Class"
+  activity: "No Class"
 
 - date: 12/1/2025
   topic: "Project"

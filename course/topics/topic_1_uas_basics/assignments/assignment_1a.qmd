@@ -4,7 +4,7 @@ subtitle: "UAS systems and applications"
 title: "Assignment 1A"
 date: 8/20/2025
 assignment-due-date: 8/27/2025
-activity: Assignment/Lab
+activity: Lab
 ---
 
 

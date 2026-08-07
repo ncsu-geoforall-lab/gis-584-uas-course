@@ -1,5 +1,5 @@
 ---
-topic: "Midterm: Fall 2025"
+topic: "Midterm"
 title: "Midterm Rubric"
 subtitle: "Midterm Rubric"
 # date: 10/6/2025

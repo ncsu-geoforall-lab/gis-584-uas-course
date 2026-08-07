@@ -1,7 +1,7 @@
 ---
-topic: "Topic 6: Machine Learning/AI"
+topic: "Topic 6B: Machine Learning & AI"
 title: "Change Detection"
-subtitle: "Topic 6B: Machine Learning/AI"
+subtitle: "Topic 6B: Machine Learning & AI"
 date: 11/12/2025
 author: Corey White
 activity: Lecture

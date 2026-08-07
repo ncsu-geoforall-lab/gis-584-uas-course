@@ -1,9 +1,9 @@
 ---
-topic: "Topic 3: UAS Flight Planning"
+topic: "Topic 3A: UAS Flight Planning"
 title: "UAS Flight Planning"
 subtitle: "Topic 3: UAS Flight Planning"
 date: 9/15/2025
-activity: Lecture/Assignment
+activity: "Lecture & Lab"
 ---
 
 ## Outline

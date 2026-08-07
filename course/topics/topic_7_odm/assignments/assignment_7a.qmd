@@ -1,5 +1,5 @@
 ---
-topic: "Topic 7: OpenDroneMap"
+topic: "Topic 7A: OpenDroneMap"
 subtitle: "WebODM"
 title: "OpenDroneMap"
 bibliography: ../references.bib
@@ -9,7 +9,7 @@ date: 11/24/2025
 format: html
 # from: markdown+emoji
 toc-depth: 4
-activity: Assignment/Lab
+activity: Lab
 keep-ipynb: true
 ---
 

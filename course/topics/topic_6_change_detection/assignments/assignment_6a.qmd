@@ -1,15 +1,14 @@
 ---
-topic: "Topic 6A: Machine Learning/AI"
+topic: "Topic 6A: Machine Learning & AI"
 subtitle: "UAS Image Classification"
 title: "Assignment 6A"
-original-assignment-due-date: 11/06/2024
 assignment-due-date: 12/1/2025
 author:
     - Corey White
-date: 11/10/25
+date: 11/10/2025
 format: html
 toc-depth: 4
-activity: Assignment/Lab
+activity: Lab
 keep-ipynb: true
 notebook-view:
   - notebook: Assignment6A.ipynb

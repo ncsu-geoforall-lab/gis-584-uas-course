@@ -1,5 +1,5 @@
 ---
-topic: "Topic 6: Machine Learning & AI"
+topic: "Topic 6A: Machine Learning & AI"
 title: "Image Classification"
 subtitle: "Topic 6A: Machine Learning & AI"
 date: 10/29/2025

@@ -1,10 +1,10 @@
 ---
-topic: "Topic 3: UAS Flight Planning"
+topic: "Topic 3A: UAS Flight Planning"
 subtitle: "Terrain Analysis of the flight site using GIS tools"
 title: "Assignment 3A"
 date: 9/15/2025
 assignment-due-date: 10/1/2025
-activity: Assignment/Lab
+activity: Lab
 notebook-view:
   - notebook: flight_plan_analysis.ipynb
     title: "Terrain Analysis of the flight site using GIS tools"
