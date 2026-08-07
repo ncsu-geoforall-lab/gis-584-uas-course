@@ -1,0 +1,121 @@
+---
+title: "Past Projects"
+---
+
+Student projects from previous offerings of the course.
+
+### Projects Spring 2024
+
+- Jessica R. Baumann: Evaluating novel invasive aquatic plant management operations using true color and multispectral UAS imagery
+- Clayton Burleson: UAS Derived Time Series for Point Beach, Wisconsin,
+2020
+- Kenneth Dunn: Mapping Landcover Changes in Horry County South Carolina
+- Lisa Fraley-McNeal: Investigating the use of UAS Footage as a Cost-Effective Method to Support Post-Construction Restoration Monitorin
+- Christopher Franz: Hurricane Helene SfM DEM Generation for Boone, NC
+- Benjamin Grimes: Impacts of the El Dorado Fire on Vegetation in Ford Canyon, California (2018-2020)
+- Truffaut Harper: Utilization of UAV Orthophotography for High Resolution Land Use Classification
+- Hannah Kyung: Hurricane Helene SfM DEM Generation for Henderson and Madison County, NC.
+- William LaForce: Generation of a 1m Digital Terrain Model from an Aerial Survey over Spruce Pine, NC in the Aftermath of Hurricane Helene
+- Richard Lee: Mapping Shoreline Erosion near North Topsail Beach
+- Hanne Parks: UAV for Fuel Flammability Analysis
+- Skylar Penney: Modeling Erosion and Dune Migration off North Carolinas' Coastline using UAS data and Geospatial Analytics
+- Will Rose: Supervised Classification Using Maximum Likelihood Algorithm and Different Sized Training Polygons at Lake Wheeler in Raleigh, NC
+- Christopher Stephens: Utilizing UAS to Monitor Avalanche Hazards
+- Isabella Thayer: Processing Post-Hurricane Imagery: Hurricane Helene in Western NC
+- Amelia G. Woodall: Structure from Motion (SfM) Processing in Areas Impacted by Hurricane Helene – Generation of a 1m DTM in Blowing Rock,
+North Carolina
+- Kyle Zampongna: Using UAS to investigate damage in a mountain town following Hurricane Helene
+
+### Projects 2021
+
+- Bartenfelder, Amy: Areal Changes at LAke Wheeler Field After the 2017 Hurricane Season
+- Webb, Andrew: Cabon Mapping of Agricultural Fields
+- Williams, Chantel: Northern Umstead State Park - Vegetation
+- Goodnight, Dallas: Can NC One Map Orthoimagery be used to accurately measure Cape Lookout Park shoreline elevation changes over time?
+- Wingler, Dylan: Using LiDAR to Compare Impact between Hurricane Matthew and Sandy on Cape Hatteras, NC
+- Pelfrey, Hank: Estimating Individual Tree Location and Height with UAS Photogrammetry
+- Dorner, Judy: Object detection in UAS Imagery Using Machine Learning Applications
+- Moy, Matthew: Creating and Interpolated DSM of Downtown Cary, NC
+- Perry, Marcus: Mars Science Helicopter: Exploring Photogrammetry with Ingenuity's NavCam Data
+- Sawtelle, Macy: Testing the Capability of Unmanned Aircraft vehicles to Monitor Forest Regeneration Activities
+- Williams, Patrick: Using Unmanned Aerial System Imagery to Perform Solar Potential Analysis
+- Erlenbach, Peter: Image Classification Using Drone Data
+- Johnson, Randy: Urban Landcover Classification Utilizing UAS
+- Hill, Russell: Canyonlands National Park - 3D mash and a Scene Layer Package
+- Farrell, Sean: Multiple Return Lidar Analysis of Hydrologic Changes Due to Highway Flooding from Hurricane Florence
+- Tan, Samantha: The Impact of hurricane Events on Coastlines: Measuring Coastline Loss with Pre and Post Michael Orthophotogrammetry
+- Herzig, Bill: Drone vs Satellite - Multispectral NDVI Image Pixel Analysis
+
+### Projects 2020
+
+- Adams, Eric: Environmental Study Using UAS Data in the Edenton Bay, NC Region
+- Bert, Steve: Optimizing Parking Management for the City of Raleigh. An Unmanned Aircraft Systems Inventory Approach
+- Davis, Britt: Structure from Motion as a Participatory Design Tool: The Landscape Architect’s Guide to Better Models and Deeper Community Engagement
+- Franklin, Samuel: A Comparative Analysis of UAS in Archeology
+- McDonald, Christopher: UAS Technology for Mapping Urban Development – SouthEnd District of Charlotte, NC
+- Parish, William: UAS Implementation for Civil Engineering Design and Construction: NC 12 Bridge near Rodanthe Study
+- Phillips, Ryan: Evaluating the Effect of Image Resolution on Digital Surface Model Construction and Usefulness
+- Pierson, Gardner: The Use of High Resolution UAS Data vs Traditional Ariel Imaging to Predict Inundation and Potential Urban Impact on the Southern Slope of Mt. Etna, Italy, Using a Lava Flow Emplacement Model.
+- Signor, Kari: Exploring Lidar Classification Methods: Archaeological Applications in the Maya Lowlands
+- Spear, Michael: Using UAS Umagery for Land Cover Classification
+- Watts, Matthew: Exploring LiDAR in Area of Wildfire and Assessing the Benefits of Adding UAS Data
+
+### Projects 2019
+
+- Baker, Kurt: Effective ground classification of non-uniform laser data
+- Brown, Tamika: The Implications of Using Unmanned Aerial Systems to Monitor Hazardous Waste Facility Sites and Better Understand Community Endangerment within the City of Chicago
+- Charping, Charlie: UAS Technology for Open Pit Mining
+- Conrad, Matt: 3D Modelling from Video: Technology Application
+- Cummings, John: Automated Detection of Roadway Features Via UAS
+- Davis, Jeremy: Creating a Basis for the Influence of Elevation on Wheat Varieties in North Carolina
+- Groh, Erica: Proposed UAS Survey of Alluvial Fans in California
+- Hoffman, Dallas: Analysis of Multiple Return Lidar in ArcGIS
+- Jones, Alli: LIDAR and UAV to Monitor Beach Nourishment - Emerald Isle, NC
+- Ma, Xingli: Use of UAS to Detect Disease in Soybeans
+- Nicholas, D. Chase: Tracking Crop Development with UAVs: Using SfM to Estimate Plant Height and Volume
+- Oberrender, Daniel: Cave Detection using Local Relief Model derived from UAS SfM
+- Potter, Andrew: Coastal Change Analysis of the Cape Lookout National Seashore
+- Ruiz, Rachel: Implementation of Unmanned Aerial System to Conduct Bridge Inspection
+- Scheip, Corey: UAS Imagery to Supplement Lidar-Based Landslide Programs
+- Wheaton, James: Utilizing UAS to Generate Land Cover Data
+- Williams, Caleb: Unmanned Aerial Systems for Waterfowl Population Studies at the Tom Yawkey Wildlife Center
+
+### Projects 2018
+
+- Albert, James: A New Approach to Landfill Management in the Solid Waste Industry
+- Anderson, Alexander: Using UAS Structure from Motion and and LiDAR DSMs to Identify, Monitor and Mitigate Coastal Erosion In Okaloosa County
+- Bastias, Sabina and Montgomery, Kellyn: Combining Nadir and Oblique Imagery to Address Distortion in UAS Data
+- Catlow, Maureen, Hahn, Becca, and Voigt Erin: "RescUAV data after Hurricane Irma: Natural Disaster Analysis"
+- Dawson, Victor: ???
+- Edenhart-Pepe, Skyler and Pierce, Austin: Evaluating the use of time series UAS and Lidar data to monitor rate of change of hydrologic flow patterns on land development projects.
+- Felipe, Lauren: ???
+- Forte, Michael: Object Detection Using Structure From Motion Techniques
+- Howell, Andrew: Estimating Area and Standing Biomass of Zizania latifolia Using sUAS
+- Kesselring, Todd: Using LiDAR and NDVI for Vegetation Management in Utility Right of Ways
+- Lamb, Kelsey: Mapping surface water and impervious surface
+- Liesch, Mandy: Changes in Water Balance Associated with Farm Development
+- Meyers, William: Measuring and Modeling Biomass of Pines at Tatum Farm
+- Schrum, Paul: 3D UAV track in Blender: A Blender Addon to import, edit, then export UAV trajectories
+- Suffern, Carrie: Monitoring Drainage Issues at a Small Farm: Use of UAS DSMs and LiDAR DEMs to Forecast Storm Runoff and Monitor Sinkhole Formation
+- Vincent, Sarah: UAV versus Statewide Contours, is it worth it to move dirt?
+
+### Projects 2016
+
+- Travis Howell: Mapping volume of wood chip pile
+- Corbin Kling: Jockey's Ridge State Park: a potential Mars dune analog
+- Nicholas Kruskamp: Forest structure
+- William Ross: Water Surface Elevation Generation & Storm Debris Volume Estimation using UAS
+- Joshua Rudd: Crop growth monitoring using sUAS
+
+### Projects 2015
+
+- Dyer Tristan: Barrier island monitoring of volume change
+- Foley Molly: Mapping forest fragmentation in urbanizing landscape using sUAS
+- Reckling William: Utilities
+- Bayasgalan Gantulga: Beaver dam impact assessment
+- Belica Laura: Monitoring grass conditions under different levels of management (change to solar irradiation from UAS DSM?)
+- Harmon Brendan: Gully monitoring and volume change assesment
+- Petras Vaclav: Optimizing point cloud density for modeling microtopography controls over surface flow.
+- Petrasova Anna: Extracting bare earth from sUAS using lower resolution bare earth lidar
+- Smart Lindsey Suzanne: Mapping coastal plain microtopography and its impact on surface water distribution
+- Velasquez Montoya Liliana: Mapping soil erosion using sUAS DEMs

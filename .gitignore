@@ -80,3 +80,9 @@ course/topics/midterm/flight_subset.zip
 *.dronelink
 flight_subset/
 **/*.quarto_ipynb
+
+# Quarto jupyter working files (including numbered leftovers)
+*.quarto_ipynb*
+
+# Untracked by decision (Fall 2026): intro notebook pending adoption
+course/topics/topic_intro_notebooks/

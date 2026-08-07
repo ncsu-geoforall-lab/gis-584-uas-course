@@ -47,8 +47,9 @@ The schedule listing is generated from the front matter of each topic's `part_*.
 ### Special Files
 
 - **_variables.yml**: Contains global variables used throughout the course.
-- **_quarto.yml**: Quarto project configuration file.
+- **_quarto.yml**: Quarto project configuration, including the explicit sidebar tree.
 - **course/content/special_dates.yml**: Contains important dates for the course.
+- **CONTRIBUTING.md**: Topic layout convention, frontmatter schema, and the new-semester checklist.
 
 ### Optimize Images
 
@@ -78,10 +79,12 @@ The site is deployed to GitHub Pages by the `Quarto Publish` workflow (`.github/
 
 ## Install Python Dependencies
 
+Dependencies are managed with [uv](https://docs.astral.sh/uv/):
+
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt
+uv venv
+uv pip install -r requirements.txt
+source .venv/bin/activate
 ```
 
 ## Authors

@@ -14,11 +14,11 @@ quarto render           # full site render into docs/
 quarto render course/topics/topic_2_sfm/assignments/assignment_2a.qmd   # single file
 ```
 
-Some pages execute Python (jupyter engine). Use the repo venv:
+Some pages execute Python (jupyter engine). Dependencies are managed with uv:
 
 ```bash
-python3 -m venv venv && source venv/bin/activate
-pip3 install -r requirements.txt
+uv venv && uv pip install -r requirements.txt
+source .venv/bin/activate
 ```
 
 Image optimization (all images should be webp):
@@ -37,12 +37,13 @@ mogrify -format webp -quality 80 *.{png,PNG,jpg,JPG}
 
 ## Content architecture
 
-The site is driven by Quarto conventions in `_quarto.yml`; file naming and frontmatter are load-bearing:
+The site is driven by Quarto conventions in `_quarto.yml`; file naming and frontmatter are load-bearing. CONTRIBUTING.md is the authoritative reference for the layout and frontmatter schema.
 
-- **Topics** live in `course/topics/topic_N_<name>/`. A topic has an `index.qmd`, content pages named `part_*.qmd` (or subtopic dirs like `2A_photogrammetry_and_SfM/` with their own `index.qmd`), `lectures/lecture_*.qmd` (Reveal.js slides), `assignments/assignment_*.qmd`, and `images/`.
-- **Sidebar** is auto-generated from the glob `course/topics/**/part_*.qmd` (numbered, depth 2). A page only appears in the Topics sidebar if it matches that pattern.
-- **Schedule** (`course/schedule.qmd`) is a listing built from frontmatter of `part_*.qmd`, `assignments/assignment_*.qmd`, and `course/content/special_dates.yml`. Fields used: `date`, `topic`, `activity`, `title`, `assignment-due-date`. Set `hide-from-listing: true` to keep a page out of the schedule. One-off dates (holidays, project milestones, due-date overrides) go in `special_dates.yml`.
-- **`_variables.yml`** holds all semester-specific values: term, syllabus/Moodle/Panopto links, software versions (GRASS, Agisoft, WebODM), and dataset URLs on Google Cloud Storage (`gis-course-data` bucket). Pages reference them via `{{< var ... >}}` shortcodes. For a new semester, update this file rather than editing links inline in qmd files.
+- **Topics** live in `course/topics/topic_N_<name>/` with a uniform shape: `index.qmd` (landing page with `title`, `description`, `order`), content pages `part_<letter>_<slug>.qmd`, `lectures/lecture_N<letter>.qmd` (Reveal.js decks, always depth 4 so the hardcoded `../../../../theme.scss` resolves; every deck has a "Return Home" footer), `assignments/assignment_N<letter>.qmd`, optional `assignments/lab_*.qmd` sub-lab manuals, and `images/` (webp).
+- **Sidebar** is an explicit per-topic tree in `_quarto.yml` (NOT a glob). New pages must be added there manually and linked from the topic's `index.qmd`.
+- **Topics index** (`course/topics/index.qmd`) is a listing over `topic_*/index.qmd` sorted by the `order` frontmatter field; it needs no maintenance when topics change.
+- **Schedule** (`course/schedule.qmd`) is a listing built from frontmatter of `part_*.qmd`, `assignments/assignment_*.qmd`, `course/topics/midterm/index.qmd`, and `course/content/special_dates.yml`. Fields used: `date`, `topic`, `activity`, `title`, `assignment-due-date`. The `topic:` string format is `"Topic <N><letter>: <Canonical Name>"` and `activity:` is a controlled enum (`Lecture | Lab | Lecture & Lab | Assignment Due | Exam | Field Trip | Guest Speaker | Project | No Class`); both are exact-match grouping keys. Pages whose filenames don't match the globs (labs, demos, references) stay off the schedule automatically.
+- **`_variables.yml`** holds all semester-specific values: term, syllabus/Moodle/Panopto links, software versions (GRASS, Agisoft, WebODM), and dataset URLs on Google Cloud Storage (`gis-course-data` bucket). Pages reference them via `{{< var ... >}}` shortcodes. For a new semester, update this file rather than editing links inline in qmd files. The nested `lake_wheeler:`/`wake_waste_transfer_center:` data tree is not yet referenced by pages; it is kept for future use (candidate for a STAC catalog).
 
 ## Conventions
 
