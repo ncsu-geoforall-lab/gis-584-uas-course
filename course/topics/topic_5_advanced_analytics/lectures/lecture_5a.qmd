@@ -5,6 +5,7 @@ author: "Helena Mitasova, Anna Petrasova, Justyna Jeziorska & Corey White"
 format:
   revealjs:
     theme: [simple, ../../../../theme.scss]
+    footer: "[Return Home](../part_a_UAS_lidar_data_comparison_fusion_analysis.qmd)"
 ---
 
 ## Outline

@@ -19,10 +19,146 @@ website:
       - course/projects.qmd
 
   sidebar:
-    - contents: course/topics/**/part_*.qmd
+    - id: topics
       title: Topics
-      depth: 2
-      numbered: true
+      collapse-level: 1
+      contents:
+        - href: course/topics/index.qmd
+          text: Overview
+        - section: "Topic 1: UAS Basics"
+          href: course/topics/topic_1_uas_basics/index.qmd
+          contents:
+            - text: "1A: Introduction to UAS"
+              href: course/topics/topic_1_uas_basics/part_a_introduction.qmd
+            - text: "1B: Rules and Regulations"
+              href: course/topics/topic_1_uas_basics/part_b_rules_regs.qmd
+            - section: Slides
+              contents:
+                - text: "Lecture 1A"
+                  href: course/topics/topic_1_uas_basics/lectures/lecture_1a.qmd
+                - text: "Lecture 1B"
+                  href: course/topics/topic_1_uas_basics/lectures/lecture_1b.qmd
+            - section: Assignments
+              contents:
+                - text: "Assignment 1A"
+                  href: course/topics/topic_1_uas_basics/assignments/assignment_1a.qmd
+                - text: "Assignment 1B"
+                  href: course/topics/topic_1_uas_basics/assignments/assignment_1b.qmd
+            - text: "Reference: FAA Part 107 Guide"
+              href: course/topics/topic_1_uas_basics/faa_part_107_guide.qmd
+        - section: "Topic 2: Structure from Motion"
+          href: course/topics/topic_2_sfm/index.qmd
+          contents:
+            - text: "2A: Photogrammetry and SfM"
+              href: course/topics/topic_2_sfm/part_a_images_to_3d.qmd
+            - text: "2B: Imagery Processing"
+              href: course/topics/topic_2_sfm/part_b_img_processing_sfm.qmd
+            - section: Slides
+              contents:
+                - text: "Lecture 2A"
+                  href: course/topics/topic_2_sfm/lectures/lecture_2a.qmd
+                - text: "Lecture 2B"
+                  href: course/topics/topic_2_sfm/lectures/lecture_2b.qmd
+            - section: Assignments
+              contents:
+                - text: "Assignment 2A"
+                  href: course/topics/topic_2_sfm/assignments/assignment_2a.qmd
+                - text: "Assignment 2B"
+                  href: course/topics/topic_2_sfm/assignments/assignment_2b.qmd
+            - text: "Demo: Structure from Motion"
+              href: course/topics/topic_2_sfm/sfm_demo.qmd
+        - section: "Topic 3: UAS Flight Planning"
+          href: course/topics/topic_3_flight_planning/index.qmd
+          contents:
+            - text: "3A: UAS Flight Planning"
+              href: course/topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd
+            - section: Slides
+              contents:
+                - text: "Lecture 3A"
+                  href: course/topics/topic_3_flight_planning/lectures/lecture_3a.qmd
+            - section: Assignments
+              contents:
+                - text: "Assignment 3A"
+                  href: course/topics/topic_3_flight_planning/assignments/assignment_3a.qmd
+        - section: "Topic 4: GIS Analytics"
+          href: course/topics/topic_4_GIS_analytics/index.qmd
+          contents:
+            - text: "4A: Analysis of UAS Data Products"
+              href: course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.qmd
+            - text: "4B: Point Cloud Analysis"
+              href: course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.qmd
+            - section: Slides
+              contents:
+                - text: "Lecture 4A"
+                  href: course/topics/topic_4_GIS_analytics/lectures/lecture_4a.qmd
+                - text: "Lecture 4B"
+                  href: course/topics/topic_4_GIS_analytics/lectures/lecture_4b.qmd
+            - section: Assignments
+              contents:
+                - text: "Assignment 4A"
+                  href: course/topics/topic_4_GIS_analytics/assignments/assignment_4a.qmd
+                - text: "Lab: Volumes"
+                  href: course/topics/topic_4_GIS_analytics/assignments/lab_volumes.qmd
+                - text: "Lab: DSM Analysis"
+                  href: course/topics/topic_4_GIS_analytics/assignments/lab_dsm_analysis.qmd
+                - text: "Assignment 4B"
+                  href: course/topics/topic_4_GIS_analytics/assignments/assignment_4b.qmd
+                - text: "Lab: Point Clouds"
+                  href: course/topics/topic_4_GIS_analytics/assignments/lab_point_clouds.qmd
+        - section: "Topic 5: Advanced Analytics"
+          href: course/topics/topic_5_advanced_analytics/index.qmd
+          contents:
+            - text: "5A: UAS and Lidar Data"
+              href: course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.qmd
+            - text: "5B: Multitemporal UAS Data"
+              href: course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.qmd
+            - section: Slides
+              contents:
+                - text: "Lecture 5A"
+                  href: course/topics/topic_5_advanced_analytics/lectures/lecture_5a.qmd
+                - text: "Lecture 5B"
+                  href: course/topics/topic_5_advanced_analytics/lectures/lecture_5b.qmd
+            - section: Assignments
+              contents:
+                - text: "Assignment 5A"
+                  href: course/topics/topic_5_advanced_analytics/assignments/assignment_5a.qmd
+                - text: "Assignment 5B"
+                  href: course/topics/topic_5_advanced_analytics/assignments/assignment_5b.qmd
+        - section: "Topic 6: Machine Learning & AI"
+          href: course/topics/topic_6_change_detection/index.qmd
+          contents:
+            - text: "6A: Image Classification"
+              href: course/topics/topic_6_change_detection/part_a_image_classification.qmd
+            - text: "6B: Change Detection"
+              href: course/topics/topic_6_change_detection/part_b_change_detection.qmd
+            - section: Slides
+              contents:
+                - text: "Lecture 6A"
+                  href: course/topics/topic_6_change_detection/lectures/lecture_6a.qmd
+                - text: "Lecture 6B"
+                  href: course/topics/topic_6_change_detection/lectures/lecture_6b.qmd
+            - section: Assignments
+              contents:
+                - text: "Assignment 6A"
+                  href: course/topics/topic_6_change_detection/assignments/assignment_6a.qmd
+        - section: "Topic 7: OpenDroneMap"
+          href: course/topics/topic_7_odm/index.qmd
+          contents:
+            - text: "7A: OpenDroneMap"
+              href: course/topics/topic_7_odm/part_a_opendronemap.qmd
+            - section: Slides
+              contents:
+                - text: "Lecture 7A"
+                  href: course/topics/topic_7_odm/lectures/lecture_7a.qmd
+            - section: Assignments
+              contents:
+                - text: "Assignment 7A"
+                  href: course/topics/topic_7_odm/assignments/assignment_7a.qmd
+        - section: Midterm
+          href: course/topics/midterm/index.qmd
+          contents:
+            - text: "Midterm Rubric"
+              href: course/topics/midterm/fall2025.qmd
 
   page-footer: 
     center: 

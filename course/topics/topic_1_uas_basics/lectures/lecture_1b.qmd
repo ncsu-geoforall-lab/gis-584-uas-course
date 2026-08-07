@@ -5,6 +5,7 @@ author: "Justyna Jeziorska & Corey White"
 format:
     revealjs:
         theme: [simple, ../../../../theme.scss]
+        footer: "[Return Home](../part_b_rules_regs.qmd)"
 ---
 
 ## Objectives

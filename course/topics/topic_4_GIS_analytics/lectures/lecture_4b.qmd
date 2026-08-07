@@ -5,6 +5,7 @@ author: "Justyna Jeziorska, Helena Mitasova & Corey White"
 format:
     revealjs:
         theme: [simple, ../../../../theme.scss]
+        footer: "[Return Home](../part_b_point_cloud_analysis.qmd)"
 ---
 
 ## Outline

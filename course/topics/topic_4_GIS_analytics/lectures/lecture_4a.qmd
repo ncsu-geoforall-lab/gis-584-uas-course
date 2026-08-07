@@ -5,6 +5,7 @@ author: "Justyna Jeziorska, Helena Mitasova & Corey White"
 format:
     revealjs:
         theme: [simple, ../../../../theme.scss]
+        footer: "[Return Home](../part_a_analysis_uas_processing_results.qmd)"
 ---
 
 <section>

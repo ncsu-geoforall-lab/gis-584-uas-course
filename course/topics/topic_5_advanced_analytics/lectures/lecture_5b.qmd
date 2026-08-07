@@ -5,6 +5,7 @@ author: "Helena Mitasova, Anna Petrasova, Justyna Jeziorska & Corey White"
 format:
   revealjs:
     theme: [simple, ../../../../theme.scss]
+    footer: "[Return Home](../part_b_Analysis_multitemporal_UAS_data_applications.qmd)"
 ---
 
 ## Outline

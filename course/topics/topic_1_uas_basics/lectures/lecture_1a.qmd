@@ -5,6 +5,7 @@ author: "Justyna Jeziorska & Corey White"
 format:
     revealjs:
         theme: [simple, ../../../../theme.scss]
+        footer: "[Return Home](../part_a_introduction.qmd)"
 ---
 
 ## Objectives
