@@ -237,8 +237,8 @@ Note the accuracy of the DSM along the roads, interpret the observed gain and lo
 
 Use orthophotos from:
 
-- [Nov 2015]({{< var.data.lake_wheeler_flight_Nov_2015_orthos >}})
-- [March 2017]({{< var.data.lake_wheeler_flight_Mar_2017_orthos >}})
-- [June 2017]({{< var.data.lake_wheeler_flight_Jun_2017_orthos >}})
+- [Nov 2015]({{< var data.lake_wheeler_flight_Nov_2015_orthos >}})
+- [March 2017]({{< var data.lake_wheeler_flight_Mar_2017_orthos >}})
+- [June 2017]({{< var data.lake_wheeler_flight_Jun_2017_orthos >}})
 
 

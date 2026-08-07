@@ -71,29 +71,31 @@ data:
   lake_wheeler_flight_Sept_17_2025_flight_data: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/091725.tar.xz
   lake_wheeler_flight_Sept_17_2025_point_cloud: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/points_fall_25.copc.laz
   lake_wheeler_flight_Sept_17_2025_flight_subset: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/flight_subset.zip
-  wake_waster_transfer_center:
-    2017:
-      02:
-        images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Wake%20Waste%20Transfer%20Center/070217/Flight_data.ziphttps://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip
+  # Nested per-site/date catalog. Not yet referenced by pages; kept for future use
+  # (candidate for reorganization as a STAC catalog.json on the gis-course-data bucket).
+  wake_waste_transfer_center:
+    "2017":
+      "02":
+        images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Wake%20Waste%20Transfer%20Center/070217/Flight_data.zip
   lake_wheeler:
-    2013:
+    "2013":
       lidar:
         las: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las
         laz: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.laz
-    2015:
-      11:
+    "2015":
+      "11":
         orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/112415/ortho_2015_11_24.pack
-    2017:
-      03:
+    "2017":
+      "03":
         orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/032917/ortho_2017_03_29.pack
-      06:
-        orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack 
-    2018:
-      02:
+      "06":
+        orthos: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack
+    "2018":
+      "02":
         images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip
         agisoft_project_files: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip
-    2024:
-      07:
+    "2024":
+      "07":
         images: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/flight_data.zip
         orthophoto: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif
         dsm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif

@@ -17,13 +17,13 @@
   activity: "Assignment Due"
   topic: "Project"
   title: "Submit brief idea to the [project discussions forum](https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=200843)"
-  assignment-due-date: 9/8/25
+  assignment-due-date: 9/8/2025
 
-- date: 9/16/25
+- date: 9/16/2025
   topic: "Wellness Day"
   title: "Wellness Day - No Class"
 
-- date: 9/17/25
+- date: 9/17/2025
   activity: "Field Trip"
   topic: "Topic 3: UAS Flight Planning"
   title: "UAS Flight at Lake Wheeler"
@@ -32,22 +32,22 @@
   activity: "Assignment Due"
   topic: "Project"
   title: "Project proposal due"
-  assignment-due-date: 9/29/25
+  assignment-due-date: 9/29/2025
 
-- date: 10/13/25
+- date: 10/13/2025
   topic: "Fall Break"
   title: "Fall Break - No Class"
 
-- date: 10/15/25
+- date: 10/15/2025
   activity: "Guest Speaker"
   topic: "TBD"
   title: "TBD"
 
-- date: 10/22/25
+- date: 10/22/2025
   topic: "Project"
   title: "Submit project progress report to the [project discussions forum](https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=200843)"
-  acitvity: "Assignment Due"
-  assignment-due-date: 10/22/25
+  activity: "Assignment Due"
+  assignment-due-date: 10/22/2025
 
 # - date: 11/3/25
 #   topic: "Midterm"
@@ -78,29 +78,29 @@
 #   title: "Intro to WebODM and ODM"
 #   activity: Lecture
 
-- date: 11/24/25
+- date: 11/24/2025
   topic: "Project"
   title: "Work on project"
   activity: Project Work Day
 
-- date: 11/26/25
+- date: 11/26/2025
   topic: "Thanksgiving Break"
   title: "Thanksgiving Break - No Class"
 
-- date: 12/1/25
+- date: 12/1/2025
   topic: "Project"
   title: "Project presentations"
-  assignment-due-date: 12/1/25
+  assignment-due-date: 12/1/2025
   activity: "Assignment Due"
 
-- date: 12/3/25
+- date: 12/3/2025
   topic: "Project"
   title: "Project presentations"
-  assignment-due-date: 12/1/25
+  assignment-due-date: 12/1/2025
   activity: "Assignment Due"
 
-- date: 12/8/25
+- date: 12/8/2025
   topic: "Project"
   title: "Project Report Due"
-  assignment-due-date: 12/8/25
+  assignment-due-date: 12/8/2025
   activity: "Assignment Due"
