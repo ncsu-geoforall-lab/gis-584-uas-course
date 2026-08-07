@@ -1,12 +1,24 @@
 ---
-topic: "Topic 2: Structure from Motion"
-title: "Structure from Motion"
-subtitle: "Topic 2: Structure from Motion"
-date: 9/3/2025
-activity: Topic
+title: "Topic 2: Structure from Motion"
+description: "Photogrammetry and Structure from Motion concepts, and processing UAS imagery into orthophotos and surface models."
+order: 2
 ---
 
-## [2A: Photogrammetry and Structure from Motion (SfM)](2A_photogrammetry_and_SfM/index.qmd)
+## Content
 
-## [2B: UAS Image Processing](2B_image_processing_and_structure_from_motion/index.qmd)
+- [2A: From images to 3D models: Photogrammetry and Structure from Motion concepts](part_a_images_to_3d.qmd)
+- [2B: Imagery processing and Structure from Motion (SfM)](part_b_img_processing_sfm.qmd)
 
+## Slides
+
+- [Lecture 2A: Photogrammetry and Structure from Motion Concepts](lectures/lecture_2a.qmd)
+- [Lecture 2B: Photogrammetry and SfM](lectures/lecture_2b.qmd)
+
+## Assignments
+
+- [Assignment 2A: 3D reconstruction from multiple photos](assignments/assignment_2a.qmd)
+- [Assignment 2B: Geoprocessing UAS imagery in Agisoft Metashape](assignments/assignment_2b.qmd)
+
+## Supplemental
+
+- [Structure from Motion demo](sfm_demo.qmd)

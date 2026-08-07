@@ -1,436 +1,264 @@
 ---
 title: "Photogrammetry and Structure from Motion Concepts"
-subtitle: "Center for Geospatial Analytics at North Carolina State University"
+subtitle: "GIS 584: UAS Mapping & Analytics"
 author: "Justyna Jeziorska, Helena Mitasova & Corey White"
 format:
-    revealjs:
-        theme: [simple, ../../../../theme.scss]
+  revealjs:
+    theme: [simple, ../../../../theme.scss]
+    slide-number: true
+    controls: true
+    progress: true
+    transition: slide
+    center: true
+    code-overflow: wrap
+    width: 1400
+    height: 800
+    chalkboard: true
+    footer: "[Return Home](../part_a_images_to_3d.qmd)"
+execute:
+  echo: false
 ---
 
-<section>
-    <h2>Objectives</h2>
-    <ul>
-        <li>Understand the role of remote sensing and photogrammetry in geospatial data aquisition</li>
-        <li>Describe different types of aerial photography and associated challenges for measurements</li>
-        <li>Understand why photogrammetry needs to be used to make measurements from aerial photographs</li>
-        <li>Understand Structure from Motion (SfM) concepts in creating 3D models from 2D images</li>
-    </ul>
-</section>
+**Photogrammetry & Structure from Motion (SfM) Concepts**  
+GIS 584 · UAS Mapping & Analytics
 
-<section>
-    <h2>What is Remote Sensing?</h2>
-::: {.columns}
-:::{.column width="60%"}
-::: {.incremental}
-- Sensing without contact
-- Acquiring data from a distance
-- Passive sensors: sensor captures reflected rays
-- Active sensors: sensor sends out rays and captures the return signal (lidar, radar, sonar)
-:::
-:::
-:::{.column width="40%"}
-![](../images/remote_sensing_photogrammetry.webp){width="100%"}
-:::
-:::
-</section>
-
-<section>
-    <h2>Photogrammetry</h2>
-    <ul>
-        <li class="fragment">3-D coordinate measuring technique that uses PHOTOGRAPHS as the fundamental medium for measurement (the science of taking precise measurements from photographs);</li>
-        <li class="fragment">Can be classified into two types: aerial and terrestrial (close range);</li>
-        <li class="fragment">Aerial Photogrammerty was a crucial development in map making</li>
-     </ul>
-</section>
-
-<section>
-    <h3>Vertical and oblique aerial imagery</h3>
-     <img class="fragment" src="../images/imagery_oblique.webp" width="70%">
-</section>
-
-<section>
-    <h2>Vertical aerial photography</h2>
-<p> Jockey's Ridge 1932</p>
-     <img src="../images/JockeysRidge1932full.webp" width="75%">
-</section>
-
-<section>
-    <h2>Oblique aerial photography</h2>
-<p> San Francisco Earthquake, 1906: Note the high distortion</p>
-     <img src="../images/san_francisco.webp" width="55%">
-</section>
-
-<section>
-    <h3>Photogrammetric process</h3>
-    <img class="fragment" src="../images/photogrammetric_proces.webp" width="90%">
-</section> 
-
-<section>
-### Geometry of aerial photograph
-::: {.columns}
-:::{.column width="50%"}
-![](../images/geometry_side.webp)
-:::
-:::{.column width="50%"}
-![](../images/geometry.webp)
-:::
-:::
-</section>
-
-<section>
-### Why do we need to process the images?
-
-From perspective to orthographic view
-
-::: {.columns}
-:::{.column width="50%"}
-![](../images/pespective_vs_orthographic.webp)
-:::
-:::{.column width="50%"}
-![](../images/scale.webp)
-:::
-:::
-</section>
-
-<section>
-### Why do we need to process the images?
-
-Perspective and relief distortion
-
-::: {.columns}
-:::{.column width="50%"}
-![](../images/pespective_vs_orthographic_image_plane.webp)
-:::
-:::{.column width="50%"}
-![](../images/disortion.webp)
-:::
-:::
-</section>
-
-<section>
-### Orthorectification - Perspective and relief distortion
-::: {.columns}
-:::{.column width="60%"}
-Process that removes:
-
-- geometric perspective
-- effects of relief displacement
-- optical distortions from the sensor
-
-from a photograph or digital image
-
-:::
-:::{.column width="40%"}
-![](../images/DSM_ortho.webp)
-![](../images/ortho_example.webp)
-:::
+::: notes
+Welcome everyone. Today we’ll connect the dots between *images* you capture with a drone and the *metrics* you can trust, orthophotos, point clouds, and elevation models.  
+By the end, you’ll understand why raw photos can’t be measured directly, what orthorectification does, and how SfM reconstructs 3D from overlapping 2D images.
+We’ll keep this practical and tie each idea to UAS field work and data QA.
 :::
 
-The resulting image - an **orthophoto** or **orthoimage**.
-</section>
+---
 
+## Objectives
 
-<section>
-    <h2>Orthorectification</h2>
-    <img src="../images/slide1.webp">
-</section>
-
-<section>
-    <h2>Orthorectification</h2>
-    <img src="../images/slide2.webp">
-</section>
-
-<section>
-    <h2>Orthorectification</h2>
-    <img src="../images/slide3.webp">
-</section>
-
-<section>
-    <h2>Orthorectification</h2>
-    <img src="../images/slide4.webp">
-</section>
-
-<section>
-    <h2>Orthorectification</h2>
-    <img src="../images/slide5.webp">
-</section>
-
-<section>
-    <h2>Orthorectification</h2>
-    <img src="../images/slide6.webp">
-</section>
-
-<section>
-    <h2>Orthorectification</h2>
-    <img src="../images/slide7.webp">
-</section>
-
-<section>
-### Orthophoto
-::: {.columns}
-:::{.column width="60%"}
-- Photo that is geometrically corrected and has a uniform scale;
-- Can be used to measure true horizontal distances (depending on cartographic projection and spatial extent)
+:::{.incremental}
+- Understand how remote sensing & photogrammetry support geospatial data acquisition
+- Recognize aerial photo types and the measurement challenges they introduce
+- Explain why image processing (orthorectification) is needed for measurements
+- Grasp SfM concepts for creating 3D models from 2D images
 :::
-:::{.column width="40%"}
-![](../images/ortho_example_measure.webp)
+
+::: notes
+These are the takeaways. We’ll move from fundamentals to workflow design.  
+Keep thinking about two questions: *What do you want to measure?* and *What accuracy do you need?*  
+Those answers determine flight planning, ground control, and processing parameters.
 :::
+
+---
+
+## What is Remote Sensing?
+
+- Sensing without contact: acquire data from a distance  
+- **Passive** sensors: measure reflected/emitted energy (RGB, multispectral, thermal)  
+- **Active** sensors: emit energy and measure returns (LiDAR, radar, sonar)
+
+::: notes
+Remote sensing gives us information without touching the surface.  
+Drones typically carry passive RGB or multispectral cameras; LiDAR UAS are active sensors and directly measure range.  
+Keep this distinction in mind, SfM uses *passive* imagery but *infers* depth from parallax.
 :::
-</section> 
 
-<section>
-### How do we get there?
-::: {.columns}
-:::{.column width="50%"}
-Old way: analogue
-![](../images/analogue.webp){ width="90%"}
+---
 
-Now: digital
-![](../images/digital.webp){ width="70%"}
+## Photogrammetry (Why it matters)
+
+- 3D coordinate measurement using photographs
+- Two broad modes: *aerial* vs *terrestrial (close-range)*
+- Historically crucial for mapping; now democratized via UAS
+
+::: notes
+Photogrammetry is the science of turning photos into measurements.  
+With UAS, we’ve moved from expensive manned flights to frequent, targeted surveys, faster iteration, but also new pitfalls like rolling shutter and lens distortions we must correct.
 :::
-:::{.column width="50%"}
-![](../images/orthophoto_how.webp){}
+
+---
+
+## Aerial Image Types
+
+:::{.incremental}
+- **Vertical**: camera nadir-pointing; lower perspective distortion; better for mapping
+- **Oblique**: camera tilted; richer façades/context; higher distortion; good for 3D
 :::
+
+::: notes
+Vertical images are standard for map accuracy and uniform scale.  
+Obliques capture façades and undercuts but bring strong perspective effects, useful for 3D context and texture, less for planimetric measurements unless carefully modeled.
 :::
-</section>
 
-<section class="smaller">
-    <h3>What do we need?</h3>
-    <ol>
-        <li class="fragment">Digital <strong>imagery</strong> with sufficient overlap;</li>
-        <li class="fragment">(Digital <strong>elevation</strong> model to remove the relief distortion)</li>
-        <li class="fragment">(Exterior <strong>orientation parameters </strong> from aerial triangulation or Inertial Measurement Unit (IMU) to remove tilt distortion);</li>
-        <li class="fragment">(<strong>Camera calibration</strong> report, to transform perspective to ortho projection);</li>
-        <li class="fragment">(<strong>Ground Control Points</strong> for georeferencing and to reduce distortions);</li>
-        <li class="fragment">Photogrammetric<strong> processing software</strong> that utilizes collinearity equations.</li>
-    </ol>
-    <p class="small fragment">Parameters 2,3,4 can be estimated from the images - see lecture on Imagery processing </p>
-</section>
+---
 
-<section>
-### 1. Digital imagery
-![](../images/digital_imagery.webp){.fragment}
+## Why Raw Photos Mislead
 
-::: {.columns}
-:::{.column width="50%"}
-![](../images/multiview.webp){.fragment}
+:::{.incremental}
+- Perspective projection (not orthographic)
+- Relief displacement: elevated features “lean” away from nadir
+- Lens and platform distortions (rolling shutter, radial/tangential lens errors)
 :::
-:::{.column width="50%"}
-![](../images/camera_sensor.webp){.fragment width="75%"}
+
+::: notes
+If you try to measure distances on a raw photo, elevation and tilt cause scale to vary across the image.  
+Orthorectification corrects these effects so you can trust the geometry.
 :::
+
+---
+
+## Orthorectification (What it does)
+
+- Removes perspective & relief distortion  
+- Compensates optical distortions (camera model)  
+- Produces a uniform-scale **orthophoto** suitable for measurement
+
+::: notes
+Think of orthorectification as “unwarping” the image onto a known surface using camera parameters and elevation.  
+The output is metrically reliable, *if* the inputs and models are correct.
 :::
-</section>
 
-<section class="smaller">
-### Location of the photo
-**Geotagging** a photograph - associating a photo with a geographical location (latitude, longitude, and usually altitude)
+---
 
-::: {.columns}
-:::{.column width="50%"}
-![](../images/geotag.webp)
+## What We Need (Inputs)
+
+:::{.incremental}
+1. Digital imagery with sufficient **overlap** (≥70% forward, ≥60% side as a baseline)
+2. **DEM/DTM** to remove relief distortion (or derive via SfM)
+3. **Exterior orientation** (IMU/PPK/RTK or estimated in bundle adjustment)
+4. **Camera calibration** (intrinsics: focal length, principal point, distortion)
+5. **Ground Control Points (GCPs)** for georeferencing & accuracy assessment
+6. Software implementing **collinearity equations** / bundle adjustment (SfM)
 :::
-:::{.column width="50%"}
-- In theory, every part of a picture can be tied to a geographic location, but in the most typical application, only **the position of the sensor** is associated with the **entire digital image**.
-- GPS in the camera or UAS measures location with very low accuracy.
+
+::: notes
+Overlap enables feature matching; more texture yields stronger geometry.  
+IMU/RTK help, but even with them, you’ll want checkpoints to validate accuracy.  
+Bundle adjustment simultaneously refines camera poses and 3D feature locations.
 :::
+
+---
+
+## Geotagging (Limits & Use)
+
+- Embeds camera position in EXIF (approximate location/altitude)
+- Useful for *initialization*, not precision georeferencing
+- Expect meter-level errors without RTK/PPK or GCPs
+
+::: notes
+Geotags get you in the right neighborhood.  
+For survey-grade outputs, you still need either high-quality GNSS (RTK/PPK) or well-placed GCPs and checkpoints to quantify accuracy.
 :::
-</section>
 
-<section>
-    <h2>Geotagging</h2>
-    <img src="../images/geotag1.webp">
-</section>
+---
 
-<section>
-    <h2>Geotagging</h2>
-    <img src="../images/geotag2.webp">
-</section>
+## Ground Control Points (GCPs)
 
-<section>
-    <h2>Geotagging</h2>
-    <img src="../images/geotag3.webp">
-</section>
-
-<section>
-    <h2>Geotagging</h2>
-    <img src="../images/geotag4.webp">
-</section>
-
-<section class="smaller">
-### 5. Ground Control Points
-- **GCP** - target in the project area with known 3 coordinates (X, Y, Z or lat, long, alt)
-- Accurate, well-placed, and marked GCPs are essential elements for model accuracy and georeferencing
-
-::: {.columns}
-:::{.column width="50%"}
-**Photo Identifiable:**
-- Any feature on the ground,
-  - Specific (e.g., corners)
-  - Unmovable
-  - Not covered by vegetation
-- It can be surveyed later on.
+:::{.incremental}
+- Marked or photo-identifiable, stable, and well-distributed
+- Known **X, Y, Z** with survey-grade accuracy
+- Essential to improve precision and to **validate** results (use checkpoints)
 :::
-:::{.column width="50%"}
-![](../images/GCPs.webp)
+
+::: notes
+Separate **GCPs** (to constrain the solution) from **checkpoints** (to evaluate it).  
+Distribute both across the project area, edges and varying elevations, to avoid biased solutions and inflated accuracy claims.
 :::
+
+---
+
+## From 2D Images to 3D (SfM)
+
+- Automated **feature matching** across overlapping images
+- **Bundle adjustment** estimates camera intrinsics/extrinsics + sparse 3D
+- Densification (stereo matching) → point cloud → mesh/DSM/orthophoto
+
+::: notes
+SfM recovers relative 3D structure from parallax; scale and orientation come from geotags, RTK/PPK, or GCPs.  
+Quality hinges on image texture, overlap, camera model, and outlier handling.
 :::
-</section>
 
-<section>
-## Ground Control Points
-::: {.columns}
-:::{.column width="50%"}
-Pre-marked (Panels): marking or painting figures or symbols on the ground before the UAS flies
+---
 
-![](../images/GCP_sketch.webp){.fragment width="75%"}
+## Multiple-View Geometry (Intuition)
+
+:::{.incremental}
+- **Correspondence**: find the same feature in different views
+- **Triangulation**: intersect rays from multiple cameras → 3D point
+- **Camera geometry**: solve for poses that best explain all matches
 :::
-:::{.column width="50%"}
-![](../images/GCP_photo.webp){.fragment}
+
+::: notes
+Every matched pixel defines a ray in 3D; with two or more rays we triangulate a point.  
+The optimization balances all matches, minimizing reprojection error while refining camera parameters, this is the heart of SfM accuracy.
 :::
+
+---
+
+## UAS Photogrammetric Workflow
+
+:::{.incremental}
+1. Mission planning (GSD target, overlap, altitude, speed, lighting, safety)
+2. Field ops (calibrated camera settings, consistent exposure, RTK/PPK optional)
+3. Control survey (GCPs + checkpoints; stable, visible, distributed)
+4. Processing (feature match → bundle adjust → densify)
+5. Products (orthophoto, DSM/DTM, contours) + **QA/QC** (residuals, RMSE/NMAD)
 :::
-</section>
 
-<section>
-    <h2>Why Ground Control Points?</h2>
-    <img class="fragment" src="../images/relative_absolute_orientation.webp">
-    <ul>
-        <li class="fragment">necessary for georeferencing if photos are not geotagged</li>
-        <li class="fragment">improve precision of the model</li>
-        <li class="fragment">important for quality control</li>
-    </ul>
-</section>
+::: notes
+Treat QA/QC as a product: report accuracy on **independent checkpoints**.  
+Inspect residuals, look for systematic tilt or doming, and check for artifacts on low-texture surfaces (water, uniform crops, snow).
+:::
 
-<section>
-    <h2>Why Ground Control Points?</h2>
-     <img src="../images/geotag3.webp">
-</section>
-<section>
-    <h2>Why Ground Control Points?</h2>
-     <img src="../images/geotagGCP1.webp">
-</section>
-<section>
-    <h2>Why Ground Control Points?</h2>
-     <img src="../images/geotagGCP2.webp">
-</section>
-<section>
-   <h2>From 2D images to a 3D model</h2>
-<ul>
-<li class="fragment"> orthophoto is a 2D image
-<li class="fragment"> elevation data are derived as part of orthorectification process
-<li class="fragment"> exact camera parameters and manually identified GCPs on the images were needed to derive a DEM
-<li class="fragment"> Structure from Motion: automated point matching, camera parameter estimation and 3D model generation
-</ul>
-</section>
+---
 
-<section>
-    <h2>Multiple-view geometry</h2>
-    <ul>
-        <li class="fragment"><strong>Scene geometry (structure):</strong> <br>Given 2D point matches in two or more images, where are the corresponding points in 3D?</li>
-        <li class="fragment"><strong>Correspondence (stereo matching):</strong> Given a point in just one image, how does it constrain the position of the corresponding point in another image? </li>
-        <li class="fragment"><strong>Camera geometry (motion):</strong> Given a set of corresponding points in two or more images, what are the camera matrices for these views?</li>
-    </ul>
-</section>
+## Common Pitfalls & Fixes
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <ul>
-        <li class="fragment">range imaging technique,</li>
-        <li class="fragment">process of estimating 3D structures from overlapping 2D image sequences,</li>
-        <li class="fragment">may be coupled with local motion signals</li>
-    </ul>
-</section>
+:::{.incremental}
+- **Low texture / repetitive patterns** → add obliques; fly lower; diversify look angles
+- **Rolling shutter** → shorter exposure, slower speed, global shutter if possible
+- **Doming / bowl surfaces** → stronger control (GCPs/RTK), better geometry
+- **Vegetation canopy bias** → model as DSM; don’t compare to DTM
+- **Shadowing/lighting changes** → plan time of day; manual exposure
+:::
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme01-01.webp" width="90%">
-</section>
+::: notes
+Most failures are geometric or radiometric: improve image geometry or stabilize exposure.  
+Always separate DSM vs DTM use-cases, don’t mistake canopy for ground.
+:::
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme02-01.webp" width="90%">
-</section>
+---
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme03-01.webp" width="90%">
-</section>
+## What We’ve Learned (Recap)
 
- <section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme04-01.webp" width="90%">
-</section>
+:::{.incremental}
+- Remote sensing basics; passive vs. active sensors
+- Why orthorectification is required for measurement
+- Inputs needed for reliable mapping (overlap, calibration, control)
+- How SfM recovers 3D and when it succeeds or fails
+:::
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme05-01.webp" width="90%">
-</section>
+::: notes
+You should now be able to plan a flight for a target GSD, choose control, and defend the accuracy of your products with checkpoints and transparent QA.
+:::
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme06-01.webp" width="90%">
-</section>
+---
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme07-01.webp" width="90%">
-</section>
+## Quick Activity (In-Class)
 
- <section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme08-01.webp" width="90%">
-</section>
+- Define a site, target GSD, and map scale
+- Pick overlap, altitude, and speed
+- Decide GCP count & placement + independent checkpoints
+- List expected products and accuracy targets (e.g., RMSE\_XY/Z)
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme09-01.webp" width="90%">
-</section>
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme11-02.webp" width="90%">
-</section>
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme12-02.webp" width="90%">
-</section>
+::: notes
+Work in teams for five minutes and sketch a plan.  
+We’ll compare choices and discuss trade-offs, this mirrors real pre-flight planning.
+:::
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme13-02.webp" width="90%">
-</section>
+---
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme14-02.webp" width="90%">
-</section>
+## References & Credits
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme15-02.webp" width="90%">
-</section>
+- Adapted from course slides: *UAS Mapping and Analytics – Photogrammetry and Structure from Motion Concepts* (NC State CGA)  
 
-<section>
-    <h2>Structure from Motion (SfM)</h2>
-    <img src="../images/SfM_scheme16-02.webp" width="90%">
-</section>
+---
 
-<section>
-    <h2>UAS Photogrammetric process</h2>
-    <img class="fragment" src="../images/uas_process.webp">
-    <p class="fragment">Throughout the whole process, it is important to remember</>
-    <ul>
-        <li class="fragment"><strong>What</strong> is the aim or the project? and </li>
-        <li class="fragment"><strong>What</strong> will be the data used for?</li>
-    </ul>
-</section>
-
-<section>
-   <h2>What we have learned</h2>
-    <ul>
-        <li class="fragment">What is remote sensing and photogrammetry</li>
-        <li class="fragment">Properties of aerial image</li>
-        <li class="fragment">Why do we need orthrectification to measure from aerial images</li>
-        <li class="fragment">What process allows us to extract 3D data from series of overlapping 2D images</li>
-    </ul>
-</section>
 
 

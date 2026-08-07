@@ -14,7 +14,7 @@ format:
     width: 1400
     height: 800
     chalkboard: true
-    footer: "[Return Home](../2B_image_processing_and_structure_from_motion/index.qmd)"
+    footer: "[Return Home](../part_b_img_processing_sfm.qmd)"
 execute:
   echo: false
 ---
@@ -443,7 +443,7 @@ Exterior orientation camera position (X, Y, Z) and yaw, pitch, roll. Logs/EXIF p
 ![](../images/log.webp){ width=60% }
 
 - Sometimes (most DJI products) exterior orientation parameters are saved in photos' EXIF file
-- Log contains information about the location of the camera, not the location of the depicted object - [more info in this section of lecture 3](./HM_Photogrammetry_and_SfM.html#/25)
+- Log contains information about the location of the camera, not the location of the depicted object - [more info in lecture 2A](lecture_2a.qmd)
 
 ::: notes
 Remember: logs tell you where the camera was, not the object. We’ll still need tie points and, ideally, GCPs to anchor the scene in the real world.
@@ -481,8 +481,8 @@ IO = camera intrinsics: focal length, principal point, lens distortion. Older wo
 ::: {.column width="50%"}
 
 - **GCP** - Target in the project area with known 3 coordinates (X, Y, Z or lat, long, alt)
-- For more information about placing targets and importance of GCPs see [this section of lecture 3](./HM_Photogrammetry_and_SfM.html#/30)
-- For more information about processing the data with GCPs see [intro to the assignment](./2017_Imagery_Processing_assignment_intro.html)
+- For more information about placing targets and importance of GCPs see [lecture 2A](lecture_2a.qmd)
+- For more information about processing the data with GCPs see [intro to the assignment](../assignments/assignment_2b.qmd)
 
 ::: 
 ::: {.column width="50%"}
@@ -1162,7 +1162,7 @@ For larger jobs, set up batches so stages run unattended. Save after each stage 
     - Photo alignment optimization
     - Measuring distances and volumes
     - Marker-based chunk alignment
-- More on GCP placing and processing in Agisoft see [intro to the assignment](./2017_Imagery_Processing_assignment_intro.html)
+- More on GCP placing and processing in Agisoft see [intro to the assignment](../assignments/assignment_2b.qmd)
 
 ::: notes
 Place markers, reproject on multiple photos, then optimize alignment with GCPs. Rebuild dense cloud/DSM/ortho afterward—optimization changes the geometry.
