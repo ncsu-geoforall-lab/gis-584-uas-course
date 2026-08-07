@@ -16,7 +16,7 @@ activity: Lecture
 
 ## Lecture
 
-* Lecture Slides: [Intro to OpenDroneMap](lecture.qmd)
+* Lecture Slides: [Intro to OpenDroneMap](lectures/lecture_7a.qmd)
 
 ##  Supplemental materials
 
@@ -27,7 +27,7 @@ activity: Lecture
 
 ## Assignment
 
-* [Intro to WebODM](assignment.qmd): Learn how to install and run WebODM on your local machine.
+* [Intro to WebODM](assignments/assignment_7a.qmd): Learn how to install and run WebODM on your local machine.
 
 ## Homework
 

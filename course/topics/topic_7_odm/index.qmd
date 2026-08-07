@@ -1,9 +1,17 @@
 ---
-topic: "Topic 7: Intro to WebODM and ODM"
-title: "Intro to WebODM and ODM"
-subtitle: "Topic 7: Intro to WebODM and ODM"
-date: 11/19/2025
-activity: Topic
+title: "Topic 7: OpenDroneMap"
+description: "Processing UAS imagery with open source tools: OpenDroneMap and WebODM."
+order: 7
 ---
 
-## [7A: Intro to OpenDroneMap ](7_OpenDroneMap/index.qmd)
+## Content
+
+- [7A: OpenDroneMap](part_a_opendronemap.qmd)
+
+## Slides
+
+- [Lecture 7A: Intro to OpenDroneMap](lectures/lecture_7a.qmd)
+
+## Assignments
+
+- [Assignment 7A: Intro to WebODM](assignments/assignment_7a.qmd)

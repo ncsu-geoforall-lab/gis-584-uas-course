@@ -15,7 +15,7 @@ format:
     width: 1400
     height: 800
     chalkboard: true
-    footer: "[Return Home](index.qmd)"
+    footer: "[Return Home](../part_a_opendronemap.qmd)"
 execute:
   echo: false
 ---
@@ -168,7 +168,7 @@ flowchart LR
 
 # **WebODM** {.text-center}
 
-[![](images/webodm-icon-64x64.png)](https://www.opendronemap.org/webodm/){fig-align="center"}
+[![](../images/webodm-icon-64x64.png)](https://www.opendronemap.org/webodm/){fig-align="center"}
 
 ## WebODM Overview
 
@@ -192,49 +192,49 @@ flowchart LR
 
 ### WebODM Dashboard
 
-![](images/webODM_dashboard.png)
+![](../images/webODM_dashboard.png)
 
 ---
 
 ### WebODM - New Project
 
-![](images/webODM_new_project.png)
+![](../images/webODM_new_project.png)
 
 ---
 
 ### Upload Images
 
-![](images/webODM_project.png)
+![](../images/webODM_project.png)
 
 ---
 
 ### (Optional) Create GCP file
 
-![](images/webODM_gcp.png)
+![](../images/webODM_gcp.png)
 
 ---
 
 ### Run Process
 
-![](images/webODM_run_process.png){width="50%"}
+![](../images/webODM_run_process.png){width="50%"}
 
 ---
 
 ### Inspect outputs 2D
 
-![Map View](images/webODM_mapview.png)
+![Map View](../images/webODM_mapview.png)
 
 ---
 
 ### Inspect outputs 3D
 
-![Potree Viewer](images/webODM_3dview.png)
+![Potree Viewer](../images/webODM_3dview.png)
 
 ---
 
 ### Export Assets
 
-![](images/webODM_assets.png){fig-align="center"}
+![](../images/webODM_assets.png){fig-align="center"}
 
 ---
 
