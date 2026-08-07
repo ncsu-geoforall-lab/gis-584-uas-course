@@ -32,9 +32,9 @@ title: "Topics"
 
 ## Topic 6: Machine Learning & AI
 
-[A. Topic 6: Image Classification](topics/topic_6_change_detection/part_6a.qmd)
+[A. Topic 6: Image Classification](topics/topic_6_change_detection/part_a_image_classification.qmd)
 
-[B. Topic 6: Change Detection](topics/topic_6_change_detection/part_6b.qmd)
+[B. Topic 6: Change Detection](topics/topic_6_change_detection/part_b_change_detection.qmd)
 
 
 ## Topic 7: Topic 7: OpenDroneMap

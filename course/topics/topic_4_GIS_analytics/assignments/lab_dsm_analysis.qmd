@@ -1,7 +1,6 @@
 ---
-title: "Assignment 4A - Analysis"
+title: "Lab: Analysis of UAS-derived DSMs and orthophotos"
 subtitle: "Analysis of UAS data processing results"
-assignment-due-date: 10/21/2025
 format: html
 toc-depth: 4
 ---

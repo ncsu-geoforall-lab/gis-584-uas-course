@@ -1,5 +1,5 @@
 ---
-topic: "Topic 6A: Machine Learning/AI"
+topic: "Topic 6B: Machine Learning/AI"
 subtitle: "UAS Change Detection"
 title: "Assignment 6B"
 original-assignment-due-date: 11/06/2024

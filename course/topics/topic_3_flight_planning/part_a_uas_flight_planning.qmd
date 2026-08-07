@@ -4,7 +4,6 @@ title: "UAS Flight Planning"
 subtitle: "Topic 3: UAS Flight Planning"
 date: 9/15/2025
 activity: Lecture/Assignment
-assignment-due-date: 10/1/2025
 ---
 
 ## Outline
@@ -53,7 +52,7 @@ assignment-due-date: 10/1/2025
 Prepare a flight plan:
 
 <!-- - [Flight planning in eMotion 3 software]() -->
-- [Flight plan analysis in GRASS](assignments/assignment_1a_grass.qmd)
+- [Flight plan analysis in GRASS](assignments/assignment_3a.qmd)
 
 ## Homework
 

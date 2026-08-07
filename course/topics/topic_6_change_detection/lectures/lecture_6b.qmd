@@ -15,7 +15,7 @@ format:
     width: 1400
     height: 800
     chalkboard: true
-    footer: "[Return Home](../part_6a.qmd)"
+    footer: "[Return Home](../part_b_change_detection.qmd)"
 execute:
   echo: false
 ---

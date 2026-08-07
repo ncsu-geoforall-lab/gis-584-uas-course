@@ -17,7 +17,7 @@ activity: Lecture
 
 ## Lecture
 
-- [Lecture Slides](lectures/change_detection.qmd)
+- [Lecture Slides](lectures/lecture_6b.qmd)
 
 ## Supplemental materials
 

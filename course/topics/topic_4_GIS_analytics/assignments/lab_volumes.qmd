@@ -1,10 +1,8 @@
 ---
-title: "Assignment 4A - Volumes"
+title: "Lab: Measuring volumes in Agisoft Metashape"
 subtitle: "Analysis of UAS data processing results"
-assignment-due-date: 10/17/2025
 format: html
 toc-depth: 4
-hide-from-listing: true
 ---
 
 ## Measurements in Agisoft Metashape

@@ -1,13 +1,12 @@
 ---
 topic: "Topic 3: UAS Flight Planning"
 subtitle: "Terrain Analysis of the flight site using GIS tools"
-title: "Assignment 3"
+title: "Assignment 3A"
 date: 9/15/2025
 assignment-due-date: 10/1/2025
 activity: Assignment/Lab
-hide-from-listing: true
 notebook-view:
-  - notebook: assignment_3a.ipynb
+  - notebook: flight_plan_analysis.ipynb
     title: "Terrain Analysis of the flight site using GIS tools"
     url: https://colab.research.google.com/drive/15oIWegngRpV4q13INV5uXzFC15ZTi-VO?usp=sharing
 ---
@@ -37,7 +36,7 @@ In order to execute a safe flight, you need to make sure that the flight path wi
 
 ### Compute a raster for elevation of the flight path
 
-For this analysis you can run GRASS GIS with the Lake_Wheeler_NCspm location. Create a new mapset to manage your flight analysis. 
+For this analysis you can run GRASS with the Lake_Wheeler_NCspm location. Create a new mapset to manage your flight analysis. 
 *Copy the unzipped location folder into your grassdata folder (in Windows in Documents)
 
 **REMEMBER** 

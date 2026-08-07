@@ -9,7 +9,7 @@ activity: Assignment/Lab
 
 ## Task
 
-- [Processing lidar and UAS SfM point clouds](../assignments/point_clouds.html)
+- [Processing lidar and UAS SfM point clouds](lab_point_clouds.qmd)
 
 ## Homework
 

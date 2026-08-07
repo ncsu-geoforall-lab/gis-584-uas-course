@@ -1,8 +1,6 @@
 ---
-topic: "Topic 1A: UAS Basics"
 title: "Step-by-Step Guide to Getting FAA Part 107 License"
 subtitle: "Step-by-Step Guide to Getting FAA Part 107 License"
-date: 8/18/2025
 author: 
     - Pratikshya Regmi
     - Corey T. White

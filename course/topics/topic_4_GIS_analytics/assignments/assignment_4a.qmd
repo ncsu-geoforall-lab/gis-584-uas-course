@@ -9,8 +9,8 @@ activity: Assignment/Lab
 
 ## Task
 
-- [Execute measurements in Agisoft Metashape](../assignments/volumes.html)
-- [Analyze differences in DSMs](../assignments/analysis.html) generated using different techniques or acquired at different times. Distinguish between errors, artifacts, and real change in vegetation and/or bare ground surface.
+- [Execute measurements in Agisoft Metashape](lab_volumes.qmd)
+- [Analyze differences in DSMs](lab_dsm_analysis.qmd) generated using different techniques or acquired at different times. Distinguish between errors, artifacts, and real change in vegetation and/or bare ground surface.
 
 ## Homework
 

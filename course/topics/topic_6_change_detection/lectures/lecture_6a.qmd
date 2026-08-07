@@ -14,7 +14,7 @@ format:
     width: 1400
     height: 800
     chalkboard: true
-    footer: "[Return Home](../part_6a.qmd)"
+    footer: "[Return Home](../part_a_image_classification.qmd)"
 execute:
   echo: false
 ---
