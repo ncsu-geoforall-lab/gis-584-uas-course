@@ -15,7 +15,7 @@ The focus of this project is on the analysis of UAS data rather than the data co
 
 ### Pre-Proposal
 
-- Submit a project pre-proposal to the [project discussion forum]({{< var course_params.moodle_project_pre_proposal_link >}}) on Moodle.
+- Submit a project pre-proposal to the [project discussion forum]({{< var course_params.project_discussions_link >}}) on Moodle.
 
 In the pre-proposal please define the scope of the project, the project location, data, and analysis you would like to perform.
 

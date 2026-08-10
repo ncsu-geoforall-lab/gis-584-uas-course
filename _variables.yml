@@ -3,9 +3,9 @@ course_params:
   course_website: "schedule.qmd"
   syllabus_link: "https://webappprd.acs.ncsu.edu/php/coursecat/syllabus.php?strm=2268&class_nbr=8156"
   moodle_link: "https://moodle-courses2527.wolfware.ncsu.edu/course/view.php?id=12591&bp=s"
-  moodle_forum_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=200840"
-  moodle_project_pre_proposal_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=200843"
-  moodle_project_proposal_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/assign/view.php?id=200885"
+  moodle_announcements_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478358"
+  project_discussions_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478361"
+  moodle_project_proposal_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/assign/view.php?id=1478415"
   panopto_link: "https://ncsu.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=a33b90fe-d4d1-47bb-9a0f-b1c1016650f3"
 
 software:
