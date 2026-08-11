@@ -7,21 +7,27 @@
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Justyna Jeziorska, Helena Mitasova &amp; Corey White">
-  <title>GIS/MEA 584: UAS Mapping and Analytics – Imagery Processing</title>
+  <title>UAS Mapping and Analytics – UAS Imagery Processing</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -30,10 +36,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-325e80447fc094eaf6b0fce49d02d209.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-37b489307523cca1917c1cad05027324.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -122,72 +130,234 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Imagery Processing</h1>
+  <h1 class="title">UAS Imagery Processing</h1>
   <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Justyna Jeziorska, Helena Mitasova &amp; Corey White 
+Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div>
 </div>
 </div>
 
 </section>
-<section id="objectives" class="slide level2">
+<section id="objectives" class="slide level2 center">
 <h2>Objectives</h2>
 <ul>
-<li><strong>Understand</strong> the photogrammetric data processing as a multistep process;</li>
-<li><strong>Indicate</strong> data needed for orthophoto/DTM generation from aerial imagery;</li>
-<li><strong>Understand</strong> the difference between interior and exterior orientation of the photo;</li>
-<li><strong>Describe</strong> the workflow of geoprocessing of aerial imagery in designated software (Agisoft Metashape Professional);</li>
+<li><strong>Understand</strong> the photogrammetric data processing as a multistep process</li>
+<li><strong>Indicate</strong> data needed for orthophoto/DTM generation from aerial imagery</li>
+<li><strong>Understand</strong> the difference between interior and exterior orientation of the photo</li>
+<li><strong>Describe</strong> the workflow of geoprocessing of aerial imagery</li>
 </ul>
+<aside class="notes">
+<p>Today we’ll walk the full photogrammetric pipeline as a multistep process. By the end, you’ll know exactly what data are needed to produce an orthophoto and DTM/DSM from aerial imagery, the difference between interior and exterior orientation, and how to run the complete workflow in Agisoft Metashape Professional.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="photogrammetric-process" class="slide level2">
+<section id="photogrammetric-process" class="slide level2 center">
 <h2>Photogrammetric process</h2>
 
-<img data-src="../images/photogrammetric_proces.webp" class="r-stretch"></section>
-<section id="photogrammetric-process-1" class="slide level2">
-<h2>Photogrammetric process</h2>
-
-<img data-src="../images/flowchart_processing.webp" class="r-stretch"></section>
-<section id="data-processing" class="slide level2">
+<img data-src="../images/flowchart_processing.webp" class="r-stretch"><aside class="notes">
+<p>This diagram is the big picture of the photogrammety process. We plan our flight, perform collect our data, process our data, and finally we are able to analyze our results.</p>
+<p>And today we are going to be focusing on data processing.</p>
+<p>So of you might be wondering why we are jumping ahead to data processing if we haven’t done flight planning or our flight yet…that is a good question, and the answer is that in order to better understand flght planning we first need to know how the data will be processed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="data-processing" class="slide level2 center">
 <h2>Data processing</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%% Photogrammetric big-picture workflow
+flowchart LR
+    A["Pre-Processing"] --&gt; B["Data Processing"]
+    B["Data Processing"] --&gt; C["Data Analysis &amp; Export"]
 
-<img data-src="../images/flowchart_processing_plain.webp" class="r-stretch"></section>
-<section id="uas-data" class="slide level2">
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Photogrammetry with SfM include 3 main steps, pre-processing, data processing, and analysis and export. Each step of course concains substeps which together form our full photogrammetric processing pipeline.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="photogrammetric-process-1" class="slide level2 center">
+<h2>Photogrammetric process</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%% Photogrammetric big-picture workflow
+flowchart LR
+  subgraph A["Pre-Processing"]
+    IMAGES["(UAS Images)"]
+    LOG["(Flight Log / EO)"]
+    GCP["(GCPs)"]
+  end
+
+  subgraph B["Data Processing"]
+    MATCH[Feature Matching]
+    SOLVE["Camera Solving
+        (SfM / Bundle Adjustment)"]
+    DENSE[Dense Point Cloud]
+    MESH[Mesh / Surface]
+  end
+
+  subgraph C["Data Analysis &amp; Export"]
+    ORTHO[Orthophoto]
+    DSM[DSM / DTM]
+    PCLOUD[Classified Point Cloud]
+    TEXMODEL[Textured 3D Model]
+    REPORT[Processing Report]
+  end
+
+  IMAGES --&gt; MATCH --&gt; SOLVE --&gt; DENSE --&gt; MESH
+  SOLVE -. Feedback loop .-&gt; IMAGES
+  LOG --&gt; SOLVE
+  GCP --&gt; SOLVE
+  DENSE --&gt; ORTHO
+  DENSE --&gt; DSM
+  DENSE --&gt; PCLOUD
+  MESH --&gt; TEXMODEL
+  SOLVE --&gt; REPORT
+  DENSE --&gt; REPORT
+  GCP --&gt; REPORT
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>This diagram is the big picture: images come in, features are matched, cameras are solved, dense geometry is built, cartographic products are exported. Keep this in mind; every button we click in software maps to one of these boxes.</p>
+<p>Note the feedback loops: if alignment is weak, we go back, clean images or add GCPs, then re-optimize. This is normal—not a failure—photogrammetry is iterative</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uas-data" class="slide level2 center">
 <h2>UAS data</h2>
 <h3 id="what-do-we-get-after-the-flight-mission">What do we get after the flight mission?</h3>
 
-<img data-src="../images/uas_data.webp" class="r-stretch"></section>
-<section id="digital-imagery" class="slide level2">
+<img data-src="../images/uas_data.webp" class="r-stretch"><aside class="notes">
+<p>So what do we get after the flight mission? You come home with three things: images, a flight log (often IMU/GNSS), and ideally GCP measurements. Everything else we’ll compute. The better these inputs, the less cleanup later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="digital-imagery" class="slide level2 center">
 <h2>Digital imagery</h2>
 
 <img data-src="../images/digital_imagery.webp" class="r-stretch"><ul>
 <li>usually on the camera SD card</li>
-<li>can be geotagged (depends on camera)
+<li>can be geotagged (depends on camera / UAS setup)
 <ul>
-<li>Camera lens location is “written into” each photo’s EXIF file</li>
-<li>this is not necessarily the case…</li>
+<li>Camera lens location is “written into” each photo’s EXIF file
+<ul>
+<li>this not always the case..</li>
+</ul></li>
 </ul></li>
 </ul>
+<aside class="notes">
+<p>Images usually live on the SD card, if you don’t forget to put it in the UAS before the flight, which is definately not something I’ve done before. Some cameras geotag photos; which is great for initial alignment, but treat tags as rough. We’ll still refine positions during bundle adjustment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="flight-log" class="slide level2">
+<section id="flight-log" class="slide level2 smaller center">
 <h2>Flight log</h2>
 <ul>
 <li>Onboard Inertial Measurement Unit (IMU) accurately measures the orientation of airborne sensors,</li>
 <li>Information is logged into a text file (flight log),</li>
-<li>Contains elements of exterior orientation (EO, more <a href="./2017_Imagery_Processing.html#/18">later in the lecture</a>)</li>
+<li>Contains elements of exterior orientation (EO)</li>
 </ul>
 
-<img data-src="../images/log.webp" style="width:80.0%" class="r-stretch"></section>
-<section id="gcp-coordinates" class="slide level2">
+<img data-src="../images/log.webp" style="width:80.0%" class="r-stretch"><blockquote>
+<p>Flight attitude - describes an aircrafts orientation in space (yaw, pitch, roll)</p>
+</blockquote>
+<aside class="notes">
+<p>The UAV’s IMU/GNSS writes a text log: attitude, altitude, and time. This provides exterior orientation hints. We’ll import these to seed alignment—then let bundle adjustment tighten them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="gcp-coordinates" class="slide level2 center">
 <h2>GCP coordinates</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -199,8 +369,21 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/GCPs.webp"></p>
 </div></div>
+<aside class="notes">
+<p>GCPs are known points surveyed in the field. They anchor the model to a coordinate system and let us quantify accuracy. Always record the CRS you surveyed in and keep metadata tidy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="spatial-reference-system" class="slide level2 smaller">
+<section id="spatial-reference-system" class="slide level2 smaller center">
 <h2>Spatial reference system</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -216,13 +399,39 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <li>There are two different types of coordinate reference systems: Geographic Coordinate Systems and Projected Coordinate Systems</li>
 <li><a href="http://spatialreference.org/ref/epsg/">Spatial reference list (EPSG codes for coordinate reference systems)</a></li>
 </ul>
+<aside class="notes">
+<p>CRS defines how map coordinates relate to the earth. We’ll choose a projected CRS appropriate to our area, not a global one unless we need it. Remember: GCS = lat/long, PCS = meters/feet.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="uas-data-processing-outputs" class="slide level2">
+<section id="uas-data-processing-outputs" class="slide level2 center">
 <h2>UAS data processing outputs</h2>
 <h3 id="what-do-we-get-after-processing-the-data">What do we get after processing the data?</h3>
 
-<img data-src="../images/processing_outputs.webp" class="r-stretch"></section>
-<section id="orthophoto" class="slide level2">
+<img data-src="../images/processing_outputs.webp" class="r-stretch"><aside class="notes">
+<p>From processing we get: orthophoto, DSM/DTM, point cloud, mesh/texture, and a processing report. Think of the orthophoto as your basemap and the DSM/DTM as your analysis surface.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="orthophoto" class="slide level2 center">
 <h2>Orthophoto</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -233,8 +442,21 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/ortho_example.webp"></p>
 </div></div>
+<aside class="notes">
+<p>An orthophoto is imagery corrected for perspective and terrain, so scale is uniform. It’s just a raster (RGB bands), but every pixel is in the right place for measurement.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="digital-surface-model" class="slide level2 smaller">
+<section id="digital-surface-model" class="slide level2 smaller center">
 <h2>Digital Surface Model</h2>
 <ul>
 <li><strong>DEM/DTM - Digital Elevation Model / Digital Terrain Model</strong>
@@ -249,8 +471,21 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </ul></li>
 </ul>
 
-<img data-src="../images/dtm_dsm.webp" style="width:100.0%" class="r-stretch"></section>
-<section id="pointcloud" class="slide level2">
+<img data-src="../images/dtm_dsm.webp" style="width:100.0%" class="r-stretch"><aside class="notes">
+<p>DTM/DEM: bare ground surface. DSM: the surface you see—trees, buildings, cars. SfM produces a DSM by default; getting a DTM requires classification and filtering.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pointcloud" class="slide level2 center">
 <h2>Pointcloud</h2>
 <ul>
 <li>Representation of the external surface of an object</li>
@@ -264,8 +499,21 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/Point_cloud_torus.webp"></p>
 </div></div>
+<aside class="notes">
+<p>A point cloud is a collection 3D of points (x, y, z, plus color/intensity). It’s not quite raster or vector—think of it as raw geometric evidence. We can classify, thin, and grid it to surfaces.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="multiple-view-geometry" class="slide level2">
+<section id="multiple-view-geometry" class="slide level2 center">
 <h2>Multiple-view geometry</h2>
 <ul>
 <li><strong>Scene geometry (structure):</strong><br>
@@ -275,22 +523,51 @@ Given a point in just one image, how does it constrain the position of the corre
 <li><strong>Camera geometry (motion):</strong><br>
 Given a set of corresponding points in two or more images, what are the camera matrices for these views?</li>
 </ul>
+<aside class="notes">
+<p>Multiple view geomoetry comes from the field of computer vision and gives us the tools to describe the spatial relationship between multiple images in a scence allowing us to construct 3D structure from 2D views.</p>
+<ul>
+<li>The scenece geometry gives us structure – where are 3D points?</li>
+<li>Stereo matching gives us Correspondence – which pixels match across images?</li>
+<li>And the Camera geometry allows us to infer Motion – where were the cameras?</li>
+</ul>
+<p>SfM solves these together by minimizing reprojection error.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="what-do-we-need" class="slide level2">
+<section id="what-do-we-need" class="slide level2 smaller center">
 <h2>What do we need?</h2>
 <ol type="1">
-<li>Digital <strong>imagery</strong>;</li>
-<li>(Digital elevation model or topographic dataset);</li>
-<li>Exterior <strong>orientation parameters</strong> from aerial triangulation or IMU;</li>
-<li>(Camera calibration report);</li>
-<li>(Ground Control Points parameters);</li>
-<li>Photogrammetric <strong>processing software</strong> that utilizes collinearity equations.</li>
+<li>Digital <strong>imagery</strong></li>
+<li>(Digital elevation model or topographic dataset)</li>
+<li>Exterior <strong>orientation parameters</strong> from aerial triangulation or IMU</li>
+<li>Optional(Camera calibration report)</li>
+<li>Optional(Ground Control Points parameters)</li>
+<li>Photogrammetric <strong>processing software</strong> that utilizes collinearity equations</li>
 </ol>
-<p class="small">
-Items in brackets are optional
-</p>
+<aside class="notes">
+<p>Required: images, EO hints (IMU/triangulation), and software that implements collinearity equations. Optional but recommended: DEM, camera calibration, and GCPs for accuracy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="digital-imagery-1" class="slide level2 smaller">
+<section id="digital-imagery-1" class="slide level2 smaller center">
 <h2>Digital imagery</h2>
 <p><img data-src="../images/digital_imagery.webp"></p>
 <div class="columns">
@@ -299,29 +576,47 @@ Items in brackets are optional
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/camera_sensor.webp" style="width:80.0%"></p>
 </div></div>
+<aside class="notes">
+<p>When we capture images, we’re always dealing with perspective projection. With a short focal length and close distance, we have full perspective — objects closer to the camera appear much larger, so scale varies dramatically across the image. This increases distortions, especially around the edges.</p>
+<p>As we increase the focal length and move the camera farther away, we approach a weak perspective model. Here, perspective rays are nearly parallel, so objects maintain a more uniform scale across the image. This reduces distortion and simplifies photogrammetric calculations, but of course requires higher altitude or zoom lenses.</p>
+<p>For UAS mapping, we’re often somewhere between these extremes. Wide-angle action cameras emphasize full perspective, while higher-altitude mapping with a longer focal length lens gets us closer to weak perspective — which is why flight height and lens choice both matter for geometry and accuracy.</p>
+<p>And remember: overlap is still king — ~75–85% forward and 60–80% side — to give Structure from Motion enough redundancy to solve geometry robustly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section class="slide level2">
-
-<!-- ## Digital Elevation Model {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/disortion.webp)
-
-::: 
-::: {.column width="50%"}
-
-**In the past:** Shape of the ground surface must be known in order to remove the effects of relief displacement
-
-**Now:** Computed automatically by Structure from Motion
-
-::: 
-::: 
-
---- -->
+<section id="digital-elevation-model" class="slide level2 smaller center">
+<h2>Digital Elevation Model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/disortion.webp"></p>
+</div><div class="column" style="width:50%;">
+<p><strong>In the past:</strong> Shape of the ground surface must be known in order to remove the effects of relief displacement</p>
+<p><strong>Now:</strong> Computed automatically by Structure from Motion</p>
+</div></div>
+<aside class="notes">
+<p>Historically we needed a DEM to remove relief displacement. Modern SfM estimates both terrain and cameras together—still, a good a priori DEM can stabilize tricky projects.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="structure-from-motion-sfm" class="slide level2 smaller">
+<section id="structure-from-motion-sfm" class="slide level2 smaller center">
 <h2>Structure from Motion (SfM)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -333,33 +628,111 @@ Items in brackets are optional
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/sfm_explained.webp"></p>
 </div></div>
+<aside class="notes">
+<p>SfM extracts 3D structure from multiple overlapping 2D images. It’s paired with MVS (multi-view stereo) to densify the model. Quality inputs = better tie points = better geometry.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="exterior-orientation-eo" class="slide level2 smaller">
+<section id="exterior-orientation-eo" class="slide level2 smaller center">
 <h2>Exterior orientation (EO)</h2>
-<p><strong>EO =</strong> Position and orientation in the object space</p>
-<p>6 elements <strong>necessary</strong> for any photogrammetric processing:</p>
+<p>Position and orientation in the object space</p>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:60%;">
+<h4 id="elements-necessary-for-any-photogrammetric-processing">6 elements <strong>necessary</strong> for any photogrammetric processing:</h4>
+<p>The cameras:</p>
 <ul>
-<li>X, Y, and Z of the exposure station position (latitude, longitude, and altitude of the camera)</li>
-<li>Angular orientation: ω, φ, and κ (yaw, pitch, and roll)</li>
+<li>X (Latitude)</li>
+<li>Y (Longitude)</li>
+<li>Z (Altitude)</li>
 </ul>
-</div><div class="column" style="width:50%;">
+<p>and Angular orientation:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 26%">
+<col style="width: 10%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Photogrammetry</th>
+<th>Aviation analogy</th>
+<th>Axis</th>
+<th>Motion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ω (omega)</strong></td>
+<td>Roll</td>
+<td>x</td>
+<td>Tilt forward/back</td>
+</tr>
+<tr class="even">
+<td><strong>φ (phi)</strong></td>
+<td>Pitch</td>
+<td>y</td>
+<td>Tilt side-to-side</td>
+</tr>
+<tr class="odd">
+<td><strong>κ (kappa)</strong></td>
+<td>Yaw</td>
+<td>z</td>
+<td>Rotation around vertical</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:40%;">
 <p><img data-src="../images/orientation.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Exterior orientation camera position (X, Y, Z) and yaw, pitch, roll. Logs/EXIF provide first guesses; bundle adjustment refines them to millimeter-to-centimeter pixel fits.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="flight-log-1" class="slide level2 smaller">
-<h2>Flight log</h2>
+<section id="flight-log-again" class="slide level2 smaller center">
+<h2>Flight log (Again)</h2>
 <ul>
 <li>Log file contains elements of exterior orientation that are measured by onboard Inertial Measurement Unit (IMU) and written into a text file</li>
 </ul>
 
 <img data-src="../images/log.webp" style="width:60.0%" class="r-stretch"><ul>
 <li>Sometimes (most DJI products) exterior orientation parameters are saved in photos’ EXIF file</li>
-<li>Log contains information about the location of the camera, not the location of the depicted object - <a href="./HM_Photogrammetry_and_SfM.html#/25">more info in this section of lecture 3</a></li>
+<li>Log contains information about the location of the camera, not the location of the depicted object - <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2a.html">more info in lecture 2A</a></li>
 </ul>
+<aside class="notes">
+<p>Remember: logs tell you where the camera was, not the object. We’ll still need tie points and, ideally, GCPs to anchor the scene in the real world.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="interior-orientation" class="slide level2 smaller">
+<section id="interior-orientation" class="slide level2 smaller center">
 <h2>Interior orientation</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -373,590 +746,924 @@ Items in brackets are optional
 <ul>
 <li>Can be automatically derived using Structure from Motion (SfM) methods</li>
 </ul>
+<aside class="notes">
+<p>IO = camera intrinsics: focal length, principal point, lens distortion. Older workflows used lab calibration; modern SfM does self-calibration as part of alignment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="ground-control-points" class="slide level2 smaller">
+<section id="ground-control-points" class="slide level2 smaller center">
 <h2>Ground Control Points</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li><strong>GCP</strong> - Target in the project area with known 3 coordinates (X, Y, Z or lat, long, alt)</li>
-<li>For more information about placing targets and importance of GCPs see <a href="./HM_Photogrammetry_and_SfM.html#/30">this section of lecture 3</a></li>
-<li>For more information about processing the data with GCPs see <a href="./2017_Imagery_Processing_assignment_intro.html">intro to the assignment</a></li>
+<li>For more information about placing targets and importance of GCPs see <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2a.html">lecture 2A</a></li>
+<li>For more information about processing the data with GCPs see <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">intro to the assignment</a></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/GCP_girls.webp"></p>
 </div></div>
+<aside class="notes">
+<p>GCPs with known X/Y/Z reduce bias (like doming) and let us report RMSE against independent check points. Place them across the full extents and elevation range.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="processing-options" class="slide level2">
-<h2>Processing options</h2>
-
-<img data-src="../images/processing_options.webp" class="r-stretch"></section>
-<section id="processing-options-1" class="slide level2">
+<section id="processing-options" class="slide level2 smaller center">
 <h2>Processing options</h2>
 <p>Everything boils down to… money (and time)</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>What is my starting budget and equipment?</li>
 <li>How frequently will I fly?</li>
 <li>Do I have the experience/training necessary for processing (or am I able to hire people who do)?</li>
 <li>Do I have time to process the data by myself?</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/processing_options.webp"></p>
+</div></div>
+<aside class="notes">
+<p>Your constraints: budget, flight frequency, team expertise, and compute time. Cloud services can offload compute; local runs give more control and transparency.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="processing-options---software" class="slide level2">
+<section id="processing-options---software" class="slide level2 center">
 <h2>Processing options - software</h2>
 <ul>
-<li><a href="http://www.agisoft.com/">Agisoft Metashape</a></li>
-<li><a href="https://pix4d.com/">Pix4D</a></li>
-<li><a href="http://uas.trimble.com/tbc-am">Trimble Business Center</a> - Aerial Photogrammetry Module</li>
-<li><a href="http://www.esri.com/products/drone2map">Drone2Map (ESRI)</a></li>
-<li><a href="https://dronemapper.com/">DroneMapper</a></li>
-<li><a href="http://opendronemap.org/">OpenDroneMap</a></li>
-<li>many many more…</li>
+<li><p><a href="http://www.agisoft.com/">Agisoft Metashape</a></p></li>
+<li><p><a href="http://opendronemap.org/">OpenDroneMap</a></p></li>
+<li><p><a href="https://pix4d.com/">Pix4D</a></p></li>
+<li><p><a href="https://www.dronedeploy.com/">DroneDeploy</a></p></li>
+<li><p><a href="https://geospatial.trimble.com/en/products/software/trimble-inpho-uasmaster">Trimble Inpho UASMaster</a></p></li>
+<li><p><a href="http://www.esri.com/products/drone2map">Drone2Map (ESRI)</a></p></li>
+<li><p><a href="https://dronemapper.com/">DroneMapper</a></p></li>
+<li><p>many many more…</p></li>
 </ul>
+<aside class="notes">
+<p>There are many commerial and open source processing software avaliable. We will be learning with both Agisoft Metashape (proprietry) and WebODM (Open Source options).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section class="slide level2">
-
-<!-- ## Agisoft Metashape Professional {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-- Image-based solution aimed at creating 3D content from still images
-- Operates with arbitrary images and is efficient in both controlled and uncontrolled conditions
-- Both image alignment and 3D model reconstruction are fully automated
-
-::: 
-::: {.column width="50%"}
-
-- [Installer](http://www.agisoft.com/downloads/installer/)
-- [Manual](https://www.agisoft.com/pdf/metashape-pro_1_5_en.pdf)
-- Tutorials for:
-  - [Orthophoto and DSM generation with GCPs](http://www.agisoft.com/pdf/PS_1.3%20-Tutorial%20%28BL%29%20-%20Orthophoto,%20DEM%20%28GCPs%29.pdf)
-  - [Dense Cloud Classification & DTM Generation](https://agisoft.freshdesk.com/support/solutions/articles/31000148866-dense-cloud-classification)
-  - [DEM based Measurements](https://agisoft.freshdesk.com/support/solutions/articles/31000148884-dem-based-measurements-)
-- [YouTube channel](https://www.youtube.com/channel/UCPheXwPeFLnWHo8u4ksSH7w)
-
-![](../images/Agisoft_Logo.webp){ width=30% }
-
-::: 
-::: 
-
----
-
-## Processing workflow {.smaller}
-
-![](../images/flowchart_processing_plain.webp)
-
-### Preprocessing stage:
-
-![](../images/flowchart_processing_pre.webp)
-
-- Loading photos into Metashape
-- Inspecting loaded images, removing unnecessary images
-
----
-
-## Processing workflow {.smaller}
-
-### Processing stage:
-
-![](../images/flowchart_processing_exporting.webp)
-
-1. Aligning photos
-2. Building dense point cloud
-    - (optional: editing dense point cloud)
-3. Building mesh (3D polygonal model)
-    - (optional: editing mesh)
-4. Generating texture
-5. Building DSM and orthomosaic
-
----
-
-## Exporting results
-
-![](../images/flowchart_processing_ex.webp)
-
-![](../images/processing_outputs.webp)
-
----
-
-## Preprocessing
-
-- Loading photos
-- Loading camera positions (flight log)
-- If the EO is in the photos EXIF file, the parameters will load automatically
-
-![](../images/camera_positions.webp){ width=70% }
-
----
-
-## Aligning photos {.smaller}
-
-At this stage, Agisoft Metashape implements SfM algorithms to monitor the movement of features through a sequence of multiple images:
-
-::: {.columns}
-::: {.column width="50%"}
-
-- Obtains the relative location of the acquisition positions
-- Refines camera calibration parameters
-- **Sparse point cloud** and a set of **camera positions** are formed
-
-::: 
-::: {.column width="50%"}
-
-![](../images/aligning_photos_funny.webp){ width=60% }
-
-::: 
-::: 
-
----
-
-## Bundle Block Adjustment {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-- Non-linear method for refining structure and motion
-- Minimizing reprojection error
-- Detecting image feature points (i.e., various geometrical similarities such as object edges or other specific details)
-
-::: 
-::: {.column width="50%"}
-
-![](../images/bundle_block_adjustment.webp)
-
-::: 
-::: 
-
----
-
-## Bundle Block Adjustment {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-- Subsequently monitoring the movement of those points throughout the sequence of multiple images
-- Using this information as input, the locations of those feature points can be estimated and rendered as a sparse 3D point cloud
-
-::: 
-::: {.column width="50%"}
-
-![](../images/Bundle_Block_Adjustment2.webp)
-
-::: 
-::: 
-
----
-
-## Aligning cameras in Metashape {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/aligned_photos.webp){ width=58.5% }
-
-::: 
-::: {.column width="50%"}
-
-![](../images/sparse_cloud.webp){ width=39% }
-
-<p class="small"><strong>Sparse point cloud</strong> generation</p>
-
-::: 
-::: 
-
-**Accuracy**
-
-- **High** accuracy setting > more accurate camera position estimates (time-consuming)
-- **Low** accuracy setting > rough camera positions
-
----
-
-## Building dense point cloud {.smaller}
-
-At the stage of dense point cloud generation, Agisoft calculates depth maps for every image
-
-- Quality: **Highest, High, Medium, Low, Lower** > the higher quality, the more accurate camera position estimates, but the process is more time-consuming
-
-![](../images/sparse_cloud.webp){ width=40% }
-
-![](../images/arrows.webp){ width=10% }
-
-![](../images/dense_cloud.webp){ width=40% }
-
----
-
-## Building dense point cloud {.smaller}
-
-### Depth Filtering modes
-
-Algorithms sorting outliers (due to some factors, like poor texture of some elements of the scene, noisy or badly focused images)
-
-- **Mild** depth filtering mode > for **complex geometry** (numerous small details on the foreground), for important features not to be sorted out
-- **Aggressive** depth filtering mode > sorting out most of the outliers
-- **Moderate** depth filtering mode > results in between the Mild and Aggressive
-
----
-
-## Optional: Editing dense point cloud {.smaller}
-
-::: {.columns}
-::: {.column width=60%"}
-
-- Manual points removal
-- Automatic filtering based on applied masks
-- Sparse cloud only:
-  - Reducing the number of points in the cloud by setting tie point per photo limit
-  - Automatic filtering based on:
-    - Reprojection error
-    - Reconstruction uncertainty
-    - Image count
-
-::: 
-::: {.column width="40%"}
-
-![](../images/editing_pointcloud.webp)
-
-::: 
-::: 
-
----
-
-## Building mesh {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-- **Arbitrary** > for modeling of any kind of object
-  - Should be selected for closed objects (statues, buildings, etc.)
-  - Memory consumption: high
-
-::: 
-::: {.column width="50%"}
-
-![](../images/mesh.webp){ width=65% }
-
-::: 
-::: 
-
-::: {.columns}
-::: {.column width="50%"}
-
-- **High field** > for modeling of planar surfaces
-  - Should be selected for aerial photography
-  - Memory consumption: low
-  - Allows for larger data sets processing
-
-::: 
-::: 
-
----
-
-## Building mesh {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-- **Source data** > the source for the mesh generation
-  - **Sparse cloud** > fast 3D model generation (low quality)
-  - **Dense cloud** > high-quality output based on the previously reconstructed dense point cloud
-- **Face count** > the maximum face count in the final mesh
-
-::: 
-::: {.column width="50%"}
-
-![](../images/mesh_low.webp)
-
-![](../images/mesh_high.webp)
-
-::: 
-::: 
-
----
-
-## Optional: Editing mesh {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-- **Close Holes tool** > repairs your model if the reconstruction procedure resulted in a mesh with several holes, due to **insufficient image overlap**
-  - Necessary step for **volumes calculation**
-
-::: 
-::: {.column width="50%"}
-
-![](../images/close_holes.webp)
-
-::: 
-::: 
-
-- **Decimation tool** > decreases the geometric resolution of the model by replacing a high-resolution mesh with a lower resolution one
-
----
-
-## Optional: Editing mesh {.smaller}
-
-::: {.columns}
-::: {.column width="60%"}
-
-- **Automatic filtering** based on specified criteria:
-  - Connected component size
-  - Polygon size
-- Manual polygon removal
-- Fixing mesh topology
-- **Editing mesh in the external program**
-  - Export mesh for editing in the external program
-  - Import edited mesh
-
-::: 
-::: {.column width="40%"}
-
-![](../images/mesh_editing.webp){ width=80% }
-
-![](../images/mesh_editing2.webp){ width=80% }
-
-::: 
-::: 
-
----
-
-## Generating texture {.smaller}
-
-- Determines how the object texture will be packed in the texture atlas
-- Affects the quality of the final model
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/texture.webp){ width=80% }
-
-::: 
-::: {.column width="50%"}
-
-- **Texture mapping modes:**
-  - Generic
-  - Adaptive orthophoto
-  - Orthophoto
-  - Spherical
-  - Single photo
-  - Keep uv
-
-::: 
-::: 
-
----
-
-## Texture mapping modes {.smaller}
-
-### Generic
-
-- Creates as uniform texture as possible
-
-### Adaptive orthophoto
-
-- The object surface split into the flat part and vertical regions
-- The flat part of the surface textured using the orthographic projection, 
-  while vertical regions textured separately to maintain accurate texture representation in such regions
-- More compact texture representation for nearly planar scenes + good texture quality 
-  for vertical surfaces
-
----
-
-## Texture mapping modes {.smaller}
-
-#### Orthophoto
-
-- The whole object surface textured in the orthographic projection
-- Even more compact texture representation than the Adaptive orthophoto at
-  the expense of texture quality in vertical regions
-
-#### Spherical
-
-- Only for objects that have a ball-like form
-
-#### Single photo
-
-- Texture from a single photo (photo can be selected from 'Texture from' list)
-
-#### Keep uv
-
-- Generates texture atlas using current texture parametrization; Rebuilding current texture with different resolution or generating
-  the atlas parametrized in the external software
-
----
-
-## Generating DSM {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/build_DEM.webp)
-
-::: 
-::: {.column width="50%"}
-
-### Parameters {.smaller}
-
-- **Source data:** Dense point cloud
-- **Interpolation**
-  - Disabled: leads to accurate reconstruction results since only areas corresponding to dense point cloud points are reconstructed
-  - Enabled (recommended): Interpolation mode - Agisoft will calculate DEM for all areas of the scene that are visible on at least one image.
-
-::: 
-::: 
-
----
-
-## Generating orthophoto {.smaller}
-
-::: {.columns}
-::: {.column width="40%"}
-
-![](../images/build_ortho.webp){ width=70% }
-
-::: 
-::: {.column width="60%"}
-
-### Parameters
-
-- **Surface:** DEM
-- **Blending mode**
-  - Mosaic (default): Implements an approach with data division into several frequency domains, which are blended independently
-  - Average: Uses the weighted average value of all pixels from individual photos
-  - Disabled: The color value for the pixel is taken from the photo with the camera view being almost along the normal to the reconstructed surface in that point.
-
-::: 
-::: 
-
----
-
-## Exporting results & saving intermediate results
-
-#### Orthophoto export
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/ortho_example.webp)
-
-::: 
-::: 
-
----
-
-## Exporting results & saving intermediate results
-
-#### DEM export
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/DSM.webp){ width=150% }
-
-::: 
-::: 
-
----
-
-## Exporting results & saving intermediate results
-
-#### 3D model export
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/sketchfab.webp){ width=72% }
-
-::: 
-::: 
-
----
-
-## Exporting results & saving intermediate results
-
-#### Point cloud export
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/pointcloud.webp)
-
-::: 
-::: 
-
----
-
-## Exporting results & saving intermediate results {.smaller}
-
-### Processing report generation
-
-::: {.columns}
-::: {.column width="50%"}
-
-![](../images/report_1.webp){ width=60% }
-
-![](../images/report_2.webp){ width=60% }
-
-::: 
-::: 
-
----
-
-## Processing report {.smaller}
-
-::: {.columns}
-::: {.column width="60%"}
-
-### Includes:
-
-- Orthophoto and digital elevation model sketch
-- Camera parameters and survey scheme
-- Tie points data export (matching points and panoramas)
-- Image overlap statistics
-- Camera positioning error estimates
-- Ground control point error estimates
-
-::: 
-::: {.column width="40%"}
-
-![](../images/Agisoft_report.webp){ width=90% }
-
-::: 
-::: 
-
----
-
-## Batch processing
-
-![](../images/Agisoft_batch.webp)
-
----
-
-## Quality processing with GCPs {.smaller}
-
-- Marker positions are defined by their projections on the source photos
-- After optimizing alignment based on markers, Point cloud generation and other steps need to be performed
-  - Used for:
-    - Setting up a coordinate system
-    - Photo alignment optimization
-    - Measuring distances and volumes
-    - Marker-based chunk alignment
-- More on GCP placing and processing in Agisoft see [intro to the assignment](./2017_Imagery_Processing_assignment_intro.html)
-
---- -->
+<section id="agisoft-metashape" class="slide level2 smaller center">
+<h2>Agisoft Metashape</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Image-based solution aimed at creating 3D content from still images</li>
+<li>Operates with arbitrary images and is efficient in both controlled and uncontrolled conditions</li>
+<li>Both image alignment and 3D model reconstruction are fully automated</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><a href="http://www.agisoft.com/downloads/installer/">Installer</a></li>
+<li><a href="https://www.agisoft.com/pdf/metashape-pro_1_5_en.pdf">Manual</a></li>
+<li>Tutorials for:
+<ul>
+<li><a href="http://www.agisoft.com/pdf/PS_1.3%20-Tutorial%20%28BL%29%20-%20Orthophoto,%20DEM%20%28GCPs%29.pdf">Orthophoto and DSM generation with GCPs</a></li>
+<li><a href="https://agisoft.freshdesk.com/support/solutions/articles/31000148866-dense-cloud-classification">Dense Cloud Classification &amp; DTM Generation</a></li>
+<li><a href="https://agisoft.freshdesk.com/support/solutions/articles/31000148884-dem-based-measurements-">DEM based Measurements</a></li>
+</ul></li>
+<li><a href="https://www.youtube.com/channel/UCPheXwPeFLnWHo8u4ksSH7w">YouTube channel</a></li>
+</ul>
+<p><img data-src="../images/Agisoft_Logo.webp" style="width:30.0%"></p>
+</div></div>
+<aside class="notes">
+<p>Metashape is robust for uncontrolled, real-world imagery. It automates alignment and reconstruction but still benefits from good inputs and sensible settings. Keep the manual handy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="what-did-we-learn" class="slide level2">
+<section id="processing-workflow" class="slide level2 smaller center">
+<h2>Processing workflow</h2>
+<h3 id="preprocessing-stage">Preprocessing stage:</h3>
+
+<img data-src="../images/flowchart_processing_pre.webp" class="r-stretch"><ul>
+<li>Loading photos into Metashape</li>
+<li>Inspecting loaded images, removing unnecessary images</li>
+</ul>
+<aside class="notes">
+<p>Load photos, inspect for blur/over-exposure, and remove bad frames. If you have camera positions, import them now—they’ll seed alignment and save time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="processing-workflow-1" class="slide level2 smaller center">
+<h2>Processing workflow</h2>
+<h3 id="processing-stage">Processing stage:</h3>
+
+<img data-src="../images/flowchart_processing_exporting.webp" class="r-stretch"><ol type="1">
+<li>Aligning photos</li>
+<li>Building dense point cloud
+<ul>
+<li>(optional: editing dense point cloud)</li>
+</ul></li>
+<li>Building mesh (3D polygonal model)
+<ul>
+<li>(optional: editing mesh)</li>
+</ul></li>
+<li>Generating texture</li>
+<li>Building DSM and orthomosaic</li>
+</ol>
+<aside class="notes">
+<ul>
+<li>Align photos (tie points + bundle adjustment).</li>
+<li>Dense point cloud (depth maps).</li>
+<li>Optional mesh + texture.</li>
+<li>Build DSM and orthomosaic.</li>
+</ul>
+<p>At each step: check diagnostics before continuing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exporting-results" class="slide level2 text-center center">
+<h2>Exporting results</h2>
+<p><img data-src="../images/flowchart_processing_ex.webp" style="width:75.0%"></p>
+<p><img data-src="../images/processing_outputs.webp" style="width:75.0%"></p>
+<aside class="notes">
+<p>We’ll export GeoTIFFs for DSM/ortho, LAS/LAZ for point clouds, and optionally OBJ/PLY for meshes. Always keep a Metashape report with parameters and errors for reproducibility.</p>
+<p>We also have the option to export cloud optimized formats such as COGS and COPCs</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="preprocessing" class="slide level2 center">
+<h2>Preprocessing</h2>
+<ul>
+<li>Loading photos</li>
+<li>Loading camera positions (flight log)</li>
+<li>If the EO is in the photos EXIF file, the parameters will load automatically</li>
+</ul>
+
+<img data-src="../images/camera_positions.webp" style="width:70.0%" class="r-stretch"><aside class="notes">
+<p>If EXIF contains EO, Metashape loads it automatically. If not, import the flight log with the correct time offset and CRS. Verify positions overlay your area.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="aligning-photos" class="slide level2 smaller center">
+<h2>Aligning photos</h2>
+<p>At this stage, Agisoft Metashape implements SfM algorithms to monitor the movement of features through a sequence of multiple images:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Obtains the relative location of the acquisition positions</li>
+<li>Refines camera calibration parameters</li>
+<li><strong>Sparse point cloud</strong> and a set of <strong>camera positions</strong> are formed</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/aligning_photos_funny.webp" style="width:60.0%"></p>
+</div></div>
+<aside class="notes">
+<p>Alignment finds features, matches them, and solves for cameras. The output is a sparse point cloud and camera poses. If coverage is weak, revisit image quality or overlap.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bundle-block-adjustment" class="slide level2 smaller center">
+<h2>Bundle Block Adjustment</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Non-linear method for refining structure and motion</li>
+<li>Minimizing reprojection error</li>
+<li>Detecting image feature points (i.e., various geometrical similarities such as object edges or other specific details)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/bundle_block_adjustment.webp"></p>
+</div></div>
+<aside class="notes">
+<p>BBA is the math heart: a nonlinear least-squares that minimizes reprojection error of tie points by adjusting IO and EO together. GCPs strengthen the solution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bundle-block-adjustment-1" class="slide level2 smaller center">
+<h2>Bundle Block Adjustment</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Subsequently monitoring the movement of those points throughout the sequence of multiple images</li>
+<li>Using this information as input, the locations of those feature points can be estimated and rendered as a sparse 3D point cloud</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/Bundle_Block_Adjustment2.webp"></p>
+</div></div>
+<aside class="notes">
+<p>We monitor point tracks across images to estimate 3D feature locations. The result is a coherent sparse cloud—our sanity check before investing time in densification.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="aligning-cameras-in-metashape" class="slide level2 smaller center">
+<h2>Aligning cameras in Metashape</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Accuracy</strong></p>
+<ul>
+<li><strong>Higher accuracy</strong> &gt; more accurate camera position estimates (time-consuming)</li>
+<li><strong>Lower accuracy</strong> &gt; rough camera positions (less-time consuming)</li>
+</ul>
+<p>Works by upscaling or downscaling images when identifying tie points.</p>
+</div><div class="column" style="width:45%;">
+<p><img data-src="../images/aligned_photos.webp"></p>
+</div></div>
+<aside class="notes">
+<p>Accuracy settings: High gives tighter camera estimates but takes longer; Low is useful for triage. Start High, downsample only if the project is truly huge.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="building-dense-point-cloud-depth-maps" class="slide level2 smaller center">
+<h2>Building dense point cloud (Depth Maps)</h2>
+<p>At the stage of dense point cloud generation, Agisoft calculates depth maps for every image</p>
+<ul>
+<li>Quality: <strong>Highest, High, Medium, Low, Lower</strong> &gt; the higher quality, the more accurate camera position estimates, but the process is more time-consuming</li>
+</ul>
+<p><img data-src="../images/sparse_cloud.webp" style="width:40.0%"> <img data-src="../images/arrows.webp" style="width:10.0%"> <img data-src="../images/dense_cloud.webp" style="width:40.0%"></p>
+<aside class="notes">
+<p>Metashape computes a depth map per image, then fuses them. Quality levels trade time for detail. For class labs, High is a good balance; Highest only when needed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="building-dense-point-cloud-depth-filtering-modes" class="slide level2 smaller center">
+<h2>Building dense point cloud (Depth Filtering Modes)</h2>
+<h3 id="depth-filtering-modes">Depth Filtering modes</h3>
+<p>Algorithms sorting outliers (due to some factors, like poor texture of some elements of the scene, noisy or badly focused images)</p>
+<ul>
+<li><strong>Mild</strong> depth filtering mode &gt; for <strong>complex geometry</strong> (numerous small details on the foreground), for important features not to be sorted out</li>
+<li><strong>Moderate</strong> depth filtering mode &gt; results in between the Mild and Aggressive</li>
+<li><strong>Aggressive</strong> depth filtering mode &gt; sorting out most of the outliers (Recommended for aerial data processing)</li>
+</ul>
+<aside class="notes">
+<p>Filtering prunes outliers. Mild preserves fine structure, Aggressive removes noise but may erase detail, Moderate is a safe default. Choose based on scene complexity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="optional-editing-dense-point-cloud" class="slide level2 smaller center">
+<h2>Optional: Editing dense point cloud</h2>
+<div class="columns">
+<div class="column" style="width:60%&quot;;">
+<ul>
+<li>Manual points removal</li>
+<li>Automatic filtering based on applied masks</li>
+<li>Sparse cloud only:
+<ul>
+<li>Reducing the number of points in the cloud by setting tie point per photo limit</li>
+<li>Automatic filtering based on:
+<ul>
+<li>Reprojection error</li>
+<li>Reconstruction uncertainty</li>
+<li>Image count</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/editing_pointcloud.webp"></p>
+</div></div>
+<aside class="notes">
+<p>Clean with masks and selection tools. In sparse cloud, use reprojection error, reconstruction uncertainty, and image count filters to remove weak tie points, then re-optimize.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="building-mesh" class="slide level2 smaller center">
+<h2>Building mesh</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Arbitrary</strong> &gt; for modeling of any kind of object
+<ul>
+<li>Should be selected for closed objects (statues, buildings, etc.)</li>
+<li>Memory consumption: high</li>
+</ul></li>
+<li><strong>High field</strong> &gt; for modeling of planar surfaces
+<ul>
+<li>Should be selected for aerial photography</li>
+<li>Memory consumption: low</li>
+<li>Allows for larger data sets processing</li>
+</ul></li>
+<li><strong>Source data</strong> &gt; the source for the mesh generation
+<ul>
+<li><strong>Sparse cloud</strong> &gt; fast 3D model generation (low quality)</li>
+<li><strong>Dense cloud</strong> &gt; high-quality output based on the previously reconstructed dense point cloud</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/mesh.webp" style="width:65.0%"></p>
+</div></div>
+<aside class="notes">
+<p>Use Arbitrary for closed objects—high memory but best geometry for statues/buildings. For aerial scenes we’ll prefer the next option. Use Height Field for terrain—lower memory and scalable. Choose Dense cloud as the source for quality results; Sparse is only for quick previews.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="building-mesh-face-count" class="slide level2 smaller center">
+<h2>Building mesh (Face Count)</h2>
+<p><strong>Face count</strong> &gt; the maximum face count in the final mesh</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/mesh_low.webp"></p>
+<figcaption>low face count</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/mesh_high.webp"></p>
+<figcaption>high face count</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Control face count to manage memory and export size. Generate a high-res master, then decimate copies for web or VR as needed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="optional-editing-mesh" class="slide level2 smaller center">
+<h2>Optional: Editing mesh</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Close Holes tool</strong> &gt; repairs your model if the reconstruction procedure resulted in a mesh with several holes, due to <strong>insufficient image overlap</strong>
+<ul>
+<li>Necessary step for <strong>volumes calculation</strong></li>
+</ul></li>
+<li><strong>Decimation tool</strong> &gt; decreases the geometric resolution of the model by replacing a high-resolution mesh with a lower resolution one</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/close_holes.webp"></p>
+</div></div>
+<aside class="notes">
+<p>If overlap was thin, expect holes. Use Close Holes before computing volumes—open meshes give nonsense volume numbers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="optional-editing-mesh-1" class="slide level2 smaller center">
+<h2>Optional: Editing mesh</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li><strong>Automatic filtering</strong> based on specified criteria:
+<ul>
+<li>Connected component size</li>
+<li>Polygon size</li>
+</ul></li>
+<li>Manual polygon removal</li>
+<li>Fixing mesh topology</li>
+<li><strong>Editing mesh in the external program</strong>
+<ul>
+<li>Export mesh for editing in the external program</li>
+<li>Import edited mesh</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/mesh_editing.webp" style="width:80.0%"></p>
+<p><img data-src="../images/mesh_editing2.webp" style="width:80.0%"></p>
+</div></div>
+<aside class="notes">
+<p>Filter by component size or polygon size to remove floaters. For heavy edits, export to a DCC tool (e.g., Blender), fix topology, then import back.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="generating-texture" class="slide level2 smaller center">
+<h2>Generating texture</h2>
+<ul>
+<li>Determines how the object texture will be packed in the texture atlas</li>
+<li>Affects the quality of the final model</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/texture.webp" style="width:80.0%"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Texture mapping modes:</strong>
+<ul>
+<li>Generic</li>
+<li>Adaptive orthophoto</li>
+<li>Orthophoto</li>
+<li>Spherical</li>
+<li>Single photo</li>
+<li>Keep uv</li>
+</ul></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Texture quality affects realism. The mapping mode controls how imagery is packed into the texture atlas. For terrain, Adaptive orthophoto or Orthophoto are typically best.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="texture-mapping-modes" class="slide level2 smaller center">
+<h2>Texture mapping modes</h2>
+<h3 id="generic">Generic</h3>
+<ul>
+<li>Creates as uniform texture as possible</li>
+</ul>
+<h3 id="adaptive-orthophoto">Adaptive orthophoto</h3>
+<ul>
+<li>The object surface split into the flat part and vertical regions</li>
+<li>The flat part of the surface textured using the orthographic projection, while vertical regions textured separately to maintain accurate texture representation in such regions</li>
+<li>More compact texture representation for nearly planar scenes + good texture quality for vertical surfaces</li>
+</ul>
+<aside class="notes">
+<p>Generic seeks uniform texture; good all-purpose. Adaptive orthophoto splits flat vs.&nbsp;vertical faces—great for near-planar scenes with facades.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="texture-mapping-modes-1" class="slide level2 smaller center">
+<h2>Texture mapping modes</h2>
+<h4 id="orthophoto-1">Orthophoto</h4>
+<ul>
+<li>The whole object surface textured in the orthographic projection</li>
+<li>Even more compact texture representation than the Adaptive orthophoto at the expense of texture quality in vertical regions</li>
+</ul>
+<h4 id="spherical">Spherical</h4>
+<ul>
+<li>Only for objects that have a ball-like form</li>
+</ul>
+<h4 id="single-photo">Single photo</h4>
+<ul>
+<li>Texture from a single photo (photo can be selected from ‘Texture from’ list)</li>
+</ul>
+<h4 id="keep-uv">Keep uv</h4>
+<ul>
+<li>Generates texture atlas using current texture parametrization; Rebuilding current texture with different resolution or generating the atlas parametrized in the external software</li>
+</ul>
+<aside class="notes">
+<p>Orthophoto is compact but weaker on verticals. Spherical is niche. Single photo is for controlled cases. Keep UV preserves external UVs if you authored them elsewhere.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="generating-dsm" class="slide level2 smaller center">
+<h2>Generating DSM</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/build_DEM.webp"></p>
+</div><div class="column" style="width:50%;">
+<h3 class="smaller" id="parameters">Parameters</h3>
+<ul>
+<li><strong>Source data:</strong> Dense point cloud</li>
+<li><strong>Interpolation</strong>
+<ul>
+<li>Disabled: leads to accurate reconstruction results since only areas corresponding to dense point cloud points are reconstructed</li>
+<li>Enabled (recommended): Interpolation mode - Agisoft will calculate DEM for all areas of the scene that are visible on at least one image.</li>
+</ul></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Build DSM from the dense cloud. With Interpolation Off, you’ll get only observed areas—good for accuracy checks. With On (recommended), gaps are filled where at least one image saw the ground.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="generating-orthophoto" class="slide level2 smaller center">
+<h2>Generating orthophoto</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="../images/build_ortho.webp" style="width:70.0%"></p>
+</div><div class="column" style="width:60%;">
+<h3 id="parameters-1">Parameters</h3>
+<ul>
+<li><strong>Surface:</strong> DEM</li>
+<li><strong>Blending mode</strong>
+<ul>
+<li>Mosaic (default): Implements an approach with data division into several frequency domains, which are blended independently</li>
+<li>Average: Uses the weighted average value of all pixels from individual photos</li>
+<li>Disabled: The color value for the pixel is taken from the photo with the camera view being almost along the normal to the reconstructed surface in that point.</li>
+</ul></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Set Surface = DEM so drape follows terrain. Blending: Mosaic is the usual choice; Average can reduce noise; Disabled chooses the most nadir, often increasing seam visibility.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exporting-results-saving-intermediate-results" class="slide level2 text-center center">
+<h2>Exporting results &amp; saving intermediate results</h2>
+<h4 id="orthophoto-export">Orthophoto export</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/ortho_example.webp"></p>
+</div></div>
+<aside class="notes">
+<p>Export as GeoTIFF or COG, check the CRS, and include overviews for fast display. Keep a world file if your GIS expects one.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exporting-results-saving-intermediate-results-1" class="slide level2 text-center center">
+<h2>Exporting results &amp; saving intermediate results</h2>
+<h4 id="dem-export">DEM export</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/DSM.webp"></p>
+</div></div>
+<aside class="notes">
+<p>Export the DSM/DTM as GeoTIFF or COG. Verify units and vertical datum. Document cell size and interpolation choices in your report.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exporting-results-saving-intermediate-results-2" class="slide level2 text-center center">
+<h2>Exporting results &amp; saving intermediate results</h2>
+<h4 id="d-model-export">3D model export</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/sketchfab.webp" style="width:72.0%"></p>
+</div></div>
+<aside class="notes">
+<p>Export OBJ/PLY/GLB depending on downstream tools. For web sharing, decimate to manageable size and consider GLB for portability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exporting-results-saving-intermediate-results-3" class="slide level2 text-center center">
+<h2>Exporting results &amp; saving intermediate results</h2>
+<h4 id="point-cloud-export">Point cloud export</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/pointcloud.webp"></p>
+</div></div>
+<aside class="notes">
+<p>Export LAS/LAZ or COPC with CRS tags. If you plan to classify later, preserve RGB and intensity attributes—they’re useful for ground/non-ground separation or if you already classified points export all or only selected classes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exporting-results-saving-intermediate-results-4" class="slide level2 text-center center">
+<h2>Exporting results &amp; saving intermediate results</h2>
+<h3 id="processing-report-generation">Processing report generation</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/report_1.webp" style="width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/report_2.webp" style="width:100.0%"></p>
+</div></div>
+<aside class="notes">
+<p>Always generate the Metashape report. It captures camera calibration, tie point statistics, overlap maps, and GCP/check-point errors—critical for QA/QC and reproducibility.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="processing-report" class="slide level2 smaller center">
+<h2>Processing report</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<h3 id="includes">Includes:</h3>
+<ul>
+<li>Orthophoto and digital elevation model sketch</li>
+<li>Camera parameters and survey scheme</li>
+<li>Tie points data export (matching points and panoramas)</li>
+<li>Image overlap statistics</li>
+<li>Camera positioning error estimates</li>
+<li>Ground control point error estimates</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/Agisoft_report.webp" style="width:90.0%"></p>
+</div></div>
+<aside class="notes">
+<p>Look for image overlap, camera error bars, and GCP vs.&nbsp;check-point RMSE. If check-point error is much higher than GCP error, you’re over-fitting—revisit weighting and distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="batch-processing" class="slide level2 center">
+<h2>Batch processing</h2>
+
+<img data-src="../images/Agisoft_batch.webp" class="r-stretch"><aside class="notes">
+<p>For larger jobs, set up batches so stages run unattended. Save after each stage so you can rollback without recomputing everything.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="quality-processing-with-gcps" class="slide level2 smaller center">
+<h2>Quality processing with GCPs</h2>
+<ul>
+<li>Marker positions are defined by their projections on the source photos</li>
+<li>After optimizing alignment based on markers, Point cloud generation and other steps need to be performed
+<ul>
+<li>Used for:
+<ul>
+<li>Setting up a coordinate system</li>
+<li>Photo alignment optimization</li>
+<li>Measuring distances and volumes</li>
+<li>Marker-based chunk alignment</li>
+</ul></li>
+</ul></li>
+<li>More on GCP placing and processing in Agisoft see <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">intro to the assignment</a></li>
+</ul>
+<aside class="notes">
+<p>Place markers, reproject on multiple photos, then optimize alignment with GCPs. Rebuild dense cloud/DSM/ortho afterward—optimization changes the geometry.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-did-we-learn" class="slide level2 center">
 <h2>What did we learn?</h2>
 <ul>
 <li>What is a general workflow for UAS imagery processing</li>
-<li>How do we transform UAS data into orthophoto, DSM, 3D model, and point cloud <!-- - How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program --></li>
+<li>How do we transform UAS data into orthophoto, DSM, 3D model, and point cloud</li>
+<li>How to process the data in Agisoft Metashape Professional and how to set proper parameters in the program</li>
 </ul>
+<aside class="notes">
+<p>You saw the end-to-end workflow: inputs → alignment → densification → surfaces → exports. You can now produce orthophotos, DSM/DTM, point clouds, and meshes in Metashape, and you know where IO/EO, GCPs, and CRS fit in.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p><a href="../../../../course/topics/topic_2_sfm/part_b_img_processing_sfm.html">Return Home</a></p>
 </div>
 </div></div>
 
@@ -967,6 +1674,7 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
   <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -981,18 +1689,19 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -1009,7 +1718,7 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1038,7 +1747,7 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
         disableLayout: false,
 
         // Vertical centering of slides
-        center: false,
+        center: true,
 
         // Enables touch navigation on devices with touch input
         touch: true,
@@ -1114,7 +1823,7 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -1134,15 +1843,15 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1400,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1159,7 +1868,7 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1216,13 +1925,14 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -1237,7 +1947,7 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/ncsu-geoforall-lab\.github\.io\/gis-584-uas-course\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

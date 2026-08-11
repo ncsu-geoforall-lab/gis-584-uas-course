@@ -7,21 +7,27 @@
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Corey White">
-  <title>GIS/MEA 584: UAS Mapping and Analytics – UAS-based Change Detection</title>
+  <title>UAS Mapping and Analytics – Classification methods for UAS data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -30,10 +36,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-325e80447fc094eaf6b0fce49d02d209.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-37b489307523cca1917c1cad05027324.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -122,193 +130,177 @@
       margin-right: 0; 
     }
   </style>
-  <script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">UAS-based Change Detection</h1>
-  <p class="subtitle"><a href="https://geospatial.ncsu.edu/">Center for Geospatial Analytics</a> <a href="http://www.ncsu.edu/">at North Carolina State University</a></p>
+  <h1 class="title">Classification methods for UAS data</h1>
+  <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Corey White 
+Corey White
 </div>
 </div>
 </div>
 
 </section>
-<section id="outline" class="slide level2">
+<section id="outline" class="slide level2 center">
 <h2>Outline</h2>
 <ul>
-<li>Selection of spatial-temporal resolution</li>
-<li>Determination of processing time step</li>
-<li>Sensor and environmental considerations</li>
-<li>Selection of classification schema</li>
-<li>Feature engineering</li>
-<li>Data Sampling</li>
-<li>Selection of classification and change detection methodology</li>
+<li>Pixel, Object, Image Classification</li>
+<li>Supervised vs Unsupervised learning</li>
+<li>Segmentation</li>
+<li>Feature Extraction</li>
+<li>Model Selection and Validation</li>
+<li>Real-time UAS analysis</li>
 </ul>
 </section>
-<section id="what-is-change-detection" class="slide level2">
-<h2>What is Change Detection?</h2>
-
-<img data-src="../images/animated_sat.gif" class="r-stretch"></section>
-<section id="why-does-it-matter" class="slide level2 smaller">
-<h2>Why does it Matter?</h2>
-
-<img data-src="../images/remotesensing-14-01718-ag.png" class="r-stretch"><div class="small">
+<section id="what-is-image-classification" class="slide level2 center">
+<h2>What is image classification?</h2>
 <ul>
-<li>White CT, Reckling W, Petrasova A, Meentemeyer RK, Mitasova H. Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion. Remote Sensing. 2022; 14(7):1718. https://doi.org/10.3390/rs14071718</li>
+<li>Labling images with sematic lables</li>
 </ul>
-</div>
+<p>Car, house, lake, tree, forest, etc..</p>
 </section>
-<section id="process-of-interest" class="slide level2">
-<h2>Process of Interest</h2>
+<section id="image-classification-applications" class="slide level2 center">
+<h2>Image classification applications</h2>
 <ul>
-<li><strong>What process are you interested in montioring?</strong>
+<li>Land cover/land use classifcation</li>
+<li>Flood detection</li>
+<li>Species Identifcation</li>
+<li>Surveillance</li>
+<li>Object Tracking</li>
+</ul>
+</section>
+<section id="uas-data-characteristics" class="slide level2 center">
+<h2>UAS Data Characteristics</h2>
 <ul>
-<li>Is it naturally occuring?</li>
-<li>Is it man made?</li>
-<li>Is it fast changing?</li>
-<li>Is it slow changing?</li>
+<li>High spatial resolution (1–10 cm)</li>
+<li>Limited spectral bands (RGB or multispectral)</li>
+<li>High within-class variability</li>
+<li>Shadows, BRDF effects, and illumination differences</li>
+</ul>
+<aside class="notes">
+<p>Discuss how UAS imagery differs from satellite data: small footprint, variable lighting, and high geometric accuracy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="types-of-classification" class="slide level2 center">
+<h2>Types of classification</h2>
+</section>
+<section id="pixel-based-classification" class="slide level2 center">
+<h2>Pixel-based classification</h2>
+<p>Each pixel is given a semantic label</p>
+</section>
+<section id="object-based-classification" class="slide level2 center">
+<h2>Object-based classification</h2>
+<p>The image is segmented into objects (groups of pixels) and the objects are classified</p>
+</section>
+<section id="semantic-scene-classification" class="slide level2 center">
+<h2>Semantic Scene classification</h2>
+<p>The entire image is classified into a semantic scene</p>
+</section>
+<section id="machine-learning-methods" class="slide level2 center">
+<h2>Machine Learning Methods</h2>
+<ul>
+<li>Supervised Learning</li>
+<li>Unsupervised Learning</li>
+<li>Deep Learning</li>
+</ul>
+</section>
+<section id="supervised-learning" class="slide level2 center">
+<h2>Supervised Learning</h2>
+<ul>
+<li><p>Labeled features are used to train ML model</p></li>
+<li><p>May require significant amount of training data.</p></li>
+<li><p>Subject to the nonstationarity nature of spatial-temporal data</p></li>
+<li><p>Random Forest, Gradient Boot, SVM</p></li>
+</ul>
+</section>
+<section id="unsupervised-learning" class="slide level2 center">
+<h2>Unsupervised Learning</h2>
+<ul>
+<li><p>Data is classified through statistical modeling.</p></li>
+<li><p>No training data is required</p></li>
+<li><p>Classes are not defined and require interpretation</p></li>
+<li><p>k-means, ISODATA</p></li>
+</ul>
+</section>
+<section id="deep-learning" class="slide level2 center">
+<h2>Deep Learning</h2>
+<ul>
+<li>Artificial Neural Network (ANN)</li>
+<li>Convolutional Neural Network (CNN)</li>
+<li>Deep Neural Networks (UNET, )</li>
+</ul>
+</section>
+<section id="spectral-properties" class="slide level2 center">
+<h2>Spectral Properties</h2>
+<ul>
+<li>Every surface has a <strong>unique spectral reflectance curve</strong></li>
+<li>UAS sensors capture reflected light in discrete bands:
+<ul>
+<li>Red, Green, Blue (visible)</li>
+<li>NIR (if multispectral)</li>
+<li>Thermal</li>
+<li>etc..</li>
 </ul></li>
+<li>Used to derive <strong>spectral indices</strong> for classification</li>
 </ul>
 </section>
-<section id="spatial-resolution---continous-data" class="slide level2 smaller">
-<h2>Spatial Resolution - Continous Data</h2>
-
-<img data-src="../images/dem_spatial_scale.png" class="r-stretch quarto-figure-center"><p class="caption">Continous Data</p><div class="small">
-<ul>
-<li>Corey White, &amp; Petras, V. (2024). tomorrownow/intro-to-geoprocessing-workshop: Zendo Release (Version 0.1.1) [Computer software]. https://doi.org/10.5281/zenodo.10764926</li>
-</ul>
-</div>
-</section>
-<section id="spatial-resolution---discrete-data" class="slide level2 smaller">
-<h2>Spatial Resolution - Discrete Data</h2>
-
-<img data-src="../images/lc_spatial_scale.png" class="r-stretch quarto-figure-center"><p class="caption">Discrete</p><div class="small">
-<ul>
-<li>Corey White, &amp; Petras, V. (2024). tomorrownow/intro-to-geoprocessing-workshop: Zendo Release (Version 0.1.1) [Computer software]. https://doi.org/10.5281/zenodo.10764926</li>
-</ul>
-</div>
-</section>
-<section id="temporal-resolution" class="slide level2 smaller">
-<h2>Temporal Resolution</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<h4 id="minutes">Minutes</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/clay-center_depth_1_1_s_prob.webp"></p>
-<figcaption>Continous: Depth (m)</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<h4 id="years">Years</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/BearCreek1.gif"></p>
-<figcaption>Discrete: Land Cover Change</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="process-time-step" class="slide level2 smaller">
-<h2>Process Time Step</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h4 id="phenological-considerations">Phenological considerations</h4>
-<ul>
-<li>Natural variation (e.g.&nbsp;seasonal, extreme weather event)</li>
-<li>Anthroprogentic change (e.g.&nbsp;construction, harvest)</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<h4 id="discrete-time-step">Discrete Time Step</h4>
-<ul>
-<li>Hourly</li>
-<li>Daily</li>
-<li>Weekly</li>
-<li>Monthly</li>
-<li>Seasonally</li>
-<li>Annually</li>
-<li>Bi-annually</li>
-</ul>
-<h4 id="continous">Continous</h4>
-<ul>
-<li>Live video feed</li>
-</ul>
-</div></div>
-</section>
-<section id="sensor-and-environmental-considerations" class="slide level2 smaller">
-<h2>Sensor and Environmental Considerations</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h4 id="sensor">Sensor</h4>
-<ul>
-<li>Spatial Resolution</li>
-<li>Spectral Resolution</li>
-<li>Radiometric</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<h4 id="environmental">Environmental</h4>
-<ul>
-<li>Sun azimuth</li>
-<li>Sun elevation</li>
-<li>Cloud coverage</li>
-<li>Off-nadir</li>
-<li>Temporal resolution</li>
-<li>Phenological cycles</li>
-</ul>
-</div></div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>Best if conditions are as similar as possible</p>
-</div>
-</div>
-</div>
-</section>
-<section id="classification-schemas" class="slide level2 smaller">
-<h2>Classification Schemas</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li><strong>Land Cover/Land Use</strong>
-<ul>
-<li>NLCD (National Land Cover Dataset)</li>
-<li>NWALT (U.S. Conterminous Wall-to-Wall Anthropogenic Land Use Trends)</li>
-</ul></li>
-<li><strong>Custom</strong></li>
-</ul>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/Annual NLCD CONUS with updated legend.png"></p>
-<figcaption>https://www.usgs.gov/centers/eros</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="spectral-bands" class="slide level2 text-center">
+<section id="spectral-bands" class="slide level2 text-center center">
 <h2>Spectral Bands</h2>
 <h4 id="rgb">RGB</h4>
 <p><img data-src="../images/ortho_r.png" style="width:25.0%" alt="red"> <img data-src="../images/ortho_g.png" style="width:25.0%" alt="green"> <img data-src="../images/ortho_b.png" style="width:25.0%" alt="blue"></p>
-<h4 id="mulispectral-n-separated-bands">Mulispectral (N-separated bands)</h4>
-<h4 id="hyperspectral-continous-spectrum">Hyperspectral (Continous Spectrum)</h4>
 </section>
-<section id="feature-engineering" class="slide level2 smaller">
+<section id="common-spectral-indices" class="slide level2 center">
+<h2>Common Spectral Indices</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Formula</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NDVI</td>
+<td>(NIR - Red) / (NIR + Red)</td>
+<td>Vegetation health</td>
+</tr>
+<tr class="even">
+<td>VARI</td>
+<td>(G - R) / (G + R - B)</td>
+<td>Green vegetation from RGB</td>
+</tr>
+<tr class="odd">
+<td>NDWI</td>
+<td>(G - NIR) / (G + NIR)</td>
+<td>Water detection</td>
+</tr>
+<tr class="even">
+<td>NDBI</td>
+<td>(SWIR - NIR) / (SWIR + NIR)</td>
+<td>Built-up detection</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="feature-engineering" class="slide level2 smaller center">
 <h2>Feature Engineering</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -331,6 +323,7 @@ Corey White
 <li>Correlation</li>
 </ul></li>
 </ul></li>
+<li><strong>Geometric Characteristics</strong></li>
 <li><strong>Principal component analysis (PCA)</strong></li>
 </ul>
 </div><div class="column" style="width:40%;">
@@ -339,7 +332,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 \]</span></p>
 </div></div>
 </section>
-<section id="sampling-methods" class="slide level2">
+<section id="sampling-methods" class="slide level2 center">
 <h2>Sampling Methods</h2>
 <ul>
 <li><strong>Random Sample</strong>
@@ -356,102 +349,19 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 </ul></li>
 </ul>
 </section>
-<section id="classification-and-change-detection" class="slide level2 smaller">
-<h2>Classification and Change Detection</h2>
-<ol type="1">
-<li><strong>Change Detection Method</strong>
+<section id="training-a-model" class="slide level2 center">
+<h2>Training a model</h2>
 <ul>
-<li>Binary / Thematic</li>
-</ul></li>
-<li><strong>Image Classification</strong>
-<ul>
-<li>Supervised</li>
-<li>Unsupervised</li>
-</ul></li>
-<li><strong>Classification Validation</strong>
-<ul>
-<li>Confusion Matrix</li>
-<li>Overall Accuarcy</li>
-<li>Kappa</li>
-</ul></li>
-<li><strong>Thematic Change</strong></li>
-</ol>
-</section>
-<section id="binary-change-detection" class="slide level2 smaller">
-<h2>Binary Change Detection</h2>
-<p>Identify Change or no change</p>
-<h3 id="methods">Methods</h3>
-<ul>
-<li>Visual change detection</li>
-<li>Thresholds (e.g.&nbsp;Image Differencing)</li>
-<li>PCA (Principle Component Analysis)</li>
-<li>Logistic Classification</li>
-</ul>
-<p><img data-src="../images/rgb_diff.png" style="width:25.0%"> <img data-src="../images/rgb_diff_binary.png" style="width:25.0%"></p>
-</section>
-<section id="thematic-change-dection" class="slide level2">
-<h2>Thematic Change Dection</h2>
-<ul>
-<li>Pixel-based Post-Classification Thematic Change Detection</li>
-<li>Object-based Post-Classification Thematic Change Detection</li>
+<li>Break data into training and testing dataset 80/20</li>
+<li>Avoid overfitting data</li>
+<li>May require a large volume of data</li>
 </ul>
 </section>
-<section id="pixel-based" class="slide level2">
-<h2>Pixel-based</h2>
-<ul>
-<li>Medium to low resolution data</li>
-<li>Track per-pixel changes over time</li>
-</ul>
-</section>
-<section id="object-based" class="slide level2">
-<h2>Object-based</h2>
-<ul>
-<li>Very high resolution (VHR) data (UAS data!)</li>
-<li>Image Segmentation</li>
-<li>Track objects over time</li>
-</ul>
-</section>
-<section id="classification-methods" class="slide level2 smaller">
-<h2>Classification Methods</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h4 id="supervised-classification">Supervised Classification</h4>
-<ul>
-<li>Needs labeled training data</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<h4 id="unsupervised-classification">Unsupervised Classification</h4>
-<ul>
-<li>No training data needed</li>
-<li>Classify the results</li>
-</ul>
-</div></div>
-</section>
-<section id="classification-methods-1" class="slide level2 smaller">
-<h2>Classification Methods</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h4 id="supervised-classification-algorithms">Supervised Classification Algorithms</h4>
-<ul>
-<li>Random Forest</li>
-<li>Support Vector Machine (SVN)</li>
-<li>Maximum Likelihood Classification (MLC)</li>
-<li>Artifical Neural Networks (ANN)</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<h4 id="unsupervised-classification-algorithms">Unsupervised Classification Algorithms</h4>
-<ul>
-<li>K-Means Clustering</li>
-<li>Iterative Self-Organizing Data Analysis (ISODATA)</li>
-<li>Spectral Change Vector Analysis</li>
-</ul>
-</div></div>
-</section>
-<section id="classification-results" class="slide level2">
+<section id="classification-results" class="slide level2 center">
 <h2>Classification Results</h2>
 
 <img data-src="../images/basic_classification.png" style="width:75.0%" class="r-stretch"></section>
-<section id="model-validation" class="slide level2 smaller">
+<section id="model-validation" class="slide level2 smaller center">
 <h2>Model Validation</h2>
 <h4 id="confusion-matrix">Confusion Matrix</h4>
 <table class="caption-top">
@@ -521,45 +431,20 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <li>Kappa coefficient (Cohen’s Kappa): inter-rater agreement</li>
 </ul>
 </section>
-<section id="post-classification-change-detection" class="slide level2">
-<h2>Post-Classification Change Detection</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TB
-  A[Image - Date 1]
-  B[Image - Date 2]
-  A --&gt; AF[Feature Engineering]
-  B --&gt; BF[Feature Engineering]
-  AF -- Pixel or Object --&gt; AC[Classification]
-  BF -- Pixel or Object --&gt; BC[Classification]
-  AC --&gt; CM[Change Map]
-  BC --&gt; CM
-
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="thematic-change-from-to" class="slide level2 smaller">
-<h2>Thematic Change (from-to)</h2>
-
-<img data-src="../images/remotesensing-14-01718-thematic.png" class="r-stretch"><div class="small">
+<section id="challenges" class="slide level2 center">
+<h2>Challenges</h2>
 <ul>
-<li>White CT, Reckling W, Petrasova A, Meentemeyer RK, Mitasova H. Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion. Remote Sensing. 2022; 14(7):1718. https://doi.org/10.3390/rs14071718</li>
+<li>Handling multiple spatial scales</li>
+<li>Nonstationarity</li>
+<li>Processing/Training</li>
 </ul>
-</div>
 
 
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p><a href="../../../../course/topics/topic_6_change_detection/part_a_image_classification.html">Return Home</a></p>
 </div>
 </div></div>
 
@@ -570,6 +455,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
   <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -584,18 +470,19 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -612,7 +499,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -641,7 +528,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         disableLayout: false,
 
         // Vertical centering of slides
-        center: false,
+        center: true,
 
         // Enables touch navigation on devices with touch input
         touch: true,
@@ -717,7 +604,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -737,15 +624,15 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1400,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -762,7 +649,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -819,13 +706,14 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -840,7 +728,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/ncsu-geoforall-lab\.github\.io\/gis-584-uas-course\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

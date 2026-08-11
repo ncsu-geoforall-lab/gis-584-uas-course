@@ -1,6 +1,44 @@
 [
   {
     "listing": "/course/schedule.html",
-    "items": []
+    "items": [
+      "/course/topics/topic_1_uas_basics/part_a_introduction.html",
+      "/course/topics/topic_1_uas_basics/assignments/assignment_1a.html",
+      "/course/topics/topic_1_uas_basics/part_b_rules_regs.html",
+      "/course/topics/topic_1_uas_basics/assignments/assignment_1b.html",
+      "/course/topics/topic_2_sfm/part_a_images_to_3d.html",
+      "/course/topics/topic_2_sfm/assignments/assignment_2a.html",
+      "/course/topics/topic_2_sfm/part_b_img_processing_sfm.html",
+      "/course/topics/topic_2_sfm/assignments/assignment_2b.html",
+      "/course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html",
+      "/course/topics/topic_3_flight_planning/assignments/assignment_3a.html",
+      "/course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html",
+      "/course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html",
+      "/course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html",
+      "/course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html",
+      "/course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html",
+      "/course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html",
+      "/course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html",
+      "/course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html",
+      "/course/topics/topic_6_change_detection/part_a_image_classification.html",
+      "/course/topics/midterm/index.html",
+      "/course/topics/topic_6_change_detection/assignments/assignment_6a.html",
+      "/course/topics/topic_6_change_detection/part_b_change_detection.html",
+      "/course/topics/topic_7_odm/part_a_opendronemap.html",
+      "/course/topics/topic_7_odm/assignments/assignment_7a.html"
+    ]
+  },
+  {
+    "listing": "/course/topics/index.html",
+    "items": [
+      "/course/topics/topic_1_uas_basics/index.html",
+      "/course/topics/topic_2_sfm/index.html",
+      "/course/topics/topic_3_flight_planning/index.html",
+      "/course/topics/topic_4_GIS_analytics/index.html",
+      "/course/topics/topic_5_advanced_analytics/index.html",
+      "/course/topics/topic_6_change_detection/index.html",
+      "/course/topics/topic_7_odm/index.html",
+      "/course/topics/midterm/index.html"
+    ]
   }
 ]

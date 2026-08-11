@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Schedule – GIS/MEA 584: UAS Mapping and Analytics</title>
+<title>Schedule – UAS Mapping and Analytics</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -39,10 +45,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-54264ee1cb6247055bddaae17d91f198.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-99d7a0e2e095b4464e37db1c5521b170.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,20 +79,21 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-schedule .list');
+    const listingTargetEl = window.document.querySelector('#listing-topics .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-schedule',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-schedule"],
+      valueNames: ['listing-date','listing-topic','listing-activity','listing-title','listing-assignment-due-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
+      page: 30,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-schedule'] = new List('listing-schedule', options);
+    window['quarto-listings']['listing-topics'] = new List('listing-topics', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -101,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
   </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -114,7 +121,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -132,7 +139,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -140,7 +147,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">GIS/MEA 584: UAS Mapping and Analytics</span>
+    <span class="navbar-title">UAS Mapping and Analytics</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -158,11 +165,11 @@ window.Quarto = {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/logistics.html"> 
-<span class="menu-text">Logistics</span></a>
+    <a class="nav-link" href="../course/policies.html"> 
+<span class="menu-text">Logistics &amp; Policies</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../course/topics.html"> 
+    <a class="nav-link" href="../course/topics/index.html"> 
 <span class="menu-text">Topics</span></a>
   </li>  
   <li class="nav-item">
@@ -180,7 +187,8 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(38)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <!-- banner.html -->
@@ -207,312 +215,801 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-custom" id="listing-schedule">
 <blockquote class="blockquote">
-Schedule will be adjusted as needed during the semester.
+<p>Schedule will be adjusted as needed during the semester.</p>
 </blockquote>
-<h4 class="anchored">
-Aug.&nbsp;19 | Introduction to the Course
-</h4>
-<ul>
-<li>
-Course logistics: <a href="../course/logistics.html">link</a> (Course instructions, management, and resources)
-</li>
-<li>
-Course Moodle site: <a href="https://moodle-courses2425.wolfware.ncsu.edu/course/view.php?id=4084&amp;bp=s">link</a>
-</li>
-</ul>
-<h4 class="anchored">
-Aug.&nbsp;19-23 | Topic 1: UAS Basics
-</h4>
-<p>
-<a href="../course/topics/topic_1_uas_basics/part_a_introduction.html">1A. Introduction to Unmanned Aerial Systems</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_1_uas_basics/lectures/lecture_1a.html">Lecture</a>
-</li>
-<li>
-Wed: Work on assingment 1A in class
-</li>
-<li>
-<a href="../course/topics/topic_1_uas_basics/assignments/assignment_1a.html">Assignment 1A: prepare presentation on UAS applications</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Aug.&nbsp;28</p>
-<h4 class="anchored">
-Aug.&nbsp;26-30 | Topic 1: UAS Basics
-</h4>
-<p>
-<a href="../course/topics/topic_1_uas_basics/part_b_rules_regs.html">1B. Rules and regulations for UAS operations</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_1_uas_basics/lectures/lecture_1b.html">Lecture</a>
-</li>
-<li>
-Wed: Student presentations of UAS applications
-</li>
-<li>
-<a href="../course/topics/topic_1_uas_basics/assignments/assignment_1b.html">Assignment: 1B UAS Rule Part 107 test subset</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;4</p>
-<h4 class="anchored">
-Sep.&nbsp;2-6 | Topic 3: UAS Flight Planning (Revised)
-</h4>
-<p>
-<a href="../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html">3. UAS flight planning</a>
-</p>
-<ul>
-<li>
-<strong>Mon: Labor Day - No Class</strong>
-</li>
-<li>
-Wed: <a href="../course/topics/topic_3_flight_planning/lectures/lecture_3a.html">Lecture</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;25</p>
-<h4 class="anchored">
-Sep.&nbsp;9 | Pre-Proposal Due
-</h4>
-<p>
-<a href="projects.html">Projects Page</a>
-</p>
-<ul>
-<li>
-Submit brief Idea to the <a href="https://moodle-courses2425.wolfware.ncsu.edu/mod/forum/view.php?id=429301">project discussions forum</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;9</p>
-<h4 class="anchored">
-Sep.&nbsp;9-13 | Topic 2: Structure from Motion (Revised)
-</h4>
-<p>
-<a href="../course/topics/topic_2_sfm/part_a_images_to_3d.html">2A. From images to 3D models: Photogrammetry and Structure from Motion concepts</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_2_sfm/lectures/lecture_2a.html">Lecture</a>
-</li>
-<li>
-Wed: <a href="../course/topics/topic_2_sfm/assignments/assignment_2a.html">Assignment 2A: 3D models from indoor photos</a>
-</li>
-<li>
-Project: <a href="https://moodle-courses2425.wolfware.ncsu.edu/mod/assign/view.php?id=429376">submit proposal</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;30</p>
-<h4 class="anchored">
-Sep.&nbsp;16-20 | UAS FLIGHT
-</h4>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_3_flight_planning/assignments/assignment_1a_grass.html">Assignment 3. UAS flight planning</a>
-</li>
-<li>
-Wed: (UAS Flight @ 10:15 am)
-</li>
-<li>
-Meeting point: Mid Pines Road, Raleigh; <a href="https://goo.gl/maps/GRVRUKJzRav">35.727104, -78.696173</a>
-</li>
-<li>
-Project: Data acquisition
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;25</p>
-<h4 class="anchored">
-Sep.&nbsp;23-27 | Topic 2: Structure from Motion
-</h4>
-<p>
-<a href="../course/topics/topic_2_sfm/part_b_img_processing_sfm.html">2B. UAS Imagery processing</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_2_sfm/lectures/lecture_2b.html">Lecture</a>
-</li>
-<li>
-Wed: In Class Assignment - <a href="../course/topics/topic_2_sfm/assignments/assignment_2b.html">Processing with AGISOFT Photoscan</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Sep.&nbsp;30</p>
-<h4 class="anchored">
-Sep.&nbsp;30 - Oct.&nbsp;4 | Topic 4: Geospatial Analytics
-</h4>
-<p>
-<a href="../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html">4A. Analysis of UAS data processing results</a>
-</p>
-<ul>
-<li>
-Mon: <a href="topics/topic_4_GIS_analytics/lectures/lecture_2a.qmd">Lecture</a>
-</li>
-<li>
-Wed: <a href="../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html">In Class Assignments</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
-<h4 class="anchored">
-Oct.&nbsp;7-11 | Topic 4: Geospatial Analytics
-</h4>
-<p>
-<a href="../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html">4B. Point cloud data analysis</a>
-</p>
-<ul>
-<li>
-Mon: <a href="topics/topic_4_GIS_analytics/lectures/lecture_2b.qmd">Lecture</a>
-</li>
-<li>
-Wed: <a href="../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html">In Class Assignments</a>
-</li>
-<li>
-Project: Data processing
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
-<h4 class="anchored">
-Oct.&nbsp;14-18 | Fall Break - Guest Speaker
-</h4>
-<ul>
-<li>
-Mon: <strong>Fall break - (No Class)</strong>
-</li>
-<li>
-Wed: Guest speaker: Canceled
-</li>
-<li>
-Project: Data processing
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Oct.&nbsp;23</p>
-<h4 class="anchored">
-Oct.&nbsp;21-25 | Topic 5: Advanced Analytics
-</h4>
-<p>
-<a href="../course/topics/topic_5_Advanced Analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html">5A. UAS and Lidar Data: Comparison, Fusion and Analysis</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_5_Advanced Analytics/lectures/lecture_5a.html">Lecture 5A</a>
-</li>
-<li>
-Wed: Dr.&nbsp;William Reckling (<a href="https://www.linkedin.com/in/william-reckling/">LinkedIn</a>)
-</li>
-<li>
-Project: Workflow development and testing
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Nov.&nbsp;13</p>
-<h4 class="anchored">
-Oct.&nbsp;28 - Nov.&nbsp;1 | Topic 5: Advanced Analytics
-</h4>
-<p>
-<a href="../course/topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.html">5B. Analysis of Multitemporal UAS Data and its Applications</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_5_Advanced Analytics/assignments/assignment_5a.html">Assignment 5A: Multitemporal UAS data analysis</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Nov.&nbsp;13</p>
-<h4 class="anchored">
-Nov.&nbsp;4-8 | Topic 5: Advanced Analytics
-</h4>
-<p>
-<a href="../course/topics/topic_5_Advanced Analytics/part_b_Analysis_multitemporal_UAS_data_applications.html">5B. Analysis of Multitemporal UAS Data and its Applications</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_5_Advanced Analytics/lectures/lecture_5b.html">Lecture 5B</a>
-</li>
-<li>
-Wed: <a href="../course/topics/topic_5_Advanced Analytics/assignments/assignment_5b.html">Assignment 5B: Multitemporal UAS data analysis</a>
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Nov.&nbsp;13</p>
-<h4 class="anchored">
-Nov.&nbsp;11-15 | Topic 6: UAS-based Change Detection
-</h4>
-<p>
-<a href="../course/topics/topic_6_change_detection/part_6a.html">6A. Change Detection with UAS Data</a>
-</p>
-<ul>
-<li>
-Mon: <a href="../course/topics/topic_6_change_detection/lectures/lecture_6a.html">Lecture 6A</a>
-</li>
-<li>
-Wed: <a href="../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A: UAS Image Classification</a>
-</li>
-<li>
-Project: Perform analysis and/or modeling
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Nov.&nbsp;20</p>
-<h4 class="anchored">
-Nov.&nbsp;18-22 | Guest Speaker &amp; Project help sessions
-</h4>
-<ul>
-<li>
-Mon: Guest Speaker: Mitchell DuRant - Cypress Creek Renewables (<a href="https://www.linkedin.com/in/mitchell-durant/">LinkedIn</a>)
-</li>
-<li>
-Wed: Project help session
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Dec.&nbsp;4</p>
-<h4 class="anchored">
-Nov.&nbsp;25-29 | Thanksgiving break: No Class
-</h4>
-<ul>
-<li>
-Work on project: visualize results, work on presentation
-</li>
-<li>
-<a href="projects.html">Project presentation and paper requirements, final project titles</a>
-</li>
-</ul>
-<h4 class="anchored">
-Dec.&nbsp;2-6 | Project presentations (<a href="projects.html">See the requirements and project titles</a>)
-</h4>
-<ul>
-<li>
-DE section: To record your presentation, use <a href="https://obsproject.com/index">Open Broadcaster Software</a> (<a href="http://www.howtogeek.com/183231/how-to-record-your-desktop-and-create-a-screencast-on-windows/">tutorial</a>), MS Powerpoint, Libre Office, or any other software with similar recording functionality.
-</li>
-<li>
-Upload the presentation to Moodle or, if the file is too big, upload your file to Google drive and share it with the instructors.
-</li>
-<li>
-Please keep the presentation to 10 minutes and name your file <code>LastnameFirstname_Presentation.avi</code>, <code>LastnameFirstname_Presentation.pptx</code> (or whatever format you use).
-</li>
-<li>
-Recorded presentations are due Dec.&nbsp;4.
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Dec.&nbsp;4</p>
-<h4 class="anchored">
-Dec.&nbsp;9-13 | Finish project paper and upload it to Moodle as a pdf file <code>LastnameFirstname_Paper.pdf</code>
-</h4>
-<ul>
-<li>
-For archiving purposes also submit a complete coursework in a ZIP file
-</li>
-<li>
-The ZIP file should include: project paper, presentation slides, and all homework papers
-</li>
-<li>
-Upload your work as a single ZIP file <code>LastnameFirstname.zip</code> to your Google drive and share it with the instructors.
-</li>
-</ul>
-<p><strong>Assignment Due Date:</strong> Dec.&nbsp;9</p>
-<p><img src="content/images/schedule.webp" alt="lecture" width="100%"></p>
-<p>
-If you are looking for what is the next step, here are some <a href="https://geospatial.ncsu.edu/geoforall/courses.html" target="_blank">related courses</a>.
-</p>
+<div id="listing-topics" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+    <select id="listing-topics-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-topics'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+      <option value="" disabled="" selected="" hidden="">Order By</option>
+      <option value="index" data-direction="asc">Default</option>
+      <option value="listing-date-sort" data-direction="asc">
+        Date - Oldest
+      </option>
+      <option value="listing-date-sort" data-direction="desc">
+        Date - Newest
+      </option>
+      <option value="listing-assignment-due-date" data-direction="asc">
+        Due Date
+      </option>
+      <option value="listing-activity" data-direction="asc">
+        Activity
+      </option>
+      <option value="listing-topic" data-direction="asc">
+        Topic
+      </option>
+    </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table table-striped">
+<thead>
+<tr>
+
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-topic" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Topic</a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-activity" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Activity</a>
+</th>
+
+<th>
+Description
+</th>
+
+<th>
+<a class="sort" data-sort="listing-assignment-due-date" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Due Date</a>
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-listing-date-sort="1786924800000" data-listing-file-modified-sort="1786475196566" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="132" data-listing-title-sort="Introduction to UAS" data-listing-filename-sort="part_a_introduction.qmd">
+<td>
+<span class="listing-date">8/17/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 1A: UAS Basics</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_1_uas_basics/part_a_introduction.html" class="title listing-title">Introduction to UAS</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-listing-date-sort="1787097600000" data-listing-file-modified-sort="1786475196554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="166" data-listing-title-sort="Assignment 1A" data-listing-filename-sort="assignment_1a.qmd">
+<td>
+<span class="listing-date">8/19/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 1A: UAS Basics</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_1_uas_basics/assignments/assignment_1a.html" class="title listing-title">Assignment 1A</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">8/26/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-listing-date-sort="1787529600000" data-listing-file-modified-sort="1786475196566" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="239" data-listing-title-sort="Rules and regulations for UAS operations" data-listing-filename-sort="part_b_rules_regs.qmd">
+<td>
+<span class="listing-date">8/24/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 1B: UAS Basics</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_1_uas_basics/part_b_rules_regs.html" class="title listing-title">Rules and regulations for UAS operations</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="3" data-listing-date-sort="1787529600000" data-listing-file-modified-sort="1786475196554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="44" data-listing-title-sort="Assignment 1B" data-listing-filename-sort="assignment_1b.qmd">
+<td>
+<span class="listing-date">8/24/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 1B: UAS Basics</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_1_uas_basics/assignments/assignment_1b.html" class="title listing-title">Assignment 1B</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">9/9/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="4" data-listing-date-sort="1787702400000" data-listing-title-sort="Assignment 1A - UAS Basics Presentations">
+<td>
+<span class="listing-date">8/26/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 1: UAS Basics</span>
+</td>
+<td>
+<span class="listing-activity">Assignment Due</span>
+</td>
+<td>
+<span class="listing-title">Assignment 1A - UAS Basics Presentations</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">8/26/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="5" data-listing-date-sort="1788307200000" data-listing-file-modified-sort="1786475196667" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="230" data-listing-title-sort="Photogrammetry and Structure from Motion concepts" data-listing-filename-sort="part_a_images_to_3d.qmd">
+<td>
+<span class="listing-date">9/2/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 2A: Structure from Motion</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_2_sfm/part_a_images_to_3d.html" class="title listing-title">Photogrammetry and Structure from Motion concepts</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="6" data-listing-date-sort="1788307200000" data-listing-file-modified-sort="1786475196567" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="621" data-listing-title-sort="Assignment 2A" data-listing-filename-sort="assignment_2a.qmd">
+<td>
+<span class="listing-date">9/2/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 2A: Structure from Motion</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_2_sfm/assignments/assignment_2a.html" class="title listing-title">Assignment 2A</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">9/23/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="7" data-listing-date-sort="1788739200000" data-listing-title-sort="Labor Day - No Class">
+<td>
+<span class="listing-date">9/7/26</span>
+</td>
+<td>
+<span class="listing-topic">Labor Day</span>
+</td>
+<td>
+<span class="listing-activity">No Class</span>
+</td>
+<td>
+<span class="listing-title">Labor Day - No Class</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="8" data-listing-date-sort="1788912000000" data-listing-file-modified-sort="1786475196667" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1687" data-listing-title-sort="Imagery processing and Structure from Motion (SfM)" data-listing-filename-sort="part_b_img_processing_sfm.qmd">
+<td>
+<span class="listing-date">9/9/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 2B: Structure from Motion</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_2_sfm/part_b_img_processing_sfm.html" class="title listing-title">Imagery processing and Structure from Motion (SfM)</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="9" data-listing-date-sort="1788912000000" data-listing-file-modified-sort="1786475196567" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3161" data-listing-title-sort="Assignment 2B" data-listing-filename-sort="assignment_2b.qmd">
+<td>
+<span class="listing-date">9/9/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 2B: Structure from Motion</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_2_sfm/assignments/assignment_2b.html" class="title listing-title">Assignment 2B</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">9/23/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="10" data-listing-date-sort="1788912000000" data-listing-title-sort="Submit brief idea to the [project discussions forum](https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478361)">
+<td>
+<span class="listing-date">9/9/26</span>
+</td>
+<td>
+<span class="listing-topic">Project</span>
+</td>
+<td>
+<span class="listing-activity">Assignment Due</span>
+</td>
+<td>
+<span class="listing-title">Submit brief idea to the <a href="https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478361">project discussions forum</a></span>
+</td>
+<td>
+<span class="listing-assignment-due-date">9/9/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="11" data-listing-date-sort="1789344000000" data-listing-file-modified-sort="1786475196679" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="198" data-listing-title-sort="UAS Flight Planning" data-listing-filename-sort="part_a_uas_flight_planning.qmd">
+<td>
+<span class="listing-date">9/14/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 3A: UAS Flight Planning</span>
+</td>
+<td>
+<span class="listing-activity">Lecture &amp; Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="title listing-title">UAS Flight Planning</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="12" data-listing-date-sort="1789344000000" data-listing-file-modified-sort="1786475196668" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="717" data-listing-title-sort="Assignment 3A" data-listing-filename-sort="assignment_3a.qmd">
+<td>
+<span class="listing-date">9/14/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 3A: UAS Flight Planning</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_3_flight_planning/assignments/assignment_3a.html" class="title listing-title">Assignment 3A</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">9/30/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="13" data-listing-date-sort="1789516800000" data-listing-title-sort="UAS Flight at Lake Wheeler (date TBD)">
+<td>
+<span class="listing-date">9/16/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 3: UAS Flight Planning</span>
+</td>
+<td>
+<span class="listing-activity">Field Trip</span>
+</td>
+<td>
+<span class="listing-title">UAS Flight at Lake Wheeler (date TBD)</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="14" data-listing-date-sort="1789948800000" data-listing-file-modified-sort="1786475196706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="146" data-listing-title-sort="Analysis of UAS data processing results" data-listing-filename-sort="part_a_analysis_uas_processing_results.qmd">
+<td>
+<span class="listing-date">9/21/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 4A: GIS Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html" class="title listing-title">Analysis of UAS data processing results</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="15" data-listing-date-sort="1790121600000" data-listing-file-modified-sort="1786475196680" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="53" data-listing-title-sort="Assignment 4A" data-listing-filename-sort="assignment_4a.qmd">
+<td>
+<span class="listing-date">9/23/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 4A: GIS Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html" class="title listing-title">Assignment 4A</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">10/16/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="16" data-listing-date-sort="1790553600000" data-listing-file-modified-sort="1786475196706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="122" data-listing-title-sort="Point cloud data analysis" data-listing-filename-sort="part_b_point_cloud_analysis.qmd">
+<td>
+<span class="listing-date">9/28/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 4B: GIS Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html" class="title listing-title">Point cloud data analysis</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="17" data-listing-date-sort="1790553600000" data-listing-title-sort="Project proposal due">
+<td>
+<span class="listing-date">9/28/26</span>
+</td>
+<td>
+<span class="listing-topic">Project</span>
+</td>
+<td>
+<span class="listing-activity">Assignment Due</span>
+</td>
+<td>
+<span class="listing-title">Project proposal due</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">9/28/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="18" data-listing-date-sort="1790640000000" data-listing-title-sort="Wellness Day - No Class">
+<td>
+<span class="listing-date">9/29/26</span>
+</td>
+<td>
+<span class="listing-topic">Wellness Day</span>
+</td>
+<td>
+<span class="listing-activity">No Class</span>
+</td>
+<td>
+<span class="listing-title">Wellness Day - No Class</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="19" data-listing-date-sort="1790726400000" data-listing-file-modified-sort="1786475196680" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="22" data-listing-title-sort="Assignment 4B" data-listing-filename-sort="assignment_4b.qmd">
+<td>
+<span class="listing-date">9/30/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 4B: GIS Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html" class="title listing-title">Assignment 4B</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">10/16/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="20" data-listing-date-sort="1791158400000" data-listing-file-modified-sort="1786475196722" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="140" data-listing-title-sort="UAS and lidar data: comparison, fusion and analysis" data-listing-filename-sort="part_a_UAS_lidar_data_comparison_fusion_analysis.qmd">
+<td>
+<span class="listing-date">10/5/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 5A: Advanced Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="title listing-title">UAS and lidar data: comparison, fusion and analysis</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="21" data-listing-date-sort="1791331200000" data-listing-file-modified-sort="1786475196706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1160" data-listing-title-sort="Assignment 5A" data-listing-filename-sort="assignment_5a.qmd">
+<td>
+<span class="listing-date">10/7/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 5A: Advanced Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html" class="title listing-title">Assignment 5A</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">11/11/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="22" data-listing-date-sort="1791936000000" data-listing-title-sort="TBD">
+<td>
+<span class="listing-date">10/14/26</span>
+</td>
+<td>
+<span class="listing-topic">TBD</span>
+</td>
+<td>
+<span class="listing-activity">Guest Speaker</span>
+</td>
+<td>
+<span class="listing-title">TBD</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="23" data-listing-date-sort="1792368000000" data-listing-title-sort="Fall Break (10/19-10/20) - No Class">
+<td>
+<span class="listing-date">10/19/26</span>
+</td>
+<td>
+<span class="listing-topic">Fall Break</span>
+</td>
+<td>
+<span class="listing-activity">No Class</span>
+</td>
+<td>
+<span class="listing-title">Fall Break (10/19-10/20) - No Class</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="24" data-listing-date-sort="1792540800000" data-listing-file-modified-sort="1786475196722" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="103" data-listing-title-sort="Analysis of multitemporal UAS data and its applications" data-listing-filename-sort="part_b_Analysis_multitemporal_UAS_data_applications.qmd">
+<td>
+<span class="listing-date">10/21/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 5B: Advanced Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html" class="title listing-title">Analysis of multitemporal UAS data and its applications</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="25" data-listing-date-sort="1792540800000" data-listing-file-modified-sort="1786475196706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1263" data-listing-title-sort="Assignment 5B" data-listing-filename-sort="assignment_5b.qmd">
+<td>
+<span class="listing-date">10/21/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 5B: Advanced Analytics</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html" class="title listing-title">Assignment 5B</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">11/11/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="26" data-listing-date-sort="1792540800000" data-listing-title-sort="Submit project progress report to the [project discussions forum](https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478361)">
+<td>
+<span class="listing-date">10/21/26</span>
+</td>
+<td>
+<span class="listing-topic">Project</span>
+</td>
+<td>
+<span class="listing-activity">Assignment Due</span>
+</td>
+<td>
+<span class="listing-title">Submit project progress report to the <a href="https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478361">project discussions forum</a></span>
+</td>
+<td>
+<span class="listing-assignment-due-date">10/21/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="27" data-listing-date-sort="1793145600000" data-listing-file-modified-sort="1786475196803" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="92" data-listing-title-sort="Image Classification" data-listing-filename-sort="part_a_image_classification.qmd">
+<td>
+<span class="listing-date">10/28/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 6A: Machine Learning &amp; AI</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_6_change_detection/part_a_image_classification.html" class="title listing-title">Image Classification</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="28" data-listing-date-sort="1793750400000" data-listing-file-modified-sort="1786475196552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="111" data-listing-title-sort="Midterm Exam" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">11/4/26</span>
+</td>
+<td>
+<span class="listing-topic">Midterm</span>
+</td>
+<td>
+<span class="listing-activity">Exam</span>
+</td>
+<td>
+<a href="../course/topics/midterm/index.html" class="title listing-title">Midterm Exam</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">11/6/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="29" data-listing-date-sort="1794182400000" data-listing-file-modified-sort="1786475196722" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3887" data-listing-title-sort="Assignment 6A" data-listing-filename-sort="assignment_6a.qmd">
+<td>
+<span class="listing-date">11/9/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 6A: Machine Learning &amp; AI</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="title listing-title">Assignment 6A</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">11/30/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="30" data-listing-date-sort="1794355200000" data-listing-file-modified-sort="1786475196803" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="62" data-listing-title-sort="Change Detection" data-listing-filename-sort="part_b_change_detection.qmd">
+<td>
+<span class="listing-date">11/11/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 6B: Machine Learning &amp; AI</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_6_change_detection/part_b_change_detection.html" class="title listing-title">Change Detection</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="31" data-listing-date-sort="1794960000000" data-listing-file-modified-sort="1786475196822" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="79" data-listing-title-sort="OpenDroneMap" data-listing-filename-sort="part_a_opendronemap.qmd">
+<td>
+<span class="listing-date">11/18/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 7A: OpenDroneMap</span>
+</td>
+<td>
+<span class="listing-activity">Lecture</span>
+</td>
+<td>
+<a href="../course/topics/topic_7_odm/part_a_opendronemap.html" class="title listing-title">OpenDroneMap</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="32" data-listing-date-sort="1795392000000" data-listing-file-modified-sort="1786475196803" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="629" data-listing-title-sort="OpenDroneMap" data-listing-filename-sort="assignment_7a.qmd">
+<td>
+<span class="listing-date">11/23/26</span>
+</td>
+<td>
+<span class="listing-topic">Topic 7A: OpenDroneMap</span>
+</td>
+<td>
+<span class="listing-activity">Lab</span>
+</td>
+<td>
+<a href="../course/topics/topic_7_odm/assignments/assignment_7a.html" class="title listing-title">OpenDroneMap</a>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="33" data-listing-date-sort="1795392000000" data-listing-title-sort="Work on project">
+<td>
+<span class="listing-date">11/23/26</span>
+</td>
+<td>
+<span class="listing-topic">Project</span>
+</td>
+<td>
+<span class="listing-activity">Project</span>
+</td>
+<td>
+<span class="listing-title">Work on project</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="34" data-listing-date-sort="1795564800000" data-listing-title-sort="Thanksgiving Break - No Class">
+<td>
+<span class="listing-date">11/25/26</span>
+</td>
+<td>
+<span class="listing-topic">Thanksgiving Break</span>
+</td>
+<td>
+<span class="listing-activity">No Class</span>
+</td>
+<td>
+<span class="listing-title">Thanksgiving Break - No Class</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">&nbsp;</span>
+</td>
+
+</tr>
+
+<tr data-index="35" data-listing-date-sort="1795996800000" data-listing-title-sort="Project presentations">
+<td>
+<span class="listing-date">11/30/26</span>
+</td>
+<td>
+<span class="listing-topic">Project</span>
+</td>
+<td>
+<span class="listing-activity">Assignment Due</span>
+</td>
+<td>
+<span class="listing-title">Project presentations</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">11/30/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="36" data-listing-date-sort="1796083200000" data-listing-title-sort="Project presentations">
+<td>
+<span class="listing-date">12/1/26</span>
+</td>
+<td>
+<span class="listing-topic">Project</span>
+</td>
+<td>
+<span class="listing-activity">Assignment Due</span>
+</td>
+<td>
+<span class="listing-title">Project presentations</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">12/1/2026</span>
+</td>
+
+</tr>
+
+<tr data-index="37" data-listing-date-sort="1796601600000" data-listing-title-sort="Project Report Due">
+<td>
+<span class="listing-date">12/7/26</span>
+</td>
+<td>
+<span class="listing-topic">Project</span>
+</td>
+<td>
+<span class="listing-activity">Assignment Due</span>
+</td>
+<td>
+<span class="listing-title">Project Report Due</span>
+</td>
+<td>
+<span class="listing-assignment-due-date">12/7/2026</span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+<nav id="topics-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div>
+<p>If you are looking for what is the next step, here are some <a href="https://geospatial.ncsu.edu/geoforall/courses.html">related courses</a>.</p>
+
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -564,13 +1061,14 @@ If you are looking for what is the next step, here are some <a href="https://geo
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -585,7 +1083,7 @@ If you are looking for what is the next step, here are some <a href="https://geo
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/ncsu-geoforall-lab\.github\.io\/gis-584-uas-course\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -918,7 +1416,7 @@ If you are looking for what is the next step, here are some <a href="https://geo
     <div class="nav-footer-left">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="https://moodle-courses1718.wolfware.ncsu.edu/course/view.php?id=4709">
+    <a class="nav-link" href="https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478358">
 <p>Moodle</p>
 </a>
   </li>  
@@ -948,7 +1446,7 @@ If you are looking for what is the next step, here are some <a href="https://geo
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://creativecommons.org/licenses/by-sa/4.0/">
-<p>© 2024 GeoForAll Lab CC BY-SA</p>
+<p>© 2026 GeoForAll Lab CC BY-SA</p>
 </a>
   </li>  
 </ul>

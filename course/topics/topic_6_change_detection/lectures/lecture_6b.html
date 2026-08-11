@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Corey White">
+  <title>UAS Mapping and Analytics – UAS Change Detection Methods</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-37b489307523cca1917c1cad05027324.css">
+  <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">UAS Change Detection Methods</h1>
+  <p class="subtitle">GIS 584: UAS Mapping &amp; Analysis</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Corey White
+</div>
+</div>
+</div>
+
+</section>
+<section id="overview" class="slide level2 center">
+<h2>Overview</h2>
+<p>Detecting and quantifying changes using multi-temporal UAS data</p>
+<h4 id="focus-areas">Focus areas</h4>
+<ul>
+<li>Pre-classification methods</li>
+<li>Feature and object-based methods</li>
+<li>Post-classification change detection</li>
+<li>Data co-registration and uncertainty</li>
+</ul>
+<aside class="notes">
+<p>Explain that change detection forms the foundation of time-series analysis using UAS. Students should appreciate that the ability to detect subtle geomorphic or ecological change relies heavily on both spatial precision and radiometric consistency. Emphasize that this lecture provides the conceptual background for their upcoming assignment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-change-detection" class="slide level2 smaller center">
+<h2>Why Change Detection?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Assess temporal dynamics of landscapes and features</li>
+<li>Monitor environmental and human processes:
+<ul>
+<li><strong>Erosion, deposition, landslides</strong></li>
+<li><strong>Vegetation growth and stress</strong></li>
+<li><strong>Infrastructure development and construction monitoring</strong></li>
+<li><strong>Disaster impact and recovery (floods, hurricanes, fires)</strong></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/animated_sat.gif"></p>
+</div></div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="uas-advantages">UAS Advantages</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>High spatial and temporal resolution compared to satellites</li>
+<li>Flexible deployment for localized studies</li>
+<li>Affordable repeat coverage for time series</li>
+<li>Capability to integrate RGB, multispectral, and LiDAR payloads</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/remotesensing-14-01718-ag.png"></p>
+<figcaption>Jockey’s Ridge, NC - 2024 4m</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Use examples of recent UAS missions from your research to show how repeated surveys reveal changes invisible in a single snapshot. Introduce the concept of temporal baselines—days, weeks, months—and how temporal resolution affects interpretability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="data-pre-processing" class="slide level2 text-center center">
+<h2>Data Pre-Processing</h2>
+<ul>
+<li>Radiometric Correction</li>
+<li>Geometric Correction &amp; Co-registration</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 class="text-center" id="jockeys-ridge">Jockey’s Ridge</h3>
+<h4 class="text-center" id="section">1932 - 2009</h4>
+<div class="grid">
+<p><img data-src="../images/airphoto_1932.png" alt="1932"> <img data-src="../images/airphoto_1945.png" alt="1945"> <img data-src="../images/airphoto_1955.png" alt="1988"> <img data-src="../images/airphoto_1962.png" alt="1962"> <img data-src="../images/airphoto_1974.png" alt="1974"> <img data-src="../images/airphoto_1988.png" alt="1988"> <img data-src="../images/airphoto_2007.png" alt="2007"> <img data-src="../images/airphoto_2009.png" alt="2009"></p>
+</div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="radiometric-correction">Radiometric Correction</h3>
+<p>Normalizes brightness and spectral values across flights</p>
+<h4 id="key-steps">Key steps:</h4>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  calibrate["`Apply **sensor calibration**
+  and **reflectance panels**`"]
+  calibrate --&gt; adjust["`Adjust for illumination
+  differences (sun angle, clouds)`"]
+  adjust --&gt; correct["`Correct vignetting
+  and shadow effects`"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Enables meaningful spectral differencing and vegetation indices</p>
+<blockquote>
+<p>Addidional Resources (<span class="citation" data-cites="sampath_guidelines_2023">Sampath et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>)</p>
+</blockquote>
+</section>
+<section class="slide level2 center">
+
+<h3 id="geometric-correction-co-registration">Geometric Correction &amp; Co-registration</h3>
+<p>Ensures all datasets share the same coordinate reference and alignment</p>
+<h4 id="methods">Methods</h4>
+<ul>
+<li><strong>GCP-based correction</strong> (preferred for absolute accuracy) (<span class="citation" data-cites="mitasova_raster-based_2009">Mitasova et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span>)</li>
+<li><strong>Feature-based registration</strong> (SIFT/SURF for automated tie points) (<span class="citation" data-cites="sedaghat_high-resolution_2019">Sedaghat and Mohammadi (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>)</li>
+<li><strong>ICP alignment</strong> for DEMs and point clouds (<span class="citation" data-cites="segal_generalized-icp_2009">Segal et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span>)</li>
+<li><strong>Nuth-Kääb Method</strong> for DEMs (<span class="citation" data-cites="nuth_co-registration_2011">Nuth and Kääb (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span>)</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="geometric-correction-co-registration-1">Geometric Correction &amp; Co-registration</h3>
+<h4 id="evaluate-accuracy-using">Evaluate accuracy using</h4>
+<ul>
+<li>RMSE (root mean square error)</li>
+<li>NMAD (normalized median absolute deviation)</li>
+<li>reprojection error</li>
+</ul>
+<aside class="notes">
+<p>Stress that co-registration errors directly translate to false change detection. A 5–10 cm horizontal misalignment can appear as a false change in vegetation or soil boundaries. Discuss the difference between absolute and relative accuracy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="co-registration-in-practice" class="slide level2 center">
+<h2>Co-registration in Practice</h2>
+<ul>
+<li>Orthomosaic alignment via tie-points and transformation models</li>
+<li>DEM alignment: remove vertical bias and tilt</li>
+</ul>
+<h4 id="common-issues">Common issues:</h4>
+<ul>
+<li>Local warping, temporal parallax, surface deformation</li>
+<li>GCP mismatch or insufficient tie points</li>
+</ul>
+<h4 id="best-practices">Best practices:</h4>
+<ul>
+<li>Use <strong>stable surfaces</strong> (buildings, pavement) for control points</li>
+<li>Validate with visual overlays and difference histograms</li>
+<li>Compute NCC or correlation metrics for quality assurance</li>
+</ul>
+<aside class="notes">
+<p>Show before/after examples illustrating pixel shifts. Explain the concept of multi-temporal bundle adjustment in advanced workflows.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pre-classification-change-detection" class="slide level2 center">
+<h2>Pre-Classification Change Detection</h2>
+<h3 id="image-differencing-rationing">Image Differencing &amp; Rationing</h3>
+<ul>
+<li>Simple and widely used for radiometrically stable imagery</li>
+<li>Compute differences between bands, indices, or reflectance values:
+<ul>
+<li>( B = B_{t2} - B_{t1} )</li>
+</ul></li>
+<li>Apply thresholds:
+<ul>
+<li>Manual (visual inspection)</li>
+<li>Automatic (Otsu’s method, ±1σ) <span class="citation" data-cites="sha_robust_2016">(<a href="#/references" role="doc-biblioref" onclick="">Sha et al. 2016</a>)</span></li>
+</ul></li>
+<li>Interpretation:
+<ul>
+<li>Positive → increase in brightness or greenness</li>
+<li>Negative → decrease (e.g., vegetation loss)</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Explain how differencing is best for continuous-valued imagery (reflectance, NDVI) and less effective on categorical data. Discuss challenges from lighting and shadows.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pre-classification-change-detection-1" class="slide level2 text-center center">
+<h2>Pre-Classification Change Detection</h2>
+<ul>
+<li>Spectral Index Differencing</li>
+<li>DEM of Difference (DoD)</li>
+<li>Multi-Temporal Image Fusion</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="spectral-index-differencing">Spectral Index Differencing</h3>
+<ul>
+<li>NDVI, VARI, NDRE, NDMI commonly used</li>
+<li>Highlights vegetation or moisture change</li>
+<li>Formula example: <span class="math display">\[\Delta NDVI = NDVI_{t2} - NDVI_{t1}\]</span></li>
+<li>Thresholds often set at ±0.1–0.2</li>
+<li>Applications: crop stress detection, vegetation removal, regrowth analysis</li>
+</ul>
+<aside class="notes">
+<p>Remind students that spectral indices require consistent illumination and calibrated reflectance. Discuss the effect of soil background and phenology.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+
+<h3 id="dem-of-difference-dod">DEM of Difference (DoD)</h3>
+<ul>
+<li>Calculates elevation change: <span class="math display">\[DoD = DEM_{t2} - DEM_{t1}\]</span></li>
+<li>Quantifies erosion, deposition, or volumetric change</li>
+<li>Requires vertical co-registration and uncertainty estimation</li>
+<li>Error propagation: <span class="math display">\[\sigma_{comb} = \sqrt{\sigma_{1}^2 + \sigma_{2}^2}\]</span></li>
+<li>Minimum Level of Detection (LoD95) defines confidence threshold</li>
+</ul>
+<aside class="notes">
+<p>Use geomorphic examples like riverbank erosion or stockpile volume change. Highlight how vertical uncertainty dominates small changes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+
+<h3 id="multi-temporal-image-fusion">Multi-Temporal Image Fusion</h3>
+<ul>
+<li><strong>Principal Component Analysis (PCA)</strong> detects correlated multi-band change</li>
+<li><strong>Change Vector Analysis (CVA)</strong> measures magnitude and direction of spectral change</li>
+</ul>
+<h4 id="common-issues-1">Common issues:</h4>
+<ul>
+<li>Sensitive to subtle multi-band variations</li>
+<li>Useful for multi-sensor integration (e.g., RGB + multispectral)</li>
+</ul>
+<aside class="notes">
+<p>Provide intuition using 2D change vectors: the length indicates magnitude, direction indicates type of change. Encourage students to see CVA as a vector space approach.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="feature-based-object-based-change-detection-obia" class="slide level2 text-centered center">
+<h2>Feature-Based &amp; Object-Based Change Detection (OBIA)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="feature-based">Feature-Based</h4>
+<ul>
+<li>Segmentation &amp; Object Generation</li>
+<li>Feature Extraction</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="object-based-change-detection-obia">Object-Based Change Detection (OBIA)</h4>
+<ul>
+<li>Object Comparison</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2 center">
+
+<h3 class="smaller" id="feature-based-1">Feature-Based</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="segmentation-object-generation">Segmentation &amp; Object Generation</h4>
+<p>Divide imagery into homogeneous regions</p>
+<h5 id="techniques">Techniques:</h5>
+<ul>
+<li>region-growing</li>
+<li>edge-detection</li>
+<li>watershed</li>
+<li>multi-resolution segmentation</li>
+<li>Scale parameter controls object granularity</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="feature-extraction">Feature Extraction</h4>
+<p>Derive attributes per object:</p>
+<ul>
+<li>mean NDVI,</li>
+<li>texture</li>
+<li>shape</li>
+<li>context</li>
+</ul>
+</div></div>
+</section>
+<section id="object-based-change-detection-obia-1" class="slide level2 center">
+<h2>Object-Based Change Detection (OBIA)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="object-comparison">Object Comparison</h3>
+<p>Compare across dates by</p>
+<ul>
+<li>overlap</li>
+<li>centroid shift</li>
+<li>attribute change</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/remotesensing-14-01718-thematic.png"></p>
+<figcaption><span class="citation" data-cites="white_rapid-dem_2022">White et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></figcaption>
+</figure>
+</div>
+</div><blockquote>
+<p>Enables context-aware change analysis</p>
+</blockquote>
+</div>
+<aside class="notes">
+<p>Contrast pixel-based and OBIA results visually. Mention that OBIA reduces salt-and-pepper noise and better represents real-world objects.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="feature-based-object-based-change-detection-obia-1" class="slide level2 center">
+<h2>Feature-Based &amp; Object-Based Change Detection (OBIA)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="advantages">Advantages</h4>
+<ul>
+<li>Reduces pixel noise</li>
+<li>Captures spatial context</li>
+<li>Integrates spectral + geometric information</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="limitations">Limitations</h4>
+<ul>
+<li>Segmentation parameter sensitivity</li>
+<li>High computational cost</li>
+<li>Object definition inconsistencies</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Encourage discussion on parameter tuning. Mention eCognition or open-source OBIA tools like Orfeo Toolbox and SAMGeo.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="post-classification-change-detection" class="slide level2 text-center center">
+<h2>Post-Classification Change Detection</h2>
+<ul>
+<li>Classify each epoch separately, then compare thematic results</li>
+<li>Produces categorical transitions (e.g., Vegetation → Bare Soil)</li>
+<li>Sensitive to classification consistency</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="workflow">Workflow</h3>
+<ol type="1">
+<li>Classify imagery for each date (RF, SVM, DL models)</li>
+<li>Align class maps</li>
+<li>Cross-tabulate transitions</li>
+<li>Derive change maps and summary statistics</li>
+</ol>
+<aside class="notes">
+<p>Explain that this is most robust when classes are stable and well-separated spectrally. Highlight potential confusion from inconsistent training data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+
+<h3 id="example-cross-classification-matrix">Example Cross-Classification Matrix</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Class (t1→t2)</th>
+<th>Vegetation</th>
+<th>Bare Soil</th>
+<th>Built-up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vegetation</td>
+<td>80%</td>
+<td>15%</td>
+<td>5%</td>
+</tr>
+<tr class="even">
+<td>Bare Soil</td>
+<td>10%</td>
+<td>85%</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>Built-up</td>
+<td>5%</td>
+<td>5%</td>
+<td>90%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Off-diagonal values = change areas</li>
+<li>Summarize transitions and map visually</li>
+</ul>
+<aside class="notes">
+<p>Discuss how to visualize this matrix in GIS and generate transition probability maps. Stress that interpretation depends on temporal spacing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+
+<h3 id="accuracy-and-error-propagation">Accuracy and Error Propagation</h3>
+<ul>
+<li>Misclassification at each date compounds</li>
+<li>Evaluate using error matrices and Kappa coefficients</li>
+<li>Apply conditional probability or Bayesian correction methods</li>
+</ul>
+<aside class="notes">
+<p>Show how overall accuracy may drop by half when two independent classifications each have 90% accuracy. Emphasize the need for consistent training data and features.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+
+<h3 id="advanced-approaches">Advanced Approaches</h3>
+<ul>
+<li><strong>Deep Learning</strong> (U-Net, CNN) for semantic segmentation</li>
+<li><strong>Temporal fusion networks</strong> capture time-based patterns</li>
+<li><strong>Ensemble methods</strong> improve stability (RF + GBM)</li>
+<li>Integration with LiDAR or radar for 3D + spectral change detection</li>
+</ul>
+<aside class="notes">
+<p>Preview emerging AI-based workflows that can process multi-temporal data automatically. Mention potential research directions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uncertainty-and-validation" class="slide level2 text-center center">
+<h2>Uncertainty and Validation</h2>
+</section>
+<section class="slide level2 center">
+
+<h3 id="sources-of-uncertainty">Sources of Uncertainty</h3>
+<ul>
+<li>Geometric misalignment</li>
+<li>Radiometric inconsistencies</li>
+<li>Shadowing and occlusion</li>
+<li>Temporal aliasing (changes between acquisition dates)</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="quantifying-confidence">Quantifying Confidence</h3>
+<ul>
+<li>Use control points and stable areas</li>
+<li>Propagate DEM and reflectance errors</li>
+<li>Define LoD95 or 3σ thresholds for reporting change</li>
+</ul>
+<aside class="notes">
+<p>Encourage quantitative reasoning: discuss how uncertainty propagation affects volumetric estimates. Introduce concepts like error budgets and probabilistic thresholds.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="case-studies-applications" class="slide level2 text-center center">
+<h2>Case Studies &amp; Applications</h2>
+</section>
+<section class="slide level2 center">
+
+<h3 id="geomorphic-change">Geomorphic Change</h3>
+<ul>
+<li>Riverbank erosion mapping using DoD</li>
+<li>Landslide volume estimation</li>
+<li>Coastal dune dynamics</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="vegetation-monitoring">Vegetation Monitoring</h3>
+<ul>
+<li>Crop regrowth and stress detection</li>
+<li>Post-fire recovery mapping</li>
+<li>Invasive species monitoring</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="infrastructure-disaster-response">Infrastructure &amp; Disaster Response</h3>
+<ul>
+<li>Construction progress mapping</li>
+<li>Post-flood damage assessment</li>
+<li>Landslide and debris flow detection</li>
+</ul>
+<aside class="notes">
+<p>Provide several example studies (e.g., Fonstad et al.&nbsp;2013, Wheaton et al.&nbsp;2010) showing how UAS have revolutionized change analysis in geomorphology and ecology.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 center">
+<h2>Summary</h2>
+<h3 id="key-takeaways">Key Takeaways</h3>
+<ul>
+<li>Co-registration accuracy is the foundation of reliable change detection</li>
+<li>Select method based on:
+<ul>
+<li>Data type (spectral, elevation, categorical)</li>
+<li>Temporal frequency</li>
+<li>Change magnitude</li>
+</ul></li>
+<li>Address uncertainty at every stage</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="looking-ahead">Looking Ahead</h3>
+<ul>
+<li>Real-time change detection pipelines (Edge + Cloud)</li>
+<li>AI-assisted feature tracking</li>
+<li>Integration of UAS with satellite time series for multi-scale change detection</li>
+</ul>
+<aside class="notes">
+<p>Summarize main method families and emphasize decision criteria. Encourage students to think critically about sources of error and method suitability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="discussion" class="slide level2 center">
+<h2>Discussion</h2>
+<ul>
+<li>What are the biggest challenges you’ve faced in multi-temporal UAS analysis?</li>
+<li>How can we validate change when ground truth is unavailable?</li>
+<li>What are promising research directions in automated change detection?</li>
+</ul>
+<aside class="notes">
+<p>Facilitate a 10–15 minute class discussion encouraging students to connect methods to their term projects. Suggest linking to forthcoming assignment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-mitasova_raster-based_2009" class="csl-entry" role="listitem">
+Mitasova, Helena, Margery F. Overton, Juan José Recalde, David J. Bernstein, and Christopher W. Freeman. 2009. <span>“Raster-Based Analysis of Coastal Terrain Dynamics from Multitemporal Lidar Data.”</span> <em>Journal of Coastal Research</em> 25 (2): 507–14. <a href="https://www.jstor.org/stable/27698342">https://www.jstor.org/stable/27698342</a>.
+</div>
+<div id="ref-nuth_co-registration_2011" class="csl-entry" role="listitem">
+Nuth, C., and A. Kääb. 2011. <span>“Co-Registration and Bias Corrections of Satellite Elevation Data Sets for Quantifying Glacier Thickness Change.”</span> <em>The Cryosphere</em> 5 (1): 271–90. <a href="https://doi.org/10.5194/tc-5-271-2011">https://doi.org/10.5194/tc-5-271-2011</a>.
+</div>
+<div id="ref-sampath_guidelines_2023" class="csl-entry" role="listitem">
+Sampath, Aparajithan, Mahesh Shrestha, Michelle While, and Victoria Mary Scholl. 2023. <em>Guidelines for Calibration of Uncrewed Aircraft Systems Imagery</em>. Nos. 2023-1033. U.S. Geological Survey. <a href="https://doi.org/10.3133/ofr20231033">https://doi.org/10.3133/ofr20231033</a>.
+</div>
+<div id="ref-sedaghat_high-resolution_2019" class="csl-entry" role="listitem">
+Sedaghat, Amin, and Nazila Mohammadi. 2019. <span>“High-Resolution Image Registration Based on Improved <span>SURF</span> Detector and Localized <span>GTM</span>.”</span> <em>International Journal of Remote Sensing</em> 40 (7): 2576–601. <a href="https://doi.org/10.1080/01431161.2018.1528402">https://doi.org/10.1080/01431161.2018.1528402</a>.
+</div>
+<div id="ref-segal_generalized-icp_2009" class="csl-entry" role="listitem">
+Segal, Aleksandr, Dirk Hähnel, and Sebastian Thrun. 2009. <em>Generalized-<span>ICP</span></em>. <a href="https://doi.org/10.15607/RSS.2009.V.021">https://doi.org/10.15607/RSS.2009.V.021</a>.
+</div>
+<div id="ref-sha_robust_2016" class="csl-entry" role="listitem">
+Sha, Chunshi, Jian Hou, and Hongxia Cui. 2016. <span>“A Robust 2D Otsu’s Thresholding Method in Image Segmentation.”</span> <em>Journal of Visual Communication and Image Representation</em> 41 (November): 339–51. <a href="https://doi.org/10.1016/j.jvcir.2016.10.013">https://doi.org/10.1016/j.jvcir.2016.10.013</a>.
+</div>
+<div id="ref-white_rapid-dem_2022" class="csl-entry" role="listitem">
+White, Corey T., William Reckling, Anna Petrasova, Ross K. Meentemeyer, and Helena Mitasova. 2022. <span>“Rapid-<span>DEM</span>: Rapid Topographic Updates Through Satellite Change Detection and <span>UAS</span> Data Fusion.”</span> <em>Remote Sensing</em> 14 (7): 1718. <a href="https://doi.org/10.3390/rs14071718">https://doi.org/10.3390/rs14071718</a>.
+</div>
+</div>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="../../../../course/topics/topic_6_change_detection/part_b_change_detection.html">Return Home</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1400,
+
+        height: 800,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

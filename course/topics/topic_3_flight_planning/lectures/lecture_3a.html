@@ -7,21 +7,27 @@
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Justyna Jeziorska, Helena Mitasova &amp; Corey White">
-  <title>GIS/MEA 584: UAS Mapping and Analytics – Flight Planning</title>
+  <title>UAS Mapping and Analytics – Flight Planning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -30,10 +36,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-325e80447fc094eaf6b0fce49d02d209.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-37b489307523cca1917c1cad05027324.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -134,13 +142,13 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Justyna Jeziorska, Helena Mitasova &amp; Corey White 
+Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div>
 </div>
 </div>
 
 </section>
-<section id="objectives" class="slide level2">
+<section id="objectives" class="slide level2 center">
 <h2>Objectives</h2>
 <ul>
 <li class="fragment">Phases of flight planning</li>
@@ -149,39 +157,40 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <li class="fragment">Flight planning software</li>
 </ul>
 </section>
-<section id="uas-photogrammetric-process" class="slide level2">
-<h2>UAS Photogrammetric process</h2>
+<section id="pre-flight-considerations" class="slide level2 center">
+<h2>Pre-flight Considerations</h2>
 
 <img data-src="../images/photogrammetric_process.webp" class="r-stretch"><p>Throughout the whole process, it is important to remember:</p>
 <ul>
-<li><strong>What</strong> is the aim or the project?</li>
-<li><strong>What</strong> will be the data used for?</li>
+<li>What is the aim of the project?</li>
+<li>What is the required resolution?</li>
+<li>Flight regulations</li>
+<li>Weather</li>
 </ul>
 </section>
-<section id="project-definition" class="slide level2">
+<section id="project-definition" class="slide level2 center">
 <h2>Project Definition</h2>
 
 <img data-src="../images/flowchart_project.webp" class="r-stretch"><ul>
-<li>Defining the scope of the project</li>
+<li>Define spatial scale (spatial resolution and extent)</li>
 <li>Choosing UAS and sensor</li>
 <li>Assessing the cost, labor, and time consumption</li>
 <li>Collecting information about terrain</li>
 </ul>
 </section>
-<section id="project-definition-1" class="slide level2">
+<section id="project-definition-1" class="slide level2 center">
 <h2>Project Definition</h2>
 
 <img data-src="../images/flowchart_project.webp" class="r-stretch"><ul>
-<li>Define the area and resolution based on:
+<li>Define the area (extent) and resolution based on:
 <ul>
 <li>UAS and sensor capabilities</li>
-<li>Spatial extent of the mapping area</li>
 <li>Terrain constraints</li>
 <li>Project requirements</li>
 </ul></li>
 </ul>
 </section>
-<section id="project-definition-2" class="slide level2">
+<section id="project-definition-2" class="slide level2 center">
 <h2>Project Definition</h2>
 
 <img data-src="../images/flowchart_project.webp" class="r-stretch"><ul>
@@ -193,7 +202,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </ul></li>
 </ul>
 </section>
-<section id="flight-planning" class="slide level2">
+<section id="flight-planning" class="slide level2 center">
 <h2>Flight planning</h2>
 
 <img data-src="../images/flowchart_planning.webp" class="r-stretch"><ul>
@@ -204,7 +213,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <li>Creating a flight plan (software specific)</li>
 </ul>
 </section>
-<section id="placing-ground-control-points-gcps" class="slide level2 smaller">
+<section id="placing-ground-control-points-gcps" class="slide level2 smaller center">
 <h2>Placing Ground Control Points (GCPs)</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -219,7 +228,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <p><img data-src="../images/GCP.webp"></p>
 </div></div>
 </section>
-<section id="placing-ground-control-points-gcps-1" class="slide level2">
+<section id="placing-ground-control-points-gcps-1" class="slide level2 center">
 <h2>Placing Ground Control Points (GCPs)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -233,7 +242,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <p><img data-src="../images/GCP_photo.webp"></p>
 </div></div>
 </section>
-<section id="gcps-accuracy" class="slide level2 smaller">
+<section id="gcps-accuracy" class="slide level2 smaller center">
 <h2>GCPs Accuracy</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -251,7 +260,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div></div>
 <p><em>Distance between two consecutive pixel centers measured on the ground</em></p>
 </section>
-<section id="ground-sampling-distance" class="slide level2 smaller">
+<section id="ground-sampling-distance" class="slide level2 smaller center">
 <h2>Ground Sampling Distance</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -262,7 +271,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 \]</span></p>
 <p>Where:</p>
 <ul>
-<li>A: Flight Altitude (m)</li>
+<li>A: Flight Altitude (m) (<em>AGL</em> - <em>Above Ground Level</em>)</li>
 <li>S: Sensor(hight, width) (mm)</li>
 <li>F: Focal Length (mm)</li>
 <li>D: Image Dimensions (height, width) (pixels)</li>
@@ -273,7 +282,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <p><img data-src="../images/GSD2.webp"></p>
 </div></div>
 </section>
-<section id="site-evaluation-and-checklists" class="slide level2 smaller">
+<section id="site-evaluation-and-checklists" class="slide level2 smaller center">
 <h2>Site evaluation and checklists</h2>
 
 <img data-src="../images/flowchart_site.webp" class="r-stretch"><ul>
@@ -290,18 +299,17 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </ul></li>
 </ul>
 </section>
-<section id="site-evaluation-and-checklists-1" class="slide level2">
+<section id="site-evaluation-and-checklists-1" class="slide level2 center">
 <h2>Site evaluation and checklists</h2>
 
 <img data-src="../images/site.webp" class="r-stretch"></section>
-<section id="site-evaluation-and-checklists-2" class="slide level2 smaller">
+<section id="site-evaluation-and-checklists-2" class="slide level2 smaller center">
 <h2>Site evaluation and checklists</h2>
 <p><strong>Preflight inspection is required under Part 107.49;</strong><br>
 </p>
 <p><strong>Remote Pilot in Command (RPIC)</strong> is required to develop a <strong>preflight inspection checklist</strong> if the manufacturer has not developed one.</p>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><a href="https://www.ncdot.gov/divisions/aviation/uas/Pages/default.aspx">NCDOT Unmanned Aircraft Systems Program</a></p>
 <ul>
 <li>The checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor</li>
 <li>In case that is not available, a standard Flight Checklist should be made and followed by the flight crew</li>
@@ -313,39 +321,39 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <p>Note: As of Dec.&nbsp;1, 2024, North Carolina no longer require commercial and government drone operators to obtain an N.C. permit</p>
 </blockquote>
 </section>
-<section id="flight-control" class="slide level2 smaller">
+<section id="flight-control" class="slide level2 smaller center">
 <h2>Flight control</h2>
 
 <img data-src="../images/flowchart_control.webp" class="r-stretch"><ul>
-<li>The UAS RPIC should <strong>launch, operate, and recover</strong> from <strong>preset locations</strong> so that the aircraft will fly according to the mission plan.</li>
+<li>The UAS <strong>RPIC</strong> should <strong>launch, operate, and recover</strong> from <strong>preset locations</strong> so that the aircraft will fly according to the mission plan.</li>
 <li><strong>Visual Line of Sight (VLOS)</strong> - the flight crew should have a clear view of the aircraft at all times, called .</li>
 <li>Observation locations should be selected for the <strong>maximum line of sight</strong> throughout the planned flight operations area (Part 107.31).</li>
 </ul>
 </section>
-<section id="flight-control-1" class="slide level2 smaller">
+<section id="flight-control-1" class="slide level2 smaller center">
 <h2>Flight control</h2>
 
 <img data-src="../images/flowchart_control.webp" class="r-stretch"><ul>
-<li><strong>RP (Remote Pilot)</strong>, <strong>PMC (Person Manipulating the Flight Controls)</strong>, and <strong>VO (Visual Observer)</strong> (if used)
+<li><strong>RP (Remote Pilot)</strong></li>
+<li><strong>PMC (Person Manipulating the Flight Controls)</strong>, - - <strong>VO (Visual Observer)</strong>
 <ul>
-<li>must be able to maintain effective communication with each other at all times (Part 107.33).</li>
+<li>(if used): must be able to maintain effective communication with each other at all times (Part 107.33).</li>
 </ul></li>
 <li>Upon any failure during the flight or any loss of visual contact with the UAS, the RPIC should command the aircraft back to the recovery location or utilize the built-in fail-safe features to recover the aircraft.</li>
 </ul>
 </section>
-<section id="lake-wheeler---imagery" class="slide level2">
+<section id="lake-wheeler---imagery" class="slide level2 center">
 <h2>Lake Wheeler - Imagery</h2>
 
-<img data-src="../images/LW_google.webp" style="width:80.0%" class="r-stretch"></section>
-<section id="lake-wheeler---aeronautical-chart" class="slide level2">
-<h2>Lake Wheeler - Aeronautical chart</h2>
+<!-- ## Lake Wheeler - Aeronautical chart
 
-<img data-src="../images/lake_wheeler1.webp" style="width:80.0%" class="r-stretch"></section>
-<section id="lake-wheeler-test-site" class="slide level2">
+![](../images/lake_wheeler1.webp){width="80%"} -->
+<img data-src="../images/LW_google.webp" style="width:80.0%" class="r-stretch"></section>
+<section id="lake-wheeler-test-site" class="slide level2 center">
 <h2>Lake Wheeler test site</h2>
 
 <img data-src="../images/lake_wheeler2.webp" style="width:80.0%" class="r-stretch"></section>
-<section id="flight-planning-software" class="slide level2 smaller">
+<section id="flight-planning-software" class="slide level2 smaller center">
 <h2>Flight planning software</h2>
 <ul>
 <li>Multiple available platforms</li>
@@ -369,7 +377,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </ul>
 </div></div>
 </section>
-<section id="how-to-plan-a-mapping-flight" class="slide level2 smaller">
+<section id="how-to-plan-a-mapping-flight" class="slide level2 smaller center">
 <h2>How to plan a mapping flight?</h2>
 <p>UAS Photogrammetric process</p>
 <p><img data-src="../images/photogrammetric_process.webp"></p>
@@ -380,18 +388,18 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <p><img data-src="../images/flight_track.webp"></p>
 </div></div>
 </section>
-<section id="location" class="slide level2">
+<section id="location" class="slide level2 center">
 <h2>Location</h2>
 <ul>
 <li>Fly larger extent than you need.</li>
 <li>Think about the area you need for analysis</li>
 </ul>
 </section>
-<section id="camera-specs" class="slide level2">
+<section id="camera-specs" class="slide level2 center">
 <h2>Camera Specs</h2>
 <p>General camera setting are usally fine.</p>
 </section>
-<section id="optional-settings" class="slide level2">
+<section id="optional-settings" class="slide level2 center">
 <h2>Optional Settings</h2>
 <ul>
 <li>Mechanical Shutter: On</li>
@@ -400,7 +408,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <li>Aspect Ratio: 3/2</li>
 </ul>
 </section>
-<section id="camera-angle" class="slide level2">
+<section id="camera-angle" class="slide level2 center">
 <h2>Camera Angle</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -418,7 +426,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </ul>
 </div></div>
 </section>
-<section id="altitude" class="slide level2">
+<section id="altitude" class="slide level2 center">
 <h2>Altitude</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -435,7 +443,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <p>Altitude 70m <img data-src="../images/flight_plan_70m_75ol.webp" alt="Altitude 70m"> Altitude 120m <img data-src="../images/flight_plan_120m_75ol.webp" alt="Altitude 120m"></p>
 </div></div>
 </section>
-<section id="flight-patterns" class="slide level2">
+<section id="flight-patterns" class="slide level2 center">
 <h2>Flight Patterns</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -454,7 +462,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </ul>
 </div></div>
 </section>
-<section id="overlap" class="slide level2">
+<section id="overlap" class="slide level2 center">
 <h2>Overlap</h2>
 <ul>
 <li>Front and Side</li>
@@ -475,7 +483,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div>
 </div>
 </section>
-<section id="drone-speed" class="slide level2">
+<section id="drone-speed" class="slide level2 center">
 <h2>Drone Speed</h2>
 <p>~30 km/hr</p>
 <ul>
@@ -485,7 +493,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <li>Motion Blur</li>
 </ul>
 </section>
-<section id="lighting" class="slide level2">
+<section id="lighting" class="slide level2 center">
 <h2>Lighting</h2>
 <ul>
 <li>Overcast</li>
@@ -494,7 +502,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
 <li>Partly Cloudly</li>
 </ul>
 </section>
-<section id="summary" class="slide level2">
+<section id="summary" class="slide level2 center">
 <h2>Summary</h2>
 <ul>
 <li>Phases of UAS flight planning</li>
@@ -508,7 +516,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p><a href="../../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html">Return Home</a></p>
 </div>
 </div></div>
 
@@ -519,6 +527,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
   <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -533,18 +542,19 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -561,7 +571,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -590,7 +600,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         disableLayout: false,
 
         // Vertical centering of slides
-        center: false,
+        center: true,
 
         // Enables touch navigation on devices with touch input
         touch: true,
@@ -666,7 +676,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -686,15 +696,15 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1400,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -711,7 +721,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -768,13 +778,14 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -789,7 +800,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/ncsu-geoforall-lab\.github\.io\/gis-584-uas-course\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

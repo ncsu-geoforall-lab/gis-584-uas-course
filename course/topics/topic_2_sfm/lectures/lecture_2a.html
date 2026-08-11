@@ -7,21 +7,27 @@
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Justyna Jeziorska, Helena Mitasova &amp; Corey White">
-  <title>GIS/MEA 584: UAS Mapping and Analytics – Photogrammetry and Structure from Motion Concepts</title>
+  <title>UAS Mapping and Analytics – Photogrammetry and Structure from Motion Concepts</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -30,10 +36,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-325e80447fc094eaf6b0fce49d02d209.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-37b489307523cca1917c1cad05027324.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -129,542 +137,396 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Photogrammetry and Structure from Motion Concepts</h1>
-  <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
+  <p class="subtitle">GIS 584: UAS Mapping &amp; Analytics</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Justyna Jeziorska, Helena Mitasova &amp; Corey White 
+Justyna Jeziorska, Helena Mitasova &amp; Corey White
 </div>
 </div>
 </div>
 
 </section>
-<section class="slide level2">
+<section class="slide level2 center">
 
-<section>
-<h2>
-Objectives
-</h2>
+<p><strong>Photogrammetry &amp; Structure from Motion (SfM) Concepts</strong><br>
+GIS 584 · UAS Mapping &amp; Analytics</p>
+<aside class="notes">
+<p>Welcome everyone. Today we’ll connect the dots between <em>images</em> you capture with a drone and the <em>metrics</em> you can trust, orthophotos, point clouds, and elevation models.<br>
+By the end, you’ll understand why raw photos can’t be measured directly, what orthorectification does, and how SfM reconstructs 3D from overlapping 2D images. We’ll keep this practical and tie each idea to UAS field work and data QA.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="objectives" class="slide level2 center">
+<h2>Objectives</h2>
 <ul>
-<li class="fragment">
-<strong>Understand</strong> the role of remote sensing and photogrammetry in geospatial data aquisition
-</li>
-<li class="fragment">
-<strong>Describe</strong> different types of aerial photography and associated challenges for measurements
-</li>
-<li class="fragment">
-<strong>Understand</strong> why photogrammetry needs to be used to make measurements from aerial photographs
-</li>
-<li class="fragment">
-<strong>Understand</strong> Structure from Motion concepts in creating 3D models from 2D images
-</li>
+<li class="fragment">Understand how remote sensing &amp; photogrammetry support geospatial data acquisition</li>
+<li class="fragment">Recognize aerial photo types and the measurement challenges they introduce</li>
+<li class="fragment">Explain why image processing (orthorectification) is needed for measurements</li>
+<li class="fragment">Grasp SfM concepts for creating 3D models from 2D images</li>
 </ul>
+<aside class="notes">
+<p>These are the takeaways. We’ll move from fundamentals to workflow design.<br>
+Keep thinking about two questions: <em>What do you want to measure?</em> and <em>What accuracy do you need?</em><br>
+Those answers determine flight planning, ground control, and processing parameters.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-What is Remote Sensing?
-</h2>
+<section id="what-is-remote-sensing" class="slide level2 center">
+<h2>What is Remote Sensing?</h2>
 <ul>
-<li>
-Sensing without contact
+<li>Sensing without contact: acquire data from a distance<br>
 </li>
-<li>
-Acquiring data from a distance
+<li><strong>Passive</strong> sensors: measure reflected/emitted energy (RGB, multispectral, thermal)<br>
 </li>
-<li>
-Passive sensors: sensor captures reflected rays
-</li>
-<li>
-Active sensors: sensor sends out rays and captures the return signal (lidar, radar, sonar)
-</li>
+<li><strong>Active</strong> sensors: emit energy and measure returns (LiDAR, radar, sonar)</li>
 </ul>
-<!-- <img src="../images/remote_sensing_photogrammetry.webp" alt="Remote Sensing Photogrammetry"> -->
+<aside class="notes">
+<p>Remote sensing gives us information without touching the surface.<br>
+Drones typically carry passive RGB or multispectral cameras; LiDAR UAS are active sensors and directly measure range.<br>
+Keep this distinction in mind, SfM uses <em>passive</em> imagery but <em>infers</em> depth from parallax.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Remote sensing for mapping explained
-</h2>
-<a href="https://www.youtube.com/watch?v=3iaFzafWJQE"><img src="../images/movie_remote.webp"></a>
-</section>
-<section>
-<h2>
-Remote sensing, photogrammerty and GIS
-</h2>
-<img class="fragment" src="../images/remote_sensing_vs_photogrammertry.webp" width="70%"> <img class="fragment" src="../images/rs_to_GIS.webp" width="60%">
-<p class="small fragment">
-Source of diagrams: Schenk (2005), modified
-</p>
-</section>
-<section>
-<h2>
-Photogrammetry
-</h2>
+<section id="photogrammetry-why-it-matters" class="slide level2 center">
+<h2>Photogrammetry (Why it matters)</h2>
 <ul>
-<li class="fragment">
-3-D coordinate measuring technique that uses PHOTOGRAPHS as the fundamental medium for measurement (the science of taking precise measurements from photographs);
-</li>
-<li class="fragment">
-Can be classified into two types: aerial and terrestrial (close range);
-</li>
-<li class="fragment">
-Aerial Photogrammerty was a crucial development in map making
-</li>
+<li>3D coordinate measurement using photographs</li>
+<li>Two broad modes: <em>aerial</em> vs <em>terrestrial (close-range)</em></li>
+<li>Historically crucial for mapping; now democratized via UAS</li>
 </ul>
+<aside class="notes">
+<p>Photogrammetry is the science of turning photos into measurements.<br>
+With UAS, we’ve moved from expensive manned flights to frequent, targeted surveys, faster iteration, but also new pitfalls like rolling shutter and lens distortions we must correct.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h3>
-Vertical and oblique aerial imagery
-</h3>
-<img class="fragment" src="../images/imagery_oblique.webp" width="70%">
-</section>
-<section>
-<h2>
-Vertical aerial photography
-</h2>
-<p>
-Jockey’s Ridge 1932
-</p>
-<img src="../images/JockeysRidge1932full.webp" width="75%">
-</section>
-<section>
-<h2>
-Oblique aerial photography
-</h2>
-<p>
-San Francisco Earthquake, 1906: Note the high distortion
-</p>
-<img src="../images/san_francisco.webp" width="55%">
-</section>
-<section>
-<h3>
-Photogrammetric process
-</h3>
-<img class="fragment" src="../images/photogrammetric_proces.webp" width="90%">
-</section>
-<section>
-<h3 id="geometry-of-aerial-photograph">Geometry of aerial photograph</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/geometry_side.webp"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/geometry.webp"></p>
-</div></div>
-</section>
-<section>
-<h3 id="why-do-we-need-to-process-the-images">Why do we need to process the images?</h3>
-<p>From perspective to orthographic view</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/pespective_vs_orthographic.webp"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/scale.webp"></p>
-</div></div>
-</section>
-<section>
-<h3 id="why-do-we-need-to-process-the-images-1">Why do we need to process the images?</h3>
-<p>Perspective and relief distortion</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/pespective_vs_orthographic_image_plane.webp"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/disortion.webp"></p>
-</div></div>
-</section>
-<section>
-<h3 id="orthorectification---perspective-and-relief-distortion">Orthorectification - Perspective and relief distortion</h3>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>Process that removes:</p>
+<section id="aerial-image-types" class="slide level2 center">
+<h2>Aerial Image Types</h2>
 <ul>
-<li>geometric perspective</li>
-<li>effects of relief displacement</li>
-<li>optical distortions from the sensor</li>
+<li class="fragment"><strong>Vertical</strong>: camera nadir-pointing; lower perspective distortion; better for mapping</li>
+<li class="fragment"><strong>Oblique</strong>: camera tilted; richer façades/context; higher distortion; good for 3D</li>
 </ul>
-<p>from a photograph or digital image</p>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/DSM_ortho.webp"> <img data-src="../images/ortho_example.webp"></p>
-</div></div>
-The resulting image - an <strong>orthophoto</strong>&nbsp;or&nbsp;<strong>orthoimage</strong>.
+<aside class="notes">
+<p>Vertical images are standard for map accuracy and uniform scale.<br>
+Obliques capture façades and undercuts but bring strong perspective effects, useful for 3D context and texture, less for planimetric measurements unless carefully modeled.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Orthorectification
-</h2>
-<img src="../images/slide1.webp">
-</section>
-<section>
-<h2>
-Orthorectification
-</h2>
-<img src="../images/slide2.webp">
-</section>
-<section>
-<h2>
-Orthorectification
-</h2>
-<img src="../images/slide3.webp">
-</section>
-<section>
-<h2>
-Orthorectification
-</h2>
-<img src="../images/slide4.webp">
-</section>
-<section>
-<h2>
-Orthorectification
-</h2>
-<img src="../images/slide5.webp">
-</section>
-<section>
-<h2>
-Orthorectification
-</h2>
-<img src="../images/slide6.webp">
-</section>
-<section>
-<h2>
-Orthorectification
-</h2>
-<img src="../images/slide7.webp">
-</section>
-<section>
-<h3 id="orthophoto">Orthophoto</h3>
-<div class="columns">
-<div class="column" style="width:60%;">
+<section id="why-raw-photos-mislead" class="slide level2 center">
+<h2>Why Raw Photos Mislead</h2>
 <ul>
-<li>Photo that is geometrically corrected and has a uniform scale;</li>
-<li>Can be used to measure true horizontal distances (depending on cartographic projection and spatial extent)</li>
+<li class="fragment">Perspective projection (not orthographic)</li>
+<li class="fragment">Relief displacement: elevated features “lean” away from nadir</li>
+<li class="fragment">Lens and platform distortions (rolling shutter, radial/tangential lens errors)</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/ortho_example_measure.webp"></p>
-</div></div>
+<aside class="notes">
+<p>If you try to measure distances on a raw photo, elevation and tilt cause scale to vary across the image.<br>
+Orthorectification corrects these effects so you can trust the geometry.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h3 id="how-do-we-get-there">How do we get there?</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Old way: analogue <img data-src="../images/analogue.webp" style="width:90.0%"></p>
-<p>Now: digital <img data-src="../images/digital.webp" style="width:70.0%"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/orthophoto_how.webp"></p>
-</div></div>
+<section id="orthorectification-what-it-does" class="slide level2 center">
+<h2>Orthorectification (What it does)</h2>
+<ul>
+<li>Removes perspective &amp; relief distortion<br>
+</li>
+<li>Compensates optical distortions (camera model)<br>
+</li>
+<li>Produces a uniform-scale <strong>orthophoto</strong> suitable for measurement</li>
+</ul>
+<aside class="notes">
+<p>Think of orthorectification as “unwarping” the image onto a known surface using camera parameters and elevation.<br>
+The output is metrically reliable, <em>if</em> the inputs and models are correct.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section class="smaller">
-<h3>
-What do we need?
-</h3>
-<ol>
-<li class="fragment">
-Digital <strong>imagery</strong> with sufficient overlap;
-</li>
-<li class="fragment">
-(Digital <strong>elevation</strong> model to remove the relief distortion)
-</li>
-<li class="fragment">
-(Exterior <strong>orientation parameters </strong> from aerial triangulation or Inertial Measurement Unit (IMU) to remove tilt distortion);
-</li>
-<li class="fragment">
-(<strong>Camera calibration</strong> report, to transform perspective to ortho projection);
-</li>
-<li class="fragment">
-(<strong>Ground Control Points</strong> for georeferencing and to reduce distortions);
-</li>
-<li class="fragment">
-Photogrammetric<strong> processing software</strong> that utilizes collinearity equations.
-</li>
+<section id="what-we-need-inputs" class="slide level2 center">
+<h2>What We Need (Inputs)</h2>
+<ol type="1">
+<li class="fragment">Digital imagery with sufficient <strong>overlap</strong> (≥70% forward, ≥60% side as a baseline)</li>
+<li class="fragment"><strong>DEM/DTM</strong> to remove relief distortion (or derive via SfM)</li>
+<li class="fragment"><strong>Exterior orientation</strong> (IMU/PPK/RTK or estimated in bundle adjustment)</li>
+<li class="fragment"><strong>Camera calibration</strong> (intrinsics: focal length, principal point, distortion)</li>
+<li class="fragment"><strong>Ground Control Points (GCPs)</strong> for georeferencing &amp; accuracy assessment</li>
+<li class="fragment">Software implementing <strong>collinearity equations</strong> / bundle adjustment (SfM)</li>
 </ol>
-<p class="small fragment">
-Parameters 2,3,4 can be estimated from the images - see lecture on Imagery processing
-</p>
+<aside class="notes">
+<p>Overlap enables feature matching; more texture yields stronger geometry.<br>
+IMU/RTK help, but even with them, you’ll want checkpoints to validate accuracy.<br>
+Bundle adjustment simultaneously refines camera poses and 3D feature locations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h3 id="digital-imagery">1. Digital imagery</h3>
-<p><img data-src="../images/digital_imagery.webp" class="fragment"></p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/multiview.webp" class="fragment"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/camera_sensor.webp" class="fragment" style="width:75.0%"></p>
-</div></div>
-</section>
-<section class="smaller">
-<h3 id="location-of-the-photo">Location of the photo</h3>
-<p><strong>Geotagging</strong> a photograph - associating a photo with a geographical location (latitude, longitude, and usually altitude)</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/geotag.webp"></p>
-</div><div class="column" style="width:50%;">
+<section id="geotagging-limits-use" class="slide level2 center">
+<h2>Geotagging (Limits &amp; Use)</h2>
 <ul>
-<li>In theory, every part of a picture can be tied to a geographic location, but in the most typical application, only <strong>the position of the sensor</strong> is associated with the <strong>entire digital image</strong>.</li>
-<li>GPS in the camera or UAS measures location with very low accuracy.</li>
+<li>Embeds camera position in EXIF (approximate location/altitude)</li>
+<li>Useful for <em>initialization</em>, not precision georeferencing</li>
+<li>Expect meter-level errors without RTK/PPK or GCPs</li>
 </ul>
-</div></div>
+<aside class="notes">
+<p>Geotags get you in the right neighborhood.<br>
+For survey-grade outputs, you still need either high-quality GNSS (RTK/PPK) or well-placed GCPs and checkpoints to quantify accuracy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Geotagging
-</h2>
-<img src="../images/geotag1.webp">
-</section>
-<section>
-<h2>
-Geotagging
-</h2>
-<img src="../images/geotag2.webp">
-</section>
-<section>
-<h2>
-Geotagging
-</h2>
-<img src="../images/geotag3.webp">
-</section>
-<section>
-<h2>
-Geotagging
-</h2>
-<img src="../images/geotag4.webp">
-</section>
-<section class="smaller">
-<h3 id="ground-control-points">5. Ground Control Points</h3>
+<section id="ground-control-points-gcps" class="slide level2 center">
+<h2>Ground Control Points (GCPs)</h2>
 <ul>
-<li><strong>GCP</strong> - target in the project area with known 3 coordinates (X, Y, Z or lat, long, alt)</li>
-<li>Accurate, well-placed, and marked GCPs are essential elements for model accuracy and georeferencing</li>
+<li class="fragment">Marked or photo-identifiable, stable, and well-distributed</li>
+<li class="fragment">Known <strong>X, Y, Z</strong> with survey-grade accuracy</li>
+<li class="fragment">Essential to improve precision and to <strong>validate</strong> results (use checkpoints)</li>
 </ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Photo Identifiable:</strong> - Any feature on the ground, - Specific (e.g., corners) - Unmovable - Not covered by vegetation - It can be surveyed later on.</p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/GCPs.webp"></p>
-</div></div>
+<aside class="notes">
+<p>Separate <strong>GCPs</strong> (to constrain the solution) from <strong>checkpoints</strong> (to evaluate it).<br>
+Distribute both across the project area, edges and varying elevations, to avoid biased solutions and inflated accuracy claims.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-</section>
-<section id="ground-control-points-1" class="slide level2">
-<h2>Ground Control Points</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Pre-marked (Panels): marking or painting figures or symbols on the ground before the UAS flies</p>
-<p><img data-src="../images/GCP_sketch.webp" class="fragment" style="width:75.0%"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/GCP_photo.webp" class="fragment"></p>
-</div></div>
-</section>
-<section>
-<h2>
-Why Ground Control Points?
-</h2>
-<img class="fragment" src="../images/relative_absolute_orientation.webp">
+<section id="from-2d-images-to-3d-sfm" class="slide level2 center">
+<h2>From 2D Images to 3D (SfM)</h2>
 <ul>
-<li class="fragment">
-necessary for georeferencing if photos are not geotagged
-</li>
-<li class="fragment">
-improve precision of the model
-</li>
-<li class="fragment">
-important for quality control
-</li>
+<li>Automated <strong>feature matching</strong> across overlapping images</li>
+<li><strong>Bundle adjustment</strong> estimates camera intrinsics/extrinsics + sparse 3D</li>
+<li>Densification (stereo matching) → point cloud → mesh/DSM/orthophoto</li>
 </ul>
+<aside class="notes">
+<p>SfM recovers relative 3D structure from parallax; scale and orientation come from geotags, RTK/PPK, or GCPs.<br>
+Quality hinges on image texture, overlap, camera model, and outlier handling.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Why Ground Control Points?
-</h2>
-<img src="../images/geotag3.webp">
-</section>
-<section>
-<h2>
-Why Ground Control Points?
-</h2>
-<img src="../images/geotagGCP1.webp">
-</section>
-<section>
-<h2>
-Why Ground Control Points?
-</h2>
-<img src="../images/geotagGCP2.webp">
-</section>
-<section>
-<h2>
-From 2D images to a 3D model
-</h2>
+<section id="multiple-view-geometry-intuition" class="slide level2 center">
+<h2>Multiple-View Geometry (Intuition)</h2>
 <ul>
-<li class="fragment">
-orthophoto is a 2D image
-</li><li class="fragment">
-elevation data are derived as part of orthorectification process
-</li><li class="fragment">
-exact camera parameters and manually identified GCPs on the images were needed to derive a DEM
-</li><li class="fragment">
-Structure from Motion: automated point matching, camera parameter estimation and 3D model generation
-</li></ul>
-</section>
-<section>
-<h2>
-Multiple-view geometry
-</h2>
-<ul>
-<li class="fragment">
-<strong>Scene geometry (structure):</strong> <br>Given 2D point matches in two or more images, where are the corresponding points in 3D?
-</li>
-<li class="fragment">
-<strong>Correspondence (stereo matching):</strong> Given a point in just one image, how does it constrain the position of the corresponding point in another image?
-</li>
-<li class="fragment">
-<strong>Camera geometry (motion):</strong> Given a set of corresponding points in two or more images, what are the camera matrices for these views?
-</li>
+<li class="fragment"><strong>Correspondence</strong>: find the same feature in different views</li>
+<li class="fragment"><strong>Triangulation</strong>: intersect rays from multiple cameras → 3D point</li>
+<li class="fragment"><strong>Camera geometry</strong>: solve for poses that best explain all matches</li>
 </ul>
+<aside class="notes">
+<p>Every matched pixel defines a ray in 3D; with two or more rays we triangulate a point.<br>
+The optimization balances all matches, minimizing reprojection error while refining camera parameters, this is the heart of SfM accuracy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
+<section id="uas-photogrammetric-workflow" class="slide level2 center">
+<h2>UAS Photogrammetric Workflow</h2>
+<ol type="1">
+<li class="fragment">Mission planning (GSD target, overlap, altitude, speed, lighting, safety)</li>
+<li class="fragment">Field ops (calibrated camera settings, consistent exposure, RTK/PPK optional)</li>
+<li class="fragment">Control survey (GCPs + checkpoints; stable, visible, distributed)</li>
+<li class="fragment">Processing (feature match → bundle adjust → densify)</li>
+<li class="fragment">Products (orthophoto, DSM/DTM, contours) + <strong>QA/QC</strong> (residuals, RMSE/NMAD)</li>
+</ol>
+<aside class="notes">
+<p>Treat QA/QC as a product: report accuracy on <strong>independent checkpoints</strong>.<br>
+Inspect residuals, look for systematic tilt or doming, and check for artifacts on low-texture surfaces (water, uniform crops, snow).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="common-pitfalls-fixes" class="slide level2 center">
+<h2>Common Pitfalls &amp; Fixes</h2>
 <ul>
-<li class="fragment">
-range imaging&nbsp;technique,
-</li>
-<li class="fragment">
-process of estimating 3D structures from overlapping 2D image sequences,
-</li>
-<li class="fragment">
-may be coupled with local&nbsp;motion signals
-</li>
+<li class="fragment"><strong>Low texture / repetitive patterns</strong> → add obliques; fly lower; diversify look angles</li>
+<li class="fragment"><strong>Rolling shutter</strong> → shorter exposure, slower speed, global shutter if possible</li>
+<li class="fragment"><strong>Doming / bowl surfaces</strong> → stronger control (GCPs/RTK), better geometry</li>
+<li class="fragment"><strong>Vegetation canopy bias</strong> → model as DSM; don’t compare to DTM</li>
+<li class="fragment"><strong>Shadowing/lighting changes</strong> → plan time of day; manual exposure</li>
 </ul>
+<aside class="notes">
+<p>Most failures are geometric or radiometric: improve image geometry or stabilize exposure.<br>
+Always separate DSM vs DTM use-cases, don’t mistake canopy for ground.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme01-01.webp" width="90%">
+<section id="what-weve-learned-recap" class="slide level2 center">
+<h2>What We’ve Learned (Recap)</h2>
+<ul>
+<li class="fragment">Remote sensing basics; passive vs.&nbsp;active sensors</li>
+<li class="fragment">Why orthorectification is required for measurement</li>
+<li class="fragment">Inputs needed for reliable mapping (overlap, calibration, control)</li>
+<li class="fragment">How SfM recovers 3D and when it succeeds or fails</li>
+</ul>
+<aside class="notes">
+<p>You should now be able to plan a flight for a target GSD, choose control, and defend the accuracy of your products with checkpoints and transparent QA.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme02-01.webp" width="90%">
+<section id="quick-activity-in-class" class="slide level2 center">
+<h2>Quick Activity (In-Class)</h2>
+<ul>
+<li>Define a site, target GSD, and map scale</li>
+<li>Pick overlap, altitude, and speed</li>
+<li>Decide GCP count &amp; placement + independent checkpoints</li>
+<li>List expected products and accuracy targets (e.g., RMSE_XY/Z)</li>
+</ul>
+<aside class="notes">
+<p>Work in teams for five minutes and sketch a plan.<br>
+We’ll compare choices and discuss trade-offs, this mirrors real pre-flight planning.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme03-01.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme04-01.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme05-01.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme06-01.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme07-01.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme08-01.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme09-01.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme11-02.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme12-02.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme13-02.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme14-02.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme15-02.webp" width="90%">
-</section>
-<section>
-<h2>
-Structure from Motion (SfM)
-</h2>
-<img src="../images/SfM_scheme16-02.webp" width="90%">
-</section>
-<section>
-<h2>
-UAS Photogrammetric process
-</h2>
-<img class="fragment" src="../images/uas_process.webp">
-<p class="fragment">
-Throughout the whole process, it is important to remember&lt;/&gt;
-</p><ul>
-<li class="fragment">
-<strong>What</strong> is the aim or the project? and
-</li>
-<li class="fragment">
-<strong>What</strong> will be the data used for?
-</li>
+<section id="references-credits" class="slide level2 center">
+<h2>References &amp; Credits</h2>
+<ul>
+<li>Adapted from course slides: <em>UAS Mapping and Analytics – Photogrammetry and Structure from Motion Concepts</em> (NC State CGA)</li>
 </ul>
 </section>
-<section>
-<h2>
-What we have learned
-</h2>
-<ul>
-<li class="fragment">
-What is remote sensing and photogrammetry
-</li>
-<li class="fragment">
-Properties of aerial image
-</li>
-<li class="fragment">
-Why do we need orthrectification to measure from aerial images
-</li>
-<li class="fragment">
-What process allows us to extract 3D data from series of overlapping 2D images
-</li>
-</ul>
-</section>
+<section class="slide level2 center">
+
 
 
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p><a href="../../../../course/topics/topic_2_sfm/part_a_images_to_3d.html">Return Home</a></p>
 </div>
 </div></div>
 
@@ -675,6 +537,7 @@ What process allows us to extract 3D data from series of overlapping 2D images
   <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -689,18 +552,19 @@ What process allows us to extract 3D data from series of overlapping 2D images
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -717,7 +581,7 @@ What process allows us to extract 3D data from series of overlapping 2D images
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -746,7 +610,7 @@ What process allows us to extract 3D data from series of overlapping 2D images
         disableLayout: false,
 
         // Vertical centering of slides
-        center: false,
+        center: true,
 
         // Enables touch navigation on devices with touch input
         touch: true,
@@ -822,7 +686,7 @@ What process allows us to extract 3D data from series of overlapping 2D images
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -842,15 +706,15 @@ What process allows us to extract 3D data from series of overlapping 2D images
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1400,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -867,7 +731,7 @@ What process allows us to extract 3D data from series of overlapping 2D images
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -924,13 +788,14 @@ What process allows us to extract 3D data from series of overlapping 2D images
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -945,7 +810,7 @@ What process allows us to extract 3D data from series of overlapping 2D images
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/ncsu-geoforall-lab\.github\.io\/gis-584-uas-course\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
