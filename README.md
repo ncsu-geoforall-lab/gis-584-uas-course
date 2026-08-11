@@ -75,7 +75,7 @@ For example, this code converts the images found in the lecture_2b.qmd file to w
 
 ## Deployment
 
-The site is deployed to GitHub Pages by the `Quarto Publish` workflow (`.github/workflows/publish.yml`) on every push to `main`. The workflow renders the site with the production profile (`QUARTO_PROFILE=production`, which disables freeze and re-executes all code cells) and deploys `docs/` with `actions/deploy-pages`. Pull requests to `main` are render-checked by `.github/workflows/pr-check.yml`.
+The site is deployed to GitHub Pages by the `Quarto Publish` workflow (`.github/workflows/publish.yml`) on every push to `main`. The workflow renders the site with the production profile (`QUARTO_PROFILE=production`, which disables freeze and re-executes all code cells) and pushes `docs/` to the `gh-pages` branch (Pages is set to deploy from that branch). The rendered `gh-pages` content is also what the "Open in Colab" badges reference for generated notebooks. Pull requests to `main` are render-checked by `.github/workflows/pr-check.yml`.
 
 ## Install Python Dependencies
 

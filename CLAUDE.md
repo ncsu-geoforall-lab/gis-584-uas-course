@@ -33,7 +33,8 @@ mogrify -format webp -quality 80 *.{png,PNG,jpg,JPG}
 
 - `execute: freeze: auto` in `_quarto.yml`: local renders reuse cached results in `_freeze/`. The production profile (`_quarto-production.yml`, activated with `QUARTO_PROFILE=production`) sets `freeze: false`, so CI re-executes all code cells.
 - `docs/` and `_freeze/` are gitignored build artifacts; never commit or hand-edit them.
-- CI: `.github/workflows/pr-check.yml` renders the site on PRs to `main`; `publish.yml` renders with the production profile and deploys to GitHub Pages on push to `main`.
+- CI: `.github/workflows/pr-check.yml` renders the site on PRs to `main`; `publish.yml` renders with the production profile and pushes `docs/` to the `gh-pages` branch on push to `main` (Pages deploys from that branch).
+- Notebook-shaped assignments (currently 3A, 6A, 6B) publish a runnable `.ipynb` to the site: qmd-based ones add `ipynb: default` as a second format, ipynb-based ones list the notebook under `resources:`. Their "Open in Colab" badges point at `colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/<path>.ipynb`, so Colab always opens the render-generated copy.
 
 ## Content architecture
 

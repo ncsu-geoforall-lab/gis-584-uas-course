@@ -22,7 +22,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip install jupyter
-      
+
       - name: Install Python requirements
         run: |
           pip install -r requirements.txt
@@ -36,22 +36,12 @@ jobs:
         env:
           QUARTO_PROFILE: production
 
-      - name: Upload static files as artifact
-        uses: actions/upload-pages-artifact@v5
+      # Publish docs/ to the gh-pages branch so rendered artifacts (including
+      # generated .ipynb files) are reachable at GitHub blob URLs for the
+      # Open in Colab badges. Pages must be set to deploy from gh-pages.
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: docs/
-
-  # Deployment job
-  deploy:
-    permissions:
-      id-token: write
-      pages: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages

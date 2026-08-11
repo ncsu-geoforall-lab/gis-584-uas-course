@@ -6,17 +6,14 @@ assignment-due-date: 11/30/2026
 author:
     - Corey White
 date: 11/9/2026
-format: html
-toc-depth: 4
+format:
+  html:
+    toc-depth: 4
+  ipynb: default
 activity: Lab
-keep-ipynb: true
-notebook-view:
-  - notebook: Assignment6A.ipynb
-    title: "UAS Image Classification"
-    url: https://colab.research.google.com/drive/1sia6F1oPW1ISV8a-6YkEEhJhXriVrYdG?usp=sharing
 ---
 
-[![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1sia6F1oPW1ISV8a-6YkEEhJhXriVrYdG?usp=sharing)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/assignment_6a.ipynb)
 
 ## Outline
 

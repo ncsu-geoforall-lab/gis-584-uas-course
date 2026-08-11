@@ -53,6 +53,23 @@ Dates are `M/D/YYYY` (no 2-digit years, no zero padding).
 - One-off dates (holidays, project milestones, due-date rows) go in
   `course/content/special_dates.yml` with the same fields.
 
+## Notebook assignments and Colab badges
+
+Assignments meant to run as notebooks publish a runnable `.ipynb` with the
+site, generated at render time:
+
+- qmd-based assignments add a second output format:
+  `format: {html: ..., ipynb: default}`
+- ipynb-based assignments (embedded via `notebook-view`) also list the
+  notebook under `resources:` so it is copied into the output
+
+The "Open in Colab" badge always points at the rendered copy on the
+`gh-pages` branch, never at a Google Drive notebook:
+
+```markdown
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/<path-to>.ipynb)
+```
+
 ## Adding a page
 
 1. Create the file following the layout and schema above.

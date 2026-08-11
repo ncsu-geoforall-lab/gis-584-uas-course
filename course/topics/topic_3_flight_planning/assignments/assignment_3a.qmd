@@ -8,8 +8,12 @@ activity: Lab
 notebook-view:
   - notebook: flight_plan_analysis.ipynb
     title: "Terrain Analysis of the flight site using GIS tools"
-    url: https://colab.research.google.com/drive/15oIWegngRpV4q13INV5uXzFC15ZTi-VO?usp=sharing
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_3_flight_planning/assignments/flight_plan_analysis.ipynb
+resources:
+  - flight_plan_analysis.ipynb
 ---
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_3_flight_planning/assignments/flight_plan_analysis.ipynb)
 
 ## Task
 
