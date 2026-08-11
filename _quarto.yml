@@ -11,7 +11,7 @@ website:
     background: primary
     left:
       - href: index.qmd
-        text: Syllabus
+        text: Home
 
       - course/schedule.qmd
       - href: course/policies.qmd
