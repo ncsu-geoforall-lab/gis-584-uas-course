@@ -161,7 +161,7 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../../index.html"> 
-<span class="menu-text">Syllabus</span></a>
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../course/schedule.html"> 
@@ -1162,7 +1162,7 @@ window.Quarto = {
 <section id="grass-setup" class="level3">
 <h3 class="anchored" data-anchor-id="grass-setup">GRASS Setup</h3>
 <p>Start a GRASS session.</p>
-<div id="f9be4267" class="cell">
+<div id="731e0975" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>home_dir <span class="op">=</span> Path.home()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>grassdata <span class="op">=</span> <span class="st">"grassdata"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>project_name <span class="op">=</span> <span class="st">"Lake_Wheeler_NCspm"</span></span>
@@ -1180,7 +1180,7 @@ window.Quarto = {
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tools <span class="op">=</span> Tools(session<span class="op">=</span>session)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Import Images from Lake Wheeler Flight Data</p>
-<div id="17fc7e74" class="cell">
+<div id="29a43927" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>uas_image_dir <span class="op">=</span> Path(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    home_dir,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Documents"</span>,</span>
@@ -1191,7 +1191,7 @@ window.Quarto = {
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"091725"</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="303caed1" class="cell">
+<div id="d1305ec5" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> gs.RegionManager(e<span class="op">=</span><span class="st">"e+100"</span>, w<span class="op">=</span><span class="st">"w-250"</span>, s<span class="op">=</span><span class="st">"s-150"</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> gj.Map(width<span class="op">=</span><span class="dv">600</span>, use_region<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    m.d_rast(<span class="bu">map</span><span class="op">=</span><span class="st">"dtm_relief"</span>)</span>
@@ -1204,7 +1204,7 @@ window.Quarto = {
 <section id="set-computational-region" class="level3">
 <h3 class="anchored" data-anchor-id="set-computational-region">Set Computational Region</h3>
 <p>The student can set the computational region to 0.3m (~ 1 ft) using the spatial extent of the <code>mid_pines_lidar2013_dem</code>.</p>
-<div id="79b5d50b" class="cell">
+<div id="58f7c41e" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tools.g_region(raster<span class="op">=</span><span class="st">"mid_pines_lidar2013_dem"</span>, res<span class="op">=</span><span class="fl">0.3</span>, flags<span class="op">=</span><span class="st">"pa"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -1215,7 +1215,7 @@ window.Quarto = {
 <section id="import-uas-dsm" class="level3">
 <h3 class="anchored" data-anchor-id="import-uas-dsm">Import UAS DSM</h3>
 <p>Import the UAS DSM data from the provide url. Students may either download the DSM data then import it into GRASS or directly download and improt using <code>r.import</code>.</p>
-<div id="94657850" class="cell">
+<div id="675b6956" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dsm <span class="op">=</span> <span class="st">"https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif"</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tools.r_import(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span><span class="op">=</span>dsm,</span>
@@ -1231,7 +1231,7 @@ window.Quarto = {
 </section>
 <section id="optional-import-uas-ortho" class="level3">
 <h3 class="anchored" data-anchor-id="optional-import-uas-ortho">(Optional) Import UAS Ortho</h3>
-<div id="bb03b991" class="cell">
+<div id="6c99648c" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ortho_url <span class="op">=</span> <span class="st">"https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho.cog.tif"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tools.r_import(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span><span class="op">=</span>ortho_url,</span>
@@ -1247,7 +1247,7 @@ window.Quarto = {
 <section id="resample-uas-dsm-to-0.3m" class="level3">
 <h3 class="anchored" data-anchor-id="resample-uas-dsm-to-0.3m">Resample UAS DSM to 0.3m</h3>
 <p>We will explicity resample our UAS-DSM data to <span class="math inline">\(0.3m\)</span> using <strong>bilinear</strong> interpolation to the extent of the <code>mid_pines_lidar2013_dem</code>.</p>
-<div id="c0488397" class="cell">
+<div id="2905f913" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> gs.RegionManager(raster<span class="op">=</span><span class="st">"mid_pines_lidar2013_dem"</span>, res<span class="op">=</span><span class="fl">0.3</span>):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    tools.r_resamp_interp(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">input</span><span class="op">=</span><span class="st">"agi_dsm_07_25"</span>, output<span class="op">=</span><span class="st">"agi_dsm_07_25_03m"</span>, method<span class="op">=</span><span class="st">"bilinear"</span></span>
@@ -1261,13 +1261,13 @@ window.Quarto = {
 <section id="examine-dtm-and-dsm-data" class="level3">
 <h3 class="anchored" data-anchor-id="examine-dtm-and-dsm-data">Examine DTM and DSM data</h3>
 <p>First look at the metadata using <code>r.info</code>.</p>
-<div id="31bef515" class="cell">
+<div id="ca272dcf" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dsm_info <span class="op">=</span> tools.r_info(<span class="bu">map</span><span class="op">=</span><span class="st">"agi_dsm_07_25"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dsm_03m_info <span class="op">=</span> tools.r_info(<span class="bu">map</span><span class="op">=</span><span class="st">"agi_dsm_07_25_03m"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dem_info <span class="op">=</span> tools.r_info(<span class="bu">map</span><span class="op">=</span><span class="st">"mid_pines_lidar2013_dem"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now compare the univariate statistics.</p>
-<div id="2dbf4a14" class="cell">
+<div id="328a2309" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dsm_univar <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span><span class="st">"agi_dsm_07_25"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dsm_03m_univar <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span><span class="st">"agi_dsm_07_25_03m"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>dem_univar <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span><span class="st">"mid_pines_lidar2013_dem"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1289,7 +1289,7 @@ Figure&nbsp;3
 </figure>
 </div>
 <p>Create a DEM of difference (DoD) between the UAS DSM and LiDAR DTM.</p>
-<div id="25db5c02" class="cell">
+<div id="f5b92adc" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tools.r_mapcalc(expression<span class="op">=</span><span class="st">"raw_diff = agi_dsm_07_25_03m - mid_pines_lidar2013_dem"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Examine the map of the DoD.</p>
@@ -1329,12 +1329,12 @@ Figure&nbsp;5
 <h3 class="anchored" data-anchor-id="co-register-the-uas-dsm-with-the-lidar-dtm">Co-Register the UAS DSM with the LiDAR DTM</h3>
 <p>Here we used the road to as a stable feature to calculate our verticle shift.</p>
 <p>For the sake of the exam how the student determines the shift is less important than them just realizing a verticle shift is required.</p>
-<div id="e24ed1af" class="cell">
+<div id="a3faf7d1" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mean_shift <span class="op">=</span> (df_dsm_profile[<span class="st">"value"</span>] <span class="op">-</span> df_dtm_profile[<span class="st">"value"</span>]).mean()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean shift: </span><span class="sc">{</span>mean_shift<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The mean difference was <code>{python} mean_shift</code> m. So we can subtract the mean difference from the DSM.</p>
-<div id="6bf324ee" class="cell">
+<div id="ae393d0d" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tools.r_mapcalc(expression<span class="op">=</span><span class="ss">f"agi_dsm_07_25_03m_vs = agi_dsm_07_25_03m - </span><span class="sc">{</span>mean_shift<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="fig-df-reg-univar" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -1349,7 +1349,7 @@ Figure&nbsp;7
 </figcaption>
 </figure>
 </div>
-<div id="9349e2b3" class="cell">
+<div id="40207c5d" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tools.r_mapcalc(expression<span class="op">=</span><span class="st">"dod = agi_dsm_07_25_03m_vs - mid_pines_lidar2013_dem"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="fig-df-diff-univar" class="cell quarto-float quarto-figure quarto-figure-center anchored">
