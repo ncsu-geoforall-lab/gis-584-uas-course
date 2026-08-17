@@ -61,3 +61,43 @@ $mermaid-node-fg-color: $primary;
 .term-card strong {
     color: $primary;
 }
+
+/* Slide tables */
+.reveal table {
+    border-collapse: collapse;
+    margin: 0.5em auto;
+}
+
+.reveal table {
+    font-size: 0.85em;
+}
+
+.reveal table th {
+    background: $primary;
+    color: #fff;
+    border-bottom: none;
+    padding: 0.25em 0.55em;
+}
+
+.reveal table td {
+    padding: 0.25em 0.55em;
+    border-bottom: 1px solid rgba($primary, 0.15);
+}
+
+.reveal table tbody tr:nth-child(even) {
+    background: rgba($primary, 0.06);
+}
+
+/* Section divider slides: pair with background-color="#e9f2e9" on the slide heading */
+.reveal .section-divider h1,
+.reveal .section-divider h2 {
+    color: $primary;
+    border-bottom: 3px solid rgba($primary, 0.35);
+    padding-bottom: 0.2em;
+    display: inline-block;
+}
+
+.reveal .section-divider p,
+.reveal .section-divider a {
+    color: $body-color;
+}

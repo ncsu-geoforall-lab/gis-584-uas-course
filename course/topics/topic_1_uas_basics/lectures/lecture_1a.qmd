@@ -6,6 +6,7 @@ format:
     revealjs:
         theme: [simple, ../../../../theme.scss]
         footer: "[Return Home](../part_a_introduction.qmd)"
+        slide-number: true
 ---
 
 ## Objectives
@@ -22,7 +23,7 @@ format:
 First lecture of the course: the goal is shared vocabulary and a mental model of what a UAS is before the course narrows to mapping. Ask who has flown a drone before and what kind; the class survey usually surfaces a good spread from toy quads to Part 107 pilots, which helps calibrate the rest of the topic.
 :::
 
-## What is a UAV? {.center .text-center}
+## What is a UAV? {.center .text-center .section-divider background-color="#e9f2e9"}
 
 ::: {.notes}
 Section opener. Use this beat to ask students what they would call the thing before giving them the terminology.
@@ -77,7 +78,7 @@ The FAA and this course use UAS because the regulations govern the whole system,
 The three-element decomposition matters practically: most field failures are control-station or data-link problems (dead tablet, lost link, interference), not aircraft problems. When the course reaches flight planning, pre-flight checks are organized around exactly these three elements.
 :::
 
-## UAS or UAV? Or maybe a drone? {.smaller}
+## What counts as a UAV? {.smaller}
 
 ::: {.columns}
 
@@ -99,7 +100,7 @@ The three-element decomposition matters practically: most field failures are con
 The definitional edges are worth a beat: a cruise missile flies unmanned but is not a UAV because it is expendable ordnance; a tethered balloon carrying a camera is aerial sensing but not a UAV because it is neither free-flying nor powered. These boundary cases foreshadow the regulatory definitions in Lecture 1B.
 :::
 
-## What does a UAS look like? {.center .text-center}
+## What does a UAS look like? {.center .text-center .section-divider background-color="#e9f2e9"}
 Types and classification of UAS
 
 ::: {.notes}
@@ -107,20 +108,20 @@ Section transition into classification. Preview: there is no single official tax
 :::
 
 ## Different shapes and sizes {.center .text-center}
-![](../images/uav_shapes_sizes.webp)
+![Range of UAS platforms from micro air vehicles to large military aircraft](../images/uav_shapes_sizes.webp){.r-stretch}
 
 ::: {.notes}
 Span the extremes on the figure: from insect-scale micro air vehicles to the Global Hawk with an airliner-class wingspan. Everything this course flies sits in the small-UAS band, under 55 lbs, but the design diversity above and below is useful context for classification.
 :::
 
-## Different Designs {.center .text-center}
-![](../images/uas_designs.webp)
+## Different designs {.center .text-center}
+![Fixed wing, rotary wing, and hybrid UAS designs](../images/uas_designs.webp){.r-stretch}
 
 ::: {.notes}
 Walk the main design families: fixed wing (efficiency, endurance, area coverage), rotary wing / multirotor (vertical takeoff, hover, ease of use), and hybrids like VTOL fixed wing that take off vertically then cruise on wings. Multirotors dominate small-site mapping; fixed wing and VTOL hybrids win on large-area coverage per battery.
 :::
 
-## Different Classifications {.smaller}
+## Different classifications {.smaller}
 
 | Basis | Example classes |
 |-------|-----------------|
@@ -144,12 +145,12 @@ Key point: the classification axis you pick depends on your question. Regulators
 
 In practice, most UAS are grouped by size:
 
-| Class | Weight | Typical altitude | Endurance | Examples |
-|-------|--------|------------------|-----------|----------|
-| Micro | Under 250 g | Under 400 ft | 15-30 min | DJI Mini, DJI Neo |
-| Small (sUAS) | Under 25 kg (55 lb) | Under 400 ft | 20-90 min | Mavic 3E, WingtraOne |
-| Medium / tactical | 25-150 kg | Up to ~10,000 ft | Several hours | ScanEagle |
-| Large (MALE / HALE) | Over 150 kg | 10,000-60,000 ft | 24+ hours | MQ-9 Reaper, Global Hawk |
+| Class      | Weight              | Typical altitude | Endurance     | Examples |
+|------------|---------------------|------------------|---------------|----------|
+| **Micro**  | Under 250 g         | Under 400 ft     | 15-30 min     | DJI Mini, DJI Neo |
+| **Small**  | Under 25 kg (55 lb) | Under 400 ft     | 20-90 min     | Mavic 3E, WingtraOne |
+| **Medium** | 25-150 kg           | Up to ~10,000 ft | Several hours | ScanEagle |
+| **Large**  | Over 150 kg         | 10,000-60,000 ft | 24+ hours     | MQ-9 Reaper, Global Hawk |
 
 ::: {.term-card}
 **This course**: micro & small UAS (sUAS), under 55 lb, flown below 400 ft
@@ -160,7 +161,7 @@ In practice, most UAS are grouped by size:
 The size ladder is the scheme students should retain: the two bottom rows are the regulated civil space (sUAS under Part 107), the top rows are military and research platforms. The 250 g and 55 lb lines carry legal weight, which Lecture 1B picks up. Have students place a familiar aircraft into a row; the highlighted card anchors where everything in this course lives.
 :::
 
-## How does a UAS work? {.center .text-center}
+## How does a UAS work? {.center .text-center .section-divider background-color="#e9f2e9"}
 System elements
 
 ::: {.notes}
@@ -189,27 +190,106 @@ Section transition from what they look like to how the pieces fit together. This
 Map these onto the course: mission planning element is the flight-planning software in Topic 3; payload is the sensor whose imagery feeds Structure from Motion in Topic 2; the communication link constraints shape where you can safely fly. Launch and recovery elements are mostly a fixed-wing concern (catapults, belly landings, parachutes).
 :::
 
-## Sensors {.center .text-center}
-![](../images/uav_sensors.webp)
+## Inside the aircraft {.center .text-center}
+
+![Main components of a mapping quadcopter](../images/uas_components_diagram.svg){.r-stretch}
 
 ::: {.notes}
-Transition into payloads, the part of the system this course cares most about: for mapping, the aircraft is just a sensor positioning platform. The figure shows the breadth beyond cameras: chemical sniffers, radiation detectors, meteorological probes.
+Orient students on the diagram before the function definitions on the next slide: flight controller and IMU in the body, GNSS antenna up top away from interference, camera on a gimbal at the front, battery as the single heaviest component, radio antennas at the rear. The next slide defines what each part does.
+:::
+
+## What each component does {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.term-card}
+**Flight controller**: the onboard computer running the autopilot
+:::
+::: {.term-card}
+**IMU**: accelerometers and gyroscopes sensing attitude and motion
+:::
+::: {.term-card}
+**GNSS receiver**: position and velocity from satellite signals
+:::
+::: {.term-card}
+**Motors + ESCs**: electronic speed controllers turn commands into thrust
+:::
+:::
+::: {.column width="50%"}
+::: {.term-card}
+**Battery**: LiPo packs, typically 20-45 min of flight for small multirotors
+:::
+::: {.term-card}
+**Radio links**: control, telemetry, and video (2.4 / 5.8 GHz)
+:::
+::: {.term-card}
+**Gimbal**: stabilizes the camera independently of aircraft motion
+:::
+:::
+:::
+
+::: {.notes}
+This names the parts students will hear about all semester: "the IMU drifted", "lost link", "gimbal pitch". The flight controller fuses IMU and GNSS data hundreds of times per second to keep the aircraft stable; that fusion is also what gets recorded as camera position and orientation for every photo, which is the bridge to the next slide. LiPo handling (storage charge, fire safety) comes up before the first field day.
+:::
+
+## How does it know where it is? {.smaller}
+
+Positioning quality decides map quality:
+
+| Method | How it works | Typical accuracy |
+|--------|--------------|------------------|
+| Standard GNSS | Satellite positioning alone | 1-3 m |
+| RTK (Real-Time Kinematic) | Live corrections from a base station or network | 1-3 cm |
+| PPK (Post-Processed Kinematic) | Corrections applied after the flight | 1-3 cm |
+| Ground control points (GCPs) | Surveyed targets visible in the imagery | cm-level, with any of the above |
+
+::: {.term-card}
+**Why it matters**: the recorded camera position of every photo anchors the photogrammetric reconstruction (Topic 2)
+:::
+
+::: {.notes}
+This single spec separates a camera drone from a survey instrument. RTK needs a correction source during flight (local base station or NC's real-time network); PPK logs raw observations and corrects afterwards, which is more forgiving of radio dropouts. GCPs trade field time for control and remain the accuracy check even on RTK flights. Topic 2 puts numbers on all of this with real datasets.
+:::
+
+## RTK: base and rover {.center .text-center}
+
+![Both receivers track the same satellites; the base station on a known point broadcasts corrections to the rover. Image: [TS Eriksson](https://commons.wikimedia.org/wiki/File:Real_time_kinematic.svg), CC BY-SA 4.0](../images/rtk_diagram.webp){.r-stretch}
+
+::: {.notes}
+Walk the geometry: both receivers see the same satellites, so most error sources (atmosphere, clocks, orbits) are shared and cancel when the base, sitting on a known point, broadcasts corrections. On a mapping drone the "rover" is the aircraft itself. In North Carolina the base can be replaced by the NC Geodetic Survey real-time network over a cell connection.
+:::
+
+## Levels of autonomy {.smaller}
+
+1. **Manual**: pilot flies with the sticks, no assistance
+2. **Stabilized**: autopilot holds attitude, altitude, and position (GNSS hover)
+3. **Waypoint missions**: aircraft flies a pre-planned route and triggers the camera automatically
+4. **Autonomous**: obstacle avoidance, terrain following, docked "drone-in-a-box" operations
+
+::: {.term-card}
+**Mapping flights are level 3**: planned in software (Topic 3), flown by the autopilot, supervised by the pilot in command
+:::
+
+::: {.notes}
+Students are often surprised that mapping is not stick flying: the pilot's job on a mapping mission is planning, supervision, and takeover if something goes wrong. Overlap and coverage requirements make hand-flown mapping impractical. Level 4 capabilities are why BVLOS rulemaking matters (Lecture 1B); docked drones flying scheduled missions are the direction commercial monitoring is heading.
 :::
 
 ## Sensors {.center .text-center}
-![](../images/uav_sensors2.webp)
+![Overview of UAS sensor payloads](../images/uav_sensors.webp){.r-stretch}
 
 ::: {.notes}
-Second sensor overview figure; use it to point out that sensor choice drives aircraft choice, not the other way around. Payload mass, power draw, and mounting/gimbal requirements are the coupling constraints, which the integration slide will formalize.
+Transition into payloads, the part of the system this course cares most about: for mapping, the aircraft is just a sensor positioning platform. The figure shows the breadth beyond cameras: chemical sniffers, radiation detectors, meteorological probes. Point out that sensor choice drives aircraft choice, not the other way around: payload mass, power draw, and mounting/gimbal requirements are the coupling constraints, which the integration slide will formalize.
 :::
 
-## UAS sensors for mapping
+## UAS sensors for mapping {.smaller}
 
-- RGB cameras
-- Infrared sensors
-- Multispectral and hyperspectral sensors
-- Laser scanners
-- Thermal sensors
+| Sensor | Measures | Mapping products | Cost |
+|--------|----------|------------------|------|
+| RGB camera | Visible light | Orthophotos, DSMs, 3D models | \$ |
+| Multispectral | Visible + NIR bands | NDVI, vegetation maps | \$\$ |
+| Hyperspectral | 100+ narrow bands | Detailed spectral analysis | \$\$\$ |
+| Lidar | Active laser returns | Bare-earth DEMs, canopy structure | \$\$-\$\$\$ |
+| Thermal | Longwave infrared | Temperature anomaly maps | \$\$ |
 
 ::: {.notes}
 This is the shortlist the course actually uses. RGB feeds photogrammetry (Topics 2-4); multispectral supports vegetation indices; lidar gives below-canopy terrain; thermal supports water, wildlife, and infrastructure applications. The following slides take each in turn.
@@ -241,8 +321,8 @@ This is the shortlist the course actually uses. RGB feeds photogrammetry (Topics
 - Weight, cost, data quality have improved; spectral bands, resolution keep improving
 - Cameras with NIR band: agriculture and vegetation mapping (for NDVI)
 - The more bands the more information, but also higher price of the sensor
-    - $$ multispectral - couple thousand
-    - $$$ hyperspectral - tens of thousands
+    - \$\$ multispectral - couple thousand
+    - \$\$\$ hyperspectral - tens of thousands
 :::
 :::{.column width="40%"}
 ![](../images/hyperspectral.webp)
@@ -318,14 +398,14 @@ The market has largely resolved this in favor of manufacturer integration: turnk
 Two forces define the current market: DJI's dominance on capability per dollar, and U.S. policy restricting Chinese-made aircraft in government and federally funded contexts (American Security Drone Act, agency bans, proposed broader restrictions). For students heading into public-sector or funded-research work, "which drone may I use" is now a compliance question before a technical one; the NC State research-security page linked here is the campus authority.
 :::
 
-## Who uses UAS? {.center .text-center}
-Types of UAV Operations
+## Who uses UAS? {.center .text-center .section-divider background-color="#e9f2e9"}
+Types of UAS operations
 
 ::: {.notes}
 Section transition from hardware to users and applications. The operational categories here get their full regulatory treatment in Lecture 1B; today is just the landscape.
 :::
 
-## Types of UAS Operations {.smaller}
+## Types of UAS operations {.smaller}
 
 - **Public Operations**
   Governmental: agencies and public universities operating under federal statute (COA) or Part 107;
@@ -340,41 +420,8 @@ Section transition from hardware to users and applications. The operational cate
 Terminology update worth stating aloud: the old "model aircraft" category was repealed in 2018 and replaced by the recreational-flyer exception; older materials and videos still use the old term. Purpose of the flight, not the aircraft, decides the category; the full rules for each are next lecture.
 :::
 
-## FAA - Federal Aviation Administration {.smaller}
 
-::: {.columns}
-:::{.column width="70%"}
-**NAS - National Airspace System**
-
-The common network of U.S. airspace:
-
-- air navigation facilities, equipment, and services;
-- airports or landing areas;
-- aeronautical charts, information and services;
-- rules, regulations, and procedures;
-- technical information; and manpower and material.
-:::
-:::{.column width="30%"}
-![](../images/NAS.webp)
-:::
-:::
-
-::: {.notes}
-Plant the flag that returns in Lecture 1B: the NAS is a single shared system and drones are new entrants into it, not users of separate airspace. Everything below 400 ft is still NAS; there is no free zone.
-:::
-
-## Integration of UAS into the NAS {.smaller}
-
-- review of current policies, regulations, environmental impact, privacy considerations, standards, and procedures;
-- identification of **gaps in current UAS** technologies and **regulations,** standards, policies, or procedures;
-- development of new technologies and **new or revised regulations, standards, policies, and procedures;**
-- and the associated development of guidance material, **training, and certification** of aircraft systems, propulsion systems, and airmen.
-
-::: {.notes}
-This integration effort is ongoing, not historical: Part 107 (2016), the 2021 Remote ID and operations-over-people rules, and the proposed Part 108 BVLOS rule are successive steps of exactly this process. Lecture 1B walks through where it stands today.
-:::
-
-## Can I use it? {.center .text-center}
+## Can I use it? {.center .text-center .section-divider background-color="#e9f2e9"}
 
 Regulations, standards, policies, and procedures
 
@@ -392,13 +439,13 @@ Deliberate cliffhanger: the honest answer is "it depends on purpose, place, airc
 Know Before You Fly is an industry-FAA outreach partnership; it is a decent student-facing entry point, though faa.gov/uas is the authoritative source. Set expectations: next lecture covers Part 107, the recreational exception, TRUST, and airspace authorization in detail.
 :::
 
-## What are UAS used for? {.center .text-center}
+## What are UAS used for? {.center .text-center .section-divider background-color="#e9f2e9"}
 
 ::: {.notes}
 Applications section: the goal is breadth, since Assignment 1A asks each student to research one system and its application in depth and present it. Encourage them to note which applications connect to their own research as these slides go by.
 :::
 
-## Army and Government {.smaller .text-center}
+## Army and government {.smaller .text-center}
 :::{.columns}
 :::{.column}
 <!-- - Public Use Aircraft -->
@@ -424,15 +471,15 @@ Applications section: the goal is breadth, since Assignment 1A asks each student
 Military use drove the technology historically and still drives much R&D funding; the civil agencies on this list operate large mapping and monitoring fleets (Interior and NOAA especially). This is also where the NDAA/Blue UAS procurement constraints from the platform slide bind hardest.
 :::
 
-## Civilian Application Fields {.center .text-center}
+## Civilian application fields {.center .text-center}
 
-![](../images/drones_industry.webp)
+![Commercial drone industry segments](../images/drones_industry.webp){.r-stretch}
 
 ::: {.notes}
 Big-picture market view: inspection, agriculture, construction, and surveying/mapping are the dominant commercial segments by revenue. Mapping and analytics, this course's slice, cuts across nearly all of them because most applications ultimately want georeferenced products.
 :::
 
-## Application Examples (1) {.smaller}
+## Applications: agriculture and telecommunications {.smaller}
 :::{.columns}
 :::{.column width="60%"}
 - **Agriculture:**
@@ -450,7 +497,7 @@ Big-picture market view: inspection, agriculture, construction, and surveying/ma
 Spray drones are a distinct regulatory world: over 55 lbs, they need exemptions beyond Part 107, and agricultural spraying is one of the fastest-growing segments. The telecom-relay use case reappeared prominently in recent hurricane responses, including in western North Carolina.
 :::
 
-## Application Examples (2) {.smaller}
+## Applications: media and traffic monitoring {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
@@ -469,7 +516,7 @@ Spray drones are a distinct regulatory world: over 55 lbs, they need exemptions 
 Both examples raise the flight-over-people and privacy questions that Lecture 1B's operations-over-people categories and best-practices slides address; newsgathering over crowds is exactly the case the category rules were written for. Traffic monitoring by DOTs is now routine, including NCDOT programs.
 :::
 
-## Application Examples (3) {.smaller}
+## Applications: mining and coastal monitoring {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
@@ -489,7 +536,7 @@ Both examples raise the flight-over-people and privacy questions that Lecture 1B
 Mine volumetrics is a flagship photogrammetry use case: repeat surveys plus DEM differencing gives stockpile and extraction volumes, exactly the change-detection workflow taught later in this course. Coastal monitoring is the local research strength; CGA has flown repeat shoreline surveys on the North Carolina coast.
 :::
 
-## UAS for Remote Sensing (1) {.smaller}
+## Remote sensing: environment and emergency response {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
@@ -508,7 +555,7 @@ Mine volumetrics is a flagship photogrammetry use case: repeat surveys plus DEM 
 The remote-sensing framing distinguishes these from the service applications: here the product is data and derived maps. Crop monitoring connects to the multispectral/NDVI slide; search and rescue to thermal. Disaster response is a strong thread for this course given recent North Carolina hurricane experience.
 :::
 
-## UAS for Remote Sensing (2) {.smaller}
+## Remote sensing: engineering and cultural heritage {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
@@ -527,7 +574,7 @@ The remote-sensing framing distinguishes these from the service applications: he
 Infrastructure inspection is the killer commercial app: bridges, towers, and solar farms replace rope teams and lift trucks with a camera in the air. Cultural heritage showcases Structure from Motion 3D reconstruction (Topic 2) on structures rather than terrain; both engineering monitoring cases (landslides especially) are repeat-survey change-detection problems.
 :::
 
-## UAS for Remote Sensing (3) {.smaller}
+## Remote sensing: surveying and cadastral mapping {.smaller}
 
 :::{.columns}
 :::{.column width="60%"}
@@ -544,22 +591,49 @@ Infrastructure inspection is the killer commercial app: bridges, towers, and sol
 This is the course's home application. The flight-track figure previews Topic 3: systematic overlapping flight lines are what turn a camera drone into a survey instrument. Modern RTK/PPK positioning on survey platforms reaches centimeter-level accuracy, which is what makes cadastral-grade work possible.
 :::
 
-## Use your imagination! {.center .text-center}
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZDXuGQRpvs4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-::: {.notes}
-Fun palette-cleanser video before wrapping up. Use it to launch Assignment 1A: each student picks one UAS, researches its specs and a real case study, and presents it to the class; unusual and imaginative systems are explicitly welcome.
-:::
-
 ## Why should you know how to use UAS? {.center .text-center}
 
 [How to obtain spatial data?](https://www.youtube.com/watch?v=47TNPodZqH0)
 
-![](../images/terrestrial_UAS_satelite.webp)
+![UAS between terrestrial survey and satellite platforms in the data-acquisition spectrum](../images/terrestrial_UAS_satelite.webp)
 
 ::: {.notes}
 The figure places UAS in the data-acquisition spectrum between terrestrial survey and crewed-aircraft/satellite platforms: UAS win on spatial resolution and revisit flexibility, lose on coverage area. The course's premise is that this niche, centimeter-resolution mapping on demand, is now accessible to any trained geospatial analyst.
+:::
+
+## The UAS mapping workflow {.smaller}
+
+How the rest of this course fits together:
+
+```{mermaid}
+flowchart TB
+    R["Rules & regulations)"] -.-> A
+    A["Plan the flight"] --> B["Collect imagery"]
+    B --> C["SfM processing"]
+    C --> D["GIS analytics"]
+    %% D --> E["Object/Change Detection"]
+```
+
+::: {.notes}
+The orientation slide for the whole semester: every later topic is one box in this pipeline. Point out that the arrows run both ways in practice; analysis needs (resolution, accuracy) drive flight planning choices, which is why planning comes after the processing topics have taught what the data must support. The field trip is where the left half becomes real.
+:::
+
+## Data products you will make {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+![Orthophoto: a georeferenced, distortion-free image map](../images/ortho_example.webp)
+:::
+::: {.column width="50%"}
+![Surface (DSM) vs terrain (DTM) elevation models](../images/dtm_dsm.webp)
+:::
+:::
+
+- **Point cloud**: millions of 3D points from SfM photogrammetry or lidar
+- **3D mesh**: a continuous textured surface for visualization and measurement
+
+::: {.notes}
+Define the four product types now so Topic 2 lands softly: the orthophoto is the map-accurate image (unlike a raw aerial photo), the DSM includes vegetation and buildings while the DTM is bare earth, and the difference between them is itself an analysis product (canopy height). Point cloud and mesh are the 3D intermediates the rasters are derived from. Every product here comes out of imagery students will collect themselves.
 :::
 
 ## Barriers
@@ -572,4 +646,18 @@ The figure places UAS in the data-acquisition spectrum between terrestrial surve
 
 ::: {.notes}
 Close with the open discussion; typical student answers include cost, battery endurance, training burden, and airspace access, all worth affirming. The three listed barriers each get follow-up in this course: regulations in Lecture 1B, procurement policy from the platform-landscape slide, and societal acceptance in the best-practices discussion. Collect answers on the board; they make a nice callback in the final topic.
+:::
+
+## Wrap-up
+
+::: {.term-card}
+**Next lecture**: [Rules and regulations for UAS operations](lecture_1b.qmd), when and where you may legally fly
+:::
+
+::: {.term-card}
+**Assignment 1A**: [UAS systems and applications](../assignments/assignment_1a.qmd), pick one system, research it, and present it to the class
+:::
+
+::: {.notes}
+Recap the arc: terminology, system elements, classification, sensors, operations, applications. Point students at the assignment page for the full list of required presentation elements and the due date, and remind DE students of the recorded-narration option.
 :::
