@@ -8,16 +8,16 @@ activity: Lecture
 
 ## Outline
 
-* levels of regulatory authority
+* Levels of regulatory authority
 * Small UAS Rule (Part 107)
-* recreational flying under the 49 USC 44809 exception (TRUST)
+* Recreational flying under the 49 USC 44809 exception (TRUST)
 * UAS authorizations to fly: LAANC and airspace restrictions
-* current information resources
+* Current information resources
 
 ## Lecture
 
 * Lecture Slides: [Rules and Regulations](lectures/lecture_1b.qmd)
-* Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1b >}}) (NCSU Only)
+<!-- * Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1b >}}) (NCSU Only) -->
 
 ### Supplemental materials
 

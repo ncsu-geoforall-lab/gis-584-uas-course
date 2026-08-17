@@ -1,7 +1,7 @@
 ---
 title: "UAS Rules and Regulations"
 subtitle: "Center for Geospatial Analytics at North Carolina State University"
-author: "Justyna Jeziorska & Corey White"
+author: "Corey White adpted from Justyna Jeziorska"
 format:
     revealjs:
         theme: [simple, ../../../../theme.scss]
@@ -51,8 +51,8 @@ The 1956 Grand Canyon midair collision is the classic trigger event; the Federal
 
 ::: {.incremental}
 - Already congested with piloted aircraft, and adding a swarm of UAS requires thoughtful planning
-- Main mandate: to ensure that UAS do not endanger current users of the NAS (including manned or other unmanned aircraft) nor compromise the safety of people and property on the ground
-- The lack of detect-and-avoid capability of most current UAS technology remains a major concern for the FAA, and is the core problem the proposed Part 108 BVLOS rule tries to solve (more at the end of this lecture)
+- Main mandate: to ensure that UAS do not endanger current users of the NAS nor compromise the safety of people and property on the ground
+<!-- - The lack of detect-and-avoid capability of most current UAS technology remains a major concern for the FAA, and is the core problem the proposed Part 108 BVLOS rule tries to solve (more at the end of this lecture) -->
 :::
 
 ::: {.notes}

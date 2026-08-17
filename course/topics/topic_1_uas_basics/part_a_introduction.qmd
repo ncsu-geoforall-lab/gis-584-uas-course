@@ -4,23 +4,27 @@ title: "Introduction to UAS"
 subtitle: "Topic 1A: UAS Basics"
 date: 8/17/2026
 activity: Lecture
+bibliography: references.bib
 ---
 
 # Introduction to Unmanned Aerial Systems
 
 ## Outline
 
-* overview of UAS technology, system's classifications
+* Overview of UAS technology, system's classifications
 * UAS components and operations
 * UAS applications
-* in class demonstration of selected systems (hands-on look at the program's aircraft; no flying)
+<!-- * In-class demonstration of selected systems (hands-on look at the program's aircraft; no flying) -->
 
 ## Lecture
 
 * Lecture Slides: [Introduction to UAS](lectures/lecture_1a.qmd)
-* Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1a >}}) (NCSU Only)
+<!-- * Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1a >}}) (NCSU Only) -->
 
 ## Supplemental materials
+
+* [Drone Mapping Software](https://dronemappingsoftware.com/) - Searchable list of software
+* [RPV, UAV, UAS, RPAS...or just drone?](https://onlinelibrary.wiley.com/doi/10.1111/phor.12244) - Editorial by Stuart I, Granshw, 2018 discussing the origin and usage of the language used to describe Drones, UAV, etc [@granshaw_20218]
 
 ### Systems
 

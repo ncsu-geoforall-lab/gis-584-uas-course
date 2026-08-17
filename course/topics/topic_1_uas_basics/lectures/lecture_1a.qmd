@@ -1,7 +1,7 @@
 ---
 title: "Introduction to UAS"
 subtitle: "Center for Geospatial Analytics at North Carolina State University"
-author: "Justyna Jeziorska & Corey White"
+author: "Corey White adapted from Justyna Jeziorska"
 format:
     revealjs:
         theme: [simple, ../../../../theme.scss]
@@ -23,10 +23,9 @@ First lecture of the course: the goal is shared vocabulary and a mental model of
 :::
 
 ## What is a UAV? {.center .text-center}
-For a brief summary read the [overview article](http://www.insidegnss.com/auto/janfeb08-wp.pdf)
 
 ::: {.notes}
-Section opener. The linked Inside GNSS piece is an early overview; it is dated technologically but still a clean explanation of the navigation problem, which is why it survives here. Use this beat to ask students what they would call the thing before giving them the terminology.
+Section opener. Use this beat to ask students what they would call the thing before giving them the terminology.
 :::
 
 ## UAS or UAV? Or maybe a drone?
@@ -34,8 +33,10 @@ Section opener. The linked Inside GNSS piece is an early overview; it is dated t
 ::: {.incremental}
 - **UAV** = Unmanned Aerial Vehicle - the aircraft itself
 - **UAS** = Unmanned Aircraft System - the aircraft plus everything needed to operate it
-- **RPA / RPAS** = Remotely Piloted Aircraft (System) - ICAO's preferred term
+- **RPA / RPAS** = Remotely Piloted Aircraft (System) - [ICAO's preferred term](https://www.icao.int/frequently-used-terms)[^1]
 - **Drone** = the colloquial catch-all, now standard in industry and media
+
+[^1]: International Civil Aviation Organization (ICAO)
 :::
 
 ::: {.notes}
@@ -47,22 +48,27 @@ The FAA and this course use UAS because the regulations govern the whole system,
 ::: {.columns}
 
 <!-- Left -->
-::: {.column width="40%"}
-- **Unmanned** = without a person onboard (operated by automatic or remote control)
-- **Aircraft** = able to fly
-- **System** = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)
+::: {.column width="50%"}
+::: {.term-card}
+**Unmanned**: without a person onboard, operated by automatic or remote control
+:::
+::: {.term-card}
+**Aircraft**: able to fly
+:::
+::: {.term-card}
+**System**: the associated elements for safe operation, such as control stations, control links, support equipment, payloads, flight termination systems, and launch and recovery equipment
+:::
 :::
 
 <!-- Right -->
-::: {.column width="60%"}
-
-![](../images/Pilot_data_UAV.webp)
-
+::: {.column .text-center width="50%"}
 **Consists of three elements:**
 
 1. Unmanned Aircraft
 2. Control Station
 3. Data Link
+
+![The pilot, control station, and data link to the UAV](../images/Pilot_data_UAV.webp){width="85%"}
 :::
 
 :::
@@ -115,28 +121,19 @@ Walk the main design families: fixed wing (efficiency, endurance, area coverage)
 :::
 
 ## Different Classifications {.smaller}
-:::{.columns}
 
-::: {.column width="40%"}
-* Physical size
-* Weight
-* Endurance
-* Altitude
-* Wing loading
-* Engine type
-* Range
-* Performance
-* Capabilities
-* Type
-:::
-::: {.column width="60%"}
-![](../images/uav_classification_bases.webp)
+| Basis | Example classes |
+|-------|-----------------|
+| Weight / size | Micro, mini, small (sUAS, under 55 lb), large |
+| Endurance | Minutes (small multirotors) to 24+ hours |
+| Altitude | Low altitude, medium altitude (MALE), high altitude (HALE) |
+| Design / lift | Fixed wing, rotary wing, hybrid VTOL, lighter than air |
+| Propulsion | Electric, combustion, hybrid |
+| Range | Visual line of sight, BVLOS, long range |
 
-:::
 ::: aside
 More about classification in the article: [Perspectives on Unmanned Aircraft
 Classification for Civil Airworthiness Standards](https://shemesh.larc.nasa.gov/people/jmm/NASA-TM-2013-217969.pdf)
-:::
 :::
 
 ::: {.notes}
@@ -145,20 +142,22 @@ Key point: the classification axis you pick depends on your question. Regulators
 
 ## Simplified classifications {.smaller}
 
-:::{.columns}
-:::{.column width="50%"}
-![](../images/uav_nomenclature_scheme.webp)
+In practice, most UAS are grouped by size:
+
+| Class | Weight | Typical altitude | Endurance | Examples |
+|-------|--------|------------------|-----------|----------|
+| Micro | Under 250 g | Under 400 ft | 15-30 min | DJI Mini, DJI Neo |
+| Small (sUAS) | Under 25 kg (55 lb) | Under 400 ft | 20-90 min | Mavic 3E, WingtraOne |
+| Medium / tactical | 25-150 kg | Up to ~10,000 ft | Several hours | ScanEagle |
+| Large (MALE / HALE) | Over 150 kg | 10,000-60,000 ft | 24+ hours | MQ-9 Reaper, Global Hawk |
+
+::: {.term-card}
+**This course**: micro & small UAS (sUAS), under 55 lb, flown below 400 ft
 :::
 
-:::{.column width="50%"}
-![](../images/uav_classification_simple.webp)
-:::
-
-- More (much much more) about classifications in the [NASA report](https://shemesh.larc.nasa.gov/people/jmm/NASA-TM-2013-217969.pdf)
-:::
 
 ::: {.notes}
-The simplified schemes collapse to what matters for civil users: micro/mini/small on one axis, fixed vs rotary wing on the other. Have students place a familiar aircraft (DJI Mini, an eBee-style flying wing, a military MALE platform) into each scheme to see how the taxonomies overlap.
+The size ladder is the scheme students should retain: the two bottom rows are the regulated civil space (sUAS under Part 107), the top rows are military and research platforms. The 250 g and 55 lb lines carry legal weight, which Lecture 1B picks up. Have students place a familiar aircraft into a row; the highlighted card anchors where everything in this course lives.
 :::
 
 ## How does a UAS work? {.center .text-center}

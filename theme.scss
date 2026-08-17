@@ -44,3 +44,20 @@ $mermaid-node-fg-color: $primary;
     float: right;
     margin-left: 10px;
 }
+
+/* Accented definition cards for lecture slides */
+.term-card {
+    border-left: 5px solid $primary;
+    background: rgba($primary, 0.07);
+    border-radius: 0 8px 8px 0;
+    padding: 0.45em 0.7em;
+    margin-bottom: 0.7em;
+}
+
+.term-card p {
+    margin: 0;
+}
+
+.term-card strong {
+    color: $primary;
+}
