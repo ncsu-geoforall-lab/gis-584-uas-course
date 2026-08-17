@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .part-label { font-size: 30px; font-weight: bold; fill: #006600; }
+      .leader { stroke: #8c8c8c; stroke-width: 2.5; stroke-dasharray: 6 5; fill: none; }
+      .frame { fill: #d9d9d9; stroke: #8c8c8c; stroke-width: 3; }
+    </style>
+  </defs>
+
+  <!-- Propellers -->
+  <ellipse cx="280" cy="150" rx="110" ry="24" class="frame" transform="rotate(-20 280 150)" opacity="0.75"/>
+  <ellipse cx="720" cy="150" rx="110" ry="24" class="frame" transform="rotate(20 720 150)" opacity="0.75"/>
+  <ellipse cx="280" cy="550" rx="110" ry="24" class="frame" transform="rotate(20 280 550)" opacity="0.75"/>
+  <ellipse cx="720" cy="550" rx="110" ry="24" class="frame" transform="rotate(-20 720 550)" opacity="0.75"/>
+
+  <!-- Arms -->
+  <line x1="500" y1="350" x2="280" y2="150" stroke="#8c8c8c" stroke-width="24" stroke-linecap="round"/>
+  <line x1="500" y1="350" x2="720" y2="150" stroke="#8c8c8c" stroke-width="24" stroke-linecap="round"/>
+  <line x1="500" y1="350" x2="280" y2="550" stroke="#8c8c8c" stroke-width="24" stroke-linecap="round"/>
+  <line x1="500" y1="350" x2="720" y2="550" stroke="#8c8c8c" stroke-width="24" stroke-linecap="round"/>
+
+  <!-- Motors -->
+  <circle cx="280" cy="150" r="32" fill="#660066"/>
+  <circle cx="720" cy="150" r="32" fill="#660066"/>
+  <circle cx="280" cy="550" r="32" fill="#660066"/>
+  <circle cx="720" cy="550" r="32" fill="#660066"/>
+
+  <!-- Body -->
+  <rect x="400" y="270" width="200" height="160" rx="26" class="frame"/>
+  <!-- Gimbal + camera (front) -->
+  <circle cx="500" cy="238" r="22" fill="#3577b5"/>
+  <circle cx="500" cy="238" r="9" fill="#12314f"/>
+  <!-- GNSS antenna puck -->
+  <circle cx="500" cy="288" r="15" fill="#e8c118" stroke="#8c8c8c" stroke-width="2"/>
+  <!-- Flight controller + IMU -->
+  <rect x="440" y="308" width="120" height="62" rx="8" fill="#006600" opacity="0.85"/>
+  <!-- Battery -->
+  <rect x="445" y="380" width="110" height="38" rx="8" fill="#c46210"/>
+  <!-- Radio antennas (rear) -->
+  <line x1="460" y1="430" x2="440" y2="485" stroke="#3e3e3e" stroke-width="6" stroke-linecap="round"/>
+  <line x1="540" y1="430" x2="560" y2="485" stroke="#3e3e3e" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Left labels -->
+  <path class="leader" d="M 235 115 L 160 85"/>
+  <text x="150" y="90" text-anchor="end" class="part-label">Propeller</text>
+
+  <path class="leader" d="M 250 570 L 220 610"/>
+  <text x="210" y="618" text-anchor="end" class="part-label">Motor + ESC</text>
+
+  <!-- Right labels -->
+  <path class="leader" d="M 522 235 L 835 180"/>
+  <text x="845" y="188" class="part-label">Gimbal + camera</text>
+
+  <path class="leader" d="M 515 288 L 835 262"/>
+  <text x="845" y="270" class="part-label">GNSS antenna</text>
+
+  <path class="leader" d="M 560 340 L 835 345"/>
+  <text x="845" y="353" class="part-label">Flight controller + IMU</text>
+
+  <path class="leader" d="M 555 400 L 835 428"/>
+  <text x="845" y="436" class="part-label">Battery (LiPo)</text>
+
+  <path class="leader" d="M 560 485 L 835 510"/>
+  <text x="845" y="518" class="part-label">Radio antennas</text>
+</svg>

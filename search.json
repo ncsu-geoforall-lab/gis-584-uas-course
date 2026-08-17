@@ -2440,7 +2440,7 @@
     "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#outline",
     "title": "Introduction to UAS",
     "section": "Outline",
-    "text": "Outline\n\noverview of UAS technology, system’s classifications\nUAS components and operations\nUAS applications\nin class demonstration of selected systems",
+    "text": "Outline\n\nOverview of UAS technology, system’s classifications\nUAS components and operations\nUAS applications",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2452,7 +2452,7 @@
     "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#lecture",
     "title": "Introduction to UAS",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides: Introduction to UAS\nLecture Recording: Fall 2024 (NCSU Only)\nPast Videos (2017)\n\nPart 1\nPart 2\nPart 3\nPart 4\nPart 5\nPart 6",
+    "text": "Lecture\n\nLecture Slides: Introduction to UAS",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2464,7 +2464,7 @@
     "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#supplemental-materials",
     "title": "Introduction to UAS",
     "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nSystems\n\nFixed wing\n\nsenseFly\neBee Classic\neBee Plus\neBee SQ\n\n\n\nRotary wing\n\nZX5 by Trimble\nInspire 2 by DJI\nMavic 2 by DJI\nPhantom 4 Pro by DJI",
+    "text": "Supplemental materials\n\nDrone Mapping Software - Searchable list of software\nRPV, UAV, UAS, RPAS…or just drone? - Editorial by Stuart I, Granshw, 2018 discussing the origin and usage of the language used to describe Drones, UAV, etc (Granshaw 2018)\n\n\nSystems\n\nFixed wing and VTOL hybrid\n\neBee X by AgEagle (successor of the senseFly eBee used in earlier offerings of this course)\nWingtraOne GEN II\n\n\n\nRotary wing\n\nDJI Mavic 3 Enterprise / Multispectral\nDJI Matrice 4 Series\nSkydio X10 (NDAA-compliant, Blue UAS listed)\nFreefly Astro (NDAA-compliant, Blue UAS listed)",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2476,19 +2476,7 @@
     "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#assignment",
     "title": "Introduction to UAS",
     "section": "Assignment",
-    "text": "Assignment\n\nUAS: systems and applications",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "1A: Introduction to UAS"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
-    "href": "course/topics/topic_1_uas_basics/part_a_introduction.html#homework",
-    "title": "Introduction to UAS",
-    "section": "Homework",
-    "text": "Homework\nPrepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. (Assignment 1A)",
+    "text": "Assignment\n\nAssignment 1A: UAS systems and applications - select one UAS, research it, and present it to the class. See the assignment page for the full list of required elements, presentation format, and submission instructions.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2500,7 +2488,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#objectives",
     "title": "Introduction to UAS",
     "section": "Objectives",
-    "text": "Objectives\n\nUse the proper terminology and understand its meaning\nDescribe the elements of UAS\nClassify different UAS according to their make and characteristics\nDescribe different classes of the UAS\nUnderstand the current state of the UAS development\nDescribe the objectives beyond the use of the UAS",
+    "text": "Objectives\n\nUse the proper terminology and understand its meaning\nDescribe the elements of a UAS\nClassify different UAS according to their design and characteristics\nUnderstand the current state of UAS development, including the platforms used for mapping today\nDescribe the range of applications UAS are used for\n\n\nFirst lecture of the course: the goal is shared vocabulary and a mental model of what a UAS is before the course narrows to mapping. Ask who has flown a drone before and what kind; the class survey usually surfaces a good spread from toy quads to Part 107 pilots, which helps calibrate the rest of the topic.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2509,11 +2497,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-an-uav",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-an-uav",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-a-uav",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-is-a-uav",
     "title": "Introduction to UAS",
-    "section": "What is an UAV?",
-    "text": "What is an UAV?\nFor the brief summary read the overview article",
+    "section": "What is a UAV?",
+    "text": "What is a UAV?\n\nSection opener. Use this beat to ask students what they would call the thing before giving them the terminology.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2526,7 +2514,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone",
     "title": "Introduction to UAS",
     "section": "UAS or UAV? Or maybe a drone?",
-    "text": "UAS or UAV? Or maybe a drone?\n\nUAV = Unmanned Aerial Vehicle\nUAS = Unmanned Aerial Systems\nDrone = Dynamic Remotely Operated Navigation Equipment\nRPA = Remotely Piloted Aircraft",
+    "text": "UAS or UAV? Or maybe a drone?\n\nUAV = Unmanned Aerial Vehicle - the aircraft itself\nUAS = Unmanned Aircraft System - the aircraft plus everything needed to operate it\nRPA / RPAS = Remotely Piloted Aircraft (System) - ICAO’s preferred term1\nDrone = the colloquial catch-all, now standard in industry and media\n\n\nThe FAA and this course use UAS because the regulations govern the whole system, not just the airframe. “Drone” carried military stigma in the 2010s and professionals avoided it; that fight is over and the industry itself says drone now. One myth to preempt: “drone” is not an acronym, the usage traces back to 1930s target aircraft named after the male bee.\n\nInternational Civil Aviation Organization (ICAO)",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2539,7 +2527,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-unmanned-aircraft-system",
     "title": "Introduction to UAS",
     "section": "UAS: Unmanned Aircraft System",
-    "text": "UAS: Unmanned Aircraft System\n\n\n\nUnmanned = without a person onboard (operated by automatic or remote control)\nAircraft = able to fly\nSystem = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)\n\n\n\nConsists of three elements:\n\nUnmanned Aircraft\nControl Station\nData Link",
+    "text": "UAS: Unmanned Aircraft System\n\n\n\nUnmanned: without a person onboard, operated by automatic or remote control\n\n\nAircraft: able to fly\n\n\nSystem: the associated elements for safe operation, such as control stations, control links, support equipment, payloads, flight termination systems, and launch and recovery equipment\n\n\nConsists of three elements:\n\nUnmanned Aircraft\nControl Station\nData Link\n\n\n\n\nThe pilot, control station, and data link to the UAV\n\n\n\n\nThe three-element decomposition matters practically: most field failures are control-station or data-link problems (dead tablet, lost link, interference), not aircraft problems. When the course reaches flight planning, pre-flight checks are organized around exactly these three elements.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2548,11 +2536,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-or-uav-or-maybe-a-drone-1",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-counts-as-a-uav",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-counts-as-a-uav",
     "title": "Introduction to UAS",
-    "section": "UAS or UAV? Or maybe a drone?",
-    "text": "UAS or UAV? Or maybe a drone?\n\n\nUnmanned Aerial Vehicle (UAV)\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\n\nMore about terminology in the article: Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’",
+    "section": "What counts as a UAV?",
+    "text": "What counts as a UAV?\n\n\nUnmanned Aerial Vehicle (UAV)\n\nExcludes: missiles, weapons, or exploding warheads,\nIncludes: all classes of airplanes, helicopters, airships, and powered-lift aircraft,\nDoesn’t include: traditional balloons, rockets, tethered aircraft, and un-powered gliders.\n\n\n\n\n\nThe definitional edges are worth a beat: a cruise missile flies unmanned but is not a UAV because it is expendable ordnance; a tethered balloon carrying a camera is aerial sensing but not a UAV because it is neither free-flying nor powered. These boundary cases foreshadow the regulatory definitions in Lecture 1B.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2565,7 +2553,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-does-a-uas-look-like",
     "title": "Introduction to UAS",
     "section": "What does a UAS look like?",
-    "text": "What does a UAS look like?\nTypes and classification of UAS",
+    "text": "What does a UAS look like?\nTypes and classification of UAS\n\nSection transition into classification. Preview: there is no single official taxonomy; military, civil-airworthiness, and market classifications all coexist, so the next slides show several cuts of the same space.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2578,7 +2566,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-shapes-and-sizes",
     "title": "Introduction to UAS",
     "section": "Different shapes and sizes",
-    "text": "Different shapes and sizes",
+    "text": "Different shapes and sizes\n\nRange of UAS platforms from micro air vehicles to large military aircraft\nSpan the extremes on the figure: from insect-scale micro air vehicles to the Global Hawk with an airliner-class wingspan. Everything this course flies sits in the small-UAS band, under 55 lbs, but the design diversity above and below is useful context for classification.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2590,8 +2578,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-designs",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-designs",
     "title": "Introduction to UAS",
-    "section": "Different Designs",
-    "text": "Different Designs",
+    "section": "Different designs",
+    "text": "Different designs\n\nFixed wing, rotary wing, and hybrid UAS designs\nWalk the main design families: fixed wing (efficiency, endurance, area coverage), rotary wing / multirotor (vertical takeoff, hover, ease of use), and hybrids like VTOL fixed wing that take off vertically then cruise on wings. Multirotors dominate small-site mapping; fixed wing and VTOL hybrids win on large-area coverage per battery.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2603,8 +2591,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-classifications",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#different-classifications",
     "title": "Introduction to UAS",
-    "section": "Different Classifications",
-    "text": "Different Classifications\n\n\n\nPhysical size\nWeight\nEndurance\nAltitude\nWing loading\nEngine type\nRange\nPerformance\nCapabilities\nType\n\n\n\n\n\nMore about classification in the article: Perspectives on Unmanned Aircraft Classification for Civil Airworthiness Standards",
+    "section": "Different classifications",
+    "text": "Different classifications\n\n\n\n\n\n\n\nBasis\nExample classes\n\n\n\n\nWeight / size\nMicro, mini, small (sUAS, under 55 lb), large\n\n\nEndurance\nMinutes (small multirotors) to 24+ hours\n\n\nAltitude\nLow altitude, medium altitude (MALE), high altitude (HALE)\n\n\nDesign / lift\nFixed wing, rotary wing, hybrid VTOL, lighter than air\n\n\nPropulsion\nElectric, combustion, hybrid\n\n\nRange\nVisual line of sight, BVLOS, long range\n\n\n\n\n\nKey point: the classification axis you pick depends on your question. Regulators classify by weight (55 lb line, 250 g line), mission planners by endurance and range, engineers by propulsion and wing loading. Weight is the axis with legal consequences, which is why it dominates in Lecture 1B.\n\n\nMore about classification in the article: Perspectives on Unmanned Aircraft Classification for Civil Airworthiness Standards",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2617,7 +2605,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#simplified-classifications",
     "title": "Introduction to UAS",
     "section": "Simplified classifications",
-    "text": "Simplified classifications\n\n\n\n\n\n\nMore (much much more) about classifications in the article\nCondensed basics including classification can be found in Unmanned Aircraft Systems for Civilian Missions",
+    "text": "Simplified classifications\nIn practice, most UAS are grouped by size:\n\n\n\n\n\n\n\n\n\n\nClass\nWeight\nTypical altitude\nEndurance\nExamples\n\n\n\n\nMicro\nUnder 250 g\nUnder 400 ft\n15-30 min\nDJI Mini, DJI Neo\n\n\nSmall\nUnder 25 kg (55 lb)\nUnder 400 ft\n20-90 min\nMavic 3E, WingtraOne\n\n\nMedium\n25-150 kg\nUp to ~10,000 ft\nSeveral hours\nScanEagle\n\n\nLarge\nOver 150 kg\n10,000-60,000 ft\n24+ hours\nMQ-9 Reaper, Global Hawk\n\n\n\n\nThis course: micro & small UAS (sUAS), under 55 lb, flown below 400 ft\n\n\nThe size ladder is the scheme students should retain: the two bottom rows are the regulated civil space (sUAS under Part 107), the top rows are military and research platforms. The 250 g and 55 lb lines carry legal weight, which Lecture 1B picks up. Have students place a familiar aircraft into a row; the highlighted card anchors where everything in this course lives.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2630,7 +2618,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#how-does-a-uas-work",
     "title": "Introduction to UAS",
     "section": "How does a UAS work?",
-    "text": "How does a UAS work?\nSystem elements",
+    "text": "How does a UAS work?\nSystem elements\n\nSection transition from what they look like to how the pieces fit together. This is the systems-engineering view that the term “UAS” implies.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2643,7 +2631,72 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#generic-unmanned-aircraft-system",
     "title": "Introduction to UAS",
     "section": "Generic Unmanned Aircraft System",
-    "text": "Generic Unmanned Aircraft System\n\n\n\nAir vehicle\nMission planning element\nCommand and control element\nCommunication link\nLaunch and recovery element (for some of them)\nPayload",
+    "text": "Generic Unmanned Aircraft System\n\n\n\nAir vehicle\nMission planning element\nCommand and control element\nCommunication link\nLaunch and recovery element (for some of them)\nPayload\n\n\n\n\n\nMap these onto the course: mission planning element is the flight-planning software in Topic 3; payload is the sensor whose imagery feeds Structure from Motion in Topic 2; the communication link constraints shape where you can safely fly. Launch and recovery elements are mostly a fixed-wing concern (catapults, belly landings, parachutes).",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#inside-the-aircraft",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#inside-the-aircraft",
+    "title": "Introduction to UAS",
+    "section": "Inside the aircraft",
+    "text": "Inside the aircraft\n\nMain components of a mapping quadcopter\nOrient students on the diagram before the function definitions on the next slide: flight controller and IMU in the body, GNSS antenna up top away from interference, camera on a gimbal at the front, battery as the single heaviest component, radio antennas at the rear. The next slide defines what each part does.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-each-component-does",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-each-component-does",
+    "title": "Introduction to UAS",
+    "section": "What each component does",
+    "text": "What each component does\n\n\n\nFlight controller: the onboard computer running the autopilot\n\n\nIMU: accelerometers and gyroscopes sensing attitude and motion\n\n\nGNSS receiver: position and velocity from satellite signals\n\n\nMotors + ESCs: electronic speed controllers turn commands into thrust\n\n\n\nBattery: LiPo packs, typically 20-45 min of flight for small multirotors\n\n\nRadio links: control, telemetry, and video (2.4 / 5.8 GHz)\n\n\nGimbal: stabilizes the camera independently of aircraft motion\n\n\n\nThis names the parts students will hear about all semester: “the IMU drifted”, “lost link”, “gimbal pitch”. The flight controller fuses IMU and GNSS data hundreds of times per second to keep the aircraft stable; that fusion is also what gets recorded as camera position and orientation for every photo, which is the bridge to the next slide. LiPo handling (storage charge, fire safety) comes up before the first field day.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#how-does-it-know-where-it-is",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#how-does-it-know-where-it-is",
+    "title": "Introduction to UAS",
+    "section": "How does it know where it is?",
+    "text": "How does it know where it is?\nPositioning quality decides map quality:\n\n\n\n\n\n\n\n\nMethod\nHow it works\nTypical accuracy\n\n\n\n\nStandard GNSS\nSatellite positioning alone\n1-3 m\n\n\nRTK (Real-Time Kinematic)\nLive corrections from a base station or network\n1-3 cm\n\n\nPPK (Post-Processed Kinematic)\nCorrections applied after the flight\n1-3 cm\n\n\nGround control points (GCPs)\nSurveyed targets visible in the imagery\ncm-level, with any of the above\n\n\n\n\nWhy it matters: the recorded camera position of every photo anchors the photogrammetric reconstruction (Topic 2)\n\n\nThis single spec separates a camera drone from a survey instrument. RTK needs a correction source during flight (local base station or NC’s real-time network); PPK logs raw observations and corrects afterwards, which is more forgiving of radio dropouts. GCPs trade field time for control and remain the accuracy check even on RTK flights. Topic 2 puts numbers on all of this with real datasets.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#rtk-base-and-rover",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#rtk-base-and-rover",
+    "title": "Introduction to UAS",
+    "section": "RTK: base and rover",
+    "text": "RTK: base and rover\n\nBoth receivers track the same satellites; the base station on a known point broadcasts corrections to the rover. Image: TS Eriksson, CC BY-SA 4.0\nWalk the geometry: both receivers see the same satellites, so most error sources (atmosphere, clocks, orbits) are shared and cancel when the base, sitting on a known point, broadcasts corrections. On a mapping drone the “rover” is the aircraft itself. In North Carolina the base can be replaced by the NC Geodetic Survey real-time network over a cell connection.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#levels-of-autonomy",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#levels-of-autonomy",
+    "title": "Introduction to UAS",
+    "section": "Levels of autonomy",
+    "text": "Levels of autonomy\n\nManual: pilot flies with the sticks, no assistance\nStabilized: autopilot holds attitude, altitude, and position (GNSS hover)\nWaypoint missions: aircraft flies a pre-planned route and triggers the camera automatically\nAutonomous: obstacle avoidance, terrain following, docked “drone-in-a-box” operations\n\n\nMapping flights are level 3: planned in software (Topic 3), flown by the autopilot, supervised by the pilot in command\n\n\nStudents are often surprised that mapping is not stick flying: the pilot’s job on a mapping mission is planning, supervision, and takeover if something goes wrong. Overlap and coverage requirements make hand-flown mapping impractical. Level 4 capabilities are why BVLOS rulemaking matters (Lecture 1B); docked drones flying scheduled missions are the direction commercial monitoring is heading.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2656,20 +2709,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors",
     "title": "Introduction to UAS",
     "section": "Sensors",
-    "text": "Sensors",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1A"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensors-1",
-    "title": "Introduction to UAS",
-    "section": "Sensors",
-    "text": "Sensors",
+    "text": "Sensors\n\nOverview of UAS sensor payloads\nTransition into payloads, the part of the system this course cares most about: for mapping, the aircraft is just a sensor positioning platform. The figure shows the breadth beyond cameras: chemical sniffers, radiation detectors, meteorological probes. Point out that sensor choice drives aircraft choice, not the other way around: payload mass, power draw, and mounting/gimbal requirements are the coupling constraints, which the integration slide will formalize.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2682,7 +2722,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-sensors-for-mapping",
     "title": "Introduction to UAS",
     "section": "UAS sensors for mapping",
-    "text": "UAS sensors for mapping\n\nRGB cameras\nInfrared sensors\nMultispectral and hyperspectral sensors\nLaser scanners\nThermal sensors",
+    "text": "UAS sensors for mapping\n\n\n\n\n\n\n\n\n\nSensor\nMeasures\nMapping products\nCost\n\n\n\n\nRGB camera\nVisible light\nOrthophotos, DSMs, 3D models\n$\n\n\nMultispectral\nVisible + NIR bands\nNDVI, vegetation maps\n$$\n\n\nHyperspectral\n100+ narrow bands\nDetailed spectral analysis\n$$$\n\n\nLidar\nActive laser returns\nBare-earth DEMs, canopy structure\n$$-$$$\n\n\nThermal\nLongwave infrared\nTemperature anomaly maps\n$$\n\n\n\n\nThis is the shortlist the course actually uses. RGB feeds photogrammetry (Topics 2-4); multispectral supports vegetation indices; lidar gives below-canopy terrain; thermal supports water, wildlife, and infrastructure applications. The following slides take each in turn.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2695,7 +2735,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#rgb-natural-color-cameras",
     "title": "Introduction to UAS",
     "section": "RGB (natural color) cameras",
-    "text": "RGB (natural color) cameras\n\n\n\nMost common payload for consumer-grade UAS\nPhoto or video mode\nMapping (orthophoto and DSM generation) possible even with non-photogrammetric cameras\nVariety of cameras, lenses, and mounting systems - some suitable for 3D modeling",
+    "text": "RGB (natural color) cameras\n\n\n\nMost common payload for consumer-grade UAS\nPhoto or video mode\nMapping (orthophoto and DSM generation) possible even with non-photogrammetric cameras\nVariety of cameras, lenses, and mounting systems - some suitable for 3D modeling\n\n\n\n\n\n\n“Non-photogrammetric” means consumer cameras without calibrated, stable lens geometry; Structure from Motion self-calibrates well enough that they still produce usable orthophotos and surface models, which is what made UAS mapping cheap. Mechanical vs rolling shutter is the spec worth teaching here: rolling shutter distorts imagery taken in motion and modern mapping drones advertise mechanical/global shutters for that reason.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2708,7 +2748,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#multispectral-and-hyperspectral-cameras",
     "title": "Introduction to UAS",
     "section": "Multispectral and hyperspectral cameras",
-    "text": "Multispectral and hyperspectral cameras\n\n\n\nMiniaturization is challenging in terms of optics and sensor calibration\nWeight, cost, data quality has improved; spectral bands, resolution need improvements\nCameras with NIR band: agriculture and vegetation mapping (for NDVI)\nThe more bands the more information, but also higher price of the sensor\n\n$$ multispectral - couple thousands\n$$$ hyperspectral - tens of thousands",
+    "text": "Multispectral and hyperspectral cameras\n\n\n\nMiniaturization is challenging in terms of optics and sensor calibration\nWeight, cost, data quality have improved; spectral bands, resolution keep improving\nCameras with NIR band: agriculture and vegetation mapping (for NDVI)\nThe more bands the more information, but also higher price of the sensor\n\n$$ multispectral - couple thousand\n$$$ hyperspectral - tens of thousands\n\n\n\n \n\n\nMultispectral has gone mainstream: integrated platforms like the DJI Mavic 3 Multispectral bundle RGB plus narrow bands with a sunlight sensor for reflectance calibration, at a price individual labs can afford. Hyperspectral (hundreds of contiguous bands) still costs an order of magnitude more and demands careful radiometric calibration; it stays a research payload.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2721,7 +2761,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#active-sensors---lidar-and-sar",
     "title": "Introduction to UAS",
     "section": "Active sensors - LiDAR and SAR",
-    "text": "Active sensors - LiDAR and SAR\n\n\n\nActive sensors can reach below-canopy ground surface\nLarge trade-offs between performance and size or cost of LiDAR\nLiDAR now common on UAS thanks to miniaturization\nSAR (Synthetic Aperture Radar) used experimentally, still faces challenges in adaptation to UAS",
+    "text": "Active sensors - LiDAR and SAR\n\n\n\nActive sensors can reach below-canopy ground surface\nTrade-offs between performance and size or cost of LiDAR keep shrinking\nLiDAR is now a routine UAS payload thanks to miniaturization\nSAR (Synthetic Aperture Radar) used experimentally, still faces challenges in adaptation to UAS\n\n\n \n\n\nThe figure pair is the pitch: first-return surface vs bare-earth ground under vegetation, which passive photogrammetry cannot deliver. Integrated lidar payloads (DJI Zenmuse L2 class) have made this routine survey equipment. Connect to the photogrammetry-vs-lidar comparison that returns in the terrain-analysis topics.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2734,7 +2774,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#thermal-imaging",
     "title": "Introduction to UAS",
     "section": "Thermal imaging",
-    "text": "Thermal imaging\n\n\n\nUsed in forest fire monitoring, search and rescue missions\nFor mapping purposes coupled with visible band sensors (see example FLIR DUO)",
+    "text": "Thermal imaging\n\n\n\nUsed in forest fire monitoring, search and rescue missions, wildlife surveys, and building/solar inspection\nFor mapping purposes usually paired with a visible-band camera on the same gimbal (e.g. DJI Mavic 3T class platforms)\n\n\n\n\n\nUncooled microbolometers are what fit on small UAS: lower resolution (often 640x512) and radiometric accuracy of a few degrees, so thermal mapping is about patterns and anomalies more than absolute temperature. Flights happen at night or dawn to maximize thermal contrast, which is why the 2021 night-operations rule (Lecture 1B) mattered to this application.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2747,7 +2787,20 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#sensor-and-platform-integration",
     "title": "Introduction to UAS",
     "section": "Sensor and platform integration",
-    "text": "Sensor and platform integration\nThe optimal combination of carrier (Unmanned Vehicle) and sensing payload needs to be determined based on:\n\n\n\nVolume, size, and weight specifications\nSpecific application requirements\nMounting: integrated by manufacturer or custom solutions\nThe sensors must be adapted to the carrier and vice versa",
+    "text": "Sensor and platform integration\nThe optimal combination of carrier (unmanned vehicle) and sensing payload needs to be determined based on:\n\n\n\nVolume, size, and weight specifications\nSpecific application requirements\nMounting: integrated by manufacturer or custom solutions\nThe sensors must be adapted to the carrier and vice versa\n\n\n\n\n\nThe market has largely resolved this in favor of manufacturer integration: turnkey platforms with matched sensor, gimbal, and processing pipeline. Custom integration survives at the research edge (novel sensors, larger platforms). Note the regulatory hook: payload weight counts toward the 250 g and 55 lb thresholds discussed next lecture.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#the-platform-landscape-today",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#the-platform-landscape-today",
+    "title": "Introduction to UAS",
+    "section": "The platform landscape today",
+    "text": "The platform landscape today\n\nConsumer/prosumer multirotors dominate small-site mapping (DJI Mini and Mavic series)\nDedicated survey platforms: DJI Matrice series, WingtraOne and other VTOL fixed wings, eBee-class flying wings (AgEagle)\nSupply-chain and security policy now shapes procurement: NDAA-compliant / Blue UAS-listed aircraft (Skydio, Freefly, and others) are required for many U.S. government and federally funded operations\nCheck program requirements before buying: see drone use in federally funded projects at NC State\n\n\nTwo forces define the current market: DJI’s dominance on capability per dollar, and U.S. policy restricting Chinese-made aircraft in government and federally funded contexts (American Security Drone Act, agency bans, proposed broader restrictions). For students heading into public-sector or funded-research work, “which drone may I use” is now a compliance question before a technical one; the NC State research-security page linked here is the campus authority.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2760,7 +2813,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#who-uses-uas",
     "title": "Introduction to UAS",
     "section": "Who uses UAS?",
-    "text": "Who uses UAS?\nTypes of UAV Operations",
+    "text": "Who uses UAS?\nTypes of UAS operations\n\nSection transition from hardware to users and applications. The operational categories here get their full regulatory treatment in Lecture 1B; today is just the landscape.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2772,34 +2825,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#types-of-uas-operations",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#types-of-uas-operations",
     "title": "Introduction to UAS",
-    "section": "Types of UAS Operations",
-    "text": "Types of UAS Operations\n\nPublic Operations\nGovernmental, limited by federal statute to certain government operations within U.S. Airspace;\nCivil Operations\nNon-Governmental, must be conducted in accordance with all Federal Aviation Administration (FAA) regulations;\nModel Aircraft\nHobby or Recreation only.",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1A"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#faa-federal-aviation-administration",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#faa-federal-aviation-administration",
-    "title": "Introduction to UAS",
-    "section": "FAA – Federal Aviation Administration",
-    "text": "FAA – Federal Aviation Administration\n\n\nNAS – National Airspace System\nThe common network of U.S. airspace:\n\nair navigation facilities, equipment, and services;\nairports or landing areas;\naeronautical charts, information and services;\nrules, regulations, and procedures;\ntechnical information; and manpower and material.",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1A"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#integration-of-uas-into-the-nas",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#integration-of-uas-into-the-nas",
-    "title": "Introduction to UAS",
-    "section": "Integration of UAS into the NAS",
-    "text": "Integration of UAS into the NAS\n\nreview of current policies, regulations, environmental impact, privacy considerations, standards, and procedures;\nidentification of gaps in current UAS technologies and regulations, standards, policies, or procedures;\ndevelopment of new technologies and new or revised regulations, standards, policies, and procedures;\nand the associated development of guidance material, training, and certification of aircraft systems, propulsion systems, and airmen.",
+    "section": "Types of UAS operations",
+    "text": "Types of UAS operations\n\nPublic Operations Governmental: agencies and public universities operating under federal statute (COA) or Part 107;\nCivil Operations Non-governmental, must be conducted in accordance with all Federal Aviation Administration (FAA) regulations (Part 107);\nRecreational Operations Flying strictly for fun, under the recreational-flyer exception (49 USC 44809).\n\n\nTerminology update worth stating aloud: the old “model aircraft” category was repealed in 2018 and replaced by the recreational-flyer exception; older materials and videos still use the old term. Purpose of the flight, not the aircraft, decides the category; the full rules for each are next lecture.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2812,7 +2839,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#can-i-use-it",
     "title": "Introduction to UAS",
     "section": "Can I use it?",
-    "text": "Can I use it?\nRegulations, standards, policies, and procedures",
+    "text": "Can I use it?\nRegulations, standards, policies, and procedures\n\nDeliberate cliffhanger: the honest answer is “it depends on purpose, place, aircraft, and pilot,” and resolving that is all of Lecture 1B. Today only the orientation layer.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2825,7 +2852,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#know-before-you-fly",
     "title": "Introduction to UAS",
     "section": "Know before you fly",
-    "text": "Know before you fly\n\n“Know Before You Fly” is an educational campaign that provides prospective unmanned aircraft users with the information and guidance they need to fly safely and responsibly.\nDifferent rules apply to recreational and business users and government entities\nNew regulations (effective on August 29, 2016) known as “Part 107”",
+    "text": "Know before you fly\n\n“Know Before You Fly” is an educational campaign that provides prospective unmanned aircraft users with the information and guidance they need to fly safely and responsibly.\nDifferent rules apply to recreational and business users and government entities\nCommercial operations are governed by Part 107, covered in depth next lecture\n\n\nKnow Before You Fly is an industry-FAA outreach partnership; it is a decent student-facing entry point, though faa.gov/uas is the authoritative source. Set expectations: next lecture covers Part 107, the recreational exception, TRUST, and airspace authorization in detail.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2838,7 +2865,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#what-are-uas-used-for",
     "title": "Introduction to UAS",
     "section": "What are UAS used for?",
-    "text": "What are UAS used for?",
+    "text": "What are UAS used for?\n\nApplications section: the goal is breadth, since Assignment 1A asks each student to research one system and its application in depth and present it. Encourage them to note which applications connect to their own research as these slides go by.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2850,8 +2877,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#army-and-government",
     "title": "Introduction to UAS",
-    "section": "Army and Government",
-    "text": "Army and Government\n\n\n\n\nDepartment of Agriculture\nDepartment of Commerce\nDepartment of Defence\nDepartment of Energy\nDepartment of Homeland Security\nDepartment of Interior\nDepartment of Justice\nNASA\nNOAA\nState Universities\nState Law Enforcement\n\n\n\n\n\nMilitary Use",
+    "section": "Army and government",
+    "text": "Army and government\n\n\n\n\nDepartment of Agriculture\nDepartment of Commerce\nDepartment of Defence\nDepartment of Energy\nDepartment of Homeland Security\nDepartment of Interior\nDepartment of Justice\nNASA\nNOAA\nState Universities\nState Law Enforcement\n\n\n\n\n\nMilitary Use\n\n\n\n\nMilitary use drove the technology historically and still drives much R&D funding; the civil agencies on this list operate large mapping and monitoring fleets (Interior and NOAA especially). This is also where the NDAA/Blue UAS procurement constraints from the platform slide bind hardest.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2863,8 +2890,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#civilian-application-fields",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#civilian-application-fields",
     "title": "Introduction to UAS",
-    "section": "Civilian Application Fields",
-    "text": "Civilian Application Fields",
+    "section": "Civilian application fields",
+    "text": "Civilian application fields\n\nCommercial drone industry segments\nBig-picture market view: inspection, agriculture, construction, and surveying/mapping are the dominant commercial segments by revenue. Mapping and analytics, this course’s slice, cuts across nearly all of them because most applications ultimately want georeferenced products.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2873,11 +2900,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-1",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#applications-agriculture-and-telecommunications",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#applications-agriculture-and-telecommunications",
     "title": "Introduction to UAS",
-    "section": "Application Examples (1)",
-    "text": "Application Examples (1)\n\n\n\nAgriculture:\n\nUAS equipped with fertilizer and pesticide dispersing equipment can be used to spray over large fields;\n\nTelecommunications:\n\nAs mobile relay platforms, e.g., in disaster zones for emergency telecommunications",
+    "section": "Applications: agriculture and telecommunications",
+    "text": "Applications: agriculture and telecommunications\n\n\n\nAgriculture:\n\nUAS equipped with fertilizer and pesticide dispersing equipment can be used to spray over large fields;\n\nTelecommunications:\n\nAs mobile relay platforms, e.g., in disaster zones for emergency telecommunications\n\n\n\n\n\n\nSpray drones are a distinct regulatory world: over 55 lbs, they need exemptions beyond Part 107, and agricultural spraying is one of the fastest-growing segments. The telecom-relay use case reappeared prominently in recent hurricane responses, including in western North Carolina.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2886,11 +2913,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-2",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#applications-media-and-traffic-monitoring",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#applications-media-and-traffic-monitoring",
     "title": "Introduction to UAS",
-    "section": "Application Examples (2)",
-    "text": "Application Examples (2)\n\n\n\nNews Broadcasting:\n\nIn providing aerial video feeds for news events;\n\nAir Traffic Control and Ground Traffic Control:\n\nTo monitor traffic and accidents over highways and streets, capture violation of traffic rules;",
+    "section": "Applications: media and traffic monitoring",
+    "text": "Applications: media and traffic monitoring\n\n\n\nNews Broadcasting:\n\nIn providing aerial video feeds for news events;\n\nAir Traffic Control and Ground Traffic Control:\n\nTo monitor traffic and accidents over highways and streets, capture violation of traffic rules;\n\n\n\n\n\n\nBoth examples raise the flight-over-people and privacy questions that Lecture 1B’s operations-over-people categories and best-practices slides address; newsgathering over crowds is exactly the case the category rules were written for. Traffic monitoring by DOTs is now routine, including NCDOT programs.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2899,11 +2926,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#application-examples-3",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#applications-mining-and-coastal-monitoring",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#applications-mining-and-coastal-monitoring",
     "title": "Introduction to UAS",
-    "section": "Application Examples (3)",
-    "text": "Application Examples (3)\n\n\n\nMineral Exploration:\n\nIn aerial survey, to find minerals in hard-to-reach regions;\nIn existing mines, to map extracted material volumes;\n\nCoastal Monitoring:\n\nMapping dynamic shorelines and post-storm assessment",
+    "section": "Applications: mining and coastal monitoring",
+    "text": "Applications: mining and coastal monitoring\n\n\n\nMineral Exploration:\n\nIn aerial survey, to find minerals in hard-to-reach regions;\nIn existing mines, to map extracted material volumes;\n\nCoastal Monitoring:\n\nMapping dynamic shorelines and post-storm assessment\n\n\n\n\n\n\nMine volumetrics is a flagship photogrammetry use case: repeat surveys plus DEM differencing gives stockpile and extraction volumes, exactly the change-detection workflow taught later in this course. Coastal monitoring is the local research strength; CGA has flown repeat shoreline surveys on the North Carolina coast.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2912,11 +2939,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-1",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#remote-sensing-environment-and-emergency-response",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#remote-sensing-environment-and-emergency-response",
     "title": "Introduction to UAS",
-    "section": "UAS for Remote Sensing (1)",
-    "text": "UAS for Remote Sensing (1)\n\n\n\nAgriculture and Environment:\n\nCrop monitoring, vegetation mapping, forest fire monitoring, animals detection;\n\nIntelligence, Surveillance, and Reconnaissance:\n\nDetection of lost persons in difficult-to-access situations, support fire brigades in real-time crisis management, rapid disaster management;",
+    "section": "Remote sensing: environment and emergency response",
+    "text": "Remote sensing: environment and emergency response\n\n\n\nAgriculture and Environment:\n\nCrop monitoring, vegetation mapping, forest fire monitoring, animal detection;\n\nIntelligence, Surveillance, and Reconnaissance:\n\nDetection of lost persons in difficult-to-access situations, support fire brigades in real-time crisis management, rapid disaster management;\n\n\n\n\n\n\nThe remote-sensing framing distinguishes these from the service applications: here the product is data and derived maps. Crop monitoring connects to the multispectral/NDVI slide; search and rescue to thermal. Disaster response is a strong thread for this course given recent North Carolina hurricane experience.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2925,11 +2952,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-2",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#remote-sensing-engineering-and-cultural-heritage",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#remote-sensing-engineering-and-cultural-heritage",
     "title": "Introduction to UAS",
-    "section": "UAS for Remote Sensing (2)",
-    "text": "UAS for Remote Sensing (2)\n\n\n\nAerial Monitoring in Engineering:\n\nInfrastructure inspections, distributed wind measurement, landslide monitoring;\n\nCultural Heritage:\n\nOrthophotos of archaeological sites, 3D models of man-made structures;",
+    "section": "Remote sensing: engineering and cultural heritage",
+    "text": "Remote sensing: engineering and cultural heritage\n\n\n\nAerial Monitoring in Engineering:\n\nInfrastructure inspections, distributed wind measurement, landslide monitoring;\n\nCultural Heritage:\n\nOrthophotos of archaeological sites, 3D models of man-made structures;\n\n\n\n\n\n\nInfrastructure inspection is the killer commercial app: bridges, towers, and solar farms replace rope teams and lift trucks with a camera in the air. Cultural heritage showcases Structure from Motion 3D reconstruction (Topic 2) on structures rather than terrain; both engineering monitoring cases (landslides especially) are repeat-survey change-detection problems.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2938,24 +2965,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-3",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#uas-for-remote-sensing-3",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#remote-sensing-surveying-and-cadastral-mapping",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#remote-sensing-surveying-and-cadastral-mapping",
     "title": "Introduction to UAS",
-    "section": "UAS for Remote Sensing (3)",
-    "text": "UAS for Remote Sensing (3)\n\n\n\nGeneral surveying, mapping, and photogrammetry, cadastral applications:\n\nCadastral surveying, alternative to traditional surveying, high-precision parcel boundary determination;",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1A"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#use-your-imagination",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#use-your-imagination",
-    "title": "Introduction to UAS",
-    "section": "Use your imagination!",
-    "text": "Use your imagination!",
+    "section": "Remote sensing: surveying and cadastral mapping",
+    "text": "Remote sensing: surveying and cadastral mapping\n\n\n\nGeneral surveying, mapping, and photogrammetry, cadastral applications:\n\nCadastral surveying, alternative to traditional surveying, high-precision parcel boundary determination;\n\n\n\n\n\n\nThis is the course’s home application. The flight-track figure previews Topic 3: systematic overlapping flight lines are what turn a camera drone into a survey instrument. Modern RTK/PPK positioning on survey platforms reaches centimeter-level accuracy, which is what makes cadastral-grade work possible.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2968,7 +2982,33 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#why-should-you-know-how-to-use-uas",
     "title": "Introduction to UAS",
     "section": "Why should you know how to use UAS?",
-    "text": "Why should you know how to use UAS?\nHow to obtain spatial data?",
+    "text": "Why should you know how to use UAS?\nHow to obtain spatial data?\n\nUAS between terrestrial survey and satellite platforms in the data-acquisition spectrum\nThe figure places UAS in the data-acquisition spectrum between terrestrial survey and crewed-aircraft/satellite platforms: UAS win on spatial resolution and revisit flexibility, lose on coverage area. The course’s premise is that this niche, centimeter-resolution mapping on demand, is now accessible to any trained geospatial analyst.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#the-uas-mapping-workflow",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#the-uas-mapping-workflow",
+    "title": "Introduction to UAS",
+    "section": "The UAS mapping workflow",
+    "text": "The UAS mapping workflow\nHow the rest of this course fits together:\n\n\n\n\n\nflowchart TB\n    R[\"Rules & regulations)\"] -.-&gt; A\n    A[\"Plan the flight\"] --&gt; B[\"Collect imagery\"]\n    B --&gt; C[\"SfM processing\"]\n    C --&gt; D[\"GIS analytics\"]\n    %% D --&gt; E[\"Object/Change Detection\"]\n\n\n\n\n\n\n\nThe orientation slide for the whole semester: every later topic is one box in this pipeline. Point out that the arrows run both ways in practice; analysis needs (resolution, accuracy) drive flight planning choices, which is why planning comes after the processing topics have taught what the data must support. The field trip is where the left half becomes real.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#data-products-you-will-make",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#data-products-you-will-make",
+    "title": "Introduction to UAS",
+    "section": "Data products you will make",
+    "text": "Data products you will make\n\n\n\n\n\nOrthophoto: a georeferenced, distortion-free image map\n\n\n\n\n\n\nSurface (DSM) vs terrain (DTM) elevation models\n\n\n\n\nPoint cloud: millions of 3D points from SfM photogrammetry or lidar\n3D mesh: a continuous textured surface for visualization and measurement\n\n\nDefine the four product types now so Topic 2 lands softly: the orthophoto is the map-accurate image (unlike a raw aerial photo), the DSM includes vegetation and buildings while the DTM is bare earth, and the difference between them is itself an analysis product (canopy height). Point cloud and mesh are the 3D intermediates the rasters are derived from. Every product here comes out of imagery students will collect themselves.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -2981,7 +3021,20 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#barriers",
     "title": "Introduction to UAS",
     "section": "Barriers",
-    "text": "Barriers\n\nConstantly changing legislation and regulations\nPolitical and societal acceptance\n\n… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?",
+    "text": "Barriers\n\nConstantly changing legislation and regulations\nPolitical and societal acceptance, privacy concerns\nSupply-chain and security restrictions on aircraft procurement\n\n… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?\n\nClose with the open discussion; typical student answers include cost, battery endurance, training burden, and airspace access, all worth affirming. The three listed barriers each get follow-up in this course: regulations in Lecture 1B, procurement policy from the platform-landscape slide, and societal acceptance in the best-practices discussion. Collect answers on the board; they make a nice callback in the final topic.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#wrap-up",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#wrap-up",
+    "title": "Introduction to UAS",
+    "section": "Wrap-up",
+    "text": "Wrap-up\n\nNext lecture: Rules and regulations for UAS operations, when and where you may legally fly\n\n\nAssignment 1A: UAS systems and applications, pick one system, research it, and present it to the class\n\n\nRecap the arc: terminology, system elements, classification, sensors, operations, applications. Point students at the assignment page for the full list of required presentation elements and the due date, and remind DE students of the recorded-narration option.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3114,7 +3167,7 @@
     "href": "course/topics/topic_1_uas_basics/faa_part_107_guide.html#recurrency-requirement",
     "title": "Step-by-Step Guide to Getting FAA Part 107 License",
     "section": "11. Recurrency Requirement",
-    "text": "11. Recurrency Requirement\n\nThe Part 107 Remote Pilot Certificate is valid for 24 months.\n\nTo continue flying commercially, you will need to pass a recurrency test every two years.",
+    "text": "11. Recurrency Requirement\n\nYour aeronautical knowledge recency is valid for 24 calendar months (the certificate itself does not expire).\nTo keep flying commercially, complete the FAA’s free online recurrent training every two years (effective April 2021; there is no longer a paid recurrent test).",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3138,7 +3191,7 @@
     "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#task",
     "title": "Assignment 1A",
     "section": "Task",
-    "text": "Task\nDuring the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.\nThe presentation should be 7 - 10 minutes long and include the following:\n\nName of the UAS\nPhoto and/or diagram of its components\nType\nPlace (country) and year of manufacture\nTechnical specifications (size, weight, endurance, wingspan, payload….)\nMain applications\nCase study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained\n\nTry to find something relevant to your research interest or just something unique that will be worth sharing.",
+    "text": "Task\nDuring the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.\nThe presentation should be 7 - 10 minutes long (about 5 - 8 slides) and include the following:\n\nName of the UAS\nPhoto and/or diagram of its components\nType\nPlace (country) and year of manufacture\nTechnical specifications (size, weight, endurance, wingspan, payload….)\nMain applications\nCase study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained\n\nTry to find something relevant to your research interest or just something unique that will be worth sharing.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3147,11 +3200,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#homework",
-    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#homework",
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#submission",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#submission",
     "title": "Assignment 1A",
-    "section": "Homework",
-    "text": "Homework\nUpload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule.",
+    "section": "Submission",
+    "text": "Submission\nUpload your presentation (PDF or PowerPoint) to Moodle, Topic 1.\n\nOn-campus students will present in class according to the schedule.\nDistance Education students: record a narrated screen capture of your presentation (7 - 10 minutes) and upload the recording, or a link to it, together with your slides to the same Moodle assignment.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Assignments",
+      "Assignment 1A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#grading",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1a.html#grading",
+    "title": "Assignment 1A",
+    "section": "Grading",
+    "text": "Grading\nYour presentation is evaluated on:\n\nCompleteness: all seven required elements listed above are covered\nQuality of the case study: concrete application with described outputs/results, sources cited\nDelivery: clear presentation within the 7 - 10 minute window (live or recorded)\nOn-time submission to Moodle\n\n\nDue 8/26/2026",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3411,7 +3477,7 @@
     "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#task",
     "title": "Assignment 1B",
     "section": "Task",
-    "text": "Task\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions",
+    "text": "Task\nSelect 5 questions from the FAA’s official Part 107 sample questions and prepare a brief report that, for each question, gives the correct answer and briefly explains why it is correct (and, where useful, why the other options are wrong).\nYou may pick any 5 questions from the document. Choose questions that require some reasoning (airspace, charts, weather, operating rules) rather than pure recall, and use the lecture materials and the FAA study resources linked from the Part 107 guide to support your explanations.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3420,11 +3486,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
-    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#homework",
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#submission",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#submission",
     "title": "Assignment 1B",
-    "section": "Homework",
-    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation.\n\nDue 9/9/2026",
+    "section": "Submission",
+    "text": "Submission\nUpload your report as a PDF (1 - 2 pages) to Moodle, Topic 1.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Assignments",
+      "Assignment 1B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#grading",
+    "href": "course/topics/topic_1_uas_basics/assignments/assignment_1b.html#grading",
+    "title": "Assignment 1B",
+    "section": "Grading",
+    "text": "Grading\nYour report is evaluated on:\n\nCorrectness: the identified answers are correct\nExplanation quality: each explanation shows why the answer is correct, referencing the relevant rule, chart, or concept\nOn-time submission to Moodle\n\n\nDue 9/9/2026",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3470,7 +3549,7 @@
     "href": "course/topics/topic_1_uas_basics/index.html#reference",
     "title": "Topic 1: UAS Basics",
     "section": "Reference",
-    "text": "Reference\n\nStep-by-Step Guide to Getting FAA Part 107 License",
+    "text": "Reference\n\nStep-by-Step Guide to Getting FAA Part 107 License\n\nObtaining the FAA Part 107 Remote Pilot Certificate is not required for this course; the guide is provided as background reference for students who want to pursue the certificate on their own.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics"
@@ -3481,7 +3560,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#objectives",
     "title": "UAS Rules and Regulations",
     "section": "Objectives",
-    "text": "Objectives\n\nUnderstand the role of the Federal Aviation Administration (FAA) in ensuring safety in National Airspace System (NAS)\nRecognize the 3 main types of UAS operations and distinguish between them\nName the requirements for legal operations of commercial purposes in the U.S. Both in regard to the pilot and to the UAS\nOutline safety guidelines for recreational use of UAS",
+    "text": "Objectives\n\nUnderstand the role of the Federal Aviation Administration (FAA) in ensuring safety in the National Airspace System (NAS)\nRecognize the main types of UAS operations and distinguish between them\nName the requirements for legal commercial UAS operations in the U.S., both for the pilot and for the UAS\nOutline the requirements for recreational flying under the 49 USC 44809 exception, including TRUST\n\n\nFrame the lecture: last week was what UAS are; this week is when and how you may legally fly them. Emphasize that everyone in the room who ever launches a drone, even a 249 g toy in a park, falls under one of these rule sets. The recreational exception is a statute (49 USC 44809, from the 2018 FAA Reauthorization Act), while commercial rules are regulation (14 CFR Part 107, effective August 29, 2016).",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3494,7 +3573,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#objectives-1",
     "title": "UAS Rules and Regulations",
     "section": "Objectives",
-    "text": "Objectives\n\nKnow operating rules for commercial use of UAS (Part 107)\nRecognize permanent and temporary “no-drone-zones” and knows where to find information about them\nUnderstand the role of Certificate of Authorization and the process of obtaining it\nRecognize when the educational use of UAS can be classified as recreational and when commercial",
+    "text": "Objectives\n\nKnow the operating rules for commercial use of UAS (Part 107)\nUnderstand how airspace authorization works today (LAANC) and recognize permanent and temporary “no-drone-zones”\nUnderstand the role of the Certificate of Authorization (COA) for public agencies\nRecognize when educational use of UAS falls under the recreational exception and when it requires Part 107\n\n\nPoint out that this material changes often: the rules taught in this course in 2017 are substantially different from today’s. Encourage students to always verify against faa.gov/uas rather than blog posts. Mapping work done for the university or a client is commercial in the FAA’s eyes, so Part 107 is the rule set most relevant to this course.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3507,7 +3586,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#federal-aviation-administration-faa",
     "title": "UAS Rules and Regulations",
     "section": "Federal Aviation Administration (FAA)",
-    "text": "Federal Aviation Administration (FAA)\n\n\n\nCreated in 1958 in response to a series of fatal accidents and midair collisions involving commercial aircraft\nMandated to develop plans and policies for the use of navigable airspace to ensure the safety of aircraft and the efficient use of airspace\nSince the creation of the FAA, American airspace has become one of the most regulated fields in the United States",
+    "text": "Federal Aviation Administration (FAA)\n\n\n\nCreated in 1958 in response to a series of fatal accidents and midair collisions involving commercial aircraft\nMandated to develop plans and policies for the use of navigable airspace to ensure the safety of aircraft and the efficient use of airspace\nSince the creation of the FAA, American airspace has become one of the most regulated fields in the United States\n\n\n\n\n\nThe 1956 Grand Canyon midair collision is the classic trigger event; the Federal Aviation Act of 1958 created the agency. The key takeaway for drone pilots: the FAA owns the airspace from the ground up. There is no unregulated altitude band below 400 ft; that figure is an operating limit, not a boundary of FAA authority.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3520,7 +3599,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#national-airspace-system-nas",
     "title": "UAS Rules and Regulations",
     "section": "National Airspace System (NAS)",
-    "text": "National Airspace System (NAS)\n\nAlready congested with piloted aircraft, and adding a swarm of UAVs requires thoughtful planning\nMain mandate: to ensure that UASs do not endanger current users of the NAS (including manned or other unmanned aircraft) nor compromise the safety of the people and property on the ground\nThe lack of detect-sense-and-avoid capability of the current UAS technology is a major concern for the FAA",
+    "text": "National Airspace System (NAS)\n\nAlready congested with piloted aircraft, and adding a swarm of UAS requires thoughtful planning\nMain mandate: to ensure that UAS do not endanger current users of the NAS nor compromise the safety of people and property on the ground \n\n\nDetect-and-avoid is the drone equivalent of “see and avoid” that manned pilots perform visually. Because a remote pilot cannot scan the sky from the cockpit, the default mitigations are visual line of sight and yielding right of way. This is the thread that connects most Part 107 operating rules, and the reason beyond-visual-line-of-sight flight currently requires a waiver. Foreshadow the Part 108 slide at the end.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3533,7 +3612,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#types-of-uas-operations",
     "title": "UAS Rules and Regulations",
     "section": "Types of UAS operations",
-    "text": "Types of UAS operations\n\n\n\nFAA distinguishes 3 main types of operations\nDifferent rules apply for legal operations of UAS depending on the type of UAS operations\nAdditional type - educational use can be considered as recreational or commercial",
+    "text": "Types of UAS operations\n\n\n\nCommercial / civil: any flight in furtherance of a business or non-recreational purpose, under 14 CFR Part 107\nRecreational: strictly for personal enjoyment, under the 49 USC 44809 exception\nPublic aircraft operations: government entities, under Part 107 or a Certificate of Authorization (COA)\nEducational use can fall under the recreational exception or Part 107, depending on the activity\n\n\n\n\n\nThe 2018 FAA Reauthorization Act repealed the old “model aircraft” rule (Section 336) and replaced it with the 44809 recreational exception; the FAA no longer uses “model aircraft” as an operational category. Stress that intent, not the aircraft, determines the category: the same Mini 4 Pro is recreational in a park on Saturday and commercial when photographing a field site for a project.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3546,7 +3625,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use-of-uas",
     "title": "UAS Rules and Regulations",
     "section": "Recreational use of UAS",
-    "text": "Recreational use of UAS\n\n\n\nThe recreational use of sUAS is the operation of an unmanned aircraft for personal interests and enjoyment\nUsing a sUAS to take photographs for your own personal use would be considered recreational\nUsing the same device to take photographs or videos for compensation or sale to another individual would be considered a commercial operation",
+    "text": "Recreational use of UAS\n\n\n\nOperation of an unmanned aircraft strictly for personal interests and enjoyment\nTaking photographs for your own personal use is recreational\nTaking the same photographs for compensation, for sale, or in furtherance of any business (including research or coursework deliverables for pay) is a commercial operation under Part 107\n\n\n\n\n\nUseful test question for the class: is posting drone footage to a monetized YouTube channel recreational? (No; compensation makes it commercial.) Is flying to practice piloting skills for a future Part 107 job recreational? (FAA guidance says yes, if the flight itself is purely for enjoyment/proficiency.) The line is the purpose of the individual flight.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3555,11 +3634,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---the-44809-exception",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---the-44809-exception",
     "title": "UAS Rules and Regulations",
-    "section": "Recreational use - safety guidelines",
-    "text": "Recreational use - safety guidelines\n\nFollow community-based safety guidelines, as developed by organizations such as the Academy of Model Aeronautics (AMA)\n\n\n\n\nFly no higher than 400 feet and remain below any surrounding obstacles when possible\nKeep your sUAS in eyesight at all times, and use an observer to assist if needed",
+    "section": "Recreational use - the 44809 exception",
+    "text": "Recreational use - the 44809 exception\nTo fly recreationally without a Part 107 certificate you must follow all conditions of 49 USC 44809:\n\n\n\nFly strictly for recreational purposes\nPass TRUST (The Recreational UAS Safety Test) and carry proof of completion\nRegister the aircraft if it weighs 250 g or more (FAADroneZone) and comply with Remote ID\nFollow the safety guidelines of an FAA-recognized Community Based Organization (CBO)\n\n\n\n\n\nTRUST (required since 2021) is free, online, cannot be failed (wrong answers are corrected and re-asked), and takes about 30 minutes; proof must be shown to the FAA or law enforcement on request. Recognized CBOs include the Academy of Model Aeronautics and FPV Freedom Coalition; their published guidelines fill in operational detail the statute leaves open. Registration is $5 for 3 years and the number goes on the aircraft.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3568,11 +3647,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-1",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---the-44809-exception-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---the-44809-exception-1",
     "title": "UAS Rules and Regulations",
-    "section": "Recreational use - safety guidelines",
-    "text": "Recreational use - safety guidelines\n\nRemain well clear of and do not interfere with manned aircraft operations, and you must see and avoid other aircraft and obstacles at all times\n\n\n\n\nDo not intentionally fly over unprotected persons or moving vehicles, and remain at least 25 feet away from individuals and vulnerable property.\n\nNo longer need a waiver (as long as specific requirements are met). ::: {.column width=“40%”}",
+    "section": "Recreational use - the 44809 exception",
+    "text": "Recreational use - the 44809 exception\n\n\n\nKeep the aircraft within visual line of sight (or use a co-located visual observer)\nGive way to and never interfere with manned aircraft\nFly at or below 400 ft in uncontrolled (Class G) airspace\nIn controlled airspace (Class B, C, D, E surface areas): fly only with a LAANC authorization or FAA authorization, at or below the UAS Facility Map altitude\n\n\n\n\n\nThis slide is where the old rules differ most from current ones: the pre-2019 “notify airports within 5 miles” requirement is gone. Today recreational and commercial pilots use the same LAANC system for controlled-airspace authorization, covered in detail later in this lecture. UAS Facility Maps grid the airspace around airports into maximum authorized altitudes (often 0 ft near the runway ends).",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3581,11 +3660,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-2",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-2",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-practices",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-practices",
     "title": "UAS Rules and Regulations",
-    "section": "Recreational use - safety guidelines",
-    "text": "Recreational use - safety guidelines\n\nRemain well clear of and do not interfere with manned aircraft operations, and you must see and avoid other aircraft and obstacles at all times\n\n\n\n\nEnsure the operating environment is safe and that the operator is competent and proficient in the operation of the sUAS.\nDo not fly near or over sensitive infrastructure or property such as power stations, water treatment facilities, correctional facilities, heavily traveled roadways, government facilities, etc.\nDo not fly in adverse weather conditions such as in high winds or reduced visibility.",
+    "section": "Recreational use - safety practices",
+    "text": "Recreational use - safety practices\n\n\n\nEnsure the operating environment is safe and the operator is competent and proficient\nDo not fly over people or moving vehicles, and keep a safe distance from individuals and vulnerable property\nDo not fly near or over sensitive infrastructure (power stations, water treatment facilities, correctional facilities, heavily traveled roadways, government facilities)\nDo not fly in adverse weather such as high winds or reduced visibility\n\n\n\n\n\nThese practices come from the CBO safety guidelines that the statute requires recreational flyers to follow. They mirror many Part 107 rules, which makes the later transition to certificated flying easier. Wind is the practical one for mapping students: most small quads struggle above roughly 20 mph sustained wind, well before the flight becomes illegal it becomes useless for data quality.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3594,11 +3673,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-3",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-guidelines-3",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-practices-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#recreational-use---safety-practices-1",
     "title": "UAS Rules and Regulations",
-    "section": "Recreational use - safety guidelines",
-    "text": "Recreational use - safety guidelines\n\n\n\nCheck and follow all local laws and ordinances before flying over private property.\nDo not conduct surveillance or photograph persons in areas where there is an expectation of privacy without the individual’s permission.\nDo not fly under the influence of alcohol or drugs",
+    "section": "Recreational use - safety practices",
+    "text": "Recreational use - safety practices\n\n\n\nCheck and follow all local laws and ordinances before flying over private property\nDo not conduct surveillance or photograph persons where there is an expectation of privacy without permission\nDo not fly under the influence of alcohol or drugs\n\n\n\n\n\nPrivacy is mostly governed by state and local law, not the FAA. North Carolina’s drone statutes (G.S. 15A-300.1) prohibit surveillance of persons or private property without consent, with civil damages available. Good discussion prompt: who enforces what? The FAA handles airspace violations; local police handle privacy, trespass, and harassment complaints.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3611,7 +3690,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use-of-uas",
     "title": "UAS Rules and Regulations",
     "section": "Commercial use of UAS",
-    "text": "Commercial use of UAS\nAny commercial use in connection with a business, including:\n\n\n\nSelling photos or videos taken from a UAS\nUsing UAS to provide contract services, such as industrial equipment or factory inspection\nUsing UAS to provide professional services, such as security or telecommunications\nUsing UAS to monitor the progress of work your company is performing",
+    "text": "Commercial use of UAS\nAny use in connection with a business or work, including:\n\n\n\nSelling photos or videos taken from a UAS\nProviding contract services, such as industrial equipment or factory inspection\nProviding professional services, such as security or telecommunications\nMonitoring the progress of work your company is performing\nUniversity research and mapping projects like the ones in this course\n\n\n \n\n\nThe FAA interprets “commercial” broadly: any flight in furtherance of a business or performed as part of one’s job, whether or not money changes hands for the flight itself. Faculty research flights and most university data-collection missions are Part 107 operations. This is why the flight operations later in this course are conducted under Part 107 by certificated pilots.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3624,7 +3703,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---remote-pilot-requirements",
     "title": "UAS Rules and Regulations",
     "section": "Commercial use - Remote Pilot requirements",
-    "text": "Commercial use - Remote Pilot requirements\n\nMust be at least 16 years of age\nBe able to read, speak, write, and understand English\nBe in a physical and mental condition to safely fly a drone\nPass the initial aeronautical knowledge exam: “Unmanned Aircraft General – Small (UAG)”\n\n\n\n\nMust pass the applicable Transportation Security Administration (TSA) vetting\nHow to obtain a Remote Pilot Airman Certificate (video)",
+    "text": "Commercial use - Remote Pilot requirements\n\nMust be at least 16 years of age\nBe able to read, speak, write, and understand English\nBe in a physical and mental condition to safely fly a drone\nPass the initial aeronautical knowledge exam: “Unmanned Aircraft General - Small (UAG)”\n\n\n\n\nMust pass the applicable Transportation Security Administration (TSA) vetting\nSee the course Step-by-Step Guide to Getting an FAA Part 107 License\n\n\n\n\n\nThe knowledge test is 60 multiple-choice questions, 2 hours, 70% to pass, about $175 at a PSI testing center. Point students to the step-by-step guide on the course site; also note the certificate is not required for this course, but it is one of the most employable single credentials a geospatial student can add. Assignment 1B has them work through sample test questions.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3637,7 +3716,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#remote-pilot-certificate",
     "title": "UAS Rules and Regulations",
     "section": "Remote Pilot Certificate",
-    "text": "Remote Pilot Certificate\n\n\nRequirements\n\nMust be easily accessible by the remote pilot during all UAS operations\nCertificate holders must complete an online recurrent training every 24 calendar months to maintain aeronautical knowledge recency (Effective - April 2021)\nChecklist for Obtaining a Remote Pilot Certificate\nFAA Safety Team Part 107 Small UAS Training Course (login required)",
+    "text": "Remote Pilot Certificate\n\n\nRequirements\n\nMust be easily accessible by the remote pilot during all UAS operations\nCertificate holders must complete free online recurrent training every 24 calendar months to maintain aeronautical knowledge recency (effective April 2021)\nFAA Safety Team Part 107 Small UAS Training Course (login required)\n\n\n\n\n\nBefore April 2021 keeping current meant paying to retake a proctored test every 24 months; now it is free online recurrent training (course ALC-677) that also covers the 2021 night-operations and operations-over-people rules. The certificate itself never expires; only recency lapses, and a lapsed pilot simply completes the training before flying again.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3650,7 +3729,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---uas-requirements",
     "title": "UAS Rules and Regulations",
     "section": "Commercial use - UAS requirements",
-    "text": "Commercial use - UAS requirements\n\n\n\nMust weigh less than 55 lbs.\nMust undergo pre-flight check by remote pilot in command (or the person supervising the operation)\n\n\n\n\n\nThe U.S. Court of Appeals for the District of Columbia Circuit invalidated the registration requirement with the decision from May 19th, 2017\nThe registration requirement is back on since 12/13/2017",
+    "text": "Commercial use - UAS requirements\n\n\n\nMust weigh less than 55 lbs\nMust be registered in FAADroneZone ($5, valid 3 years)\nMust comply with Remote ID\nMust undergo a pre-flight check by the remote pilot in command\n\n\n\n\n\nUnder Part 107 every aircraft is registered individually regardless of weight (the 250 g threshold applies only to recreational registration). At 55 lbs and above you leave Part 107 entirely and need an exemption or airworthiness certification. The pre-flight check requirement (107.49) is where checklists, battery inspection, and control-link verification live; this becomes routine in the flight-planning topic.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3663,7 +3742,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements",
     "title": "UAS Rules and Regulations",
     "section": "Commercial use - location requirements",
-    "text": "Commercial use - location requirements\n\n\nClass B/C/D: May operate with permission from local Air Traffic Control\nClass E/G: May operate while following all other regulations",
+    "text": "Commercial use - location requirements\n\n\nClass B/C/D and Class E surface areas: operations require an airspace authorization, normally obtained through LAANC\nClass G (uncontrolled): may operate while following all other Part 107 rules, no authorization needed\n\n\nWalk through the airspace classes on the figure from the top down: A (18,000 ft and above, irrelevant to sUAS), B around major hubs like Charlotte, C around mid-size towered airports like RDU, D around smaller towered airports, E controlled airspace that can extend to the surface, G uncontrolled. The practical question for every mission: is my site under controlled airspace that reaches the surface? If yes, get a LAANC authorization first.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3672,11 +3751,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---location-requirements-1",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#laanc---airspace-authorization",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#laanc---airspace-authorization",
     "title": "UAS Rules and Regulations",
-    "section": "Commercial use - location requirements",
-    "text": "Commercial use - location requirements\n\n\nLine Pattern\n\nSolid line – higher class (More Restrictive)\nDashed line – lower class (Less Restrictive)\n\nLine Color\n\nBlue line – higher class (More Restrictive)\nMagenta line – lower class (Less Restrictive)\n\nFAA online course on airspace classification and map\n\n\nThis translates to:\n\nSolid blue – class B, Solid magenta – class C\nDashed blue – class D, Dashed magenta – class E",
+    "section": "LAANC - airspace authorization",
+    "text": "LAANC - airspace authorization\nLow Altitude Authorization and Notification Capability\n\n\n\nAutomated, near-real-time FAA authorization for flights in controlled airspace, up to the altitude in the UAS Facility Maps\nAvailable to both Part 107 and recreational flyers\nRequest through an FAA-approved service supplier app (e.g. Aloft, AutoPylot, Airspace Link)\nAbove facility-map altitudes or where LAANC is unavailable: apply via FAADroneZone\n\n\n\n\n\nLAANC replaced the old call-the-tower and 5-mile-notification era: since 2018-2019 authorization is an app workflow that usually returns approval in seconds. Demo one supplier app live if possible, showing the UAS Facility Map grid around RDU: each grid cell shows the maximum altitude the FAA will auto-authorize, and zero-grid cells require a manual FAADroneZone application with longer lead time. This is the single most-used regulatory tool students will touch in practice.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#reading-aeronautical-charts",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#reading-aeronautical-charts",
+    "title": "UAS Rules and Regulations",
+    "section": "Reading aeronautical charts",
+    "text": "Reading aeronautical charts\n\n\nLine Pattern\n\nSolid line - higher class (more restrictive)\nDashed line - lower class (less restrictive)\n\nLine Color\n\nBlue line - higher class (more restrictive)\nMagenta line - lower class (less restrictive)\n\nFAA course on airspace classification\n\nThis translates to:\n\nSolid blue - class B, Solid magenta - class C\nDashed blue - class D, Dashed magenta - class E\n\nInteractive charts: VFRMap, SkyVector\n\n\nChart reading is heavily tested on the Part 107 exam, so this slide maps directly to Assignment 1B question types. Suggest pulling up SkyVector on the Raleigh area and having students identify the RDU Class C shelves and the dashed magenta Class E surface areas nearby. Remind them that the sectional shows airspace; the UAS Facility Map shows what LAANC will authorize, and both are needed for mission planning.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3688,21 +3780,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules",
     "title": "UAS Rules and Regulations",
-    "section": "Commercial Use - Operating Rules",
-    "text": "Commercial Use - Operating Rules\n\nMust fly under 400 feet above ground level (AGL) or, if flying at an altitude higher than 400 feet AGL, stay within 400 feet of a structure\n\n\n\n\nMust not fly from a moving vehicle unless you are in a sparsely populated area\nMust fly at or below 100 mph",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---remote-id",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---remote-id",
-    "title": "UAS Rules and Regulations",
-    "section": "Commercial Use - Remote ID",
-    "text": "Commercial Use - Remote ID\n\nUAS must broadcast identification and location to authorities and nearby operators. (Effective March 2021)\nReal-time tracking and identification of UAS in flight.\nYou can operate without a Remote ID with FAA recognized Identification Area.",
+    "section": "Commercial use - operating rules",
+    "text": "Commercial use - operating rules\n\nMust fly at or below 400 feet above ground level (AGL), or within 400 feet of a structure if flying higher\n\n\n\n\nMust not fly from a moving vehicle unless in a sparsely populated area\nMust fly at or below 100 mph (87 knots)\nMust yield right of way to manned aircraft\n\n\n\n\n\nThe 400-ft-of-a-structure allowance (107.51) exists for tower and building inspection: you may fly up to 400 ft above a structure’s top while within a 400 ft radius of it. For mapping work in this course, flight altitude is chosen for ground sampling distance and is normally 200-400 ft AGL, so the ceiling rarely binds, but it matters when a site sits under a low LAANC grid altitude.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3714,8 +3793,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-1",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-1",
     "title": "UAS Rules and Regulations",
-    "section": "Commercial Use - Operating Rules",
-    "text": "Commercial Use - Operating Rules\n\n\n\nNighttime operations and flights over people allowed under certain conditions without a waiver (Effective - March 2021)\n\nRequires additional training\nRequires anti-collision lighting for nighttime operations\n\n\n\n\n\n\nMust yield right of way to manned aircraft",
+    "section": "Commercial use - operating rules",
+    "text": "Commercial use - operating rules\n\n\n\nMust keep the UAS within visual line of sight (VLOS) of the remote pilot in command or a visual observer\nNight operations allowed without a waiver (since April 2021) if the pilot has completed current training and the aircraft has anti-collision lighting visible for 3 statute miles\n\n\n\n\n\nVLOS means unaided eyes (glasses fine, binoculars or FPV goggles alone do not count); an FPV pilot needs a visual observer next to them. The 2021 rule ended the era of night waivers: before it, daylight-only operation (old 107.29) was the most-waived rule in Part 107. Thermal mapping missions, which fly at night or dawn for temperature contrast, are the course-relevant beneficiary.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3724,11 +3803,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---flight-over-people",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---flight-over-people",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#remote-id",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#remote-id",
     "title": "UAS Rules and Regulations",
-    "section": "Commercial Use - Flight Over People",
-    "text": "Commercial Use - Flight Over People\n4 Classes of UAS\nRequired for all Classes\n\nAnit-collision ights\nTraining",
+    "section": "Remote ID",
+    "text": "Remote ID\n\nUAS must broadcast identification, location, and control-station location during flight (rule effective 2021, enforced since March 16, 2024)\nThree ways to comply:\n\nStandard Remote ID aircraft (built-in broadcast)\nAircraft with an attached broadcast module (VLOS only)\nFly without Remote ID only inside an FAA-Recognized Identification Area (FRIA)\n\nApplies to all aircraft that must be registered (recreational and Part 107)\n\n\nThink of Remote ID as a digital license plate broadcast over WiFi/Bluetooth that anyone with a phone app can receive; the FAA and law enforcement can correlate it with registration data. FRIAs are fixed sites sponsored by CBOs and educational institutions, mostly model-aircraft fields. Practical note for the course: all recent DJI aircraft have standard Remote ID built in; check compliance for anything older or self-built.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3737,11 +3816,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-1",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#operations-over-people---categories-1-4",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#operations-over-people---categories-1-4",
     "title": "UAS Rules and Regulations",
-    "section": "Class 1",
-    "text": "Class 1\nWeight Limit: Less than 0.55 pounds (250 grams).\nRequirements:\n\nNo exposed rotating parts that can cause lacerations.\n\nOperations:\n\nCan fly over people without additional restrictions.\n\nExample UAS - DJI Neo / DJI Mavic Mini / Mini 2 / Mini 3 Pro",
+    "section": "Operations Over People - Categories 1-4",
+    "text": "Operations Over People - Categories 1-4\nSince April 2021, routine flight over people is allowed under Part 107 if the aircraft qualifies for one of four categories (14 CFR Part 107 Subpart D).\n\nNot to be confused with airspace classes B/C/D/E/G from earlier in this lecture\nCategory is a property of the aircraft (weight, injury severity, certification), not of the pilot\nSustained flight over open-air assemblies additionally requires Remote ID (Categories 1-3)\n\n\nSet up the next four slides. Before 2021 any flight over a person outside your crew required a waiver; the Operations Over People rule made it routine, scaled to how much harm the aircraft could do. Emphasize the terminology trap: FAA “Category 1-4” (over-people) vs airspace “Class B-G”; the exam uses both. Also distinguish transiting over people (allowed per category) from sustained hovering over crowds.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3750,11 +3829,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-2",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-2",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#category-1",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#category-1",
     "title": "UAS Rules and Regulations",
-    "section": "Class 2",
-    "text": "Class 2\nWeight Limit: No specific weight limit.\n\nMust not casue injury greater than 11 ft-lbs of kinetic energy.\n\nRequirements:\n\nNo exposed rotating parts that can cause lacerations.\nFollow Remote ID rule\n\nOperations:\n\nCan fly in open-air assemblies\nAllows limited operations over people.\n\nExample UAS\n\nParrot Anafi",
+    "section": "Category 1",
+    "text": "Category 1\nEligibility: aircraft weighs 0.55 lb (250 g) or less, including everything attached.\nRequirements:\n\nNo exposed rotating parts that could lacerate human skin\nRemote ID required for sustained flight over open-air assemblies\n\nOperations:\n\nMay fly over people without a waiver or a Declaration of Compliance\n\nExample UAS: sub-250 g aircraft such as the DJI Mini series or DJI Neo (with propeller guards where needed to meet the laceration requirement)\n\nCategory 1 is self-declared: no FAA paperwork, the operator just has to be right about the weight and the laceration criterion. This is a major reason the sub-250 g market segment exists; manufacturers engineer to sit under the threshold. Weight includes payload, so adding a prop-guard set or beacon can push an aircraft out of Category 1.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3763,11 +3842,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-3",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-3",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#category-2-and-category-3",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#category-2-and-category-3",
     "title": "UAS Rules and Regulations",
-    "section": "Class 3",
-    "text": "Class 3\nWeight Limit: No specific limit, but similar to Category 2.\n\nMust not cause injury greater than the severity of injury from 25 ft-lbs of kinetic energy.\n\nRequirements:\n\nNo exposed rotating parts that can cause lacerations.\nFollow Remote ID rule\n\nOperations:\n\nCan fly over “any-person” under certain conditions.\n\nOperating in a controlled environment where everyone is notified the UAS is operating above.\nPersons are part of the UAS team\nPersons are protect by a covered area\n\n\nExample UAS- Can fly in open-air assemblies\n\nDJI Phantom 4 Pro V2.0",
+    "section": "Category 2 and Category 3",
+    "text": "Category 2 and Category 3\nEligibility: no weight limit; injury-severity based, demonstrated through an FAA-accepted Means of Compliance and a Declaration of Compliance by the manufacturer.\n\nCategory 2: impact must not exceed the severity of 11 ft-lbs of kinetic energy; no exposed lacerating parts; allows routine flight over people\nCategory 3: impact must not exceed 25 ft-lbs; no flight over open-air assemblies; over people only within a closed or restricted-access site with notice, or when people are under cover or in stationary vehicles\n\n\nCategories 2 and 3 are manufacturer-certified, not operator-declared, and as of the mid-2020s very few aircraft hold accepted Declarations of Compliance, so these categories are rare in practice; most operators either stay in Category 1 or avoid flying over people entirely. The kinetic-energy thresholds translate to roughly a 2 lb and 4 lb aircraft at terminal velocity, though the tests are on impact severity, not weight.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3776,11 +3855,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-4",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#class-4",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#category-4",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#category-4",
     "title": "UAS Rules and Regulations",
-    "section": "Class 4",
-    "text": "Class 4\nWeight Limit: No specific weight limit.\nRequirements:\n\nMost restricted\nUAS must have airworthiness certificate issued (same as a crewed aircraft)\nFollow Remote ID rule\n\nOperations:\n\nCan operate over people, including sustained flight over open-air assemblies, subject to additional safety requirements.\n\nExample UAS:\n\nDJI Matrice 300 RTK",
+    "section": "Category 4",
+    "text": "Category 4\nEligibility: aircraft holds an airworthiness certificate issued under Part 21, like a crewed aircraft.\nRequirements:\n\nOperated within its approved flight manual limitations\nMaintenance, inspection, and record-keeping program required\n\nOperations:\n\nMay operate over people, including sustained flight over open-air assemblies, subject to the operating limitations in the certificate\n\n\nCategory 4 is the “certify it like an airplane” path, aimed at larger aircraft and future package-delivery style operations; it is out of reach for typical mapping platforms and no common survey drone uses it. For this course the takeaway hierarchy is: Category 1 if under 250 g, otherwise plan missions so you are not over people at all, which is standard practice for site mapping.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3789,24 +3868,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-2",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#commercial-use---operating-rules-2",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivers-from-part-107-operating-rules",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivers-from-part-107-operating-rules",
     "title": "UAS Rules and Regulations",
-    "section": "Commercial Use - Operating Rules",
-    "text": "Commercial Use - Operating Rules\n\n\n\nMust keep the UAS in sight (i.e. visual line of sight), either by the remote pilot in command or a visual observer",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivers-from-operating-rules-for-commercial-use-of-uas",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivers-from-operating-rules-for-commercial-use-of-uas",
-    "title": "UAS Rules and Regulations",
-    "section": "Waivers from operating rules for commercial use of UAS",
-    "text": "Waivers from operating rules for commercial use of UAS\n\nIf you want to operate UAS for commercial purposes outside of these rules, you may apply for a certificate of waiver\nThe FAA will grant waivers if operation can be performed safely but may otherwise not be allowed under Part 107",
+    "section": "Waivers from Part 107 operating rules",
+    "text": "Waivers from Part 107 operating rules\n\nTo operate outside Part 107 rules, apply for a Certificate of Waiver through FAADroneZone\nThe FAA grants waivers when the proposed operation can be performed safely with the applicant’s proposed mitigations\n\n\nThe waiver process asks “how will you mitigate the risk this rule addresses?” and successful applications read like safety cases, not requests. Approval times run weeks to months, so waivers are planned mission infrastructure, not a quick fix. Since the 2021 rules absorbed night operations and some over-people flight, the dominant remaining waiver is beyond visual line of sight.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3818,21 +3884,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107",
     "title": "UAS Rules and Regulations",
-    "section": "Waivable sections of part 107",
-    "text": "Waivable sections of part 107\n\n\n\nOperation from a moving vehicle or aircraft (§ 107.25)*\nDaylight operation (§ 107.29)\nVisual line of sight aircraft operation (§ 107.31)*\nVisual observer (§ 107.33)\nOperation in certain airspace (§ 107.41)\n\n\n\nYielding the right of way (§ 107.37(a))\nOperation of multiple small unmanned aircraft systems (§ 107.35)\nOperation over people (§ 107.39)\nOperating limitations for small unmanned aircraft (§ 107.51)\n\n\n\nNo waiver of this provision will be issued to allow the carriage of property of another by aircraft for compensation or hire",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#waivable-sections-of-part-107-1",
-    "title": "UAS Rules and Regulations",
-    "section": "Waivable sections of part 107",
-    "text": "Waivable sections of part 107\n\nas of January 2017",
+    "section": "Waivable sections of Part 107",
+    "text": "Waivable sections of Part 107\n\n\n\nOperation from a moving vehicle or aircraft (§ 107.25)\nVisual line of sight aircraft operation (§ 107.31) - the most requested waiver today (BVLOS)\nVisual observer (§ 107.33)\nOperation of multiple small unmanned aircraft systems (§ 107.35)\n\n\n\nYielding the right of way (§ 107.37(a))\nOperation over people (§ 107.39, beyond the category rules)\nOperation in certain airspace (§ 107.41)\nOperating limitations for small unmanned aircraft (§ 107.51)\n\n\n\nNo waiver will be issued to allow the carriage of property of another by aircraft for compensation or hire\n\n\nBVLOS (107.31) waivers dominate because they unlock the economics of linear inspection, agriculture, and delivery: one pilot covering miles instead of a visual bubble. Daylight-only operation (old 107.29) used to top this list before the 2021 night rule removed the need. The carriage-for-hire exclusion is why drone delivery companies operate under separate exemptions and air-carrier rules, not Part 107 waivers.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3844,8 +3897,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#accident-reporting-107.9",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#accident-reporting-107.9",
     "title": "UAS Rules and Regulations",
-    "section": "Accident Reporting (§ 107.9)",
-    "text": "Accident Reporting (§ 107.9)\nNo later than 10 days after an operation, a remote pilot in command must report to the Federal Aviation Administration in a manner acceptable to the Administrator, any operation of the small unmanned aircraft involving at least:\n\n\n\nSerious injury to any person or any loss of consciousness; or\nDamage to any property, other than the small unmanned aircraft, unless the cost of repair (including materials and labor) or fair market value of the property does not exceed $500",
+    "section": "Accident reporting (§ 107.9)",
+    "text": "Accident reporting (§ 107.9)\nNo later than 10 days after an operation, the remote pilot in command must report to the FAA any operation of the small unmanned aircraft involving at least:\n\n\n\nSerious injury to any person or any loss of consciousness; or\nDamage to any property, other than the small unmanned aircraft, unless the cost of repair (including materials and labor) or fair market value of the property does not exceed $500\n\n\n\n\n\nReports go through FAADroneZone. Note what does not trigger a report: destroying your own aircraft, or minor property damage under $500. “Serious injury” follows the AIS Level 3 standard, roughly an injury requiring hospitalization. Universities typically layer their own incident reporting on top, which connects to the NC State UAS procedures linked from the part page.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3858,7 +3911,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#where-not-to-fly",
     "title": "UAS Rules and Regulations",
     "section": "Where NOT to fly",
-    "text": "Where NOT to fly",
+    "text": "Where NOT to fly\n\n\nTransition into airspace restrictions. The no-drone-zone signage is public outreach; the legal substance is in the TFRs, special-use airspace, and security restrictions on the following slides. Best pre-flight habit: check a LAANC/B4UFLY-service app the day of the flight, since restrictions appear and move (wildfires, VIP movement, sporting events).",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3871,7 +3924,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airspace-restrictions",
     "title": "UAS Rules and Regulations",
     "section": "Airspace restrictions",
-    "text": "Airspace restrictions\n\n\n\nSecurity Sensitive Airspace Restrictions\nTemporary Flight Restrictions (TFRs)\nRestricted or Special Use Airspace\nStadiums and sporting events\nWildfires\nAirports",
+    "text": "Airspace restrictions\n\n\n\nSecurity Sensitive Airspace Restrictions\nTemporary Flight Restrictions (TFRs)\nRestricted or Special Use Airspace\nStadiums and sporting events\nWildfires\nControlled airspace around airports (LAANC)\n\n\n\n\n\nPreview the taxonomy: some restrictions are permanent and mapped (special use airspace, security areas), some are scheduled (stadium TFRs), some pop up with hours’ notice (wildfire TFRs). All of them override any LAANC authorization you may hold. The next slides take them one at a time.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3884,7 +3937,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#security-sensitive-airspace-restrictions",
     "title": "UAS Rules and Regulations",
     "section": "Security Sensitive Airspace Restrictions",
-    "text": "Security Sensitive Airspace Restrictions\n\n\n\nProhibited all UAS flights within the airspace\nRestrictions extend from the ground up to 400 feet AGL\nApply to all types and purposes of UAS flight operations\nRemain in effect 24 hours a day, 7 days a week\n\n\n\n14 CFR § 99.7",
+    "text": "Security Sensitive Airspace Restrictions\n\n\n\nAll UAS flights prohibited within the airspace\nRestrictions extend from the ground up to 400 feet AGL\nApply to all types and purposes of UAS flight operations\nRemain in effect 24 hours a day, 7 days a week\n\n\n\n14 CFR § 99.7\n\n\nThese cover sites like military bases, national landmarks, and critical infrastructure designated at federal request. They are depicted on the FAA’s UAS-specific maps rather than sectionals, another reason to check a drone-specific app rather than only a pilot’s chart. Violations here draw federal attention quickly; some sites have counter-UAS authority.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3897,7 +3950,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#temporary-flight-restrictions",
     "title": "UAS Rules and Regulations",
     "section": "Temporary Flight Restrictions",
-    "text": "Temporary Flight Restrictions\n\n\n\nTFR: Area of airspace where air travel is limited because of a temporary hazardous condition, such as a wildfire or chemical spill; a security-related event\nTFR contains the details about the restriction (size, altitude, time period that it is in effect, and what types of operations are restricted and permitted)\n\n\n\n\nTFR map\nTFR list",
+    "text": "Temporary Flight Restrictions\n\n\n\nTFR: airspace where flight is limited because of a temporary hazardous condition (wildfire, chemical spill) or a security-related event (VIP movement, large public events)\nThe TFR text gives the details: size, altitude, effective times, and which operations are restricted or permitted\n\n\n\n\nTFR map\nTFR list\n\n\n\nPresidential TFRs are the famous ones: a 30-nautical-mile ring that shuts down drone activity wherever the President travels, often on short notice. For fieldwork the operational lesson is to check TFRs the same day as the flight; a site that was clear during planning can be closed by a wildfire TFR the morning of the mission.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3910,7 +3963,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#restricted-or-special-use-airspace",
     "title": "UAS Rules and Regulations",
     "section": "Restricted or Special Use Airspace",
-    "text": "Restricted or Special Use Airspace\n\n\nTypes of Special Use Airspace include: - Prohibited areas - Restricted areas - Warning areas - Military operation areas (MOAs) - Alert areas - Controlled firing areas (CFAs)\n\n\nThe airspace surrounding Washington DC is the most restricted in the country More info",
+    "text": "Restricted or Special Use Airspace\n\n\nTypes of Special Use Airspace include:\n\nProhibited areas\nRestricted areas\nWarning areas\nMilitary operation areas (MOAs)\nAlert areas\nControlled firing areas (CFAs)\n\n\n\nThe airspace surrounding Washington DC is the most restricted in the country More info\n\n\nProhibited areas (P-56 over the White House and National Mall) ban flight outright; restricted areas require permission from the using agency; MOAs and warning areas are legal but hazardous. North Carolina relevance: large MOAs and restricted areas sit east of Raleigh around Seymour Johnson AFB and the Dare County bombing range, which matters for coastal mapping projects.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3923,7 +3976,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#stadiums-and-sporting-events",
     "title": "UAS Rules and Regulations",
     "section": "Stadiums and sporting events",
-    "text": "Stadiums and sporting events\n\n\nUAS operations are prohibited within a radius of 3 nautical miles of the stadium or venue of:\n\nMajor League Baseball\nNational Football League\nNCAA Division One Football\nNASCAR Sprint Cup, Indy Car, and Champ Series races",
+    "text": "Stadiums and sporting events\n\n\nUAS operations are prohibited within a radius of 3 nautical miles of the stadium or venue, from one hour before to one hour after, for:\n\nMajor League Baseball\nNational Football League\nNCAA Division One Football\nNASCAR Cup Series, IndyCar, and Champ Series races\n\n\n\n\n\nThis is a standing TFR (FDC NOTAM 4/3621) up to 3,000 ft AGL. Local hook: Carter-Finley Stadium is on this list on football Saturdays, and the restriction covers a 3 nm radius, which reaches much of west Raleigh including parts of campus and Lake Wheeler Road. Check the game schedule before planning fall field days.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3936,7 +3989,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#wildfires",
     "title": "UAS Rules and Regulations",
     "section": "Wildfires",
-    "text": "Wildfires\n\n\nIt is illegal to fly your UAS in or around a wildfire firefighting operation",
+    "text": "Wildfires\n\n\nIt is illegal to fly your UAS in or around a wildfire firefighting operation \n\n\n\n\n“If you fly, we can’t” is the fire community’s campaign line: a single drone sighting grounds firefighting aircraft. Wildfire TFRs carry civil penalties that can exceed $20,000 plus potential criminal liability. The legitimate path exists: public agencies fly fire-mapping missions under COAs in coordination with incident command, an application area from Lecture 1A.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3945,11 +3998,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airports",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airports",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airports-and-controlled-airspace",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#airports-and-controlled-airspace",
     "title": "UAS Rules and Regulations",
-    "section": "Airports",
-    "text": "Airports\n\nRecreational operators are required to give notice for flights within 5 miles of an airport to both the airport operator and air traffic control tower, if the airport has a tower\nRecreational operations are not permitted in Class B airspace around most major airports without specific air traffic permission and coordination",
+    "section": "Airports and controlled airspace",
+    "text": "Airports and controlled airspace\n\nThere is no “notify within 5 miles” rule anymore; that pre-2019 requirement was repealed with Section 336\nBoth recreational and Part 107 pilots need a LAANC (or FAADroneZone) authorization to fly in Class B, C, D, or surface Class E airspace\nAuthorization is granted up to the UAS Facility Map altitude for the grid cell; near runways this is often 0 ft (no automatic authorization)\n\n\n\n\n\n\n\n\nCalled out explicitly because the 5-mile rule persists in older videos and blog posts and in some exam-prep material. The current logic is airspace-based, not distance-based: a site 4 miles from an airport in Class G needs nothing, while a site 8 miles away under a Class C shelf that reaches the surface needs authorization. Always resolve the question with a facility-map app, not distance.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3961,8 +4014,8 @@
     "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#public-entities",
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#public-entities",
     "title": "UAS Rules and Regulations",
-    "section": "Public Entities",
-    "text": "Public Entities\n\n\nPublicly funded university, law enforcement agency, fire department, or any other federal or state government agency have\nTWO OPTIONS:\n\nFollow the same requirements and operating rules for business users (known as “Part 107”)\n\nOR\n\nOperate UAS for a government entity outside of these rules, you may apply for a blanket public Certificate of Authorization (COA)",
+    "section": "Public entities",
+    "text": "Public entities\n\n\nPublicly funded universities, law enforcement agencies, fire departments, and other government agencies have two options:\n\nFollow the same requirements and operating rules as commercial users (Part 107)\n\nOR\n\nOperate as public aircraft under a blanket Certificate of Authorization (COA)\n\n\n\n\n\nIn practice most public entities, including most university flight programs, simply use Part 107 because it is simpler and their missions fit within it; COAs are reserved for operations Part 107 cannot cover, such as certain law-enforcement or emergency operations. Ask the class why an agency might still want a COA (self-certification of pilots, emergency provisions, operations outside Part 107 limits).",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3975,7 +4028,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#certificate-of-authorization",
     "title": "UAS Rules and Regulations",
     "section": "Certificate of Authorization",
-    "text": "Certificate of Authorization\nCan be obtained: - Only by government entities – such as federal and state government agencies, law enforcement agencies, and public colleges and universities - Only for public (governmental) UAS aircraft operations\nAllows: - Flights at or below 400 feet in Class G airspace nationwide - Self-certification of the UAS pilot - The ability to obtain emergency COAs under special circumstances",
+    "text": "Certificate of Authorization\nCan be obtained:\n\nOnly by government entities, such as federal and state agencies, law enforcement, and public colleges and universities\nOnly for public (governmental) UAS aircraft operations\n\nAllows:\n\nFlights at or below 400 feet in Class G airspace nationwide\nSelf-certification of the UAS pilot\nEmergency COAs under special circumstances\n\n\nThe blanket public COA is the standing nationwide authorization; operations outside it (higher altitudes, specific controlled airspace) need a jurisdictional COA for a defined area. Self-certification of pilots is the notable difference from Part 107: the agency, not the FAA, attests pilot qualification.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -3984,24 +4037,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#certificate-of-authorization-1",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#certificate-of-authorization-1",
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#how-to-apply-for-a-coa",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#how-to-apply-for-a-coa",
     "title": "UAS Rules and Regulations",
-    "section": "Certificate of Authorization",
-    "text": "Certificate of Authorization\n\n\n\nCOAs are issued for a specific period of time, usually two years\nInclude special provisions unique to each proposal, such as a defined block of airspace and time of day sUAS can be used",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "Slides",
-      "Lecture 1B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#how-to-apply-for-coa",
-    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#how-to-apply-for-coa",
-    "title": "UAS Rules and Regulations",
-    "section": "How to apply for COA?",
-    "text": "How to apply for COA?\n\nSince 2009, the FAA has taken steps to streamline the application process by transitioning online\nVisit the FAA website for more information on how to apply for a COA online\nThe average COA processing time is less than 60 days\nExpedited authorization is available in emergency and life-threatening situations\nSample COA Application",
+    "section": "How to apply for a COA?",
+    "text": "How to apply for a COA?\n\nApplications are submitted online via the FAA’s COA process\nVisit the FAA website for details on how to apply\nThe average COA processing time is less than 60 days\nExpedited authorization is available in emergency and life-threatening situations\nSample COA Application\n\n\nMostly reference material; students will not file COAs themselves, but they may work under one. Emergency COAs matter after disasters: post-hurricane mapping flights in North Carolina have operated under expedited authorizations coordinated with emergency management, a direct link to the change-detection applications later in the course.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -4014,7 +4054,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#educational-use",
     "title": "UAS Rules and Regulations",
     "section": "Educational use",
-    "text": "Educational use\n\n\n\nNew legal interpretation from the FAA (May 5, 2016), the use of UAS by students in accredited education institutions as part of their coursework will be allowed under recreational guidelines for model aircraft\nThis does not apply to research efforts, which would too closely link operation of the UAS to faculty members’ professional duties and compensation",
+    "text": "Educational use\n\n\n\nUnder 49 USC 44809(c) and FAA educational-user guidance, students at accredited institutions may fly under the recreational exception as part of coursework (TRUST, registration, and all other 44809 conditions still apply)\nFaculty-directed research and flights that further university business generally require Part 107\nIn this course, instructional flight operations are conducted under Part 107 by certificated pilots\n\n\n \n\n\nHistory for context: a May 2016 FAA legal interpretation first allowed student flying under model-aircraft rules; the 2018 Reauthorization Act wrote the concept into statute at 44809(c), and 2021 FAA guidance details when instructors and faculty can participate (limited assistance is fine; directing research flights is not recreational). The safe institutional default is Part 107 for anything tied to funded research.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -4027,7 +4067,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#uas-best-practices",
     "title": "UAS Rules and Regulations",
     "section": "UAS best practices",
-    "text": "UAS best practices\n\n\n\nIf you can, tell other people you’ll be taking pictures or video of them before you do so\nIf someone has a reasonable expectation of privacy, don’t violate it by taking pictures or video, unless you’ve got a very good reason\nDon’t fly over other people’s private property without permission if you can easily avoid doing so",
+    "text": "UAS best practices\n\n\n\nIf you can, tell other people you’ll be taking pictures or video of them before you do so\nIf someone has a reasonable expectation of privacy, don’t violate it by taking pictures or video, unless you’ve got a very good reason\nDon’t fly over other people’s private property without permission if you can easily avoid doing so\n\n\n\n\n\n\nThese come from the NTIA voluntary best practices for UAS privacy: not law, but the professional norm, and often stricter than what the FAA requires. For mapping projects, landowner permission for takeoff, landing, and ground control points is both courteous and usually a practical necessity; the FAA governs the air, but the launch site is property law.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -4040,7 +4080,20 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#uas-best-practices-1",
     "title": "UAS Rules and Regulations",
     "section": "UAS best practices",
-    "text": "UAS best practices\n\n\n\nDon’t gather personal data for no reason, and don’t keep it for longer than you have to\nIf you keep sensitive data about other people, secure it against loss or theft\nIf someone asks you to delete personal data about him or her that you’ve gathered, do so, unless you’ve got a good reason not to\n\n\n\n\nDon’t harass people with your drone",
+    "text": "UAS best practices\n\n\n\nDon’t gather personal data for no reason, and don’t keep it for longer than you have to\nIf you keep sensitive data about other people, secure it against loss or theft\nIf someone asks you to delete personal data about him or her that you’ve gathered, do so, unless you’ve got a good reason not to\n\n\n\n\nDon’t harass people with your drone\n\n\n\n\nData-handling practices map directly onto research-data management: orthophotos of residential areas contain personal data (faces, vehicles, backyards), and IRB or data-management plans may govern retention. Good habit to teach: plan flight lines to minimize capture of areas outside the study site rather than cropping afterwards.",
+    "crumbs": [
+      "Topics",
+      "Topic 1: UAS Basics",
+      "Slides",
+      "Lecture 1B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#current-developments---bvlos-and-part-108",
+    "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#current-developments---bvlos-and-part-108",
+    "title": "UAS Rules and Regulations",
+    "section": "Current developments - BVLOS and Part 108",
+    "text": "Current developments - BVLOS and Part 108\n\nThe biggest open problem from earlier in this lecture: beyond visual line of sight (BVLOS) flight without a waiver\nThe FAA published the proposed Part 108 rule (Notice of Proposed Rulemaking, August 2025) to enable routine BVLOS operations\nBuilt on automated traffic awareness/deconfliction services and aircraft airworthiness acceptance instead of one-off waivers\nExpect the regulatory landscape to keep shifting; always check faa.gov/uas for current rules\n\n\nClose the loop with the detect-and-avoid concern from the NAS slide: Part 108 is the FAA’s answer, replacing case-by-case BVLOS waivers with a performance-based rule using strategic deconfliction and third-party services. Check the current rulemaking status before lecture and update the class, since the final rule may land during or after this semester. Good discussion prompt: which mapping applications change most if BVLOS becomes routine? (Corridor mapping, large-area agriculture, disaster response.)",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -4053,7 +4106,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1b.html#resources",
     "title": "UAS Rules and Regulations",
     "section": "Resources",
-    "text": "Resources\n\n\n\nU.S. Air Space map\nKnow Before you Fly website\nRegister your drone\nOperating UAS in North Carolina\nAviation Weather Center",
+    "text": "Resources\n\n\n\nFAA UAS home - start here, always current\nRecreational flyers and TRUST\nLAANC and approved service suppliers\nFAADroneZone - registration, waivers, reports\nOperating UAS in North Carolina\nAviation Weather Center\n\n\n\n\n\nPoint students at faa.gov/uas as the single source of truth and remind them Assignment 1B (Part 107 sample questions) is where this lecture becomes graded work. The NCDOT page matters because North Carolina additionally requires a state UAS operator permit for commercial and government operations in the state, a detail many out-of-state guides miss.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -4066,7 +4119,7 @@
     "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#outline",
     "title": "Rules and regulations for UAS operations",
     "section": "Outline",
-    "text": "Outline\n\nlevels of regulatory authority\nSmall UAS Rule (Part 107)\nUAS authorizations to fly\ntypes of airspace and restrictions to flight\ncurrent information resources",
+    "text": "Outline\n\nLevels of regulatory authority\nSmall UAS Rule (Part 107)\nRecreational flying under the 49 USC 44809 exception (TRUST)\nUAS authorizations to fly: LAANC and airspace restrictions\nCurrent information resources",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -4078,7 +4131,7 @@
     "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#lecture",
     "title": "Rules and regulations for UAS operations",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides: Rules and Regulations\nLecture Recording: Fall 2024 (NCSU Only)\nPast Videos (2017)\n\nPart 1\nPart 2\nPart 3\nPart 4\nPart 5\n\n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nWhere can I find study materials for the Part 107 aeronautical knowledge test?\nOperating UAS in North Carolina\nDrone use in Federally Funded Projects\nUAS Activities at NC State: Rules and Regulations\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector:charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA Data Portal\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources &lt;!– * Other helpful material (Need Permission)\nEducational use of UAS –&gt;",
+    "text": "Lecture\n\nLecture Slides: Rules and Regulations \n\n\nSupplemental materials\n\nFAA Unmanned Aircraft Systems\nBecoming a Pilot sUAS Rule (Part 107)\nWhere can I find study materials for the Part 107 aeronautical knowledge test?\nRecreational flyers and TRUST (The Recreational UAS Safety Test)\nLAANC airspace authorization and approved service suppliers\nFAADroneZone - registration, waivers, accident reports\nOperating UAS in North Carolina\nDrone use in Federally Funded Projects\nUAS Activities at NC State: Rules and Regulations\nAeronautical charts and related georeferenced data\n\nView digital aeronautical charts\nSkyvector: charts, airspace and airport information for pilots\nDownload georeferenced digital aeronautical charts, download Charlotte for NC chart\nFAA Data Portal\n\nWeather data\n\nAviation Weather Center, interactive METAR, TAFs and other NOAA NWS resources",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -4090,19 +4143,7 @@
     "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#assignment",
     "title": "Rules and regulations for UAS operations",
     "section": "Assignment",
-    "text": "Assignment\nUAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided sample questions",
-    "crumbs": [
-      "Topics",
-      "Topic 1: UAS Basics",
-      "1B: Rules and Regulations"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
-    "href": "course/topics/topic_1_uas_basics/part_b_rules_regs.html#homework",
-    "title": "Rules and regulations for UAS operations",
-    "section": "Homework",
-    "text": "Homework\nPrepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation.",
+    "text": "Assignment\n\nAssignment 1B: UAS Rule Part 107 test subset - see the assignment page for the full instructions and submission details.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",

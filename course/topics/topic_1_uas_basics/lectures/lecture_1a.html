@@ -10,7 +10,7 @@
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
-  <meta name="author" content="Justyna Jeziorska &amp; Corey White">
+  <meta name="author" content="Corey White adapted from Justyna Jeziorska">
   <title>UAS Mapping and Analytics – Introduction to UAS</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-6c8fdd65dee6c56e4978718f6ca1511b.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-905dfe4bb1274ae1ab1235b8be50cbb7.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -128,6 +128,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -140,7 +143,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Justyna Jeziorska &amp; Corey White
+Corey White adapted from Justyna Jeziorska
 </div>
 </div>
 </div>
@@ -150,47 +153,106 @@ Justyna Jeziorska &amp; Corey White
 <h2>Objectives</h2>
 <ul>
 <li class="fragment">Use the proper terminology and understand its meaning</li>
-<li class="fragment">Describe the elements of UAS</li>
-<li class="fragment">Classify different UAS according to their make and characteristics</li>
-<li class="fragment">Describe different classes of the UAS</li>
-<li class="fragment">Understand the current state of the UAS development</li>
-<li class="fragment">Describe the objectives beyond the use of the UAS</li>
+<li class="fragment">Describe the elements of a UAS</li>
+<li class="fragment">Classify different UAS according to their design and characteristics</li>
+<li class="fragment">Understand the current state of UAS development, including the platforms used for mapping today</li>
+<li class="fragment">Describe the range of applications UAS are used for</li>
 </ul>
+<aside class="notes">
+<p>First lecture of the course: the goal is shared vocabulary and a mental model of what a UAS is before the course narrows to mapping. Ask who has flown a drone before and what kind; the class survey usually surfaces a good spread from toy quads to Part 107 pilots, which helps calibrate the rest of the topic.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="what-is-an-uav" class="slide level2 center text-center">
-<h2>What is an UAV?</h2>
-<p>For the brief summary read the <a href="http://www.insidegnss.com/auto/janfeb08-wp.pdf">overview article</a></p>
+<section id="what-is-a-uav" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>What is a UAV?</h2>
+<aside class="notes">
+<p>Section opener. Use this beat to ask students what they would call the thing before giving them the terminology.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="uas-or-uav-or-maybe-a-drone" class="slide level2">
 <h2>UAS or UAV? Or maybe a drone?</h2>
 <ul>
-<li class="fragment"><strong>UAV</strong> = Unmanned Aerial Vehicle</li>
-<li class="fragment"><strong>UAS</strong> = Unmanned Aerial Systems</li>
-<li class="fragment"><strong>Drone</strong> = Dynamic Remotely Operated Navigation Equipment</li>
-<li class="fragment"><strong>RPA</strong> = Remotely Piloted Aircraft</li>
+<li class="fragment"><strong>UAV</strong> = Unmanned Aerial Vehicle - the aircraft itself</li>
+<li class="fragment"><strong>UAS</strong> = Unmanned Aircraft System - the aircraft plus everything needed to operate it</li>
+<li class="fragment"><strong>RPA / RPAS</strong> = Remotely Piloted Aircraft (System) - <a href="https://www.icao.int/frequently-used-terms">ICAO’s preferred term</a><sup>1</sup></li>
+<li class="fragment"><strong>Drone</strong> = the colloquial catch-all, now standard in industry and media</li>
 </ul>
-</section>
+<aside class="notes">
+<p>The FAA and this course use UAS because the regulations govern the whole system, not just the airframe. “Drone” carried military stigma in the 2010s and professionals avoided it; that fight is over and the industry itself says drone now. One myth to preempt: “drone” is not an acronym, the usage traces back to 1930s target aircraft named after the male bee.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>International Civil Aviation Organization (ICAO)</p></li></ol></aside></section>
 <section id="uas-unmanned-aircraft-system" class="slide level2 smaller">
 <h2>UAS: Unmanned Aircraft System</h2>
 <div class="columns">
-<!-- Left --><div class="column" style="width:40%;">
-<ul>
-<li><strong>Unmanned</strong> = without a person onboard (operated by automatic or remote control)</li>
-<li><strong>Aircraft</strong> = able to fly</li>
-<li><strong>System</strong> = associated elements related to safe operations (may include control stations, control links, support equipment, payloads, flight termination systems, and launch recovery equipment)</li>
-</ul>
-</div><!-- Right --><div class="column" style="width:60%;">
-<p><img data-src="../images/Pilot_data_UAV.webp"></p>
+<!-- Left --><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Unmanned</strong>: without a person onboard, operated by automatic or remote control</p>
+</div>
+<div class="term-card">
+<p><strong>Aircraft</strong>: able to fly</p>
+</div>
+<div class="term-card">
+<p><strong>System</strong>: the associated elements for safe operation, such as control stations, control links, support equipment, payloads, flight termination systems, and launch and recovery equipment</p>
+</div>
+</div><!-- Right --><div class="column text-center" style="width:50%;">
 <p><strong>Consists of three elements:</strong></p>
 <ol type="1">
 <li>Unmanned Aircraft</li>
 <li>Control Station</li>
 <li>Data Link</li>
 </ol>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/Pilot_data_UAV.webp" style="width:85.0%"></p>
+<figcaption>The pilot, control station, and data link to the UAV</figcaption>
+</figure>
+</div>
 </div></div>
+<aside class="notes">
+<p>The three-element decomposition matters practically: most field failures are control-station or data-link problems (dead tablet, lost link, interference), not aircraft problems. When the course reaches flight planning, pre-flight checks are organized around exactly these three elements.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="uas-or-uav-or-maybe-a-drone-1" class="slide level2 smaller">
-<h2>UAS or UAV? Or maybe a drone?</h2>
+<section id="what-counts-as-a-uav" class="slide level2 smaller">
+<h2>What counts as a UAV?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Unmanned Aerial Vehicle (UAV)</strong></p>
@@ -201,61 +263,213 @@ Justyna Jeziorska &amp; Corey White
 </ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="../images/uav_acronym.webp"></p>
-
 </div></div>
-<aside><div>
-<p>More about terminology in the article: <a href="https://dissenter.firedoglake.com/2013/10/11/dont-use-the-word-drones-theyre-uavs/">Don’t use the ‘D’ Word: They’re ‘UAVs’ or ‘RPAs’ But Definitely Not ‘Drones’</a></p>
-</div></aside></section>
-<section id="what-does-a-uas-look-like" class="slide level2 center text-center">
+<aside class="notes">
+<p>The definitional edges are worth a beat: a cruise missile flies unmanned but is not a UAV because it is expendable ordnance; a tethered balloon carrying a camera is aerial sensing but not a UAV because it is neither free-flying nor powered. These boundary cases foreshadow the regulatory definitions in Lecture 1B.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-does-a-uas-look-like" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>What does a UAS look like?</h2>
 <p>Types and classification of UAS</p>
+<aside class="notes">
+<p>Section transition into classification. Preview: there is no single official taxonomy; military, civil-airworthiness, and market classifications all coexist, so the next slides show several cuts of the same space.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="different-shapes-and-sizes" class="slide level2 center text-center">
 <h2>Different shapes and sizes</h2>
 
-<img data-src="../images/uav_shapes_sizes.webp" class="r-stretch"></section>
+<img data-src="../images/uav_shapes_sizes.webp" class="r-stretch quarto-figure-center"><p class="caption">Range of UAS platforms from micro air vehicles to large military aircraft</p><aside class="notes">
+<p>Span the extremes on the figure: from insect-scale micro air vehicles to the Global Hawk with an airliner-class wingspan. Everything this course flies sits in the small-UAS band, under 55 lbs, but the design diversity above and below is useful context for classification.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="different-designs" class="slide level2 center text-center">
-<h2>Different Designs</h2>
+<h2>Different designs</h2>
 
-<img data-src="../images/uas_designs.webp" class="r-stretch"></section>
+<img data-src="../images/uas_designs.webp" class="r-stretch quarto-figure-center"><p class="caption">Fixed wing, rotary wing, and hybrid UAS designs</p><aside class="notes">
+<p>Walk the main design families: fixed wing (efficiency, endurance, area coverage), rotary wing / multirotor (vertical takeoff, hover, ease of use), and hybrids like VTOL fixed wing that take off vertically then cruise on wings. Multirotors dominate small-site mapping; fixed wing and VTOL hybrids win on large-area coverage per battery.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="different-classifications" class="slide level2 smaller">
-<h2>Different Classifications</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>Physical size</li>
-<li>Weight</li>
-<li>Endurance</li>
-<li>Altitude</li>
-<li>Wing loading</li>
-<li>Engine type</li>
-<li>Range</li>
-<li>Performance</li>
-<li>Capabilities</li>
-<li>Type</li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p><img data-src="../images/uav_classification_bases.webp"></p>
-</div></div>
+<h2>Different classifications</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Basis</th>
+<th>Example classes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Weight / size</td>
+<td>Micro, mini, small (sUAS, under 55 lb), large</td>
+</tr>
+<tr class="even">
+<td>Endurance</td>
+<td>Minutes (small multirotors) to 24+ hours</td>
+</tr>
+<tr class="odd">
+<td>Altitude</td>
+<td>Low altitude, medium altitude (MALE), high altitude (HALE)</td>
+</tr>
+<tr class="even">
+<td>Design / lift</td>
+<td>Fixed wing, rotary wing, hybrid VTOL, lighter than air</td>
+</tr>
+<tr class="odd">
+<td>Propulsion</td>
+<td>Electric, combustion, hybrid</td>
+</tr>
+<tr class="even">
+<td>Range</td>
+<td>Visual line of sight, BVLOS, long range</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notes">
+<p>Key point: the classification axis you pick depends on your question. Regulators classify by weight (55 lb line, 250 g line), mission planners by endurance and range, engineers by propulsion and wing loading. Weight is the axis with legal consequences, which is why it dominates in Lecture 1B.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <aside><div>
 <p>More about classification in the article: <a href="https://shemesh.larc.nasa.gov/people/jmm/NASA-TM-2013-217969.pdf">Perspectives on Unmanned Aircraft Classification for Civil Airworthiness Standards</a></p>
 </div></aside></section>
 <section id="simplified-classifications" class="slide level2 smaller">
 <h2>Simplified classifications</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/uav_nomenclature_scheme.webp"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/uav_classification_simple.webp"></p>
-</div><ul>
-<li>More (much much more) about classifications in the <a href="http://shemesh.larc.nasa.gov/people/jmm/NASA-TM-2013-217969.pdf">article</a></li>
-<li>Condensed basics including classification can be found in <a href="http://www.bigs-potsdam.org/images/Policy%20Paper/PolicyPaper-No.1_Civil-Use-of-UAS_Bildschirmversion%20interaktiv.pdf">Unmanned Aircraft Systems for Civilian Missions</a></li>
-</ul>
+<p>In practice, most UAS are grouped by size:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 27%">
+<col style="width: 23%">
+<col style="width: 19%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Weight</th>
+<th>Typical altitude</th>
+<th>Endurance</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Micro</strong></td>
+<td>Under 250 g</td>
+<td>Under 400 ft</td>
+<td>15-30 min</td>
+<td>DJI Mini, DJI Neo</td>
+</tr>
+<tr class="even">
+<td><strong>Small</strong></td>
+<td>Under 25 kg (55 lb)</td>
+<td>Under 400 ft</td>
+<td>20-90 min</td>
+<td>Mavic 3E, WingtraOne</td>
+</tr>
+<tr class="odd">
+<td><strong>Medium</strong></td>
+<td>25-150 kg</td>
+<td>Up to ~10,000 ft</td>
+<td>Several hours</td>
+<td>ScanEagle</td>
+</tr>
+<tr class="even">
+<td><strong>Large</strong></td>
+<td>Over 150 kg</td>
+<td>10,000-60,000 ft</td>
+<td>24+ hours</td>
+<td>MQ-9 Reaper, Global Hawk</td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>This course</strong>: micro &amp; small UAS (sUAS), under 55 lb, flown below 400 ft</p>
 </div>
+<aside class="notes">
+<p>The size ladder is the scheme students should retain: the two bottom rows are the regulated civil space (sUAS under Part 107), the top rows are military and research platforms. The 250 g and 55 lb lines carry legal weight, which Lecture 1B picks up. Have students place a familiar aircraft into a row; the highlighted card anchors where everything in this course lives.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="how-does-a-uas-work" class="slide level2 center text-center">
+<section id="how-does-a-uas-work" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>How does a UAS work?</h2>
 <p>System elements</p>
+<aside class="notes">
+<p>Section transition from what they look like to how the pieces fit together. This is the systems-engineering view that the term “UAS” implies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="generic-unmanned-aircraft-system" class="slide level2 smaller">
 <h2>Generic Unmanned Aircraft System</h2>
@@ -272,24 +486,256 @@ Justyna Jeziorska &amp; Corey White
 </div><div class="column" style="width:60%;">
 <p><img data-src="../images/uas_general_scheme.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Map these onto the course: mission planning element is the flight-planning software in Topic 3; payload is the sensor whose imagery feeds Structure from Motion in Topic 2; the communication link constraints shape where you can safely fly. Launch and recovery elements are mostly a fixed-wing concern (catapults, belly landings, parachutes).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inside-the-aircraft" class="slide level2 center text-center">
+<h2>Inside the aircraft</h2>
+
+<img data-src="../images/uas_components_diagram.svg" class="r-stretch quarto-figure-center"><p class="caption">Main components of a mapping quadcopter</p><aside class="notes">
+<p>Orient students on the diagram before the function definitions on the next slide: flight controller and IMU in the body, GNSS antenna up top away from interference, camera on a gimbal at the front, battery as the single heaviest component, radio antennas at the rear. The next slide defines what each part does.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-each-component-does" class="slide level2 smaller">
+<h2>What each component does</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Flight controller</strong>: the onboard computer running the autopilot</p>
+</div>
+<div class="term-card">
+<p><strong>IMU</strong>: accelerometers and gyroscopes sensing attitude and motion</p>
+</div>
+<div class="term-card">
+<p><strong>GNSS receiver</strong>: position and velocity from satellite signals</p>
+</div>
+<div class="term-card">
+<p><strong>Motors + ESCs</strong>: electronic speed controllers turn commands into thrust</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Battery</strong>: LiPo packs, typically 20-45 min of flight for small multirotors</p>
+</div>
+<div class="term-card">
+<p><strong>Radio links</strong>: control, telemetry, and video (2.4 / 5.8 GHz)</p>
+</div>
+<div class="term-card">
+<p><strong>Gimbal</strong>: stabilizes the camera independently of aircraft motion</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>This names the parts students will hear about all semester: “the IMU drifted”, “lost link”, “gimbal pitch”. The flight controller fuses IMU and GNSS data hundreds of times per second to keep the aircraft stable; that fusion is also what gets recorded as camera position and orientation for every photo, which is the bridge to the next slide. LiPo handling (storage charge, fire safety) comes up before the first field day.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-does-it-know-where-it-is" class="slide level2 smaller">
+<h2>How does it know where it is?</h2>
+<p>Positioning quality decides map quality:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 35%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>How it works</th>
+<th>Typical accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Standard GNSS</td>
+<td>Satellite positioning alone</td>
+<td>1-3 m</td>
+</tr>
+<tr class="even">
+<td>RTK (Real-Time Kinematic)</td>
+<td>Live corrections from a base station or network</td>
+<td>1-3 cm</td>
+</tr>
+<tr class="odd">
+<td>PPK (Post-Processed Kinematic)</td>
+<td>Corrections applied after the flight</td>
+<td>1-3 cm</td>
+</tr>
+<tr class="even">
+<td>Ground control points (GCPs)</td>
+<td>Surveyed targets visible in the imagery</td>
+<td>cm-level, with any of the above</td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>Why it matters</strong>: the recorded camera position of every photo anchors the photogrammetric reconstruction (Topic 2)</p>
+</div>
+<aside class="notes">
+<p>This single spec separates a camera drone from a survey instrument. RTK needs a correction source during flight (local base station or NC’s real-time network); PPK logs raw observations and corrects afterwards, which is more forgiving of radio dropouts. GCPs trade field time for control and remain the accuracy check even on RTK flights. Topic 2 puts numbers on all of this with real datasets.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rtk-base-and-rover" class="slide level2 center text-center">
+<h2>RTK: base and rover</h2>
+
+<img data-src="../images/rtk_diagram.webp" class="r-stretch quarto-figure-center"><p class="caption">Both receivers track the same satellites; the base station on a known point broadcasts corrections to the rover. Image: <a href="https://commons.wikimedia.org/wiki/File:Real_time_kinematic.svg">TS Eriksson</a>, CC BY-SA 4.0</p><aside class="notes">
+<p>Walk the geometry: both receivers see the same satellites, so most error sources (atmosphere, clocks, orbits) are shared and cancel when the base, sitting on a known point, broadcasts corrections. On a mapping drone the “rover” is the aircraft itself. In North Carolina the base can be replaced by the NC Geodetic Survey real-time network over a cell connection.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="levels-of-autonomy" class="slide level2 smaller">
+<h2>Levels of autonomy</h2>
+<ol type="1">
+<li><strong>Manual</strong>: pilot flies with the sticks, no assistance</li>
+<li><strong>Stabilized</strong>: autopilot holds attitude, altitude, and position (GNSS hover)</li>
+<li><strong>Waypoint missions</strong>: aircraft flies a pre-planned route and triggers the camera automatically</li>
+<li><strong>Autonomous</strong>: obstacle avoidance, terrain following, docked “drone-in-a-box” operations</li>
+</ol>
+<div class="term-card">
+<p><strong>Mapping flights are level 3</strong>: planned in software (Topic 3), flown by the autopilot, supervised by the pilot in command</p>
+</div>
+<aside class="notes">
+<p>Students are often surprised that mapping is not stick flying: the pilot’s job on a mapping mission is planning, supervision, and takeover if something goes wrong. Overlap and coverage requirements make hand-flown mapping impractical. Level 4 capabilities are why BVLOS rulemaking matters (Lecture 1B); docked drones flying scheduled missions are the direction commercial monitoring is heading.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sensors" class="slide level2 center text-center">
 <h2>Sensors</h2>
 
-<img data-src="../images/uav_sensors.webp" class="r-stretch"></section>
-<section id="sensors-1" class="slide level2 center text-center">
-<h2>Sensors</h2>
-
-<img data-src="../images/uav_sensors2.webp" class="r-stretch"></section>
-<section id="uas-sensors-for-mapping" class="slide level2">
+<img data-src="../images/uav_sensors.webp" class="r-stretch quarto-figure-center"><p class="caption">Overview of UAS sensor payloads</p><aside class="notes">
+<p>Transition into payloads, the part of the system this course cares most about: for mapping, the aircraft is just a sensor positioning platform. The figure shows the breadth beyond cameras: chemical sniffers, radiation detectors, meteorological probes. Point out that sensor choice drives aircraft choice, not the other way around: payload mass, power draw, and mounting/gimbal requirements are the coupling constraints, which the integration slide will formalize.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uas-sensors-for-mapping" class="slide level2 smaller">
 <h2>UAS sensors for mapping</h2>
-<ul>
-<li>RGB cameras</li>
-<li>Infrared sensors</li>
-<li>Multispectral and hyperspectral sensors</li>
-<li>Laser scanners</li>
-<li>Thermal sensors</li>
-</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 23%">
+<col style="width: 42%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sensor</th>
+<th>Measures</th>
+<th>Mapping products</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RGB camera</td>
+<td>Visible light</td>
+<td>Orthophotos, DSMs, 3D models</td>
+<td>$</td>
+</tr>
+<tr class="even">
+<td>Multispectral</td>
+<td>Visible + NIR bands</td>
+<td>NDVI, vegetation maps</td>
+<td>$$</td>
+</tr>
+<tr class="odd">
+<td>Hyperspectral</td>
+<td>100+ narrow bands</td>
+<td>Detailed spectral analysis</td>
+<td>$$$</td>
+</tr>
+<tr class="even">
+<td>Lidar</td>
+<td>Active laser returns</td>
+<td>Bare-earth DEMs, canopy structure</td>
+<td>$$-$$$</td>
+</tr>
+<tr class="odd">
+<td>Thermal</td>
+<td>Longwave infrared</td>
+<td>Temperature anomaly maps</td>
+<td>$$</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>This is the shortlist the course actually uses. RGB feeds photogrammetry (Topics 2-4); multispectral supports vegetation indices; lidar gives below-canopy terrain; thermal supports water, wildlife, and infrastructure applications. The following slides take each in turn.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="rgb-natural-color-cameras" class="slide level2 smaller">
 <h2>RGB (natural color) cameras</h2>
@@ -305,6 +751,19 @@ Justyna Jeziorska &amp; Corey White
 <!-- ![Gimbal](../images/gimbal.webp){.nostretch fig-align="center" width="400px"} -->
 <p><img data-src="../images/RGB_photo.webp"></p>
 </div></div>
+<aside class="notes">
+<p>“Non-photogrammetric” means consumer cameras without calibrated, stable lens geometry; Structure from Motion self-calibrates well enough that they still produce usable orthophotos and surface models, which is what made UAS mapping cheap. Mechanical vs rolling shutter is the spec worth teaching here: rolling shutter distorts imagery taken in motion and modern mapping drones advertise mechanical/global shutters for that reason.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="multispectral-and-hyperspectral-cameras" class="slide level2 smaller">
 <h2>Multispectral and hyperspectral cameras</h2>
@@ -312,17 +771,30 @@ Justyna Jeziorska &amp; Corey White
 <div class="column" style="width:60%;">
 <ul>
 <li>Miniaturization is challenging in terms of optics and sensor calibration</li>
-<li>Weight, cost, data quality has improved; spectral bands, resolution need improvements</li>
+<li>Weight, cost, data quality have improved; spectral bands, resolution keep improving</li>
 <li>Cameras with NIR band: agriculture and vegetation mapping (for NDVI)</li>
 <li>The more bands the more information, but also higher price of the sensor
 <ul>
-<li>$$ multispectral - couple thousands</li>
+<li>$$ multispectral - couple thousand</li>
 <li>$$$ hyperspectral - tens of thousands</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/hyperspectral.webp"> <img data-src="../images/ndvi.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Multispectral has gone mainstream: integrated platforms like the DJI Mavic 3 Multispectral bundle RGB plus narrow bands with a sunlight sensor for reflectance calibration, at a price individual labs can afford. Hyperspectral (hundreds of contiguous bands) still costs an order of magnitude more and demands careful radiometric calibration; it stays a research payload.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="active-sensors---lidar-and-sar" class="slide level2 smaller">
 <h2>Active sensors - LiDAR and SAR</h2>
@@ -330,29 +802,55 @@ Justyna Jeziorska &amp; Corey White
 <div class="column" style="width:60%;">
 <ul>
 <li>Active sensors can reach below-canopy ground surface</li>
-<li>Large trade-offs between performance and size or cost of LiDAR</li>
-<li>LiDAR now common on UAS thanks to miniaturization</li>
+<li>Trade-offs between performance and size or cost of LiDAR keep shrinking</li>
+<li>LiDAR is now a routine UAS payload thanks to miniaturization</li>
 <li>SAR (Synthetic Aperture Radar) used experimentally, still faces challenges in adaptation to UAS</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/lid2013_1r_3ft_3d.webp" alt="1st Return"> <img data-src="../images/lid2013_be_3ft_3d.webp" alt="Bare Earth"></p>
 </div></div>
+<aside class="notes">
+<p>The figure pair is the pitch: first-return surface vs bare-earth ground under vegetation, which passive photogrammetry cannot deliver. Integrated lidar payloads (DJI Zenmuse L2 class) have made this routine survey equipment. Connect to the photogrammetry-vs-lidar comparison that returns in the terrain-analysis topics.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="thermal-imaging" class="slide level2 smaller">
 <h2>Thermal imaging</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li>Used in forest fire monitoring, search and rescue missions</li>
-<li>For mapping purposes coupled with visible band sensors (see example <a href="http://www.flir.com/suas/duo/">FLIR DUO</a>)</li>
+<li>Used in forest fire monitoring, search and rescue missions, wildlife surveys, and building/solar inspection</li>
+<li>For mapping purposes usually paired with a visible-band camera on the same gimbal (e.g.&nbsp;DJI Mavic 3T class platforms)</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/thermal.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Uncooled microbolometers are what fit on small UAS: lower resolution (often 640x512) and radiometric accuracy of a few degrees, so thermal mapping is about patterns and anomalies more than absolute temperature. Flights happen at night or dawn to maximize thermal contrast, which is why the 2021 night-operations rule (Lecture 1B) mattered to this application.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sensor-and-platform-integration" class="slide level2 smaller">
 <h2>Sensor and platform integration</h2>
-<p>The optimal combination of carrier (Unmanned Vehicle) and sensing payload needs to be determined based on:</p>
+<p>The optimal combination of carrier (unmanned vehicle) and sensing payload needs to be determined based on:</p>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -364,65 +862,136 @@ Justyna Jeziorska &amp; Corey White
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/josh.webp"></p>
 </div></div>
+<aside class="notes">
+<p>The market has largely resolved this in favor of manufacturer integration: turnkey platforms with matched sensor, gimbal, and processing pipeline. Custom integration survives at the research edge (novel sensors, larger platforms). Note the regulatory hook: payload weight counts toward the 250 g and 55 lb thresholds discussed next lecture.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="who-uses-uas" class="slide level2 center text-center">
+<section id="the-platform-landscape-today" class="slide level2 smaller">
+<h2>The platform landscape today</h2>
+<ul>
+<li>Consumer/prosumer multirotors dominate small-site mapping (DJI Mini and Mavic series)</li>
+<li>Dedicated survey platforms: DJI Matrice series, WingtraOne and other VTOL fixed wings, eBee-class flying wings (AgEagle)</li>
+<li><strong>Supply-chain and security policy now shapes procurement:</strong> NDAA-compliant / <a href="https://www.diu.mil/blue-uas">Blue UAS</a>-listed aircraft (Skydio, Freefly, and others) are required for many U.S. government and federally funded operations</li>
+<li>Check program requirements before buying: see <a href="https://research.ncsu.edu/administration/compliance/research-compliance/research-security/drone-use-in-federally-funded-projects/">drone use in federally funded projects at NC State</a></li>
+</ul>
+<aside class="notes">
+<p>Two forces define the current market: DJI’s dominance on capability per dollar, and U.S. policy restricting Chinese-made aircraft in government and federally funded contexts (American Security Drone Act, agency bans, proposed broader restrictions). For students heading into public-sector or funded-research work, “which drone may I use” is now a compliance question before a technical one; the NC State research-security page linked here is the campus authority.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="who-uses-uas" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Who uses UAS?</h2>
-<p>Types of UAV Operations</p>
+<p>Types of UAS operations</p>
+<aside class="notes">
+<p>Section transition from hardware to users and applications. The operational categories here get their full regulatory treatment in Lecture 1B; today is just the landscape.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="types-of-uas-operations" class="slide level2 smaller">
-<h2>Types of UAS Operations</h2>
+<h2>Types of UAS operations</h2>
 <ul>
-<li><p><strong>Public Operations</strong><br>
-Governmental, limited by federal statute to certain government operations within U.S. Airspace;</p></li>
-<li><p><strong>Civil Operations</strong><br>
-Non-Governmental, must be conducted in accordance with all Federal Aviation Administration (FAA) regulations;</p></li>
-<li><p><strong>Model Aircraft</strong><br>
-Hobby or Recreation <strong>only.</strong></p></li>
+<li><p><strong>Public Operations</strong> Governmental: agencies and public universities operating under federal statute (COA) or Part 107;</p></li>
+<li><p><strong>Civil Operations</strong> Non-governmental, must be conducted in accordance with all Federal Aviation Administration (FAA) regulations (Part 107);</p></li>
+<li><p><strong>Recreational Operations</strong> Flying strictly for fun, under the recreational-flyer exception (49 USC 44809).</p></li>
 </ul>
+<aside class="notes">
+<p>Terminology update worth stating aloud: the old “model aircraft” category was repealed in 2018 and replaced by the recreational-flyer exception; older materials and videos still use the old term. Purpose of the flight, not the aircraft, decides the category; the full rules for each are next lecture.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="faa-federal-aviation-administration" class="slide level2 smaller">
-<h2>FAA – Federal Aviation Administration</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p><strong>NAS – National Airspace System</strong></p>
-<p>The common network of U.S. airspace:</p>
-<ul>
-<li>air navigation facilities, equipment, and services;</li>
-<li>airports or landing areas;</li>
-<li>aeronautical charts, information and services;</li>
-<li>rules, regulations, and procedures;</li>
-<li>technical information; and manpower and material.</li>
-</ul>
-</div><div class="column" style="width:30%;">
-<p><img data-src="../images/NAS.webp"></p>
-</div></div>
-</section>
-<section id="integration-of-uas-into-the-nas" class="slide level2 smaller">
-<h2>Integration of UAS into the NAS</h2>
-<ul>
-<li>review of current policies, regulations, environmental impact, privacy considerations, standards, and procedures;</li>
-<li>identification of <strong>gaps in current UAS</strong> technologies and <strong>regulations,</strong> standards, policies, or procedures;</li>
-<li>development of new technologies and <strong>new or revised regulations, standards, policies, and procedures;</strong></li>
-<li>and the associated development of guidance material, <strong>training, and certification</strong> of aircraft systems, propulsion systems, and airmen.</li>
-</ul>
-</section>
-<section id="can-i-use-it" class="slide level2 center text-center">
+<section id="can-i-use-it" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Can I use it?</h2>
 <p>Regulations, standards, policies, and procedures</p>
+<aside class="notes">
+<p>Deliberate cliffhanger: the honest answer is “it depends on purpose, place, aircraft, and pilot,” and resolving that is all of Lecture 1B. Today only the orientation layer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="know-before-you-fly" class="slide level2 text-center">
 <h2>Know before you fly</h2>
 <ul>
 <li><a href="https://knowbeforeyoufly.org/">“Know Before You Fly”</a> is an educational campaign that provides prospective unmanned aircraft users with the information and guidance they need to fly safely and responsibly.</li>
 <li>Different rules apply to <a href="https://knowbeforeyoufly.org/recreational/">recreational</a> and <a href="https://knowbeforeyoufly.org/commercial/">business</a> users and <a href="https://knowbeforeyoufly.org/government-entities/">government entities</a></li>
-<li>New regulations (effective on August 29, 2016) known as <a href="https://youtu.be/v-d1RuTFvbs">“Part 107”</a></li>
+<li>Commercial operations are governed by <a href="https://www.faa.gov/uas/commercial_operators">Part 107</a>, covered in depth next lecture</li>
 </ul>
+<aside class="notes">
+<p>Know Before You Fly is an industry-FAA outreach partnership; it is a decent student-facing entry point, though faa.gov/uas is the authoritative source. Set expectations: next lecture covers Part 107, the recreational exception, TRUST, and airspace authorization in detail.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="what-are-uas-used-for" class="slide level2 center text-center">
+<section id="what-are-uas-used-for" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>What are UAS used for?</h2>
+<aside class="notes">
+<p>Applications section: the goal is breadth, since Assignment 1A asks each student to research one system and its application in depth and present it. Encourage them to note which applications connect to their own research as these slides go by.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="army-and-government" class="slide level2 smaller text-center">
-<h2>Army and Government</h2>
+<h2>Army and government</h2>
 <div class="columns">
 <div class="column">
 <!-- - Public Use Aircraft -->
@@ -447,13 +1016,39 @@ Hobby or Recreation <strong>only.</strong></p></li>
 </figure>
 </div>
 </div></div>
+<aside class="notes">
+<p>Military use drove the technology historically and still drives much R&amp;D funding; the civil agencies on this list operate large mapping and monitoring fleets (Interior and NOAA especially). This is also where the NDAA/Blue UAS procurement constraints from the platform slide bind hardest.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="civilian-application-fields" class="slide level2 center text-center">
-<h2>Civilian Application Fields</h2>
+<h2>Civilian application fields</h2>
 
-<img data-src="../images/drones_industry.webp" class="r-stretch"></section>
-<section id="application-examples-1" class="slide level2 smaller">
-<h2>Application Examples (1)</h2>
+<img data-src="../images/drones_industry.webp" class="r-stretch quarto-figure-center"><p class="caption">Commercial drone industry segments</p><aside class="notes">
+<p>Big-picture market view: inspection, agriculture, construction, and surveying/mapping are the dominant commercial segments by revenue. Mapping and analytics, this course’s slice, cuts across nearly all of them because most applications ultimately want georeferenced products.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="applications-agriculture-and-telecommunications" class="slide level2 smaller">
+<h2>Applications: agriculture and telecommunications</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -469,9 +1064,22 @@ Hobby or Recreation <strong>only.</strong></p></li>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/use_examples_1.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Spray drones are a distinct regulatory world: over 55 lbs, they need exemptions beyond Part 107, and agricultural spraying is one of the fastest-growing segments. The telecom-relay use case reappeared prominently in recent hurricane responses, including in western North Carolina.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="application-examples-2" class="slide level2 smaller">
-<h2>Application Examples (2)</h2>
+<section id="applications-media-and-traffic-monitoring" class="slide level2 smaller">
+<h2>Applications: media and traffic monitoring</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -487,9 +1095,22 @@ Hobby or Recreation <strong>only.</strong></p></li>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/use_examples_2a.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Both examples raise the flight-over-people and privacy questions that Lecture 1B’s operations-over-people categories and best-practices slides address; newsgathering over crowds is exactly the case the category rules were written for. Traffic monitoring by DOTs is now routine, including NCDOT programs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="application-examples-3" class="slide level2 smaller">
-<h2>Application Examples (3)</h2>
+<section id="applications-mining-and-coastal-monitoring" class="slide level2 smaller">
+<h2>Applications: mining and coastal monitoring</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -506,15 +1127,28 @@ Hobby or Recreation <strong>only.</strong></p></li>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/use_examples_2.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Mine volumetrics is a flagship photogrammetry use case: repeat surveys plus DEM differencing gives stockpile and extraction volumes, exactly the change-detection workflow taught later in this course. Coastal monitoring is the local research strength; CGA has flown repeat shoreline surveys on the North Carolina coast.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="uas-for-remote-sensing-1" class="slide level2 smaller">
-<h2>UAS for Remote Sensing (1)</h2>
+<section id="remote-sensing-environment-and-emergency-response" class="slide level2 smaller">
+<h2>Remote sensing: environment and emergency response</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
 <li><strong>Agriculture and Environment:</strong>
 <ul>
-<li>Crop monitoring, vegetation mapping, forest fire monitoring, animals detection;</li>
+<li>Crop monitoring, vegetation mapping, forest fire monitoring, animal detection;</li>
 </ul></li>
 <li><strong>Intelligence, Surveillance, and Reconnaissance:</strong>
 <ul>
@@ -524,9 +1158,22 @@ Hobby or Recreation <strong>only.</strong></p></li>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/remote_sensing_uas1.webp"></p>
 </div></div>
+<aside class="notes">
+<p>The remote-sensing framing distinguishes these from the service applications: here the product is data and derived maps. Crop monitoring connects to the multispectral/NDVI slide; search and rescue to thermal. Disaster response is a strong thread for this course given recent North Carolina hurricane experience.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="uas-for-remote-sensing-2" class="slide level2 smaller">
-<h2>UAS for Remote Sensing (2)</h2>
+<section id="remote-sensing-engineering-and-cultural-heritage" class="slide level2 smaller">
+<h2>Remote sensing: engineering and cultural heritage</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -542,9 +1189,22 @@ Hobby or Recreation <strong>only.</strong></p></li>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/remote_sensing_uas2.webp"></p>
 </div></div>
+<aside class="notes">
+<p>Infrastructure inspection is the killer commercial app: bridges, towers, and solar farms replace rope teams and lift trucks with a camera in the air. Cultural heritage showcases Structure from Motion 3D reconstruction (Topic 2) on structures rather than terrain; both engineering monitoring cases (landslides especially) are repeat-survey change-detection problems.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="uas-for-remote-sensing-3" class="slide level2 smaller">
-<h2>UAS for Remote Sensing (3)</h2>
+<section id="remote-sensing-surveying-and-cadastral-mapping" class="slide level2 smaller">
+<h2>Remote sensing: surveying and cadastral mapping</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -556,27 +1216,155 @@ Hobby or Recreation <strong>only.</strong></p></li>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/flight_track.webp"></p>
 </div></div>
-</section>
-<section id="use-your-imagination" class="slide level2 center text-center">
-<h2>Use your imagination!</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZDXuGQRpvs4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-</iframe>
+<aside class="notes">
+<p>This is the course’s home application. The flight-track figure previews Topic 3: systematic overlapping flight lines are what turn a camera drone into a survey instrument. Modern RTK/PPK positioning on survey platforms reaches centimeter-level accuracy, which is what makes cadastral-grade work possible.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-should-you-know-how-to-use-uas" class="slide level2 center text-center">
 <h2>Why should you know how to use UAS?</h2>
 <p><a href="https://www.youtube.com/watch?v=47TNPodZqH0">How to obtain spatial data?</a></p>
 
-<img data-src="../images/terrestrial_UAS_satelite.webp" class="r-stretch"></section>
+<img data-src="../images/terrestrial_UAS_satelite.webp" class="r-stretch quarto-figure-center"><p class="caption">UAS between terrestrial survey and satellite platforms in the data-acquisition spectrum</p><aside class="notes">
+<p>The figure places UAS in the data-acquisition spectrum between terrestrial survey and crewed-aircraft/satellite platforms: UAS win on spatial resolution and revisit flexibility, lose on coverage area. The course’s premise is that this niche, centimeter-resolution mapping on demand, is now accessible to any trained geospatial analyst.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-uas-mapping-workflow" class="slide level2 smaller">
+<h2>The UAS mapping workflow</h2>
+<p>How the rest of this course fits together:</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    R["Rules &amp; regulations)"] -.-&gt; A
+    A["Plan the flight"] --&gt; B["Collect imagery"]
+    B --&gt; C["SfM processing"]
+    C --&gt; D["GIS analytics"]
+    %% D --&gt; E["Object/Change Detection"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The orientation slide for the whole semester: every later topic is one box in this pipeline. Point out that the arrows run both ways in practice; analysis needs (resolution, accuracy) drive flight planning choices, which is why planning comes after the processing topics have taught what the data must support. The field trip is where the left half becomes real.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="data-products-you-will-make" class="slide level2 smaller">
+<h2>Data products you will make</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/ortho_example.webp"></p>
+<figcaption>Orthophoto: a georeferenced, distortion-free image map</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/dtm_dsm.webp"></p>
+<figcaption>Surface (DSM) vs terrain (DTM) elevation models</figcaption>
+</figure>
+</div>
+</div></div>
+<ul>
+<li><strong>Point cloud</strong>: millions of 3D points from SfM photogrammetry or lidar</li>
+<li><strong>3D mesh</strong>: a continuous textured surface for visualization and measurement</li>
+</ul>
+<aside class="notes">
+<p>Define the four product types now so Topic 2 lands softly: the orthophoto is the map-accurate image (unlike a raw aerial photo), the DSM includes vegetation and buildings while the DTM is bare earth, and the difference between them is itself an analysis product (canopy height). Point cloud and mesh are the 3D intermediates the rasters are derived from. Every product here comes out of imagery students will collect themselves.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="barriers" class="slide level2">
 <h2>Barriers</h2>
 <ul>
 <li>Constantly changing legislation and regulations</li>
-<li>Political and societal acceptance</li>
+<li>Political and societal acceptance, privacy concerns</li>
+<li>Supply-chain and security restrictions on aircraft procurement</li>
 </ul>
 <p><em>… what do you consider a barrier in UAS development? What obstacles do you see for yourself as a potential UAS user?</em></p>
+<aside class="notes">
+<p>Close with the open discussion; typical student answers include cost, battery endurance, training burden, and airspace access, all worth affirming. The three listed barriers each get follow-up in this course: regulations in Lecture 1B, procurement policy from the platform-landscape slide, and societal acceptance in the best-practices discussion. Collect answers on the board; they make a nice callback in the final topic.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Next lecture</strong>: <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1b.html">Rules and regulations for UAS operations</a>, when and where you may legally fly</p>
+</div>
+<div class="term-card">
+<p><strong>Assignment 1A</strong>: <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html">UAS systems and applications</a>, pick one system, research it, and present it to the class</p>
+</div>
+<aside class="notes">
+<p>Recap the arc: terminology, system elements, classification, sensors, operations, applications. Point students at the assignment page for the full list of required presentation elements and the due date, and remind DE students of the recorded-narration option.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 
 </section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -633,7 +1421,7 @@ Hobby or Recreation <strong>only.</strong></p></li>
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

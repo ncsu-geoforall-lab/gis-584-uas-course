@@ -27,7 +27,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -47,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-99d7a0e2e095b4464e37db1c5521b170.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-bb56509ab555e8b86e1ca13be97fc220.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -652,7 +671,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#systems" id="toc-systems" class="nav-link" data-scroll-target="#systems">Systems</a></li>
   </ul></li>
   <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -695,48 +713,39 @@ ul.task-list li input[type="checkbox"] {
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <ul>
-<li>overview of UAS technology, system’s classifications</li>
+<li>Overview of UAS technology, system’s classifications</li>
 <li>UAS components and operations</li>
-<li>UAS applications</li>
-<li>in class demonstration of selected systems</li>
+<li>UAS applications <!-- * In-class demonstration of selected systems (hands-on look at the program's aircraft; no flying) --></li>
 </ul>
 </section>
 <section id="lecture" class="level2">
 <h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
 <ul>
-<li>Lecture Slides: <a href="../../../course/topics/topic_1_uas_basics/lectures/lecture_1a.html">Introduction to UAS</a></li>
-<li>Lecture Recording: <a href="https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=965b4d89-574a-4ae3-aa38-b1c1016651e4">Fall 2024</a> (NCSU Only)</li>
-<li>Past Videos (2017)
-<ul>
-<li><a href="https://youtu.be/ey_ryHr5JOU?feature=shared">Part 1</a></li>
-<li><a href="https://youtu.be/7eX8qyRALLs?feature=shared">Part 2</a></li>
-<li><a href="https://youtu.be/9bzUauhT-DE?feature=shared">Part 3</a></li>
-<li><a href="https://youtu.be/mFCUbibLq4c?feature=shared">Part 4</a></li>
-<li><a href="https://youtu.be/5ycXcaHk3DU?feature=shared">Part 5</a></li>
-<li><a href="https://youtu.be/_ZFZCoLzsrI?feature=shared">Part 6</a></li>
-</ul></li>
+<li>Lecture Slides: <a href="../../../course/topics/topic_1_uas_basics/lectures/lecture_1a.html">Introduction to UAS</a> <!-- * Lecture Recording: [Fall 2024](https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=965b4d89-574a-4ae3-aa38-b1c1016651e4) (NCSU Only) --></li>
 </ul>
 </section>
 <section id="supplemental-materials" class="level2">
 <h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
+<ul>
+<li><a href="https://dronemappingsoftware.com/">Drone Mapping Software</a> - Searchable list of software</li>
+<li><a href="https://onlinelibrary.wiley.com/doi/10.1111/phor.12244">RPV, UAV, UAS, RPAS…or just drone?</a> - Editorial by Stuart I, Granshw, 2018 discussing the origin and usage of the language used to describe Drones, UAV, etc <span class="citation" data-cites="granshaw_20218">(<a href="#ref-granshaw_20218" role="doc-biblioref">Granshaw 2018</a>)</span></li>
+</ul>
 <section id="systems" class="level3">
 <h3 class="anchored" data-anchor-id="systems">Systems</h3>
-<section id="fixed-wing" class="level4">
-<h4 class="anchored" data-anchor-id="fixed-wing">Fixed wing</h4>
+<section id="fixed-wing-and-vtol-hybrid" class="level4">
+<h4 class="anchored" data-anchor-id="fixed-wing-and-vtol-hybrid">Fixed wing and VTOL hybrid</h4>
 <ul>
-<li><a href="https://www.sensefly.com/">senseFly</a></li>
-<li><a href="https://www.sensefly.com/drone/ebee-mapping-drone/">eBee Classic</a></li>
-<li><a href="https://www.sensefly.com/drone/ebee-plus-survey-drone/">eBee Plus</a></li>
-<li><a href="https://www.sensefly.com/drone/ebee-sq-agriculture-drone/">eBee SQ</a></li>
+<li><a href="https://ageagle.com/drones/ebee-x/">eBee X by AgEagle</a> (successor of the senseFly eBee used in earlier offerings of this course)</li>
+<li><a href="https://wingtra.com/mapping-drone-wingtraone/">WingtraOne GEN II</a></li>
 </ul>
 </section>
 <section id="rotary-wing" class="level4">
 <h4 class="anchored" data-anchor-id="rotary-wing">Rotary wing</h4>
 <ul>
-<li><a href="https://www.trimble.com/Survey/ZX5.aspx">ZX5 by Trimble</a></li>
-<li><a href="https://www.dji.com/inspire-2">Inspire 2 by DJI</a></li>
-<li><a href="https://www.dji.com/mavic-2">Mavic 2 by DJI</a></li>
-<li><a href="https://www.dji.com/phantom-4-pro-v2">Phantom 4 Pro by DJI</a></li>
+<li><a href="https://enterprise.dji.com/mavic-3-enterprise">DJI Mavic 3 Enterprise / Multispectral</a></li>
+<li><a href="https://enterprise.dji.com/matrice-4-series">DJI Matrice 4 Series</a></li>
+<li><a href="https://www.skydio.com/x10">Skydio X10</a> (NDAA-compliant, <a href="https://www.diu.mil/blue-uas">Blue UAS</a> listed)</li>
+<li><a href="https://freeflysystems.com/astro">Freefly Astro</a> (NDAA-compliant, Blue UAS listed)</li>
 </ul>
 </section>
 </section>
@@ -744,18 +753,19 @@ ul.task-list li input[type="checkbox"] {
 <section id="assignment" class="level2">
 <h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
 <ul>
-<li><a href="../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html">UAS: systems and applications</a></li>
+<li><a href="../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html">Assignment 1A: UAS systems and applications</a> - select one UAS, research it, and present it to the class. See the assignment page for the full list of required elements, presentation format, and submission instructions.</li>
 </ul>
-</section>
-<section id="homework" class="level2">
-<h2 class="anchored" data-anchor-id="homework">Homework</h2>
-<p>Prepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. (<a href="../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html">Assignment 1A</a>)</p>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-granshaw_20218" class="csl-entry" role="listitem">
+Granshaw, Stuart I. 2018. <span>“RPV, UAV, UAS, RPAS … or Just Drone?”</span> <em>The Photogrammetric Record</em> 33 (162): 160–70. https://doi.org/<a href="https://doi.org/10.1111/phor.12244">https://doi.org/10.1111/phor.12244</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
