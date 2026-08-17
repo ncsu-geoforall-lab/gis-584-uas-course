@@ -4,50 +4,42 @@ title: "Introduction to UAS"
 subtitle: "Topic 1A: UAS Basics"
 date: 8/17/2026
 activity: Lecture
+bibliography: references.bib
 ---
 
 # Introduction to Unmanned Aerial Systems
 
 ## Outline
 
-* overview of UAS technology, system's classifications
+* Overview of UAS technology, system's classifications
 * UAS components and operations
 * UAS applications
-* in class demonstration of selected systems
+<!-- * In-class demonstration of selected systems (hands-on look at the program's aircraft; no flying) -->
 
 ## Lecture
 
 * Lecture Slides: [Introduction to UAS](lectures/lecture_1a.qmd)
-* Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1a >}}) (NCSU Only)
-* Past Videos (2017)
-    * [Part 1](https://youtu.be/ey_ryHr5JOU?feature=shared)
-    * [Part 2](https://youtu.be/7eX8qyRALLs?feature=shared)
-    * [Part 3](https://youtu.be/9bzUauhT-DE?feature=shared)
-    * [Part 4](https://youtu.be/mFCUbibLq4c?feature=shared)
-    * [Part 5](https://youtu.be/5ycXcaHk3DU?feature=shared)
-    * [Part 6](https://youtu.be/_ZFZCoLzsrI?feature=shared)
+<!-- * Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1a >}}) (NCSU Only) -->
 
 ## Supplemental materials
 
+* [Drone Mapping Software](https://dronemappingsoftware.com/) - Searchable list of software
+* [RPV, UAV, UAS, RPAS...or just drone?](https://onlinelibrary.wiley.com/doi/10.1111/phor.12244) - Editorial by Stuart I, Granshw, 2018 discussing the origin and usage of the language used to describe Drones, UAV, etc [@granshaw_20218]
+
 ### Systems
 
-#### Fixed wing 
-* [senseFly](https://www.sensefly.com/)
-* [eBee Classic](https://www.sensefly.com/drone/ebee-mapping-drone/)
-* [eBee Plus](https://www.sensefly.com/drone/ebee-plus-survey-drone/)
-* [eBee SQ](https://www.sensefly.com/drone/ebee-sq-agriculture-drone/)
+#### Fixed wing and VTOL hybrid
+
+* [eBee X by AgEagle](https://ageagle.com/drones/ebee-x/) (successor of the senseFly eBee used in earlier offerings of this course)
+* [WingtraOne GEN II](https://wingtra.com/mapping-drone-wingtraone/)
 
 #### Rotary wing
-- [ZX5 by Trimble](https://www.trimble.com/Survey/ZX5.aspx)
-- [Inspire 2 by DJI](https://www.dji.com/inspire-2)
-- [Mavic 2 by DJI](https://www.dji.com/mavic-2)
-- [Phantom 4 Pro by DJI](https://www.dji.com/phantom-4-pro-v2)
+
+- [DJI Mavic 3 Enterprise / Multispectral](https://enterprise.dji.com/mavic-3-enterprise)
+- [DJI Matrice 4 Series](https://enterprise.dji.com/matrice-4-series)
+- [Skydio X10](https://www.skydio.com/x10) (NDAA-compliant, [Blue UAS](https://www.diu.mil/blue-uas) listed)
+- [Freefly Astro](https://freeflysystems.com/astro) (NDAA-compliant, Blue UAS listed)
 
 ## Assignment
 
-* [UAS: systems and applications](assignments/assignment_1a.qmd)
-
-## Homework
-
-Prepare presentation about UAS relevant to your research or interests, describe its technical specifications, main applications and a case study. ([Assignment 1A](assignments/assignment_1a.qmd))
-
+* [Assignment 1A: UAS systems and applications](assignments/assignment_1a.qmd) - select one UAS, research it, and present it to the class. See the assignment page for the full list of required elements, presentation format, and submission instructions.

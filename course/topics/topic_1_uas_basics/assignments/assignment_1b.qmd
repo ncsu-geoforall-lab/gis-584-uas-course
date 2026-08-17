@@ -9,10 +9,20 @@ activity: Lab
 
 ## Task
 
-UAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided [sample questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf)
+Select 5 questions from the FAA's official [Part 107 sample questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf) and prepare a brief report that, for each question, gives the correct answer and briefly explains why it is correct (and, where useful, why the other options are wrong).
 
-## Homework
+You may pick any 5 questions from the document. Choose questions that require some reasoning (airspace, charts, weather, operating rules) rather than pure recall, and use the lecture materials and the FAA study resources linked from the [Part 107 guide](../faa_part_107_guide.qmd) to support your explanations.
 
-Prepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation.
+## Submission
+
+Upload your report as a PDF (1 - 2 pages) to Moodle, Topic 1.
+
+## Grading
+
+Your report is evaluated on:
+
+* Correctness: the identified answers are correct
+* Explanation quality: each explanation shows why the answer is correct, referencing the relevant rule, chart, or concept
+* On-time submission to Moodle
 
 ### Due {{< meta assignment-due-date >}}

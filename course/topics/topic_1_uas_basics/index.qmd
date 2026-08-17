@@ -22,3 +22,5 @@ order: 1
 ## Reference
 
 - [Step-by-Step Guide to Getting FAA Part 107 License](faa_part_107_guide.qmd)
+
+Obtaining the FAA Part 107 Remote Pilot Certificate is **not required** for this course; the guide is provided as background reference for students who want to pursue the certificate on their own.

@@ -10,9 +10,9 @@ activity: Lab
 
 ## Task
 
-During the first lecture you’ve learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.
+During the first lecture you've learned about different types of UAS and their applications. Since it is practically impossible to be familiar with all of the existing and emerging UAS your task is to select one system and prepare a short presentation for the class. If you have previous experience with UAS your presentation can describe your project. This way we will be able to learn about a broad range of UAS and their applications.
 
-The presentation should be 7 - 10 minutes long and include the following:
+The presentation should be 7 - 10 minutes long (about 5 - 8 slides) and include the following:
 
 * Name of the UAS
 * Photo and/or diagram of its components
@@ -20,10 +20,24 @@ The presentation should be 7 - 10 minutes long and include the following:
 * Place (country) and year of manufacture
 * Technical specifications (size, weight, endurance, wingspan, payload….)
 * Main applications
-* Case study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained 
+* Case study that shows how this UAS was used in industry/research/combat/private needs and what kind of outputs/results were obtained
 
 Try to find something relevant to your research interest or just something unique that will be worth sharing.
 
-## Homework
+## Submission
 
-Upload your presentation to Moodle, Topic 1. On-campus students will present according to the schedule. 
+Upload your presentation (PDF or PowerPoint) to Moodle, Topic 1.
+
+* **On-campus students** will present in class according to the schedule.
+* **Distance Education students**: record a narrated screen capture of your presentation (7 - 10 minutes) and upload the recording, or a link to it, together with your slides to the same Moodle assignment.
+
+## Grading
+
+Your presentation is evaluated on:
+
+* Completeness: all seven required elements listed above are covered
+* Quality of the case study: concrete application with described outputs/results, sources cited
+* Delivery: clear presentation within the 7 - 10 minute window (live or recorded)
+* On-time submission to Moodle
+
+### Due {{< meta assignment-due-date >}}
