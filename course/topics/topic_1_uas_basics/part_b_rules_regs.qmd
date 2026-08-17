@@ -10,44 +10,34 @@ activity: Lecture
 
 * levels of regulatory authority
 * Small UAS Rule (Part 107)
-* UAS authorizations to fly
-* types of airspace and restrictions to flight
-* current information resources 
+* recreational flying under the 49 USC 44809 exception (TRUST)
+* UAS authorizations to fly: LAANC and airspace restrictions
+* current information resources
 
 ## Lecture
 
 * Lecture Slides: [Rules and Regulations](lectures/lecture_1b.qmd)
 * Lecture Recording: [Fall 2024]({{< var recordings.topic1.lecture1b >}}) (NCSU Only)
-* Past Videos (2017)
-    * [Part 1](https://youtu.be/Pf_kwEq6too?feature=shared)
-    * [Part 2](https://youtu.be/JUM93NZlukI?feature=shared)
-    * [Part 3](https://youtu.be/goewibtKfgQ?feature=shared)
-    * [Part 4](https://youtu.be/KQ02OTxmlNA?feature=shared)
-    * [Part 5](https://youtu.be/lW58hD165sY?feature=shared)
 
 ### Supplemental materials
 
 * [FAA Unmanned Aircraft Systems](https://www.faa.gov/uas/)
 * [Becoming a Pilot sUAS Rule (Part 107)](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot/)
 * [Where can I find study materials for the Part 107 aeronautical knowledge test?](https://www.faa.gov/faq/where-can-i-find-study-materials-part-107-aeronautical-knowledge-test)
+* [Recreational flyers and TRUST (The Recreational UAS Safety Test)](https://www.faa.gov/uas/recreational_flyers)
+* [LAANC airspace authorization and approved service suppliers](https://www.faa.gov/uas/getting_started/laanc)
+* [FAADroneZone](https://faadronezone-access.faa.gov/) - registration, waivers, accident reports
 * [Operating UAS in North Carolina](https://www.ncdot.gov/aviation/uas/)
 * [Drone use in Federally Funded Projects](https://research.ncsu.edu/administration/compliance/research-compliance/research-security/drone-use-in-federally-funded-projects/)
 * [UAS Activities at NC State: Rules and Regulations](https://oit.ncsu.edu/about/units/campus-it/rules-and-regulations/uas/)
 * Aeronautical charts and related georeferenced data
     * [View digital aeronautical charts](https://vfrmap.com/)
-    * [Skyvector](https://skyvector.com/):charts, airspace and airport information for pilots
+    * [Skyvector](https://skyvector.com/): charts, airspace and airport information for pilots
     * [Download georeferenced digital aeronautical charts](http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/vfr/), download Charlotte for NC chart
     * [FAA Data Portal](https://www.faa.gov/data)
 * Weather data
-    * [Aviation Weather Center](https://www.aviationweather.gov/), interactive METAR, TAFs and other NOAA NWS resources 
-<!-- * Other helpful material (Need Permission)
-    * [Educational use of UAS](https://drive.google.com/open?id=0B8j08KoSleFQd3gzdElMOHJKMHM)  -->
-
+    * [Aviation Weather Center](https://www.aviationweather.gov/), interactive METAR, TAFs and other NOAA NWS resources
 
 ## Assignment
 
-UAS Rule Part 107 test: select 5 questions and briefly explain the correct answers in the the provided [sample questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf) 
-
-## Homework
-
-Prepare brief report on the selected section of the Part 107 test - 5 questions and answers with explanation. 
+* [Assignment 1B: UAS Rule Part 107 test subset](assignments/assignment_1b.qmd) - see the assignment page for the full instructions and submission details.
