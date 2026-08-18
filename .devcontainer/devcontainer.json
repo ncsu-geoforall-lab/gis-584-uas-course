@@ -1,0 +1,57 @@
+{
+  "name": "GIS/MAE 584 UAS Mapping and Analytics",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "workspaceFolder": "/workspaces/gis-584-uas-course",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "features": {
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+      "version": "1.9.38"
+    }
+  },
+  "remoteEnv": {
+    "PATH": "${containerWorkspaceFolder}/.venv/bin:${containerEnv:PATH}"
+  },
+  "forwardPorts": [4200, 8888],
+  "portsAttributes": {
+    "4200": {
+      "label": "Quarto preview",
+      "onAutoForward": "openPreview"
+    },
+    "8888": {
+      "label": "Jupyter",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "waitFor": "postCreateCommand",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "quarto.quarto",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "python.terminal.activateEnvironment": false,
+        "jupyter.notebookFileRoot": "${workspaceFolder}",
+        "files.watcherExclude": {
+          "**/.venv/**": true,
+          "**/_freeze/**": true,
+          "**/docs/**": true
+        }
+      }
+    }
+  },
+  "remoteUser": "root"
+}
