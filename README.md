@@ -1,6 +1,7 @@
 # GIS/MAE 584 Mapping and Analytics Using UAS
 
 [![Quarto Publish](https://github.com/ncsu-geoforall-lab/gis-584-uas-course/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/ncsu-geoforall-lab/gis-584-uas-course/actions/workflows/publish.yml)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ncsu-geoforall-lab/gis-584-uas-course)
 
 Course website for GIS/MAE 584 Mapping and Analytics Using UAS
 
@@ -11,6 +12,26 @@ Course website for GIS/MAE 584 Mapping and Analytics Using UAS
 ## Configuration
 
 Install Quarto following the directions at [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/)
+
+## GitHub Codespaces
+
+A Codespace gives you the course stack in the browser with nothing to install
+locally: GRASS 8.5 built with GDAL and PDAL, Python 3.12 with the packages in
+`requirements.txt`, Jupyter, Quarto, and the GRASS addons the assignments use.
+
+Start one from **Code > Codespaces > Create codespace on main**, or with the
+badge above. The first build takes about 10 minutes.
+
+The Lake Wheeler GRASS project is not in the repository. Download it inside the
+Codespace with:
+
+```bash
+bash .devcontainer/get-course-data.sh
+grass ~/grassdata/Lake_Wheeler_NCspm/PERMANENT
+```
+
+See [.devcontainer/README.md](.devcontainer/README.md) for what the environment
+contains and what it does not cover (WebODM, Agisoft Metashape, the wxGUI).
 
 ## Development
 
