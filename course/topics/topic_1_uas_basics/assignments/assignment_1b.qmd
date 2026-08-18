@@ -9,20 +9,30 @@ activity: Lab
 
 ## Task
 
+Complete **one** of the following two options.
+
+### Option 1: Pass the TRUST safety test
+
+Take and pass [TRUST (The Recreational UAS Safety Test)](https://www.faa.gov/uas/recreational_flyers/knowledge_test_updates), the FAA's free online safety test for recreational flyers. The test is administered by FAA-approved test administrators, takes about 30 minutes, and cannot be failed: incorrect answers are corrected and re-asked. Keep your completion certificate; you are required to carry proof of completion whenever you fly recreationally.
+
+Along with your certificate, write a short reflection (2 - 3 sentences): what from the training was new to you, or what surprised you the most?
+
+### Option 2: Part 107 sample questions report
+
 Select 5 questions from the FAA's official [Part 107 sample questions](https://www.faa.gov/sites/faa.gov/files/training_testing/testing/test_questions/uag_questions.pdf) and prepare a brief report that, for each question, gives the correct answer and briefly explains why it is correct (and, where useful, why the other options are wrong).
 
 You may pick any 5 questions from the document. Choose questions that require some reasoning (airspace, charts, weather, operating rules) rather than pure recall, and use the lecture materials and the FAA study resources linked from the [Part 107 guide](../faa_part_107_guide.qmd) to support your explanations.
 
 ## Submission
 
-Upload your report as a PDF (1 - 2 pages) to Moodle, Topic 1.
+Upload to Moodle, Assignment 1B:
+
+* **Option 1**: your TRUST completion certificate (PDF or image) as proof of completion, with your 2 - 3 sentence reflection in the Moodle text box or as a second page.
+* **Option 2**: your report as a PDF (1 - 2 pages).
 
 ## Grading
 
-Your report is evaluated on:
-
-* Correctness: the identified answers are correct
-* Explanation quality: each explanation shows why the answer is correct, referencing the relevant rule, chart, or concept
-* On-time submission to Moodle
+* **Option 1**: complete/incomplete, based on the submitted TRUST certificate and reflection.
+* **Option 2**: evaluated on correctness of the identified answers, explanation quality (each explanation shows why the answer is correct, referencing the relevant rule, chart, or concept), and on-time submission.
 
 ### Due {{< meta assignment-due-date >}}
