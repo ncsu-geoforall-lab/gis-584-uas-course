@@ -10,7 +10,7 @@
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
-  <meta name="author" content="Corey White adpted from Justyna Jeziorska">
+  <meta name="author" content="Corey White">
   <title>UAS Mapping and Analytics – UAS Rules and Regulations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -140,44 +140,25 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Corey White adpted from Justyna Jeziorska
+Corey White
 </div>
 </div>
 </div>
 
 </section>
-<section id="objectives" class="slide level2">
+<section id="objectives" class="slide level2 smaller">
 <h2>Objectives</h2>
 <ul>
 <li><strong>Understand</strong> the role of the Federal Aviation Administration (FAA) in ensuring safety in the National Airspace System (NAS)</li>
-<li><strong>Recognize</strong> the main types of UAS operations and distinguish between them</li>
-<li><strong>Name</strong> the requirements for legal commercial UAS operations in the U.S., both for the pilot and for the UAS</li>
-<li><strong>Outline</strong> the requirements for recreational flying under the 49 USC 44809 exception, including TRUST</li>
+<li><strong>Recognize</strong> the main types of UAS operations and the rules for each: Part 107 for commercial use and the 49 USC 44809 recreational exception (TRUST)</li>
+<li><strong>Know</strong> the Part 107 operating rules, including airspace authorization with LAANC</li>
+<li><strong>Recognize</strong> permanent and temporary “no-drone-zones”</li>
+<li><strong>Understand</strong> the Certificate of Authorization (COA) for public agencies and when educational use requires Part 107</li>
 </ul>
 <aside class="notes">
-<p>Frame the lecture: last week was what UAS are; this week is when and how you may legally fly them. Emphasize that everyone in the room who ever launches a drone, even a 249 g toy in a park, falls under one of these rule sets. The recreational exception is a statute (49 USC 44809, from the 2018 FAA Reauthorization Act), while commercial rules are regulation (14 CFR Part 107, effective August 29, 2016).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="objectives-1" class="slide level2">
-<h2>Objectives</h2>
-<ul>
-<li><strong>Know</strong> the operating rules for commercial use of UAS (Part 107)</li>
-<li><strong>Understand</strong> how airspace authorization works today (LAANC) and <strong>recognize</strong> permanent and temporary “no-drone-zones”</li>
-<li><strong>Understand</strong> the role of the Certificate of Authorization (COA) for public agencies</li>
-<li><strong>Recognize</strong> when educational use of UAS falls under the recreational exception and when it requires Part 107</li>
-</ul>
-<aside class="notes">
-<p>Point out that this material changes often: the rules taught in this course in 2017 are substantially different from today’s. Encourage students to always verify against faa.gov/uas rather than blog posts. Mapping work done for the university or a client is commercial in the FAA’s eyes, so Part 107 is the rule set most relevant to this course.</p>
+<p>Frame the lecture: last week was what UAS are; this week is when and how you may legally fly them.</p>
+<p>Emphasize that everyone in the room who ever launches a drone, even a 249 g toy in a park, falls under one of these rule sets. The recreational exception is a statute (49 USC 44809, from the 2018 FAA Reauthorization Act), while commercial rules are regulation (14 CFR Part 107, effective August 29, 2016).</p>
+<p>This material changes often; encourage students to always verify against faa.gov/uas rather than blog posts.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -202,6 +183,9 @@ Corey White adpted from Justyna Jeziorska
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/FAA.webp"></p>
 </div></div>
+<blockquote>
+<p><a href="https://www.faa.gov/about/history/brief_history">A Brief History of the FAA</a></p>
+</blockquote>
 <aside class="notes">
 <p>The 1956 Grand Canyon midair collision is the classic trigger event; the Federal Aviation Act of 1958 created the agency. The key takeaway for drone pilots: the FAA owns the airspace from the ground up. There is no unregulated altitude band below 400 ft; that figure is an operating limit, not a boundary of FAA authority.</p>
 <style type="text/css">
@@ -216,11 +200,12 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="national-airspace-system-nas" class="slide level2">
+<section id="national-airspace-system-nas" class="slide level2 smaller">
 <h2>National Airspace System (NAS)</h2>
 <ul>
 <li class="fragment">Already congested with piloted aircraft, and adding a swarm of UAS requires thoughtful planning</li>
-<li class="fragment">Main mandate: to ensure that UAS do not endanger current users of the NAS nor compromise the safety of people and property on the ground <!-- - The lack of detect-and-avoid capability of most current UAS technology remains a major concern for the FAA, and is the core problem the proposed Part 108 BVLOS rule tries to solve (more at the end of this lecture) --></li>
+<li class="fragment"><strong>Main mandate:</strong> to ensure that UAS do not endanger current users of the NAS nor compromise the safety of people and property on the ground</li>
+<li class="fragment">Most small UAS cannot yet <strong>detect and avoid</strong> other aircraft, the gap behind many of today’s operating rules and the proposed Part 108 BVLOS rule (end of this lecture)</li>
 </ul>
 <aside class="notes">
 <p>Detect-and-avoid is the drone equivalent of “see and avoid” that manned pilots perform visually. Because a remote pilot cannot scan the sky from the cockpit, the default mitigations are visual line of sight and yielding right of way. This is the thread that connects most Part 107 operating rules, and the reason beyond-visual-line-of-sight flight currently requires a waiver. Foreshadow the Part 108 slide at the end.</p>
@@ -236,19 +221,44 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="types-of-uas-operations" class="slide level2">
+<section id="who-may-fly-and-under-which-rules" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Who may fly, and under which rules?</h2>
+<p>Types of UAS operations</p>
+<aside class="notes">
+<p>Section transition: from the FAA’s mandate to the rule sets it created. The next slides sort every flight into one of three buckets and then work through each bucket’s requirements.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="types-of-uas-operations" class="slide level2 smaller">
 <h2>Types of UAS operations</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li><strong>Commercial / civil</strong>: any flight in furtherance of a business or non-recreational purpose, under <strong>14 CFR Part 107</strong></li>
-<li><strong>Recreational</strong>: strictly for personal enjoyment, under the <strong>49 USC 44809</strong> exception</li>
-<li><strong>Public aircraft operations</strong>: government entities, under Part 107 or a <strong>Certificate of Authorization (COA)</strong></li>
-<li><strong>Educational use</strong> can fall under the recreational exception or Part 107, depending on the activity</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/uas_operations.webp"></p>
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Commercial / civil</strong>: any flight in furtherance of a business or non-recreational purpose, under <strong>14 CFR Part 107</strong></p>
+</div>
+<div class="term-card">
+<p><strong>Recreational</strong>: strictly for personal enjoyment, under the <strong>49 USC 44809</strong> exception</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Public aircraft operations</strong>: government entities, under Part 107 or a <strong>Certificate of Authorization (COA)</strong></p>
+</div>
+<div class="term-card">
+<p><strong>Educational use</strong> can fall under the recreational exception or Part 107, depending on the activity</p>
+</div>
 </div></div>
+<div class="term-card">
+<p><strong>Intent decides</strong>: the same aircraft can fly recreationally on Saturday and commercially on Monday</p>
+</div>
 <aside class="notes">
 <p>The 2018 FAA Reauthorization Act repealed the old “model aircraft” rule (Section 336) and replaced it with the 44809 recreational exception; the FAA no longer uses “model aircraft” as an operational category. Stress that intent, not the aircraft, determines the category: the same Mini 4 Pro is recreational in a park on Saturday and commercial when photographing a field site for a project.</p>
 <style type="text/css">
@@ -265,16 +275,11 @@ Corey White adpted from Justyna Jeziorska
 </section>
 <section id="recreational-use-of-uas" class="slide level2 smaller">
 <h2>Recreational use of UAS</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
 <ul>
 <li>Operation of an unmanned aircraft strictly for <strong>personal interests and enjoyment</strong></li>
 <li>Taking photographs for your own personal use is recreational</li>
 <li>Taking the same photographs for compensation, for sale, or in furtherance of any business (including research or coursework deliverables for pay) is a <strong>commercial</strong> operation under Part 107</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/recreational.webp"></p>
-</div></div>
 <aside class="notes">
 <p>Useful test question for the class: is posting drone footage to a monetized YouTube channel recreational? (No; compensation makes it commercial.) Is flying to practice piloting skills for a future Part 107 job recreational? (FAA guidance says yes, if the flight itself is purely for enjoyment/proficiency.) The line is the purpose of the individual flight.</p>
 <style type="text/css">
@@ -289,22 +294,22 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="recreational-use---the-44809-exception" class="slide level2 smaller">
-<h2>Recreational use - the 44809 exception</h2>
-<p>To fly recreationally without a Part 107 certificate you must follow <strong>all</strong> conditions of 49 USC 44809:</p>
+<section id="the-44809-exception-conditions" class="slide level2 smaller">
+<h2>The 44809 exception: conditions</h2>
+<p>To fly recreationally without a Part 107 certificate you must follow <strong>all</strong> conditions of <a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title49-section44809&amp;num=0&amp;edition=prelim">49 USC 44809</a>:</p>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
 <li>Fly <strong>strictly for recreational purposes</strong></li>
-<li>Pass <strong>TRUST</strong> (The Recreational UAS Safety Test) and carry proof of completion</li>
+<li>Pass <a href="https://www.faa.gov/uas/recreational_flyers/knowledge_test_updates"><strong>TRUST</strong></a> (The Recreational UAS Safety Test) and carry proof of completion</li>
 <li><strong>Register</strong> the aircraft if it weighs 250 g or more (<a href="https://faadronezone-access.faa.gov/">FAADroneZone</a>) and comply with <strong>Remote ID</strong></li>
-<li>Follow the safety guidelines of an FAA-recognized <strong>Community Based Organization (CBO)</strong></li>
+<li>Follow the safety guidelines of an FAA-recognized <a href="https://www.faa.gov/uas/recreationalfliers/faa-recognized-community-based-organizations"><strong>Community Based Organization (CBO)</strong></a></li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/did_you_know2.webp"></p>
 </div></div>
 <aside class="notes">
-<p>TRUST (required since 2021) is free, online, cannot be failed (wrong answers are corrected and re-asked), and takes about 30 minutes; proof must be shown to the FAA or law enforcement on request. Recognized CBOs include the Academy of Model Aeronautics and FPV Freedom Coalition; their published guidelines fill in operational detail the statute leaves open. Registration is $5 for 3 years and the number goes on the aircraft.</p>
+<p>TRUST (required since 2021) is free, online, cannot be failed (wrong answers are corrected and re-asked), and takes about 30 minutes; proof must be shown to the FAA or law enforcement on request. Recognized CBOs include the Academy of Model Aeronautics and FPV Freedom Coalition; their published guidelines fill in operational detail the statute leaves open. Registration is $5 for 3 years and the number goes on the aircraft. Assignment 1B offers TRUST as one of its two options.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -317,8 +322,8 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="recreational-use---the-44809-exception-1" class="slide level2 smaller">
-<h2>Recreational use - the 44809 exception</h2>
+<section id="the-44809-exception-where-you-may-fly" class="slide level2 smaller">
+<h2>The 44809 exception: where you may fly</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -344,21 +349,16 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="recreational-use---safety-practices" class="slide level2 smaller">
-<h2>Recreational use - safety practices</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+<section id="recreational-use---do-not-fly" class="slide level2 smaller">
+<h2>Recreational use - Do not fly</h2>
 <ul>
-<li>Ensure the operating environment is safe and the operator is competent and proficient</li>
-<li>Do not fly over people or moving vehicles, and keep a safe distance from individuals and vulnerable property</li>
-<li>Do not fly near or over sensitive infrastructure (power stations, water treatment facilities, correctional facilities, heavily traveled roadways, government facilities)</li>
-<li>Do not fly in adverse weather such as high winds or reduced visibility</li>
+<li><strong>over people or moving vehicles</strong>, and keep a safe distance from individuals and vulnerable property</li>
+<li><strong>near or over sensitive infrastructure</strong> (power stations, water treatment facilities, correctional facilities, heavily traveled roadways, government facilities)</li>
+<li>in <strong>adverse weather</strong> such as <strong>high winds</strong> or reduced visibility</li>
+<li><strong>under the influence</strong> of alcohol or drugs</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/funny2.webp"></p>
-</div></div>
 <aside class="notes">
-<p>These practices come from the CBO safety guidelines that the statute requires recreational flyers to follow. They mirror many Part 107 rules, which makes the later transition to certificated flying easier. Wind is the practical one for mapping students: most small quads struggle above roughly 20 mph sustained wind, well before the flight becomes illegal it becomes useless for data quality.</p>
+<p>These practices come from the CBO safety guidelines that the statute requires recreational flyers to follow, and they mirror many Part 107 rules, which makes the later transition to certificated flying easier. Wind is the practical one for mapping students: most small quads struggle above roughly 20 mph sustained wind, well before the flight becomes illegal it becomes useless for data quality.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -371,20 +371,32 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="recreational-use---safety-practices-1" class="slide level2 smaller">
+<section id="recreational-use---safety-practices" class="slide level2 smaller">
 <h2>Recreational use - safety practices</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
 <ul>
-<li>Check and follow all local laws and ordinances before flying over private property</li>
-<li>Do not conduct surveillance or photograph persons where there is an expectation of privacy without permission</li>
-<li>Do not fly under the influence of alcohol or drugs</li>
+<li>Ensure the <strong>operating environment</strong> is <strong>safe</strong> and the <strong>operator</strong> is <strong>competent</strong> and proficient</li>
+<li>Check and <strong>follow all local laws and ordinances</strong> before flying over private property</li>
+<li><strong>Do not conduct surveillance</strong> or <strong>photograph persons</strong> where there is an <strong>expectation of privacy</strong> without permission</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/cartoon.webp"></p>
-</div></div>
 <aside class="notes">
-<p>Privacy is mostly governed by state and local law, not the FAA. North Carolina’s drone statutes (G.S. 15A-300.1) prohibit surveillance of persons or private property without consent, with civil damages available. Good discussion prompt: who enforces what? The FAA handles airspace violations; local police handle privacy, trespass, and harassment complaints.</p>
+<p>Privacy is mostly governed by state and local law, not the FAA: North Carolina’s drone statutes (G.S. 15A-300.1) prohibit surveillance of persons or private property without consent, with civil damages available. Good discussion prompt: who enforces what? The FAA handles airspace violations; local police handle privacy, trespass, and harassment complaints.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="flying-under-part-107" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Flying under Part 107</h2>
+<p>Commercial operations: the pilot, the aircraft, the rules</p>
+<aside class="notes">
+<p>Section transition into the course’s home rule set. Structure of this section: what counts as commercial, then pilot requirements, aircraft requirements, operating rules, operations over people, waivers, and accident reporting.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -444,7 +456,7 @@ Corey White adpted from Justyna Jeziorska
 <p><img data-src="../images/licence.webp"></p>
 </div></div>
 <aside class="notes">
-<p>The knowledge test is 60 multiple-choice questions, 2 hours, 70% to pass, about $175 at a PSI testing center. Point students to the step-by-step guide on the course site; also note the certificate is not required for this course, but it is one of the most employable single credentials a geospatial student can add. Assignment 1B has them work through sample test questions.</p>
+<p>The knowledge test is 60 multiple-choice questions, 2 hours, 70% to pass, about $175 at a PSI testing center. Point students to the step-by-step guide on the course site; also note the certificate is not required for this course, but it is one of the most employable single credentials a geospatial student can add. Assignment 1B lets them either take TRUST or work through Part 107 sample test questions.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -461,7 +473,6 @@ Corey White adpted from Justyna Jeziorska
 <h2>Remote Pilot Certificate</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<h3 id="requirements">Requirements</h3>
 <ul>
 <li>Must be easily accessible by the remote pilot during all UAS operations</li>
 <li>Certificate holders must complete free <a href="https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot#keepCurrent">online recurrent training</a> every 24 calendar months to maintain aeronautical knowledge recency (effective April 2021)</li>
@@ -471,7 +482,7 @@ Corey White adpted from Justyna Jeziorska
 <p><img data-src="../images/test.webp" style="width:80.0%"></p>
 </div></div>
 <aside class="notes">
-<p>Before April 2021 keeping current meant paying to retake a proctored test every 24 months; now it is free online recurrent training (course ALC-677) that also covers the 2021 night-operations and operations-over-people rules. The certificate itself never expires; only recency lapses, and a lapsed pilot simply completes the training before flying again.</p>
+<p>Before April 2021 keeping current meant paying to retake a proctored test every 24 months; now it is free online recurrent training (<a href="https://www.faasafety.gov/gslac/ALC/CourseLanding.aspx?cID=677">course ALC-677</a>) that also covers the 2021 night-operations and operations-over-people rules. The certificate itself never expires; only recency lapses, and a lapsed pilot simply completes the training before flying again.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -498,7 +509,7 @@ Corey White adpted from Justyna Jeziorska
 <p><img data-src="../images/cartoon9.webp"></p>
 </div></div>
 <aside class="notes">
-<p>Under Part 107 every aircraft is registered individually regardless of weight (the 250 g threshold applies only to recreational registration). At 55 lbs and above you leave Part 107 entirely and need an exemption or airworthiness certification. The pre-flight check requirement (107.49) is where checklists, battery inspection, and control-link verification live; this becomes routine in the flight-planning topic.</p>
+<p>Under Part 107 every aircraft is registered individually regardless of weight (the 250 g threshold applies only to recreational registration). At 55 lbs and above you leave Part 107 entirely and need an exemption or airworthiness certification. The pre-flight check requirement <a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.49">(107.49)</a> is where checklists, battery inspection, and control-link verification live; this becomes routine in the flight-planning topic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -511,10 +522,293 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="commercial-use---location-requirements" class="slide level2">
-<h2>Commercial use - location requirements</h2>
+<section id="part-107-flight-limits" class="slide level2 smaller">
+<h2>Part 107: flight limits</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Must fly at or below <strong>400 feet above ground level (AGL)</strong>, or within 400 feet of a structure if flying higher</li>
+<li>Must not fly from a <strong>moving vehicle</strong> unless in a sparsely populated area</li>
+<li>Must fly at or below <strong>100 mph (87 knots)</strong></li>
+<li>Must <strong>yield right of way</strong> to manned aircraft</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/structures.webp"></p>
+</div></div>
+<aside class="notes">
+<p>The 400-ft-of-a-structure allowance <a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.51">(107.51)</a> exists for tower and building inspection: you may fly up to 400 ft above a structure’s top while within a 400 ft radius of it. For mapping work in this course, flight altitude is chosen for ground sampling distance and is normally 200-400 ft AGL, so the ceiling rarely binds, but it matters when a site sits under a low LAANC grid altitude.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="part-107-line-of-sight-and-night" class="slide level2 smaller">
+<h2>Part 107: line of sight and night</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Must keep the UAS within <strong>visual line of sight</strong> (VLOS) of the remote pilot in command or a visual observer</p>
+</div><div class="column" style="width:60%;">
+<p><img data-src="../images/light.webp"></p>
+</div></div>
+<div class="term-card">
+<p><strong>Night operations</strong> allowed without a waiver (since April 2021) if the pilot has completed current training and the aircraft has <strong>anti-collision lighting</strong> visible for 3 statute miles</p>
+</div>
+<aside class="notes">
+<p>VLOS means unaided eyes (glasses fine, binoculars or FPV goggles alone do not count); an FPV pilot needs a visual observer next to them. The 2021 rule ended the era of night waivers: before it, daylight-only operation (old 107.29) was the most-waived rule in Part 107. Thermal mapping missions, which fly at night or dawn for temperature contrast, are the course-relevant beneficiary.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="remote-id" class="slide level2 smaller">
+<h2>Remote ID</h2>
+<ul>
+<li>UAS must broadcast identification, location, and control-station location during flight (rule effective 2021, enforced since <strong>March 16, 2024</strong>)</li>
+<li>Three ways to comply:
+<ul>
+<li><strong>Standard Remote ID</strong> aircraft (built-in broadcast)</li>
+<li>Aircraft with an attached <strong>broadcast module</strong> (VLOS only)</li>
+<li>Fly without Remote ID only inside an <strong>FAA-Recognized Identification Area (FRIA)</strong></li>
+</ul></li>
+<li>Applies to all aircraft that must be registered (recreational and Part 107)</li>
+</ul>
+<aside class="notes">
+<p>Think of Remote ID as a digital license plate broadcast over WiFi/Bluetooth that anyone with a phone app can receive; the FAA and law enforcement can correlate it with registration data. FRIAs are fixed sites sponsored by CBOs and educational institutions, mostly model-aircraft fields. Practical note for the course: all recent DJI aircraft have standard Remote ID built in; check compliance for anything older or self-built.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="operations-over-people-categories-1-4" class="slide level2 smaller">
+<h2>Operations over people: Categories 1-4</h2>
+<p>Since April 2021, routine flight <strong>over people</strong> is allowed under Part 107 if the aircraft qualifies for one of <strong>four categories</strong> (<a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-D">14 CFR Part 107 Subpart D</a>).</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Aircraft limit</th>
+<th>Certification</th>
+<th>Over people</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Under 250 g</td>
+<td>Self-declared</td>
+<td>Routine</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>11 ft-lbs impact</td>
+<td>Manufacturer DOC</td>
+<td>Routine</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>25 ft-lbs impact</td>
+<td>Manufacturer DOC</td>
+<td>Restricted sites only</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>None</td>
+<td>Airworthiness certificate</td>
+<td>Per certificate</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<div class="term-card">
+<p><strong>Not airspace classes</strong>: Category 1-4 describes the aircraft; Class B-G describes the airspace</p>
+</div>
+<aside class="notes">
+<p>Set up the next two slides. Before 2021 any flight over a person outside your crew required a waiver; the Operations Over People rule made it routine, scaled to how much harm the aircraft could do. Emphasize the terminology trap: FAA “Category 1-4” (over-people) vs airspace “Class B-G”; the exam uses both. Also distinguish transiting over people (allowed per category) from sustained hovering over crowds.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="category-1" class="slide level2 smaller">
+<h2>Category 1</h2>
+<p><strong>Eligibility:</strong> aircraft weighs <strong>0.55 lb (250 g) or less</strong>, including everything attached.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>No exposed rotating parts that could lacerate human skin</li>
+<li>Remote ID required for sustained flight over open-air assemblies</li>
+</ul>
+<p><strong>Operations:</strong></p>
+<ul>
+<li>May fly over people without a waiver or a Declaration of Compliance</li>
+</ul>
+<p><strong>Example UAS:</strong> sub-250 g aircraft such as the DJI Mini series or DJI Neo (with propeller guards where needed to meet the laceration requirement)</p>
+<aside class="notes">
+<p>Category 1 is self-declared: no FAA paperwork, the operator just has to be right about the weight and the laceration criterion. This is a major reason the sub-250 g market segment exists; manufacturers engineer to sit under the threshold. Weight includes payload, so adding a prop-guard set or beacon can push an aircraft out of Category 1. This is the category students will actually use.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="categories-2-3-and-4" class="slide level2 smaller">
+<h2>Categories 2, 3, and 4</h2>
+<p><strong>Categories 2 and 3</strong>: no weight limit; injury-severity based, demonstrated through an FAA-accepted <strong>Means of Compliance</strong> and a manufacturer <strong>Declaration of Compliance (DOC)</strong></p>
+<ul>
+<li><strong>Category 2:</strong> impact must not exceed <strong>11 ft-lbs</strong> of kinetic energy; no exposed lacerating parts; routine flight over people</li>
+<li><strong>Category 3:</strong> impact must not exceed <strong>25 ft-lbs</strong>; <strong>no flight over open-air assemblies</strong>; over people only within a closed or restricted-access site with notice, or when people are under cover or in stationary vehicles</li>
+</ul>
+<p><strong>Category 4</strong>: aircraft holds an <strong>airworthiness certificate</strong> under Part 21, operated within its flight manual with a maintenance, inspection, and record-keeping program; may operate over open-air assemblies per the certificate</p>
+<aside class="notes">
+<p>Categories 2 and 3 are manufacturer-certified, not operator-declared, and as of the mid-2020s very few aircraft hold accepted Declarations of Compliance, so these categories are rare in practice. The kinetic-energy thresholds translate to roughly a 2 lb and 4 lb aircraft at terminal velocity, though the tests are on impact severity, not weight. Category 4 is the “certify it like an airplane” path aimed at larger aircraft and delivery-style operations; no common survey drone uses it. The practical takeaway hierarchy: Category 1 if under 250 g, otherwise plan missions so you are not over people at all, which is standard practice for site mapping.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="waivers-from-part-107-operating-rules" class="slide level2 smaller">
+<h2>Waivers from Part 107 operating rules</h2>
+<ul>
+<li>To operate outside Part 107 rules, apply for a <strong>Certificate of Waiver</strong> through <a href="https://faadronezone-access.faa.gov/">FAADroneZone</a></li>
+<li>The FAA grants waivers when the proposed operation can be performed safely with the applicant’s proposed mitigations</li>
+</ul>
+<aside class="notes">
+<p>The waiver process asks “how will you mitigate the risk this rule addresses?” and successful applications read like safety cases, not requests. Approval times run weeks to months, so waivers are planned mission infrastructure, not a quick fix. Since the 2021 rules absorbed night operations and some over-people flight, the dominant remaining waiver is beyond visual line of sight.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="waivable-sections-of-part-107" class="slide level2 smaller">
+<h2>Waivable sections of Part 107</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Operation from a moving vehicle or aircraft (<a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.25">§ 107.25</a>)</li>
+<li>Visual line of sight aircraft operation (<a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.31">§ 107.31</a>) - <strong>the most requested waiver today (BVLOS)</strong></li>
+<li>Visual observer (<a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.33">§ 107.33</a>)</li>
+<li>Operation of multiple small unmanned aircraft systems (<a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.35">§ 107.35</a>)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Yielding the right of way (<a href="https://www.ecfr.gov/current/title-14/part-107/section-107.37#p-107.37(a)">§ 107.37(a)</a>)</li>
+<li>Operation over people (<a href="https://www.ecfr.gov/current/title-14/part-107/section-107.37#p-107.39">§ 107.39</a>, beyond the category rules)</li>
+<li>Operation in certain airspace (<a href="https://www.ecfr.gov/current/title-14/part-107/section-107.37#p-107.41">§ 107.41</a>)</li>
+<li>Operating limitations for small unmanned aircraft (<a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.51">§ 107.51</a>)</li>
+</ul>
+</div></div>
+<ul>
+<li>No waiver will be issued to allow the carriage of property of another by aircraft for compensation or hire</li>
+</ul>
+<aside class="notes">
+<p>BVLOS (107.31) waivers dominate because they unlock the economics of linear inspection, agriculture, and delivery: one pilot covering miles instead of a visual bubble. Daylight-only operation (old 107.29) used to top this list before the 2021 night rule removed the need. The carriage-for-hire exclusion is why drone delivery companies operate under separate exemptions and air-carrier rules, not Part 107 waivers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="accident-reporting-107.9" class="slide level2 smaller">
+<h2>Accident reporting (§ 107.9)</h2>
+<p>No later than <strong>10 days</strong> after an operation, the remote pilot in command must report to the FAA any operation of the small unmanned aircraft involving at least:</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Serious injury to any person or any loss of consciousness; or</li>
+<li>Damage to any property, other than the small unmanned aircraft, unless the cost of repair (including materials and labor) or fair market value of the property does not exceed <strong>$500</strong></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../images/drone-crash-test.webp"></p>
+</div></div>
+<aside class="notes">
+<p>Reports go through FAADroneZone. Note what does not trigger a report: destroying your own aircraft, or minor property damage under $500. “Serious injury” follows the AIS Level 3 standard, roughly an injury requiring hospitalization. Universities typically layer their own incident reporting on top, which connects to the NC State UAS procedures linked from the part page.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="where-can-you-fly" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Where can you fly?</h2>
+<p>Airspace classes, LAANC, and reading the chart</p>
+<aside class="notes">
+<p>Section transition into airspace. This is the most practical section of the lecture: every mission starts with “what airspace is my site under and do I need authorization?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="airspace-classes" class="slide level2 smaller">
+<h2>Airspace classes</h2>
 
-<img data-src="../images/NAS_classification.webp" class="center r-stretch" style="width:100.0%"><ul>
+<img data-src="../images/NAS_classification.webp" class="center r-stretch quarto-figure-center" style="width:100.0%"><p class="caption">U.S. airspace classes in profile</p><ul>
 <li>Class B/C/D and Class E surface areas: operations require an <strong>airspace authorization</strong>, normally obtained through <strong>LAANC</strong></li>
 <li>Class G (uncontrolled): may operate while following all other Part 107 rules, no authorization needed</li>
 </ul>
@@ -562,27 +856,44 @@ Corey White adpted from Justyna Jeziorska
 </section>
 <section id="reading-aeronautical-charts" class="slide level2 smaller">
 <h2>Reading aeronautical charts</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h4 id="line-pattern">Line Pattern</h4>
-<ul>
-<li>Solid line - higher class (more restrictive)</li>
-<li>Dashed line - lower class (less restrictive)</li>
-</ul>
-<h4 id="line-color">Line Color</h4>
-<ul>
-<li>Blue line - higher class (more restrictive)</li>
-<li>Magenta line - lower class (less restrictive)</li>
-</ul>
-<p><a href="https://www.faasafety.gov/gslac/ALC/course_content.aspx?cID=42&amp;sID=505&amp;preview=true">FAA course on airspace classification</a></p>
-</div><div class="column" style="width:50%;">
-<h4 id="this-translates-to">This translates to:</h4>
-<ul>
-<li><strong>Solid blue</strong> - class B, <strong>Solid magenta</strong> - class C</li>
-<li><strong>Dashed blue</strong> - class D, <strong>Dashed magenta</strong> - class E</li>
-</ul>
-<p>Interactive charts: <a href="https://vfrmap.com/">VFRMap</a>, <a href="https://skyvector.com/">SkyVector</a></p>
-</div></div>
+<p>Solid lines and blue mean more restrictive; dashed lines and magenta mean less restrictive:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 36%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Airspace class</th>
+<th>Chart symbol</th>
+<th>Around</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>B</td>
+<td>Solid blue</td>
+<td>Major hubs (Charlotte)</td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td>Solid magenta</td>
+<td>Mid-size towered airports (RDU)</td>
+</tr>
+<tr class="odd">
+<td>D</td>
+<td>Dashed blue</td>
+<td>Smaller towered airports</td>
+</tr>
+<tr class="even">
+<td>E (surface)</td>
+<td>Dashed magenta</td>
+<td>Non-towered airports with instrument approaches</td>
+</tr>
+</tbody>
+</table>
+<p>Interactive charts: <a href="https://vfrmap.com/">VFRMap</a>, <a href="https://skyvector.com/">SkyVector</a> | <a href="https://www.faasafety.gov/gslac/ALC/course_content.aspx?cID=42&amp;sID=505&amp;preview=true">FAA course on airspace classification</a></p>
 <aside class="notes">
 <p>Chart reading is heavily tested on the Part 107 exam, so this slide maps directly to Assignment 1B question types. Suggest pulling up SkyVector on the Raleigh area and having students identify the RDU Class C shelves and the dashed magenta Class E surface areas nearby. Remind them that the sectional shows airspace; the UAS Facility Map shows what LAANC will authorize, and both are needed for mission planning.</p>
 <style type="text/css">
@@ -597,225 +908,22 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="commercial-use---operating-rules" class="slide level2">
-<h2>Commercial use - operating rules</h2>
-<ul>
-<li>Must fly at or below 400 feet above ground level (AGL), or within 400 feet of a structure if flying higher</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li>Must not fly from a moving vehicle unless in a sparsely populated area</li>
-<li>Must fly at or below 100 mph (87 knots)</li>
-<li>Must yield right of way to manned aircraft</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/structures.webp"></p>
-</div></div>
-<aside class="notes">
-<p>The 400-ft-of-a-structure allowance (107.51) exists for tower and building inspection: you may fly up to 400 ft above a structure’s top while within a 400 ft radius of it. For mapping work in this course, flight altitude is chosen for ground sampling distance and is normally 200-400 ft AGL, so the ceiling rarely binds, but it matters when a site sits under a low LAANC grid altitude.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="commercial-use---operating-rules-1" class="slide level2 smaller">
-<h2>Commercial use - operating rules</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li>Must keep the UAS within <strong>visual line of sight</strong> (VLOS) of the remote pilot in command or a visual observer</li>
-<li><strong>Night operations</strong> allowed without a waiver (since April 2021) if the pilot has completed current training and the aircraft has <strong>anti-collision lighting</strong> visible for 3 statute miles</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/light.webp"></p>
-</div></div>
-<aside class="notes">
-<p>VLOS means unaided eyes (glasses fine, binoculars or FPV goggles alone do not count); an FPV pilot needs a visual observer next to them. The 2021 rule ended the era of night waivers: before it, daylight-only operation (old 107.29) was the most-waived rule in Part 107. Thermal mapping missions, which fly at night or dawn for temperature contrast, are the course-relevant beneficiary.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="remote-id" class="slide level2 smaller">
-<h2>Remote ID</h2>
-<ul>
-<li>UAS must broadcast identification, location, and control-station location during flight (rule effective 2021, enforced since <strong>March 16, 2024</strong>)</li>
-<li>Three ways to comply:
-<ul>
-<li><strong>Standard Remote ID</strong> aircraft (built-in broadcast)</li>
-<li>Aircraft with an attached <strong>broadcast module</strong> (VLOS only)</li>
-<li>Fly without Remote ID only inside an <strong>FAA-Recognized Identification Area (FRIA)</strong></li>
-</ul></li>
-<li>Applies to all aircraft that must be registered (recreational and Part 107)</li>
-</ul>
-<aside class="notes">
-<p>Think of Remote ID as a digital license plate broadcast over WiFi/Bluetooth that anyone with a phone app can receive; the FAA and law enforcement can correlate it with registration data. FRIAs are fixed sites sponsored by CBOs and educational institutions, mostly model-aircraft fields. Practical note for the course: all recent DJI aircraft have standard Remote ID built in; check compliance for anything older or self-built.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="operations-over-people---categories-1-4" class="slide level2 smaller">
-<h2>Operations Over People - Categories 1-4</h2>
-<p>Since April 2021, routine flight <strong>over people</strong> is allowed under Part 107 if the aircraft qualifies for one of <strong>four categories</strong> (14 CFR Part 107 Subpart D).</p>
-<ul>
-<li>Not to be confused with <strong>airspace classes</strong> B/C/D/E/G from earlier in this lecture</li>
-<li>Category is a property of the <strong>aircraft</strong> (weight, injury severity, certification), not of the pilot</li>
-<li>Sustained flight over <strong>open-air assemblies</strong> additionally requires Remote ID (Categories 1-3)</li>
-</ul>
-<aside class="notes">
-<p>Set up the next four slides. Before 2021 any flight over a person outside your crew required a waiver; the Operations Over People rule made it routine, scaled to how much harm the aircraft could do. Emphasize the terminology trap: FAA “Category 1-4” (over-people) vs airspace “Class B-G”; the exam uses both. Also distinguish transiting over people (allowed per category) from sustained hovering over crowds.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="category-1" class="slide level2 smaller">
-<h2>Category 1</h2>
-<p><strong>Eligibility:</strong> aircraft weighs <strong>0.55 lb (250 g) or less</strong>, including everything attached.</p>
-<p><strong>Requirements:</strong></p>
-<ul>
-<li>No exposed rotating parts that could lacerate human skin</li>
-<li>Remote ID required for sustained flight over open-air assemblies</li>
-</ul>
-<p><strong>Operations:</strong></p>
-<ul>
-<li>May fly over people without a waiver or a Declaration of Compliance</li>
-</ul>
-<p><strong>Example UAS:</strong> sub-250 g aircraft such as the DJI Mini series or DJI Neo (with propeller guards where needed to meet the laceration requirement)</p>
-<aside class="notes">
-<p>Category 1 is self-declared: no FAA paperwork, the operator just has to be right about the weight and the laceration criterion. This is a major reason the sub-250 g market segment exists; manufacturers engineer to sit under the threshold. Weight includes payload, so adding a prop-guard set or beacon can push an aircraft out of Category 1.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="category-2-and-category-3" class="slide level2 smaller">
-<h2>Category 2 and Category 3</h2>
-<p><strong>Eligibility:</strong> no weight limit; injury-severity based, demonstrated through an FAA-accepted <strong>Means of Compliance</strong> and a <strong>Declaration of Compliance</strong> by the manufacturer.</p>
-<ul>
-<li><strong>Category 2:</strong> impact must not exceed the severity of <strong>11 ft-lbs</strong> of kinetic energy; no exposed lacerating parts; allows routine flight over people</li>
-<li><strong>Category 3:</strong> impact must not exceed <strong>25 ft-lbs</strong>; <strong>no flight over open-air assemblies</strong>; over people only within a <strong>closed or restricted-access site</strong> with notice, or when people are under cover or in stationary vehicles</li>
-</ul>
-<aside class="notes">
-<p>Categories 2 and 3 are manufacturer-certified, not operator-declared, and as of the mid-2020s very few aircraft hold accepted Declarations of Compliance, so these categories are rare in practice; most operators either stay in Category 1 or avoid flying over people entirely. The kinetic-energy thresholds translate to roughly a 2 lb and 4 lb aircraft at terminal velocity, though the tests are on impact severity, not weight.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="category-4" class="slide level2 smaller">
-<h2>Category 4</h2>
-<p><strong>Eligibility:</strong> aircraft holds an <strong>airworthiness certificate</strong> issued under Part 21, like a crewed aircraft.</p>
-<p><strong>Requirements:</strong></p>
-<ul>
-<li>Operated within its approved flight manual limitations</li>
-<li>Maintenance, inspection, and record-keeping program required</li>
-</ul>
-<p><strong>Operations:</strong></p>
-<ul>
-<li>May operate over people, including sustained flight over open-air assemblies, subject to the operating limitations in the certificate</li>
-</ul>
-<aside class="notes">
-<p>Category 4 is the “certify it like an airplane” path, aimed at larger aircraft and future package-delivery style operations; it is out of reach for typical mapping platforms and no common survey drone uses it. For this course the takeaway hierarchy is: Category 1 if under 250 g, otherwise plan missions so you are not over people at all, which is standard practice for site mapping.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="waivers-from-part-107-operating-rules" class="slide level2">
-<h2>Waivers from Part 107 operating rules</h2>
-<ul>
-<li>To operate outside Part 107 rules, apply for a <strong>Certificate of Waiver</strong> through <a href="https://faadronezone-access.faa.gov/">FAADroneZone</a></li>
-<li>The FAA grants waivers when the proposed operation can be performed safely with the applicant’s proposed mitigations</li>
-</ul>
-<aside class="notes">
-<p>The waiver process asks “how will you mitigate the risk this rule addresses?” and successful applications read like safety cases, not requests. Approval times run weeks to months, so waivers are planned mission infrastructure, not a quick fix. Since the 2021 rules absorbed night operations and some over-people flight, the dominant remaining waiver is beyond visual line of sight.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="waivable-sections-of-part-107" class="slide level2 smaller">
-<h2>Waivable sections of Part 107</h2>
+<section id="airports-and-controlled-airspace" class="slide level2 smaller">
+<h2>Airports and controlled airspace</h2>
+<div class="term-card">
+<p><strong>No 5-mile rule</strong>: airspace class, not distance to an airport, decides whether you need authorization (the pre-2019 notification requirement was repealed with Section 336)</p>
+</div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>Operation from a moving vehicle or aircraft (§ 107.25)</li>
-<li>Visual line of sight aircraft operation (§ 107.31) - <strong>the most requested waiver today (BVLOS)</strong></li>
-<li>Visual observer (§ 107.33)</li>
-<li>Operation of multiple small unmanned aircraft systems (§ 107.35)</li>
+<li>Both recreational and Part 107 pilots need a <strong>LAANC (or FAADroneZone) authorization</strong> to fly in Class B, C, D, or surface Class E airspace</li>
+<li>Authorization is granted up to the <strong>UAS Facility Map</strong> altitude for the grid cell; near runways this is often <strong>0 ft</strong> (no automatic authorization)</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<ul>
-<li>Yielding the right of way (§ 107.37(a))</li>
-<li>Operation over people (§ 107.39, beyond the category rules)</li>
-<li>Operation in certain airspace (§ 107.41)</li>
-<li>Operating limitations for small unmanned aircraft (§ 107.51)</li>
-</ul>
+<p><img data-src="../images/drone_airport.webp"></p>
 </div></div>
-<ul>
-<li>No waiver will be issued to allow the carriage of property of another by aircraft for compensation or hire</li>
-</ul>
 <aside class="notes">
-<p>BVLOS (107.31) waivers dominate because they unlock the economics of linear inspection, agriculture, and delivery: one pilot covering miles instead of a visual bubble. Daylight-only operation (old 107.29) used to top this list before the 2021 night rule removed the need. The carriage-for-hire exclusion is why drone delivery companies operate under separate exemptions and air-carrier rules, not Part 107 waivers.</p>
+<p>Called out explicitly because the 5-mile rule persists in older videos and blog posts and in some exam-prep material. The current logic is airspace-based, not distance-based: a site 4 miles from an airport in Class G needs nothing, while a site 8 miles away under a Class C shelf that reaches the surface needs authorization. Always resolve the question with a facility-map app, not distance.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -828,36 +936,10 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="accident-reporting-107.9" class="slide level2 smaller">
-<h2>Accident reporting (§ 107.9)</h2>
-<p>No later than <strong>10 days</strong> after an operation, the remote pilot in command must report to the FAA any operation of the small unmanned aircraft involving at least:</p>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li>Serious injury to any person or any loss of consciousness; or</li>
-<li>Damage to any property, other than the small unmanned aircraft, unless the cost of repair (including materials and labor) or fair market value of the property does not exceed <strong>$500</strong></li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/drone-crash-test.webp"></p>
-</div></div>
-<aside class="notes">
-<p>Reports go through FAADroneZone. Note what does not trigger a report: destroying your own aircraft, or minor property damage under $500. “Serious injury” follows the AIS Level 3 standard, roughly an injury requiring hospitalization. Universities typically layer their own incident reporting on top, which connects to the NC State UAS procedures linked from the part page.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="where-not-to-fly" class="slide level2">
+<section id="where-not-to-fly" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Where NOT to fly</h2>
 
-<img data-src="../images/no_drone_zoneFAA.webp" style="width:70.0%" class="r-stretch"><aside class="notes">
+<img data-src="../images/no_drone_zoneFAA.webp" style="width:55.0%" class="r-stretch quarto-figure-center"><p class="caption">FAA “No Drone Zone” outreach signage</p><aside class="notes">
 <p>Transition into airspace restrictions. The no-drone-zone signage is public outreach; the legal substance is in the TFRs, special-use airspace, and security restrictions on the following slides. Best pre-flight habit: check a LAANC/B4UFLY-service app the day of the flight, since restrictions appear and move (wildfires, VIP movement, sporting events).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -873,19 +955,13 @@ Corey White adpted from Justyna Jeziorska
 </section>
 <section id="airspace-restrictions" class="slide level2 smaller">
 <h2>Airspace restrictions</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
 <ul>
 <li>Security Sensitive Airspace Restrictions</li>
 <li>Temporary Flight Restrictions (TFRs)</li>
 <li>Restricted or Special Use Airspace</li>
 <li>Stadiums and sporting events</li>
 <li>Wildfires</li>
-<li>Controlled airspace around airports (LAANC)</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/no_drone_zone.webp" style="width:60.0%"></p>
-</div></div>
 <aside class="notes">
 <p>Preview the taxonomy: some restrictions are permanent and mapped (special use airspace, security areas), some are scheduled (stadium TFRs), some pop up with hours’ notice (wildfire TFRs). All of them override any LAANC authorization you may hold. The next slides take them one at a time.</p>
 <style type="text/css">
@@ -900,8 +976,8 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="security-sensitive-airspace-restrictions" class="slide level2">
-<h2>Security Sensitive Airspace Restrictions</h2>
+<section id="security-sensitive-airspace-restrictions" class="slide level2 smaller">
+<h2>Security sensitive airspace restrictions</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -912,7 +988,7 @@ Corey White adpted from Justyna Jeziorska
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/restricted2.webp"></p>
-<p>14 CFR § 99.7</p>
+<p><a href="https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-99/subpart-A/section-99.7">14 CFR § 99.7</a></p>
 </div></div>
 <aside class="notes">
 <p>These cover sites like military bases, national landmarks, and critical infrastructure designated at federal request. They are depicted on the FAA’s UAS-specific maps rather than sectionals, another reason to check a drone-specific app rather than only a pilot’s chart. Violations here draw federal attention quickly; some sites have counter-UAS authority.</p>
@@ -928,21 +1004,22 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="temporary-flight-restrictions" class="slide level2">
-<h2>Temporary Flight Restrictions</h2>
+<section id="temporary-flight-restrictions-tfrs" class="slide level2 smaller">
+<h2>Temporary flight restrictions (TFRs)</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<ul>
-<li>TFR: airspace where flight is limited because of a temporary hazardous condition (wildfire, chemical spill) or a security-related event (VIP movement, large public events)</li>
-<li>The TFR text gives the details: size, altitude, effective times, and which operations are restricted or permitted</li>
-</ul>
+<div class="term-card">
+<p><strong>TFR:</strong> airspace where flight is limited because of a temporary hazardous condition (wildfire, chemical spill) or a security-related event (VIP movement, large public events)</p>
+</div>
+<div class="term-card">
+<p>The TFR text gives the details: <strong>size</strong>, <strong>altitude</strong>, <strong>effective times</strong>, and which operations are restricted or permitted</p>
+</div>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/tfr.webp"></p>
-<ul>
-<li><a href="https://tfr.faa.gov/tfr_map_ims/html/index.html">TFR map</a></li>
-<li><a href="https://tfr.faa.gov/tfr2/list.html">TFR list</a></li>
-</ul>
 </div></div>
+<blockquote>
+<p><a href="https://tfr.faa.gov/tfr_map_ims/html/index.html">TFR map</a>, <a href="https://tfr.faa.gov/tfr2/list.html">TFR list</a></p>
+</blockquote>
 <aside class="notes">
 <p>Presidential TFRs are the famous ones: a 30-nautical-mile ring that shuts down drone activity wherever the President travels, often on short notice. For fieldwork the operational lesson is to check TFRs the same day as the flight; a site that was clear during planning can be closed by a wildfire TFR the morning of the mission.</p>
 <style type="text/css">
@@ -957,8 +1034,8 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="restricted-or-special-use-airspace" class="slide level2">
-<h2>Restricted or Special Use Airspace</h2>
+<section id="restricted-or-special-use-airspace" class="slide level2 smaller">
+<h2>Restricted or special use airspace</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p>Types of Special Use Airspace include:</p>
@@ -988,7 +1065,7 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="stadiums-and-sporting-events" class="slide level2">
+<section id="stadiums-and-sporting-events" class="slide level2 smaller">
 <h2>Stadiums and sporting events</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -1003,7 +1080,7 @@ Corey White adpted from Justyna Jeziorska
 <p><img data-src="../images/did_you_know7.webp"></p>
 </div></div>
 <aside class="notes">
-<p>This is a standing TFR (FDC NOTAM 4/3621) up to 3,000 ft AGL. Local hook: Carter-Finley Stadium is on this list on football Saturdays, and the restriction covers a 3 nm radius, which reaches much of west Raleigh including parts of campus and Lake Wheeler Road. Check the game schedule before planning fall field days.</p>
+<p>This is a standing TFR up to 3,000 ft AGL. Local hook: Carter-Finley Stadium is on this list on football Saturdays, and the restriction covers a 3 nm radius, which reaches much of west Raleigh including parts of campus and Lake Wheeler Road. Check the game schedule before planning fall field days.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1038,21 +1115,11 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="airports-and-controlled-airspace" class="slide level2 smaller">
-<h2>Airports and controlled airspace</h2>
-<ul>
-<li>There is <strong>no</strong> “notify within 5 miles” rule anymore; that pre-2019 requirement was repealed with Section 336</li>
-<li>Both recreational and Part 107 pilots need a <strong>LAANC (or FAADroneZone) authorization</strong> to fly in Class B, C, D, or surface Class E airspace</li>
-<li>Authorization is granted up to the <strong>UAS Facility Map</strong> altitude for the grid cell; near runways this is often <strong>0 ft</strong> (no automatic authorization)</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/drone_airport.webp"></p>
-</div></div>
+<section id="beyond-part-107" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Beyond Part 107</h2>
+<p>Public agencies, COAs, and educational use</p>
 <aside class="notes">
-<p>Called out explicitly because the 5-mile rule persists in older videos and blog posts and in some exam-prep material. The current logic is airspace-based, not distance-based: a site 4 miles from an airport in Class G needs nothing, while a site 8 miles away under a Class C shelf that reaches the surface needs authorization. Always resolve the question with a facility-map app, not distance.</p>
+<p>Section transition: the rule paths that are not Part 107. Most students will never file a COA, but many will work for or with agencies that hold one.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1094,44 +1161,22 @@ Corey White adpted from Justyna Jeziorska
           display:block!important;
       }</style></aside>
 </section>
-<section id="certificate-of-authorization" class="slide level2">
+<section id="certificate-of-authorization" class="slide level2 smaller">
 <h2>Certificate of Authorization</h2>
 <p><strong>Can be obtained:</strong></p>
 <ul>
-<li class="fragment">Only by government entities, such as federal and state agencies, law enforcement, and public colleges and universities</li>
-<li class="fragment">Only for public (governmental) UAS aircraft operations</li>
+<li>Only by government entities, such as federal and state agencies, law enforcement, and public colleges and universities, for public (governmental) UAS aircraft operations</li>
 </ul>
 <p><strong>Allows:</strong></p>
 <ul>
-<li class="fragment">Flights at or below 400 feet in Class G airspace nationwide</li>
-<li class="fragment">Self-certification of the UAS pilot</li>
-<li class="fragment">Emergency COAs under special circumstances</li>
+<li>Flights at or below 400 feet in Class G airspace nationwide, self-certification of the UAS pilot, and emergency COAs under special circumstances</li>
 </ul>
-<aside class="notes">
-<p>The blanket public COA is the standing nationwide authorization; operations outside it (higher altitudes, specific controlled airspace) need a jurisdictional COA for a defined area. Self-certification of pilots is the notable difference from Part 107: the agency, not the FAA, attests pilot qualification.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="how-to-apply-for-a-coa" class="slide level2">
-<h2>How to apply for a COA?</h2>
+<p><strong>Applying:</strong></p>
 <ul>
-<li class="fragment">Applications are submitted online via the FAA’s COA process</li>
-<li class="fragment">Visit the <a href="https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/coa/">FAA website</a> for details on how to apply</li>
-<li class="fragment">The average COA processing time is less than 60 days</li>
-<li class="fragment">Expedited authorization is available in emergency and life-threatening situations</li>
-<li class="fragment"><a href="https://www.faa.gov/sites/faa.gov/files/about/office_org/headquarters_offices/ato/COA%2520Sample%2520Application%2520v%25201-1.pdf">Sample COA Application</a></li>
+<li>Online via the <a href="https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/coa/">FAA’s COA process</a> (<a href="https://www.faa.gov/sites/faa.gov/files/about/office_org/headquarters_offices/ato/COA%2520Sample%2520Application%2520v%25201-1.pdf">sample application</a>); average processing under 60 days, expedited in emergency and life-threatening situations</li>
 </ul>
 <aside class="notes">
-<p>Mostly reference material; students will not file COAs themselves, but they may work under one. Emergency COAs matter after disasters: post-hurricane mapping flights in North Carolina have operated under expedited authorizations coordinated with emergency management, a direct link to the change-detection applications later in the course.</p>
+<p>The blanket public COA is the standing nationwide authorization; operations outside it (higher altitudes, specific controlled airspace) need a jurisdictional COA for a defined area. Self-certification of pilots is the notable difference from Part 107: the agency, not the FAA, attests pilot qualification. Students will not file COAs themselves, but they may work under one; emergency COAs matter after disasters, as with post-hurricane mapping flights in North Carolina coordinated with emergency management.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1151,8 +1196,10 @@ Corey White adpted from Justyna Jeziorska
 <ul>
 <li>Under <strong>49 USC 44809(c)</strong> and FAA educational-user guidance, students at accredited institutions may fly under the <strong>recreational exception</strong> as part of coursework (TRUST, registration, and all other 44809 conditions still apply)</li>
 <li><strong>Faculty-directed research</strong> and flights that further university business generally require <strong>Part 107</strong></li>
-<li>In this course, instructional flight operations are conducted under Part 107 by certificated pilots</li>
 </ul>
+<div class="term-card">
+<p><strong>In this course</strong>: instructional flight operations are conducted under Part 107 by certificated pilots</p>
+</div>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../images/uas_operations.webp"> <img data-src="../images/group_photo.webp"></p>
 </div></div>
@@ -1173,48 +1220,23 @@ Corey White adpted from Justyna Jeziorska
 <section id="uas-best-practices" class="slide level2 smaller">
 <h2>UAS best practices</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:50%;">
 <ul>
 <li>If you can, tell other people you’ll be taking pictures or video of them before you do so</li>
 <li>If someone has a reasonable expectation of privacy, don’t violate it by taking pictures or video, unless you’ve got a very good reason</li>
 <li>Don’t fly over other people’s private property without permission if you can easily avoid doing so</li>
+<li>Don’t harass people with your drone</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/funny1.webp"></p>
-</div></div>
-<p><img data-src="../images/important_note.webp"></p>
-<aside class="notes">
-<p>These come from the NTIA voluntary best practices for UAS privacy: not law, but the professional norm, and often stricter than what the FAA requires. For mapping projects, landowner permission for takeoff, landing, and ground control points is both courteous and usually a practical necessity; the FAA governs the air, but the launch site is property law.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="uas-best-practices-1" class="slide level2 smaller">
-<h2>UAS best practices</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+</div><div class="column" style="width:50%;">
 <ul>
 <li>Don’t gather personal data for no reason, and don’t keep it for longer than you have to</li>
 <li>If you keep sensitive data about other people, secure it against loss or theft</li>
 <li>If someone asks you to delete personal data about him or her that you’ve gathered, do so, unless you’ve got a good reason not to</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/cartoon7.webp"></p>
-<ul>
-<li>Don’t harass people with your drone</li>
-</ul>
 </div></div>
-<p><img data-src="../images/important_note.webp"></p>
-<aside class="notes">
-<p>Data-handling practices map directly onto research-data management: orthophotos of residential areas contain personal data (faces, vehicles, backyards), and IRB or data-management plans may govern retention. Good habit to teach: plan flight lines to minimize capture of areas outside the study site rather than cropping afterwards.</p>
+
+<img data-src="../images/important_note.webp" class="r-stretch"><aside class="notes">
+<p>These come from the NTIA voluntary best practices for UAS privacy: not law, but the professional norm, and often stricter than what the FAA requires. For mapping projects, landowner permission for takeoff, landing, and ground control points is both courteous and usually a practical necessity; the FAA governs the air, but the launch site is property law. The data-handling side maps directly onto research-data management: orthophotos of residential areas contain personal data (faces, vehicles, backyards), and IRB or data-management plans may govern retention. Good habit to teach: plan flight lines to minimize capture of areas outside the study site rather than cropping afterwards.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1230,11 +1252,13 @@ Corey White adpted from Justyna Jeziorska
 <section id="current-developments---bvlos-and-part-108" class="slide level2 smaller">
 <h2>Current developments - BVLOS and Part 108</h2>
 <ul>
-<li>The biggest open problem from earlier in this lecture: <strong>beyond visual line of sight (BVLOS)</strong> flight without a waiver</li>
+<li>The biggest open problem in UAS regulation today: <strong>beyond visual line of sight (BVLOS)</strong> flight without a waiver</li>
 <li>The FAA published the proposed <strong>Part 108</strong> rule (Notice of Proposed Rulemaking, August 2025) to enable routine BVLOS operations</li>
 <li>Built on automated traffic awareness/deconfliction services and aircraft airworthiness acceptance instead of one-off waivers</li>
-<li>Expect the regulatory landscape to keep shifting; <strong>always check <a href="https://www.faa.gov/uas">faa.gov/uas</a> for current rules</strong></li>
 </ul>
+<div class="term-card">
+<p><strong>The rules keep moving</strong>: always verify against <a href="https://www.faa.gov/uas">faa.gov/uas</a> before you fly</p>
+</div>
 <aside class="notes">
 <p>Close the loop with the detect-and-avoid concern from the NAS slide: Part 108 is the FAA’s answer, replacing case-by-case BVLOS waivers with a performance-based rule using strategic deconfliction and third-party services. Check the current rulemaking status before lecture and update the class, since the final rule may land during or after this semester. Good discussion prompt: which mapping applications change most if BVLOS becomes routine? (Corridor mapping, large-area agriculture, disaster response.)</p>
 <style type="text/css">
@@ -1265,7 +1289,29 @@ Corey White adpted from Justyna Jeziorska
 <p><img data-src="../images/cartoon2.webp"></p>
 </div></div>
 <aside class="notes">
-<p>Point students at faa.gov/uas as the single source of truth and remind them Assignment 1B (Part 107 sample questions) is where this lecture becomes graded work. The NCDOT page matters because North Carolina additionally requires a state UAS operator permit for commercial and government operations in the state, a detail many out-of-state guides miss.</p>
+<p>Point students at faa.gov/uas as the single source of truth and remind them Assignment 1B (TRUST, or the Part 107 sample questions) is where this lecture becomes graded work. The NCDOT page matters because North Carolina additionally requires a state UAS operator permit for commercial and government operations in the state, a detail many out-of-state guides miss.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Assignment 1B</strong>: <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1b.html">pass the TRUST safety test</a> (submit your certificate), or explain 5 Part 107 sample questions</p>
+</div>
+<div class="term-card">
+<p><strong>Next topic</strong>: Structure from Motion, how overlapping photos become orthophotos and surface models</p>
+</div>
+<aside class="notes">
+<p>Recap the arc: who regulates, the three operation types, recreational (44809/TRUST) vs commercial (Part 107), airspace and LAANC, restrictions, and where the rules are heading. If students choose the sample-questions option of Assignment 1B, encourage picking chart and airspace questions since those are the hardest on the real exam.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1336,7 +1382,7 @@ Corey White adpted from Justyna Jeziorska
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
