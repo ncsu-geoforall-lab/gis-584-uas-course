@@ -42,7 +42,7 @@
   <rect x="1060" y="65" width="220" height="130" rx="14" class="box"/>
   <text x="1170" y="122" class="label">GIS</text>
   <text x="1170" y="158" class="label">analytics</text>
-  <text x="1170" y="230" class="sub">Topics 4 to 7</text>
+  <text x="1170" y="230" class="sub">Topics 4 to 6</text>
 
   <!-- arrows -->
   <line x1="242" y1="130" x2="276" y2="130" class="arrow-dashed" marker-end="url(#head-grey)"/>

@@ -53,7 +53,6 @@ The course is organized into topics, each containing lectures and labs. The main
 - course/topics/topic_4_GIS_analytics
 - course/topics/topic_5_advanced_analytics
 - course/topics/topic_6_change_detection
-- course/topics/topic_7_odm
 
 #### Custom Headers
 

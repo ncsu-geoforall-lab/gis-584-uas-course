@@ -27,7 +27,7 @@ Select an object in your office, at home, or outside. Take multiple overlapping 
 Use any Structure from Motion tool. The two the course uses are listed first; the rest are good alternatives, all free for students.
 
 - [Agisoft Metashape Professional](https://www.agisoft.com/) {{< var software.agisoft.version >}}: the software used for aerial processing in Assignment 2B. Windows, macOS, and Linux. A license is provided for every student in this class; the installer is on the [Agisoft download page]({{< var software.agisoft.website >}}) and the activation instructions will be provided on Moodle.
-- [WebODM](https://webodm.org/) {{< var software.webodm.version >}}: free and open source, the software used for drone mapping. Native installers for Windows and macOS, Docker on Linux; 8 GB RAM minimum. It processes aerial and ground images, nadir or oblique, so it works for this assignment too, though its defaults are tuned for mapping flights rather than small objects. 
+- [WebODM](https://webodm.org/) {{< var software.webodm.version >}}: free and open source, the software used for drone mapping in Assignment 2C. Native installers for Windows and macOS, Docker on Linux; 8 GB RAM minimum. It processes aerial and ground images, nadir or oblique, so it works for this assignment too, though its defaults are tuned for mapping flights rather than small objects. 
 
   >Since April 2026 WebODM is an independent project (github.com/WebODM); the "OpenDroneMap Desktop" installer sold by the OpenDroneMap organization is a different product.
 
