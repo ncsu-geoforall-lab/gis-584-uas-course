@@ -15,25 +15,35 @@ Select an object in your office, at home, or outside. Take multiple overlapping 
 
 ::: {.columns}
 ::: {.column width="50%"}
-![A physical terrain model reconstructed from about 20 photos](images/Photomodel_013.webp)
+![A physical terrain model reconstructed from about 20 photos](images/Photomodel_013.webp){fig-alt="Textured 3D model of a sand terrain model with roads and buildings, reconstructed from photographs"}
 :::
 ::: {.column width="50%"}
-![The same reconstruction, with the model exported as a point cloud and interpolated to a DEM in GIS](images/phscan_lrwprop3.webp)
+![The same reconstruction, with the model exported as a point cloud and interpolated to a DEM in GIS](images/phscan_lrwprop3.webp){fig-alt="Color-shaded digital elevation model interpolated from the exported point cloud of the terrain model"}
 :::
 :::
 
 ## Software
 
-Use any Structure from Motion tool. Options that work on a laptop or phone:
+Use any Structure from Motion tool. The two the course uses are listed first; the rest are good alternatives, all free for students.
 
-- [Agisoft Metashape](https://www.agisoft.com/) {{< var software.agisoft.version >}}: the software used for aerial processing in Assignment 2B; a 30-day trial is available from the [download page]({{< var software.agisoft.website >}}). The Standard edition is enough for this assignment.
-- [WebODM](https://webodm.org/): free and open source drone mapping software, used for aerial processing.
-- [RealityScan](https://www.realityscan.com/) (Epic Games): free desktop application for Windows, with a companion mobile app for iOS and Android.
-- [COLMAP](https://colmap.github.io/): free and open source, Windows, macOS, and Linux. See the notes below.
-- [Meshroom](https://alicevision.org/) (AliceVision): free and open source, Windows and Linux; dense reconstruction needs an NVIDIA GPU.
-- [Polycam](https://poly.cam/): mobile app (iOS and Android) with a free tier; check its export limits before relying on it for the optional model submission.
+- [Agisoft Metashape Professional](https://www.agisoft.com/) {{< var software.agisoft.version >}}: the software used for aerial processing in Assignment 2B. Windows, macOS, and Linux. A license is provided for every student in this class; the installer is on the [Agisoft download page]({{< var software.agisoft.website >}}) and the activation instructions are on Moodle.
+- [WebODM](https://webodm.org/) {{< var software.webodm.version >}}: free and open source, the software used for drone mapping in Topic 7. Native installers for Windows and macOS, Docker on Linux; 8 GB RAM minimum. It processes aerial and ground images, nadir or oblique, so it works for this assignment too, though its defaults are tuned for mapping flights rather than small objects. Since April 2026 WebODM is an independent project (github.com/WebODM); the "OpenDroneMap Desktop" installer sold by the OpenDroneMap organization is a different product.
+- [RealityScan](https://www.realityscan.com/) 2.2 (Epic Games, formerly RealityCapture): free for students and educators. The desktop application is Windows only, installed through the Epic Games Launcher, and needs an NVIDIA or AMD GPU; the mobile app for iOS and Android is free as well.
+- [COLMAP](https://colmap.github.io/) 4.1: free and open source. Windows binaries with and without CUDA on the [releases page](https://github.com/colmap/colmap/releases), Homebrew on macOS, packages on Linux. See the notes below.
+- [Meshroom](https://alicevision.org/) 2025.1 (AliceVision): free and open source, Windows and Linux only; the binaries are built for NVIDIA CUDA GPUs.
+- [Polycam](https://poly.cam/): iOS, Android, and web. The free tier caps a capture at 150 photos and exports only glTF, which is fine for the optional model submission.
 
-No NVIDIA GPU, or on a Mac? Metashape and Polycam work everywhere. Meshroom and COLMAP need an NVIDIA GPU for the dense step (stop after sparse reconstruction without one), and RealityScan's desktop application is Windows only.
+On a Mac? Metashape, WebODM, COLMAP (Homebrew), or Polycam. No NVIDIA GPU? Metashape and WebODM run on the CPU; COLMAP and Meshroom need CUDA for the dense step (with COLMAP, stop after sparse reconstruction), and RealityScan needs a discrete GPU.
+
+### Good starting points
+
+A first attempt that works is worth more than an ambitious one that fails to align. Pick one of these, get a clean model, then run your experiment as variations on it.
+
+- **A shoebox-sized object with a matte, textured surface**: a hiking boot, a carved bowl, a potted plant with its pot, a rock with visible grain. On a table in even indoor light, or outside in shade. 40 to 60 photos in two rings around the object at different heights, plus 5 or 6 looking down from above, each photo overlapping the last by more than half.
+- **A fixed outdoor object**: a fire hydrant, a tree stump, a boulder, a small sculpture. Overcast light or open shade. 60 to 100 photos in two full circuits at two distances, keeping the object filling the frame.
+- **A building corner or a section of facade** with windows and brick or siding, from the sidewalk. 80 to 120 photos in a slow walk along the facade with the camera pointed at it, then a second pass from farther back or at a different height.
+
+Variations that produce a clear result in the report: use half the photos; keep one ring only; stand in one spot and rotate instead of walking around; shoot in direct sun versus shade; cover a shiny or plain surface with tape or newspaper and rebuild; capture the same object with a phone and a dedicated camera. Objects that usually fail, and are worth avoiding for the baseline: glass, polished metal, plain white walls, anything that moves in the wind.
 
 ### Photo capturing guidelines
 
@@ -50,13 +60,13 @@ Adapted from the [Agisoft Metashape user manual](https://www.agisoft.com/pdf/met
 - More photos than you think you need is better than too few.
 - Move the camera around the object. Standing in one spot and rotating the camera does not produce parallax, the apparent shift of a feature between photos taken from different positions, and without parallax the software cannot triangulate depth.
 
-![Capture scenarios from the Metashape manual: incorrect on the left, correct on the right](images/photo_guidelines1.webp){width="80%" fig-align="center"}
+![Capture scenarios from the Metashape manual: incorrect on the left, correct on the right](images/photo_guidelines1.webp){width="80%" fig-align="center" fig-alt="Diagrams of camera positions for photographing a facade and an interior: rotating in one spot marked incorrect, moving the camera between overlapping positions marked correct"}
 
-![](images/photo_guidelines2.webp){width="80%" fig-align="center"}
+![](images/photo_guidelines2.webp){width="80%" fig-align="center" fig-alt="Diagrams of camera positions for an isolated object: a few photos from one side marked incorrect, a full ring of overlapping photos around the object marked correct"}
 
 ### COLMAP notes
 
-COLMAP is a general-purpose Structure from Motion and Multi-View Stereo pipeline with a graphical and a command-line interface. Download binaries from the [COLMAP releases page](https://github.com/colmap/colmap/releases), unzip, and run `COLMAP.bat` (Windows) to start the graphical interface. Dense reconstruction requires an NVIDIA GPU with CUDA; without one, stop after the sparse reconstruction.
+COLMAP is a general-purpose Structure from Motion and Multi-View Stereo pipeline with a graphical and a command-line interface. On Windows, download the binaries from the [COLMAP releases page](https://github.com/colmap/colmap/releases), unzip, and run `COLMAP.bat` to start the graphical interface; on macOS, install with `brew install colmap` and run `colmap gui`. Dense reconstruction requires an NVIDIA GPU with CUDA; without one, stop after the sparse reconstruction.
 
 The video below (no audio) loads about 20 images of a physical terrain model and runs the full pipeline. Notice that you can inspect keypoints, matches, and the links between cameras and reconstructed points.
 
