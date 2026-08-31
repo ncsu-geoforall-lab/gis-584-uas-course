@@ -32,14 +32,7 @@ Section opener. Ask who has used Google Earth or a county orthophoto and assumed
 
 ## Where this lecture sits {.center .text-center}
 
-```{mermaid}
-flowchart LR
-    R["Rules & regulations"] -.-> A
-    A["Plan the flight"] --> B["Collect imagery"]
-    B --> C["SfM processing"]
-    C --> D["GIS analytics"]
-    style C fill:#006600,stroke:#006600,color:#ffffff
-```
+![](../images/pipeline_diagram.svg){width="95%" fig-alt="The course pipeline: rules and regulations, plan the flight, collect imagery, SfM processing (highlighted), GIS analytics, with the topic that covers each step"}
 
 ::: {.term-card}
 **Why processing before planning?** You cannot plan a flight well until you know what the processing needs from the imagery

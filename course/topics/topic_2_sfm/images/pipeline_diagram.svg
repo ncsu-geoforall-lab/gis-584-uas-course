@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 260" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .box { fill: #006600; fill-opacity: 0.07; stroke: #006600; stroke-width: 3; }
+      .box-active { fill: #006600; stroke: #006600; stroke-width: 3; }
+      .label { font-size: 30px; font-weight: bold; fill: #006600; text-anchor: middle; }
+      .label-active { font-size: 30px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .sub { font-size: 22px; fill: #3e3e3e; text-anchor: middle; }
+      .sub-active { font-size: 22px; fill: #e6f0e6; text-anchor: middle; }
+      .arrow { stroke: #660066; stroke-width: 4; fill: none; }
+      .arrow-dashed { stroke: #8c8c8c; stroke-width: 4; stroke-dasharray: 10 8; fill: none; }
+    </style>
+    <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#660066"/>
+    </marker>
+    <marker id="head-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c8c8c"/>
+    </marker>
+  </defs>
+
+  <!-- boxes: x positions 20, 280, 540, 800, 1060; width 220; height 130 -->
+  <rect x="20" y="65" width="220" height="130" rx="14" class="box"/>
+  <text x="130" y="122" class="label">Rules and</text>
+  <text x="130" y="158" class="label">regulations</text>
+  <text x="130" y="230" class="sub">Topic 1</text>
+
+  <rect x="280" y="65" width="220" height="130" rx="14" class="box"/>
+  <text x="390" y="122" class="label">Plan the</text>
+  <text x="390" y="158" class="label">flight</text>
+  <text x="390" y="230" class="sub">Topic 3</text>
+
+  <rect x="540" y="65" width="220" height="130" rx="14" class="box"/>
+  <text x="650" y="122" class="label">Collect</text>
+  <text x="650" y="158" class="label">imagery</text>
+  <text x="650" y="230" class="sub">Field trip</text>
+
+  <rect x="800" y="65" width="220" height="130" rx="14" class="box-active"/>
+  <text x="910" y="122" class="label-active">SfM</text>
+  <text x="910" y="158" class="label-active">processing</text>
+  <text x="910" y="230" class="sub">Topic 2, this lecture</text>
+
+  <rect x="1060" y="65" width="220" height="130" rx="14" class="box"/>
+  <text x="1170" y="122" class="label">GIS</text>
+  <text x="1170" y="158" class="label">analytics</text>
+  <text x="1170" y="230" class="sub">Topics 4 to 7</text>
+
+  <!-- arrows -->
+  <line x1="242" y1="130" x2="276" y2="130" class="arrow-dashed" marker-end="url(#head-grey)"/>
+  <line x1="502" y1="130" x2="536" y2="130" class="arrow" marker-end="url(#head)"/>
+  <line x1="762" y1="130" x2="796" y2="130" class="arrow" marker-end="url(#head)"/>
+  <line x1="1022" y1="130" x2="1056" y2="130" class="arrow" marker-end="url(#head)"/>
+</svg>
