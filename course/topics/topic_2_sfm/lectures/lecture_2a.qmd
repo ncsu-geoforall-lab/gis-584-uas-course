@@ -7,16 +7,17 @@ format:
         theme: [simple, ../../../../theme.scss]
         footer: "[Return Home](../part_a_images_to_3d.qmd)"
         slide-number: true
+bibliography: ../references.bib
 ---
 
 ## Objectives
 
 ::: {.incremental}
-- Distinguish remote sensing from photogrammetry and explain what each contributes to UAS mapping
-- Explain why a raw aerial photograph cannot be measured like a map, and what orthorectification fixes
-- Describe how Structure from Motion (SfM) recovers 3D geometry from overlapping 2D images
-- Explain how geotags, ground control points, and RTK/PPK positioning anchor a model to the ground
-- Recognize the imaging conditions that make SfM succeed or fail
+- **Distinguish** _remote sensing_ from _photogrammetry_ and explain what each contributes to UAS mapping
+- **Explain** why a _raw aerial photograph_ cannot be measured like a map, and what _orthorectification_ fixes
+- **Describe** how _Structure from Motion (SfM)_ recovers 3D geometry from overlapping 2D images
+- **Explain** how _geotags_, _ground control points_, and _RTK/PPK_ positioning anchor a model to the ground
+- **Recognize** the _imaging conditions_ that make SfM succeed or fail
 :::
 
 ::: {.notes}
@@ -97,13 +98,13 @@ The kite photo makes the point that aerial imaging predates aircraft; the instru
 **Analog photogrammetry**: calibrated metric cameras, film, stereoplotters, manual point measurement by trained operators
 :::
 ::: {.term-card}
-**Digital photogrammetry**: scanned or digital imagery, analytical solutions, still needs camera calibration and manual control measurement
-:::
-::: {.term-card}
 **Structure from Motion**: consumer cameras, automatic feature matching, self-calibration, thousands of images processed on a laptop
 :::
 :::
 ::: {.column width="50%"}
+::: {.term-card}
+**Digital photogrammetry**: scanned or digital imagery, analytical solutions, still needs camera calibration and manual control measurement
+:::
 ![Camera positions, ground control markers, and photos in an SfM project](../images/digital.webp){fig-alt="Screenshot of photogrammetry software with a camera list, ground control markers, model view, and photo strip"}
 :::
 :::
@@ -404,12 +405,13 @@ The table is the map of Lecture 2B, where each row becomes a Metashape workflow 
 Section transition. SfM alone gives shape without scale, position, or orientation in the real world; this section is about how those get added and how accuracy is proven.
 :::
 
-## Relative and absolute orientation {.center}
+## Relative and absolute orientation {.center .smaller}
 
 ![Source: Dr. Qassim Abdullah, Penn State GEOG 892](../images/relative_absolute_orientation.webp){width="95%" fig-alt="Left: images fitted to each other above terrain; right: the same block fitted to ground control points marked by stars"}
 
 ::: {.term-card}
-**Relative orientation**: images fit each other. **Absolute orientation**: the block fits the ground, through ground control or accurately known camera positions
+- **Relative orientation**: images fit each other. 
+- **Absolute orientation**: the block fits the ground, through ground control or accurately known camera positions
 :::
 
 ::: {.notes}
@@ -545,9 +547,20 @@ Five minutes, then compare two or three plans on the board. The point is to make
 Recap the arc: photogrammetry versus remote sensing, why perspective geometry blocks measurement, how orthorectification fixes it, how SfM recovers 3D from overlap, and how geotags, GCPs, and RTK/PPK anchor the result. Assignment 2A is the desk-scale version of everything in the tie-point build; encourage students to deliberately break something (too few photos, a shiny object, changing zoom) so the report has something to explain.
 :::
 
-## References and image credits {.smaller}
+## References {.smaller}
 
-- Jeziorska, J., Mitasova, H. Photogrammetry and Structure from Motion Concepts, GIS 584 course slides, NC State Center for Geospatial Analytics (this deck adapts and extends them)
-- Furukawa, Y., Hernandez, C. (2015). [Multi-View Stereo: A Tutorial](http://carlos-hernandez.org/papers/fnt_mvs_2015.pdf). Foundations and Trends in Computer Graphics and Vision 9(1-2)
-- OpenTopography, [Introduction to Structure from Motion Photogrammetry](https://opentopography.org/workshops/GSA2021), GSA 2021 short course
-- Camera geometry figure: Natural Resources Canada. Perspective versus orthographic: Wikipedia. Relative and absolute orientation: Q. Abdullah, Penn State GEOG 892. SfM diagram: theia-sfm.org. Analog instruments: USGS. GCP target: TxDOT. 1906 San Francisco: G. Lawrence, Library of Congress. Tie-point and geotag sequences, GCP photo: NC State CGA (V. Petras, A. Petrasova)
+This deck adapts and extends the original course slides [@jeziorska_mitasova_sfm_slides]. For the mathematics of dense matching see @furukawa_hernandez_2015; for a longer treatment of SfM for the geosciences see @opentopography_2021_sfm.
+
+::: {#refs}
+:::
+
+## Image credits {.smaller}
+
+- Camera geometry: Natural Resources Canada
+- Perspective versus orthographic projection: Wikipedia
+- Relative and absolute orientation: Q. Abdullah, Penn State GEOG 892
+- SfM diagram: theia-sfm.org
+- Analog orthophoto instruments: USGS
+- GCP target sketch: TxDOT survey manual
+- 1906 San Francisco kite photographs: G. Lawrence, Library of Congress
+- Tie-point and geotag sequences, overlap diagram, GCP photo: NC State Center for Geospatial Analytics
