@@ -66,6 +66,8 @@ website:
                   href: course/topics/topic_2_sfm/assignments/assignment_2a.qmd
                 - text: "Assignment 2B"
                   href: course/topics/topic_2_sfm/assignments/assignment_2b.qmd
+                - text: "Assignment 2C"
+                  href: course/topics/topic_2_sfm/assignments/assignment_2c.qmd
             - text: "Demo: Structure from Motion"
               href: course/topics/topic_2_sfm/sfm_demo.qmd
         - section: "Topic 3: UAS Flight Planning"
@@ -142,19 +144,6 @@ website:
               contents:
                 - text: "Assignment 6A"
                   href: course/topics/topic_6_change_detection/assignments/assignment_6a.qmd
-        - section: "Topic 7: OpenDroneMap"
-          href: course/topics/topic_7_odm/index.qmd
-          contents:
-            - text: "7A: OpenDroneMap"
-              href: course/topics/topic_7_odm/part_a_opendronemap.qmd
-            - section: Slides
-              contents:
-                - text: "Lecture 7A"
-                  href: course/topics/topic_7_odm/lectures/lecture_7a.qmd
-            - section: Assignments
-              contents:
-                - text: "Assignment 7A"
-                  href: course/topics/topic_7_odm/assignments/assignment_7a.qmd
         - section: Midterm
           href: course/topics/midterm/index.qmd
           contents:
