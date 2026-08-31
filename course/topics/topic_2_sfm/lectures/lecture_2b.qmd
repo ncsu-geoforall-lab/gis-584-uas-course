@@ -409,16 +409,16 @@ Position and orientation in the object space
 
 The cameras:
 
-- X (Latitude) 
-- Y (Longitude)
-- Z (Altitude)
+- X (easting)
+- Y (northing)
+- Z (elevation)
 
 and Angular orientation:
 
 | Photogrammetry | Aviation analogy | Axis   | Motion                   |
 | -------------- | ---------------- | ------ | ------------------------ |
-| **ω (omega)**  | Roll             | x | Tilt forward/back        |
-| **φ (phi)**    | Pitch            | y | Tilt side-to-side        |
+| **ω (omega)**  | Roll             | x (flight direction) | Wing tilt side-to-side |
+| **φ (phi)**    | Pitch            | y | Nose tilt forward/back |
 | **κ (kappa)**  | Yaw              | z | Rotation around vertical |
 
 
@@ -757,7 +757,7 @@ Algorithms sorting outliers (due to some factors, like poor texture of some elem
 - **Aggressive** depth filtering mode > sorting out most of the outliers (Recommended for aerial data processing)
 
 ::: notes
-Filtering prunes outliers. Mild preserves fine structure, Aggressive removes noise but may erase detail, Moderate is a safe default. Choose based on scene complexity.
+Filtering prunes outliers. Aggressive is the usual choice for aerial mapping and is what Assignment 2B uses; Mild preserves fine structure on complex objects with small foreground details; Moderate sits between. Choose based on scene complexity.
 :::
 
 ---
