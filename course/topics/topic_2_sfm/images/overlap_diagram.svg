@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 700" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .label { font-size: 46px; font-weight: bold; fill: #006600; }
+      .sub { font-size: 34px; fill: #3e3e3e; }
+      .leader { stroke: #8c8c8c; stroke-width: 2.5; stroke-dasharray: 6 5; fill: none; }
+      .footprint { fill: #006600; fill-opacity: 0.07; stroke: #006600; stroke-width: 2.5; }
+      .flightline { stroke: #8c8c8c; stroke-width: 4; stroke-dasharray: 14 10; fill: none; }
+      .station { fill: #660066; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c8c8c"/>
+    </marker>
+  </defs>
+
+  <!-- Side overlap band (between the two strips) -->
+  <rect x="120" y="280" width="810" height="100" fill="#c46210" fill-opacity="0.28"/>
+  <!-- Forward overlap band (between two consecutive frames on line 1) -->
+  <rect x="420" y="80" width="210" height="200" fill="#660066" fill-opacity="0.28"/>
+
+  <!-- Image footprints, flight line 1 -->
+  <rect x="120" y="80" width="360" height="300" class="footprint"/>
+  <rect x="270" y="80" width="360" height="300" class="footprint"/>
+  <rect x="420" y="80" width="360" height="300" class="footprint"/>
+  <rect x="570" y="80" width="360" height="300" class="footprint"/>
+  <!-- Image footprints, flight line 2 -->
+  <rect x="120" y="280" width="360" height="300" class="footprint"/>
+  <rect x="270" y="280" width="360" height="300" class="footprint"/>
+  <rect x="420" y="280" width="360" height="300" class="footprint"/>
+  <rect x="570" y="280" width="360" height="300" class="footprint"/>
+
+  <!-- Flight lines (lawnmower pattern) -->
+  <line x1="60" y1="230" x2="1000" y2="230" class="flightline" marker-end="url(#arrow)"/>
+  <line x1="1000" y1="430" x2="60" y2="430" class="flightline" marker-end="url(#arrow)"/>
+  <path d="M 1000 230 Q 1060 330 1000 430" class="flightline"/>
+
+  <!-- Camera stations -->
+  <circle cx="300" cy="230" r="16" class="station"/>
+  <circle cx="450" cy="230" r="16" class="station"/>
+  <circle cx="600" cy="230" r="16" class="station"/>
+  <circle cx="750" cy="230" r="16" class="station"/>
+  <circle cx="300" cy="430" r="16" class="station"/>
+  <circle cx="450" cy="430" r="16" class="station"/>
+  <circle cx="600" cy="430" r="16" class="station"/>
+  <circle cx="750" cy="430" r="16" class="station"/>
+
+  <!-- Labels -->
+  <text x="60" y="205" class="sub">Flight line 1</text>
+  <text x="60" y="465" class="sub">Flight line 2</text>
+
+  <path class="leader" d="M 525 80 L 525 76"/>
+  <text x="525" y="32" text-anchor="middle" class="label">Forward overlap</text>
+  <text x="525" y="72" text-anchor="middle" class="sub" font-size="30">same line, consecutive photos</text>
+
+  <path class="leader" d="M 930 330 L 990 330"/>
+  <text x="1000" y="322" class="label">Side overlap</text>
+  <text x="1000" y="352" class="sub" font-size="30">adjacent lines</text>
+
+  <!-- Legend -->
+  <circle cx="140" cy="640" r="16" class="station"/>
+  <text x="165" y="649" class="sub">camera station (one photo)</text>
+  <rect x="700" y="625" width="46" height="30" class="footprint"/>
+  <text x="760" y="649" class="sub">image footprint on the ground</text>
+</svg>

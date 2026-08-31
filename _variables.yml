@@ -14,7 +14,7 @@ software:
     version: "8.5"
   agisoft:
     website: "https://www.agisoft.com/downloads/installer/"
-    version: "2.3.1"
+    version: "2.3.2"
   webodm:
     version: "3.2"
 
