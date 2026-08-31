@@ -27,7 +27,7 @@ Select an object in your office, at home, or outside. Take multiple overlapping 
 Use any Structure from Motion tool. Options that work on a laptop or phone:
 
 - [Agisoft Metashape](https://www.agisoft.com/) {{< var software.agisoft.version >}}: the software used for aerial processing in Assignment 2B; a 30-day trial is available from the [download page]({{< var software.agisoft.website >}}). The Standard edition is enough for this assignment.
-- [WebODM](https://webodm.org/): free and open source drone mapping software, used for aerial processing in Topic 7.
+- [WebODM](https://webodm.org/): free and open source drone mapping software, used for aerial processing.
 - [RealityScan](https://www.realityscan.com/) (Epic Games): free desktop application for Windows, with a companion mobile app for iOS and Android.
 - [COLMAP](https://colmap.github.io/): free and open source, Windows, macOS, and Linux. See the notes below.
 - [Meshroom](https://alicevision.org/) (AliceVision): free and open source, Windows and Linux; dense reconstruction needs an NVIDIA GPU.
