@@ -322,7 +322,7 @@ Same build with five drone images. Features are detected in every frame, matched
 ## SfM at work {background-iframe="../sfm_demo_embed.html" background-interactive="true"}
 
 ::: {.notes}
-Live demo slide; the visualization is interactive (drag to orbit, scroll to zoom). The red dot is the camera flying a lawnmower pattern over a wireframe terrain, the green square is its ground footprint, and the rays connect the camera to the features it sees. Ask students to watch one red ground point and count how many camera positions get a ray to it: that count is the redundancy the previous slides argued for. The same page is linked from the topic page for later.
+Live demo slide; the visualization is interactive (drag to orbit, scroll to zoom, panel at top right). The red dot is the camera flying a lawnmower pattern; the green square is its ground footprint; purple rays go only to the ground features inside that footprint. Each photo station leaves a footprint outline, feature points turn grey to orange (1 to 2 photos) to green (3 or more), and the terrain becomes solid only where three or more photos overlap. The in-class move: drop forward overlap to 50 and side overlap to 30 in the panel, ask the class to predict the "points seen 3+ times" count before the flight runs, then run it. Then raise the flying height and ask why fewer photos now cover the same site. The same page is linked from the topic page for later.
 :::
 
 ## Multiple-view geometry {.smaller}

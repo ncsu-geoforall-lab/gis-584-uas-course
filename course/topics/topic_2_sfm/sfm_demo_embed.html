@@ -5,417 +5,420 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Structure from Motion Visualization</title>
     <style>
-        /* body {
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            /* background-color: #000; */
-        } */
-
-        html, body { margin: 0; height: 100%; overflow: hidden; background: #f2f2f2; }
+        html, body {
+            margin: 0; height: 100%; overflow: hidden; background: #f2f2f2;
+            font-family: Lato, "Helvetica Neue", Arial, sans-serif; color: #3e3e3e;
+        }
         canvas { display: block; width: 100%; height: 100%; }
+        #hud {
+            position: absolute; left: 12px; bottom: 56px;
+            background: rgba(242, 242, 242, 0.88);
+            border-left: 5px solid #006600; border-radius: 0 8px 8px 0;
+            padding: 8px 12px; font-size: 14px; line-height: 1.5; pointer-events: none;
+        }
+        #hud strong { color: #006600; }
+        #hud .swatch { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin: 0 4px 0 8px; vertical-align: middle; }
+        #hud .hint { color: #8c8c8c; font-size: 12px; }
+        .lil-gui {
+            --background-color: #f2f2f2; --text-color: #3e3e3e;
+            --title-background-color: #006600; --title-text-color: #ffffff;
+            --widget-color: #e1e8e1; --hover-color: #d4e2d4; --focus-color: #c8dcc8;
+            --number-color: #006600; --string-color: #660066;
+            --font-family: Lato, "Helvetica Neue", Arial, sans-serif; --font-size: 13px;
+        }
     </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+    }
+    </script>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script> -->
-    <script>
+    <div id="hud">
+        <div><strong>Photos</strong>: <span id="hud-photos">0 of 0</span></div>
+        <div><strong>Points seen 3+ times</strong>: <span id="hud-points">0 of 0</span></div>
+        <div>
+            <span class="swatch" style="background:#8c8c8c"></span>not seen
+            <span class="swatch" style="background:#c46210"></span>1 to 2 photos
+            <span class="swatch" style="background:#006600"></span>3 or more
+        </div>
+        <div class="hint" id="hud-status">Drag to orbit, scroll to zoom</div>
+    </div>
 
-        // Create a GUI
-        // const gui = new dat.GUI();
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { ImprovedNoise } from 'three/addons/math/ImprovedNoise.js';
+        import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
-        // Parameters object
-        const params = {
-            numAnchorPoints: 10, // Default number of anchor points
-            terrainSize: 100 // Default terrain size
-        };
+        // ---------- constants ----------
+        const COLORS = { primary: 0x006600, secondary: 0x660066, orange: 0xc46210, blue: 0x3577b5, grey: 0x8c8c8c, bg: 0xf2f2f2 };
+        const SITE = 10;            // the mapped site is SITE x SITE units
+        const SEGMENTS = 100;       // terrain grid resolution
+        const HFOV = THREE.MathUtils.degToRad(60);   // camera horizontal field of view
+        const N_FEATURES = 60;      // ground feature points
+        const REQUIRED = 3;         // photos needed before a point counts as reconstructed
+        const BASE_SPEED = 2.0;     // site units per second at speed 1x
+        const RESTART_DELAY = 4000; // ms to hold the finished flight before restarting
 
-        // Add controls to the GUI
-        // gui.add(params, 'numAnchorPoints', 1, 100).name('Anchor Points').onChange(updateAnchorPoints);
-        // gui.add(params, 'terrainSize', 10, 500).name('Terrain Size').onChange(updateTerrain);
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const params = { agl: 3, forward: 80, side: 65, speed: 1, showRays: true, showReconstruction: true };
+        // Optional URL parameters, e.g. ?forward=50&side=30&t=20 to open mid-flight
+        const query = new URLSearchParams(window.location.search);
+        for (const key of ['agl', 'forward', 'side', 'speed']) {
+            const v = parseFloat(query.get(key));
+            if (Number.isFinite(v)) params[key] = v;
+        }
+        const jumpSeconds = parseFloat(query.get('t')) || 0;
 
-        // Function to update anchor points
-        // function updateAnchorPoints(value) {
-        //     // Logic to update the number of anchor points
-        //     // For example, regenerate anchor points based on the new value
-        //     anchorPoints = createAnchorPoints(geometry, value, terrain);
-        // }
-
-        // // Function to update terrain
-        // function updateTerrain(value) {
-        //     // Logic to update the terrain size
-        //     // For example, regenerate the terrain based on the new value
-        //     generateTerrain(value);
-        // }
-
-        // Set up the scene, camera, and renderer
+        // ---------- renderer, camera, controls ----------
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 9, 14);
         const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setClearColor(0xf2f2f2);
+        renderer.setClearColor(COLORS.bg);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
-
-        // Add ambient light
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-
-        // Add directional light
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(5, 5, 5).normalize();
-        scene.add(directionalLight);
-
-        // Simplex noise instance
-        const simplex = new SimplexNoise();
-
-        // Create a DSM using PlaneBufferGeometry and subtle simplex noise
-        const widthSegments = 100;
-        const heightSegments = 100;
-        const geometry = new THREE.PlaneBufferGeometry(10, 10, widthSegments, heightSegments);
-
-        // Modify the z-coordinates of the vertices using simplex noise with reduced amplitude
-        const vertices = geometry.attributes.position.array;
-        for (let i = 0; i < vertices.length; i += 3) {
-            const x = vertices[i];
-            const y = vertices[i + 1];
-            vertices[i + 2] = simplex.noise2D(x * 0.3, y * 0.3) / 2.0; // Reduced amplitude for a more subtle terrain
-        }
-
-        const elevationColors = [
-            { value: 0.0, color: new THREE.Color(0x00bfbf) }, // 0% 0 191 191
-            { value: 0.2, color: new THREE.Color(0x00ff00) }, // 20% 0 255 0
-            { value: 0.4, color: new THREE.Color(0xffff00) }, // 40% 255 255 0
-            { value: 0.6, color: new THREE.Color(0xff7f00) }, // 60% 255 127 0
-            { value: 0.8, color: new THREE.Color(0xbf7f3f) }, // 80% 191 127 63
-            { value: 1.0, color: new THREE.Color(0xc8c8c8) }  // 100% 200 200 200
-        ];
-
-        const vertexShader = `
-            varying float vElevation;
-            void main() {
-                vElevation = position.z;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            }
-        `;
-
-        const fragmentShader = `
-            uniform vec3 elevationColors[3];
-            varying float vElevation;
-            void main() {
-                vec3 color;
-                if (vElevation < 0.5) {
-                    color = mix(elevationColors[0], elevationColors[1], vElevation * 2.0);
-                } else {
-                    color = mix(elevationColors[1], elevationColors[2], (vElevation - 0.5) * 2.0);
-                }
-                gl_FragColor = vec4(color, 1.0);
-            }
-        `;
-
-        geometry.computeVertexNormals(); // Recompute normals after modifying vertices
-
-        // Colored Terrain
-        // const shaderMaterial = new THREE.ShaderMaterial({
-        //     vertexShader: vertexShader,
-        //     fragmentShader: fragmentShader,
-        //     uniforms: {
-        //         elevationColors: { value: elevationColors.map(e => e.color) }
-        //     }
-        // });
-        // const terrain = new THREE.Mesh(geometry, shaderMaterial);
-
-        // Wired Terrain
-        const material = new THREE.MeshStandardMaterial({ color: 0x228b22, wireframe: true });
-        const terrain = new THREE.Mesh(geometry, material);
-
-        
-        terrain.rotation.x = -Math.PI / 2; // Rotate to make it horizontal
-        scene.add(terrain);
-
-        // Function to create anchor points directly on the DSM's surface
-        function createAnchorPoints(bufferGeometry, numPoints, terrain) {
-            const positions = bufferGeometry.attributes.position.array;
-            const points = [];
-
-            for (let i = 0; i < numPoints; i++) {
-                // Randomly select a vertex from the geometry
-                const index = Math.floor(Math.random() * (positions.length / 3)) * 3;
-
-                // Create a point at this vertex
-                const point = new THREE.Vector3(
-                    positions[index],
-                    positions[index + 1],
-                    positions[index + 2]
-                );
-
-                // Apply the terrain's rotation to the anchor points
-                point.applyMatrix3(terrain.matrixWorld);
-
-                points.push(point);
-            }
-            return points;
-        }
-
-        // Correctly place anchor points on the terrain surface after rotation
-        const anchorPoints = createAnchorPoints(geometry, 50, terrain);
-        const anchorMaterial = new THREE.PointsMaterial({ color: 0xff0000, size: 0.25 });
-        const anchorGeometry = new THREE.BufferGeometry().setFromPoints(anchorPoints);
-
-        const anchorMesh = new THREE.Points(anchorGeometry, anchorMaterial);
-        scene.add(anchorMesh);
-
-        // Function to create a camera representation
-        function createCameraRepresentation(position, color = 0x0000ff) {
-            const cameraGeometry = new THREE.SphereGeometry(0.1, 32, 32);
-            const cameraMaterial = new THREE.MeshBasicMaterial({ color });
-            const cameraMesh = new THREE.Mesh(cameraGeometry, cameraMaterial);
-            cameraMesh.position.copy(position);
-            scene.add(cameraMesh);
-            return cameraMesh;
-        }
-
-        // Create a UAV camera path for two passes
-        // const uavPath1 = [];
-        // const uavPath2 = [];
-        // for (let i = 0; i <= 1; i += 0.01) {
-        //     const x = 5 * (i * 2 - 1);
-        //     const z = 5 * (i * 2 - 1);
-        //     uavPath1.push(new THREE.Vector3(x, 3, z));
-        //     uavPath2.push(new THREE.Vector3(x, 3.5, -z));
-        // }
-
-         // Create realistic UAV camera paths (grid pattern)
-        // const uavPath1 = [];
-        // const uavPath2 = [];
-        // for (let i = -5; i <= 5; i += 0.25) {
-        //     for (let j = -5; j <= 5; j += 0.25) {
-        //         uavPath1.push(new THREE.Vector3(3, 3, j));
-        //         uavPath2.push(new THREE.Vector3(i, 3.5, j));
-        //     }
-        // }const uavCamera2 = createCameraRepresentation(uavPath2[0], 0xff0000);
-
-        // Define the boundaries and step sizes
-        const startX = -5;
-        const endX = 5;
-        const startY = 3;
-        const endY = 3;
-        const startZ = -5;
-        const endZ = 5;
-        const stepSize = 0.25;
-        const rowDistance = 0.25;
-
-        // Create realistic UAV camera paths (lawnmower pattern)
-        const uavPath1 = [];
-        const uavPath2 = [];
-
-        let direction = 1; // 1 for forward, -1 for backward
-
-        for (let z = startZ; z <= endZ; z += rowDistance) {
-            if (direction === 1) {
-                for (let x = startX; x <= endX; x += stepSize) {
-                    uavPath1.push(new THREE.Vector3(x, startY, z));
-                    uavPath2.push(new THREE.Vector3(x, endY, z));
-                }
-            } else {
-                for (let x = endX; x >= startX; x -= stepSize) {
-                    uavPath1.push(new THREE.Vector3(x, startY, z));
-                    uavPath2.push(new THREE.Vector3(x, endY, z));
-                }
-            }
-            direction *= -1; // Change direction at the end of each row
-        }
-
-        // Create geometry and add points from uavPath1
-        const uavlineGeometry = new THREE.BufferGeometry().setFromPoints(uavPath1[0]);
-
-        // Create a dashed line material
-        const uavlineMaterial = new THREE.LineDashedMaterial({
-            color: 0xff0000, // Red color
-            dashSize: 0.1, // Length of dashes
-            gapSize: 0.1, // Length of gaps between dashes
-        });
-
-        // Create the line object
-        const uavLine = new THREE.Line(uavlineGeometry, uavlineMaterial);
-        uavLine.computeLineDistances(); // Required for dashed lines
-
-        // Add the line to the scene
-        scene.add(uavLine);
-
-        // Create a box to represent the UAV's field of view
-        // const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-        // const boxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-        // const uavFOVBox = new THREE.Mesh(boxGeometry, boxMaterial);
-        // scene.add(uavFOVBox);
-
-        // Create a plane to represent the UAV's field of view
-        const planeGeometry = new THREE.PlaneGeometry(2, 2); // Adjust size as needed
-        const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x006600, side: THREE.DoubleSide, transparent: true, opacity: 0.6 }); // Solid fill color
-        const uavFOVPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-        scene.add(uavFOVPlane);
-
-        // // Create a plane to represent the UAV's field of view
-        //     const aggPlaneGeometry = new THREE.PlaneGeometry(2, 2); // Adjust size as needed
-        //     const aggPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide, wireframe: true }); // Solid fill color
-        //     const aggUavFOVPlane = new THREE.Mesh(aggPlaneGeometry, aggPlaneMaterial);
-        //     scene.add(aggUavFOVPlane)
-
-        // Define initial position and rotation
-        const initialPosition = new THREE.Vector3(0, 0, 0);
-        const initialRotation = new THREE.Euler(-Math.PI / 2, 0, 0);
-
-        let uavIndex = 0;
-        const uavCamera1 = createCameraRepresentation(uavPath1[0], 0xff0000);
-        const uavCamera2 = createCameraRepresentation(uavPath2[0], 0x3577b5);
-        
-
-        // Camera frustum visualization for UAV cameras
-
-        // Function to create and return line between two points
-        function createLine(pointA, pointB, color = 0xffffff) {
-            const geometry = new THREE.BufferGeometry().setFromPoints([pointA, pointB]);
-            const material = new THREE.LineBasicMaterial({ color });
-            const line = new THREE.Line(geometry, material);
-            scene.add(line);
-            return line;
-        }
-
-        // Store the lines for each pass
-        const linesPass1 = [];
-        const linesPass2 = [];
-
-        // Create lines from the UAV cameras to anchor points
-        anchorPoints.forEach(point => {
-            linesPass1.push(createLine(uavPath1[0], point, 0x660066));
-            linesPass2.push(createLine(uavPath2[0], point, 0x3577b5));
-        });
-
-        // Simulate feature matching between passes
-        function createFeatureMatchingLines(pointsA, pointsB, color = 0xffd700) {
-            pointsA.forEach((pointA, index) => {
-                const pointB = pointsB[index];
-                const lineGeometry = new THREE.BufferGeometry().setFromPoints([pointA, pointB]);
-                const lineMaterial = new THREE.LineBasicMaterial({ color });
-                const line = new THREE.Line(lineGeometry, lineMaterial);
-                scene.add(line);
-            });
-        }
-
-        // Create feature matching lines between two UAV passes
-        createFeatureMatchingLines(anchorPoints, anchorPoints);
-
-        // OrbitControls for user interaction
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
-        controls.dampingFactor = 0.25;
-        controls.enableZoom = true;
+        controls.dampingFactor = 0.1;
+        controls.target.set(0, 0, 0);
 
-        camera.position.set(0, 9, 14);
-        camera.lookAt(0, 0, 0);
-
-        const trailGeometry = new THREE.PlaneGeometry(2, 2);
-        const trailMaterial = new THREE.MeshBasicMaterial({ color: 0x8c8c8c, side: THREE.DoubleSide, wireframe: true });
-        const trailPlanes = [];
-
-        let lastUpdateTime = 0;
-        const updateInterval = 50; // Time in milliseconds between updates
-        function animate(t) {
-            requestAnimationFrame(animate);
-            // Calculate the time elapsed since the last update
-            const elapsedTime = t - lastUpdateTime;
-
-            if (elapsedTime >= updateInterval) {
-            // Move the UAV cameras along their paths
-            uavIndex = (uavIndex + 1) % uavPath1.length;
-            uavCamera1.position.copy(uavPath1[uavIndex]);
-            uavCamera2.position.copy(uavPath2[uavIndex]);
-
-            if (uavIndex < uavPath1.length - 1) {
-                uavIndex++;
-                const newPoints = uavPath1.slice(0, uavIndex + 1);
-                uavlineGeometry.setFromPoints(newPoints);
-                uavLine.computeLineDistances(); // Required for dashed lines
-            }
-
-            // Update the positions of the lines to keep them connected to the moving UAV cameras
-            linesPass1.forEach((line, index) => {
-                const linePositions = line.geometry.attributes.position.array;
-                const anchorPoint = anchorPoints[index];
-
-                // Update the line's start point (UAV camera position)
-                linePositions[0] = uavCamera1.position.x;
-                linePositions[1] = uavCamera1.position.y;
-                linePositions[2] = uavCamera1.position.z;
-
-                // Update the line's endpoint (anchor point on the terrain)
-                linePositions[3] = anchorPoint.x;
-                linePositions[4] = anchorPoint.y;
-                linePositions[5] = anchorPoint.z;
-
-                line.geometry.attributes.position.needsUpdate = true;
-            });
-
-            linesPass2.forEach((line, index) => {
-                const linePositions = line.geometry.attributes.position.array;
-                const anchorPoint = anchorPoints[index];
-
-                // Update the line's start point (UAV camera position)
-                linePositions[0] = uavCamera2.position.x;
-                linePositions[1] = uavCamera2.position.y;
-                linePositions[2] = uavCamera2.position.z;
-
-                // Update the line's endpoint (anchor point on the terrain)
-                linePositions[3] = anchorPoint.x;
-                linePositions[4] = anchorPoint.y;
-                linePositions[5] = anchorPoint.z;
-
-                line.geometry.attributes.position.needsUpdate = true;
-            });
-
-            // // Update the UAV's field of view box position
-            // uavFOVBox.position.copy(uavCamera1.position);
-
-            //  // Create a plane to represent the UAV's field of view
-            if (uavIndex <= 1) {
-                trailPlanes.forEach(m => scene.remove(m));
-                trailPlanes.length = 0;
-            }
-            const aggUavFOVPlane = new THREE.Mesh(trailGeometry, trailMaterial);
-            scene.add(aggUavFOVPlane);
-            trailPlanes.push(aggUavFOVPlane);
-    
-
-            // Update the UAV's field of view plane position and orientation
-            aggUavFOVPlane.position.set(uavCamera1.position.x, 0, uavCamera1.position.z); // Set y to 0 to place it on the terrain surface
-            aggUavFOVPlane.rotation.x = -Math.PI / 2; // Rotate to align with the terrain surface
-
-            // Update the UAV's field of view plane position and orientation
-            uavFOVPlane.position.set(uavCamera1.position.x, 0, uavCamera1.position.z); // Set y to 0 to place it on the terrain surface
-            uavFOVPlane.rotation.x = -Math.PI / 2; // Rotate to align with the terrain surface
-
-           
-            // Update the last update time
-            lastUpdateTime = t;
-            }
-  
-             controls.update();
-            renderer.render(scene, camera);
-            
+        // ---------- terrain ----------
+        // The plane is built in local x, y with height in z, then rotated flat:
+        // world x = local x, world y (up) = local z, world z = -local y.
+        const noise = new ImprovedNoise();
+        const terrainGeometry = new THREE.PlaneGeometry(SITE, SITE, SEGMENTS, SEGMENTS);
+        const tPos = terrainGeometry.attributes.position;
+        const vertexX = new Float32Array(tPos.count);
+        const vertexZ = new Float32Array(tPos.count);
+        for (let i = 0; i < tPos.count; i++) {
+            const x = tPos.getX(i), y = tPos.getY(i);
+            tPos.setZ(i, noise.noise(x * 0.3 + 7.3, y * 0.3 + 2.1, 0.5) * 1.2);
+            vertexX[i] = x;
+            vertexZ[i] = -y;
         }
+        terrainGeometry.computeVertexNormals();
+        const coverage = new THREE.BufferAttribute(new Float32Array(tPos.count), 1);
+        coverage.setUsage(THREE.DynamicDrawUsage);
+        terrainGeometry.setAttribute('coverage', coverage);
+
+        const wireframe = new THREE.Mesh(terrainGeometry, new THREE.MeshBasicMaterial({ color: COLORS.grey, wireframe: true, transparent: true, opacity: 0.35 }));
+        wireframe.rotation.x = -Math.PI / 2;
+        scene.add(wireframe);
+
+        // Reconstruction: shown only where the interpolated coverage reaches REQUIRED photos
+        const reconstruction = new THREE.Mesh(terrainGeometry, new THREE.ShaderMaterial({
+            uniforms: {
+                uRequired: { value: REQUIRED },
+                uLight: { value: new THREE.Vector3(0.4, 1.0, 0.6).normalize() },
+            },
+            vertexShader: `
+                attribute float coverage;
+                varying float vCoverage;
+                varying float vHeight;
+                varying vec3 vNormal;
+                void main() {
+                    vCoverage = coverage;
+                    vHeight = position.z;
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }`,
+            fragmentShader: `
+                uniform float uRequired;
+                uniform vec3 uLight;
+                varying float vCoverage;
+                varying float vHeight;
+                varying vec3 vNormal;
+                void main() {
+                    if (vCoverage < uRequired) discard;
+                    float h = clamp((vHeight + 0.6) / 1.2, 0.0, 1.0);
+                    vec3 low = vec3(0.30, 0.52, 0.24);
+                    vec3 high = vec3(0.86, 0.80, 0.58);
+                    vec3 base = mix(low, high, h);
+                    float lambert = 0.55 + 0.45 * max(dot(normalize(vNormal), uLight), 0.0);
+                    gl_FragColor = vec4(base * lambert, 1.0);
+                }`,
+            polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
+        }));
+        reconstruction.rotation.x = -Math.PI / 2;
+        scene.add(reconstruction);
+
+        // ---------- ground feature points ----------
+        function mulberry32(seed) {
+            return function () {
+                seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+                let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+                t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+                return ((t ^ t >>> 14) >>> 0) / 4294967296;
+            };
+        }
+        const rand = mulberry32(584);
+        const features = [];
+        for (let i = 0; i < N_FEATURES; i++) {
+            const idx = Math.floor(rand() * tPos.count);
+            features.push(new THREE.Vector3(vertexX[idx], tPos.getZ(idx), vertexZ[idx]));
+        }
+        const featureCounts = new Uint16Array(N_FEATURES);
+        const featureGeometry = new THREE.BufferGeometry().setFromPoints(features);
+        const featureColors = new THREE.BufferAttribute(new Float32Array(N_FEATURES * 3), 3);
+        featureGeometry.setAttribute('color', featureColors);
+        function circleTexture() {
+            const c = document.createElement('canvas');
+            c.width = c.height = 64;
+            const ctx = c.getContext('2d');
+            ctx.beginPath();
+            ctx.arc(32, 32, 28, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            const tex = new THREE.CanvasTexture(c);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            return tex;
+        }
+        scene.add(new THREE.Points(featureGeometry, new THREE.PointsMaterial({ size: 0.24, vertexColors: true, map: circleTexture(), alphaTest: 0.5, transparent: true })));
+
+        const colorGrey = new THREE.Color(COLORS.grey), colorOrange = new THREE.Color(COLORS.orange), colorGreen = new THREE.Color(COLORS.primary);
+        function refreshFeatureColors() {
+            for (let i = 0; i < N_FEATURES; i++) {
+                const c = featureCounts[i] === 0 ? colorGrey : featureCounts[i] < REQUIRED ? colorOrange : colorGreen;
+                featureColors.setXYZ(i, c.r, c.g, c.b);
+            }
+            featureColors.needsUpdate = true;
+        }
+
+        // ---------- flight plan ----------
+        // Footprint from flying height and field of view; the long side of the
+        // 3:2 frame is across track. Station spacing and line spacing follow from
+        // the overlap percentages.
+        function buildPlan(p) {
+            const across = 2 * p.agl * Math.tan(HFOV / 2);
+            const along = across * (2 / 3);
+            const stationStep = along * (1 - p.forward / 100);
+            const lineStep = across * (1 - p.side / 100);
+            const half = SITE / 2;
+            const xs = [];
+            for (let x = -half + along / 2; ; x += stationStep) {
+                xs.push(x);
+                if (x + along / 2 >= half) break;
+            }
+            const zs = [];
+            for (let z = -half + across / 2; ; z += lineStep) {
+                zs.push(z);
+                if (z + across / 2 >= half) break;
+            }
+            const stations = [];
+            zs.forEach((z, li) => {
+                const ordered = li % 2 ? [...xs].reverse() : xs;
+                ordered.forEach(x => stations.push(new THREE.Vector3(x, p.agl, z)));
+            });
+            return { stations, along, across };
+        }
+
+        // ---------- scene objects updated in place ----------
+        const uav = new THREE.Mesh(new THREE.SphereGeometry(0.11, 24, 24), new THREE.MeshBasicMaterial({ color: 0xcc0000 }));
+        scene.add(uav);
+
+        const footprintMaterial = new THREE.MeshBasicMaterial({ color: COLORS.primary, side: THREE.DoubleSide, transparent: true, opacity: 0.35, depthWrite: false });
+        const footprint = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), footprintMaterial);
+        footprint.rotation.x = -Math.PI / 2;
+        scene.add(footprint);
+
+        const frustumGeometry = new THREE.BufferGeometry();
+        frustumGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(8 * 3), 3));
+        scene.add(new THREE.LineSegments(frustumGeometry, new THREE.LineBasicMaterial({ color: COLORS.primary, transparent: true, opacity: 0.6 })));
+
+        const rayGeometry = new THREE.BufferGeometry();
+        rayGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(N_FEATURES * 2 * 3), 3));
+        const rays = new THREE.LineSegments(rayGeometry, new THREE.LineBasicMaterial({ color: COLORS.secondary, transparent: true, opacity: 0.7 }));
+        scene.add(rays);
+
+        const pathMaterial = new THREE.LineDashedMaterial({ color: 0xcc0000, dashSize: 0.12, gapSize: 0.08 });
+        let pathLine = null;
+        let trail = null;     // outlines of every footprint photographed so far
+
+        let plan, seg, segT, photosTaken, finished, paused, restartTimer, flash;
+
+        function disposeLine(obj) {
+            if (!obj) return;
+            scene.remove(obj);
+            obj.geometry.dispose();
+        }
+
+        function rebuild() {
+            clearTimeout(restartTimer);
+            plan = buildPlan(params);
+            const n = plan.stations.length;
+
+            disposeLine(pathLine);
+            const pathGeometry = new THREE.BufferGeometry();
+            pathGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array((n + 1) * 3), 3));
+            pathLine = new THREE.Line(pathGeometry, pathMaterial);
+            scene.add(pathLine);
+
+            disposeLine(trail);
+            const trailGeometry = new THREE.BufferGeometry();
+            trailGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 8 * 3), 3));
+            trailGeometry.setDrawRange(0, 0);
+            trail = new THREE.LineSegments(trailGeometry, new THREE.LineBasicMaterial({ color: COLORS.grey, transparent: true, opacity: 0.5 }));
+            scene.add(trail);
+
+            footprint.scale.set(plan.along, plan.across, 1);
+            featureCounts.fill(0);
+            refreshFeatureColors();
+            coverage.array.fill(0);
+            coverage.needsUpdate = true;
+
+            seg = 0; segT = 0; photosTaken = 0; finished = false; flash = 0;
+            uav.position.copy(plan.stations[0]);
+            takePhoto(plan.stations[0]);
+            updateHUD();
+        }
+
+        function takePhoto(s) {
+            const x0 = s.x - plan.along / 2, x1 = s.x + plan.along / 2;
+            const z0 = s.z - plan.across / 2, z1 = s.z + plan.across / 2;
+            for (let i = 0; i < N_FEATURES; i++) {
+                const f = features[i];
+                if (f.x >= x0 && f.x <= x1 && f.z >= z0 && f.z <= z1) featureCounts[i]++;
+            }
+            const cov = coverage.array;
+            for (let i = 0; i < cov.length; i++) {
+                if (vertexX[i] >= x0 && vertexX[i] <= x1 && vertexZ[i] >= z0 && vertexZ[i] <= z1) cov[i]++;
+            }
+            coverage.needsUpdate = true;
+            refreshFeatureColors();
+
+            // footprint outline left behind at this station
+            const t = trail.geometry.attributes.position;
+            const b = photosTaken * 8;
+            const y = 0.01;
+            const corners = [[x0, z0], [x1, z0], [x1, z1], [x0, z1]];
+            for (let c = 0; c < 4; c++) {
+                const [ax, az] = corners[c], [bx, bz] = corners[(c + 1) % 4];
+                t.setXYZ(b + c * 2, ax, y, az);
+                t.setXYZ(b + c * 2 + 1, bx, y, bz);
+            }
+            t.needsUpdate = true;
+            photosTaken++;
+            trail.geometry.setDrawRange(0, photosTaken * 8);
+            flash = 1;
+        }
+
+        function updateHUD() {
+            let seen = 0;
+            for (let i = 0; i < N_FEATURES; i++) if (featureCounts[i] >= REQUIRED) seen++;
+            document.getElementById('hud-photos').textContent = `${photosTaken} of ${plan.stations.length}`;
+            document.getElementById('hud-points').textContent = `${seen} of ${N_FEATURES}`;
+            document.getElementById('hud-status').textContent =
+                finished ? 'Flight complete, restarting' : paused ? 'Paused' : 'Drag to orbit, scroll to zoom';
+        }
+
+        function updateMovingParts() {
+            const u = uav.position;
+            const hx = plan.along / 2, hz = plan.across / 2;
+            footprint.position.set(u.x, 0.02, u.z);
+            footprintMaterial.opacity = 0.35 + 0.45 * flash;
+
+            const fp = frustumGeometry.attributes.position;
+            const corners = [[u.x - hx, u.z - hz], [u.x + hx, u.z - hz], [u.x + hx, u.z + hz], [u.x - hx, u.z + hz]];
+            corners.forEach(([cx, cz], i) => {
+                fp.setXYZ(i * 2, u.x, u.y, u.z);
+                fp.setXYZ(i * 2 + 1, cx, 0.02, cz);
+            });
+            fp.needsUpdate = true;
+
+            const rp = rayGeometry.attributes.position;
+            let k = 0;
+            if (params.showRays) {
+                for (let i = 0; i < N_FEATURES; i++) {
+                    const f = features[i];
+                    if (Math.abs(f.x - u.x) <= hx && Math.abs(f.z - u.z) <= hz) {
+                        rp.setXYZ(k * 2, u.x, u.y, u.z);
+                        rp.setXYZ(k * 2 + 1, f.x, f.y, f.z);
+                        k++;
+                    }
+                }
+            }
+            rp.needsUpdate = true;
+            rayGeometry.setDrawRange(0, k * 2);
+
+            const pp = pathLine.geometry.attributes.position;
+            for (let i = 0; i <= seg; i++) {
+                const s = plan.stations[i];
+                pp.setXYZ(i, s.x, s.y, s.z);
+            }
+            pp.setXYZ(seg + 1, u.x, u.y, u.z);
+            pp.needsUpdate = true;
+            pathLine.geometry.setDrawRange(0, seg + 2);
+            pathLine.computeLineDistances();
+        }
+
+        function advance(dt) {
+            if (finished) return;
+            let travel = BASE_SPEED * params.speed * dt;
+            while (travel > 0 && seg < plan.stations.length - 1) {
+                const a = plan.stations[seg], b = plan.stations[seg + 1];
+                const length = a.distanceTo(b);
+                const remaining = (1 - segT) * length;
+                if (travel < remaining) {
+                    segT += travel / length;
+                    travel = 0;
+                } else {
+                    travel -= remaining;
+                    seg++;
+                    segT = 0;
+                    takePhoto(plan.stations[seg]);
+                }
+            }
+            if (seg >= plan.stations.length - 1) {
+                uav.position.copy(plan.stations[seg]);
+                finished = true;
+                updateHUD();
+                restartTimer = setTimeout(rebuild, RESTART_DELAY);
+                return;
+            }
+            uav.position.lerpVectors(plan.stations[seg], plan.stations[seg + 1], segT);
+            updateHUD();
+        }
+
+        // ---------- controls panel ----------
+        const gui = new GUI({ width: 250, title: 'Flight plan' });
+        gui.add(params, 'agl', 2, 6, 0.25).name('Flying height').onChange(rebuild);
+        gui.add(params, 'forward', 50, 90, 5).name('Forward overlap %').onChange(rebuild);
+        gui.add(params, 'side', 30, 85, 5).name('Side overlap %').onChange(rebuild);
+        gui.add(params, 'speed', 0.5, 4, 0.5).name('Speed');
+        gui.add(params, 'showRays').name('Show rays');
+        gui.add(params, 'showReconstruction').name('Show reconstruction').onChange(v => { reconstruction.visible = v; });
+        const actions = {
+            pause() { paused = !paused; updateHUD(); },
+            restart() { rebuild(); },
+        };
+        gui.add(actions, 'pause').name('Pause / resume');
+        gui.add(actions, 'restart').name('Restart flight');
+
+        // ---------- loop ----------
+        paused = reducedMotion;
+        rebuild();
+        for (let s = 0; s < jumpSeconds && !finished; s += 0.05) advance(0.05);
+        const clock = new THREE.Clock();
+        renderer.setAnimationLoop(() => {
+            const dt = Math.min(clock.getDelta(), 0.1);
+            if (!paused) advance(dt);
+            flash = Math.max(0, flash - dt * 4);
+            updateMovingParts();
+            controls.update();
+            renderer.render(scene, camera);
+        });
 
         window.addEventListener('resize', () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
+            camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
-
-        animate();
     </script>
 </body>
 </html>

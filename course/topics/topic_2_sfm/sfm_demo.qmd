@@ -7,6 +7,8 @@ resources:
   - sfm_demo_embed.html
 ---
 
-A UAS flies a lawnmower pattern over a wireframe terrain. The red dot is the camera, the green square is its footprint on the ground, and the lines from the camera to the red points are the rays to features it can see; the trail of white squares is the coverage so far. Drag to orbit, scroll to zoom. [Open the demo full screen](sfm_demo_embed.html).
+A UAS flies a lawnmower pattern over a terrain that starts as a grey wireframe. The red dot is the camera, the green square is its footprint on the ground, and the purple rays connect the camera to the ground features inside that footprint. Every time the aircraft reaches a photo station it takes a picture: the outline of the footprint stays on the ground, and each feature point inside it gains one observation. Points turn from grey (never seen) to orange (1 to 2 photos) to green (3 or more), and the terrain is reconstructed as a solid surface only where at least three photos overlap.
+
+Use the panel to change the flying height and the forward and side overlap; the plan and the number of photos update immediately. Try lowering forward overlap to 50% and side overlap to 30% and predict how many points will still be orange when the flight ends. Drag to orbit, scroll to zoom. [Open the demo full screen](sfm_demo_embed.html).
 
 <iframe src="sfm_demo_embed.html" title="Structure from Motion visualization" width="100%" height="600" style="border: 1px solid #ccc;" allowfullscreen></iframe>
