@@ -17,7 +17,9 @@ Generate an orthomosaic and a digital surface model (DSM) from UAS photographs i
 
 The photos were taken by a Trimble UX5 fixed-wing UAS on September 22, 2016 over the NC State Lake Wheeler Road Field Laboratory ([map](https://www.openstreetmap.org/?mlat=35.7260&mlon=-78.7020#map=15/35.7260/-78.7020)). Processing can be time consuming, so the lab uses a subset of the flight and images downsampled by 50 percent. That is enough to finish in class; the same steps apply to a full flight at full resolution.
 
-Metashape 2.x renamed several workflow steps. The instructions use the current names, with the older name in parentheses the first time it appears, so that older tutorials and videos still make sense.
+Metashape 2.x renamed several workflow steps. The instructions use the current names, with the older name in parentheses the first time it appears, so that older tutorials and videos still make sense. The screenshots are from Metashape 1.x and may show the old dialog names.
+
+Keep your exported products and the processing report: [Assignment 2C](assignment_2c.qmd) processes the same imagery in WebODM and compares the two.
 
 ### Workflow overview (with GCPs)
 
@@ -78,6 +80,8 @@ The Settings dialog also holds the accuracy weights the adjustment uses:
 - **Scale bar accuracy (m)**: accuracy of measured distances between markers, often 0.001 m.
 - **Marker accuracy (pix)**: how precisely a marker can be placed on an image; 0.1 px for printed targets, 0.5 px for natural features.
 - **Tie point accuracy (pix)**: weight of the automatically detected points, typically 0.5 to 1 px.
+
+For this flight leave the defaults.
 :::
 
 ### Loading camera positions
@@ -157,7 +161,9 @@ Click Save ![Save icon](images/save_icon.webp){width=25}.
 
 Click View Errors ![View Errors icon](images/view_errors_icon.webp){width=25} in the Reference pane to see the current errors. The best results come from optimizing twice: first on the camera coordinates only, then on the GCP markers only.
 
-Click Optimize Cameras ![Optimize icon](images/optimize_icon.webp){width=25} in the Reference pane toolbar and check all the camera parameters.
+In the Reference pane, leave all cameras checked and uncheck all markers (select one, press Ctrl+A, right-click, `Uncheck`), so that this first pass adjusts on the camera coordinates only.
+
+Click Optimize Cameras ![Optimize icon](images/optimize_icon.webp){width=25} in the Reference pane toolbar. In the dialog, check every camera calibration parameter (f, cx, cy, k1 to k4, p1, p2, b1, b2) so that all of them are refined.
 
 ::: {.callout-warning}
 Depending on the Metashape version, the Optimize Cameras icon is a star or a camera with a wrench.
@@ -170,7 +176,7 @@ In the Reference pane:
 - uncheck all cameras (select one, press Ctrl+A, right-click, `Uncheck`)
 - check all markers (select one, press Ctrl+A, right-click, `Check`)
 
-Click Settings ![Settings icon](images/settings_icon.webp){width=25} and leave the default marker accuracy (0.005 m).
+Click Settings ![Settings icon](images/settings_icon.webp){width=25} and leave the default marker accuracy (0.005 m), or enter your GCPs' surveyed precision if you know it (0.01 to 0.05 m is typical for RTK GNSS).
 
 Click Optimize Cameras ![Optimize icon](images/optimize_icon.webp){width=25} again with the default options, then Save ![Save icon](images/save_icon.webp){width=25}.
 
@@ -269,7 +275,7 @@ The orthomosaic takes the DEM's coordinate system (`EPSG:3358`) and can only be 
 
 Batch processing runs several steps in order without user intervention, with the same parameters as above:
 
-1. Optimize Cameras (only if the GCPs were placed but the alignment not yet optimized)
+1. Optimize Cameras (skip if you already optimized in Stage 2)
 2. Build Point Cloud
 3. Build Model
 4. Build Texture
@@ -329,7 +335,7 @@ Prepare a report (3 to 5 pages including figures) on generating the orthomosaic 
 
 1. **Workflow**: the steps you ran and the parameters you chose at each one (alignment accuracy, point cloud quality and depth filtering, model surface type, DEM and orthomosaic coordinate system), and how long the slow steps took on your machine.
 2. **Products**: figures of the orthomosaic and the DSM, with the coordinate system and cell size stated.
-3. **The processing report**: explain what the Metashape report says about your project: number of images and tie points, flying altitude and ground resolution, the overlap map, the camera calibration and its residuals, the camera location errors, and the ground control point errors before and after optimization. State the accuracy of your products and which number in the report supports it.
+3. **The processing report**: explain what the Metashape report says about your project: number of images and tie points, flying altitude and ground resolution, the overlap map, the camera calibration and its residuals, the camera location errors, and the ground control point errors before and after optimization. State the accuracy of your products and which number in the report supports it, and say why this report has no checkpoint error.
 4. **Discussion**: what would you change to improve the accuracy (more or better distributed GCPs, checkpoints, higher quality settings, RTK positions), and what would it cost in field or processing time?
 
 ## Submission
@@ -343,7 +349,7 @@ Upload to Moodle, Assignment 2B:
 
 * **Workflow**: every step and parameter is stated, so that someone else could reproduce your products.
 * **Products**: the orthomosaic and DSM are shown, georeferenced in EPSG:3358, and described.
-* **Report interpretation**: the accuracy figures are identified correctly and explained, not just copied; control error and checkpoint error are distinguished.
+* **Report interpretation**: the accuracy figures are identified correctly and explained, not just copied; since this lab has no checkpoints, the difference between control error and checkpoint error is discussed conceptually.
 * **Discussion**: improvements are tied to the concepts from the lectures.
 * On-time submission.
 
