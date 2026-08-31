@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-bb56509ab555e8b86e1ca13be97fc220.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-a3173e8170d86760298aa9abf2d0df4c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -643,8 +643,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#photo-capturing-guidelines" id="toc-photo-capturing-guidelines" class="nav-link active" data-scroll-target="#photo-capturing-guidelines">Photo capturing guidelines</a></li>
-  <li><a href="#colmap" id="toc-colmap" class="nav-link" data-scroll-target="#colmap">COLMAP</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a>
+  <ul class="collapse">
+  <li><a href="#good-starting-points" id="toc-good-starting-points" class="nav-link" data-scroll-target="#good-starting-points">Good starting points</a></li>
+  <li><a href="#photo-capturing-guidelines" id="toc-photo-capturing-guidelines" class="nav-link" data-scroll-target="#photo-capturing-guidelines">Photo capturing guidelines</a></li>
+  <li><a href="#colmap-notes" id="toc-colmap-notes" class="nav-link" data-scroll-target="#colmap-notes">COLMAP notes</a></li>
+  </ul></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" id="toc-due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="nav-link" data-scroll-target="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 9/23/2026</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -681,61 +692,152 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Perform an experiment to investigate the impact of the number and orientation of photos, light, as well as the shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.</p>
-<p>Select an object in your office, at home, or outside, take multiple overlapping images of this object with your camera and create its 3D digital model using appropriate software. Make sure that you do not change the zoom during the capture (unless you want to test what impact it would have). You can also compare the models derived from a high-end digital camera and a smartphone.</p>
-<p>Take the photos from various locations and place features on the physical model to explore the best approach for obtaining a model with minimal distortions. Use any suitable software, for example:</p>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>Run an experiment on how the number and orientation of photos, the lighting, and the shape and surface of the photographed object affect its 3D reconstruction from multiple overlapping images.</p>
+<p>Select an object in your office, at home, or outside. Take multiple overlapping photos of it with a camera or phone and build a 3D model with one of the software options below. Keep the zoom fixed during a capture session unless testing zoom changes is part of your experiment. Then vary one factor and rebuild, so that you end up with at least two models to compare: fewer photos, a different camera path, different light, added surface features, or a second camera (for example a phone against a dedicated camera). Compare the models and explain the differences.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Photomodel_013.webp" class="img-fluid figure-img" alt="Textured 3D model of a sand terrain model with roads and buildings, reconstructed from photographs"></p>
+<figcaption>A physical terrain model reconstructed from about 20 photos</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/phscan_lrwprop3.webp" class="img-fluid figure-img" alt="Color-shaded digital elevation model interpolated from the exported point cloud of the terrain model"></p>
+<figcaption>The same reconstruction, with the model exported as a point cloud and interpolated to a DEM in GIS</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<p>Use any Structure from Motion tool. The two the course uses are listed first; the rest are good alternatives, all free for students.</p>
 <ul>
-<li><a href="https://www.unrealengine.com/en-US/realityscan">Reality Scan</a> - Unreal Engine Reality Capture</li>
-<li><a href="https://colmap.github.io/index.html">Colmap</a> (see below) - free and open-source software.</li>
-<li><a href="https://alicevision.org/">Meshroom (AliceVision)</a> (Window and Linux) - free and open-source software.</li>
-<li><a href="http://remake.autodesk.com/try-remake">ReCap</a> (Windows only) 30-days free trial is available and students can get the software for free for 3 years.</li>
-<li><a href="http://www.regard3d.org/index.php">Regard3D</a> (Windows and Mac) - free and open-source software.</li>
-<li><a href="https://www.agisoft.com/downloads/installer/">Agisoft Metashape 2.1.2</a> (which we will be using later for aerial imagery processing).</li>
-<li><a href="https://poly.cam/">Polycam</a> (Mobile app) - with try for free online option. <!-- - [OpenSfM](https://opensfm.org/) - Requiures  --></li>
+<li><p><a href="https://www.agisoft.com/">Agisoft Metashape Professional</a> 2.3.2: the software used for aerial processing in Assignment 2B. Windows, macOS, and Linux. A license is provided for every student in this class; the installer is on the <a href="https://www.agisoft.com/downloads/installer/">Agisoft download page</a> and the activation instructions will be provided on Moodle.</p></li>
+<li><p><a href="https://webodm.org/">WebODM</a> 3.2: free and open source, the software used for drone mapping. Native installers for Windows and macOS, Docker on Linux; 8 GB RAM minimum. It processes aerial and ground images, nadir or oblique, so it works for this assignment too, though its defaults are tuned for mapping flights rather than small objects.</p>
+<blockquote class="blockquote">
+<p>Since April 2026 WebODM is an independent project (github.com/WebODM); the “OpenDroneMap Desktop” installer sold by the OpenDroneMap organization is a different product.</p>
+</blockquote></li>
+<li><p><a href="https://www.realityscan.com/">RealityScan</a> 2.2 (Epic Games, formerly RealityCapture): free for students and educators. The desktop application is Windows only, installed through the Epic Games Launcher, and needs an NVIDIA or AMD GPU; the mobile app for iOS and Android is free as well.</p></li>
+<li><p><a href="https://colmap.github.io/">COLMAP</a> 4.1: free and open source. Windows binaries with and without CUDA on the <a href="https://github.com/colmap/colmap/releases">releases page</a>, Homebrew on macOS, packages on Linux. See the notes below.</p></li>
+<li><p><a href="https://alicevision.org/">Meshroom</a> 2025.1 (AliceVision): free and open source, Windows and Linux only; the binaries are built for NVIDIA CUDA GPUs.</p></li>
+<li><p><a href="https://poly.cam/">Polycam</a>: iOS, Android, and web. The free tier caps a capture at 150 photos and exports only glTF, which is fine for the optional model submission.</p></li>
 </ul>
-<center>
-<img src="images/Photomodel_012.webp" height="300"> <br> Example 3D model obtained from 20 photos using catch123 from Autodesk (this software has been discontinued and Autodesk replaced it with ReCap) <br><a href="images/phscan_lrwprop3.webp">DEM interpolated in GIS from the point cloud exported from 123D Catch</a>
-</center>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>On a Mac?</strong> Metashape, WebODM, COLMAP (Homebrew), or Polycam.</li>
+<li><strong>No NVIDIA GPU?</strong> Metashape and WebODM run on the CPU; COLMAP and Meshroom need CUDA for the dense step (with COLMAP, stop after sparse reconstruction), and RealityScan needs a discrete GPU.</li>
+</ul>
+</div>
+</div>
+<section id="good-starting-points" class="level3">
+<h3 class="anchored" data-anchor-id="good-starting-points">Good starting points</h3>
+<p>A first attempt that works is worth more than an ambitious one that fails to align. Pick one of these, get a clean model, then run your experiment as variations on it.</p>
+<ul>
+<li><strong>A shoebox-sized object with a matte, textured surface</strong>: a hiking boot, a carved bowl, a potted plant with its pot, a rock with visible grain. On a table in even indoor light, or outside in shade. 40 to 60 photos in two rings around the object at different heights, plus 5 or 6 looking down from above, each photo overlapping the last by more than half.</li>
+<li><strong>A fixed outdoor object</strong>: a fire hydrant, a tree stump, a boulder, a small sculpture. Overcast light or open shade. 60 to 100 photos in two full circuits at two distances, keeping the object filling the frame.</li>
+<li><strong>A building corner or a section of facade</strong> with windows and brick or siding, from the sidewalk. 80 to 120 photos in a slow walk along the facade with the camera pointed at it, then a second pass from farther back or at a different height.</li>
+</ul>
+<p>Variations that produce a clear result in the report: use half the photos; keep one ring only; stand in one spot and rotate instead of walking around; shoot in direct sun versus shade; cover a shiny or plain surface with tape or newspaper and rebuild; capture the same object with a phone and a dedicated camera. Objects that usually fail, and are worth avoiding for the baseline: glass, polished metal, plain white walls, anything that moves in the wind.</p>
+</section>
 <section id="photo-capturing-guidelines" class="level3">
 <h3 class="anchored" data-anchor-id="photo-capturing-guidelines">Photo capturing guidelines</h3>
-<p>Source: <a href="https://www.agisoft.com/pdf/metashape_2_1_en.pdf">Agisoft Photoscan Professional User Manual</a>, modified</p>
+<p>Adapted from the <a href="https://www.agisoft.com/pdf/metashape-pro_2_3_en.pdf">Agisoft Metashape user manual</a>.</p>
 <ul>
-<li>Use a digital camera with reasonably high resolution (5 MPix or more);</li>
-<li>Avoid ultra-wide angle and fisheye lenses;</li>
-<li>Fixed lenses are preferred. If zoom lenses are used - focal length should be set either to maximal or to minimal value during the entire shooting session for more stable results;</li>
-<li>ISO should be set to the lowest value, otherwise high ISO values will induce additional noise to images;</li>
-<li>It is important to capture sharp, not blurred photos;</li>
-<li>Avoid not textured, shiny, highly reflective or transparent objects;</li>
-<li>Avoid unwanted foregrounds;</li>
-<li>Avoid moving objects within the scene to be reconstructed;</li>
-<li>Avoid absolutely flat objects or scenes;</li>
-<li>Number of photos: more than required is better than not enough;</li>
-<li>Good lighting is required to achieve better quality of the results, yet blinks should be avoided. It is recommended to remove sources of light from camera fields of view. Avoid using flash;</li>
-<li>Each photo should effectively use the frame size: object of interest should take up the maximum area. In some cases, portrait camera orientation should be used;</li>
-<li>Do not try to place the full object in the image frame, if some parts are missing it is not a problem providing that these parts appear on other images.</li>
+<li>Use a camera with reasonable resolution (5 MP or more); a modern phone camera is fine.</li>
+<li>Avoid ultra-wide-angle and fisheye lenses.</li>
+<li>Prefer a fixed focal length. With a zoom lens, keep it at either the minimum or the maximum for the whole session.</li>
+<li>Use the lowest ISO you can; high ISO adds noise.</li>
+<li>Capture sharp, well-exposed photos. Avoid blur, flash, and light sources inside the frame.</li>
+<li>Avoid untextured, shiny, reflective, or transparent objects, and objects that move between photos.</li>
+<li>Avoid completely flat objects or scenes.</li>
+<li>Fill the frame with the object; portrait orientation can help. The whole object does not need to fit in every photo as long as every part appears in several photos.</li>
+<li>More photos than you think you need is better than too few.</li>
+<li>Move the camera around the object. Standing in one spot and rotating the camera does not produce parallax, the apparent shift of a feature between photos taken from different positions, and without parallax the software cannot triangulate depth.</li>
 </ul>
-<center>
-<p>
-Advice on appropriate capturing scenarios:
-</p>
-<img src="images/photo_guidelines1.webp" width="70%"> <img src="images/photo_guidelines2.webp" width="70%">
-</center>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/photo_guidelines1.webp" class="img-fluid figure-img" style="width:80.0%" alt="Diagrams of camera positions for photographing a facade and an interior: rotating in one spot marked incorrect, moving the camera between overlapping positions marked correct"></p>
+<figcaption>Capture scenarios from the Metashape manual: incorrect on the left, correct on the right</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/photo_guidelines2.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Diagrams of camera positions for an isolated object: a few photos from one side marked incorrect, a full ring of overlapping photos around the object marked correct"></p>
+</figure>
+</div>
 </section>
-<section id="colmap" class="level3">
-<h3 class="anchored" data-anchor-id="colmap">COLMAP</h3>
-<p>COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface. COLMAP is open source (GNU GPL) and can be installed on all major platforms.</p>
-<p>Binaries can be downloaded from <a href="https://demuc.de/colmap/">COLMAP website</a>. <em>Note: Dense reconstruction step requires NVIDIA graphics card with CUDA installed.</em> Depending on your computer configuration, install binaries with or without CUDA. Once downloaded, unzip and run <code>COLMAP.bat</code> (on Windows). This should start COLMAP’s graphical user interface.</p>
-<p>In this video tutorial (no audio), we upload around 20 images of a scaled physical model to a folder and run all steps of the reconstruction pipeline. Notice we can inspect keypoints, matches, and links between cameras and reconstructed points.</p>
-<blockquote class="blockquote">
-<p>Note 1: If you don’t have CUDA, you need to stop before the dense reconstruction step.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Note 2: If you have CUDA, stereo reconstruction can crash COLMAP, which is due to so-called GPU timeouts; More information <a href="https://colmap.github.io/faq.html#fix-gpu-freezes-and-timeouts-during-dense-reconstruction">can be found here</a>.</p>
-</blockquote>
+<section id="colmap-notes" class="level3">
+<h3 class="anchored" data-anchor-id="colmap-notes">COLMAP notes</h3>
+<p>COLMAP is a general-purpose Structure from Motion and Multi-View Stereo pipeline with a graphical and a command-line interface. On Windows, download the binaries from the <a href="https://github.com/colmap/colmap/releases">COLMAP releases page</a>, unzip, and run <code>COLMAP.bat</code> to start the graphical interface; on macOS, install with <code>brew install colmap</code> and run <code>colmap gui</code>. Dense reconstruction requires an NVIDIA GPU with CUDA; without one, stop after the sparse reconstruction.</p>
+<p>The video below (no audio) loads about 20 images of a physical terrain model and runs the full pipeline. Notice that you can inspect keypoints, matches, and the links between cameras and reconstructed points.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have CUDA, stereo reconstruction can crash COLMAP with a GPU timeout. See the <a href="https://colmap.github.io/faq.html#fix-gpu-freezes-and-timeouts-during-dense-reconstruction">COLMAP FAQ</a> for the fix.</p>
+</div>
+</div>
 <iframe width="853" height="480" src="https://www.youtube.com/embed/sHW0f6R0rbI?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="">
 </iframe>
+</section>
+</section>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>Prepare a short report (2 to 4 pages including figures) on your 3D modeling experiment:</p>
+<ol type="1">
+<li><strong>Setup</strong>: the object, the camera (make, model, or phone), the software, and the capture conditions (indoor or outdoor, lighting).</li>
+<li><strong>Experiment</strong>: what you varied (number of photos, camera path, light, surface features, camera) and how many photos went into each model.</li>
+<li><strong>Results</strong>: screenshots of each model, including the reconstructed camera positions. Point out holes, noise, distortions, or missing parts.</li>
+<li><strong>Discussion</strong>: which factors mattered most, and why, using the concepts from the lecture (overlap, texture, parallax, lighting).</li>
+</ol>
+<p>If you would like your model added to the <a href="https://sketchfab.com/osgeolab/collections/classroom-models">OSGeoLab Sketchfab collection</a> of models from previous offerings of this course, add this line at the end of your report and include the model file in your submission:</p>
+<blockquote class="blockquote">
+<p>I agree for my 3D model to be uploaded to the OSGeoLab Sketchfab collection and I want / do not want my name listed as an author in the model description.</p>
+</blockquote>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Assignment 2A:</p>
+<ul>
+<li>Your report as a PDF.</li>
+<li>Optional: your 3D model, preferably as an OBJ with its MTL and texture image files, or as a GLB, zipped into one archive.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>Setup</strong>: object, camera, software, and capture conditions stated clearly enough to interpret the results.</li>
+<li><strong>Experiment design</strong>: at least one factor varied deliberately, with the models compared side by side.</li>
+<li><strong>Results</strong>: figures show the models and camera positions clearly, with the problems identified.</li>
+<li><strong>Discussion</strong>: differences are explained with the lecture concepts, not just described.</li>
+<li>On-time submission.</li>
+</ul>
+<section id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="level3">
+<h3 class="anchored" data-anchor-id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 9/23/2026</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
