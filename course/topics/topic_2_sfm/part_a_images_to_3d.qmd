@@ -18,8 +18,6 @@ bibliography: references.bib
 ## Lecture
 
 * Lecture Slides: [Photogrammetry and Structure from Motion Concepts](lectures/lecture_2a.qmd)
-<!-- * Lecture Recording: [Fall 2024]({{< var recordings.topic2.lecture2a >}}) (NCSU Only) -->
-<!-- * In-Class Recording: [Fall 2024]({{< var recordings.topic2.assignment2a >}}) (NCSU Only) -->
 
 ## Supplemental materials
 
