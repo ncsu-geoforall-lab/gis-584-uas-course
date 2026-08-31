@@ -102,3 +102,13 @@ $mermaid-node-fg-color: $primary;
 .reveal .section-divider a {
     color: $body-color;
 }
+
+/* Mermaid diagrams on slides: add .mermaid-wide to a slide heading to center
+   the diagram and scale it to 85% of the slide width */
+.reveal .mermaid-wide svg.mermaid-js {
+    display: block;
+    margin: 0 auto;
+    width: 85%;
+    max-width: 85% !important;
+    height: auto;
+}

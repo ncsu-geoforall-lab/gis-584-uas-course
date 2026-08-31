@@ -42,11 +42,21 @@ Section opener. Ask who has used Google Earth or a county orthophoto and assumed
 Students sometimes ask why processing comes before flight planning in the schedule. The answer is on the card: overlap, altitude, lighting, and ground control are all chosen to satisfy the reconstruction algorithm, so we teach the algorithm first. Topic 3 then turns these requirements into a mission plan, and the Lake Wheeler field trip flies it.
 :::
 
-## Remote sensing and photogrammetry {.smaller}
+## Remote sensing and photogrammetry {.smaller .mermaid-wide}
 
-![](../images/remote_sensing_vs_photogrammertry.webp){width="75%" fig-align="center" fig-alt="Remote sensing analyzes and interprets images; photogrammetry produces maps and precise 3D positions"}
-
-![](../images/rs_to_GIS.webp){width="75%" fig-align="center" fig-alt="Remote sensing and photogrammetry both feed object space data fusion and GIS"}
+```{mermaid}
+%%| fig-width: 9
+flowchart TB
+    IMG["Aerial and UAS images"]
+    RS["Remote sensing<br/>What is it?<br/>land cover, vegetation, temperature"]
+    PG["Photogrammetry<br/>Where is it, how big is it?<br/>position, shape, elevation"]
+    GIS["GIS<br/>analysis, data fusion, maps"]
+    IMG --> RS
+    IMG --> PG
+    RS --> GIS
+    PG --> GIS
+    style PG fill:#006600,stroke:#006600,color:#ffffff
+```
 
 ::: {.notes}
 Two disciplines that share the same input. Remote sensing asks what is in the image (land cover, vegetation health, temperature); photogrammetry asks where things are and how big they are. UAS mapping needs both, and GIS is where they meet. In this course, Topic 2 is photogrammetry, Topics 4 and 5 lean on remote sensing, and the change-detection topic combines them.

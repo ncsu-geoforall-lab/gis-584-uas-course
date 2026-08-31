@@ -607,7 +607,7 @@ How the rest of this course fits together:
 
 ```{mermaid}
 flowchart TB
-    R["Rules & regulations)"] -.-> A
+    R["Rules & regulations"] -.-> A
     A["Plan the flight"] --> B["Collect imagery"]
     B --> C["SfM processing"]
     C --> D["GIS analytics"]
