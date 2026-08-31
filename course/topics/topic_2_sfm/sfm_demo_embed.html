@@ -107,6 +107,21 @@
         coverage.setUsage(THREE.DynamicDrawUsage);
         terrainGeometry.setAttribute('coverage', coverage);
 
+        // Bilinear terrain height at world (x, z). PlaneGeometry rows run from
+        // local +y to -y, so row index grows with world z.
+        function terrainHeight(x, z) {
+            const half = SITE / 2, cell = SITE / SEGMENTS;
+            const fx = THREE.MathUtils.clamp((x + half) / cell, 0, SEGMENTS - 1e-6);
+            const fz = THREE.MathUtils.clamp((z + half) / cell, 0, SEGMENTS - 1e-6);
+            const ix = Math.floor(fx), iz = Math.floor(fz), tx = fx - ix, tz = fz - iz;
+            const row = SEGMENTS + 1;
+            const h00 = tPos.getZ(iz * row + ix), h10 = tPos.getZ(iz * row + ix + 1);
+            const h01 = tPos.getZ((iz + 1) * row + ix), h11 = tPos.getZ((iz + 1) * row + ix + 1);
+            return (h00 * (1 - tx) + h10 * tx) * (1 - tz) + (h01 * (1 - tx) + h11 * tx) * tz;
+        }
+        const DRAPE = 0.04;     // lift draped lines and the footprint just above the surface
+        const EDGE_SAMPLES = 8; // segments per footprint edge when draping outlines
+
         const wireframe = new THREE.Mesh(terrainGeometry, new THREE.MeshBasicMaterial({ color: COLORS.grey, wireframe: true, transparent: true, opacity: 0.35 }));
         wireframe.rotation.x = -Math.PI / 2;
         scene.add(wireframe);
@@ -223,9 +238,27 @@
         scene.add(uav);
 
         const footprintMaterial = new THREE.MeshBasicMaterial({ color: COLORS.primary, side: THREE.DoubleSide, transparent: true, opacity: 0.35, depthWrite: false });
-        const footprint = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), footprintMaterial);
-        footprint.rotation.x = -Math.PI / 2;
+        const FOOT_SEG = 12;
+        const footprintGeometry = new THREE.PlaneGeometry(1, 1, FOOT_SEG, FOOT_SEG);
+        const footprintUV = footprintGeometry.attributes.position.clone(); // local -0.5..0.5 template
+        const footprint = new THREE.Mesh(footprintGeometry, footprintMaterial);
         scene.add(footprint);
+
+        // Write a footprint outline draped on the terrain into a LineSegments buffer
+        function writeDrapedOutline(attr, start, x0, x1, z0, z1) {
+            const corners = [[x0, z0], [x1, z0], [x1, z1], [x0, z1]];
+            let k = start;
+            for (let c = 0; c < 4; c++) {
+                const [ax, az] = corners[c], [bx, bz] = corners[(c + 1) % 4];
+                for (let e = 0; e < EDGE_SAMPLES; e++) {
+                    const t0 = e / EDGE_SAMPLES, t1 = (e + 1) / EDGE_SAMPLES;
+                    const px = ax + (bx - ax) * t0, pz = az + (bz - az) * t0;
+                    const qx = ax + (bx - ax) * t1, qz = az + (bz - az) * t1;
+                    attr.setXYZ(k++, px, terrainHeight(px, pz) + DRAPE, pz);
+                    attr.setXYZ(k++, qx, terrainHeight(qx, qz) + DRAPE, qz);
+                }
+            }
+        }
 
         const frustumGeometry = new THREE.BufferGeometry();
         frustumGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(8 * 3), 3));
@@ -261,12 +294,11 @@
 
             disposeLine(trail);
             const trailGeometry = new THREE.BufferGeometry();
-            trailGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 8 * 3), 3));
+            trailGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * EDGE_SAMPLES * 8 * 3), 3));
             trailGeometry.setDrawRange(0, 0);
             trail = new THREE.LineSegments(trailGeometry, new THREE.LineBasicMaterial({ color: COLORS.grey, transparent: true, opacity: 0.5 }));
             scene.add(trail);
 
-            footprint.scale.set(plan.along, plan.across, 1);
             featureCounts.fill(0);
             refreshFeatureColors();
             coverage.array.fill(0);
@@ -292,19 +324,12 @@
             coverage.needsUpdate = true;
             refreshFeatureColors();
 
-            // footprint outline left behind at this station
+            // footprint outline left behind at this station, draped on the terrain
             const t = trail.geometry.attributes.position;
-            const b = photosTaken * 8;
-            const y = 0.01;
-            const corners = [[x0, z0], [x1, z0], [x1, z1], [x0, z1]];
-            for (let c = 0; c < 4; c++) {
-                const [ax, az] = corners[c], [bx, bz] = corners[(c + 1) % 4];
-                t.setXYZ(b + c * 2, ax, y, az);
-                t.setXYZ(b + c * 2 + 1, bx, y, bz);
-            }
+            writeDrapedOutline(t, photosTaken * EDGE_SAMPLES * 8, x0, x1, z0, z1);
             t.needsUpdate = true;
             photosTaken++;
-            trail.geometry.setDrawRange(0, photosTaken * 8);
+            trail.geometry.setDrawRange(0, photosTaken * EDGE_SAMPLES * 8);
             flash = 1;
         }
 
@@ -320,14 +345,21 @@
         function updateMovingParts() {
             const u = uav.position;
             const hx = plan.along / 2, hz = plan.across / 2;
-            footprint.position.set(u.x, 0.02, u.z);
+            // footprint draped on the terrain under the camera
+            const fpos = footprintGeometry.attributes.position;
+            for (let i = 0; i < fpos.count; i++) {
+                const x = u.x + footprintUV.getX(i) * plan.along;
+                const z = u.z - footprintUV.getY(i) * plan.across;
+                fpos.setXYZ(i, x, terrainHeight(x, z) + DRAPE, z);
+            }
+            fpos.needsUpdate = true;
             footprintMaterial.opacity = 0.35 + 0.45 * flash;
 
             const fp = frustumGeometry.attributes.position;
             const corners = [[u.x - hx, u.z - hz], [u.x + hx, u.z - hz], [u.x + hx, u.z + hz], [u.x - hx, u.z + hz]];
             corners.forEach(([cx, cz], i) => {
                 fp.setXYZ(i * 2, u.x, u.y, u.z);
-                fp.setXYZ(i * 2 + 1, cx, 0.02, cz);
+                fp.setXYZ(i * 2 + 1, cx, terrainHeight(cx, cz) + DRAPE, cz);
             });
             fp.needsUpdate = true;
 

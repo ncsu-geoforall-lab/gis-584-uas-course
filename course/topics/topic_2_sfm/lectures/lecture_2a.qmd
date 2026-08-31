@@ -32,7 +32,14 @@ Section opener. Ask who has used Google Earth or a county orthophoto and assumed
 
 ## Where this lecture sits {.center .text-center}
 
-![The UAS mapping workflow; this topic covers the concepts behind data processing](../images/uas_process.webp){width="90%" fig-alt="Flowchart: flight planning, flight, data processing, data analysis"}
+```{mermaid}
+flowchart LR
+    R["Rules & regulations"] -.-> A
+    A["Plan the flight"] --> B["Collect imagery"]
+    B --> C["SfM processing"]
+    C --> D["GIS analytics"]
+    style C fill:#006600,stroke:#006600,color:#ffffff
+```
 
 ::: {.term-card}
 **Why processing before planning?** You cannot plan a flight well until you know what the processing needs from the imagery
@@ -525,12 +532,43 @@ In teams of three, sketch a plan for mapping a site of your choice:
 
 1. What do you want to measure, and to what accuracy?
 2. What GSD does that imply? (Just the target; the formula comes in Topic 3)
-3. Nadir only, or nadir plus oblique? What overlap?
+3. Nadir only, or nadir plus oblique? What overlap? Test your overlap in the [demo](../sfm_demo_embed.html): how many photos does the plan need, and do all the points turn green?
 4. How many GCPs and checkpoints, and where?
 5. Which products do you need: orthophoto, DSM, DTM, point cloud, mesh?
 
 ::: {.notes}
 Five minutes, then compare two or three plans on the board. The point is to make students commit to numbers and then discover the trade-offs: high accuracy pulls the GSD down, which pulls the altitude down, which multiplies images and flight time. Keep the plans; they become the starting point for the flight planning exercise in Topic 3.
+:::
+
+## Key terms {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.term-card}
+**Parallax**: the shift of a feature between photos taken from different positions; the source of all depth information in SfM
+:::
+::: {.term-card}
+**Tie point**: a feature detected and matched across two or more photos
+:::
+::: {.term-card}
+**Bundle adjustment**: the joint least-squares solution for camera poses, camera model, and 3D points that minimizes reprojection error
+:::
+:::
+::: {.column width="50%"}
+::: {.term-card}
+**Interior and exterior orientation**: the camera model (focal length, principal point, distortion) and each photo's position and attitude
+:::
+::: {.term-card}
+**GCP and checkpoint**: surveyed targets used to constrain the solution, and surveyed targets withheld to measure its error
+:::
+::: {.term-card}
+**GSD**: the ground size of one pixel; set by focal length, sensor, and flying height (formula in Topic 3)
+:::
+:::
+:::
+
+::: {.notes}
+One-slide glossary for the notes and for DE students. Read it as a checklist: if a student can explain each card in a sentence, they have the lecture. Lecture 2B uses every one of these terms as Metashape settings and report fields.
 :::
 
 ## Wrap-up
