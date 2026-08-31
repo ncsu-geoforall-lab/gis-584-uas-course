@@ -12,7 +12,7 @@ order: 2
 ## Slides
 
 - [Lecture 2A: Photogrammetry and Structure from Motion Concepts](lectures/lecture_2a.qmd)
-- [Lecture 2B: Photogrammetry and SfM](lectures/lecture_2b.qmd)
+- [Lecture 2B: UAS Imagery Processing](lectures/lecture_2b.qmd)
 
 ## Assignments
 

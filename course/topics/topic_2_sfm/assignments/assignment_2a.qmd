@@ -7,63 +7,90 @@ assignment-due-date: 9/23/2026
 activity: Lab
 ---
 
-Perform an experiment to investigate the impact of the number and orientation of photos, light, as well as the shape and features of a photographed object on its 3D reconstruction from multiple overlapping imagery.
+## Task
 
-Select an object in your office, at home, or outside, take multiple overlapping images of this object with your camera and create its 3D digital model using appropriate software. Make sure that you do not change the zoom during the capture (unless you want to test what impact it would have). You can also compare the models derived from a high-end digital camera and a smartphone.
+Run an experiment on how the number and orientation of photos, the lighting, and the shape and surface of the photographed object affect its 3D reconstruction from multiple overlapping images.
 
-Take the photos from various locations and place features on the physical model to explore the best approach for obtaining a model with minimal distortions. Use any suitable software, for example:
+Select an object in your office, at home, or outside. Take multiple overlapping photos of it with a camera or phone and build a 3D model with one of the software options below. Keep the zoom fixed during a capture session unless testing zoom changes is part of your experiment. Then vary one factor and rebuild, so that you end up with at least two models to compare: fewer photos, a different camera path, different light, added surface features, or a second camera (for example a phone against a dedicated camera). Compare the models and explain the differences.
 
-- [Reality Scan](https://www.unrealengine.com/en-US/realityscan) - Unreal Engine Reality Capture
-- [Colmap](https://colmap.github.io/index.html) (see below) - free and open-source software.
-- [Meshroom (AliceVision)](https://alicevision.org/) (Window and Linux) - free and open-source software.
-- [ReCap](http://remake.autodesk.com/try-remake) (Windows only) 30-days free trial is available and students can get the software for free for 3 years.
-- [Regard3D](http://www.regard3d.org/index.php) (Windows and Mac) - free and open-source software.
-- [Agisoft Metashape 2.1.2](https://www.agisoft.com/downloads/installer/) (which we will be using later for aerial imagery processing).
-- [Polycam](https://poly.cam/) (Mobile app) - with try for free online option.
-<!-- - [OpenSfM](https://opensfm.org/) - Requiures  -->
+::: {.columns}
+::: {.column width="50%"}
+![A physical terrain model reconstructed from about 20 photos](images/Photomodel_013.webp)
+:::
+::: {.column width="50%"}
+![The same reconstruction, with the model exported as a point cloud and interpolated to a DEM in GIS](images/phscan_lrwprop3.webp)
+:::
+:::
 
+## Software
 
-<center>
-<img src="images/Photomodel_012.webp" height=300>
-<br>
-Example 3D model obtained from 20 photos using catch123 from Autodesk (this software has been discontinued and Autodesk replaced it with ReCap)
-<br><a href="images/phscan_lrwprop3.webp">DEM interpolated in GIS from the point cloud exported from 123D Catch</a>
-</center>
+Use any Structure from Motion tool. Options that work on a laptop or phone:
+
+- [Agisoft Metashape](https://www.agisoft.com/) {{< var software.agisoft.version >}}: the software used for aerial processing in Assignment 2B; a 30-day trial is available from the [download page]({{< var software.agisoft.website >}}). The Standard edition is enough for this assignment.
+- [RealityScan](https://www.realityscan.com/) (Epic Games): free desktop application for Windows, with a companion mobile app for iOS and Android.
+- [COLMAP](https://colmap.github.io/): free and open source, Windows, macOS, and Linux. See the notes below.
+- [Meshroom](https://alicevision.org/) (AliceVision): free and open source, Windows and Linux; dense reconstruction needs an NVIDIA GPU.
+- [Polycam](https://poly.cam/): mobile app (iOS and Android) with a free tier; check its export limits before relying on it for the optional model submission.
+
+No NVIDIA GPU, or on a Mac? Metashape and Polycam work everywhere. Meshroom and COLMAP need an NVIDIA GPU for the dense step (stop after sparse reconstruction without one), and RealityScan's desktop application is Windows only.
 
 ### Photo capturing guidelines
-Source: [Agisoft Photoscan Professional User Manual](https://www.agisoft.com/pdf/metashape_2_1_en.pdf), modified
 
-- Use a digital camera with reasonably high resolution (5 MPix or more);
-- Avoid ultra-wide angle and fisheye lenses;
-- Fixed lenses are preferred. If zoom lenses are used - focal length should be set either to maximal or to minimal value during the entire shooting session for more stable results;
-- ISO should be set to the lowest value, otherwise high ISO values will induce additional noise to images;
-- It is important to capture sharp, not blurred photos;
-- Avoid not textured, shiny, highly reflective or transparent objects;
-- Avoid unwanted foregrounds;
-- Avoid moving objects within the scene to be reconstructed;
-- Avoid absolutely flat objects or scenes;
-- Number of photos: more than required is better than not enough;
-- Good lighting is required to achieve better quality of the results, yet blinks should be avoided. It is recommended to remove sources of light from camera fields of view. Avoid using flash;
-- Each photo should effectively use the frame size: object of interest should take up the maximum area. In some cases, portrait camera orientation should be used;
-- Do not try to place the full object in the image frame, if some parts are missing it is not a problem providing that these parts appear on other images.
+Adapted from the [Agisoft Metashape user manual](https://www.agisoft.com/pdf/metashape-pro_2_3_en.pdf).
 
-<center>
-<p>Advice on appropriate capturing scenarios:</p>
-<img src="images/photo_guidelines1.webp" width=70%>
-<img src="images/photo_guidelines2.webp" width=70%>
-</center>
+- Use a camera with reasonable resolution (5 MP or more); a modern phone camera is fine.
+- Avoid ultra-wide-angle and fisheye lenses.
+- Prefer a fixed focal length. With a zoom lens, keep it at either the minimum or the maximum for the whole session.
+- Use the lowest ISO you can; high ISO adds noise.
+- Capture sharp, well-exposed photos. Avoid blur, flash, and light sources inside the frame.
+- Avoid untextured, shiny, reflective, or transparent objects, and objects that move between photos.
+- Avoid completely flat objects or scenes.
+- Fill the frame with the object; portrait orientation can help. The whole object does not need to fit in every photo as long as every part appears in several photos.
+- More photos than you think you need is better than too few.
+- Move the camera around the object. Standing in one spot and rotating the camera does not produce parallax, the apparent shift of a feature between photos taken from different positions, and without parallax the software cannot triangulate depth.
 
-### COLMAP
-COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface. COLMAP is open source (GNU GPL) and can be installed on all major platforms.
+![Capture scenarios from the Metashape manual: incorrect on the left, correct on the right](images/photo_guidelines1.webp){width="80%" fig-align="center"}
 
-Binaries can be downloaded from [COLMAP website](https://demuc.de/colmap/).
-*Note: Dense reconstruction step requires NVIDIA graphics card with CUDA installed.* Depending on your computer configuration, install binaries with or without CUDA. Once downloaded, unzip and run `COLMAP.bat` (on Windows). This should start COLMAP's graphical user interface.
+![](images/photo_guidelines2.webp){width="80%" fig-align="center"}
 
-In this video tutorial (no audio), we upload around 20 images of a scaled physical model to a folder and run all steps of the reconstruction pipeline. Notice we can inspect keypoints, matches, and links between cameras and reconstructed points.
+### COLMAP notes
 
-> Note 1: If you don't have CUDA, you need to stop before the dense reconstruction step.
+COLMAP is a general-purpose Structure from Motion and Multi-View Stereo pipeline with a graphical and a command-line interface. Download binaries from the [COLMAP releases page](https://github.com/colmap/colmap/releases), unzip, and run `COLMAP.bat` (Windows) to start the graphical interface. Dense reconstruction requires an NVIDIA GPU with CUDA; without one, stop after the sparse reconstruction.
 
-> Note 2: If you have CUDA, stereo reconstruction can crash COLMAP, which is due to so-called GPU timeouts; More information [can be found here](https://colmap.github.io/faq.html#fix-gpu-freezes-and-timeouts-during-dense-reconstruction).
+The video below (no audio) loads about 20 images of a physical terrain model and runs the full pipeline. Notice that you can inspect keypoints, matches, and the links between cameras and reconstructed points.
+
+::: {.callout-note}
+If you have CUDA, stereo reconstruction can crash COLMAP with a GPU timeout. See the [COLMAP FAQ](https://colmap.github.io/faq.html#fix-gpu-freezes-and-timeouts-during-dense-reconstruction) for the fix.
+:::
 
 <iframe width="853" height="480" src="https://www.youtube.com/embed/sHW0f6R0rbI?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 
+## Report
+
+Prepare a short report (2 to 4 pages including figures) on your 3D modeling experiment:
+
+1. **Setup**: the object, the camera (make, model, or phone), the software, and the capture conditions (indoor or outdoor, lighting).
+2. **Experiment**: what you varied (number of photos, camera path, light, surface features, camera) and how many photos went into each model.
+3. **Results**: screenshots of each model, including the reconstructed camera positions. Point out holes, noise, distortions, or missing parts.
+4. **Discussion**: which factors mattered most, and why, using the concepts from the lecture (overlap, texture, parallax, lighting).
+
+If you would like your model added to the [OSGeoLab Sketchfab collection](https://sketchfab.com/osgeolab/collections/classroom-models) of models from previous offerings of this course, add this line at the end of your report and include the model file in your submission:
+
+> I agree for my 3D model to be uploaded to the OSGeoLab Sketchfab collection and I want / do not want my name listed as an author in the model description.
+
+## Submission
+
+Upload to Moodle, Assignment 2A:
+
+* Your report as a PDF.
+* Optional: your 3D model, preferably as an OBJ with its MTL and texture image files, or as a GLB, zipped into one archive.
+
+## Grading
+
+* **Setup**: object, camera, software, and capture conditions stated clearly enough to interpret the results.
+* **Experiment design**: at least one factor varied deliberately, with the models compared side by side.
+* **Results**: figures show the models and camera positions clearly, with the problems identified.
+* **Discussion**: differences are explained with the lecture concepts, not just described.
+* On-time submission.
+
+### Due {{< meta assignment-due-date >}}
