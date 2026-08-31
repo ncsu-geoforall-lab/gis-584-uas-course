@@ -31,7 +31,7 @@ Section opener. Ask who has used Google Earth or a county orthophoto and assumed
 
 ## Where this lecture sits {.center .text-center}
 
-![The UAS mapping workflow; this topic covers the concepts behind data processing](../images/uas_process.webp){width="90%"}
+![The UAS mapping workflow; this topic covers the concepts behind data processing](../images/uas_process.webp){width="90%" fig-alt="Flowchart: flight planning, flight, data processing, data analysis"}
 
 ::: {.term-card}
 **Why processing before planning?** You cannot plan a flight well until you know what the processing needs from the imagery
@@ -43,9 +43,9 @@ Students sometimes ask why processing comes before flight planning in the schedu
 
 ## Remote sensing and photogrammetry {.smaller}
 
-![](../images/remote_sensing_vs_photogrammertry.webp){width="75%" fig-align="center"}
+![](../images/remote_sensing_vs_photogrammertry.webp){width="75%" fig-align="center" fig-alt="Remote sensing analyzes and interprets images; photogrammetry produces maps and precise 3D positions"}
 
-![](../images/rs_to_GIS.webp){width="75%" fig-align="center"}
+![](../images/rs_to_GIS.webp){width="75%" fig-align="center" fig-alt="Remote sensing and photogrammetry both feed object space data fusion and GIS"}
 
 ::: {.notes}
 Two disciplines that share the same input. Remote sensing asks what is in the image (land cover, vegetation health, temperature); photogrammetry asks where things are and how big they are. UAS mapping needs both, and GIS is where they meet. In this course, Topic 2 is photogrammetry, Topics 4 and 5 lean on remote sensing, and the change-detection topic combines them.
@@ -53,12 +53,13 @@ Two disciplines that share the same input. Remote sensing asks what is in the im
 
 ## Passive and active sensing {.smaller}
 
-| | Passive | Active |
-|---|---|---|
-| **Energy source** | Sun (reflected) or the object itself (emitted) | The sensor emits energy and measures the return |
-| **UAS examples** | RGB, multispectral, thermal cameras | Lidar, radar |
-| **How 3D is obtained** | Inferred from parallax between overlapping images (SfM) | Measured directly as range |
-| **Cost and weight** | Low | Higher |
+::: {.term-card}
+**Passive sensors** (RGB, multispectral, thermal cameras) record reflected or emitted energy; depth is not measured, it is inferred from parallax between overlapping images
+:::
+
+::: {.term-card}
+**Active sensors** (lidar, radar) emit energy and measure the return; range is measured directly
+:::
 
 ::: {.term-card}
 **This topic**: passive RGB imagery, with 3D inferred by Structure from Motion
@@ -72,10 +73,10 @@ Recall the sensor table from Lecture 1A. The distinction that matters here is th
 
 ::: {.columns}
 ::: {.column width="50%"}
-![San Francisco after the 1906 earthquake, from a kite (George Lawrence)](../images/san_francisco.webp){height="300"}
+![San Francisco after the 1906 earthquake, from a kite (George Lawrence)](../images/san_francisco.webp){height="300" fig-alt="Two panoramic kite photographs of San Francisco in 1906 showing the waterfront and the burned city"}
 :::
 ::: {.column width="50%"}
-![Analog orthophoto production at USGS: a 4.5-ton copy camera and the T-64 Orthophotoscope](../images/analogue.webp){height="300"}
+![Analog orthophoto production at USGS: a 4.5-ton copy camera and the T-64 Orthophotoscope](../images/analogue.webp){height="300" fig-alt="Two black and white photographs of room-sized analog orthophoto instruments at USGS"}
 :::
 :::
 
@@ -103,7 +104,7 @@ The kite photo makes the point that aerial imaging predates aircraft; the instru
 :::
 :::
 ::: {.column width="50%"}
-![Camera positions, ground control markers, and photos in an SfM project](../images/digital.webp)
+![Camera positions, ground control markers, and photos in an SfM project](../images/digital.webp){fig-alt="Screenshot of photogrammetry software with a camera list, ground control markers, model view, and photo strip"}
 :::
 :::
 
@@ -115,7 +116,7 @@ The screenshot is the modern desk: every element the historic operator measured 
 
 ::: {.columns}
 ::: {.column width="45%"}
-![](../images/imagery_oblique.webp)
+![](../images/imagery_oblique.webp){fig-alt="Tree diagram classifying imagery as terrestrial or aerial, aerial as vertical or oblique, with sketches of each view"}
 :::
 ::: {.column width="55%"}
 | | Vertical (nadir) | Oblique |
@@ -142,7 +143,7 @@ Section transition. The claim to defend: you can measure on a map, but not on a 
 
 ::: {.columns}
 ::: {.column width="50%"}
-![Source: Natural Resources Canada](../images/geometry.webp)
+![Source: Natural Resources Canada](../images/geometry.webp){fig-alt="Diagram of a camera with focal length between lens and film, and altitude above ground level and above sea level"}
 :::
 ::: {.column width="50%"}
 ::: {.term-card}
@@ -165,7 +166,7 @@ Three quantities students will use in every flight plan. Scale is focal length d
 
 ::: {.columns}
 ::: {.column width="50%"}
-![Source: Wikipedia](../images/pespective_vs_orthographic.webp)
+![Source: Wikipedia](../images/pespective_vs_orthographic.webp){fig-alt="Two blocks at different heights shown in orthographic view at true position and in perspective view displaced outward"}
 :::
 ::: {.column width="50%"}
 - A camera is a **perspective** projection: all rays pass through one point, the lens
@@ -182,10 +183,10 @@ The figure is the whole argument in one picture. The two red blocks are at diffe
 
 ::: {.columns}
 ::: {.column width="50%"}
-![](../images/geometry_side.webp)
+![](../images/geometry_side.webp){fig-alt="Map and photo of two trees on a slope, showing their positions shift in the photo relative to the map"}
 :::
 ::: {.column width="50%"}
-![](../images/disortion.webp)
+![](../images/disortion.webp){fig-alt="Cross section showing a ray from the projection center through relief to the datum plane and the resulting relief distortion on the image"}
 :::
 :::
 
@@ -214,7 +215,7 @@ Relief displacement is the big one, but the other three matter for consumer came
 
 ::: {.columns}
 ::: {.column width="45%"}
-![](../images/orthophoto_how.webp)
+![](../images/orthophoto_how.webp){fig-alt="Diagram of image space, exposure station, terrain with relief, and the orthophotomap below it in orthogonal projection"}
 :::
 ::: {.column width="55%"}
 Orthorectification re-projects each image pixel from the camera's perspective onto a map plane. It needs:
@@ -237,7 +238,7 @@ Walk the figure top to bottom: image space, the perspective center, the terrain 
 
 ::: {.columns}
 ::: {.column width="50%"}
-![UAS orthophoto with a coordinate grid and scale bar](../images/ortho_example_measure.webp)
+![UAS orthophoto with a coordinate grid and scale bar](../images/ortho_example_measure.webp){fig-alt="UAS orthophoto of fields and a road with a latitude longitude grid, scale bar, and north arrow"}
 :::
 ::: {.column width="50%"}
 - Uniform scale: distances, areas, and angles are measurable
@@ -245,7 +246,7 @@ Walk the figure top to bottom: image space, the perspective center, the terrain 
 - An RGB raster like any other; loads into GIS as a basemap or analysis layer
 - Its accuracy is only as good as the surface model and control behind it
 
-![](../images/DSM_ortho.webp){width="32%" fig-align="center"}
+![](../images/DSM_ortho.webp){width="32%" fig-align="center" fig-alt="Camera above a digital surface model projecting down to an orthophotomap"}
 :::
 :::
 
@@ -263,7 +264,7 @@ Section transition into the core mechanism. This is the part to slow down on; th
 
 ::: {.columns}
 ::: {.column width="55%"}
-![Five overlapping nadir images from one flight line](../images/SfM_scheme11-02.webp)
+![Two flight lines of a lawnmower pattern with the forward and side overlap bands shaded](../images/overlap_diagram.svg){fig-alt="Two flight lines with overlapping image footprints; the forward overlap band between consecutive photos and the side overlap band between lines are shaded"}
 :::
 ::: {.column width="45%"}
 | Overlap | Typical for SfM |
@@ -288,13 +289,13 @@ Classical stereo photogrammetry needed each point in two photos; SfM wants it in
 ## Tie points: the desk-scale version {.center}
 
 ::: {.r-stack}
-![](../images/SfM_scheme01-01.webp){width="80%"}
+![](../images/SfM_scheme01-01.webp){width="80%" fig-alt="Three photographs of a small box taken from different positions"}
 
-![](../images/SfM_scheme03-01.webp){.fragment width="80%"}
+![](../images/SfM_scheme03-01.webp){.fragment width="80%" fig-alt="The same three photographs with one feature marked in each"}
 
-![](../images/SfM_scheme07-01.webp){.fragment width="80%"}
+![](../images/SfM_scheme07-01.webp){.fragment width="80%" fig-alt="Colored lines connecting matched tie points across the three photographs"}
 
-![](../images/SfM_scheme09-01.webp){.fragment width="80%"}
+![](../images/SfM_scheme09-01.webp){.fragment width="80%" fig-alt="Rays from the three photographs intersecting at one reconstructed 3D point on the box"}
 :::
 
 ::: {.notes}
@@ -304,24 +305,30 @@ Click through the build. Three photos of one object from different positions. Fi
 ## Tie points: the aerial version {.center}
 
 ::: {.r-stack}
-![](../images/SfM_scheme11-02.webp){width="80%"}
+![](../images/SfM_scheme11-02.webp){width="80%" fig-alt="Five overlapping nadir drone images of a field with a red-roofed shed"}
 
-![](../images/SfM_scheme12-02.webp){.fragment width="80%"}
+![](../images/SfM_scheme12-02.webp){.fragment width="80%" fig-alt="The five drone images with matching features marked in each"}
 
-![](../images/SfM_scheme14-02.webp){.fragment width="80%"}
+![](../images/SfM_scheme14-02.webp){.fragment width="80%" fig-alt="Matched features connected across the five drone images below a reconstructed 3D view of the site"}
 
-![](../images/SfM_scheme16-02.webp){.fragment width="80%"}
+![](../images/SfM_scheme16-02.webp){.fragment width="80%" fig-alt="Rays from the five drone images intersecting at one reconstructed point on the 3D model of the site"}
 :::
 
 ::: {.notes}
 Same build with five drone images. Features are detected in every frame, matched where they reappear, and the matched rays intersect on the reconstructed surface at the top. The corner of the red-roofed shed gets an x, y, z. Note that the coordinates are relative until something anchors them to the ground, which is the last section of this lecture.
 :::
 
+## SfM at work {background-iframe="../sfm_demo_embed.html" background-interactive="true"}
+
+::: {.notes}
+Live demo slide; the visualization is interactive (drag to orbit, scroll to zoom). The red dot is the camera flying a lawnmower pattern over a wireframe terrain, the green square is its ground footprint, and the rays connect the camera to the features it sees. Ask students to watch one red ground point and count how many camera positions get a ray to it: that count is the redundancy the previous slides argued for. The same page is linked from the topic page for later.
+:::
+
 ## Multiple-view geometry {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
-![Source: theia-sfm.org](../images/sfm_explained.webp)
+![Source: theia-sfm.org](../images/sfm_explained.webp){fig-alt="A moving camera captures a sequence of images; lines of sight to corresponding feature points intersect at a 3D model"}
 :::
 ::: {.column width="50%"}
 SfM solves three linked questions at once:
@@ -380,10 +387,10 @@ Keep this at the concept level; 2B has the diagrams. The one intuition worth lan
 
 ::: {.columns}
 ::: {.column width="50%"}
-![Sparse cloud](../images/sparse_cloud.webp){height="130"}
+![Sparse cloud](../images/sparse_cloud.webp){height="130" fig-alt="Sparse point cloud of a field, scattered points on a grey background"}
 :::
 ::: {.column width="50%"}
-![Dense cloud](../images/dense_cloud.webp){height="130"}
+![Dense cloud](../images/dense_cloud.webp){height="130" fig-alt="Dense point cloud of the same field showing the road, trees, and shed"}
 :::
 :::
 
@@ -399,7 +406,7 @@ Section transition. SfM alone gives shape without scale, position, or orientatio
 
 ## Relative and absolute orientation {.center}
 
-![Source: Dr. Qassim Abdullah, Penn State GEOG 892](../images/relative_absolute_orientation.webp){width="95%"}
+![Source: Dr. Qassim Abdullah, Penn State GEOG 892](../images/relative_absolute_orientation.webp){width="95%" fig-alt="Left: images fitted to each other above terrain; right: the same block fitted to ground control points marked by stars"}
 
 ::: {.term-card}
 **Relative orientation**: images fit each other. **Absolute orientation**: the block fits the ground, through ground control or accurately known camera positions
@@ -412,11 +419,11 @@ Left: the photos are consistent with each other but the whole block could be sca
 ## Whose coordinates are these? {.center}
 
 ::: {.r-stack}
-![](../images/geotag1.webp){width="75%"}
+![](../images/geotag1.webp){width="75%" fig-alt="A camera with GPS above terrain; the geotag gives the latitude, longitude, and altitude of the sensor"}
 
-![](../images/geotag4.webp){.fragment width="75%"}
+![](../images/geotag4.webp){.fragment width="75%" fig-alt="The same diagram asking whether the orthophoto pixel takes the coordinates of the sensor or of the photographed ground point"}
 
-![](../images/geotagGCP2.webp){.fragment width="75%"}
+![](../images/geotagGCP2.webp){.fragment width="75%" fig-alt="The diagram with three coordinate types: geotag measured at low accuracy, GCP measured at high accuracy, ground point calculated"}
 :::
 
 ::: {.notes}
@@ -441,7 +448,7 @@ A common student misconception is that a geotagged dataset is georeferenced. It 
 
 ::: {.columns}
 ::: {.column width="40%"}
-![A GCP target at Lake Wheeler. Photo by Vaclav Petras](../images/GCP_photo.webp){width="70%" fig-align="center"}
+![A GCP target at Lake Wheeler. Photo by Vaclav Petras](../images/GCP_photo.webp){width="70%" fig-align="center" fig-alt="A white L-shaped ground control target and a survey flag on grass"}
 :::
 ::: {.column width="60%"}
 - A target on the ground whose center is surveyed to centimeter accuracy (RTK GNSS or total station)
@@ -449,7 +456,7 @@ A common student misconception is that a geotagged dataset is georeferenced. It 
 - Marked in several photos during processing; the software then adjusts the block to fit
 - Distributed across the whole area and the full range of elevation, including the edges
 
-![](../images/GCP_sketch.webp){width="22%" fig-align="center"}
+![](../images/GCP_sketch.webp){width="22%" fig-align="center" fig-alt="Sketch of a cross-shaped survey target centered over a survey monument"}
 :::
 :::
 
