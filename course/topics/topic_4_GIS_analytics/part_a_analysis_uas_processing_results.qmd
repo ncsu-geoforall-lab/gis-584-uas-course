@@ -2,7 +2,7 @@
 topic: "Topic 4A: GIS Analytics"
 title: "Analysis of UAS data processing results"
 subtitle: "Topic 4A: GIS Analytics"
-date: 9/21/2026
+date: 9/28/2026
 activity: Lecture
 ---
 

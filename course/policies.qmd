@@ -103,9 +103,9 @@ your GIS courses.
 
 - [GRASS {{< var software.grass.version >}}]({{< var software.grass.website >}}), installation instructions at
   <https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/logistics.html#software>
-- [Agisoft Metashape]({{< var software.agisoft.website >}}), licensed by
-  NC State. The demo version is sufficient for the course work.
-- [OpenDroneMap](http://opendronemap.org/) and WebODM
+- [Agisoft Metashape]({{< var software.agisoft.website >}}) {{< var software.agisoft.version >}}, licensed by
+  NC State; a license is provided to every student in the class.
+- [WebODM](https://webodm.org/) {{< var software.webodm.version >}}, free and open source
 
 Additional tools referenced in the course, not required:
 [PDAL](https://pdal.io/en/stable/) for point cloud processing,

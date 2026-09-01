@@ -81,7 +81,7 @@ jupyter lab --ip 0.0.0.0 --no-browser
 
 ## Not covered
 
-- **Topic 7 (WebODM)** needs Docker and enough RAM and disk for photogrammetry.
+- **Assignment 2C (WebODM)** needs Docker and enough RAM and disk for photogrammetry.
   Keep running it locally per `assignment_7a.qmd`.
 - **Agisoft Metashape** (Topic 2) is licensed desktop software and is not in the
   container.

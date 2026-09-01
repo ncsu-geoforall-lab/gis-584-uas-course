@@ -18,6 +18,7 @@ order: 2
 
 - [Assignment 2A: 3D reconstruction from multiple photos](assignments/assignment_2a.qmd)
 - [Assignment 2B: Geoprocessing UAS imagery in Agisoft Metashape](assignments/assignment_2b.qmd)
+- [Assignment 2C: Processing the same imagery in WebODM](assignments/assignment_2c.qmd)
 
 ## Supplemental
 

@@ -21,7 +21,7 @@ bibliography: ../references.bib
 :::
 
 ::: {.notes}
-Lecture 2A explained why SfM works; today is how you run it. By the end, students should be able to open Metashape, go from photos to orthomosaic and DSM, and defend the settings they chose. Everything here is exercised in Assignment 2B on the Lake Wheeler dataset, and Topic 7 repeats the same pipeline in WebODM. If students ask why processing comes before flight planning in the schedule: you cannot plan a flight well until you know what the processing needs from the imagery.
+Lecture 2A explained why SfM works; today is how you run it. By the end, students should be able to open Metashape, go from photos to orthomosaic and DSM, and defend the settings they chose. Everything here is exercised in Assignment 2B on the Lake Wheeler dataset, and Assignment 2C repeats the same pipeline in WebODM on the same imagery. If students ask why processing comes before flight planning in the schedule: you cannot plan a flight well until you know what the processing needs from the imagery.
 :::
 
 ## From flight to products {.center .text-center .section-divider background-color="#e9f2e9"}
@@ -317,7 +317,7 @@ Section transition. Options first, then the Metashape workflow step by step, wit
 | Option | Examples | Trade-off |
 |---|---|---|
 | Desktop, commercial | Agisoft Metashape, Pix4Dmatic, DJI Terra | Control and transparency; needs a capable machine and a license |
-| Desktop, open source | WebODM (Topic 7) | Free, scriptable, same pipeline; fewer guardrails |
+| Desktop, open source | WebODM (Assignment 2C) | Free, scriptable, same pipeline; fewer guardrails |
 | Cloud | DroneDeploy, Pix4Dcloud, WebODM Lightning, Drone2Map | No local compute; recurring cost and less control over settings |
 
 ::: {.term-card}

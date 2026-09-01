@@ -45,8 +45,7 @@ Dates are `M/D/YYYY` (no 2-digit years, no zero padding).
 
 - `topic:` is `"Topic <N><letter>: <Canonical Name>"`. Canonical names:
   1 UAS Basics, 2 Structure from Motion, 3 UAS Flight Planning,
-  4 GIS Analytics, 5 Advanced Analytics, 6 Machine Learning & AI,
-  7 OpenDroneMap. The schedule groups by this string; a typo creates a new
+  4 GIS Analytics, 5 Advanced Analytics, 6 Machine Learning & AI. The schedule groups by this string; a typo creates a new
   category chip.
 - `activity:` is one of: `Lecture`, `Lab`, `Lecture & Lab`, `Assignment Due`,
   `Exam`, `Field Trip`, `Guest Speaker`, `Project`, `No Class`.
