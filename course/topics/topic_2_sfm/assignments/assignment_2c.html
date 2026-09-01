@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Processing UAS imagery with open source tools: OpenDroneMap and WebODM.">
+<meta name="dcterms.date" content="2026-09-23">
 
-<title>Topic 7: OpenDroneMap – UAS Mapping and Analytics</title>
+<title>Assignment 2C – UAS Mapping and Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,27 +27,84 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../favicon.ico" rel="icon">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-a3173e8170d86760298aa9abf2d0df4c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-a3173e8170d86760298aa9abf2d0df4c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -86,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">UAS Mapping and Analytics</span>
     </a>
   </div>
@@ -97,23 +154,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/schedule.html"> 
+    <a class="nav-link" href="../../../../course/schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/policies.html"> 
+    <a class="nav-link" href="../../../../course/policies.html"> 
 <span class="menu-text">Logistics &amp; Policies</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../../course/topics/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../../course/topics/index.html" aria-current="page"> 
 <span class="menu-text">Topics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../course/projects.html"> 
+    <a class="nav-link" href="../../../../course/projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -127,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_7_odm/index.html">Topic 7: OpenDroneMap</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_2_sfm/index.html">Topic 2: Structure from Motion</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2c.html">Assignment 2C</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -141,13 +198,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/topic_1_uas_basics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../course/topics/topic_1_uas_basics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 1: UAS Basics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -156,13 +213,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_1_uas_basics/part_a_introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_1_uas_basics/part_a_introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1A: Introduction to UAS</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_1_uas_basics/part_b_rules_regs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_1_uas_basics/part_b_rules_regs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1B: Rules and Regulations</span></a>
   </div>
 </li>
@@ -177,13 +234,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_1_uas_basics/lectures/lecture_1a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 1A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_1_uas_basics/lectures/lecture_1b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 1B</span></a>
   </div>
 </li>
@@ -200,13 +257,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 1A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_1_uas_basics/assignments/assignment_1b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 1B</span></a>
   </div>
 </li>
@@ -214,7 +271,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_1_uas_basics/faa_part_107_guide.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_1_uas_basics/faa_part_107_guide.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reference: FAA Part 107 Guide</span></a>
   </div>
 </li>
@@ -222,22 +279,22 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/topic_2_sfm/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../course/topics/topic_2_sfm/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 2: Structure from Motion</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_2_sfm/part_a_images_to_3d.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_2_sfm/part_a_images_to_3d.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2A: Photogrammetry and SfM</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_2_sfm/part_b_img_processing_sfm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_2_sfm/part_b_img_processing_sfm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2B: Imagery Processing</span></a>
   </div>
 </li>
@@ -252,13 +309,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_2_sfm/lectures/lecture_2a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 2A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_2_sfm/lectures/lecture_2b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 2B</span></a>
   </div>
 </li>
@@ -266,30 +323,36 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_2_sfm/assignments/assignment_2a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 2A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_2_sfm/assignments/assignment_2b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 2B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2c.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Assignment 2C</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_2_sfm/sfm_demo.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_2_sfm/sfm_demo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Demo: Structure from Motion</span></a>
   </div>
 </li>
@@ -297,7 +360,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/topic_3_flight_planning/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../course/topics/topic_3_flight_planning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 3: UAS Flight Planning</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -306,7 +369,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3A: UAS Flight Planning</span></a>
   </div>
 </li>
@@ -321,7 +384,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_3_flight_planning/lectures/lecture_3a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_3_flight_planning/lectures/lecture_3a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 3A</span></a>
   </div>
 </li>
@@ -338,7 +401,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_3_flight_planning/assignments/assignment_3a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_3_flight_planning/assignments/assignment_3a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 3A</span></a>
   </div>
 </li>
@@ -348,7 +411,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/topic_4_GIS_analytics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../course/topics/topic_4_GIS_analytics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 4: GIS Analytics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -357,13 +420,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4A: Analysis of UAS Data Products</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4B: Point Cloud Analysis</span></a>
   </div>
 </li>
@@ -378,13 +441,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 4A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 4B</span></a>
   </div>
 </li>
@@ -401,31 +464,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 4A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/assignments/lab_volumes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_volumes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab: Volumes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/assignments/lab_dsm_analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_dsm_analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab: DSM Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 4B</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_4_GIS_analytics/assignments/lab_point_clouds.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_point_clouds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab: Point Clouds</span></a>
   </div>
 </li>
@@ -435,7 +498,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/topic_5_advanced_analytics/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../course/topics/topic_5_advanced_analytics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 5: Advanced Analytics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -444,13 +507,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5A: UAS and Lidar Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5B: Multitemporal UAS Data</span></a>
   </div>
 </li>
@@ -465,13 +528,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 5A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 5B</span></a>
   </div>
 </li>
@@ -488,13 +551,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 5A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 5B</span></a>
   </div>
 </li>
@@ -504,7 +567,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/topic_6_change_detection/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../course/topics/topic_6_change_detection/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 6: Machine Learning &amp; AI</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -513,13 +576,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_6_change_detection/part_a_image_classification.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_6_change_detection/part_a_image_classification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">6A: Image Classification</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_6_change_detection/part_b_change_detection.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_6_change_detection/part_b_change_detection.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">6B: Change Detection</span></a>
   </div>
 </li>
@@ -534,13 +597,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 6A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_6_change_detection/lectures/lecture_6b.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6b.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lecture 6B</span></a>
   </div>
 </li>
@@ -557,7 +620,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 6A</span></a>
   </div>
 </li>
@@ -567,67 +630,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/topic_7_odm/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Topic 7: OpenDroneMap</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_7_odm/part_a_opendronemap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7A: OpenDroneMap</span></a>
-  </div>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
- <span class="menu-text">Slides</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_7_odm/lectures/lecture_7a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lecture 7A</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false">
- <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_7_odm/assignments/assignment_7a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Assignment 7A</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../course/topics/midterm/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../../../course/topics/midterm/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Midterm</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/midterm/fall2025.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../course/topics/midterm/fall2025.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Midterm Rubric</span></a>
   </div>
 </li>
@@ -643,9 +655,34 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#why-geo.txt" id="toc-why-geo.txt" class="nav-link" data-scroll-target="#why-geo.txt">Why geo.txt</a></li>
+  </ul></li>
+  <li><a href="#stage-1-project-and-ground-control-points" id="toc-stage-1-project-and-ground-control-points" class="nav-link" data-scroll-target="#stage-1-project-and-ground-control-points">Stage 1: Project and ground control points</a>
+  <ul class="collapse">
+  <li><a href="#create-a-project" id="toc-create-a-project" class="nav-link" data-scroll-target="#create-a-project">Create a project</a></li>
+  <li><a href="#mark-the-gcps" id="toc-mark-the-gcps" class="nav-link" data-scroll-target="#mark-the-gcps">Mark the GCPs</a></li>
+  </ul></li>
+  <li><a href="#stage-2-processing" id="toc-stage-2-processing" class="nav-link" data-scroll-target="#stage-2-processing">Stage 2: Processing</a>
+  <ul class="collapse">
+  <li><a href="#create-the-task" id="toc-create-the-task" class="nav-link" data-scroll-target="#create-the-task">Create the task</a></li>
+  <li><a href="#monitor" id="toc-monitor" class="nav-link" data-scroll-target="#monitor">Monitor</a></li>
+  </ul></li>
+  <li><a href="#stage-3-results-and-export" id="toc-stage-3-results-and-export" class="nav-link" data-scroll-target="#stage-3-results-and-export">Stage 3: Results and export</a>
+  <ul class="collapse">
+  <li><a href="#view" id="toc-view" class="nav-link" data-scroll-target="#view">View</a></li>
+  <li><a href="#download" id="toc-download" class="nav-link" data-scroll-target="#download">Download</a></li>
+  </ul></li>
+  <li><a href="#stage-4-compare-with-metashape" id="toc-stage-4-compare-with-metashape" class="nav-link" data-scroll-target="#stage-4-compare-with-metashape">Stage 4: Compare with Metashape</a></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" id="toc-due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="nav-link" data-scroll-target="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 10/7/2026</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -653,24 +690,26 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 <!-- banner.html -->
 <div class="banner-image">
-    <img src="../../../includes/images/banner.jpg" alt="Banner">
+    <img src="../../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_2_sfm/index.html">Topic 2: Structure from Motion</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2c.html">Assignment 2C</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Topic 7: OpenDroneMap</h1>
+<h1 class="title">Assignment 2C</h1>
+<p class="subtitle lead">Processing the same imagery in WebODM</p>
 </div>
 
-<div>
-  <div class="description">
-    Processing UAS imagery with open source tools: OpenDroneMap and WebODM.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 23, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -680,28 +719,229 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="content" class="level2">
-<h2 class="anchored" data-anchor-id="content">Content</h2>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>Process the Assignment 2B photographs, camera positions, and ground control points in <a href="https://webodm.org/">WebODM</a>, the free and open source drone mapping software <span class="citation" data-cites="webodm_2026">(<a href="#ref-webodm_2026" role="doc-biblioref">WebODM contributors 2026</a>)</span>, and compare the orthomosaic and DSM with the ones you produced in Agisoft Metashape. Same imagery, same control, different software: the differences you find are the software’s, not the flight’s.</p>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<p>WebODM 3.2 is an independent open source project (since April 2026 at <a href="https://github.com/WebODM/WebODM">github.com/WebODM</a>). Install it one of these ways:</p>
 <ul>
-<li><a href="../../../course/topics/topic_7_odm/part_a_opendronemap.html">7A: OpenDroneMap</a></li>
+<li><p><strong>Windows or macOS</strong>: download the free installer from <a href="https://webodm.org/">webodm.org</a>. The installer bundles everything, including the Docker backend on macOS. Windows 10 or newer with a 64-bit CPU; macOS 13 or newer, Apple silicon supported.</p></li>
+<li><p><strong>Linux</strong>: install <a href="https://docs.docker.com/engine/install/">Docker</a> and Git, add yourself to the <code>docker</code> group (<code>sudo usermod -aG docker $USER</code>, then log out and in), and run</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/WebODM/WebODM <span class="at">--config</span> core.autocrlf=input <span class="at">--depth</span> 1</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> WebODM</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./webodm.sh</span> start</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>./webodm.sh stop</code> stops it and <code>./webodm.sh update</code> updates it.</p></li>
+<li><p><strong>Memory</strong>: 8 GB RAM is the minimum and handles about 100 images, which covers this data set; 16 GB is recommended. 20 GB of free disk.</p></li>
+<li><p><strong>No suitable laptop?</strong> <a href="https://webodm.net/">WebODM Lightning</a> processes in the cloud from the same interface; it is a paid service with a small free allowance.</p></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The OpenDroneMap organization sells an installer called “OpenDroneMap Desktop”. It is a different, older product. The WebODM installers are free.</p>
+</div>
+</div>
+<p>Once started, open <a href="http://localhost:8000">http://localhost:8000</a> and create the administrator account on the first visit. See the <a href="https://docs.webodm.org/installation/">WebODM documentation</a> for troubleshooting.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/092216/downsized_samples.zip">Download the data</a> if you no longer have it from Assignment 2B: 78 photos, the flight log, and the coordinates of 3 GCPs.</li>
+<li>Two files prepared for WebODM, explained below:
+<ul>
+<li><a href="assets/geo.txt">geo.txt</a>: the camera positions in WebODM’s image geolocation format</li>
+<li><a href="assets/gcp_seed_epsg4326.txt">gcp_seed_epsg4326.txt</a>: the three GCP coordinates in the layout the GCP interface reads (also available in UTM zone 17N as <a href="assets/gcp_seed_epsg32617.txt">gcp_seed_epsg32617.txt</a> if the interface asks for a projected system)</li>
+</ul></li>
+</ul>
+<section id="why-geo.txt" class="level3">
+<h3 class="anchored" data-anchor-id="why-geo.txt">Why geo.txt</h3>
+<p>The Trimble UX5 does not write GPS coordinates into the photos; the positions live in the flight log. Metashape imported the log directly. WebODM reads camera positions from the photos’ EXIF, and when there are none it accepts an <a href="https://docs.webodm.org/ground-control-points/">image geolocation file</a> named <code>geo.txt</code>: a header with the coordinate system, then one line per photo with the file name, longitude, latitude, height, and optionally yaw, pitch, and roll.</p>
+<pre><code>EPSG:4326
+DSC06168.jpg -78.69809128 35.72773663 179.49 0.147352 0.0137609 -3.05065
+DSC06169.jpg -78.69807484 35.72753443 177.82 0.0312571 -0.0901053 -3.09326</code></pre>
+<p>The provided file was generated from <code>2016_09_22_sample.txt</code> with a few lines of Python. File names are case sensitive: the log says <code>.JPG</code>, the files are <code>.jpg</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"2016_09_22_sample.txt"</span>) <span class="im">as</span> log, <span class="bu">open</span>(<span class="st">"geo.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> geo:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    geo.write(<span class="st">"EPSG:4326</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> csv.DictReader(log):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        name <span class="op">=</span> r[<span class="st">"name"</span>].replace(<span class="st">".JPG"</span>, <span class="st">".jpg"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        geo.write(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>r[<span class="st">'longitude'</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>r[<span class="st">'latitude'</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>r[<span class="st">'height'</span>]<span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="sc">{</span>r[<span class="st">'yaw'</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>r[<span class="st">'pitch'</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>r[<span class="st">'roll'</span>]<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="stage-1-project-and-ground-control-points" class="level2">
+<h2 class="anchored" data-anchor-id="stage-1-project-and-ground-control-points">Stage 1: Project and ground control points</h2>
+<section id="create-a-project" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-project">Create a project</h3>
+<p>On the dashboard click <strong>Add Project</strong> at the top right, enter a name and a description, and click <strong>Create Project</strong>. The project appears at the top of the dashboard.</p>
+<p><a href="images/webODM_new_project.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/webODM_new_project.webp" class="img-fluid" alt="WebODM new project dialog with name and description fields"></a></p>
+</section>
+<section id="mark-the-gcps" class="level3">
+<h3 class="anchored" data-anchor-id="mark-the-gcps">Mark the GCPs</h3>
+<p>WebODM needs a <code>gcp_list.txt</code> file: for each GCP, its ground coordinates and its pixel position on every photo where it is visible. The built-in <strong>GCP Interface</strong> (left sidebar) creates it.</p>
+<ol type="1">
+<li>Open <strong>GCP Interface</strong>.</li>
+<li>Load the seed file <code>gcp_seed_epsg4326.txt</code>: it lists the three GCPs with their coordinates and no image positions yet. If the interface rejects the geographic coordinates, load <code>gcp_seed_epsg32617.txt</code> instead (same points in UTM zone 17N).</li>
+<li>Load the 78 photos.</li>
+<li>For each GCP (UAV 3, UAV 6, UAV 8): select it in the list, find it on the map (the interface shows an aerial basemap), then open each photo that shows the target and click its center. Mark every GCP on <strong>at least 3 photos</strong>; 5 or more is better. Use the same photos you used in Metashape if you noted them.</li>
+<li><strong>Export File</strong> and save it as <code>gcp_list.txt</code>.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/webODM_gcp.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="The GCP interface: photo on the left, basemap on the right"><img src="images/webODM_gcp.webp" class="img-fluid figure-img" alt="WebODM ground control point interface showing an aerial photo beside a satellite basemap with a target marker"></a></p>
+<figcaption>The GCP interface: photo on the left, basemap on the right</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <a href="https://docs.webodm.org/ground-control-points/">WebODM documentation</a> recommends at least 5 GCPs on 3 or more photos each. This data set has 3, the same as in Metashape, so expect a warning in the task log; processing still uses them. The resulting <code>gcp_list.txt</code> has one line per GCP per photo: coordinates, pixel position, file name, label.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="stage-2-processing" class="level2">
+<h2 class="anchored" data-anchor-id="stage-2-processing">Stage 2: Processing</h2>
+<section id="create-the-task" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-task">Create the task</h3>
+<p>Click <strong>Select Images and GCP</strong> on your project and select the 78 photos <strong>plus</strong> <code>geo.txt</code> <strong>plus</strong> <code>gcp_list.txt</code>. WebODM recognizes the two text files by name.</p>
+<p><a href="images/webODM_add_images_gcp_button.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/webODM_add_images_gcp_button.webp" class="img-fluid" alt="WebODM dashboard with the Select Images and GCP button highlighted"></a></p>
+<p>Give the task a name, keep the default processing node (<code>node-odm-1</code>), and choose the <strong>DSM+DTM</strong> preset. Click <strong>Edit</strong> to check the options:</p>
+<ul>
+<li><code>dsm: true</code>, <code>dtm: true</code></li>
+<li><code>dem-resolution</code> and <code>orthophoto-resolution</code>: leave the defaults (5 cm/pixel; they are capped at the ground sampling distance)</li>
+<li><code>pc-quality: medium</code> (the default), comparable to Metashape’s Medium point cloud</li>
+<li>Leave <strong>resize images</strong> at the default</li>
+</ul>
+<p><a href="images/webODM_task_options.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images/webODM_task_options.webp" class="img-fluid" alt="WebODM task options with preset selection and processing node"></a> <a href="images/webODM_edit_task_options.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="images/webODM_edit_task_options.webp" class="img-fluid" alt="WebODM task option editor listing dsm, dtm, and resolution options"></a></p>
+<p>Click <strong>Review</strong>, check the summary, then <strong>Start Processing</strong>. Note the start time.</p>
+<p><a href="images/webODM_task_review.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="images/webODM_task_review.webp" class="img-fluid" alt="WebODM task review dialog listing the selected options"></a></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Processing takes from twenty minutes to a few hours depending on your hardware and, with Docker, on how much CPU and memory Docker Desktop is allowed to use (Settings, Resources).</p>
+</div>
+</div>
+</section>
+<section id="monitor" class="level3">
+<h3 class="anchored" data-anchor-id="monitor">Monitor</h3>
+<p>The task shows its progress and console output on the dashboard. When it finishes, the task card lists the number of reconstructed points, the average GSD, the area, and the processing time.</p>
+<p><a href="images/webODM_dashboard.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="images/webODM_dashboard.webp" class="img-fluid" alt="WebODM dashboard with completed tasks showing options, GSD, area, reconstructed points, and processing time"></a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If a task fails or you change an option, <strong>Restart</strong> lets you resume from a later pipeline stage instead of starting over.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="stage-3-results-and-export" class="level2">
+<h2 class="anchored" data-anchor-id="stage-3-results-and-export">Stage 3: Results and export</h2>
+<section id="view" class="level3">
+<h3 class="anchored" data-anchor-id="view">View</h3>
+<p><strong>View Map</strong> opens the orthomosaic with the DSM and DTM as switchable layers and a measurement tool; <strong>View 3D Model</strong> opens the point cloud and textured model.</p>
+<p><a href="images/webODM_mapview.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="images/webODM_mapview.webp" class="img-fluid" alt="WebODM 2D map view of an orthomosaic"></a> <a href="images/webODM_3dview.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="images/webODM_3dview.webp" class="img-fluid" alt="WebODM 3D viewer showing a point cloud"></a></p>
+</section>
+<section id="download" class="level3">
+<h3 class="anchored" data-anchor-id="download">Download</h3>
+<p><strong>Download Assets</strong> offers each product separately or everything as one zip:</p>
+<ul>
+<li>Orthophoto (GeoTIFF)</li>
+<li>Surface model (DSM) and terrain model (DTM), GeoTIFF</li>
+<li>Point cloud (LAZ)</li>
+<li>Textured model</li>
+<li><strong>Quality report</strong> (PDF): the WebODM equivalent of the Metashape processing report, with GSD, overlap, camera calibration, and the GCP errors</li>
+<li><strong>Backup</strong>: the whole task, to reload into another WebODM instance</li>
+</ul>
+<p><a href="images/webODM_assets.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="images/webODM_assets.webp" class="img-fluid" alt="WebODM download assets menu"></a></p>
+</section>
+</section>
+<section id="stage-4-compare-with-metashape" class="level2">
+<h2 class="anchored" data-anchor-id="stage-4-compare-with-metashape">Stage 4: Compare with Metashape</h2>
+<p>Load the two orthomosaics and the two DSMs into GRASS (or QGIS). The Metashape products are in NC State Plane, EPSG:3358; WebODM writes its products in the UTM zone of the site, EPSG:32617, unless told otherwise. <code>r.import</code> reprojects on the way in:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in a GRASS project in EPSG:3358</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=odm_dsm.tif output=dsm_webodm resolution=value resolution_value=0.15</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=metashape_dsm.tif output=dsm_metashape resolution=value resolution_value=0.15</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=dsm_metashape</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"dsm_diff = dsm_webodm - dsm_metashape"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> dsm_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then look at:</p>
+<ul>
+<li><strong>Orthomosaics</strong> side by side at building edges, tree crowns, the road, and the field boundary: sharpness, seams, doubled or smeared features, extent.</li>
+<li><strong>DSM difference</strong>: the mean and standard deviation of <code>dsm_diff</code>, a map of it, and where the large differences are (vegetation, buildings, edges of the block). A constant offset between the two points at a vertical datum or GCP height difference rather than at the reconstruction.</li>
+<li><strong>Quality report versus processing report</strong>: GSD, number of reconstructed points, GCP errors, and processing time.</li>
 </ul>
 </section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>Prepare a report (3 to 5 pages including figures):</p>
+<ol type="1">
+<li><strong>Setup</strong>: your machine and installation route, the task options, and the processing time; the photos on which you marked each GCP.</li>
+<li><strong>Products</strong>: figures of the WebODM orthomosaic and DSM with their coordinate system and cell size.</li>
+<li><strong>Comparison</strong>: the side-by-side figures, the DSM difference statistics and map, and the report figures from both tools (GSD, point count, GCP errors).</li>
+<li><strong>Discussion</strong>: which product you would trust more and why, and what each tool made easy or hard. Refer to the pipeline stages from Lecture 2B when explaining a difference.</li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Assignment 2C:</p>
 <ul>
-<li><a href="../../../course/topics/topic_7_odm/lectures/lecture_7a.html">Lecture 7A: Intro to OpenDroneMap</a></li>
+<li>Your report as a PDF, with the WebODM quality report attached or included as an appendix.</li>
+<li>Optional: your <code>gcp_list.txt</code>, and the exported DSM difference map if it is under the Moodle size limit.</li>
 </ul>
 </section>
-<section id="assignments" class="level2">
-<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
 <ul>
-<li><a href="../../../course/topics/topic_7_odm/assignments/assignment_7a.html">Assignment 7A: Intro to WebODM</a></li>
+<li><strong>Setup</strong>: installation route, options, GCP photos, and timing stated.</li>
+<li><strong>Products</strong>: orthomosaic and DSM shown, georeferenced, and described.</li>
+<li><strong>Comparison</strong>: the two tools are compared with figures and numbers, not impressions; the DSM difference is quantified.</li>
+<li><strong>Discussion</strong>: differences are explained with the processing concepts from the lectures.</li>
+<li>On-time submission.</li>
 </ul>
+<section id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="level3">
+
+
 
 
 </section>
+</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Due 10/7/2026</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-webodm_2026" class="csl-entry" role="listitem">
+WebODM contributors. 2026. <em><span>WebODM</span>: The Free and Open Source Drone Mapping Software</em>. Software, version 3.2. <a href="https://webodm.org/">https://webodm.org/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -1160,6 +1400,38 @@ ul.task-list li input[type="checkbox"] {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
