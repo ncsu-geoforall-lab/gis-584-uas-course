@@ -55,9 +55,10 @@ Section one: the floor that pixel size sets, and why you rarely stand on it.
 | **Horizontal RMSE** | about 1 x GSD (asymptote 0.66 x) | 1 to 3 x GSD | 1 to 7 x GSD |
 | **Vertical RMSE** | 1.5 to 2 x GSD | 1 to 4.5 x GSD | 1.5 to 5 x GSD |
 
+- Envelope columns from @jimenez-jimenez_digital_2021; best-case column from @sanz-ablanedo_accuracy_2018
 - Vertical error runs about **2.5 x** the horizontal error, consistently [@sanz-ablanedo_accuracy_2018]
 - Vertical never reaches 1 x GSD, no matter how much control you add
-- With poor georeferencing the multiplier is 50 to 100 x GSD: the pixel size stops mattering entirely
+- With uncorrected navigation-grade georeferencing, errors reach meters, tens of GSD or more: the pixel size stops mattering entirely
 
 ::: {.notes}
 The envelope is Jimenez-Jimenez et al. 2021; the asymptotes are Sanz-Ablanedo et al. 2018, from 3465 GCP combinations over a 1200 ha block. Teach the multipliers as a band, not a constant: the gap between the floor (1x) and what you get is governed by georeferencing and systematic error, not pixel size. Ask the class: your Lake Wheeler flight had roughly 2 to 3 cm GSD; what vertical accuracy should they predict before the lab? Write the predictions down; the lab checks them.
@@ -88,8 +89,7 @@ Section two: how many points, where, and the difference between the points you f
 - Count in flight units: about **3 to 4 GCPs per 100 photos**; below 1 per 100 accuracy degrades fast [@sanz-ablanedo_accuracy_2018]
 - Horizontal stops improving past about 3 per 100; vertical keeps improving to about 4 per 100
 - **Distribution beats count**: an even triangular spread is twice as accurate as a poor layout with the same number
-- Edge coverage first, then a stratified interior; more points past that buy better error *structure*, not lower RMSE [@dai_enhancing_2023]
-- With high-quality control (RTK-surveyed, as ours), count dominates distribution; with poor control, placement governs
+- Edge coverage first, then an even interior; more points past that buy better error *structure*, not lower RMSE [@dai_enhancing_2023]
 
 ::: {.notes}
 The per-100-photos rule travels better than per-hectare rules because it scales with overlap and altitude automatically. Dai et al. 2023 is the modern synthesis: after the first few GCPs, RMSE barely moves but the spatial autocorrelation of the residual error keeps improving, which matters for differencing. Our 9/16 field design (3 to 5 targets on a 78-photo class of flight) sits right on the recommended density.
@@ -129,11 +129,11 @@ Section three: direct georeferencing moved the field in the last five years; her
 |---|---|
 | ASPRS Addendum V [@asprs_positional_2024] | PPK reaches 1 to 2 cm horizontal, 2 to 4 cm vertical "when used properly"; RTK typically 5 to 10 cm |
 | RTK aircraft, zero GCPs, purpose-built flight [@stott_ground_2020] | Vertical RMSE 6.6 cm over 2 km of river; adding 5 GCPs did not improve it |
-| PPK versus GCP workflows [@zhang_evaluating_2019] | PPK matched GCP accuracy (2 cm H, 3 cm V); some missions carried a vertical bias that **one GCP** removed, improving vertical 20 to 30 percent |
+| PPK versus GCP workflows [@zhang_evaluating_2019] | PPK matched GCP-workflow accuracy (MAE about 2 cm, RMSE about 3 cm); some missions carried a vertical bias that **one GCP** removed, improving vertical accuracy 20 to 30 percent |
 | Repeat surveys [@nota_improving_2022] | Co-alignment of epochs gives sub-2 cm relative accuracy; ground control in at least one epoch still anchors absolute Z |
 
 ::: {.notes}
-Stott's caveat is the teaching point: the zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir, and vertical error still clustered spatially at the 10 cm scale, so distributed checkpoints stayed mandatory. Zhang's one-GCP result is the canonical citation for the vertical bias fix: the bias is near constant, so one known point kills it. Nota matters for the change-detection topic later: co-align the epochs and put control in one of them.
+Stott's caveat is the teaching point: the zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir. Against the sparse target checkpoints, vertical errors still clustered spatially up to 0.14 m even though the dense validation found no consistent systematic error, so distributed checkpoints stayed mandatory. Zhang's one-GCP result is the canonical citation for the vertical bias fix: the bias is near constant, so one known point kills it. Nota matters for the change-detection topic later: co-align the epochs and put control in one of them.
 :::
 
 ## The 2026 recipe, and the standard's caution {.smaller}
@@ -151,7 +151,7 @@ Present the tension honestly instead of resolving it: recent peer-reviewed resul
 
 ## The receiver in your hands {.smaller}
 
-- Base within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna, at a tenth of the price [@famiglietti_test_2021]
+- Base within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna [@famiglietti_test_2021]; the price gap between those two bases is roughly an order of magnitude
 - **Antenna beats receiver**: a low-cost dual-frequency board matched geodetic instruments in network RTK only when paired with a geodetic-grade antenna; with a patch antenna it needed open sky [@janos_evaluation_2021]
 - The base coordinate governs absolute accuracy: the rover measures centimeters *relative to the base*, and every point inherits the base position (the field protocol's Methods A, B, and C)
 
@@ -173,8 +173,8 @@ Section four: the error that does not average away, and that differencing cannot
 
 - Nadir-only image blocks with self-calibration cannot separate radial lens distortion from surface shape
 - Camera orientations off parallel by only **2 degrees** produce a dome of about **0.2 m over 100 m** [@james_mitigating_2014]
-- Fixes, in order of power: a known camera model with self-calibration off; **oblique imagery** (convergent orbit cut the error to under 2 mm); two flying heights; well-distributed control
-- The right obliquity is **20 to 35 degrees**, worth nearly 50 percent better accuracy in high relief [@nesbit_enhancing_2019]
+- Fixes, in order of power: a known camera model with self-calibration off; **oblique imagery** (practical plans cut the deformation by one to two orders of magnitude; a convergent orbit reached under 2 mm in simulation); two flying heights; well-distributed control
+- The best camera angles in the tested 0 to 35 degree range were **20 to 35 degrees**, worth nearly 50 percent better accuracy in high relief [@nesbit_enhancing_2019]
 - Caution: a *gently* tilted camera (under 15 degrees) can make things worse by exciting a different distortion correlation, especially on consumer wide-angle cameras with onboard lens correction [@james_mitigating_2020]
 
 ::: {.notes}
@@ -225,11 +225,11 @@ Walk each row on the projector with a real pair of reports. Two traps to name: b
 - Anything about the parts of the site with no checkpoints at all
 
 ::: {.term-card}
-**Report vocabulary** [@asprs_positional_2024]: report RMSE~H~ and RMSE~V~ (RMSE~3D~ if asked); the old 95 percent confidence reporting is gone from Edition 2; 30 checkpoints is the standard's minimum for a statistical claim, and Section 7.15 gives the honest wording when, as in a class lab, you have fewer
+**Report vocabulary** [@asprs_positional_2024]: report RMSE~H~ and RMSE~V~ (RMSE~3D~ if asked); the old 95 percent confidence reporting is gone from Edition 2; 30 checkpoints is the standard's minimum for a statistical claim, and Section 7.16.1 gives the honest wording when, as in a class lab, you have fewer
 :::
 
 ::: {.notes}
-Section 7.15 matters for every project the students will run this decade: small sites cannot afford 30 checkpoints, and the standard's answer is truth in reporting rather than silence: report the RMSE, state the checkpoint count, and do not claim the statistical confidence the sample cannot support. The lab report requires exactly that sentence.
+Section 7.16.1 matters for every project the students will run this decade: small sites cannot afford 30 checkpoints, and the standard's answer is truth in reporting rather than silence: report the RMSE, state the checkpoint count, and do not claim the statistical confidence the sample cannot support. The lab report requires exactly that sentence.
 :::
 
 ## What can you measure {.center .text-center .section-divider background-color="#e9f2e9"}
@@ -250,10 +250,10 @@ $$\text{LoD} \approx 2.8 \times 5 \text{ cm} \approx 14 \text{ cm}$$
 
 - A 30 cm gully clears the threshold; 2 cm of sheet erosion is invisible
 - Thresholding is for **gross** change only; it biases net change, where random errors already cancel [@anderson_uncertainty_2019]
-- Spatially variable LoD can consume a quarter to half of real volumetric change [@wheaton_accounting_2010]
+- Spatially variable LoD can exclude from a quarter to more than half of observed volumetric change [@wheaton_accounting_2010]
 
 ::: {.notes}
-The LoD arithmetic is the lecture's destination: every accuracy number from the previous fifty minutes exists to be plugged in here. Wheaton's Feshie numbers (24 to 31 percent of change excluded in dry years, 57 to 59 in wet) show the price of thresholding; Anderson's correction says when to pay it: gross change yes, net change no, and error propagation is not thresholding. PPK flights under 45 m have reached sub-5 cm detection thresholds, which is what chasing micro-topography actually requires.
+The LoD arithmetic is the lecture's destination: every accuracy number from the previous fifty minutes exists to be plugged in here. Wheaton's Feshie numbers (24 to 31 percent of change excluded in dry years, 57 to 59 in wet) show the price of thresholding; Anderson's correction says when to pay it: gross change yes, net change no, and error propagation is not thresholding. Zhang et al. 2019 reached sub-5 cm detection thresholds with PPK flights below 45 m, which is what chasing micro-topography actually requires.
 :::
 
 ## Trees or erosion {.smaller}

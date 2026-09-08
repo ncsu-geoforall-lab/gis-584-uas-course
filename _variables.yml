@@ -71,6 +71,8 @@ data:
   lake_wheeler_flight_Sept_16_2026_dsm_metashape: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/dsm_metashape.tif
   lake_wheeler_flight_Sept_16_2026_ortho_webodm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/ortho_webodm.cog.tif
   lake_wheeler_flight_Sept_16_2026_dsm_webodm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/dsm_webodm.tif
+  lake_wheeler_flight_Sept_16_2026_report_metashape: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/report_metashape.pdf
+  lake_wheeler_flight_Sept_16_2026_report_webodm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/report_webodm.pdf
   lake_wheeler_flight_Sept_16_2026_checkpoints: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/checkpoints.csv
   lake_wheeler_flight_Sept_16_2026_checkpoints_full: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/checkpoints_full.csv
   lake_wheeler_flight_Sept_16_2026_base_bundle: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/base_bundle.zip

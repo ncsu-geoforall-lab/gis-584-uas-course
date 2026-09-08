@@ -19,6 +19,10 @@ activity: Lecture
 <!-- - Lecture Recording: [Fall 2024]({{< var recordings.topic4.lecture4a >}}) (NCSU Only)
 - In-Class Recording: [Fall 2024]({{< var recordings.topic4.assignment4a >}}) (NCSU Only) -->
 
+::: {.callout-note}
+The products you analyze in this topic have not yet been independently validated. Topic 3B (10/26) closes that loop: the checkpoints collected at the field flight measure how accurate these surfaces actually are, and what change they can detect.
+:::
+
 ## Supplemental materials
 - Bowl effect explained: [Mitigating systematic error in topographic models derived from UAV and ground-based image networks](https://onlinelibrary.wiley.com/doi/10.1002/esp.3609/epdf)
 - Image residuals, camera calibration and impact of GCPs: [Evaluation of structure from motion for soil microtopography measurement](https://onlinelibrary.wiley.com/doi/10.1111/phor.12072/full)

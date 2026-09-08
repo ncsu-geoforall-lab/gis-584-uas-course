@@ -14,7 +14,7 @@ The takeaway to keep in mind all day: the rover can measure a point to about a c
 - Emlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)
 - Fixed-height tripod with tribrach for the base; survey pole for the rover
 - Phone or tablet with [Emlid Flow](https://emlid.com/flow/) connected to each receiver
-- NCRTN real-time (RTK) login credentials, entered into Emlid Flow before the trip
+- North Carolina Real Time Network (NCRTN) RTK login credentials, entered into Emlid Flow before the trip
 - Field notebook or the shared field sheet; a phone camera for point photos
 - Spare: LoRa radio link configured between base and rover, in case cell coverage drops
 
@@ -23,18 +23,18 @@ The takeaway to keep in mind all day: the rover can measure a point to about a c
 1. Set the tripod over the practice mark (35.727565, -78.697788) and level it carefully.
 2. Measure and record the antenna height, and write down what you measured to. Emlid Flow applies the antenna phase center offset itself; you enter the height to the antenna reference point (bottom of the receiver on a tribrach, or the pole length if pole-mounted). A wrong antenna height puts a direct vertical error into every point collected today; it is the single most common way to lose vertical accuracy.
 3. Confirm open sky view. Record the satellite count and PDOP before starting.
-4. **Establish the base coordinate** (Method B of the base-coordinate lab):
+4. **Start the raw log first**: begin RINEX logging at 1 Hz on the base and leave it running all day. This log is post-processed against the NCRTN CORS in the Topic 3B lab (Method C), so it must cover the whole session. Note the start time.
+5. **Record Method A** while still in Single mode: average the position for five minutes and record that autonomous coordinate. It is the deliberately wrong number the Topic 3B lab compares against.
+6. **Establish the base coordinate** (Method B, which the lab compares against Methods A and C):
    a. Configure the receiver as a rover in Emlid Flow and connect to the NCRTN NTRIP caster ([rtn.nc.gov](https://rtn.nc.gov/)) with the VRS mountpoint.
    b. Wait for FIX (not FLOAT, not SINGLE). Note satellites and correction age.
    c. Occupy the mark with a 1 to 2 minute averaged collection. This is the mark's coordinate in NAD83(2011).
    d. Switch to Base mode and enter that coordinate manually as the known position.
-   e. Start broadcasting corrections over LoRa.
-5. **Start a parallel raw log**: begin RINEX logging at 1 Hz on the base and leave it running all day. This log is post-processed against the NCRTN CORS in the Topic 3B lab (Method C), so it must cover the whole session. Note the start time.
-6. Before the rover crews start, record for Method A: put a second receiver (or the base, before step 4) in Single mode and average for five minutes; record that autonomous coordinate. It is the deliberately wrong number the lab compares against.
+   e. Start broadcasting corrections over LoRa. **From this point, do not reconfigure or restart the base**: the rover crews and the running log both depend on it.
 
 ## Rover work: GCPs and checkpoints
 
-Project settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542), geoid GEOID18, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, which is the older NAD83(HARN) realization; the difference between the two here is a few millimeters, but write down which one you used, because stating the datum is part of the survey. Rover antenna height is the pole length; confirm it once and do not change the pole length during the day.
+Project settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542), geoid GEOID18, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, which is the older NAD83(HARN) realization; at this site the two realizations differ by about 2 cm horizontally, which is real money at checkpoint accuracy, so write down which one you used: stating the datum realization is part of the survey. Rover antenna height is the pole length; confirm it once and do not change the pole length during the day.
 
 **Ground control targets (3 to 5 points).** Measure the center of each laid-out target with a 1 to 2 minute averaged FIX occupation. These are the only points that will be used to control the photogrammetric processing.
 
@@ -70,6 +70,8 @@ Method B needs the NCRTN over a cell connection. If there is no coverage, skip s
 - Fixed-height tripod parts complete; pole tip checked
 - Field sheets printed; GCP targets counted
 - After the trip: derive the two lab files from the Emlid Flow export: `checkpoints.csv` with exactly `name, easting, northing, height` (EPSG:3358, orthometric) and `checkpoints_full.csv` with everything, marking re-occupations in the name
+- After the trip: download the NCRTN CORS RINEX for the base session window and package it with the base RINEX log and the field-recorded Method A and B coordinates as `base_bundle.zip`
+- After processing: upload the six product files plus the two processing report PDFs to the GCS `091626/` folder under the names in `_variables.yml`
 - Assign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line
 :::
 
