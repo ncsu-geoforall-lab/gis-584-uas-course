@@ -71,7 +71,7 @@ Method B needs the NCRTN over a cell connection. If there is no coverage, skip s
 - Field sheets printed; GCP targets counted
 - After the trip: derive the two lab files from the Emlid Flow export: `checkpoints.csv` with exactly `name, easting, northing, height` (EPSG:3358, orthometric) and `checkpoints_full.csv` with everything, marking re-occupations in the name
 - After the trip: download the NCRTN CORS RINEX for the base session window and package it with the base RINEX log and the field-recorded Method A and B coordinates as `base_bundle.zip`
-- After processing: upload the six product files plus the two processing report PDFs to the GCS `091626/` folder under the names in `_variables.yml`
+- After processing: upload the six product files, the two processing report PDFs, and `base_bundle.zip` to the GCS `091626/` folder under the names in `_variables.yml`
 - Assign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line
 :::
 

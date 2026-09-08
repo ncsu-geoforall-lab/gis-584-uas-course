@@ -35,7 +35,7 @@ The orthomosaics are large. They are cloud-optimized GeoTIFFs, so for the horizo
 
 ## Software
 
-- [Emlid Studio](https://emlid.com/emlid-studio/) (free, Windows and macOS) or [RTKLIB](https://www.rtklib.com/) (free; the RTKPOST GUI is Windows, the command-line tools run everywhere) for Part 1. In either tool, if the solution stays FLOAT, restrict processing to the middle hour of the log and re-check both antenna heights before anything else
+- [Emlid Studio](https://emlid.com/emlid-studio/) (free, Windows and macOS) or [RTKLIB](https://www.rtklib.com/) (free; the RTKPOST GUI is Windows, the command-line tools run everywhere) for Part 1. In either tool, if the solution stays FLOAT, restrict processing to the middle hour of the log
 - GRASS {{< var software.grass.version >}} (or QGIS) for Parts 2 and 3
 
 ## Part 1: The base coordinate, three ways
