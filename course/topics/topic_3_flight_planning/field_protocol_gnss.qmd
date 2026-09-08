@@ -59,7 +59,7 @@ To the shared drive folder, same day:
 
 ## If cell coverage drops
 
-Method B needs the NCRTN over a cell connection. If there is no coverage, skip step 4, set the base to average its position in Single mode, and carry on collecting with LoRa corrections; the whole survey shifts onto the correct datum later, when the base RINEX is post-processed against the NCRTN CORS (the lab's Method C). Nothing collected is lost; only the absolute coordinate arrives later.
+Method B needs the NCRTN over a cell connection. If there is no coverage, skip step 6, keep the RINEX log from step 4 running, set the base to average its position in Single mode, and carry on collecting with LoRa corrections; the whole survey shifts onto the correct datum later, when the base RINEX is post-processed against the NCRTN CORS (the lab's Method C). Nothing collected is lost; only the absolute coordinate arrives later.
 
 ::: {.callout-note collapse="true"}
 ## Instructor checklist (before the trip)
