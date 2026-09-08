@@ -69,6 +69,7 @@ Method B needs the NCRTN over a cell connection. If there is no coverage, skip s
 - RS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range
 - Fixed-height tripod parts complete; pole tip checked
 - Field sheets printed; GCP targets counted
+- After the trip: derive the two lab files from the Emlid Flow export: `checkpoints.csv` with exactly `name, easting, northing, height` (EPSG:3358, orthometric) and `checkpoints_full.csv` with everything, marking re-occupations in the name
 - Assign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line
 :::
 

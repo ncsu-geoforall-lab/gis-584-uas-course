@@ -24,9 +24,14 @@ All files are from the {{< var course_params.term >}} flight (September 16) at L
 
 - [Orthomosaic, Metashape]({{< var data.lake_wheeler_flight_Sept_16_2026_ortho_metashape >}}) and [DSM, Metashape]({{< var data.lake_wheeler_flight_Sept_16_2026_dsm_metashape >}}) (EPSG:3358)
 - [Orthomosaic, WebODM]({{< var data.lake_wheeler_flight_Sept_16_2026_ortho_webodm >}}) and [DSM, WebODM]({{< var data.lake_wheeler_flight_Sept_16_2026_dsm_webodm >}})
-- [Checkpoints]({{< var data.lake_wheeler_flight_Sept_16_2026_checkpoints >}}): the withheld points, with orthometric and ellipsoidal heights, plus the repeatability re-occupations
+- [Checkpoints]({{< var data.lake_wheeler_flight_Sept_16_2026_checkpoints >}}): the withheld points, exactly four columns in this order: `name, easting, northing, height` (EPSG:3358, orthometric). This is the file the GRASS commands below expect
+- [Checkpoints, full]({{< var data.lake_wheeler_flight_Sept_16_2026_checkpoints_full >}}): the complete field export with ellipsoidal heights, occupation metadata, and the repeatability re-occupations; used only in the "Report the accuracy" step
 - [Base station bundle]({{< var data.lake_wheeler_flight_Sept_16_2026_base_bundle >}}): base RINEX log, the NCRTN CORS RINEX for the same window, and the Method A and B coordinates recorded in the field
 - The processing reports from both tools are included with the products
+
+::: {.callout-note}
+The orthomosaics are large. They are cloud-optimized GeoTIFFs, so for the horizontal digitizing you can stream them without downloading: in QGIS add the URL prefixed with `/vsicurl/`, or in GRASS pass the same `/vsicurl/` URL to `r.import`. The DSMs and reports are small enough to download directly.
+:::
 
 ## Software
 
@@ -39,7 +44,7 @@ Every checkpoint inherits the base station coordinate, so the survey is only as 
 
 1. **Method A (autonomous average)**: the five-minute Single-mode average recorded in the field. No correction source. Read it from the field records.
 2. **Method B (NCRTN VRS)**: the real-time network solution collected before the base started broadcasting. Read it from the field records.
-3. **Method C (static post-processing)**: compute it yourself. In Emlid Studio, use the Static workflow with the base RINEX as the rover input and the NCRTN CORS file as the base; enter the antenna heights from the field sheet; process and record the solved coordinate. In RTKLIB, the same files go through RTKPOST in Static mode.
+3. **Method C (static post-processing)**: compute it yourself. In Emlid Studio, use the Static workflow with the base RINEX as the rover input and the NCRTN CORS file as the base; use the CORS station's published coordinate as the known base position with an antenna height of 0 m (the CORS values are already at the antenna reference point), enter your base receiver's antenna height from the field sheet, then process and record the solved coordinate in NAD83(2011). In RTKLIB, the same files go through RTKPOST with positioning mode set to Static; the remaining defaults are fine.
 
 Then:
 
@@ -51,7 +56,7 @@ Then:
 
 ### Vertical
 
-Import a DSM and the checkpoints into GRASS and compute the residuals at each checkpoint:
+Import a DSM and the checkpoints into GRASS and compute the residuals at each checkpoint. The `v.*` tools below are the vector siblings of the raster tools you used in Topics 2 to 4 and will be new; run the commands one at a time and read what each prints:
 
 ```bash
 # in a GRASS project in EPSG:3358
@@ -70,16 +75,16 @@ v.db.univar map=checkpoints column=dz2    # RMSE_V1 = sqrt of the mean of dz2
 Repeat for the WebODM DSM. For each product:
 
 - **RMSE~V1~**: the square root of the mean of `dz2`.
-- **Mean error**: from the `dz` statistics. The blunder rule: flag any checkpoint with |dz| beyond 3 x your target RMSE and investigate before excluding; a mean error above 25 percent of the RMSE points at a systematic bias, not noise [@asprs_positional_2024].
+- **Mean error**: from the `dz` statistics. The blunder rule: flag any checkpoint with |dz| beyond 3 x the RMSE~V1~ you just computed, investigate it, and recompute after excluding confirmed blunders; a mean error above 25 percent of the RMSE points at a systematic bias, not noise [@asprs_positional_2024].
 - **Map the residuals** (`v.colors` on `dz`, over the orthomosaic): is the error spatially structured (edges, one corner, a dome) or salt and pepper?
 
 ### Horizontal
 
-Pick at least 8 photo-identifiable checkpoints, digitize their positions on each orthomosaic (GRASS digitizer or QGIS), and compute for each the offsets to the surveyed coordinates. RMSE~H~ is the square root of the mean of (de^2^ + dn^2^).
+Pick at least 8 photo-identifiable checkpoints, digitize their positions on each orthomosaic (in QGIS: a new point layer with the ortho as basemap; in GRASS: right-click the map in the Layer Manager and choose Digitize), and compute for each the offsets to the surveyed coordinates. RMSE~H~ is the square root of the mean of (de^2^ + dn^2^).
 
 ### Report the accuracy
 
-- **RMSE~V2~ and RMSE~H2~ (the ruler)**: estimate the checkpoint survey accuracy from the repeatability re-occupations in the checkpoint file (the RMS of the differences between independent occupations, divided by sqrt 2).
+- **RMSE~V2~ and RMSE~H2~ (the ruler)**: estimate the checkpoint survey accuracy from the repeatability re-occupations in the full checkpoint file (the RMS of the differences between independent occupations, divided by sqrt 2).
 - Combine in quadrature: reported RMSE~V~ = sqrt(RMSE~V1~^2^ + RMSE~V2~^2^), and the same for horizontal.
 - Write the accuracy statement in Edition 2 language, including the checkpoint count and the Section 7.15 wording for a sample below 30 [@asprs_positional_2024].
 
@@ -91,7 +96,7 @@ Pick at least 8 photo-identifiable checkpoints, digitize their positions on each
    - Measuring canopy height to 0.5 m [@grybas_evaluating_2022]
    - Detecting a 30 cm deep gully after a storm
    - Quantifying 2 cm of sheet erosion across the field
-3. Fill in the report comparison table from the lecture with your numbers from both tools: GSD, aligned images, camera position error, control fit, checkpoint RMSE (yours, from Part 2), processing time.
+3. Fill in a comparison table for both tools, adapted from the lecture's "two dialects" table by dropping the overlap and camera model rows and adding processing time: GSD, aligned images and coverage, camera position error, control fit, checkpoint RMSE (yours, from Part 2), and processing time.
 4. One paragraph: which product would you hand to a client, and what would you change about the flight or the control to halve the LoD [@james_mitigating_2014; @stott_ground_2020]?
 
 ## Report
@@ -109,7 +114,8 @@ Upload to Moodle, Assignment 3B:
 
 * **Base coordinate**: all three methods reported with a correct reading of what the comparison shows.
 * **Validation**: residuals computed correctly, blunder and bias checks applied, quadrature carried, accuracy stated in Edition 2 terms with the small-sample wording.
-* **Measurability**: the four verdicts follow from the student's own numbers, not from the lecture's example.
+* **Residual maps and table**: the residual maps show spatial structure or its absence and are interpreted; the checkpoint residual CSV for both products is included.
+* **Measurability**: the LoD is computed from the student's own RMSE~V~ and the four verdicts follow from it, not from the lecture's example.
 * **Interpretation**: the comparison table is filled and the closing paragraph ties changes to mechanisms from the lectures.
 * On-time submission.
 
