@@ -19,7 +19,7 @@
 - date: 9/16/2026
   activity: "Field Trip"
   topic: "Topic 3: UAS Flight Planning"
-  title: "UAS Flight at Lake Wheeler"
+  title: "UAS Flight at Lake Wheeler ([GNSS field protocol](topics/topic_3_flight_planning/field_protocol_gnss.qmd))"
 
 - date: 9/28/2026
   activity: "Assignment Due"

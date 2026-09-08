@@ -83,6 +83,8 @@ website:
               contents:
                 - text: "Assignment 3A"
                   href: course/topics/topic_3_flight_planning/assignments/assignment_3a.qmd
+            - text: "GNSS Field Protocol"
+              href: course/topics/topic_3_flight_planning/field_protocol_gnss.qmd
         - section: "Topic 4: GIS Analytics"
           href: course/topics/topic_4_GIS_analytics/index.qmd
           contents:

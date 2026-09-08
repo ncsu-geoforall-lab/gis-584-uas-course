@@ -1,0 +1,75 @@
+---
+title: "GNSS Field Protocol: Base Station and Checkpoints"
+format:
+    html:
+        toc: true
+---
+
+This is the protocol for the GNSS work at the {{< var course_params.term >}} Lake Wheeler field flight. While the UAS flies, student groups rotate through the Emlid Reach RS4 base and rover to collect the ground control and checkpoint coordinates that Topic 3B uses to validate the flight's orthomosaic and DSM. The flight itself is not affected by this work; the GNSS crew operates off the flight line.
+
+The takeaway to keep in mind all day: the rover can measure a point to about a centimeter relative to the base, but every point inherits the base coordinate. If the base coordinate is wrong by two meters, every point is wrong by two meters, even with a FIX. Establishing that one coordinate carefully is most of the job.
+
+## Equipment
+
+- Emlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)
+- Fixed-height tripod with tribrach for the base; survey pole for the rover
+- Phone or tablet with [Emlid Flow](https://emlid.com/flow/) connected to each receiver
+- NCRTN real-time (RTK) login credentials, entered into Emlid Flow before the trip
+- Field notebook or the shared field sheet; a phone camera for point photos
+- Spare: LoRa radio link configured between base and rover, in case cell coverage drops
+
+## Base setup
+
+1. Set the tripod over the practice mark (35.727565, -78.697788) and level it carefully.
+2. Measure and record the antenna height, and write down what you measured to. Emlid Flow applies the antenna phase center offset itself; you enter the height to the antenna reference point (bottom of the receiver on a tribrach, or the pole length if pole-mounted). A wrong antenna height puts a direct vertical error into every point collected today; it is the single most common way to lose vertical accuracy.
+3. Confirm open sky view. Record the satellite count and PDOP before starting.
+4. **Establish the base coordinate** (Method B of the base-coordinate lab):
+   a. Configure the receiver as a rover in Emlid Flow and connect to the NCRTN NTRIP caster ([rtn.nc.gov](https://rtn.nc.gov/)) with the VRS mountpoint.
+   b. Wait for FIX (not FLOAT, not SINGLE). Note satellites and correction age.
+   c. Occupy the mark with a 1 to 2 minute averaged collection. This is the mark's coordinate in NAD83(2011).
+   d. Switch to Base mode and enter that coordinate manually as the known position.
+   e. Start broadcasting corrections over LoRa.
+5. **Start a parallel raw log**: begin RINEX logging at 1 Hz on the base and leave it running all day. This log is post-processed against the NCRTN CORS in the Topic 3B lab (Method C), so it must cover the whole session. Note the start time.
+6. Before the rover crews start, record for Method A: put a second receiver (or the base, before step 4) in Single mode and average for five minutes; record that autonomous coordinate. It is the deliberately wrong number the lab compares against.
+
+## Rover work: GCPs and checkpoints
+
+Project settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542), geoid GEOID18, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, which is the older NAD83(HARN) realization; the difference between the two here is a few millimeters, but write down which one you used, because stating the datum is part of the survey. Rover antenna height is the pole length; confirm it once and do not change the pole length during the day.
+
+**Ground control targets (3 to 5 points).** Measure the center of each laid-out target with a 1 to 2 minute averaged FIX occupation. These are the only points that will be used to control the photogrammetric processing.
+
+**Checkpoints (12 to 20 points).** Everything else is withheld from processing and used to measure the accuracy of the final products. For each checkpoint:
+
+- Pick a point you will be able to find in the imagery at 2 to 3 cm resolution: pavement corners, the junction of sidewalk joints, a manhole edge, a paint mark. Avoid grass, gravel, and anything that moves.
+- Hold the pole plumb (the RS4 tilt compensation helps, but a steady pole is better), confirm FIX, and collect a 1 to 2 minute averaged occupation.
+- Photograph the point with the pole tip visible and note the point number on the field sheet.
+- Spread the points across the whole flight block, including the edges and the full elevation range, and put several on smooth level ground (those serve the vertical assessment).
+
+**Repeatability check.** A second group re-occupies 3 to 5 of the earlier checkpoints without looking at the first group's numbers. Agreement between independent occupations is the honest accuracy check, not the precision the software reports.
+
+## What to upload at the end of the day
+
+To the shared drive folder, same day:
+
+1. The base RINEX log (stop logging, download from the receiver)
+2. The Emlid Flow project CSV export (all points, both height types)
+3. The Method A autonomous coordinate and the Method B surveyed coordinate, with antenna heights and times
+4. The point photos, named by point number
+5. A photo of the field sheet
+
+## If cell coverage drops
+
+Method B needs the NCRTN over a cell connection. If there is no coverage, skip step 4, set the base to average its position in Single mode, and carry on collecting with LoRa corrections; the whole survey shifts onto the correct datum later, when the base RINEX is post-processed against the NCRTN CORS (the lab's Method C). Nothing collected is lost; only the absolute coordinate arrives later.
+
+::: {.callout-note collapse="true"}
+## Instructor checklist (before the trip)
+
+- NCRTN RTK login tested in Emlid Flow on the actual field tablet, with a FIX obtained somewhere off campus
+- NCRTN CORS download account working; know the nearest CORS station ID to Lake Wheeler
+- RS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range
+- Fixed-height tripod parts complete; pole tip checked
+- Field sheets printed; GCP targets counted
+- Assign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line
+:::
+
+The base-coordinate comparison (Methods A, B, and C) and the checkpoint validation of the flight products continue in the Topic 3B lab.
