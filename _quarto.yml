@@ -75,14 +75,20 @@ website:
           contents:
             - text: "3A: UAS Flight Planning"
               href: course/topics/topic_3_flight_planning/part_a_uas_flight_planning.qmd
+            - text: "3B: Ground Control & Accuracy"
+              href: course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.qmd
             - section: Slides
               contents:
                 - text: "Lecture 3A"
                   href: course/topics/topic_3_flight_planning/lectures/lecture_3a.qmd
+                - text: "Lecture 3B"
+                  href: course/topics/topic_3_flight_planning/lectures/lecture_3b.qmd
             - section: Assignments
               contents:
                 - text: "Assignment 3A"
                   href: course/topics/topic_3_flight_planning/assignments/assignment_3a.qmd
+                - text: "Assignment 3B"
+                  href: course/topics/topic_3_flight_planning/assignments/assignment_3b.qmd
             - text: "GNSS Field Protocol"
               href: course/topics/topic_3_flight_planning/field_protocol_gnss.qmd
         - section: "Topic 4: GIS Analytics"

@@ -7,14 +7,17 @@ order: 3
 ## Content
 
 - [3A: UAS Flight Planning](part_a_uas_flight_planning.qmd)
+- [3B: Ground control, checkpoints, and accuracy](part_b_ground_control_accuracy.qmd)
 
 ## Slides
 
 - [Lecture 3A: UAS Flight Planning](lectures/lecture_3a.qmd)
+- [Lecture 3B: Ground Control, Checkpoints, and Accuracy](lectures/lecture_3b.qmd)
 
 ## Assignments
 
 - [Assignment 3A: Terrain analysis of the flight site using GIS tools](assignments/assignment_3a.qmd)
+- [Assignment 3B: Validate the Lake Wheeler flight](assignments/assignment_3b.qmd)
 
 ## Reference
 

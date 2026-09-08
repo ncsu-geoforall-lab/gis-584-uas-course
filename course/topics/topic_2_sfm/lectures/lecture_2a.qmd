@@ -512,7 +512,7 @@ This distinction is the difference between a map with an accuracy claim and a ma
 :::
 
 ::: {.notes}
-This closes the loop from Lecture 1A's positioning slide. Accurate camera positions constrain the bundle adjustment nearly as well as ground control, which is why RTK drones cut field time so much. Two cautions: a constant vertical offset (antenna to sensor lever arm, geoid versus ellipsoid heights) is invisible without a ground point, and product accuracy can only be demonstrated with checkpoints. In North Carolina the base station can be the state's real-time network.
+This closes the loop from Lecture 1A's positioning slide. Topic 3B puts real numbers on this table with the class's own checkpoint data. Accurate camera positions constrain the bundle adjustment nearly as well as ground control, which is why RTK drones cut field time so much. Two cautions: a constant vertical offset (antenna to sensor lever arm, geoid versus ellipsoid heights) is invisible without a ground point, and product accuracy can only be demonstrated with checkpoints. In North Carolina the base station can be the state's real-time network.
 :::
 
 ## Common pitfalls {.smaller}

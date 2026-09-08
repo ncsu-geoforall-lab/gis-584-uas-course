@@ -1,0 +1,116 @@
+---
+topic: "Topic 3B: UAS Flight Planning"
+title: "Assignment 3B"
+subtitle: "Validate the Lake Wheeler flight"
+date: 10/26/2026
+assignment-due-date: 11/9/2026
+activity: Lab
+bibliography: ../references.bib
+format:
+    html:
+        toc: true
+        toc-depth: 3
+---
+
+## Task
+
+Measure the accuracy of the Lake Wheeler flight and decide what it can measure. You will establish the GNSS base coordinate three independent ways, evaluate the flight's orthomosaic and DSM (processed in both Agisoft Metashape and WebODM) against the checkpoints collected at the field trip, report the accuracy in ASPRS Edition 2 terms [@asprs_positional_2024], and answer four measurement questions with arithmetic.
+
+The checkpoints were withheld from processing, so this is an independent accuracy assessment: the honest kind [@sanz-ablanedo_accuracy_2018]. On-campus students collected this data with the Emlid Reach RS4 at the flight; distance education students work from the identical files and run the same analysis, including the GNSS post-processing.
+
+## Data
+
+All files are from the {{< var course_params.term >}} flight (September 16) at Lake Wheeler:
+
+- [Orthomosaic, Metashape]({{< var data.lake_wheeler_flight_Sept_16_2026_ortho_metashape >}}) and [DSM, Metashape]({{< var data.lake_wheeler_flight_Sept_16_2026_dsm_metashape >}}) (EPSG:3358)
+- [Orthomosaic, WebODM]({{< var data.lake_wheeler_flight_Sept_16_2026_ortho_webodm >}}) and [DSM, WebODM]({{< var data.lake_wheeler_flight_Sept_16_2026_dsm_webodm >}})
+- [Checkpoints]({{< var data.lake_wheeler_flight_Sept_16_2026_checkpoints >}}): the withheld points, with orthometric and ellipsoidal heights, plus the repeatability re-occupations
+- [Base station bundle]({{< var data.lake_wheeler_flight_Sept_16_2026_base_bundle >}}): base RINEX log, the NCRTN CORS RINEX for the same window, and the Method A and B coordinates recorded in the field
+- The processing reports from both tools are included with the products
+
+## Software
+
+- [Emlid Studio](https://emlid.com/emlid-studio/) (free, Windows and macOS) or [RTKLIB](https://www.rtklib.com/) (free, all platforms) for Part 1
+- GRASS {{< var software.grass.version >}} (or QGIS) for Parts 2 and 3
+
+## Part 1: The base coordinate, three ways
+
+Every checkpoint inherits the base station coordinate, so the survey is only as good as that one position. The [field protocol](../field_protocol_gnss.qmd) recorded it three ways; you compare them.
+
+1. **Method A (autonomous average)**: the five-minute Single-mode average recorded in the field. No correction source. Read it from the field records.
+2. **Method B (NCRTN VRS)**: the real-time network solution collected before the base started broadcasting. Read it from the field records.
+3. **Method C (static post-processing)**: compute it yourself. In Emlid Studio, use the Static workflow with the base RINEX as the rover input and the NCRTN CORS file as the base; enter the antenna heights from the field sheet; process and record the solved coordinate. In RTKLIB, the same files go through RTKPOST in Static mode.
+
+Then:
+
+- Put the three coordinates in one table (easting, northing, ellipsoidal height, and the differences from Method C).
+- Method A should sit meters away; Methods B and C should agree within a few centimeters. State which axis disagrees most and why vertical is the weak axis.
+- Answer: if the base had broadcast the Method A coordinate all day, what error would every checkpoint carry, and could any later processing remove it?
+
+## Part 2: Validate the products
+
+### Vertical
+
+Import a DSM and the checkpoints into GRASS and compute the residuals at each checkpoint:
+
+```bash
+# in a GRASS project in EPSG:3358
+r.import input=dsm_metashape.tif output=dsm_metashape
+v.in.ascii input=checkpoints.csv output=checkpoints separator=comma skip=1 \
+    x=2 y=3 z=4 columns="name text, e double precision, n double precision, h double precision"
+g.region raster=dsm_metashape
+v.what.rast map=checkpoints raster=dsm_metashape column=dsm_z
+v.db.addcolumn map=checkpoints columns="dz double precision, dz2 double precision"
+v.db.update map=checkpoints column=dz query_column="dsm_z - h"
+v.db.update map=checkpoints column=dz2 query_column="dz * dz"
+v.db.univar map=checkpoints column=dz     # mean error: is the surface biased?
+v.db.univar map=checkpoints column=dz2    # RMSE_V1 = sqrt of the mean of dz2
+```
+
+Repeat for the WebODM DSM. For each product:
+
+- **RMSE~V1~**: the square root of the mean of `dz2`.
+- **Mean error**: from the `dz` statistics. The blunder rule: flag any checkpoint with |dz| beyond 3 x your target RMSE and investigate before excluding; a mean error above 25 percent of the RMSE points at a systematic bias, not noise [@asprs_positional_2024].
+- **Map the residuals** (`v.colors` on `dz`, over the orthomosaic): is the error spatially structured (edges, one corner, a dome) or salt and pepper?
+
+### Horizontal
+
+Pick at least 8 photo-identifiable checkpoints, digitize their positions on each orthomosaic (GRASS digitizer or QGIS), and compute for each the offsets to the surveyed coordinates. RMSE~H~ is the square root of the mean of (de^2^ + dn^2^).
+
+### Report the accuracy
+
+- **RMSE~V2~ and RMSE~H2~ (the ruler)**: estimate the checkpoint survey accuracy from the repeatability re-occupations in the checkpoint file (the RMS of the differences between independent occupations, divided by sqrt 2).
+- Combine in quadrature: reported RMSE~V~ = sqrt(RMSE~V1~^2^ + RMSE~V2~^2^), and the same for horizontal.
+- Write the accuracy statement in Edition 2 language, including the checkpoint count and the Section 7.15 wording for a sample below 30 [@asprs_positional_2024].
+
+## Part 3: What can this flight measure?
+
+1. Compute the level of detection for a repeat of this flight at the same quality: LoD = 2.8 x your sigma-z (use RMSE~V~).
+2. Rule, with numbers, on each question:
+   - Counting the trees along the field edge
+   - Measuring canopy height to 0.5 m [@grybas_evaluating_2022]
+   - Detecting a 30 cm deep gully after a storm
+   - Quantifying 2 cm of sheet erosion across the field
+3. Fill in the report comparison table from the lecture with your numbers from both tools: GSD, aligned images, camera position error, control fit, checkpoint RMSE (yours, from Part 2), processing time.
+4. One paragraph: which product would you hand to a client, and what would you change about the flight or the control to halve the LoD [@james_mitigating_2014; @stott_ground_2020]?
+
+## Report
+
+Prepare a report (4 to 6 pages including figures): the base coordinate table and discussion (Part 1); the validation methods, residual maps, and the Edition 2 accuracy statement for both products (Part 2); the LoD arithmetic, the four verdicts, the filled comparison table, and the closing paragraph (Part 3).
+
+## Submission
+
+Upload to Moodle, Assignment 3B:
+
+* Your report as a PDF.
+* Your checkpoint residual table (CSV export) for both products.
+
+## Grading
+
+* **Base coordinate**: all three methods reported with a correct reading of what the comparison shows.
+* **Validation**: residuals computed correctly, blunder and bias checks applied, quadrature carried, accuracy stated in Edition 2 terms with the small-sample wording.
+* **Measurability**: the four verdicts follow from the student's own numbers, not from the lecture's example.
+* **Interpretation**: the comparison table is filled and the closing paragraph ties changes to mechanisms from the lectures.
+* On-time submission.
+
+### Due {{< meta assignment-due-date >}}
