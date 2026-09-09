@@ -1,0 +1,34 @@
+---
+topic: "Topic 3B: UAS Flight Planning"
+title: "Ground control, checkpoints, and accuracy"
+subtitle: "Topic 3: UAS Flight Planning"
+date: 10/26/2026
+activity: Lecture
+bibliography: references.bib
+---
+
+## Outline
+
+- What flight GSD buys you: the floor it sets on horizontal and vertical accuracy, and why you rarely stand on it
+- Ground control versus checkpoints: fitting the map versus judging it
+- RTK and PPK direct georeferencing, and what still needs a ground point
+- Systematic error: doming, why it beats random noise, and how to detect it in a report
+- Reading the Agisoft and WebODM reports side by side
+- The level of detection: deciding with arithmetic whether a flight can count trees or quantify micro erosion
+
+## Lecture
+
+- Lecture Slides: [Ground Control, Checkpoints, and Accuracy](lectures/lecture_3b.qmd)
+
+## Supplemental materials
+
+- [ASPRS Positional Accuracy Standards for Digital Geospatial Data, Edition 2, Version 2 (2024)](https://publicdocuments.asprs.org/PositionalAccuracyStd-Ed2-V2) [@asprs_positional_2024]: Addendum V is the UAS chapter; Section 7.16.1 covers reporting with fewer than 30 checkpoints
+- [GNSS field protocol](field_protocol_gnss.qmd): the base station and checkpoint procedure used at the Lake Wheeler flight
+- Sanz-Ablanedo et al. 2018 [@sanz-ablanedo_accuracy_2018]: the GCP density and checkpoint-overestimation numbers
+- Stott et al. 2020 [@stott_ground_2020] and Zhang et al. 2019 [@zhang_evaluating_2019]: the modern RTK/PPK versus GCP evidence
+- James and Robson 2014 [@james_mitigating_2014] and James et al. 2020 [@james_mitigating_2020]: doming and its mitigations
+- Wheaton et al. 2010 [@wheaton_accounting_2010] and Anderson 2019 [@anderson_uncertainty_2019]: uncertainty in DEM differencing
+
+## Assignment
+
+- [Assignment 3B: Validate the Lake Wheeler flight](assignments/assignment_3b.qmd): establish the base coordinate three ways, evaluate the flight's orthomosaic and DSM against the withheld checkpoints, and rule on what the flight can measure. See the assignment page for data, submission, grading, and the due date.
