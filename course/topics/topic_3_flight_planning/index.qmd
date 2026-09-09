@@ -15,3 +15,7 @@ order: 3
 ## Assignments
 
 - [Assignment 3A: Terrain analysis of the flight site using GIS tools](assignments/assignment_3a.qmd)
+
+## Reference
+
+- [GNSS Field Protocol: Base Station and Checkpoints](field_protocol_gnss.qmd)

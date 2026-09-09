@@ -22,6 +22,10 @@ activity: "Lecture & Lab"
 - [Assignment Recording]({{< var recordings.topic3.assignment3 >}}) (NCSU Only)
 <!-- - Recording of the Intro to flight planning in eMotion software -->
 
+## Field trip
+
+- [GNSS field protocol](field_protocol_gnss.qmd): base station setup and checkpoint collection with the Emlid Reach RS4 during the Lake Wheeler flight; read it before the trip
+
 ## Supplemental materials
 
 ### Flight - watch the following if you were unable to attend the flight session
