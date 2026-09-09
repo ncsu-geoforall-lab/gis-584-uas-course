@@ -858,7 +858,7 @@
     "href": "course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html#lecture",
     "title": "Analysis of UAS data processing results",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides &lt;!– - Lecture Recording: Fall 2024 (NCSU Only)\nIn-Class Recording: Fall 2024 (NCSU Only) –&gt;",
+    "text": "Lecture\n\nLecture Slides &lt;!– - Lecture Recording: Fall 2024 (NCSU Only)\nIn-Class Recording: Fall 2024 (NCSU Only) –&gt;\n\n\n\n\n\n\n\nNote\n\n\n\nThe products you analyze in this topic have not yet been independently validated. Topic 3B (10/26) closes that loop: the checkpoints collected at the field flight measure how accurate these surfaces actually are, and what change they can detect.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -939,6 +939,78 @@
       "Topic 4: GIS Analytics",
       "Assignments",
       "Assignment 4A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
+    "title": "UAS Flight Planning",
+    "section": "Outline",
+    "text": "Outline\n\nDefining the data collection purpose\nSurvey area, take off and landing locations\nTerrain and weather conditions\nSafe flight\nFlight parameters\nFlight planning and management platforms",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "3A: UAS Flight Planning"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
+    "title": "UAS Flight Planning",
+    "section": "Lecture",
+    "text": "Lecture\n\nFlight planning introduction\nLecture Recording (NCSU Only)\nAssignment Recording (NCSU Only)",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "3A: UAS Flight Planning"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#field-trip",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#field-trip",
+    "title": "UAS Flight Planning",
+    "section": "Field trip",
+    "text": "Field trip\n\nGNSS field protocol: base station setup and checkpoint collection with the Emlid Reach RS4 during the Lake Wheeler flight; read it before the trip",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "3A: UAS Flight Planning"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
+    "title": "UAS Flight Planning",
+    "section": "Supplemental materials",
+    "text": "Supplemental materials\n\nFlight - watch the following if you were unable to attend the flight session\n\nFixed wing flight (eBee X): set up, launch and landing\nVertical take-off (VTOL) fixed wing flight with Wingtra drone\nRotary wing flight (Phantom)\n\nFlight with Drone Deploy flight planning app\nFlight with Pix4D Capture flight planning app\n\n\n\n\nFlight planning and management platforms\n\nCommerical Options\n\nDroneDeploy\nPix4Dcapture Pro\nDJI GS PRO\nUgCS\nDroneLink\n\n\n\nOpen Source Options\n\nQGroundControl\nMission Planner\nMavProxy",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "3A: UAS Flight Planning"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
+    "title": "UAS Flight Planning",
+    "section": "Assignment",
+    "text": "Assignment\nPrepare a flight plan:\n\n\nFlight plan analysis in GRASS",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "3A: UAS Flight Planning"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
+    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
+    "title": "UAS Flight Planning",
+    "section": "Homework",
+    "text": "Homework\nPrepare a report on the flight plan: purpose, permits, map of the area boundary, with take off, landing, locations, ground control points and flight altitude analysis.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "3A: UAS Flight Planning"
     ]
   },
   {
@@ -1316,6 +1388,78 @@
       "Topic 3: UAS Flight Planning",
       "Slides",
       "Lecture 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "",
+    "text": "This is the protocol for the GNSS work at the Fall 2026 Lake Wheeler field flight. While the UAS flies, student groups rotate through the Emlid Reach RS4 base and rover to collect the ground control and checkpoint coordinates that Topic 3B uses to validate the flight’s orthomosaic and DSM. The flight itself is not affected by this work; the GNSS crew operates off the flight line.\nThe takeaway to keep in mind all day: the rover can measure a point to about a centimeter relative to the base, but every point inherits the base coordinate. If the base coordinate is wrong by two meters, every point is wrong by two meters, even with a FIX. Establishing that one coordinate carefully is most of the job.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#equipment",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#equipment",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "Equipment",
+    "text": "Equipment\n\nEmlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)\nFixed-height tripod with tribrach for the base; survey pole for the rover\nPhone or tablet with Emlid Flow connected to each receiver\nNorth Carolina Real Time Network (NCRTN) RTK login credentials, entered into Emlid Flow before the trip\nField notebook or the shared field sheet; a phone camera for point photos\nSpare: LoRa radio link configured between base and rover, in case cell coverage drops",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-setup",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-setup",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "Base setup",
+    "text": "Base setup\n\nSet the tripod over the practice mark (35.727565, -78.697788) and level it carefully.\nMeasure and record the antenna height, and write down what you measured to. Emlid Flow applies the antenna phase center offset itself; you enter the height to the antenna reference point (bottom of the receiver on a tribrach, or the pole length if pole-mounted). A wrong antenna height puts a direct vertical error into every point collected today; it is the single most common way to lose vertical accuracy.\nConfirm open sky view. Record the satellite count and PDOP before starting.\nStart the raw log first: begin RINEX logging at 1 Hz on the base and leave it running all day. This log is post-processed against the NCRTN CORS in the Topic 3B lab (Method C), so it must cover the whole session. Note the start time.\nRecord Method A while still in Single mode: average the position for five minutes and record that autonomous coordinate. It is the deliberately wrong number the Topic 3B lab compares against.\nEstablish the base coordinate (Method B, which the lab compares against Methods A and C):\n\nConfigure the receiver as a rover in Emlid Flow and connect to the NCRTN NTRIP caster (rtn.nc.gov) with the VRS mountpoint.\nWait for FIX (not FLOAT, not SINGLE). Note satellites and correction age.\nOccupy the mark with a 1 to 2 minute averaged collection. This is the mark’s coordinate in NAD83(2011).\nSwitch to Base mode and enter that coordinate manually as the known position.\nStart broadcasting corrections over LoRa. From this point, do not reconfigure or restart the base: the rover crews and the running log both depend on it.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#rover-work-gcps-and-checkpoints",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#rover-work-gcps-and-checkpoints",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "Rover work: GCPs and checkpoints",
+    "text": "Rover work: GCPs and checkpoints\nProject settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542), geoid GEOID18, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, which is the older NAD83(HARN) realization; at this site the two realizations differ by about 2 cm horizontally, which is real money at checkpoint accuracy, so write down which one you used: stating the datum realization is part of the survey. Rover antenna height is the pole length; confirm it once and do not change the pole length during the day.\nGround control targets (3 to 5 points). Measure the center of each laid-out target with a 1 to 2 minute averaged FIX occupation. These are the only points that will be used to control the photogrammetric processing.\nCheckpoints (12 to 20 points). Everything else is withheld from processing and used to measure the accuracy of the final products. For each checkpoint:\n\nPick a point you will be able to find in the imagery at 2 to 3 cm resolution: pavement corners, the junction of sidewalk joints, a manhole edge, a paint mark. Avoid grass, gravel, and anything that moves.\nHold the pole plumb (the RS4 tilt compensation helps, but a steady pole is better), confirm FIX, and collect a 1 to 2 minute averaged occupation.\nPhotograph the point with the pole tip visible and note the point number on the field sheet.\nSpread the points across the whole flight block, including the edges and the full elevation range, and put several on smooth level ground (those serve the vertical assessment).\n\nRepeatability check. A second group re-occupies 3 to 5 of the earlier checkpoints without looking at the first group’s numbers. Agreement between independent occupations is the honest accuracy check, not the precision the software reports.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#what-to-upload-at-the-end-of-the-day",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#what-to-upload-at-the-end-of-the-day",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "What to upload at the end of the day",
+    "text": "What to upload at the end of the day\nTo the shared drive folder, same day:\n\nThe base RINEX log (stop logging, download from the receiver)\nThe Emlid Flow project CSV export (all points, both height types)\nThe Method A autonomous coordinate and the Method B surveyed coordinate, with antenna heights and times\nThe point photos, named by point number\nA photo of the field sheet",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#if-cell-coverage-drops",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#if-cell-coverage-drops",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "If cell coverage drops",
+    "text": "If cell coverage drops\nMethod B needs the NCRTN over a cell connection. If there is no coverage, skip step 6, keep the RINEX log from step 4 running, set the base to average its position in Single mode, and carry on collecting with LoRa corrections; the whole survey shifts onto the correct datum later, when the base RINEX is post-processed against the NCRTN CORS (the lab’s Method C). Nothing collected is lost; only the absolute coordinate arrives later.\n\n\n\n\n\n\nNoteInstructor checklist (before the trip)\n\n\n\n\n\n\nNCRTN RTK login tested in Emlid Flow on the actual field tablet, with a FIX obtained somewhere off campus\nNCRTN CORS download account working; know the nearest CORS station ID to Lake Wheeler\nRS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range\nFixed-height tripod parts complete; pole tip checked\nField sheets printed; GCP targets counted\nAfter the trip: derive the two lab files from the Emlid Flow export: checkpoints.csv with exactly name, easting, northing, height (EPSG:3358, orthometric) and checkpoints_full.csv with everything, marking re-occupations in the name\nAfter the trip: download the NCRTN CORS RINEX for the base session window and package it with the base RINEX log and the field-recorded Method A and B coordinates as base_bundle.zip\nAfter processing: upload the six product files, the two processing report PDFs, and base_bundle.zip to the GCS 091626/ folder under the names in _variables.yml\nAssign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line\n\n\n\n\nThe base-coordinate comparison (Methods A, B, and C) and the checkpoint validation of the flight products continue in the Topic 3B lab.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
     ]
   },
   {
@@ -2923,7 +3067,7 @@
     "href": "course/schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Schedule will be adjusted as needed during the semester.\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Due Date\n      \n      \n        Activity\n      \n      \n        Topic\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTopic\n\n\n\nActivity\n\n\n\nDescription\n\n\n\nDue Date\n\n\n\n\n\n\n\n\n8/17/26\n\n\nTopic 1A: UAS Basics\n\n\nLecture\n\n\nIntroduction to UAS\n\n\n \n\n\n\n\n\n\n8/19/26\n\n\nTopic 1A: UAS Basics\n\n\nLab\n\n\nAssignment 1A\n\n\n8/26/2026\n\n\n\n\n\n\n8/24/26\n\n\nTopic 1B: UAS Basics\n\n\nLecture\n\n\nRules and regulations for UAS operations\n\n\n \n\n\n\n\n\n\n8/24/26\n\n\nTopic 1B: UAS Basics\n\n\nLab\n\n\nAssignment 1B\n\n\n9/9/2026\n\n\n\n\n\n\n8/26/26\n\n\nTopic 1: UAS Basics\n\n\nAssignment Due\n\n\nAssignment 1A - UAS Basics Presentations\n\n\n8/26/2026\n\n\n\n\n\n\n8/31/26\n\n\nTopic 2A: Structure from Motion\n\n\nLecture\n\n\nPhotogrammetry and Structure from Motion concepts\n\n\n \n\n\n\n\n\n\n9/2/26\n\n\nTopic 2A: Structure from Motion\n\n\nLab\n\n\nAssignment 2A\n\n\n9/23/2026\n\n\n\n\n\n\n9/7/26\n\n\nLabor Day\n\n\nNo Class\n\n\nLabor Day - No Class\n\n\n \n\n\n\n\n\n\n9/9/26\n\n\nTopic 2B: Structure from Motion\n\n\nLecture\n\n\nImagery processing and Structure from Motion (SfM)\n\n\n \n\n\n\n\n\n\n9/9/26\n\n\nProject\n\n\nAssignment Due\n\n\nSubmit brief idea to the project discussions forum\n\n\n9/9/2026\n\n\n\n\n\n\n9/14/26\n\n\nTopic 3A: UAS Flight Planning\n\n\nLecture & Lab\n\n\nUAS Flight Planning\n\n\n \n\n\n\n\n\n\n9/14/26\n\n\nTopic 3A: UAS Flight Planning\n\n\nLab\n\n\nAssignment 3A\n\n\n9/30/2026\n\n\n\n\n\n\n9/16/26\n\n\nTopic 3: UAS Flight Planning\n\n\nField Trip\n\n\nUAS Flight at Lake Wheeler\n\n\n \n\n\n\n\n\n\n9/21/26\n\n\nTopic 2B: Structure from Motion\n\n\nLab\n\n\nAssignment 2B\n\n\n10/5/2026\n\n\n\n\n\n\n9/23/26\n\n\nTopic 2C: Structure from Motion\n\n\nLab\n\n\nAssignment 2C\n\n\n10/7/2026\n\n\n\n\n\n\n9/28/26\n\n\nTopic 4A: GIS Analytics\n\n\nLecture\n\n\nAnalysis of UAS data processing results\n\n\n \n\n\n\n\n\n\n9/28/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject proposal due\n\n\n9/28/2026\n\n\n\n\n\n\n9/29/26\n\n\nWellness Day\n\n\nNo Class\n\n\nWellness Day - No Class\n\n\n \n\n\n\n\n\n\n9/30/26\n\n\nTopic 4A: GIS Analytics\n\n\nLab\n\n\nAssignment 4A\n\n\n10/16/2026\n\n\n\n\n\n\n10/5/26\n\n\nTopic 4B: GIS Analytics\n\n\nLecture\n\n\nPoint cloud data analysis\n\n\n \n\n\n\n\n\n\n10/7/26\n\n\nTopic 4B: GIS Analytics\n\n\nLab\n\n\nAssignment 4B\n\n\n10/16/2026\n\n\n\n\n\n\n10/12/26\n\n\nTopic 5A: Advanced Analytics\n\n\nLecture\n\n\nUAS and lidar data: comparison, fusion and analysis\n\n\n \n\n\n\n\n\n\n10/14/26\n\n\nTopic 5A: Advanced Analytics\n\n\nLab\n\n\nAssignment 5A\n\n\n11/11/2026\n\n\n\n\n\n\n10/14/26\n\n\nTBD\n\n\nGuest Speaker\n\n\nTBD\n\n\n \n\n\n\n\n\n\n10/19/26\n\n\nFall Break\n\n\nNo Class\n\n\nFall Break (10/19-10/20) - No Class\n\n\n \n\n\n\n\n\n\n10/21/26\n\n\nTopic 5B: Advanced Analytics\n\n\nLecture\n\n\nAnalysis of multitemporal UAS data and its applications\n\n\n \n\n\n\n\n\n\n10/21/26\n\n\nTopic 5B: Advanced Analytics\n\n\nLab\n\n\nAssignment 5B\n\n\n11/11/2026\n\n\n\n\n\n\n10/21/26\n\n\nProject\n\n\nAssignment Due\n\n\nSubmit project progress report to the project discussions forum\n\n\n10/21/2026\n\n\n\n\n\n\n10/28/26\n\n\nTopic 6A: Machine Learning & AI\n\n\nLecture\n\n\nImage Classification\n\n\n \n\n\n\n\n\n\n11/4/26\n\n\nMidterm\n\n\nExam\n\n\nMidterm Exam\n\n\n11/6/2026\n\n\n\n\n\n\n11/9/26\n\n\nTopic 6A: Machine Learning & AI\n\n\nLab\n\n\nAssignment 6A\n\n\n11/30/2026\n\n\n\n\n\n\n11/11/26\n\n\nTopic 6B: Machine Learning & AI\n\n\nLecture\n\n\nChange Detection\n\n\n \n\n\n\n\n\n\n11/23/26\n\n\nProject\n\n\nProject\n\n\nWork on project\n\n\n \n\n\n\n\n\n\n11/25/26\n\n\nThanksgiving Break\n\n\nNo Class\n\n\nThanksgiving Break - No Class\n\n\n \n\n\n\n\n\n\n11/30/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject presentations\n\n\n11/30/2026\n\n\n\n\n\n\n12/1/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject presentations\n\n\n12/1/2026\n\n\n\n\n\n\n12/7/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject Report Due\n\n\n12/7/2026\n\n\n\n\n\n\nNo matching items\n\n  \n\n\nIf you are looking for what is the next step, here are some related courses."
+    "text": "Schedule will be adjusted as needed during the semester.\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Due Date\n      \n      \n        Activity\n      \n      \n        Topic\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTopic\n\n\n\nActivity\n\n\n\nDescription\n\n\n\nDue Date\n\n\n\n\n\n\n\n\n8/17/26\n\n\nTopic 1A: UAS Basics\n\n\nLecture\n\n\nIntroduction to UAS\n\n\n \n\n\n\n\n\n\n8/19/26\n\n\nTopic 1A: UAS Basics\n\n\nLab\n\n\nAssignment 1A\n\n\n8/26/2026\n\n\n\n\n\n\n8/24/26\n\n\nTopic 1B: UAS Basics\n\n\nLecture\n\n\nRules and regulations for UAS operations\n\n\n \n\n\n\n\n\n\n8/24/26\n\n\nTopic 1B: UAS Basics\n\n\nLab\n\n\nAssignment 1B\n\n\n9/9/2026\n\n\n\n\n\n\n8/26/26\n\n\nTopic 1: UAS Basics\n\n\nAssignment Due\n\n\nAssignment 1A - UAS Basics Presentations\n\n\n8/26/2026\n\n\n\n\n\n\n8/31/26\n\n\nTopic 2A: Structure from Motion\n\n\nLecture\n\n\nPhotogrammetry and Structure from Motion concepts\n\n\n \n\n\n\n\n\n\n9/2/26\n\n\nTopic 2A: Structure from Motion\n\n\nLab\n\n\nAssignment 2A\n\n\n9/23/2026\n\n\n\n\n\n\n9/7/26\n\n\nLabor Day\n\n\nNo Class\n\n\nLabor Day - No Class\n\n\n \n\n\n\n\n\n\n9/9/26\n\n\nTopic 2B: Structure from Motion\n\n\nLecture\n\n\nImagery processing and Structure from Motion (SfM)\n\n\n \n\n\n\n\n\n\n9/9/26\n\n\nProject\n\n\nAssignment Due\n\n\nSubmit brief idea to the project discussions forum\n\n\n9/9/2026\n\n\n\n\n\n\n9/14/26\n\n\nTopic 3A: UAS Flight Planning\n\n\nLecture & Lab\n\n\nUAS Flight Planning\n\n\n \n\n\n\n\n\n\n9/14/26\n\n\nTopic 3A: UAS Flight Planning\n\n\nLab\n\n\nAssignment 3A\n\n\n9/30/2026\n\n\n\n\n\n\n9/16/26\n\n\nTopic 3: UAS Flight Planning\n\n\nField Trip\n\n\nUAS Flight at Lake Wheeler (GNSS field protocol)\n\n\n \n\n\n\n\n\n\n9/21/26\n\n\nTopic 2B: Structure from Motion\n\n\nLab\n\n\nAssignment 2B\n\n\n10/5/2026\n\n\n\n\n\n\n9/23/26\n\n\nTopic 2C: Structure from Motion\n\n\nLab\n\n\nAssignment 2C\n\n\n10/7/2026\n\n\n\n\n\n\n9/28/26\n\n\nTopic 4A: GIS Analytics\n\n\nLecture\n\n\nAnalysis of UAS data processing results\n\n\n \n\n\n\n\n\n\n9/28/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject proposal due\n\n\n9/28/2026\n\n\n\n\n\n\n9/29/26\n\n\nWellness Day\n\n\nNo Class\n\n\nWellness Day - No Class\n\n\n \n\n\n\n\n\n\n9/30/26\n\n\nTopic 4A: GIS Analytics\n\n\nLab\n\n\nAssignment 4A\n\n\n10/16/2026\n\n\n\n\n\n\n10/5/26\n\n\nTopic 4B: GIS Analytics\n\n\nLecture\n\n\nPoint cloud data analysis\n\n\n \n\n\n\n\n\n\n10/7/26\n\n\nTopic 4B: GIS Analytics\n\n\nLab\n\n\nAssignment 4B\n\n\n10/16/2026\n\n\n\n\n\n\n10/12/26\n\n\nTopic 5A: Advanced Analytics\n\n\nLecture\n\n\nUAS and lidar data: comparison, fusion and analysis\n\n\n \n\n\n\n\n\n\n10/14/26\n\n\nTopic 5A: Advanced Analytics\n\n\nLab\n\n\nAssignment 5A\n\n\n11/11/2026\n\n\n\n\n\n\n10/14/26\n\n\nTBD\n\n\nGuest Speaker\n\n\nTBD\n\n\n \n\n\n\n\n\n\n10/19/26\n\n\nFall Break\n\n\nNo Class\n\n\nFall Break (10/19-10/20) - No Class\n\n\n \n\n\n\n\n\n\n10/21/26\n\n\nTopic 5B: Advanced Analytics\n\n\nLecture\n\n\nAnalysis of multitemporal UAS data and its applications\n\n\n \n\n\n\n\n\n\n10/21/26\n\n\nTopic 5B: Advanced Analytics\n\n\nLab\n\n\nAssignment 5B\n\n\n11/11/2026\n\n\n\n\n\n\n10/21/26\n\n\nProject\n\n\nAssignment Due\n\n\nSubmit project progress report to the project discussions forum\n\n\n10/21/2026\n\n\n\n\n\n\n10/26/26\n\n\nTopic 3B: UAS Flight Planning\n\n\nLecture\n\n\nGround control, checkpoints, and accuracy\n\n\n \n\n\n\n\n\n\n10/26/26\n\n\nTopic 3B: UAS Flight Planning\n\n\nLab\n\n\nAssignment 3B\n\n\n11/9/2026\n\n\n\n\n\n\n10/28/26\n\n\nTopic 6A: Machine Learning & AI\n\n\nLecture\n\n\nImage Classification\n\n\n \n\n\n\n\n\n\n11/4/26\n\n\nMidterm\n\n\nExam\n\n\nMidterm Exam\n\n\n11/6/2026\n\n\n\n\n\n\n11/9/26\n\n\nTopic 6A: Machine Learning & AI\n\n\nLab\n\n\nAssignment 6A\n\n\n11/30/2026\n\n\n\n\n\n\n11/11/26\n\n\nTopic 6B: Machine Learning & AI\n\n\nLecture\n\n\nChange Detection\n\n\n \n\n\n\n\n\n\n11/23/26\n\n\nProject\n\n\nProject\n\n\nWork on project\n\n\n \n\n\n\n\n\n\n11/25/26\n\n\nThanksgiving Break\n\n\nNo Class\n\n\nThanksgiving Break - No Class\n\n\n \n\n\n\n\n\n\n11/30/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject presentations\n\n\n11/30/2026\n\n\n\n\n\n\n12/1/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject presentations\n\n\n12/1/2026\n\n\n\n\n\n\n12/7/26\n\n\nProject\n\n\nAssignment Due\n\n\nProject Report Due\n\n\n12/7/2026\n\n\n\n\n\n\nNo matching items\n\n  \n\n\nIf you are looking for what is the next step, here are some related courses."
   },
   {
     "objectID": "course/topics/midterm/fall2025.html#report-format",
@@ -4352,7 +4496,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2a.html#direct-georeferencing-rtk-and-ppk",
     "title": "Photogrammetry and Structure from Motion Concepts",
     "section": "Direct georeferencing: RTK and PPK",
-    "text": "Direct georeferencing: RTK and PPK\n\n\n\n\n\n\n\n\n\nMethod\nCamera position accuracy\nGround control needed\nTypical use\n\n\n\n\nStandard GNSS geotags\n1 to 3 m\nYes, for any survey-grade product\nConsumer drones\n\n\nRTK (real-time corrections)\n1 to 3 cm\nFew; still use checkpoints\nSurvey platforms with a base station or network\n\n\nPPK (post-processed corrections)\n1 to 3 cm\nFew; still use checkpoints\nSame, more tolerant of radio dropouts\n\n\nGCPs only\nn/a\n5 or more, well distributed\nAny platform, extra field time\n\n\n\n\nEven with RTK/PPK: place a few checkpoints, and at least one GCP to fix any vertical offset, since camera accuracy is not the same as product accuracy\n\n\nThis closes the loop from Lecture 1A’s positioning slide. Accurate camera positions constrain the bundle adjustment nearly as well as ground control, which is why RTK drones cut field time so much. Two cautions: a constant vertical offset (antenna to sensor lever arm, geoid versus ellipsoid heights) is invisible without a ground point, and product accuracy can only be demonstrated with checkpoints. In North Carolina the base station can be the state’s real-time network.",
+    "text": "Direct georeferencing: RTK and PPK\n\n\n\n\n\n\n\n\n\nMethod\nCamera position accuracy\nGround control needed\nTypical use\n\n\n\n\nStandard GNSS geotags\n1 to 3 m\nYes, for any survey-grade product\nConsumer drones\n\n\nRTK (real-time corrections)\n1 to 3 cm\nFew; still use checkpoints\nSurvey platforms with a base station or network\n\n\nPPK (post-processed corrections)\n1 to 3 cm\nFew; still use checkpoints\nSame, more tolerant of radio dropouts\n\n\nGCPs only\nn/a\n5 or more, well distributed\nAny platform, extra field time\n\n\n\n\nEven with RTK/PPK: place a few checkpoints, and at least one GCP to fix any vertical offset, since camera accuracy is not the same as product accuracy\n\n\nThis closes the loop from Lecture 1A’s positioning slide. Topic 3B puts real numbers on this table with the class’s own checkpoint data. Accurate camera positions constrain the bundle adjustment nearly as well as ground control, which is why RTK drones cut field time so much. Two cautions: a constant vertical offset (antenna to sensor lever arm, geoid versus ellipsoid heights) is invisible without a ground point, and product accuracy can only be demonstrated with checkpoints. In North Carolina the base station can be the state’s real-time network.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -4499,11 +4643,128 @@
     ]
   },
   {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#task",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#task",
+    "title": "Assignment 3B",
+    "section": "Task",
+    "text": "Task\nMeasure the accuracy of the Lake Wheeler flight and decide what it can measure. You will establish the GNSS base coordinate three independent ways, evaluate the flight’s orthomosaic and DSM (processed in both Agisoft Metashape and WebODM) against the checkpoints collected at the field trip, report the accuracy in ASPRS Edition 2 terms (American Society for Photogrammetry and Remote Sensing 2024), and answer four measurement questions with arithmetic.\nThe checkpoints were withheld from processing, so this is an independent accuracy assessment: the honest kind (Sanz-Ablanedo et al. 2018). On-campus students collected this data with the Emlid Reach RS4 at the flight; distance education students work from the identical files and run the same analysis, including the GNSS post-processing.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#data",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#data",
+    "title": "Assignment 3B",
+    "section": "Data",
+    "text": "Data\nAll files are from the Fall 2026 flight (September 16) at Lake Wheeler:\n\nOrthomosaic, Metashape and DSM, Metashape (EPSG:3358)\nOrthomosaic, WebODM and DSM, WebODM (also EPSG:3358; if a download reports a different CRS, r.import reprojects it on the way in)\nCheckpoints: the withheld points, exactly four columns in this order: name, easting, northing, height (EPSG:3358, orthometric). This is the file the GRASS commands below expect\nCheckpoints, full: the complete field export with ellipsoidal heights, occupation metadata, and the repeatability re-occupations; used only in the “Report the accuracy” step\nBase station bundle: base RINEX log, the NCRTN CORS RINEX for the same window, and the Method A and B coordinates recorded in the field\nProcessing reports: Metashape and WebODM (PDF); Parts 2 and 3 read numbers out of both\n\n\n\n\n\n\n\nNote\n\n\n\nThe orthomosaics are large. They are cloud-optimized GeoTIFFs, so for the horizontal digitizing you can stream them without downloading: in QGIS add the URL prefixed with /vsicurl/, or in GRASS pass the same /vsicurl/ URL to r.import. The DSMs and reports are small enough to download directly.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#software",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#software",
+    "title": "Assignment 3B",
+    "section": "Software",
+    "text": "Software\n\nEmlid Studio (free, Windows and macOS) or RTKLIB (free; the RTKPOST GUI is Windows, the command-line tools run everywhere) for Part 1. In either tool, if the solution stays FLOAT, restrict processing to the middle hour of the log\nGRASS 8.5 (or QGIS) for Parts 2 and 3",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#part-1-the-base-coordinate-three-ways",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#part-1-the-base-coordinate-three-ways",
+    "title": "Assignment 3B",
+    "section": "Part 1: The base coordinate, three ways",
+    "text": "Part 1: The base coordinate, three ways\nEvery checkpoint inherits the base station coordinate, so the survey is only as good as that one position. The field protocol recorded it three ways; you compare them.\n\nMethod A (autonomous average): the five-minute Single-mode average recorded in the field. No correction source. Read it from the field records.\nMethod B (NCRTN VRS): the real-time network solution collected before the base started broadcasting. Read it from the field records.\nMethod C (static post-processing): compute it yourself. In Emlid Studio, use the Static workflow with the base RINEX as the rover input and the NCRTN CORS file as the base; use the CORS station’s published coordinate as the known base position with an antenna height of 0 m (the CORS values are already at the antenna reference point), enter your base receiver’s antenna height from the field sheet, then process and record the solved coordinate in NAD83(2011). In RTKLIB, the same files go through RTKPOST with positioning mode set to Static; the remaining defaults are fine.\n\nThen:\n\nPut the three coordinates in one table (easting, northing, ellipsoidal height, and the differences from Method C).\nMethod A should sit meters away; Methods B and C should agree within a few centimeters. State which axis disagrees most and why vertical is the weak axis.\nAnswer: if the base had broadcast the Method A coordinate all day, what error would every checkpoint carry, and could any later processing remove it?",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#part-2-validate-the-products",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#part-2-validate-the-products",
+    "title": "Assignment 3B",
+    "section": "Part 2: Validate the products",
+    "text": "Part 2: Validate the products\n\nVertical\nImport a DSM and the checkpoints into GRASS and compute the residuals at each checkpoint. The v.* tools below are the vector siblings of the raster tools you used in Topics 2 and 3 and will be new; run the commands one at a time and read what each prints:\n# in a GRASS project in EPSG:3358\nr.import input=dsm_metashape.tif output=dsm_metashape\nv.in.ascii input=checkpoints.csv output=checkpoints separator=comma skip=1 \\\n    x=2 y=3 z=4 columns=\"name text, e double precision, n double precision, h double precision\"\ng.region raster=dsm_metashape\nv.what.rast map=checkpoints raster=dsm_metashape column=dsm_z\nv.db.addcolumn map=checkpoints columns=\"dz double precision, dz2 double precision\"\nv.db.update map=checkpoints column=dz query_column=\"dsm_z - h\"\nv.db.update map=checkpoints column=dz2 query_column=\"dz * dz\"\nv.db.univar map=checkpoints column=dz     # mean error: is the surface biased?\nv.db.univar map=checkpoints column=dz2    # RMSE_V1 = sqrt of the mean of dz2\nRepeat for the WebODM DSM. For each product:\n\nRMSEV1: the square root of the mean of dz2.\nMean error: from the dz statistics. The blunder rule: the standard screens at 3 x the project’s target RMSE; this lab sets no target class, so flag any checkpoint with |dz| beyond 3 x the RMSEV1 you just computed, investigate it, and recompute after excluding confirmed blunders; a mean error above 25 percent of the RMSE points at a systematic bias, not noise (American Society for Photogrammetry and Remote Sensing 2024).\nMap the residuals (v.colors on dz, over the orthomosaic): is the error spatially structured (edges, one corner, a dome) or salt and pepper?\n\n\n\nHorizontal\nPick at least 8 photo-identifiable checkpoints, digitize their positions on each orthomosaic (in QGIS: a new point layer with the ortho as basemap; in GRASS: right-click the map in the Layer Manager and choose Digitize), and compute for each the offsets to the surveyed coordinates. RMSEH is the square root of the mean of (de2 + dn2).\n\n\nReport the accuracy\n\nRMSEV2 and RMSEH2 (the ruler): estimate the checkpoint survey accuracy from the repeatability re-occupations in the full checkpoint file (the RMS of the differences between independent occupations, divided by sqrt 2).\nCombine in quadrature: reported RMSEV = sqrt(RMSEV12 + RMSEV22), and the same for horizontal.\nWrite the accuracy statement in Edition 2 language, including the checkpoint count and the Section 7.16.1 wording for a sample below 30 (American Society for Photogrammetry and Remote Sensing 2024).",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#part-3-what-can-this-flight-measure",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#part-3-what-can-this-flight-measure",
+    "title": "Assignment 3B",
+    "section": "Part 3: What can this flight measure?",
+    "text": "Part 3: What can this flight measure?\n\nCompute the level of detection for a repeat of this flight at the same quality: LoD = 2.8 x your sigma-z (use RMSEV).\nRule, with numbers, on each question:\n\nCounting the trees along the field edge\nMeasuring canopy height to 0.5 m (Grybas and Congalton 2022)\nDetecting a 30 cm deep gully after a storm\nQuantifying 2 cm of sheet erosion across the field\n\nFill in a comparison table for both tools, adapted from the lecture’s “two dialects” table by dropping the overlap and camera model rows and adding processing time: GSD, aligned images and coverage, camera position error, control fit, checkpoint RMSE (yours, from Part 2), and processing time.\nOne paragraph: which product would you hand to a client, and what would you change about the flight or the control to halve the LoD (James and Robson 2014; Stott et al. 2020)?",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#report",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#report",
+    "title": "Assignment 3B",
+    "section": "Report",
+    "text": "Report\nPrepare a report (4 to 6 pages including figures): the base coordinate table and discussion (Part 1); the validation methods, residual maps, and the Edition 2 accuracy statement for both products (Part 2); the LoD arithmetic, the four verdicts, the filled comparison table, and the closing paragraph (Part 3).",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#submission",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#submission",
+    "title": "Assignment 3B",
+    "section": "Submission",
+    "text": "Submission\nUpload to Moodle, Assignment 3B:\n\nYour report as a PDF.\nYour checkpoint residual table (CSV export) for both products.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#grading",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#grading",
+    "title": "Assignment 3B",
+    "section": "Grading",
+    "text": "Grading\n\nBase coordinate: all three methods reported with a correct reading of what the comparison shows.\nValidation: residuals computed correctly, blunder and bias checks applied, quadrature carried, accuracy stated in Edition 2 terms with the small-sample wording.\nResidual maps and table: the residual maps show spatial structure or its absence and are interpreted; the checkpoint residual CSV for both products is included.\nMeasurability: the LoD is computed from the student’s own RMSEV and the four verdicts follow from it, not from the lecture’s example.\nInterpretation: the comparison table is filled and the closing paragraph ties changes to mechanisms from the lectures.\nOn-time submission.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3B"
+    ]
+  },
+  {
     "objectID": "course/topics/topic_3_flight_planning/index.html#content",
     "href": "course/topics/topic_3_flight_planning/index.html#content",
     "title": "Topic 3: UAS Flight Planning",
     "section": "Content",
-    "text": "Content\n\n3A: UAS Flight Planning",
+    "text": "Content\n\n3A: UAS Flight Planning\n3B: Ground control, checkpoints, and accuracy",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning"
@@ -4514,7 +4775,7 @@
     "href": "course/topics/topic_3_flight_planning/index.html#slides",
     "title": "Topic 3: UAS Flight Planning",
     "section": "Slides",
-    "text": "Slides\n\nLecture 3A: UAS Flight Planning",
+    "text": "Slides\n\nLecture 3A: UAS Flight Planning\nLecture 3B: Ground Control, Checkpoints, and Accuracy",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning"
@@ -4525,70 +4786,381 @@
     "href": "course/topics/topic_3_flight_planning/index.html#assignments",
     "title": "Topic 3: UAS Flight Planning",
     "section": "Assignments",
-    "text": "Assignments\n\nAssignment 3A: Terrain analysis of the flight site using GIS tools",
+    "text": "Assignments\n\nAssignment 3A: Terrain analysis of the flight site using GIS tools\nAssignment 3B: Validate the Lake Wheeler flight",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning"
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#outline",
-    "title": "UAS Flight Planning",
+    "objectID": "course/topics/topic_3_flight_planning/index.html#reference",
+    "href": "course/topics/topic_3_flight_planning/index.html#reference",
+    "title": "Topic 3: UAS Flight Planning",
+    "section": "Reference",
+    "text": "Reference\n\nGNSS Field Protocol: Base Station and Checkpoints",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#objectives",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#objectives",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Objectives",
+    "text": "Objectives\n\nExplain the relationship between flight GSD and the horizontal and vertical accuracy a UAS survey can actually achieve\nDesign ground control and checkpoint schemes, and defend the difference between the two\nChoose between GCP-based and RTK/PPK georeferencing, and know what each still needs\nRead an Agisoft and a WebODM processing report and state the accuracy of the products with the right numbers\nDecide, with arithmetic, whether a given flight can answer a given question: counting trees or measuring millimeters of erosion\n\n\nThis is the accuracy lecture the SfM topic has been pointing at since Topic 2: 2A said checkpoints are the honest number, 2B said quote the checkpoint RMSE, and today is where those numbers come from and what they permit. Everything is anchored to the reports students produced themselves in Assignments 2B and 2C and to the checkpoint data collected with the Emlid rover at the Lake Wheeler flight. The lab runs the full validation on the flight’s own products.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-report-number-is-not-the-accuracy",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-report-number-is-not-the-accuracy",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "The report number is not the accuracy",
+    "text": "The report number is not the accuracy\nA worked example straight from the ASPRS standard (American Society for Photogrammetry and Remote Sensing 2024):\n\nYour DSM fits the checkpoints with RMSEV1 = 1 cm. The report says so.\nThe checkpoints themselves were surveyed with an RTK rover: RMSEV2 = 2 cm.\nThe accuracy you may claim is the quadrature sum:\n\n\\[\\text{RMSE}_V = \\sqrt{1^2 + 2^2} = 2.24 \\text{ cm}\\]\n\nEdition 2 rule: checkpoint survey error can no longer be ignored; reported accuracy includes it. Your product is never more accurate than the ruler you measured it with\n\n\nOpen with the arithmetic because it reframes the whole hour: the software prints a fit, not an accuracy. Edition 1 dodged this by requiring checkpoints three times better than the product, so their error was negligible; Edition 2 relaxed that to two times and made you carry the term instead. For our lab the rover repeatability from the field day is RMSE V2. This is also the first appearance of the lecture’s habit: every accuracy claim must say what it was measured against and how good the ruler was.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-gsd-buys-you",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-gsd-buys-you",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "What GSD buys you",
+    "text": "What GSD buys you\n\nSection one: the floor that pixel size sets, and why you rarely stand on it.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#gsd-sets-a-floor-not-the-accuracy",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#gsd-sets-a-floor-not-the-accuracy",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "GSD sets a floor, not the accuracy",
+    "text": "GSD sets a floor, not the accuracy\n\n\n\n\n\n\n\n\n\n\nBest case (strong control, good geometry)\nFlat terrain envelope\nComplex terrain envelope\n\n\n\n\nHorizontal RMSE\nabout 1 x GSD (asymptote 0.66 x)\n1 to 3 x GSD\n1 to 7 x GSD\n\n\nVertical RMSE\n1.5 to 2 x GSD\n1 to 4.5 x GSD\n1.5 to 5 x GSD\n\n\n\n\nEnvelope columns from Jiménez-Jiménez et al. (2021); best-case column from Sanz-Ablanedo et al. (2018)\nVertical error runs about 2.5 x the horizontal error, consistently (Sanz-Ablanedo et al. 2018)\nVertical never reaches 1 x GSD, no matter how much control you add\nWith uncorrected navigation-grade georeferencing, errors reach meters, tens of GSD or more: the pixel size stops mattering entirely\n\n\nThe envelope is Jimenez-Jimenez et al. 2021; the asymptotes are Sanz-Ablanedo et al. 2018, from 3465 GCP combinations over a 1200 ha block. Teach the multipliers as a band, not a constant: the gap between the floor (1x) and what you get is governed by georeferencing and systematic error, not pixel size. Ask the class: your Lake Wheeler flight had roughly 2 to 3 cm GSD; what vertical accuracy should they predict before the lab? Write the predictions down; the lab checks them.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#planning-with-gsd",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#planning-with-gsd",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Planning with GSD",
+    "text": "Planning with GSD\n\nASPRS recommends source imagery GSD of 0.5 to 1.0 x the target horizontal accuracy class: a 5 cm class wants 2.5 to 5 cm GSD (American Society for Photogrammetry and Remote Sensing 2024)\nRead backwards: expect RMSEH of 1 to 2 x GSD from a well-run project\nThe standard is explicit that this is a planning heuristic, not an accuracy statement\n\n\nWorkflow: start from what you must measure, derive the accuracy that requires, derive the GSD, and only then the flying height (the Topic 3A formula)\n\n\nThis connects 3A’s GSD formula to a requirement instead of a preference. The design direction runs measurement to accuracy to GSD to altitude, never the other way. The standard’s own caveat is worth quoting: the table should not be used to reference product accuracy. It tells you what to fly, not what you achieved.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#ground-control",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#ground-control",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Ground control",
+    "text": "Ground control\n\nSection two: how many points, where, and the difference between the points you fit and the points you judge with.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#how-many-gcps-and-where",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#how-many-gcps-and-where",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "How many GCPs, and where",
+    "text": "How many GCPs, and where\n\nCount in flight units: about 3 to 4 GCPs per 100 photos; below 1 per 100 accuracy degrades fast (Sanz-Ablanedo et al. 2018)\nHorizontal stops improving past about 3 per 100; vertical keeps improving to about 4 per 100\nDistribution beats count: an even triangular spread is twice as accurate as a poor layout with the same number\nEdge coverage first, then an even interior; more points past that buy better error structure, not lower RMSE (Dai et al. 2023)\n\n\nThe per-100-photos rule travels better than per-hectare rules because it scales with overlap and altitude automatically. Dai et al. 2023 is the modern synthesis: after the first few GCPs, RMSE barely moves but the spatial autocorrelation of the residual error keeps improving, which matters for differencing. Our 9/16 field design (3 to 5 targets on a 78-photo class of flight) sits right on the recommended density.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#control-is-not-validation",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#control-is-not-validation",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Control is not validation",
+    "text": "Control is not validation\n\n\n\nGCPs (control): used in the bundle adjustment; the model is fitted to them\n\n\nCheckpoints: surveyed the same way, withheld from processing entirely; the model is judged against them\n\n\n\nError reported on control points overstates accuracy by 3 x (dense control) to 4 to 8 x (sparse control) (Sanz-Ablanedo et al. 2018)\nThe adjustment was told to fit those points; their residuals are a statement about the fit, not the map\nASPRS: checkpoints must be independent, excluded from the aerial triangulation, and away from any GCP (American Society for Photogrammetry and Remote Sensing 2024)\n\n\n\nThe 3 to 8 times overestimation is the single most important number in this section, and it is why the field protocol withheld most of the surveyed points. If students remember one distinction from today, it is this one; the midterm will ask it.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#rtk-ppk-and-what-they-still-need",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#rtk-ppk-and-what-they-still-need",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "RTK, PPK, and what they still need",
+    "text": "RTK, PPK, and what they still need\n\nSection three: direct georeferencing moved the field in the last five years; here is the current state and the honest recipe.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#direct-georeferencing-today",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#direct-georeferencing-today",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Direct georeferencing today",
+    "text": "Direct georeferencing today\n\n\n\n\n\n\n\nEvidence\nResult\n\n\n\n\nASPRS Addendum V (American Society for Photogrammetry and Remote Sensing 2024)\nPPK reaches 1 to 2 cm horizontal, 2 to 4 cm vertical “when used properly”; RTK typically 5 to 10 cm\n\n\nRTK aircraft, zero GCPs, purpose-built flight (Stott et al. 2020)\nVertical RMSE 6.6 cm over 2 km of river; adding 5 GCPs did not improve it\n\n\nPPK versus GCP workflows (Zhang et al. 2019)\nPPK matched GCP-workflow accuracy (MAE about 2 cm, RMSE about 3 cm); some missions carried a vertical bias that one GCP removed, improving vertical accuracy 20 to 30 percent\n\n\nRepeat surveys (Nota et al. 2022)\nCo-alignment of epochs gives sub-2 cm relative accuracy; ground control in at least one epoch still anchors absolute Z\n\n\n\n\nStott’s caveat is the teaching point: the zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir. Against the sparse target checkpoints, vertical errors still clustered spatially up to 0.14 m even though the dense validation found no consistent systematic error, so distributed checkpoints stayed mandatory. Zhang’s one-GCP result is the canonical citation for the vertical bias fix: the bias is near constant, so one known point kills it. Nota matters for the change-detection topic later: co-align the epochs and put control in one of them.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-2026-recipe-and-the-standards-caution",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-2026-recipe-and-the-standards-caution",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "The 2026 recipe, and the standard’s caution",
+    "text": "The 2026 recipe, and the standard’s caution\n\nDefensible default: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint\n\n\nThe ASPRS standard is more conservative: GCPs remain “highly recommended” and should take priority over airborne positions in the adjustment, because camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations (American Society for Photogrammetry and Remote Sensing 2024)\nBoth are right: the journal results are conditional on strong flight geometry; the standard writes for contracts and courts\n\n\nPresent the tension honestly instead of resolving it: recent peer-reviewed results justify the light-control recipe when the flight design is strong; the standard assumes you must defend the number to a client. A student consultant should know both positions and say which regime they are operating in. Our lab uses the recipe: 3 targets as control, everything else checkpoints.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-receiver-in-your-hands",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-receiver-in-your-hands",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "The receiver in your hands",
+    "text": "The receiver in your hands\n\nBase within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna (Famiglietti et al. 2021); the price gap between those two bases is roughly an order of magnitude\nAntenna beats receiver: a low-cost dual-frequency board matched geodetic instruments in network RTK only when paired with a geodetic-grade antenna; with a patch antenna it needed open sky (Janos and Kuras 2021)\nThe base coordinate governs absolute accuracy: the rover measures centimeters relative to the base, and every point inherits the base position (the field protocol’s Methods A, B, and C)\n\n\nNo peer-reviewed RS4 study exists yet: our own field data, RS4 against the NCRTN, is genuinely publishable\n\n\nThis slide connects the literature to the hardware students actually held. The Famiglietti comparison is the honest Emlid-class citation; the receivers have since improved. The publishable-gap card is real: nobody has published an RS4-versus-state-RTN evaluation, and the class dataset is a credible short note. Recruit interest for it here.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#systematic-error",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#systematic-error",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Systematic error",
+    "text": "Systematic error\n\nSection four: the error that does not average away, and that differencing cannot forgive.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#doming",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#doming",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Doming",
+    "text": "Doming\n\nNadir-only image blocks with self-calibration cannot separate radial lens distortion from surface shape\nCamera orientations off parallel by only 2 degrees produce a dome of about 0.2 m over 100 m (James and Robson 2014)\nFixes, in order of power: a known camera model with self-calibration off; oblique imagery (practical plans cut the deformation by one to two orders of magnitude; a convergent orbit reached under 2 mm in simulation); two flying heights; well-distributed control\nThe best camera angles in the tested 0 to 35 degree range were 20 to 35 degrees, worth nearly 50 percent better accuracy in high relief (Nesbit and Hugenholtz 2019)\nCaution: a gently tilted camera (under 15 degrees) can make things worse by exciting a different distortion correlation, especially on consumer wide-angle cameras with onboard lens correction (James et al. 2020)\n\n\nRecall the pitfalls table from 2A; here is the mechanism and the numbers. The 2020 caveat is the one practitioners miss: the popular “just tilt the camera a bit” advice backfires below 15 degrees on exactly the cameras students fly. More overlap, incidentally, does not fix doming; James et al. 2020 showed relative insensitivity to overlap, a common myth.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#why-systematic-error-is-the-enemy",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#why-systematic-error-is-the-enemy",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Why systematic error is the enemy",
+    "text": "Why systematic error is the enemy\n\nRandom error averages away in aggregates; a 2 cm systematic bias does not\nIn modern change detection, propagated uncertainty is dominated by low-magnitude, spatially correlated or systematic error, not by point precision (Anderson 2019)\nA noisy point cloud is a smaller problem than a quiet dome\n\n\nBlunder rule (American Society for Photogrammetry and Remote Sensing 2024): any checkpoint discrepancy beyond 3 x the target RMSE is a blunder to investigate, not average in; mean error should stay under 25 percent of the target RMSE\n\n\nThe mean-error rule is the practical doming detector in a report: a mean checkpoint error far from zero, or a mean above a quarter of the RMSE, says the surface is biased, not noisy. Students apply exactly this test to their DSM residuals in the lab.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#reading-the-reports",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#reading-the-reports",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Reading the reports",
+    "text": "Reading the reports\n\nSection five: the week’s stated purpose. Bring up the students’ own 2B and 2C reports side by side on screen for this section; the slides give the map, the reports give the territory.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-same-facts-two-dialects",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-same-facts-two-dialects",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "The same facts, two dialects",
+    "text": "The same facts, two dialects\n\n\n\n\n\n\n\n\nQuantity\nAgisoft Metashape report\nWebODM quality report\n\n\n\n\nGSD\nSurvey Data: ground resolution\nOverview: average GSD\n\n\nCoverage and photos\nSurvey Data: coverage area, aligned images\nOverview: area, reconstructed images\n\n\nOverlap\nCamera locations and image overlap figure\nSurvey Data overlap heatmap\n\n\nCamera model\nCalibrated values with uncertainties and residual plot\nCamera parameters, per-band\n\n\nCamera position error\nCamera Locations table: X, Y, Z error\nGPS/geolocation details, 3D errors\n\n\nControl fit\nGround Control Points table: control RMSE\nGCP errors section (when GCPs used)\n\n\nCheckpoint error\nCheck Points rows in the same table\nAbsent unless checkpoints were declared\n\n\n\n\nWalk each row on the projector with a real pair of reports. Two traps to name: both tools print camera-position errors that students mistake for map accuracy, and WebODM only reports what it was given, so a project processed without declared checkpoints reports no independent accuracy at all, which does not mean the map is accurate. The lab’s comparison table is this slide filled in with their numbers.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-neither-report-tells-you",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-neither-report-tells-you",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "What neither report tells you",
+    "text": "What neither report tells you\n\nWhether the checkpoints were independent (the software trusts your labeling)\nThe survey accuracy of the control and checkpoints, so neither can do the quadrature for you\nWhether the error is spatially structured: a mean near zero can hide a dome that cancels\nAnything about the parts of the site with no checkpoints at all\n\n\nReport vocabulary (American Society for Photogrammetry and Remote Sensing 2024): report RMSEH and RMSEV (RMSE3D if asked); the old 95 percent confidence reporting is gone from Edition 2; 30 checkpoints is the standard’s minimum for a statistical claim, and Section 7.16.1 gives the honest wording when, as in a class lab, you have fewer\n\n\nSection 7.16.1 matters for every project the students will run this decade: small sites cannot afford 30 checkpoints, and the standard’s answer is truth in reporting rather than silence: report the RMSE, state the checkpoint count, and do not claim the statistical confidence the sample cannot support. The lab report requires exactly that sentence.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-can-you-measure",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-can-you-measure",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "What can you measure",
+    "text": "What can you measure\n\nSection six: the payoff. The same flight either answers the question or it does not, and the arithmetic decides.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-level-of-detection",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-level-of-detection",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "The level of detection",
+    "text": "The level of detection\nFor change between two surveys of similar quality, at 95 percent confidence:\n\\[\\text{LoD} = 1.96 \\sqrt{\\sigma_{z1}^2 + \\sigma_{z2}^2} \\approx 2.8\\,\\sigma_z\\]\nWorked example for a good flight: 3 cm GSD, strong control, so \\(\\sigma_z \\approx\\) 1.5 to 2 x GSD \\(\\approx\\) 5 cm:\n\\[\\text{LoD} \\approx 2.8 \\times 5 \\text{ cm} \\approx 14 \\text{ cm}\\]\n\nA 30 cm gully clears the threshold; 2 cm of sheet erosion is invisible\nThresholding is for gross change only; it biases net change, where random errors already cancel (Anderson 2019)\nSpatially variable LoD can exclude from a quarter to more than half of observed volumetric change (Wheaton et al. 2010)\n\n\nThe LoD arithmetic is the lecture’s destination: every accuracy number from the previous fifty minutes exists to be plugged in here. Wheaton’s Feshie numbers (24 to 31 percent of change excluded in dry years, 57 to 59 in wet) show the price of thresholding; Anderson’s correction says when to pay it: gross change yes, net change no, and error propagation is not thresholding. Zhang et al. 2019 reached sub-5 cm detection thresholds with PPK flights below 45 m, which is what chasing micro-topography actually requires.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#trees-or-erosion",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#trees-or-erosion",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Trees or erosion",
+    "text": "Trees or erosion\n\n\n\n\n\n\n\n\nQuestion\nBinding constraint\nVerdict at 3 cm GSD, 5 cm sigma-z\n\n\n\n\nCount the trees\nDetection in the orthomosaic\nEasy; accuracy barely matters\n\n\nMeasure canopy height\nCanopy and ground surfaces, not GSD: flying height 80 to 120 m showed no significant effect on tree height RMSE (1.8 to 3.2 m) (Grybas and Congalton 2022)\nExpect meters of error regardless of pixel size\n\n\nDetect a 30 cm rill or gully\nLoD about 14 cm\nYes, cleanly\n\n\nQuantify 2 cm sheet erosion\nLoD, dominated by systematic error\nNo; needs sub-2 cm sigma-z, near-ground flights, and bias control\n\n\n\n\nThe asymmetry is the thesis of the whole topic: for trees the limiting error lives in the canopy and the terrain model underneath it, so buying more GSD buys nothing; for micro-topography the limiting error is exactly the accuracy chain this lecture built, and every link (base coordinate, control, calibration, systematic bias) shows up in the final LoD. Students argue these verdicts with their own numbers in the lab’s part three.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#key-terms",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#key-terms",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Key terms",
+    "text": "Key terms\n\n\n\nCheckpoint: surveyed, withheld, judges the map; also called check point, validation point, independent test point\n\n\nDirect georeferencing: camera positions from RTK or PPK doing the work of control; also called GNSS-aided or GCP-free\n\n\nLevel of detection (LoD): the smallest elevation change distinguishable from error at a stated confidence\n\n\n\nDoming: broad systematic DEM deformation from the self-calibration ambiguity; also called bowling when inverted\n\n\nRMSEH, RMSEV, RMSE3D: Edition 2’s reporting quantities, replacing RMSEx/RMSEy/RMSEz and the 95 percent statistics\n\n\nQuadrature: accuracies add as the square root of summed squares; the product carries the checkpoint survey error\n\n\n\nThe synonym lists matter because students will search the literature and hit every variant. This is midterm vocabulary.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#wrap-up",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#wrap-up",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Wrap-up",
+    "text": "Wrap-up\n\nAssignment 3B: Validate the Lake Wheeler flight: establish the base coordinate three ways, evaluate the flight’s orthomosaic and DSM against the checkpoints you collected, and rule on what the flight can measure\n\n\nMidterm 11/4: the control versus checkpoint distinction, the quadrature rule, and the LoD arithmetic are all fair game\n\n\nRecap the chain: GSD sets the floor, georeferencing and systematic error set the distance above it, checkpoints measure that distance honestly, the quadrature keeps the claim honest, and the LoD converts the whole chain into a yes or no about the question you actually care about. The lab data is their own field work from 9/16, which is the point.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#references",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#references",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "References",
+    "text": "References\n\n\nAmerican Society for Photogrammetry and Remote Sensing. 2024. ASPRS Positional Accuracy Standards for Digital Geospatial Data, Edition 2, Version 2. American Society for Photogrammetry; Remote Sensing. https://publicdocuments.asprs.org/PositionalAccuracyStd-Ed2-V2.\n\n\nAnderson, Scott W. 2019. “Uncertainty in Quantitative Analyses of Topographic Change: Error Propagation and the Role of Thresholding.” Earth Surface Processes and Landforms 44 (5): 1015–33. https://doi.org/10.1002/esp.4551.\n\n\nDai, Wen, Ruibo Qiu, Bo Wang, et al. 2023. “Enhancing UAV-SfM Photogrammetry for Terrain Modeling from the Perspective of Spatial Structure of Errors.” Remote Sensing 15 (17): 4305. https://doi.org/10.3390/rs15174305.\n\n\nFamiglietti, Nicola Angelo, Gianpaolo Cecere, Carmine Grasso, Antonino Memmolo, and Annamaria Vicari. 2021. “A Test on the Potential of a Low Cost Unmanned Aerial Vehicle RTK/PPK Solution for Precision Positioning.” Sensors 21 (11): 3882. https://doi.org/10.3390/s21113882.\n\n\nGrybas, Heather, and Russell G. Congalton. 2022. “Evaluating the Impacts of Flying Height and Forward Overlap on Tree Height Estimates Using Unmanned Aerial Systems.” Forests 13 (9): 1462. https://doi.org/10.3390/f13091462.\n\n\nJames, Mike R., Gilles Antoniazza, Stuart Robson, and Stuart N. Lane. 2020. “Mitigating Systematic Error in Topographic Models for Geomorphic Change Detection: Accuracy, Precision and Considerations Beyond Off-Nadir Imagery.” Earth Surface Processes and Landforms 45 (10): 2251–71. https://doi.org/10.1002/esp.4878.\n\n\nJames, Mike R., and Stuart Robson. 2014. “Mitigating Systematic Error in Topographic Models Derived from UAV and Ground-Based Image Networks.” Earth Surface Processes and Landforms 39 (10): 1413–20. https://doi.org/10.1002/esp.3609.\n\n\nJanos, Daniel, and Przemysław Kuras. 2021. “Evaluation of Low-Cost GNSS Receiver Under Demanding Conditions in RTK Network Mode.” Sensors 21 (16): 5552. https://doi.org/10.3390/s21165552.\n\n\nJiménez-Jiménez, Sergio Iván, Waldo Ojeda-Bustamante, Mariana de Jesús Marcial-Pablo, and Juan Enciso. 2021. “Digital Terrain Models Generated with Low-Cost UAV Photogrammetry: Methodology and Accuracy.” ISPRS International Journal of Geo-Information 10 (5): 285. https://doi.org/10.3390/ijgi10050285.\n\n\nNesbit, Paul Ryan, and Christopher H. Hugenholtz. 2019. “Enhancing UAV-SfM 3D Model Accuracy in High-Relief Landscapes by Incorporating Oblique Images.” Remote Sensing 11 (3): 239. https://doi.org/10.3390/rs11030239.\n\n\nNota, E. W., W. Nijland, and T. de Haas. 2022. “Improving UAV-SfM Time-Series Accuracy by Co-Alignment and Contributions of Ground Control or RTK Positioning.” International Journal of Applied Earth Observation and Geoinformation 109: 102772. https://doi.org/10.1016/j.jag.2022.102772.\n\n\nSanz-Ablanedo, Enoc, Jim H. Chandler, José Ramón Rodríguez-Pérez, and Celestino Ordóñez. 2018. “Accuracy of Unmanned Aerial Vehicle (UAV) and SfM Photogrammetry Survey as a Function of the Number and Location of Ground Control Points Used.” Remote Sensing 10 (10): 1606. https://doi.org/10.3390/rs10101606.\n\n\nStott, Eilidh, Richard D. Williams, and Trevor B. Hoey. 2020. “Ground Control Point Distribution for Accurate Kilometre-Scale Topographic Mapping Using an RTK-GNSS Unmanned Aerial Vehicle and SfM Photogrammetry.” Drones 4 (3): 55. https://doi.org/10.3390/drones4030055.\n\n\nWheaton, Joseph M., James Brasington, Stephen E. Darby, and David A. Sear. 2010. “Accounting for Uncertainty in DEMs from Repeat Topographic Surveys: Improved Sediment Budgets.” Earth Surface Processes and Landforms 35 (2): 136–56. https://doi.org/10.1002/esp.1886.\n\n\nZhang, He, Emilien Aldana-Jague, François Clapuyt, Florian Wilken, Veerle Vanacker, and Kristof Van Oost. 2019. “Evaluating the Potential of Post-Processing Kinematic (PPK) Georeferencing for UAV-Based Structure-from-Motion (SfM) Photogrammetry and Surface Change Detection.” Earth Surface Dynamics 7 (3): 807–27. https://doi.org/10.5194/esurf-7-807-2019.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#outline",
+    "href": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#outline",
+    "title": "Ground control, checkpoints, and accuracy",
     "section": "Outline",
-    "text": "Outline\n\nDefining the data collection purpose\nSurvey area, take off and landing locations\nTerrain and weather conditions\nSafe flight\nFlight parameters\nFlight planning and management platforms",
+    "text": "Outline\n\nWhat flight GSD buys you: the floor it sets on horizontal and vertical accuracy, and why you rarely stand on it\nGround control versus checkpoints: fitting the map versus judging it\nRTK and PPK direct georeferencing, and what still needs a ground point\nSystematic error: doming, why it beats random noise, and how to detect it in a report\nReading the Agisoft and WebODM reports side by side\nThe level of detection: deciding with arithmetic whether a flight can count trees or quantify micro erosion",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
-      "3A: UAS Flight Planning"
+      "3B: Ground Control & Accuracy"
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#lecture",
-    "title": "UAS Flight Planning",
+    "objectID": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#lecture",
+    "href": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#lecture",
+    "title": "Ground control, checkpoints, and accuracy",
     "section": "Lecture",
-    "text": "Lecture\n\nFlight planning introduction\nLecture Recording (NCSU Only)\nAssignment Recording (NCSU Only)",
+    "text": "Lecture\n\nLecture Slides: Ground Control, Checkpoints, and Accuracy",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
-      "3A: UAS Flight Planning"
+      "3B: Ground Control & Accuracy"
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#supplemental-materials",
-    "title": "UAS Flight Planning",
+    "objectID": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#supplemental-materials",
+    "href": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#supplemental-materials",
+    "title": "Ground control, checkpoints, and accuracy",
     "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nFlight - watch the following if you were unable to attend the flight session\n\nFixed wing flight (eBee X): set up, launch and landing\nVertical take-off (VTOL) fixed wing flight with Wingtra drone\nRotary wing flight (Phantom)\n\nFlight with Drone Deploy flight planning app\nFlight with Pix4D Capture flight planning app\n\n\n\n\nFlight planning and management platforms\n\nCommerical Options\n\nDroneDeploy\nPix4Dcapture Pro\nDJI GS PRO\nUgCS\nDroneLink\n\n\n\nOpen Source Options\n\nQGroundControl\nMission Planner\nMavProxy",
+    "text": "Supplemental materials\n\nASPRS Positional Accuracy Standards for Digital Geospatial Data, Edition 2, Version 2 (2024) (American Society for Photogrammetry and Remote Sensing 2024): Addendum V is the UAS chapter; Section 7.16.1 covers reporting with fewer than 30 checkpoints\nGNSS field protocol: the base station and checkpoint procedure used at the Lake Wheeler flight\nSanz-Ablanedo et al. 2018 (Sanz-Ablanedo et al. 2018): the GCP density and checkpoint-overestimation numbers\nStott et al. 2020 (Stott et al. 2020) and Zhang et al. 2019 (Zhang et al. 2019): the modern RTK/PPK versus GCP evidence\nJames and Robson 2014 (James and Robson 2014) and James et al. 2020 (James et al. 2020): doming and its mitigations\nWheaton et al. 2010 (Wheaton et al. 2010) and Anderson 2019 (Anderson 2019): uncertainty in DEM differencing",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
-      "3A: UAS Flight Planning"
+      "3B: Ground Control & Accuracy"
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#assignment",
-    "title": "UAS Flight Planning",
+    "objectID": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#assignment",
+    "href": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#assignment",
+    "title": "Ground control, checkpoints, and accuracy",
     "section": "Assignment",
-    "text": "Assignment\nPrepare a flight plan:\n\n\nFlight plan analysis in GRASS",
+    "text": "Assignment\n\nAssignment 3B: Validate the Lake Wheeler flight: establish the base coordinate three ways, evaluate the flight’s orthomosaic and DSM against the withheld checkpoints, and rule on what the flight can measure. See the assignment page for data, submission, grading, and the due date.",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
-      "3A: UAS Flight Planning"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
-    "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#homework",
-    "title": "UAS Flight Planning",
-    "section": "Homework",
-    "text": "Homework\nPrepare a report on the flight plan: purpose, permits, map of the area boundary, with take off, landing, locations, ground control points and flight altitude analysis.",
-    "crumbs": [
-      "Topics",
-      "Topic 3: UAS Flight Planning",
-      "3A: UAS Flight Planning"
+      "3B: Ground Control & Accuracy"
     ]
   },
   {

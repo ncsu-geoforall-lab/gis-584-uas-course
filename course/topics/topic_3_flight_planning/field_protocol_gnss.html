@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-12">
 
-<title>UAS and lidar data: comparison, fusion and analysis – UAS Mapping and Analytics</title>
+<title>GNSS Field Protocol: Base Station and Checkpoints – UAS Mapping and Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -127,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/index.html">Topic 5: Advanced Analytics</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html">5A: UAS and Lidar Data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/index.html">Topic 3: UAS Flight Planning</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html">GNSS Field Protocol</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -305,11 +304,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../course/topics/topic_3_flight_planning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 3: UAS Flight Planning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="sidebar-item-text sidebar-link">
@@ -370,7 +369,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">GNSS Field Protocol</span></a>
   </div>
 </li>
@@ -467,14 +466,14 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../course/topics/topic_5_advanced_analytics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 5: Advanced Analytics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5A: UAS and Lidar Data</span></a>
   </div>
 </li>
@@ -622,10 +621,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
-  <li><a href="#supplemental-materials" id="toc-supplemental-materials" class="nav-link" data-scroll-target="#supplemental-materials">Supplemental materials</a></li>
-  <li><a href="#assignment-homework" id="toc-assignment-homework" class="nav-link" data-scroll-target="#assignment-homework">Assignment &amp; Homework</a></li>
+  <li><a href="#equipment" id="toc-equipment" class="nav-link active" data-scroll-target="#equipment">Equipment</a></li>
+  <li><a href="#base-setup" id="toc-base-setup" class="nav-link" data-scroll-target="#base-setup">Base setup</a></li>
+  <li><a href="#rover-work-gcps-and-checkpoints" id="toc-rover-work-gcps-and-checkpoints" class="nav-link" data-scroll-target="#rover-work-gcps-and-checkpoints">Rover work: GCPs and checkpoints</a></li>
+  <li><a href="#what-to-upload-at-the-end-of-the-day" id="toc-what-to-upload-at-the-end-of-the-day" class="nav-link" data-scroll-target="#what-to-upload-at-the-end-of-the-day">What to upload at the end of the day</a></li>
+  <li><a href="#if-cell-coverage-drops" id="toc-if-cell-coverage-drops" class="nav-link" data-scroll-target="#if-cell-coverage-drops">If cell coverage drops</a></li>
   </ul>
 </nav>
     </div>
@@ -636,10 +636,9 @@ ul.task-list li input[type="checkbox"] {
     <img src="../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/index.html">Topic 5: Advanced Analytics</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html">5A: UAS and Lidar Data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/index.html">Topic 3: UAS Flight Planning</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html">GNSS Field Protocol</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">UAS and lidar data: comparison, fusion and analysis</h1>
-<p class="subtitle lead">Topic 5A: Advanced Analytics</p>
+<h1 class="title">GNSS Field Protocol: Base Station and Checkpoints</h1>
 </div>
 
 
@@ -647,12 +646,6 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 12, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -662,35 +655,91 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<p>This is the protocol for the GNSS work at the Fall 2026 Lake Wheeler field flight. While the UAS flies, student groups rotate through the Emlid Reach RS4 base and rover to collect the ground control and checkpoint coordinates that Topic 3B uses to validate the flight’s orthomosaic and DSM. The flight itself is not affected by this work; the GNSS crew operates off the flight line.</p>
+<p>The takeaway to keep in mind all day: the rover can measure a point to about a centimeter relative to the base, but every point inherits the base coordinate. If the base coordinate is wrong by two meters, every point is wrong by two meters, even with a FIX. Establishing that one coordinate carefully is most of the job.</p>
+<section id="equipment" class="level2">
+<h2 class="anchored" data-anchor-id="equipment">Equipment</h2>
 <ul>
-<li>Analysis of lidar and UAS DSMs differences</li>
-<li>Patching and smooth fusion of UAS and lidar DSM</li>
-<li>Overland flow simulation on fused DEM</li>
+<li>Emlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)</li>
+<li>Fixed-height tripod with tribrach for the base; survey pole for the rover</li>
+<li>Phone or tablet with <a href="https://emlid.com/flow/">Emlid Flow</a> connected to each receiver</li>
+<li>North Carolina Real Time Network (NCRTN) RTK login credentials, entered into Emlid Flow before the trip</li>
+<li>Field notebook or the shared field sheet; a phone camera for point photos</li>
+<li>Spare: LoRa radio link configured between base and rover, in case cell coverage drops</li>
 </ul>
 </section>
-<section id="lecture" class="level2">
-<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
-<ul>
-<li><a href="../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html">Lecture Slides</a> &lt;!– - Lecture Recording: <a href="https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a5da365c-e33c-464a-aa6d-b1c101667b47">Fall 2024</a> (NCSU Only)</li>
-<li>In-Class Assignment Recording: <a href="https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=bf7a7e29-c76f-4c87-a7e9-b217010f6a42">Fall 2024</a> (NCSU Only) –&gt;</li>
-</ul>
+<section id="base-setup" class="level2">
+<h2 class="anchored" data-anchor-id="base-setup">Base setup</h2>
+<ol type="1">
+<li>Set the tripod over the practice mark (35.727565, -78.697788) and level it carefully.</li>
+<li>Measure and record the antenna height, and write down what you measured to. Emlid Flow applies the antenna phase center offset itself; you enter the height to the antenna reference point (bottom of the receiver on a tribrach, or the pole length if pole-mounted). A wrong antenna height puts a direct vertical error into every point collected today; it is the single most common way to lose vertical accuracy.</li>
+<li>Confirm open sky view. Record the satellite count and PDOP before starting.</li>
+<li><strong>Start the raw log first</strong>: begin RINEX logging at 1 Hz on the base and leave it running all day. This log is post-processed against the NCRTN CORS in the Topic 3B lab (Method C), so it must cover the whole session. Note the start time.</li>
+<li><strong>Record Method A</strong> while still in Single mode: average the position for five minutes and record that autonomous coordinate. It is the deliberately wrong number the Topic 3B lab compares against.</li>
+<li><strong>Establish the base coordinate</strong> (Method B, which the lab compares against Methods A and C):
+<ol type="a">
+<li>Configure the receiver as a rover in Emlid Flow and connect to the NCRTN NTRIP caster (<a href="https://rtn.nc.gov/">rtn.nc.gov</a>) with the VRS mountpoint.</li>
+<li>Wait for FIX (not FLOAT, not SINGLE). Note satellites and correction age.</li>
+<li>Occupy the mark with a 1 to 2 minute averaged collection. This is the mark’s coordinate in NAD83(2011).</li>
+<li>Switch to Base mode and enter that coordinate manually as the known position.</li>
+<li>Start broadcasting corrections over LoRa. <strong>From this point, do not reconfigure or restart the base</strong>: the rover crews and the running log both depend on it.</li>
+</ol></li>
+</ol>
 </section>
-<section id="supplemental-materials" class="level2">
-<h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
+<section id="rover-work-gcps-and-checkpoints" class="level2">
+<h2 class="anchored" data-anchor-id="rover-work-gcps-and-checkpoints">Rover work: GCPs and checkpoints</h2>
+<p>Project settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542), geoid GEOID18, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, which is the older NAD83(HARN) realization; at this site the two realizations differ by about 2 cm horizontally, which is real money at checkpoint accuracy, so write down which one you used: stating the datum realization is part of the survey. Rover antenna height is the pole length; confirm it once and do not change the pole length during the day.</p>
+<p><strong>Ground control targets (3 to 5 points).</strong> Measure the center of each laid-out target with a 1 to 2 minute averaged FIX occupation. These are the only points that will be used to control the photogrammetric processing.</p>
+<p><strong>Checkpoints (12 to 20 points).</strong> Everything else is withheld from processing and used to measure the accuracy of the final products. For each checkpoint:</p>
 <ul>
-<li><a href="https://www.geoweeknews.com/news/drone-lidar-vs-photogrammetry-technical-guide">Drone LiDAR vs Photogrammetry</a>: A Technical Guide, brief article from SPAR3D (online news on 3D technology: sensing, processing and visualization)</li>
-<li><a href="https://www-tandfonline-com.prox.lib.ncsu.edu/doi/full/10.1080/13658816.2015.1063639">Fusion of multi-scale DEMs using a regularized super-resolution method</a>. Linwei Yue , Huanfeng Shen , Qiangqiang Yuan , Liangpei Zhang. International Journal of Geographical Information Science. Vol. 29, Iss. 12, 2015</li>
-<li><a href="https://opengeospatialdata.springeropen.com/articles/10.1186/s40965-017-0019-2">Petrasova et al.&nbsp;2017, Fusion of high-resolution DEMs for water flow modeling.</a> Open Geospatial Data, Software and Standards 2:6.</li>
+<li>Pick a point you will be able to find in the imagery at 2 to 3 cm resolution: pavement corners, the junction of sidewalk joints, a manhole edge, a paint mark. Avoid grass, gravel, and anything that moves.</li>
+<li>Hold the pole plumb (the RS4 tilt compensation helps, but a steady pole is better), confirm FIX, and collect a 1 to 2 minute averaged occupation.</li>
+<li>Photograph the point with the pole tip visible and note the point number on the field sheet.</li>
+<li>Spread the points across the whole flight block, including the edges and the full elevation range, and put several on smooth level ground (those serve the vertical assessment).</li>
 </ul>
+<p><strong>Repeatability check.</strong> A second group re-occupies 3 to 5 of the earlier checkpoints without looking at the first group’s numbers. Agreement between independent occupations is the honest accuracy check, not the precision the software reports.</p>
 </section>
-<section id="assignment-homework" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-homework">Assignment &amp; Homework</h2>
-<p><a href="../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html">Assignment 5A: Fusion of UAS and lidar data</a></p>
+<section id="what-to-upload-at-the-end-of-the-day" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-upload-at-the-end-of-the-day">What to upload at the end of the day</h2>
+<p>To the shared drive folder, same day:</p>
+<ol type="1">
+<li>The base RINEX log (stop logging, download from the receiver)</li>
+<li>The Emlid Flow project CSV export (all points, both height types)</li>
+<li>The Method A autonomous coordinate and the Method B surveyed coordinate, with antenna heights and times</li>
+<li>The point photos, named by point number</li>
+<li>A photo of the field sheet</li>
+</ol>
+</section>
+<section id="if-cell-coverage-drops" class="level2">
+<h2 class="anchored" data-anchor-id="if-cell-coverage-drops">If cell coverage drops</h2>
+<p>Method B needs the NCRTN over a cell connection. If there is no coverage, skip step 6, keep the RINEX log from step 4 running, set the base to average its position in Single mode, and carry on collecting with LoRa corrections; the whole survey shifts onto the correct datum later, when the base RINEX is post-processed against the NCRTN CORS (the lab’s Method C). Nothing collected is lost; only the absolute coordinate arrives later.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Instructor checklist (before the trip)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
-<li>Optional, advanced topic: <a href="https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/python.html">Python Scripting for UAS/lidar analysis in GRASS GIS</a></li>
+<li>NCRTN RTK login tested in Emlid Flow on the actual field tablet, with a FIX obtained somewhere off campus</li>
+<li>NCRTN CORS download account working; know the nearest CORS station ID to Lake Wheeler</li>
+<li>RS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range</li>
+<li>Fixed-height tripod parts complete; pole tip checked</li>
+<li>Field sheets printed; GCP targets counted</li>
+<li>After the trip: derive the two lab files from the Emlid Flow export: <code>checkpoints.csv</code> with exactly <code>name, easting, northing, height</code> (EPSG:3358, orthometric) and <code>checkpoints_full.csv</code> with everything, marking re-occupations in the name</li>
+<li>After the trip: download the NCRTN CORS RINEX for the base session window and package it with the base RINEX log and the field-recorded Method A and B coordinates as <code>base_bundle.zip</code></li>
+<li>After processing: upload the six product files, the two processing report PDFs, and <code>base_bundle.zip</code> to the GCS <code>091626/</code> folder under the names in <code>_variables.yml</code></li>
+<li>Assign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line</li>
 </ul>
+</div>
+</div>
+</div>
+<p>The base-coordinate comparison (Methods A, B, and C) and the checkpoint validation of the flight products continue in the Topic 3B lab.</p>
 
 
 </section>

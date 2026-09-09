@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-12">
+<meta name="dcterms.date" content="2026-10-26">
 
-<title>UAS and lidar data: comparison, fusion and analysis – UAS Mapping and Analytics</title>
+<title>Ground control, checkpoints, and accuracy – UAS Mapping and Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,7 +27,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -127,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/index.html">Topic 5: Advanced Analytics</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html">5A: UAS and Lidar Data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/index.html">Topic 3: UAS Flight Planning</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html">3B: Ground Control &amp; Accuracy</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -305,11 +324,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../course/topics/topic_3_flight_planning/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 3: UAS Flight Planning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="sidebar-item-text sidebar-link">
@@ -318,7 +337,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">3B: Ground Control &amp; Accuracy</span></a>
   </div>
 </li>
@@ -467,14 +486,14 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../../course/topics/topic_5_advanced_analytics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic 5: Advanced Analytics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5A: UAS and Lidar Data</span></a>
   </div>
 </li>
@@ -625,7 +644,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
   <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
   <li><a href="#supplemental-materials" id="toc-supplemental-materials" class="nav-link" data-scroll-target="#supplemental-materials">Supplemental materials</a></li>
-  <li><a href="#assignment-homework" id="toc-assignment-homework" class="nav-link" data-scroll-target="#assignment-homework">Assignment &amp; Homework</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
   </ul>
 </nav>
     </div>
@@ -636,10 +655,10 @@ ul.task-list li input[type="checkbox"] {
     <img src="../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/index.html">Topic 5: Advanced Analytics</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html">5A: UAS and Lidar Data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/index.html">Topic 3: UAS Flight Planning</a></li><li class="breadcrumb-item"><a href="../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html">3B: Ground Control &amp; Accuracy</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">UAS and lidar data: comparison, fusion and analysis</h1>
-<p class="subtitle lead">Topic 5A: Advanced Analytics</p>
+<h1 class="title">Ground control, checkpoints, and accuracy</h1>
+<p class="subtitle lead">Topic 3: UAS Flight Planning</p>
 </div>
 
 
@@ -650,7 +669,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 12, 2026</p>
+      <p class="date">October 26, 2026</p>
     </div>
   </div>
   
@@ -665,37 +684,67 @@ ul.task-list li input[type="checkbox"] {
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <ul>
-<li>Analysis of lidar and UAS DSMs differences</li>
-<li>Patching and smooth fusion of UAS and lidar DSM</li>
-<li>Overland flow simulation on fused DEM</li>
+<li>What flight GSD buys you: the floor it sets on horizontal and vertical accuracy, and why you rarely stand on it</li>
+<li>Ground control versus checkpoints: fitting the map versus judging it</li>
+<li>RTK and PPK direct georeferencing, and what still needs a ground point</li>
+<li>Systematic error: doming, why it beats random noise, and how to detect it in a report</li>
+<li>Reading the Agisoft and WebODM reports side by side</li>
+<li>The level of detection: deciding with arithmetic whether a flight can count trees or quantify micro erosion</li>
 </ul>
 </section>
 <section id="lecture" class="level2">
 <h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
 <ul>
-<li><a href="../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html">Lecture Slides</a> &lt;!– - Lecture Recording: <a href="https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a5da365c-e33c-464a-aa6d-b1c101667b47">Fall 2024</a> (NCSU Only)</li>
-<li>In-Class Assignment Recording: <a href="https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=bf7a7e29-c76f-4c87-a7e9-b217010f6a42">Fall 2024</a> (NCSU Only) –&gt;</li>
+<li>Lecture Slides: <a href="../../../course/topics/topic_3_flight_planning/lectures/lecture_3b.html">Ground Control, Checkpoints, and Accuracy</a></li>
 </ul>
 </section>
 <section id="supplemental-materials" class="level2">
 <h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
 <ul>
-<li><a href="https://www.geoweeknews.com/news/drone-lidar-vs-photogrammetry-technical-guide">Drone LiDAR vs Photogrammetry</a>: A Technical Guide, brief article from SPAR3D (online news on 3D technology: sensing, processing and visualization)</li>
-<li><a href="https://www-tandfonline-com.prox.lib.ncsu.edu/doi/full/10.1080/13658816.2015.1063639">Fusion of multi-scale DEMs using a regularized super-resolution method</a>. Linwei Yue , Huanfeng Shen , Qiangqiang Yuan , Liangpei Zhang. International Journal of Geographical Information Science. Vol. 29, Iss. 12, 2015</li>
-<li><a href="https://opengeospatialdata.springeropen.com/articles/10.1186/s40965-017-0019-2">Petrasova et al.&nbsp;2017, Fusion of high-resolution DEMs for water flow modeling.</a> Open Geospatial Data, Software and Standards 2:6.</li>
+<li><a href="https://publicdocuments.asprs.org/PositionalAccuracyStd-Ed2-V2">ASPRS Positional Accuracy Standards for Digital Geospatial Data, Edition 2, Version 2 (2024)</a> <span class="citation" data-cites="asprs_positional_2024">(<a href="#ref-asprs_positional_2024" role="doc-biblioref">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>: Addendum V is the UAS chapter; Section 7.16.1 covers reporting with fewer than 30 checkpoints</li>
+<li><a href="../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html">GNSS field protocol</a>: the base station and checkpoint procedure used at the Lake Wheeler flight</li>
+<li>Sanz-Ablanedo et al.&nbsp;2018 <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#ref-sanz-ablanedo_accuracy_2018" role="doc-biblioref">Sanz-Ablanedo et al. 2018</a>)</span>: the GCP density and checkpoint-overestimation numbers</li>
+<li>Stott et al.&nbsp;2020 <span class="citation" data-cites="stott_ground_2020">(<a href="#ref-stott_ground_2020" role="doc-biblioref">Stott et al. 2020</a>)</span> and Zhang et al.&nbsp;2019 <span class="citation" data-cites="zhang_evaluating_2019">(<a href="#ref-zhang_evaluating_2019" role="doc-biblioref">Zhang et al. 2019</a>)</span>: the modern RTK/PPK versus GCP evidence</li>
+<li>James and Robson 2014 <span class="citation" data-cites="james_mitigating_2014">(<a href="#ref-james_mitigating_2014" role="doc-biblioref">James and Robson 2014</a>)</span> and James et al.&nbsp;2020 <span class="citation" data-cites="james_mitigating_2020">(<a href="#ref-james_mitigating_2020" role="doc-biblioref">James et al. 2020</a>)</span>: doming and its mitigations</li>
+<li>Wheaton et al.&nbsp;2010 <span class="citation" data-cites="wheaton_accounting_2010">(<a href="#ref-wheaton_accounting_2010" role="doc-biblioref">Wheaton et al. 2010</a>)</span> and Anderson 2019 <span class="citation" data-cites="anderson_uncertainty_2019">(<a href="#ref-anderson_uncertainty_2019" role="doc-biblioref">Anderson 2019</a>)</span>: uncertainty in DEM differencing</li>
 </ul>
 </section>
-<section id="assignment-homework" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-homework">Assignment &amp; Homework</h2>
-<p><a href="../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html">Assignment 5A: Fusion of UAS and lidar data</a></p>
+<section id="assignment" class="level2">
+<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
 <ul>
-<li>Optional, advanced topic: <a href="https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/python.html">Python Scripting for UAS/lidar analysis in GRASS GIS</a></li>
+<li><a href="../../../course/topics/topic_3_flight_planning/assignments/assignment_3b.html">Assignment 3B: Validate the Lake Wheeler flight</a>: establish the base coordinate three ways, evaluate the flight’s orthomosaic and DSM against the withheld checkpoints, and rule on what the flight can measure. See the assignment page for data, submission, grading, and the due date.</li>
 </ul>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-asprs_positional_2024" class="csl-entry" role="listitem">
+American Society for Photogrammetry and Remote Sensing. 2024. <em><span>ASPRS</span> Positional Accuracy Standards for Digital Geospatial Data, Edition 2, Version 2</em>. American Society for Photogrammetry; Remote Sensing. <a href="https://publicdocuments.asprs.org/PositionalAccuracyStd-Ed2-V2">https://publicdocuments.asprs.org/PositionalAccuracyStd-Ed2-V2</a>.
+</div>
+<div id="ref-anderson_uncertainty_2019" class="csl-entry" role="listitem">
+Anderson, Scott W. 2019. <span>“Uncertainty in Quantitative Analyses of Topographic Change: Error Propagation and the Role of Thresholding.”</span> <em>Earth Surface Processes and Landforms</em> 44 (5): 1015–33. <a href="https://doi.org/10.1002/esp.4551">https://doi.org/10.1002/esp.4551</a>.
+</div>
+<div id="ref-james_mitigating_2020" class="csl-entry" role="listitem">
+James, Mike R., Gilles Antoniazza, Stuart Robson, and Stuart N. Lane. 2020. <span>“Mitigating Systematic Error in Topographic Models for Geomorphic Change Detection: Accuracy, Precision and Considerations Beyond Off-Nadir Imagery.”</span> <em>Earth Surface Processes and Landforms</em> 45 (10): 2251–71. <a href="https://doi.org/10.1002/esp.4878">https://doi.org/10.1002/esp.4878</a>.
+</div>
+<div id="ref-james_mitigating_2014" class="csl-entry" role="listitem">
+James, Mike R., and Stuart Robson. 2014. <span>“Mitigating Systematic Error in Topographic Models Derived from <span>UAV</span> and Ground-Based Image Networks.”</span> <em>Earth Surface Processes and Landforms</em> 39 (10): 1413–20. <a href="https://doi.org/10.1002/esp.3609">https://doi.org/10.1002/esp.3609</a>.
+</div>
+<div id="ref-sanz-ablanedo_accuracy_2018" class="csl-entry" role="listitem">
+Sanz-Ablanedo, Enoc, Jim H. Chandler, José Ramón Rodríguez-Pérez, and Celestino Ordóñez. 2018. <span>“Accuracy of Unmanned Aerial Vehicle (<span>UAV</span>) and <span>SfM</span> Photogrammetry Survey as a Function of the Number and Location of Ground Control Points Used.”</span> <em>Remote Sensing</em> 10 (10): 1606. <a href="https://doi.org/10.3390/rs10101606">https://doi.org/10.3390/rs10101606</a>.
+</div>
+<div id="ref-stott_ground_2020" class="csl-entry" role="listitem">
+Stott, Eilidh, Richard D. Williams, and Trevor B. Hoey. 2020. <span>“Ground Control Point Distribution for Accurate Kilometre-Scale Topographic Mapping Using an <span>RTK</span>-<span>GNSS</span> Unmanned Aerial Vehicle and <span>SfM</span> Photogrammetry.”</span> <em>Drones</em> 4 (3): 55. <a href="https://doi.org/10.3390/drones4030055">https://doi.org/10.3390/drones4030055</a>.
+</div>
+<div id="ref-wheaton_accounting_2010" class="csl-entry" role="listitem">
+Wheaton, Joseph M., James Brasington, Stephen E. Darby, and David A. Sear. 2010. <span>“Accounting for Uncertainty in <span>DEMs</span> from Repeat Topographic Surveys: Improved Sediment Budgets.”</span> <em>Earth Surface Processes and Landforms</em> 35 (2): 136–56. <a href="https://doi.org/10.1002/esp.1886">https://doi.org/10.1002/esp.1886</a>.
+</div>
+<div id="ref-zhang_evaluating_2019" class="csl-entry" role="listitem">
+Zhang, He, Emilien Aldana-Jague, François Clapuyt, Florian Wilken, Veerle Vanacker, and Kristof Van Oost. 2019. <span>“Evaluating the Potential of Post-Processing Kinematic (<span>PPK</span>) Georeferencing for <span>UAV</span>-Based Structure-from-Motion (<span>SfM</span>) Photogrammetry and Surface Change Detection.”</span> <em>Earth Surface Dynamics</em> 7 (3): 807–27. <a href="https://doi.org/10.5194/esurf-7-807-2019">https://doi.org/10.5194/esurf-7-807-2019</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

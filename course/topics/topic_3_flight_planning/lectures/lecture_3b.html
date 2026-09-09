@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Corey White">
+  <title>UAS Mapping and Analytics – Ground Control, Checkpoints, and Accuracy</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-5480ceb7a1ce4baa9b13cd8d69b87f4c.css">
+  <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Ground Control, Checkpoints, and Accuracy</h1>
+  <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Corey White
+</div>
+</div>
+</div>
+
+</section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<ul>
+<li class="fragment">Explain the relationship between flight GSD and the horizontal and vertical accuracy a UAS survey can actually achieve</li>
+<li class="fragment">Design ground control and checkpoint schemes, and defend the difference between the two</li>
+<li class="fragment">Choose between GCP-based and RTK/PPK georeferencing, and know what each still needs</li>
+<li class="fragment">Read an Agisoft and a WebODM processing report and state the accuracy of the products with the right numbers</li>
+<li class="fragment">Decide, with arithmetic, whether a given flight can answer a given question: counting trees or measuring millimeters of erosion</li>
+</ul>
+<aside class="notes">
+<p>This is the accuracy lecture the SfM topic has been pointing at since Topic 2: 2A said checkpoints are the honest number, 2B said quote the checkpoint RMSE, and today is where those numbers come from and what they permit. Everything is anchored to the reports students produced themselves in Assignments 2B and 2C and to the checkpoint data collected with the Emlid rover at the Lake Wheeler flight. The lab runs the full validation on the flight’s own products.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-report-number-is-not-the-accuracy" class="slide level2 smaller">
+<h2>The report number is not the accuracy</h2>
+<p>A worked example straight from the ASPRS standard <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>:</p>
+<ul>
+<li>Your DSM fits the checkpoints with RMSE<sub>V1</sub> = 1 cm. The report says so.</li>
+<li>The checkpoints themselves were surveyed with an RTK rover: RMSE<sub>V2</sub> = 2 cm.</li>
+<li>The accuracy you may claim is the quadrature sum:</li>
+</ul>
+<p><span class="math display">\[\text{RMSE}_V = \sqrt{1^2 + 2^2} = 2.24 \text{ cm}\]</span></p>
+<div class="term-card">
+<p><strong>Edition 2 rule</strong>: checkpoint survey error can no longer be ignored; reported accuracy includes it. Your product is never more accurate than the ruler you measured it with</p>
+</div>
+<aside class="notes">
+<p>Open with the arithmetic because it reframes the whole hour: the software prints a fit, not an accuracy. Edition 1 dodged this by requiring checkpoints three times better than the product, so their error was negligible; Edition 2 relaxed that to two times and made you carry the term instead. For our lab the rover repeatability from the field day is RMSE V2. This is also the first appearance of the lecture’s habit: every accuracy claim must say what it was measured against and how good the ruler was.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-gsd-buys-you" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>What GSD buys you</h2>
+<aside class="notes">
+<p>Section one: the floor that pixel size sets, and why you rarely stand on it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="gsd-sets-a-floor-not-the-accuracy" class="slide level2 smaller">
+<h2>GSD sets a floor, not the accuracy</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Best case (strong control, good geometry)</th>
+<th>Flat terrain envelope</th>
+<th>Complex terrain envelope</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Horizontal RMSE</strong></td>
+<td>about 1 x GSD (asymptote 0.66 x)</td>
+<td>1 to 3 x GSD</td>
+<td>1 to 7 x GSD</td>
+</tr>
+<tr class="even">
+<td><strong>Vertical RMSE</strong></td>
+<td>1.5 to 2 x GSD</td>
+<td>1 to 4.5 x GSD</td>
+<td>1.5 to 5 x GSD</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Envelope columns from <span class="citation" data-cites="jimenez-jimenez_digital_2021">Jiménez-Jiménez et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>; best-case column from <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">Sanz-Ablanedo et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></li>
+<li>Vertical error runs about <strong>2.5 x</strong> the horizontal error, consistently <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
+<li>Vertical never reaches 1 x GSD, no matter how much control you add</li>
+<li>With uncorrected navigation-grade georeferencing, errors reach meters, tens of GSD or more: the pixel size stops mattering entirely</li>
+</ul>
+<aside class="notes">
+<p>The envelope is Jimenez-Jimenez et al.&nbsp;2021; the asymptotes are Sanz-Ablanedo et al.&nbsp;2018, from 3465 GCP combinations over a 1200 ha block. Teach the multipliers as a band, not a constant: the gap between the floor (1x) and what you get is governed by georeferencing and systematic error, not pixel size. Ask the class: your Lake Wheeler flight had roughly 2 to 3 cm GSD; what vertical accuracy should they predict before the lab? Write the predictions down; the lab checks them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="planning-with-gsd" class="slide level2 smaller">
+<h2>Planning with GSD</h2>
+<ul>
+<li>ASPRS recommends source imagery GSD of <strong>0.5 to 1.0 x</strong> the target horizontal accuracy class: a 5 cm class wants 2.5 to 5 cm GSD <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
+<li>Read backwards: expect RMSE<sub>H</sub> of 1 to 2 x GSD from a well-run project</li>
+<li>The standard is explicit that this is a planning heuristic, not an accuracy statement</li>
+</ul>
+<div class="term-card">
+<p><strong>Workflow</strong>: start from what you must measure, derive the accuracy that requires, derive the GSD, and only then the flying height (the Topic 3A formula)</p>
+</div>
+<aside class="notes">
+<p>This connects 3A’s GSD formula to a requirement instead of a preference. The design direction runs measurement to accuracy to GSD to altitude, never the other way. The standard’s own caveat is worth quoting: the table should not be used to reference product accuracy. It tells you what to fly, not what you achieved.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ground-control" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Ground control</h2>
+<aside class="notes">
+<p>Section two: how many points, where, and the difference between the points you fit and the points you judge with.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-many-gcps-and-where" class="slide level2 smaller">
+<h2>How many GCPs, and where</h2>
+<ul>
+<li>Count in flight units: about <strong>3 to 4 GCPs per 100 photos</strong>; below 1 per 100 accuracy degrades fast <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
+<li>Horizontal stops improving past about 3 per 100; vertical keeps improving to about 4 per 100</li>
+<li><strong>Distribution beats count</strong>: an even triangular spread is twice as accurate as a poor layout with the same number</li>
+<li>Edge coverage first, then an even interior; more points past that buy better error <em>structure</em>, not lower RMSE <span class="citation" data-cites="dai_enhancing_2023">(<a href="#/references" role="doc-biblioref" onclick="">Dai et al. 2023</a>)</span></li>
+</ul>
+<aside class="notes">
+<p>The per-100-photos rule travels better than per-hectare rules because it scales with overlap and altitude automatically. Dai et al.&nbsp;2023 is the modern synthesis: after the first few GCPs, RMSE barely moves but the spatial autocorrelation of the residual error keeps improving, which matters for differencing. Our 9/16 field design (3 to 5 targets on a 78-photo class of flight) sits right on the recommended density.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="control-is-not-validation" class="slide level2 smaller">
+<h2>Control is not validation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>GCPs (control)</strong>: used in the bundle adjustment; the model is fitted to them</p>
+</div>
+<div class="term-card">
+<p><strong>Checkpoints</strong>: surveyed the same way, withheld from processing entirely; the model is judged against them</p>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Error reported on control points overstates accuracy by <strong>3 x</strong> (dense control) to <strong>4 to 8 x</strong> (sparse control) <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
+<li>The adjustment was told to fit those points; their residuals are a statement about the fit, not the map</li>
+<li>ASPRS: checkpoints must be independent, excluded from the aerial triangulation, and away from any GCP <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>The 3 to 8 times overestimation is the single most important number in this section, and it is why the field protocol withheld most of the surveyed points. If students remember one distinction from today, it is this one; the midterm will ask it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rtk-ppk-and-what-they-still-need" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>RTK, PPK, and what they still need</h2>
+<aside class="notes">
+<p>Section three: direct georeferencing moved the field in the last five years; here is the current state and the honest recipe.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="direct-georeferencing-today" class="slide level2 smaller">
+<h2>Direct georeferencing today</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Evidence</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ASPRS Addendum V <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></td>
+<td>PPK reaches 1 to 2 cm horizontal, 2 to 4 cm vertical “when used properly”; RTK typically 5 to 10 cm</td>
+</tr>
+<tr class="even">
+<td>RTK aircraft, zero GCPs, purpose-built flight <span class="citation" data-cites="stott_ground_2020">(<a href="#/references" role="doc-biblioref" onclick="">Stott et al. 2020</a>)</span></td>
+<td>Vertical RMSE 6.6 cm over 2 km of river; adding 5 GCPs did not improve it</td>
+</tr>
+<tr class="odd">
+<td>PPK versus GCP workflows <span class="citation" data-cites="zhang_evaluating_2019">(<a href="#/references" role="doc-biblioref" onclick="">Zhang et al. 2019</a>)</span></td>
+<td>PPK matched GCP-workflow accuracy (MAE about 2 cm, RMSE about 3 cm); some missions carried a vertical bias that <strong>one GCP</strong> removed, improving vertical accuracy 20 to 30 percent</td>
+</tr>
+<tr class="even">
+<td>Repeat surveys <span class="citation" data-cites="nota_improving_2022">(<a href="#/references" role="doc-biblioref" onclick="">Nota et al. 2022</a>)</span></td>
+<td>Co-alignment of epochs gives sub-2 cm relative accuracy; ground control in at least one epoch still anchors absolute Z</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Stott’s caveat is the teaching point: the zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir. Against the sparse target checkpoints, vertical errors still clustered spatially up to 0.14 m even though the dense validation found no consistent systematic error, so distributed checkpoints stayed mandatory. Zhang’s one-GCP result is the canonical citation for the vertical bias fix: the bias is near constant, so one known point kills it. Nota matters for the change-detection topic later: co-align the epochs and put control in one of them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-2026-recipe-and-the-standards-caution" class="slide level2 smaller">
+<h2>The 2026 recipe, and the standard’s caution</h2>
+<div class="term-card">
+<p><strong>Defensible default</strong>: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint</p>
+</div>
+<ul>
+<li>The ASPRS standard is more conservative: GCPs remain “highly recommended” and should take priority over airborne positions in the adjustment, because camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
+<li>Both are right: the journal results are conditional on strong flight geometry; the standard writes for contracts and courts</li>
+</ul>
+<aside class="notes">
+<p>Present the tension honestly instead of resolving it: recent peer-reviewed results justify the light-control recipe when the flight design is strong; the standard assumes you must defend the number to a client. A student consultant should know both positions and say which regime they are operating in. Our lab uses the recipe: 3 targets as control, everything else checkpoints.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-receiver-in-your-hands" class="slide level2 smaller">
+<h2>The receiver in your hands</h2>
+<ul>
+<li>Base within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna <span class="citation" data-cites="famiglietti_test_2021">(<a href="#/references" role="doc-biblioref" onclick="">Famiglietti et al. 2021</a>)</span>; the price gap between those two bases is roughly an order of magnitude</li>
+<li><strong>Antenna beats receiver</strong>: a low-cost dual-frequency board matched geodetic instruments in network RTK only when paired with a geodetic-grade antenna; with a patch antenna it needed open sky <span class="citation" data-cites="janos_evaluation_2021">(<a href="#/references" role="doc-biblioref" onclick="">Janos and Kuras 2021</a>)</span></li>
+<li>The base coordinate governs absolute accuracy: the rover measures centimeters <em>relative to the base</em>, and every point inherits the base position (the field protocol’s Methods A, B, and C)</li>
+</ul>
+<div class="term-card">
+<p><strong>No peer-reviewed RS4 study exists yet</strong>: our own field data, RS4 against the NCRTN, is genuinely publishable</p>
+</div>
+<aside class="notes">
+<p>This slide connects the literature to the hardware students actually held. The Famiglietti comparison is the honest Emlid-class citation; the receivers have since improved. The publishable-gap card is real: nobody has published an RS4-versus-state-RTN evaluation, and the class dataset is a credible short note. Recruit interest for it here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="systematic-error" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Systematic error</h2>
+<aside class="notes">
+<p>Section four: the error that does not average away, and that differencing cannot forgive.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="doming" class="slide level2 smaller">
+<h2>Doming</h2>
+<ul>
+<li>Nadir-only image blocks with self-calibration cannot separate radial lens distortion from surface shape</li>
+<li>Camera orientations off parallel by only <strong>2 degrees</strong> produce a dome of about <strong>0.2 m over 100 m</strong> <span class="citation" data-cites="james_mitigating_2014">(<a href="#/references" role="doc-biblioref" onclick="">James and Robson 2014</a>)</span></li>
+<li>Fixes, in order of power: a known camera model with self-calibration off; <strong>oblique imagery</strong> (practical plans cut the deformation by one to two orders of magnitude; a convergent orbit reached under 2 mm in simulation); two flying heights; well-distributed control</li>
+<li>The best camera angles in the tested 0 to 35 degree range were <strong>20 to 35 degrees</strong>, worth nearly 50 percent better accuracy in high relief <span class="citation" data-cites="nesbit_enhancing_2019">(<a href="#/references" role="doc-biblioref" onclick="">Nesbit and Hugenholtz 2019</a>)</span></li>
+<li>Caution: a <em>gently</em> tilted camera (under 15 degrees) can make things worse by exciting a different distortion correlation, especially on consumer wide-angle cameras with onboard lens correction <span class="citation" data-cites="james_mitigating_2020">(<a href="#/references" role="doc-biblioref" onclick="">James et al. 2020</a>)</span></li>
+</ul>
+<aside class="notes">
+<p>Recall the pitfalls table from 2A; here is the mechanism and the numbers. The 2020 caveat is the one practitioners miss: the popular “just tilt the camera a bit” advice backfires below 15 degrees on exactly the cameras students fly. More overlap, incidentally, does not fix doming; James et al.&nbsp;2020 showed relative insensitivity to overlap, a common myth.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-systematic-error-is-the-enemy" class="slide level2 smaller">
+<h2>Why systematic error is the enemy</h2>
+<ul>
+<li>Random error averages away in aggregates; a 2 cm systematic bias does not</li>
+<li>In modern change detection, propagated uncertainty is dominated by low-magnitude, spatially correlated or systematic error, not by point precision <span class="citation" data-cites="anderson_uncertainty_2019">(<a href="#/references" role="doc-biblioref" onclick="">Anderson 2019</a>)</span></li>
+<li>A noisy point cloud is a smaller problem than a quiet dome</li>
+</ul>
+<div class="term-card">
+<p><strong>Blunder rule</strong> <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>: any checkpoint discrepancy beyond 3 x the target RMSE is a blunder to investigate, not average in; mean error should stay under 25 percent of the target RMSE</p>
+</div>
+<aside class="notes">
+<p>The mean-error rule is the practical doming detector in a report: a mean checkpoint error far from zero, or a mean above a quarter of the RMSE, says the surface is biased, not noisy. Students apply exactly this test to their DSM residuals in the lab.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reading-the-reports" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Reading the reports</h2>
+<aside class="notes">
+<p>Section five: the week’s stated purpose. Bring up the students’ own 2B and 2C reports side by side on screen for this section; the slides give the map, the reports give the territory.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-same-facts-two-dialects" class="slide level2 smaller">
+<h2>The same facts, two dialects</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quantity</th>
+<th>Agisoft Metashape report</th>
+<th>WebODM quality report</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GSD</td>
+<td>Survey Data: ground resolution</td>
+<td>Overview: average GSD</td>
+</tr>
+<tr class="even">
+<td>Coverage and photos</td>
+<td>Survey Data: coverage area, aligned images</td>
+<td>Overview: area, reconstructed images</td>
+</tr>
+<tr class="odd">
+<td>Overlap</td>
+<td>Camera locations and image overlap figure</td>
+<td>Survey Data overlap heatmap</td>
+</tr>
+<tr class="even">
+<td>Camera model</td>
+<td>Calibrated values with uncertainties and residual plot</td>
+<td>Camera parameters, per-band</td>
+</tr>
+<tr class="odd">
+<td>Camera position error</td>
+<td>Camera Locations table: X, Y, Z error</td>
+<td>GPS/geolocation details, 3D errors</td>
+</tr>
+<tr class="even">
+<td>Control fit</td>
+<td>Ground Control Points table: control RMSE</td>
+<td>GCP errors section (when GCPs used)</td>
+</tr>
+<tr class="odd">
+<td><strong>Checkpoint error</strong></td>
+<td>Check Points rows in the same table</td>
+<td>Absent unless checkpoints were declared</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Walk each row on the projector with a real pair of reports. Two traps to name: both tools print camera-position errors that students mistake for map accuracy, and WebODM only reports what it was given, so a project processed without declared checkpoints reports no independent accuracy at all, which does not mean the map is accurate. The lab’s comparison table is this slide filled in with their numbers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-neither-report-tells-you" class="slide level2 smaller">
+<h2>What neither report tells you</h2>
+<ul>
+<li>Whether the checkpoints were independent (the software trusts your labeling)</li>
+<li>The survey accuracy of the control and checkpoints, so neither can do the quadrature for you</li>
+<li>Whether the error is spatially structured: a mean near zero can hide a dome that cancels</li>
+<li>Anything about the parts of the site with no checkpoints at all</li>
+</ul>
+<div class="term-card">
+<p><strong>Report vocabulary</strong> <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>: report RMSE<sub>H</sub> and RMSE<sub>V</sub> (RMSE<sub>3D</sub> if asked); the old 95 percent confidence reporting is gone from Edition 2; 30 checkpoints is the standard’s minimum for a statistical claim, and Section 7.16.1 gives the honest wording when, as in a class lab, you have fewer</p>
+</div>
+<aside class="notes">
+<p>Section 7.16.1 matters for every project the students will run this decade: small sites cannot afford 30 checkpoints, and the standard’s answer is truth in reporting rather than silence: report the RMSE, state the checkpoint count, and do not claim the statistical confidence the sample cannot support. The lab report requires exactly that sentence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-can-you-measure" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>What can you measure</h2>
+<aside class="notes">
+<p>Section six: the payoff. The same flight either answers the question or it does not, and the arithmetic decides.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-level-of-detection" class="slide level2 smaller">
+<h2>The level of detection</h2>
+<p>For change between two surveys of similar quality, at 95 percent confidence:</p>
+<p><span class="math display">\[\text{LoD} = 1.96 \sqrt{\sigma_{z1}^2 + \sigma_{z2}^2} \approx 2.8\,\sigma_z\]</span></p>
+<p>Worked example for a good flight: 3 cm GSD, strong control, so <span class="math inline">\(\sigma_z \approx\)</span> 1.5 to 2 x GSD <span class="math inline">\(\approx\)</span> 5 cm:</p>
+<p><span class="math display">\[\text{LoD} \approx 2.8 \times 5 \text{ cm} \approx 14 \text{ cm}\]</span></p>
+<ul>
+<li>A 30 cm gully clears the threshold; 2 cm of sheet erosion is invisible</li>
+<li>Thresholding is for <strong>gross</strong> change only; it biases net change, where random errors already cancel <span class="citation" data-cites="anderson_uncertainty_2019">(<a href="#/references" role="doc-biblioref" onclick="">Anderson 2019</a>)</span></li>
+<li>Spatially variable LoD can exclude from a quarter to more than half of observed volumetric change <span class="citation" data-cites="wheaton_accounting_2010">(<a href="#/references" role="doc-biblioref" onclick="">Wheaton et al. 2010</a>)</span></li>
+</ul>
+<aside class="notes">
+<p>The LoD arithmetic is the lecture’s destination: every accuracy number from the previous fifty minutes exists to be plugged in here. Wheaton’s Feshie numbers (24 to 31 percent of change excluded in dry years, 57 to 59 in wet) show the price of thresholding; Anderson’s correction says when to pay it: gross change yes, net change no, and error propagation is not thresholding. Zhang et al.&nbsp;2019 reached sub-5 cm detection thresholds with PPK flights below 45 m, which is what chasing micro-topography actually requires.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="trees-or-erosion" class="slide level2 smaller">
+<h2>Trees or erosion</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Binding constraint</th>
+<th>Verdict at 3 cm GSD, 5 cm sigma-z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Count the trees</td>
+<td>Detection in the orthomosaic</td>
+<td>Easy; accuracy barely matters</td>
+</tr>
+<tr class="even">
+<td>Measure canopy height</td>
+<td>Canopy and ground surfaces, not GSD: flying height 80 to 120 m showed <strong>no significant effect</strong> on tree height RMSE (1.8 to 3.2 m) <span class="citation" data-cites="grybas_evaluating_2022">(<a href="#/references" role="doc-biblioref" onclick="">Grybas and Congalton 2022</a>)</span></td>
+<td>Expect meters of error regardless of pixel size</td>
+</tr>
+<tr class="odd">
+<td>Detect a 30 cm rill or gully</td>
+<td>LoD about 14 cm</td>
+<td>Yes, cleanly</td>
+</tr>
+<tr class="even">
+<td>Quantify 2 cm sheet erosion</td>
+<td>LoD, dominated by systematic error</td>
+<td>No; needs sub-2 cm sigma-z, near-ground flights, and bias control</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>The asymmetry is the thesis of the whole topic: for trees the limiting error lives in the canopy and the terrain model underneath it, so buying more GSD buys nothing; for micro-topography the limiting error is exactly the accuracy chain this lecture built, and every link (base coordinate, control, calibration, systematic bias) shows up in the final LoD. Students argue these verdicts with their own numbers in the lab’s part three.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-terms" class="slide level2 smaller">
+<h2>Key terms</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Checkpoint</strong>: surveyed, withheld, judges the map; also called check point, validation point, independent test point</p>
+</div>
+<div class="term-card">
+<p><strong>Direct georeferencing</strong>: camera positions from RTK or PPK doing the work of control; also called GNSS-aided or GCP-free</p>
+</div>
+<div class="term-card">
+<p><strong>Level of detection (LoD)</strong>: the smallest elevation change distinguishable from error at a stated confidence</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Doming</strong>: broad systematic DEM deformation from the self-calibration ambiguity; also called bowling when inverted</p>
+</div>
+<div class="term-card">
+<p><strong>RMSE<sub>H</sub>, RMSE<sub>V</sub>, RMSE<sub>3D</sub></strong>: Edition 2’s reporting quantities, replacing RMSEx/RMSEy/RMSEz and the 95 percent statistics</p>
+</div>
+<div class="term-card">
+<p><strong>Quadrature</strong>: accuracies add as the square root of summed squares; the product carries the checkpoint survey error</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>The synonym lists matter because students will search the literature and hit every variant. This is midterm vocabulary.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Assignment 3B</strong>: <a href="../../../../course/topics/topic_3_flight_planning/assignments/assignment_3b.html">Validate the Lake Wheeler flight</a>: establish the base coordinate three ways, evaluate the flight’s orthomosaic and DSM against the checkpoints you collected, and rule on what the flight can measure</p>
+</div>
+<div class="term-card">
+<p><strong>Midterm 11/4</strong>: the control versus checkpoint distinction, the quadrature rule, and the LoD arithmetic are all fair game</p>
+</div>
+<aside class="notes">
+<p>Recap the chain: GSD sets the floor, georeferencing and systematic error set the distance above it, checkpoints measure that distance honestly, the quadrature keeps the claim honest, and the LoD converts the whole chain into a yes or no about the question you actually care about. The lab data is their own field work from 9/16, which is the point.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-asprs_positional_2024" class="csl-entry" role="listitem">
+American Society for Photogrammetry and Remote Sensing. 2024. <em><span>ASPRS</span> Positional Accuracy Standards for Digital Geospatial Data, Edition 2, Version 2</em>. American Society for Photogrammetry; Remote Sensing. <a href="https://publicdocuments.asprs.org/PositionalAccuracyStd-Ed2-V2">https://publicdocuments.asprs.org/PositionalAccuracyStd-Ed2-V2</a>.
+</div>
+<div id="ref-anderson_uncertainty_2019" class="csl-entry" role="listitem">
+Anderson, Scott W. 2019. <span>“Uncertainty in Quantitative Analyses of Topographic Change: Error Propagation and the Role of Thresholding.”</span> <em>Earth Surface Processes and Landforms</em> 44 (5): 1015–33. <a href="https://doi.org/10.1002/esp.4551">https://doi.org/10.1002/esp.4551</a>.
+</div>
+<div id="ref-dai_enhancing_2023" class="csl-entry" role="listitem">
+Dai, Wen, Ruibo Qiu, Bo Wang, et al. 2023. <span>“Enhancing <span>UAV</span>-<span>SfM</span> Photogrammetry for Terrain Modeling from the Perspective of Spatial Structure of Errors.”</span> <em>Remote Sensing</em> 15 (17): 4305. <a href="https://doi.org/10.3390/rs15174305">https://doi.org/10.3390/rs15174305</a>.
+</div>
+<div id="ref-famiglietti_test_2021" class="csl-entry" role="listitem">
+Famiglietti, Nicola Angelo, Gianpaolo Cecere, Carmine Grasso, Antonino Memmolo, and Annamaria Vicari. 2021. <span>“A Test on the Potential of a Low Cost Unmanned Aerial Vehicle <span>RTK</span>/<span>PPK</span> Solution for Precision Positioning.”</span> <em>Sensors</em> 21 (11): 3882. <a href="https://doi.org/10.3390/s21113882">https://doi.org/10.3390/s21113882</a>.
+</div>
+<div id="ref-grybas_evaluating_2022" class="csl-entry" role="listitem">
+Grybas, Heather, and Russell G. Congalton. 2022. <span>“Evaluating the Impacts of Flying Height and Forward Overlap on Tree Height Estimates Using Unmanned Aerial Systems.”</span> <em>Forests</em> 13 (9): 1462. <a href="https://doi.org/10.3390/f13091462">https://doi.org/10.3390/f13091462</a>.
+</div>
+<div id="ref-james_mitigating_2020" class="csl-entry" role="listitem">
+James, Mike R., Gilles Antoniazza, Stuart Robson, and Stuart N. Lane. 2020. <span>“Mitigating Systematic Error in Topographic Models for Geomorphic Change Detection: Accuracy, Precision and Considerations Beyond Off-Nadir Imagery.”</span> <em>Earth Surface Processes and Landforms</em> 45 (10): 2251–71. <a href="https://doi.org/10.1002/esp.4878">https://doi.org/10.1002/esp.4878</a>.
+</div>
+<div id="ref-james_mitigating_2014" class="csl-entry" role="listitem">
+James, Mike R., and Stuart Robson. 2014. <span>“Mitigating Systematic Error in Topographic Models Derived from <span>UAV</span> and Ground-Based Image Networks.”</span> <em>Earth Surface Processes and Landforms</em> 39 (10): 1413–20. <a href="https://doi.org/10.1002/esp.3609">https://doi.org/10.1002/esp.3609</a>.
+</div>
+<div id="ref-janos_evaluation_2021" class="csl-entry" role="listitem">
+Janos, Daniel, and Przemysław Kuras. 2021. <span>“Evaluation of Low-Cost <span>GNSS</span> Receiver Under Demanding Conditions in <span>RTK</span> Network Mode.”</span> <em>Sensors</em> 21 (16): 5552. <a href="https://doi.org/10.3390/s21165552">https://doi.org/10.3390/s21165552</a>.
+</div>
+<div id="ref-jimenez-jimenez_digital_2021" class="csl-entry" role="listitem">
+Jiménez-Jiménez, Sergio Iván, Waldo Ojeda-Bustamante, Mariana de Jesús Marcial-Pablo, and Juan Enciso. 2021. <span>“Digital Terrain Models Generated with Low-Cost <span>UAV</span> Photogrammetry: Methodology and Accuracy.”</span> <em>ISPRS International Journal of Geo-Information</em> 10 (5): 285. <a href="https://doi.org/10.3390/ijgi10050285">https://doi.org/10.3390/ijgi10050285</a>.
+</div>
+<div id="ref-nesbit_enhancing_2019" class="csl-entry" role="listitem">
+Nesbit, Paul Ryan, and Christopher H. Hugenholtz. 2019. <span>“Enhancing <span>UAV</span>-<span>SfM</span> <span>3D</span> Model Accuracy in High-Relief Landscapes by Incorporating Oblique Images.”</span> <em>Remote Sensing</em> 11 (3): 239. <a href="https://doi.org/10.3390/rs11030239">https://doi.org/10.3390/rs11030239</a>.
+</div>
+<div id="ref-nota_improving_2022" class="csl-entry" role="listitem">
+Nota, E. W., W. Nijland, and T. de Haas. 2022. <span>“Improving <span>UAV</span>-<span>SfM</span> Time-Series Accuracy by Co-Alignment and Contributions of Ground Control or <span>RTK</span> Positioning.”</span> <em>International Journal of Applied Earth Observation and Geoinformation</em> 109: 102772. <a href="https://doi.org/10.1016/j.jag.2022.102772">https://doi.org/10.1016/j.jag.2022.102772</a>.
+</div>
+<div id="ref-sanz-ablanedo_accuracy_2018" class="csl-entry" role="listitem">
+Sanz-Ablanedo, Enoc, Jim H. Chandler, José Ramón Rodríguez-Pérez, and Celestino Ordóñez. 2018. <span>“Accuracy of Unmanned Aerial Vehicle (<span>UAV</span>) and <span>SfM</span> Photogrammetry Survey as a Function of the Number and Location of Ground Control Points Used.”</span> <em>Remote Sensing</em> 10 (10): 1606. <a href="https://doi.org/10.3390/rs10101606">https://doi.org/10.3390/rs10101606</a>.
+</div>
+<div id="ref-stott_ground_2020" class="csl-entry" role="listitem">
+Stott, Eilidh, Richard D. Williams, and Trevor B. Hoey. 2020. <span>“Ground Control Point Distribution for Accurate Kilometre-Scale Topographic Mapping Using an <span>RTK</span>-<span>GNSS</span> Unmanned Aerial Vehicle and <span>SfM</span> Photogrammetry.”</span> <em>Drones</em> 4 (3): 55. <a href="https://doi.org/10.3390/drones4030055">https://doi.org/10.3390/drones4030055</a>.
+</div>
+<div id="ref-wheaton_accounting_2010" class="csl-entry" role="listitem">
+Wheaton, Joseph M., James Brasington, Stephen E. Darby, and David A. Sear. 2010. <span>“Accounting for Uncertainty in <span>DEMs</span> from Repeat Topographic Surveys: Improved Sediment Budgets.”</span> <em>Earth Surface Processes and Landforms</em> 35 (2): 136–56. <a href="https://doi.org/10.1002/esp.1886">https://doi.org/10.1002/esp.1886</a>.
+</div>
+<div id="ref-zhang_evaluating_2019" class="csl-entry" role="listitem">
+Zhang, He, Emilien Aldana-Jague, François Clapuyt, Florian Wilken, Veerle Vanacker, and Kristof Van Oost. 2019. <span>“Evaluating the Potential of Post-Processing Kinematic (<span>PPK</span>) Georeferencing for <span>UAV</span>-Based Structure-from-Motion (<span>SfM</span>) Photogrammetry and Surface Change Detection.”</span> <em>Earth Surface Dynamics</em> 7 (3): 807–27. <a href="https://doi.org/10.5194/esurf-7-807-2019">https://doi.org/10.5194/esurf-7-807-2019</a>.
+</div>
+</div>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="../../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html">Return Home</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
