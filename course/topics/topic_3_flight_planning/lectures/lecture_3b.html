@@ -437,10 +437,10 @@ Corey White
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-2026-recipe-and-the-standards-caution" class="slide level2 smaller">
-<h2>The 2026 recipe, and the standard’s caution</h2>
+<section id="standards-caution" class="slide level2 smaller">
+<h2>Standard’s caution</h2>
 <div class="term-card">
-<p><strong>Defensible default</strong>: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint</p>
+<p><strong>Defaults</strong>: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint</p>
 </div>
 <ul>
 <li>The ASPRS standard is more conservative: GCPs remain “highly recommended” and should take priority over airborne positions in the adjustment, because camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
@@ -467,9 +467,6 @@ Corey White
 <li><strong>Antenna beats receiver</strong>: a low-cost dual-frequency board matched geodetic instruments in network RTK only when paired with a geodetic-grade antenna; with a patch antenna it needed open sky <span class="citation" data-cites="janos_evaluation_2021">(<a href="#/references" role="doc-biblioref" onclick="">Janos and Kuras 2021</a>)</span></li>
 <li>The base coordinate governs absolute accuracy: the rover measures centimeters <em>relative to the base</em>, and every point inherits the base position (the field protocol’s Methods A, B, and C)</li>
 </ul>
-<div class="term-card">
-<p><strong>No peer-reviewed RS4 study exists yet</strong>: our own field data, RS4 against the NCRTN, is genuinely publishable</p>
-</div>
 <aside class="notes">
 <p>This slide connects the literature to the hardware students actually held. The Famiglietti comparison is the honest Emlid-class citation; the receivers have since improved. The publishable-gap card is real: nobody has published an RS4-versus-state-RTN evaluation, and the class dataset is a credible short note. Recruit interest for it here.</p>
 <style type="text/css">
