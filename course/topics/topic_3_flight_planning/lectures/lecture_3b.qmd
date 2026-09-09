@@ -136,10 +136,10 @@ Section three: direct georeferencing moved the field in the last five years; her
 Stott's caveat is the teaching point: the zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir. Against the sparse target checkpoints, vertical errors still clustered spatially up to 0.14 m even though the dense validation found no consistent systematic error, so distributed checkpoints stayed mandatory. Zhang's one-GCP result is the canonical citation for the vertical bias fix: the bias is near constant, so one known point kills it. Nota matters for the change-detection topic later: co-align the epochs and put control in one of them.
 :::
 
-## The 2026 recipe, and the standard's caution {.smaller}
+## Standard's caution {.smaller}
 
 ::: {.term-card}
-**Defensible default**: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint
+**Defaults**: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint
 :::
 
 - The ASPRS standard is more conservative: GCPs remain "highly recommended" and should take priority over airborne positions in the adjustment, because camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations [@asprs_positional_2024]
@@ -155,9 +155,6 @@ Present the tension honestly instead of resolving it: recent peer-reviewed resul
 - **Antenna beats receiver**: a low-cost dual-frequency board matched geodetic instruments in network RTK only when paired with a geodetic-grade antenna; with a patch antenna it needed open sky [@janos_evaluation_2021]
 - The base coordinate governs absolute accuracy: the rover measures centimeters *relative to the base*, and every point inherits the base position (the field protocol's Methods A, B, and C)
 
-::: {.term-card}
-**No peer-reviewed RS4 study exists yet**: our own field data, RS4 against the NCRTN, is genuinely publishable
-:::
 
 ::: {.notes}
 This slide connects the literature to the hardware students actually held. The Famiglietti comparison is the honest Emlid-class citation; the receivers have since improved. The publishable-gap card is real: nobody has published an RS4-versus-state-RTN evaluation, and the class dataset is a credible short note. Recruit interest for it here.
