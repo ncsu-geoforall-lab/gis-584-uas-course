@@ -45,6 +45,62 @@ In the pre-proposal please define the scope of the project, the project location
 - References: at least 5 papers from scientific journals, rest can be reports, web documents
 - Appendix (optional): workflows, scripts, metadata. Software commands, issues go here
 
+## Grading and rubric
+
+The project is worth 40% of the course grade (see [Logistics & Policies](policies.qmd)). Within the project:
+
+| Milestone | Due | Weight |
+|---|---|---|
+| Pre-proposal | 9/9 | required, not graded |
+| Proposal | 9/28 | 5% |
+| Progress report | 10/21 | required, not graded |
+| Presentation | 11/30 and 12/1 | 35% |
+| Final paper and portfolio | 12/7 | 60% |
+
+Milestones are hard deadlines and are not accepted late. The ungraded milestones exist so you get feedback while there is still time to act on it; skipping one costs you that feedback and a conversation with me, not points.
+
+For every graded row below: full points means the element is present, specific to your project, and correctly interpreted; partial credit means it is present but thin, generic, or partly wrong; zero means it is missing.
+
+### Proposal (5 points)
+
+| Criterion | Points |
+|---|---|
+| Research question or objective: specific, and answerable with UAS data | 2 |
+| Study site and data: identified, available, and suited to the question | 1 |
+| Methods and software tools: named, with the underlying theory | 1 |
+| Expected results: described concretely | 1 |
+
+### Presentation (35 points)
+
+DE and on-campus presentations are graded on the same rows; only the length differs (10 minutes DE, 15 plus 5 discussion on campus).
+
+| Criterion | Points |
+|---|---|
+| Introduction and background: problem, motivation, research question | 4 |
+| Study site: where, why this site, geographic characteristics | 3 |
+| Data acquisition: platform and sensor, flight plan if applicable, conditions | 4 |
+| Data properties and processing: resolution, extent, accuracy | 4 |
+| Analysis and modeling methods: methodology and workflows | 5 |
+| Results: quantitative and qualitative, with tables, graphs, maps | 6 |
+| Discussion: effects of conditions, data, and methods; uncertainty; comparison with other studies; what remains unresolved | 4 |
+| Conclusion: key findings, methodological advances, future work | 2 |
+| Delivery: within the time limit, clear, figures readable with scale and legends | 3 |
+
+### Final paper (60 points)
+
+| Criterion | Points |
+|---|---|
+| Introduction and background with the research question | 6 |
+| Study site | 4 |
+| Data acquisition | 5 |
+| Data properties and processing | 6 |
+| Analysis and modeling methods | 8 |
+| Results: presented and explained with quantitative and qualitative description | 12 |
+| Discussion: uncertainty, comparison with other studies, open questions | 8 |
+| Conclusion and future work | 3 |
+| Scientific writing, structure, and formatting: journal standards, minimum 4 pages single spaced | 5 |
+| References: at least 5 scientific journal papers, consistent citation style | 3 |
+
 ## Past Projects
 
 Examples of student projects from previous semesters are on the [Past Projects](past_projects.qmd) page.
