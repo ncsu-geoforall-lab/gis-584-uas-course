@@ -13,17 +13,18 @@ bibliography: ../references.bib
 ## Objectives
 
 ::: {.incremental}
-- Describe photogrammetric processing as a multistep pipeline and name what each step consumes and produces
+- Describe photogrammetric processing as a multistep pipeline
 - List the data needed to generate an orthomosaic and a DSM from UAS imagery
-- Distinguish interior from exterior orientation and explain where each comes from
+- Distinguish interior from exterior orientation 
 - Run the full workflow in Agisoft Metashape and choose sensible parameters
-- Read a processing report and say which numbers describe the accuracy of the products
+- Read a processing report
 :::
 
 ::: {.notes}
 * Last week we learned about how SfM works
-* today we are learning how to parametrize it
+* Today we are learning how to parametrize it
 * Goal go from photos to orthomosaic and DSM
+* Interpret results
 :::
 
 ## From flight to products {.center .text-center .section-divider background-color="#e9f2e9"}
