@@ -178,7 +178,11 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <li class="fragment">Read a processing report and say which numbers describe the accuracy of the products</li>
 </ul>
 <aside class="notes">
-<p>Lecture 2A explained why SfM works; today is how you run it. By the end, students should be able to open Metashape, go from photos to orthomosaic and DSM, and defend the settings they chose. Everything here is exercised in Assignment 2B on the Lake Wheeler dataset, and Assignment 2C repeats the same pipeline in WebODM on the same imagery. If students ask why processing comes before flight planning in the schedule: you cannot plan a flight well until you know what the processing needs from the imagery.</p>
+<ul>
+<li>Last week we learned about how SfM works</li>
+<li>today we are learning how to parametrize it</li>
+<li>Goal go from photos to orthomosaic and DSM</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -194,7 +198,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <section id="from-flight-to-products" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>From flight to products</h2>
 <aside class="notes">
-<p>Section opener. The big picture first: what comes home from the field, what goes into the software, and what comes out. Every button in Metashape maps to one box on the next slide.</p>
+<p>Big picture first. What do we bring home, what goes into the software, what comes out. Every button we click today maps to one box on the next slide.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -250,7 +254,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 </div>
 <aside class="notes">
-<p>Images come in, features are matched, cameras are solved, dense geometry is built, cartographic products are exported. The dashed arrow is the part students forget: if alignment is weak you go back, clean images or add ground control, then re-optimize. Photogrammetry is iterative, not a single pass.</p>
+<p>Images come in. Features get matched, cameras get solved, dense geometry gets built, products get exported. See the dashed arrow: when alignment is weak, we go back, clean images or add control, and re-optimize. This is iterative, not a single pass. That loop is normal, not failure.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -270,7 +274,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><strong>Three things</strong>: images, a flight log or EXIF positions, and ground control coordinates. Everything else is computed</p>
 </div>
 <aside class="notes">
-<p>The better these three inputs, the less cleanup later. The rest of this section takes them one at a time.</p>
+<p>Three things come home from a flight: images, a flight log or EXIF positions, and ground control. Everything else is computed. The better these three, the less cleanup later.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -293,7 +297,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <li>Look through them before processing: blurred, over-exposed, and takeoff frames go</li>
 </ul>
 <aside class="notes">
-<p>Reminder from 2A: a geotag gets the model into the right neighborhood and seeds the alignment; centimeter accuracy comes from RTK/PPK positions or ground control. The pre-processing step nobody likes is culling bad frames, and it pays off more than any setting in the software.</p>
+<p>From 2A: a geotag gets the model into the right neighborhood; centimeter accuracy comes from RTK, PPK, or ground control. And the unglamorous step that pays off the most: look through your photos before processing. Blurry frames, over-exposed frames, the takeoff shot of your shoes: delete them now.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -315,7 +319,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/camera_sensor.webp" style="width:80.0%" alt="Camera sensor and lens geometry"></p>
 </div></div>
 <aside class="notes">
-<p>A short focal length close to the subject gives full perspective: objects near the camera look much larger, scale varies across the frame, distortion grows toward the edges. A longer focal length farther away approaches weak perspective, where rays are nearly parallel and scale is nearly uniform. UAS mapping sits between the two: wide action cameras push toward full perspective, higher flights with a longer lens toward weak perspective. Flight height and lens choice both matter for geometry, and overlap is still what makes the solution robust.</p>
+<p>Short focal length up close: full perspective. Nearby objects balloon, scale swings across the frame, distortion piles up at the edges. Long lens far away: rays nearly parallel, scale nearly uniform. UAS mapping lives between the two: wide action cameras pull one way, higher flights with longer lenses pull the other. And overlap is still king: 75 to 85 forward, 60 to 80 side.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -345,7 +349,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><strong>Flight attitude</strong>: the aircraft’s orientation in space, yaw, pitch, and roll</p>
 </div>
 <aside class="notes">
-<p>Logs seed the alignment and then bundle adjustment tightens them. When positions live in EXIF, Metashape reads them automatically; when they are in a separate log you import them with the right column order, time offset, and coordinate system, then check that the cameras land on top of your site.</p>
+<p>The IMU and GNSS write position and attitude for every photo. That is our exterior orientation, as first guesses. In EXIF, Metashape just reads it. In a separate log, we import it: right columns, right time offset, right coordinate system, then check the cameras actually land on our site.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -371,7 +375,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/GCPs.webp" alt="Ground control targets laid out across a field"></p>
 </div></div>
 <aside class="notes">
-<p>GCP placement and the GCP versus checkpoint distinction were in Lecture 2A; here the point is bookkeeping. A GCP file without its CRS is a set of numbers, not coordinates, and mixed CRS is the most common cause of a model that lands hundreds of meters from where it should.</p>
+<p>Placement and the control-versus-checkpoint distinction were 2A. Today is bookkeeping: a GCP file without its coordinate system is a list of numbers, not coordinates. A mixed-up CRS is the number one reason a model lands a hundred meters from where it should.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -430,7 +434,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><strong>Vertical datum</strong>: GNSS heights are ellipsoidal; maps use orthometric heights above the geoid. In North Carolina the two differ by about 30 m</p>
 </div>
 <aside class="notes">
-<p>Geotags arrive in WGS 84 degrees; the products should leave in a projected system with meters, which for our work is NC State Plane. The vertical datum trips up more projects than the horizontal one: if the GCPs are orthometric and the cameras ellipsoidal, the block fits at the wrong height until Metashape is told which is which. Assignment 2B walks through setting both.</p>
+<p>Geotags arrive in WGS 84 degrees. Products should leave in a projected system in meters; for us, NC State Plane. However, the vertical is the real trap: GNSS heights are ellipsoidal, maps want orthometric, and around here the two differ by about 30 m. Tell the software which is which, or wear the offset. Assignment 2B walks through setting both.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -446,7 +450,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <section id="products" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Products</h2>
 <aside class="notes">
-<p>Section transition. Four products come out of the pipeline; students met them in 1A and 2A, so this is a quick pass with the emphasis on what each one is good for.</p>
+<p>Four products come out. You have met them all; quick pass, what each is for.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -463,7 +467,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <h2>What comes out of processing</h2>
 
 <img data-src="../images/processing_outputs.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:75.0%" alt="Processing outputs: orthomosaic, digital surface model, point cloud, textured 3D model, and report"><aside class="notes">
-<p>Orthomosaic as the basemap, DSM or DTM as the analysis surface, point cloud as the raw 3D evidence, textured model for visualization, and the report as the record of how good all of it is.</p>
+<p>Orthomosaic is your basemap. DSM or DTM is your analysis surface. Point cloud is the raw 3D evidence. Textured model is for showing people. And the report is the record of how good all of it is; we end the lecture there.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -489,7 +493,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/ortho_example.webp" alt="Orthomosaic of fields and a road"></p>
 </div></div>
 <aside class="notes">
-<p>Every pixel is in the right place for measurement, as long as the surface it was draped on is right. Errors in the DSM show up as smeared building edges and doubled features; errors in control show up as the whole map being shifted.</p>
+<p>Every pixel in the right place, as long as the surface underneath was right. DSM errors smear building edges and double features; control errors shift the whole map. It looks authoritative either way. That is the danger.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -511,7 +515,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </ul>
 
 <img data-src="../images/dtm_dsm.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="Cross-section comparing a surface model over trees and buildings with the bare-earth terrain model beneath"><aside class="notes">
-<p>The distinction matters for every later topic: canopy height is DSM minus DTM, hydrology needs the DTM, and comparing an SfM DSM to a lidar DTM is a classic wrong conclusion. Metashape can classify ground points in the point cloud and build a DTM from those only.</p>
+<p>Canopy height is DSM minus DTM. Hydrology needs the DTM. Comparing an SfM DSM to a lidar DTM is the classic way to reach a wrong conclusion. SfM gives you the DSM by default; the DTM takes ground classification, which Metashape can do from the point cloud.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -537,7 +541,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/pointclouds.webp" alt="Colored point cloud of a landscape"></p>
 </div></div>
 <aside class="notes">
-<p>Treat it as raw geometric evidence: classify it, thin it, grid it to a surface. Exported as LAS, LAZ, or COPC it moves into GRASS and other tools for the terrain topics.</p>
+<p>Neither raster nor vector, hence the Dale Lutz line. Treat it as evidence: classify it, thin it, grid it. Exported as LAZ or COPC it flows straight into GRASS for the terrain topics.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -553,7 +557,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <section id="orientation-and-control" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Orientation and control</h2>
 <aside class="notes">
-<p>Section transition into the vocabulary Metashape uses in its dialogs and report: interior orientation, exterior orientation, markers.</p>
+<p>Now the vocabulary Metashape uses in its dialogs and its report: interior orientation, exterior orientation, markers.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -615,7 +619,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </tbody>
 </table>
 <aside class="notes">
-<p>Lecture 2A covered the concepts; this is the checklist form. The historical column is worth a sentence: classical orthorectification needed a DEM as input, and SfM turned that requirement into an output, which is the reason it needs so much overlap.</p>
+<p>2A gave you the concepts; here is the checklist. One historical note worth a beat: classical orthorectification needed a DEM as an input. SfM turned that input into an output. That is the revolution, and it is also why we need all that overlap.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -667,7 +671,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/orientation.webp" alt="Aircraft with the omega, phi, and kappa rotation axes"></p>
 </div></div>
 <aside class="notes">
-<p>Logs and EXIF provide first guesses for all six; bundle adjustment refines them until the tie points fit to a fraction of a pixel. In the Metashape reference pane these are the camera rows; their accuracy setting tells the adjustment how much to trust them.</p>
+<p>Six numbers per photo: where the camera was, and how it was pointed. Logs and EXIF are first guesses; bundle adjustment tightens them until the tie points fit to a fraction of a pixel. In the Reference pane these are the camera rows, and their accuracy setting says how much the adjustment should trust them.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -693,7 +697,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/interior_orientation.webp" alt="Diagram of focal length, principal point, and image plane inside a camera"></p>
 </div></div>
 <aside class="notes">
-<p>Self-calibration is what lets a consumer camera produce usable maps, and it is also a source of the doming error from 2A: with weak geometry the adjustment can trade focal length against a bowed surface and still fit. GCPs and a second flying height constrain it. The report prints the solved camera model with its uncertainties.</p>
+<p>Self-calibration is why a consumer camera can make maps at all. However, it is also where the doming error is born: with weak geometry the solver can trade focal length against a bowed surface and still fit. GCPs and a second flying height pin it down. The report prints the solved camera model; look at it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -724,7 +728,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 </div></div>
 <aside class="notes">
-<p>Marker placement is the manual part of the workflow and Assignment 2B walks through it: import the coordinates, filter photos by marker, drag the flag onto the target in several photos, optimize. The report then lists control error and checkpoint error separately; students should be able to say which one they would quote.</p>
+<p>A marker is Metashape’s word for a GCP: known coordinates plus where you clicked it on the photos. That clicking is the manual labor of this workflow, and the lab walks it: import, filter photos by marker, drag the flag, optimize. The report then lists control error and checkpoint error separately. Know which one you would quote.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -740,7 +744,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <section id="processing-in-metashape" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Processing in Metashape</h2>
 <aside class="notes">
-<p>Section transition. Options first, then the Metashape workflow step by step, with the settings that matter and what they cost.</p>
+<p>Where to process, then the workflow step by step, with the settings that matter.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -790,7 +794,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><strong>The real questions</strong>: budget and equipment, how often you fly, whether you have the training to process, and whether you have the time</p>
 </div>
 <aside class="notes">
-<p>This course uses Metashape (licensed for every student) and WebODM (free). RealityScan handles aerial blocks too and is free for students, so it is a fair third option for personal projects. Cloud services trade money for time and hide the parameters we spend the rest of this lecture on.</p>
+<p>We use Metashape, licensed for everyone here, and WebODM, free and open source, in Assignment 2C. RealityScan is free for students too if you want a third. Cloud services trade money for time and hide exactly the parameters we are about to spend twenty minutes on.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -822,7 +826,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 </div></div>
 <aside class="notes">
-<p>Metashape 2.x renamed several steps: the dense cloud is now the point cloud, build mesh is build model, and the orthophoto is the orthomosaic. Older tutorials and videos use the old names; the pipeline is the same. Keep the manual open during the assignment; the appendix has the memory requirements per quality setting.</p>
+<p>Version 2 renamed things: dense cloud is now point cloud, build mesh is build model, orthophoto is orthomosaic. Old tutorials and videos use the old names; same pipeline. Keep the manual handy; the appendix has memory requirements per quality setting, and you will want it before you click Ultra High.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -884,7 +888,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </tbody>
 </table>
 <aside class="notes">
-<p>This is the map of the rest of the lecture and of Assignment 2B. Check the diagnostics after every step before spending compute on the next one: a bad alignment makes everything downstream wrong, and it is the cheapest step to redo. The model step is optional for mapping; the DEM can be built from the point cloud or straight from depth maps.</p>
+<p>This table is the rest of the lecture, and it is the lab. One rule: check the result after every step before paying for the next one. A bad alignment poisons everything downstream, and it is the cheapest step to redo. Also notice the model row is optional for mapping; the DEM comes straight from the point cloud.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -906,7 +910,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <li>Set camera accuracy (meters and degrees) to what the aircraft’s GNSS can actually deliver</li>
 </ul>
 <aside class="notes">
-<p>The picture to expect: cameras in neat flight lines above the footprint of the site. If they are scattered or in the ocean, the CRS or the column order is wrong. Camera accuracy is a weight, not a guess: 3 to 10 m for a standard GNSS, 0.02 to 0.05 m for RTK.</p>
+<p>What you want to see: cameras in neat flight lines over your site. Scattered cameras, or cameras in the ocean: wrong CRS or wrong column order; fix it before anything else. Camera accuracy is a weight, not a wish: 3 to 10 m for standard GNSS, a couple of centimeters for RTK.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -970,7 +974,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </tbody>
 </table>
 <aside class="notes">
-<p>Start at High; drop to Medium only for very large projects, and use Low for a quick check that the block hangs together before placing markers. Reference preselection uses the geotags to decide which pairs to match and saves a lot of time on aerial blocks. If coverage is thin, revisit image quality and overlap rather than the settings.</p>
+<p>Start at High. Medium for truly big projects; Low only as a quick sanity check before placing markers. Reference preselection uses the geotags to pick which pairs to try and saves enormous time on aerial blocks. If alignment is thin, your problem is image quality or overlap, not this dialog.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -997,7 +1001,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/bundle_block_adjustment.webp" alt="Diagram of rays from several camera stations converging on tie points on the ground"></p>
 </div></div>
 <aside class="notes">
-<p>The mathematical heart of the workflow, and the reason the report’s tie point statistics matter: a mean reprojection error above about one pixel says the camera model or the matches are poor. Optimize Cameras re-runs the adjustment after markers are placed; everything built before that (point cloud, DEM) must be rebuilt afterwards because the geometry moved.</p>
+<p>This is the math heart: nonlinear least squares over every camera and every tie point, minimizing reprojection error. One diagnostic to remember: mean reprojection error above about a pixel means the matches or the camera model are poor. And after you place markers and optimize, everything built before is stale; rebuild it. The geometry moved.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1063,7 +1067,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </tbody>
 </table>
 <aside class="notes">
-<p>Metashape computes a depth map for every image and fuses them into the point cloud. Quality is the setting with the biggest effect on time and memory; the manual’s appendix lists RAM per quality and image count. Medium is the assignment setting so that the lab finishes in class; High is what you would use for a real product.</p>
+<p>A depth map per image, fused into the cloud. Quality is the big time-and-memory knob. Medium is our class setting so the lab finishes in the room; High is what I would use for a deliverable. Check the manual’s appendix before promising Ultra High to anyone.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1113,7 +1117,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <li>Filter the tie points by reprojection error, reconstruction uncertainty, and image count, then optimize again</li>
 </ul>
 <aside class="notes">
-<p>Filtering prunes outliers that come from poor texture, noise, and badly focused images. Aggressive is the aerial default; Mild is for objects with fine structure such as vegetation or thin poles. Cleaning tie points before optimization is the cheapest accuracy gain in the whole workflow.</p>
+<p>Aggressive for aerial mapping; that is also the lab setting. Mild only when fine structure is the point: vegetation, wires, thin poles. And the cheapest accuracy gain in the whole workflow: filter the tie points by error and uncertainty, then optimize again, before you densify.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1167,7 +1171,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 </div></div>
 <aside class="notes">
-<p>Height field for anything flown nadir over terrain; arbitrary for the 2A-style objects and for facades. Face count controls memory and export size; generate a detailed master and decimate copies for the web. The assignment still builds a model so that students see the textured product, but a production mapping workflow often skips it.</p>
+<p>Height field for anything flown nadir over terrain: 2.5D and light. Arbitrary is for the 2A-style objects and facades: full 3D, heavy. For pure mapping you can skip the model entirely; we build one in the lab so you get a textured product to keep.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1194,7 +1198,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/close_holes.webp" alt="Metashape close holes dialog"></p>
 </div></div>
 <aside class="notes">
-<p>Holes are common in UAS data because weather cuts flights short. Close them before computing volumes; leave them alone otherwise, since interpolated geometry is invented geometry. Filtering by component size is the quickest way to remove floaters over water or sky.</p>
+<p>Weather cuts flights short; holes happen. Close them only when you must, and always before volume calculations, because an open mesh gives volume numbers that mean nothing. Otherwise leave the holes honest: interpolated geometry is invented geometry.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1250,7 +1254,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 </div></div>
 <aside class="notes">
-<p>For terrain, Adaptive orthophoto or Orthophoto; the rest are for objects. Texture size sets the atlas resolution; 4096 is enough for the assignment. Texture is purely visual and does not affect the DEM or orthomosaic.</p>
+<p>Terrain wants Adaptive orthophoto or Orthophoto; everything else is for objects. 4096 is plenty for the lab. Remember texture is cosmetic: it changes nothing in the DEM or the orthomosaic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1277,7 +1281,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </ul>
 </div></div>
 <aside class="notes">
-<p>Set the projection once here and the orthomosaic follows it. Point cloud as source with the ground class selected is how Metashape produces a DTM. Turn interpolation off when you want to know where the data really are, on when you need a continuous surface for analysis.</p>
+<p>Set the projection here, once, and the orthomosaic inherits it. We use NC State Plane, EPSG:3358. Point cloud as source; pick the ground class only and you have made a DTM. Interpolation off is the honest surface for accuracy work; on is the usable surface for analysis.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1308,7 +1312,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </ul>
 </div></div>
 <aside class="notes">
-<p>Mosaic is the right default; Average reduces noise on uniform surfaces but blurs edges; Disabled is a diagnostic to see where seams fall. Building on the model instead of the DEM gives a true orthophoto where building sides do not smear, at the cost of model quality driving the result.</p>
+<p>Mosaic blending, the default, is right. Average trades sharpness for noise; Disabled shows you where the seams are, which is occasionally exactly what you want to see. Building on the model instead of the DEM gives a true orthophoto with clean building edges, at the price of the model’s quality.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1324,7 +1328,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <section id="exports-and-quality-control" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Exports and quality control</h2>
 <aside class="notes">
-<p>Section transition. Getting the products out in formats the rest of the course uses, and reading the report that says how good they are.</p>
+<p>Last stretch: getting products out in formats the rest of the course reads, and then reading the report.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1381,7 +1385,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </tbody>
 </table>
 <aside class="notes">
-<p>Cloud-optimized formats (COG for rasters, COPC for point clouds) are what the later topics read directly from the web bucket. Camera positions and calibration can also be exported (XML, omega phi kappa text, Bundler) for reuse in other software. Save the project after every stage so a failed step can be rerun without recomputing everything before it.</p>
+<p>COG for rasters, COPC for point clouds; that is what the later topics stream from the bucket. Camera positions export too if another package needs them. And save the project after every stage, so a crash costs you a step, not a day.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1417,7 +1421,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><strong>Quote the checkpoint RMSE</strong>: control point error is circular, the adjustment was told to fit those points</p>
 </div>
 <aside class="notes">
-<p>Assignment 2B asks students to explain the report, and this slide is the reading guide. Overlap map: dark areas with fewer than 3 images are where the reconstruction is weak. Calibration residuals: a systematic pattern means the camera model is not fitting. Control versus checkpoint: if checkpoint error is much larger than control error, the model is over-fitting the control and the distribution or weighting needs work.</p>
+<p>Always generate it. Here is the reading guide. Overlap map first: dark means fewer than three images, weak reconstruction. Calibration residuals: a pattern means the camera model is not fitting. Then control versus checkpoints, listed separately: checkpoint error much bigger than control error means you over-fit your control. Your homework is to explain this document, and this slide is the outline of that explanation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1448,7 +1452,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><strong>Batch process</strong>: queue the steps with their parameters and let them run unattended; the same steps are available from the Python API for repeatable projects</p>
 </div>
 <aside class="notes">
-<p>The step students skip is the last one: after optimization every derived product is stale. Batch processing is how you avoid babysitting a multi-hour job, and the Python API is the same workflow as a script, which becomes useful when you process repeat flights of the same site in the change-detection topic.</p>
+<p>The step everyone skips: after Optimize Cameras, every derived product is stale. Rebuild. Batch is how a multi-hour job runs without a babysitter, and the same steps exist in the Python API, which gets interesting the moment you process repeat flights of the same site.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1470,7 +1474,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><strong>Next topic</strong>: UAS flight planning, and the Lake Wheeler field flight where the next dataset gets collected</p>
 </div>
 <aside class="notes">
-<p>Recap the arc: inputs, products, orientation and control, the Metashape pipeline step by step, exports, and the report. Point students at the assignment page for the data download, the step-by-step settings, and the submission requirements; remind DE students that the recorded walkthrough follows the same order as this deck.</p>
+<p>The arc: inputs, products, orientation and control, the workflow, exports, the report. Assignment 2B is the whole pipeline on the Lake Wheeler data; download, settings, and submission are on the page. DE folks: the recorded walkthrough follows this same order. Next Monday is flight planning, and Wednesday we fly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
