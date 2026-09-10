@@ -1528,7 +1528,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#objectives",
     "title": "UAS Imagery Processing",
     "section": "Objectives",
-    "text": "Objectives\n\nDescribe photogrammetric processing as a multistep pipeline\nList the data needed to generate an orthomosaic and a DSM from UAS imagery\nDistinguish interior from exterior orientation\nRun the full workflow in Agisoft Metashape and choose sensible parameters\nRead a processing report\n\n\n\nLast week we learned about how SfM works\nToday we are learning how to parametrize it\nGoal go from photos to orthomosaic and DSM\nInterpret results",
+    "text": "Objectives\n\nDescribe photogrammetric processing as a multistep pipeline\nList the data needed to generate an orthomosaic and a DSM from UAS imagery\nDistinguish interior from exterior orientation\nRun the full workflow\nRead a processing report\n\n\n\nLast week we learned about how SfM works\nToday we are learning how to parametrize it\nGoal go from photos to orthomosaic and DSM\nInterpret results",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
