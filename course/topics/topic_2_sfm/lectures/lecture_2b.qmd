@@ -16,7 +16,7 @@ bibliography: ../references.bib
 - Describe photogrammetric processing as a multistep pipeline
 - List the data needed to generate an orthomosaic and a DSM from UAS imagery
 - Distinguish interior from exterior orientation 
-- Run the full workflow in Agisoft Metashape and choose sensible parameters
+- Run the full workflow
 - Read a processing report
 :::
 
