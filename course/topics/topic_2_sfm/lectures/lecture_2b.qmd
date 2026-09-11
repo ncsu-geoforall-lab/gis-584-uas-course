@@ -309,13 +309,13 @@ Self-calibration is why a consumer camera can make maps at all. However, it is a
 A marker is Metashape's word for a GCP: known coordinates plus where you clicked it on the photos. That clicking is the manual labor of this workflow, and the lab walks it: import, filter photos by marker, drag the flag, optimize. The report then lists control error and checkpoint error separately. Know which one you would quote.
 :::
 
-## Processing in Metashape {.center .text-center .section-divider background-color="#e9f2e9"}
+## Where to process {.center .text-center .section-divider background-color="#e9f2e9"}
 
 ::: {.notes}
 Where to process, then the workflow step by step, with the settings that matter.
 :::
 
-## Where to process {.smaller}
+## Software options {.smaller}
 
 | Option | Examples | Trade-off |
 |---|---|---|
@@ -369,7 +369,10 @@ This table is the rest of the lecture, and it is the lab. One rule: check the re
 
 ## Loading photos and positions {.smaller}
 
-![](../images/camera_positions.webp){width="70%" fig-align="center" fig-alt="Metashape model view with camera positions arranged in flight lines above the site"}
+![](../images/wf_photos.svg){width="100%" fig-alt="Metashape workflow strip with the Add Photos step highlighted"}
+
+
+![](../images/camera_positions.webp){height="270" fig-align="center" fig-alt="Metashape model view with camera positions arranged in flight lines above the site"}
 
 - Add Photos, then check the reference pane: positions from EXIF load automatically
 - Import a flight log when positions are not in EXIF: set the column order, coordinate system, and time offset
@@ -380,6 +383,9 @@ What you want to see: cameras in neat flight lines over your site. Scattered cam
 :::
 
 ## Align photos {.smaller}
+
+![](../images/wf_align.svg){width="100%" fig-alt="Metashape workflow strip with the Align step highlighted"}
+
 
 ::: {.columns}
 ::: {.column width="60%"}
@@ -403,6 +409,9 @@ Start at High. Medium for truly big projects; Low only as a quick sanity check b
 
 ## Bundle adjustment {.smaller}
 
+![](../images/wf_align.svg){width="100%" fig-alt="Metashape workflow strip with the Align step highlighted"}
+
+
 ::: {.columns}
 ::: {.column width="50%"}
 - Non-linear least squares over every camera and every tie point
@@ -419,7 +428,31 @@ Start at High. Medium for truly big projects; Low only as a quick sanity check b
 This is the math heart: nonlinear least squares over every camera and every tie point, minimizing reprojection error. One diagnostic to remember: mean reprojection error above about a pixel means the matches or the camera model are poor. And after you place markers and optimize, everything built before is stale; rebuild it. The geometry moved.
 :::
 
+## Optimizing with markers {.smaller}
+
+![](../images/wf_markers.svg){width="100%" fig-alt="Metashape workflow strip with the Markers step highlighted"}
+
+
+::: {.columns}
+::: {.column width="55%"}
+1. Import marker coordinates and set their coordinate system
+2. Place each marker on several photos (filter photos by marker)
+3. Set marker accuracy (0.005 to 0.05 m) and camera accuracy to realistic values
+4. Optimize Cameras: the adjustment now fits the control
+5. Rebuild the point cloud, DEM, and orthomosaic; the geometry has moved
+:::
+::: {.column width="45%"}
+![](../images/Agisoft_batch.webp){fig-alt="Metashape batch process dialog listing queued workflow steps"}
+:::
+:::
+::: {.notes}
+The step everyone skips: after Optimize Cameras, every derived product is stale. Rebuild.
+:::
+
 ## Build point cloud {.smaller}
+
+![](../images/wf_cloud.svg){width="100%" fig-alt="Metashape workflow strip with the Point Cloud step highlighted"}
+
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -441,6 +474,9 @@ A depth map per image, fused into the cloud. Quality is the big time-and-memory 
 
 ## Depth filtering and editing {.smaller}
 
+![](../images/wf_cloud.svg){width="100%" fig-alt="Metashape workflow strip with the Point Cloud step highlighted"}
+
+
 | Depth filtering | Use when |
 |---|---|
 | Mild | Complex geometry with many small foreground details you want to keep |
@@ -456,6 +492,9 @@ Aggressive for aerial mapping; that is also the lab setting. Mild only when fine
 :::
 
 ## Build model {.smaller}
+
+![](../images/wf_model.svg){width="100%" fig-alt="Metashape workflow strip with the Model step highlighted"}
+
 
 ::: {.columns}
 ::: {.column width="55%"}
@@ -480,6 +519,9 @@ Height field for anything flown nadir over terrain: 2.5D and light. Arbitrary is
 
 ## Editing the model {.smaller}
 
+![](../images/wf_model.svg){width="100%" fig-alt="Metashape workflow strip with the Model step highlighted"}
+
+
 ::: {.columns}
 ::: {.column width="50%"}
 - **Close holes**: fills gaps left by insufficient overlap; required before any volume calculation, otherwise the volume is meaningless
@@ -493,10 +535,13 @@ Height field for anything flown nadir over terrain: 2.5D and light. Arbitrary is
 :::
 
 ::: {.notes}
-Weather cuts flights short; holes happen. Close them only when you must, and always before volume calculations, because an open mesh gives volume numbers that mean nothing. Otherwise leave the holes honest: interpolated geometry is invented geometry.
+Holes happen. Close them only when you must, and always before volume calculations, because an open mesh gives volume numbers that mean nothing. Otherwise leave the holes honest: interpolated geometry is invented geometry.
 :::
 
 ## Build texture {.smaller}
+
+![](../images/wf_texture.svg){width="100%" fig-alt="Metashape workflow strip with the Texture step highlighted"}
+
 
 ::: {.columns}
 ::: {.column width="55%"}
@@ -520,6 +565,9 @@ Terrain wants Adaptive orthophoto or Orthophoto; everything else is for objects.
 
 ## Build DEM {.smaller}
 
+![](../images/wf_dem.svg){width="100%" fig-alt="Metashape workflow strip with the DEM step highlighted"}
+
+
 ::: {.columns}
 ::: {.column width="45%"}
 ![](../images/build_DEM.webp){fig-alt="Metashape build DEM dialog"}
@@ -537,6 +585,9 @@ Set the projection here, once, and the orthomosaic inherits it. We use NC State 
 :::
 
 ## Build orthomosaic {.smaller}
+
+![](../images/wf_ortho.svg){width="100%" fig-alt="Metashape workflow strip with the Orthomosaic step highlighted"}
+
 
 ::: {.columns}
 ::: {.column width="45%"}
@@ -562,6 +613,9 @@ Last stretch: getting products out in formats the rest of the course reads, and 
 
 ## Export formats {.smaller}
 
+![](../images/wf_export.svg){width="100%" fig-alt="Metashape workflow strip with the Export step highlighted"}
+
+
 | Product (File, Export) | Formats | Notes |
 |---|---|---|
 | Orthomosaic | GeoTIFF, COG, JPEG, PNG, KMZ | Check the CRS; write overviews |
@@ -570,24 +624,29 @@ Last stretch: getting products out in formats the rest of the course reads, and 
 | Model | OBJ, PLY, GLB, FBX, 3D PDF | OBJ writes textures as separate files; GLB is one file |
 | Report | PDF | Always |
 
+::: {.term-card}
+**Batch process**: queue the steps above with their parameters and let them run unattended; the same steps are available from the Python API for repeatable projects
+:::
+
 ::: {.notes}
-COG for rasters, COPC for point clouds; that is what the later topics stream from the bucket. Camera positions export too if another package needs them. And save the project after every stage, so a crash costs you a step, not a day.
+COG for rasters, COPC for point clouds; that is what the later topics stream from the bucket. Camera positions export too if another package needs them. And save the project after every stage, so a crash costs you a step, not a day. One more workflow habit: Batch queues every step you just learned and runs them without a babysitter, and the same steps exist in the Python API, which gets interesting the moment you process repeat flights of the same site.
 :::
 
 ## The processing report {.smaller}
+
+![](../images/wf_export.svg){width="100%" fig-alt="Metashape workflow strip with the Export step highlighted"}
+
 
 ::: {.columns}
 ::: {.column width="55%"}
 Always generate it. It contains:
 
 - Survey data: image count, flying altitude, ground resolution, coverage area, camera model
-- Camera calibration with residual plots
-- Camera locations and error estimates
-- Ground control point and checkpoint errors, listed separately
-- Overlap map, DEM and orthomosaic previews, processing parameters
+- Camera calibration with residual plots; camera locations and error estimates
+- Control and checkpoint errors listed separately; overlap map, previews, parameters
 :::
 ::: {.column width="45%"}
-![](../images/Agisoft_report.webp){width="62%" fig-align="center" fig-alt="Pages of a Metashape processing report with the orthomosaic, DEM, overlap map, and camera calibration residuals"}
+![](../images/Agisoft_report.webp){width="50%" fig-align="center" fig-alt="Pages of a Metashape processing report with the orthomosaic, DEM, overlap map, and camera calibration residuals"}
 :::
 :::
 
@@ -597,29 +656,6 @@ Always generate it. It contains:
 
 ::: {.notes}
 Always generate it. Here is the reading guide. Overlap map first: dark means fewer than three images, weak reconstruction. Calibration residuals: a pattern means the camera model is not fitting. Then control versus checkpoints, listed separately: checkpoint error much bigger than control error means you over-fit your control. Your homework is to explain this document, and this slide is the outline of that explanation.
-:::
-
-## Optimizing with markers {.smaller}
-
-::: {.columns}
-::: {.column width="55%"}
-1. Import marker coordinates and set their coordinate system
-2. Place each marker on several photos (filter photos by marker)
-3. Set marker accuracy (0.005 to 0.05 m) and camera accuracy to realistic values
-4. Optimize Cameras: the adjustment now fits the control
-5. Rebuild the point cloud, DEM, and orthomosaic; the geometry has moved
-:::
-::: {.column width="45%"}
-![](../images/Agisoft_batch.webp){fig-alt="Metashape batch process dialog listing queued workflow steps"}
-:::
-:::
-
-::: {.term-card}
-**Batch process**: queue the steps with their parameters and let them run unattended; the same steps are available from the Python API for repeatable projects
-:::
-
-::: {.notes}
-The step everyone skips: after Optimize Cameras, every derived product is stale. Rebuild. Batch is how a multi-hour job runs without a babysitter, and the same steps exist in the Python API, which gets interesting the moment you process repeat flights of the same site.
 :::
 
 ## Wrap-up
