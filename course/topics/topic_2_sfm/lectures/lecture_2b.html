@@ -742,8 +742,8 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
           display:block!important;
       }</style></aside>
 </section>
-<section id="processing-in-metashape" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
-<h2>Processing in Metashape</h2>
+<section id="where-to-process" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Where to process</h2>
 <aside class="notes">
 <p>Where to process, then the workflow step by step, with the settings that matter.</p>
 <style type="text/css">
@@ -758,8 +758,8 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
           display:block!important;
       }</style></aside>
 </section>
-<section id="where-to-process" class="slide level2 smaller">
-<h2>Where to process</h2>
+<section id="software-options" class="slide level2 smaller">
+<h2>Software options</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -904,8 +904,13 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="loading-photos-and-positions" class="slide level2 smaller">
 <h2>Loading photos and positions</h2>
-
-<img data-src="../images/camera_positions.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Metashape model view with camera positions arranged in flight lines above the site"><ul>
+<p><img data-src="../images/wf_photos.svg" style="width:100.0%" alt="Metashape workflow strip with the Add Photos step highlighted"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/camera_positions.webp" class="quarto-figure quarto-figure-center" alt="Metashape model view with camera positions arranged in flight lines above the site" height="270"></p>
+</figure>
+</div>
+<ul>
 <li>Add Photos, then check the reference pane: positions from EXIF load automatically</li>
 <li>Import a flight log when positions are not in EXIF: set the column order, coordinate system, and time offset</li>
 <li>Set camera accuracy (meters and degrees) to what the aircraft’s GNSS can actually deliver</li>
@@ -926,6 +931,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="align-photos" class="slide level2 smaller">
 <h2>Align photos</h2>
+<p><img data-src="../images/wf_align.svg" style="width:100.0%" alt="Metashape workflow strip with the Align step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -990,6 +996,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="bundle-adjustment" class="slide level2 smaller">
 <h2>Bundle adjustment</h2>
+<p><img data-src="../images/wf_align.svg" style="width:100.0%" alt="Metashape workflow strip with the Align step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -1015,8 +1022,38 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
           display:block!important;
       }</style></aside>
 </section>
+<section id="optimizing-with-markers" class="slide level2 smaller">
+<h2>Optimizing with markers</h2>
+<p><img data-src="../images/wf_markers.svg" style="width:100.0%" alt="Metashape workflow strip with the Markers step highlighted"></p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ol type="1">
+<li>Import marker coordinates and set their coordinate system</li>
+<li>Place each marker on several photos (filter photos by marker)</li>
+<li>Set marker accuracy (0.005 to 0.05 m) and camera accuracy to realistic values</li>
+<li>Optimize Cameras: the adjustment now fits the control</li>
+<li>Rebuild the point cloud, DEM, and orthomosaic; the geometry has moved</li>
+</ol>
+</div><div class="column" style="width:45%;">
+<p><img data-src="../images/Agisoft_batch.webp" alt="Metashape batch process dialog listing queued workflow steps"></p>
+</div></div>
+<aside class="notes">
+<p>The step everyone skips: after Optimize Cameras, every derived product is stale. Rebuild.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="build-point-cloud" class="slide level2 smaller">
 <h2>Build point cloud</h2>
+<p><img data-src="../images/wf_cloud.svg" style="width:100.0%" alt="Metashape workflow strip with the Point Cloud step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1083,7 +1120,8 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="depth-filtering-and-editing" class="slide level2 smaller">
 <h2>Depth filtering and editing</h2>
-<table class="caption-top">
+
+<img data-src="../images/wf_cloud.svg" style="width:100.0%" alt="Metashape workflow strip with the Point Cloud step highlighted" class="r-stretch"><table class="caption-top">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
@@ -1133,6 +1171,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="build-model" class="slide level2 smaller">
 <h2>Build model</h2>
+<p><img data-src="../images/wf_model.svg" style="width:100.0%" alt="Metashape workflow strip with the Model step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:55%;">
 <table class="caption-top">
@@ -1187,6 +1226,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="editing-the-model" class="slide level2 smaller">
 <h2>Editing the model</h2>
+<p><img data-src="../images/wf_model.svg" style="width:100.0%" alt="Metashape workflow strip with the Model step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -1199,7 +1239,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 <p><img data-src="../images/close_holes.webp" alt="Metashape close holes dialog"></p>
 </div></div>
 <aside class="notes">
-<p>Weather cuts flights short; holes happen. Close them only when you must, and always before volume calculations, because an open mesh gives volume numbers that mean nothing. Otherwise leave the holes honest: interpolated geometry is invented geometry.</p>
+<p>Holes happen. Close them only when you must, and always before volume calculations, because an open mesh gives volume numbers that mean nothing. Otherwise leave the holes honest: interpolated geometry is invented geometry.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1214,6 +1254,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="build-texture" class="slide level2 smaller">
 <h2>Build texture</h2>
+<p><img data-src="../images/wf_texture.svg" style="width:100.0%" alt="Metashape workflow strip with the Texture step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:55%;">
 <table class="caption-top">
@@ -1270,6 +1311,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="build-dem" class="slide level2 smaller">
 <h2>Build DEM</h2>
+<p><img data-src="../images/wf_dem.svg" style="width:100.0%" alt="Metashape workflow strip with the DEM step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:45%;">
 <p><img data-src="../images/build_DEM.webp" alt="Metashape build DEM dialog"></p>
@@ -1297,6 +1339,7 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="build-orthomosaic" class="slide level2 smaller">
 <h2>Build orthomosaic</h2>
+<p><img data-src="../images/wf_ortho.svg" style="width:100.0%" alt="Metashape workflow strip with the Orthomosaic step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1344,7 +1387,8 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="export-formats" class="slide level2 smaller">
 <h2>Export formats</h2>
-<table class="caption-top">
+
+<img data-src="../images/wf_export.svg" style="width:100.0%" alt="Metashape workflow strip with the Export step highlighted" class="r-stretch"><table class="caption-top">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -1385,8 +1429,11 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </tr>
 </tbody>
 </table>
+<div class="term-card">
+<p><strong>Batch process</strong>: queue the steps above with their parameters and let them run unattended; the same steps are available from the Python API for repeatable projects</p>
+</div>
 <aside class="notes">
-<p>COG for rasters, COPC for point clouds; that is what the later topics stream from the bucket. Camera positions export too if another package needs them. And save the project after every stage, so a crash costs you a step, not a day.</p>
+<p>COG for rasters, COPC for point clouds; that is what the later topics stream from the bucket. Camera positions export too if another package needs them. And save the project after every stage, so a crash costs you a step, not a day. One more workflow habit: Batch queues every step you just learned and runs them without a babysitter, and the same steps exist in the Python API, which gets interesting the moment you process repeat flights of the same site.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1401,20 +1448,19 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </section>
 <section id="the-processing-report" class="slide level2 smaller">
 <h2>The processing report</h2>
+<p><img data-src="../images/wf_export.svg" style="width:100.0%" alt="Metashape workflow strip with the Export step highlighted"></p>
 <div class="columns">
 <div class="column" style="width:55%;">
 <p>Always generate it. It contains:</p>
 <ul>
 <li>Survey data: image count, flying altitude, ground resolution, coverage area, camera model</li>
-<li>Camera calibration with residual plots</li>
-<li>Camera locations and error estimates</li>
-<li>Ground control point and checkpoint errors, listed separately</li>
-<li>Overlap map, DEM and orthomosaic previews, processing parameters</li>
+<li>Camera calibration with residual plots; camera locations and error estimates</li>
+<li>Control and checkpoint errors listed separately; overlap map, previews, parameters</li>
 </ul>
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/Agisoft_report.webp" class="quarto-figure quarto-figure-center" style="width:62.0%" alt="Pages of a Metashape processing report with the orthomosaic, DEM, overlap map, and camera calibration residuals"></p>
+<p><img data-src="../images/Agisoft_report.webp" class="quarto-figure quarto-figure-center" style="width:50.0%" alt="Pages of a Metashape processing report with the orthomosaic, DEM, overlap map, and camera calibration residuals"></p>
 </figure>
 </div>
 </div></div>
@@ -1423,37 +1469,6 @@ Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 <aside class="notes">
 <p>Always generate it. Here is the reading guide. Overlap map first: dark means fewer than three images, weak reconstruction. Calibration residuals: a pattern means the camera model is not fitting. Then control versus checkpoints, listed separately: checkpoint error much bigger than control error means you over-fit your control. Your homework is to explain this document, and this slide is the outline of that explanation.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="optimizing-with-markers" class="slide level2 smaller">
-<h2>Optimizing with markers</h2>
-<div class="columns">
-<div class="column" style="width:55%;">
-<ol type="1">
-<li>Import marker coordinates and set their coordinate system</li>
-<li>Place each marker on several photos (filter photos by marker)</li>
-<li>Set marker accuracy (0.005 to 0.05 m) and camera accuracy to realistic values</li>
-<li>Optimize Cameras: the adjustment now fits the control</li>
-<li>Rebuild the point cloud, DEM, and orthomosaic; the geometry has moved</li>
-</ol>
-</div><div class="column" style="width:45%;">
-<p><img data-src="../images/Agisoft_batch.webp" alt="Metashape batch process dialog listing queued workflow steps"></p>
-</div></div>
-<div class="term-card">
-<p><strong>Batch process</strong>: queue the steps with their parameters and let them run unattended; the same steps are available from the Python API for repeatable projects</p>
-</div>
-<aside class="notes">
-<p>The step everyone skips: after Optimize Cameras, every derived product is stale. Rebuild. Batch is how a multi-hour job runs without a babysitter, and the same steps exist in the Python API, which gets interesting the moment you process repeat flights of the same site.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

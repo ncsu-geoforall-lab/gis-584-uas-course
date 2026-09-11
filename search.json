@@ -1771,11 +1771,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#processing-in-metashape",
-    "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#processing-in-metashape",
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#where-to-process",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#where-to-process",
     "title": "UAS Imagery Processing",
-    "section": "Processing in Metashape",
-    "text": "Processing in Metashape\n\nWhere to process, then the workflow step by step, with the settings that matter.",
+    "section": "Where to process",
+    "text": "Where to process\n\nWhere to process, then the workflow step by step, with the settings that matter.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1784,11 +1784,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#where-to-process",
-    "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#where-to-process",
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#software-options",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#software-options",
     "title": "UAS Imagery Processing",
-    "section": "Where to process",
-    "text": "Where to process\n\n\n\n\n\n\n\n\nOption\nExamples\nTrade-off\n\n\n\n\nDesktop, commercial\nAgisoft Metashape, Pix4Dmatic, DJI Terra\nControl and transparency; needs a capable machine and a license\n\n\nDesktop, open source\nWebODM (Assignment 2C)\nFree, scriptable, same pipeline; fewer guardrails\n\n\nCloud\nDroneDeploy, Pix4Dcloud, WebODM Lightning, Drone2Map\nNo local compute; recurring cost and less control over settings\n\n\n\n\nThe real questions: budget and equipment, how often you fly, whether you have the training to process, and whether you have the time\n\n\nWe use Metashape, licensed for everyone here, and WebODM, free and open source, in Assignment 2C. RealityScan is free for students too if you want a third. Cloud services trade money for time and hide exactly the parameters we are about to spend twenty minutes on.",
+    "section": "Software options",
+    "text": "Software options\n\n\n\n\n\n\n\n\nOption\nExamples\nTrade-off\n\n\n\n\nDesktop, commercial\nAgisoft Metashape, Pix4Dmatic, DJI Terra\nControl and transparency; needs a capable machine and a license\n\n\nDesktop, open source\nWebODM (Assignment 2C)\nFree, scriptable, same pipeline; fewer guardrails\n\n\nCloud\nDroneDeploy, Pix4Dcloud, WebODM Lightning, Drone2Map\nNo local compute; recurring cost and less control over settings\n\n\n\n\nThe real questions: budget and equipment, how often you fly, whether you have the training to process, and whether you have the time\n\n\nWe use Metashape, licensed for everyone here, and WebODM, free and open source, in Assignment 2C. RealityScan is free for students too if you want a third. Cloud services trade money for time and hide exactly the parameters we are about to spend twenty minutes on.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1827,7 +1827,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#loading-photos-and-positions",
     "title": "UAS Imagery Processing",
     "section": "Loading photos and positions",
-    "text": "Loading photos and positions\n\n\nAdd Photos, then check the reference pane: positions from EXIF load automatically\nImport a flight log when positions are not in EXIF: set the column order, coordinate system, and time offset\nSet camera accuracy (meters and degrees) to what the aircraft’s GNSS can actually deliver\n\n\nWhat you want to see: cameras in neat flight lines over your site. Scattered cameras, or cameras in the ocean: wrong CRS or wrong column order; fix it before anything else. Camera accuracy is a weight, not a wish: 3 to 10 m for standard GNSS, a couple of centimeters for RTK.",
+    "text": "Loading photos and positions\n\n\n\n\n\n\n\nAdd Photos, then check the reference pane: positions from EXIF load automatically\nImport a flight log when positions are not in EXIF: set the column order, coordinate system, and time offset\nSet camera accuracy (meters and degrees) to what the aircraft’s GNSS can actually deliver\n\n\nWhat you want to see: cameras in neat flight lines over your site. Scattered cameras, or cameras in the ocean: wrong CRS or wrong column order; fix it before anything else. Camera accuracy is a weight, not a wish: 3 to 10 m for standard GNSS, a couple of centimeters for RTK.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1840,7 +1840,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#align-photos",
     "title": "UAS Imagery Processing",
     "section": "Align photos",
-    "text": "Align photos\n\n\n\nDetects features in every image and matches them across overlapping images\nSolves camera positions, orientations, and the camera model together (bundle adjustment)\nOutput: tie points (the sparse cloud) and camera poses\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAccuracy\nHighest\nHigh\nMedium\nLow, Lowest\n\n\n\n\nImages\nupscaled 2x\nfull resolution\ndownscaled 4x\n16x, 64x\n\n\nUse\nsmall, high-quality sets\nthe usual choice\nlarge projects\ntriage\n\n\n\n\nStart at High. Medium for truly big projects; Low only as a quick sanity check before placing markers. Reference preselection uses the geotags to pick which pairs to try and saves enormous time on aerial blocks. If alignment is thin, your problem is image quality or overlap, not this dialog.",
+    "text": "Align photos\n\n\n\n\nDetects features in every image and matches them across overlapping images\nSolves camera positions, orientations, and the camera model together (bundle adjustment)\nOutput: tie points (the sparse cloud) and camera poses\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAccuracy\nHighest\nHigh\nMedium\nLow, Lowest\n\n\n\n\nImages\nupscaled 2x\nfull resolution\ndownscaled 4x\n16x, 64x\n\n\nUse\nsmall, high-quality sets\nthe usual choice\nlarge projects\ntriage\n\n\n\n\nStart at High. Medium for truly big projects; Low only as a quick sanity check before placing markers. Reference preselection uses the geotags to pick which pairs to try and saves enormous time on aerial blocks. If alignment is thin, your problem is image quality or overlap, not this dialog.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1853,7 +1853,20 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#bundle-adjustment",
     "title": "UAS Imagery Processing",
     "section": "Bundle adjustment",
-    "text": "Bundle adjustment\n\n\n\nNon-linear least squares over every camera and every tie point\nMinimizes reprojection error: the distance between where a 3D point projects and where the feature was detected\nRefines exterior and interior orientation at the same time\nMarkers with known coordinates strengthen and georeference the solution\n\n\n\n\n\nThis is the math heart: nonlinear least squares over every camera and every tie point, minimizing reprojection error. One diagnostic to remember: mean reprojection error above about a pixel means the matches or the camera model are poor. And after you place markers and optimize, everything built before is stale; rebuild it. The geometry moved.",
+    "text": "Bundle adjustment\n\n\n\n\nNon-linear least squares over every camera and every tie point\nMinimizes reprojection error: the distance between where a 3D point projects and where the feature was detected\nRefines exterior and interior orientation at the same time\nMarkers with known coordinates strengthen and georeference the solution\n\n\n\n\n\nThis is the math heart: nonlinear least squares over every camera and every tie point, minimizing reprojection error. One diagnostic to remember: mean reprojection error above about a pixel means the matches or the camera model are poor. And after you place markers and optimize, everything built before is stale; rebuild it. The geometry moved.",
+    "crumbs": [
+      "Topics",
+      "Topic 2: Structure from Motion",
+      "Slides",
+      "Lecture 2B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#optimizing-with-markers",
+    "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#optimizing-with-markers",
+    "title": "UAS Imagery Processing",
+    "section": "Optimizing with markers",
+    "text": "Optimizing with markers\n\n\n\n\nImport marker coordinates and set their coordinate system\nPlace each marker on several photos (filter photos by marker)\nSet marker accuracy (0.005 to 0.05 m) and camera accuracy to realistic values\nOptimize Cameras: the adjustment now fits the control\nRebuild the point cloud, DEM, and orthomosaic; the geometry has moved\n\n\n\n\n\nThe step everyone skips: after Optimize Cameras, every derived product is stale. Rebuild.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1866,7 +1879,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#build-point-cloud",
     "title": "UAS Imagery Processing",
     "section": "Build point cloud",
-    "text": "Build point cloud\n\n\n\n\n\nTie points\n\n\n\n\n\n\nPoint cloud\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuality\nUltra high\nHigh\nMedium\nLow, Lowest\n\n\n\n\nImage scale\nfull, a point per pixel\n1/2\n1/4\n1/8, 1/16\n\n\nCost\ndays on a laptop\nhours; most real work\nunder an hour; the class setting\nquick previews\n\n\n\n\nA depth map per image, fused into the cloud. Quality is the big time-and-memory knob. Medium is our class setting so the lab finishes in the room; High is what I would use for a deliverable. Check the manual’s appendix before promising Ultra High to anyone.",
+    "text": "Build point cloud\n\n\n\n\n\n\nTie points\n\n\n\n\n\n\nPoint cloud\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuality\nUltra high\nHigh\nMedium\nLow, Lowest\n\n\n\n\nImage scale\nfull, a point per pixel\n1/2\n1/4\n1/8, 1/16\n\n\nCost\ndays on a laptop\nhours; most real work\nunder an hour; the class setting\nquick previews\n\n\n\n\nA depth map per image, fused into the cloud. Quality is the big time-and-memory knob. Medium is our class setting so the lab finishes in the room; High is what I would use for a deliverable. Check the manual’s appendix before promising Ultra High to anyone.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1879,7 +1892,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#depth-filtering-and-editing",
     "title": "UAS Imagery Processing",
     "section": "Depth filtering and editing",
-    "text": "Depth filtering and editing\n\n\n\n\n\n\n\nDepth filtering\nUse when\n\n\n\n\nMild\nComplex geometry with many small foreground details you want to keep\n\n\nModerate\nIn between\n\n\nAggressive\nAerial mapping; removes most outliers. The Assignment 2B setting\n\n\nDisabled\nOnly for very clean, high-quality imagery\n\n\n\n\nEdit the point cloud afterwards if needed: select and delete stray points, or classify ground points for a DTM\nFilter the tie points by reprojection error, reconstruction uncertainty, and image count, then optimize again\n\n\nAggressive for aerial mapping; that is also the lab setting. Mild only when fine structure is the point: vegetation, wires, thin poles. And the cheapest accuracy gain in the whole workflow: filter the tie points by error and uncertainty, then optimize again, before you densify.",
+    "text": "Depth filtering and editing\n\n\n\n\n\n\n\n\nDepth filtering\nUse when\n\n\n\n\nMild\nComplex geometry with many small foreground details you want to keep\n\n\nModerate\nIn between\n\n\nAggressive\nAerial mapping; removes most outliers. The Assignment 2B setting\n\n\nDisabled\nOnly for very clean, high-quality imagery\n\n\n\n\nEdit the point cloud afterwards if needed: select and delete stray points, or classify ground points for a DTM\nFilter the tie points by reprojection error, reconstruction uncertainty, and image count, then optimize again\n\n\nAggressive for aerial mapping; that is also the lab setting. Mild only when fine structure is the point: vegetation, wires, thin poles. And the cheapest accuracy gain in the whole workflow: filter the tie points by error and uncertainty, then optimize again, before you densify.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1892,7 +1905,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#build-model",
     "title": "UAS Imagery Processing",
     "section": "Build model",
-    "text": "Build model\n\n\n\n\n\n\n\n\n\nSetting\nOptions\n\n\n\n\nSurface type\nHeight field: aerial and terrain, 2.5D, low memory. Arbitrary: closed objects, 3D, high memory\n\n\nSource data\nDepth maps or point cloud; tie points for a quick preview\n\n\nFace count\nHigh, Medium, Low, or custom\n\n\n\n\nOptional for mapping: DEM and orthomosaic can be built without a model; build one for a textured 3D product\n\n\n\n\n\n\n\n\n\nHeight field for anything flown nadir over terrain: 2.5D and light. Arbitrary is for the 2A-style objects and facades: full 3D, heavy. For pure mapping you can skip the model entirely; we build one in the lab so you get a textured product to keep.",
+    "text": "Build model\n\n\n\n\n\n\n\n\n\n\nSetting\nOptions\n\n\n\n\nSurface type\nHeight field: aerial and terrain, 2.5D, low memory. Arbitrary: closed objects, 3D, high memory\n\n\nSource data\nDepth maps or point cloud; tie points for a quick preview\n\n\nFace count\nHigh, Medium, Low, or custom\n\n\n\n\nOptional for mapping: DEM and orthomosaic can be built without a model; build one for a textured 3D product\n\n\n\n\n\n\n\n\n\nHeight field for anything flown nadir over terrain: 2.5D and light. Arbitrary is for the 2A-style objects and facades: full 3D, heavy. For pure mapping you can skip the model entirely; we build one in the lab so you get a textured product to keep.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1905,7 +1918,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#editing-the-model",
     "title": "UAS Imagery Processing",
     "section": "Editing the model",
-    "text": "Editing the model\n\n\n\nClose holes: fills gaps left by insufficient overlap; required before any volume calculation, otherwise the volume is meaningless\nDecimate: replaces a dense mesh with a lighter one\nFilter by connected component size and polygon size to drop floating fragments\nExport to an external editor for heavy repairs and import the result\n\n\n\n\n\nWeather cuts flights short; holes happen. Close them only when you must, and always before volume calculations, because an open mesh gives volume numbers that mean nothing. Otherwise leave the holes honest: interpolated geometry is invented geometry.",
+    "text": "Editing the model\n\n\n\n\nClose holes: fills gaps left by insufficient overlap; required before any volume calculation, otherwise the volume is meaningless\nDecimate: replaces a dense mesh with a lighter one\nFilter by connected component size and polygon size to drop floating fragments\nExport to an external editor for heavy repairs and import the result\n\n\n\n\n\nHoles happen. Close them only when you must, and always before volume calculations, because an open mesh gives volume numbers that mean nothing. Otherwise leave the holes honest: interpolated geometry is invented geometry.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1918,7 +1931,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#build-texture",
     "title": "UAS Imagery Processing",
     "section": "Build texture",
-    "text": "Build texture\n\n\n\n\n\n\n\n\n\nMapping mode\nUse\n\n\n\n\nGeneric\nAny object; as uniform a texture as possible\n\n\nAdaptive orthophoto\nTerrain with buildings: flat areas textured orthographically, vertical faces separately\n\n\nOrthophoto\nTerrain only; most compact, weaker on vertical faces\n\n\nSpherical, Single camera, Keep uv\nSpecial cases: ball-shaped objects, one photo, existing parameterization\n\n\n\nBlending: Mosaic (default) picks the most nadir view per pixel; Average blends all views\n\n\n\n\n\n\n\n\nTerrain wants Adaptive orthophoto or Orthophoto; everything else is for objects. 4096 is plenty for the lab. Remember texture is cosmetic: it changes nothing in the DEM or the orthomosaic.",
+    "text": "Build texture\n\n\n\n\n\n\n\n\n\n\nMapping mode\nUse\n\n\n\n\nGeneric\nAny object; as uniform a texture as possible\n\n\nAdaptive orthophoto\nTerrain with buildings: flat areas textured orthographically, vertical faces separately\n\n\nOrthophoto\nTerrain only; most compact, weaker on vertical faces\n\n\nSpherical, Single camera, Keep uv\nSpecial cases: ball-shaped objects, one photo, existing parameterization\n\n\n\nBlending: Mosaic (default) picks the most nadir view per pixel; Average blends all views\n\n\n\n\n\n\n\n\nTerrain wants Adaptive orthophoto or Orthophoto; everything else is for objects. 4096 is plenty for the lab. Remember texture is cosmetic: it changes nothing in the DEM or the orthomosaic.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1931,7 +1944,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#build-dem",
     "title": "UAS Imagery Processing",
     "section": "Build DEM",
-    "text": "Build DEM\n\n\n\n\n\nProjection: set the output CRS here; the assignment uses NC State Plane, EPSG:3358\nSource data: point cloud (all points for a DSM, ground class for a DTM), depth maps, or model\nInterpolation: Enabled (default) fills gaps visible in at least one image; Disabled keeps only observed cells and is the honest choice for accuracy checks\nResolution: leave the default, which follows the ground sampling distance\n\n\n\nSet the projection here, once, and the orthomosaic inherits it. We use NC State Plane, EPSG:3358. Point cloud as source; pick the ground class only and you have made a DTM. Interpolation off is the honest surface for accuracy work; on is the usable surface for analysis.",
+    "text": "Build DEM\n\n\n\n\n\n\nProjection: set the output CRS here; the assignment uses NC State Plane, EPSG:3358\nSource data: point cloud (all points for a DSM, ground class for a DTM), depth maps, or model\nInterpolation: Enabled (default) fills gaps visible in at least one image; Disabled keeps only observed cells and is the honest choice for accuracy checks\nResolution: leave the default, which follows the ground sampling distance\n\n\n\nSet the projection here, once, and the orthomosaic inherits it. We use NC State Plane, EPSG:3358. Point cloud as source; pick the ground class only and you have made a DTM. Interpolation off is the honest surface for accuracy work; on is the usable surface for analysis.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1944,7 +1957,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#build-orthomosaic",
     "title": "UAS Imagery Processing",
     "section": "Build orthomosaic",
-    "text": "Build orthomosaic\n\n\n\n\n\n\n\n\n\nSurface: DEM (the usual choice for mapping) or Model (true orthophoto with building facades handled)\nBlending mode: Mosaic (default) divides the imagery into frequency bands and blends each; Average uses a weighted mean of all photos; Disabled takes the most nadir photo per pixel and shows seams\nRefine seamlines and the ghosting filter help with moving objects and canopy\nSame CRS as the DEM; the orthomosaic can only be built in the DEM’s projection\n\n\n\nMosaic blending, the default, is right. Average trades sharpness for noise; Disabled shows you where the seams are, which is occasionally exactly what you want to see. Building on the model instead of the DEM gives a true orthophoto with clean building edges, at the price of the model’s quality.",
+    "text": "Build orthomosaic\n\n\n\n\n\n\n\n\n\n\nSurface: DEM (the usual choice for mapping) or Model (true orthophoto with building facades handled)\nBlending mode: Mosaic (default) divides the imagery into frequency bands and blends each; Average uses a weighted mean of all photos; Disabled takes the most nadir photo per pixel and shows seams\nRefine seamlines and the ghosting filter help with moving objects and canopy\nSame CRS as the DEM; the orthomosaic can only be built in the DEM’s projection\n\n\n\nMosaic blending, the default, is right. Average trades sharpness for noise; Disabled shows you where the seams are, which is occasionally exactly what you want to see. Building on the model instead of the DEM gives a true orthophoto with clean building edges, at the price of the model’s quality.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1970,7 +1983,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#export-formats",
     "title": "UAS Imagery Processing",
     "section": "Export formats",
-    "text": "Export formats\n\n\n\n\n\n\n\n\nProduct (File, Export)\nFormats\nNotes\n\n\n\n\nOrthomosaic\nGeoTIFF, COG, JPEG, PNG, KMZ\nCheck the CRS; write overviews\n\n\nDEM\nGeoTIFF, COG, XYZ\nVerify units and vertical datum\n\n\nPoint cloud\nLAS, LAZ, COPC, PLY, E57\nKeep RGB and classes; COPC streams into GRASS\n\n\nModel\nOBJ, PLY, GLB, FBX, 3D PDF\nOBJ writes textures as separate files; GLB is one file\n\n\nReport\nPDF\nAlways\n\n\n\n\nCOG for rasters, COPC for point clouds; that is what the later topics stream from the bucket. Camera positions export too if another package needs them. And save the project after every stage, so a crash costs you a step, not a day.",
+    "text": "Export formats\n\n\n\n\n\n\n\n\n\nProduct (File, Export)\nFormats\nNotes\n\n\n\n\nOrthomosaic\nGeoTIFF, COG, JPEG, PNG, KMZ\nCheck the CRS; write overviews\n\n\nDEM\nGeoTIFF, COG, XYZ\nVerify units and vertical datum\n\n\nPoint cloud\nLAS, LAZ, COPC, PLY, E57\nKeep RGB and classes; COPC streams into GRASS\n\n\nModel\nOBJ, PLY, GLB, FBX, 3D PDF\nOBJ writes textures as separate files; GLB is one file\n\n\nReport\nPDF\nAlways\n\n\n\n\nBatch process: queue the steps above with their parameters and let them run unattended; the same steps are available from the Python API for repeatable projects\n\n\nCOG for rasters, COPC for point clouds; that is what the later topics stream from the bucket. Camera positions export too if another package needs them. And save the project after every stage, so a crash costs you a step, not a day. One more workflow habit: Batch queues every step you just learned and runs them without a babysitter, and the same steps exist in the Python API, which gets interesting the moment you process repeat flights of the same site.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -1983,20 +1996,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#the-processing-report",
     "title": "UAS Imagery Processing",
     "section": "The processing report",
-    "text": "The processing report\n\n\nAlways generate it. It contains:\n\nSurvey data: image count, flying altitude, ground resolution, coverage area, camera model\nCamera calibration with residual plots\nCamera locations and error estimates\nGround control point and checkpoint errors, listed separately\nOverlap map, DEM and orthomosaic previews, processing parameters\n\n\n\n\n\n\n\n\n\nQuote the checkpoint RMSE: control point error is circular, the adjustment was told to fit those points\n\n\nAlways generate it. Here is the reading guide. Overlap map first: dark means fewer than three images, weak reconstruction. Calibration residuals: a pattern means the camera model is not fitting. Then control versus checkpoints, listed separately: checkpoint error much bigger than control error means you over-fit your control. Your homework is to explain this document, and this slide is the outline of that explanation.",
-    "crumbs": [
-      "Topics",
-      "Topic 2: Structure from Motion",
-      "Slides",
-      "Lecture 2B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_2_sfm/lectures/lecture_2b.html#optimizing-with-markers",
-    "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#optimizing-with-markers",
-    "title": "UAS Imagery Processing",
-    "section": "Optimizing with markers",
-    "text": "Optimizing with markers\n\n\n\nImport marker coordinates and set their coordinate system\nPlace each marker on several photos (filter photos by marker)\nSet marker accuracy (0.005 to 0.05 m) and camera accuracy to realistic values\nOptimize Cameras: the adjustment now fits the control\nRebuild the point cloud, DEM, and orthomosaic; the geometry has moved\n\n\n\n\n\nBatch process: queue the steps with their parameters and let them run unattended; the same steps are available from the Python API for repeatable projects\n\n\nThe step everyone skips: after Optimize Cameras, every derived product is stale. Rebuild. Batch is how a multi-hour job runs without a babysitter, and the same steps exist in the Python API, which gets interesting the moment you process repeat flights of the same site.",
+    "text": "The processing report\n\n\n\nAlways generate it. It contains:\n\nSurvey data: image count, flying altitude, ground resolution, coverage area, camera model\nCamera calibration with residual plots; camera locations and error estimates\nControl and checkpoint errors listed separately; overlap map, previews, parameters\n\n\n\n\n\n\n\n\n\nQuote the checkpoint RMSE: control point error is circular, the adjustment was told to fit those points\n\n\nAlways generate it. Here is the reading guide. Overlap map first: dark means fewer than three images, weak reconstruction. Calibration residuals: a pattern means the camera model is not fitting. Then control versus checkpoints, listed separately: checkpoint error much bigger than control error means you over-fit your control. Your homework is to explain this document, and this slide is the outline of that explanation.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
