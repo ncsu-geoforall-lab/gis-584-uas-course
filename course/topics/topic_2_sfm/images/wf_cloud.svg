@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 56" font-family="Lato, sans-serif">
+<rect x="20.0" y="9.0" width="127.6" height="38" rx="8" fill="#d9e8d9" stroke="#006600" stroke-width="2"/>
+<text x="83.8" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#006600">Photos</text>
+<path d="M 149.6 23.0 L 159.6 28.0 L 149.6 33.0 Z" fill="#8c8c8c"/>
+<rect x="161.6" y="9.0" width="127.6" height="38" rx="8" fill="#d9e8d9" stroke="#006600" stroke-width="2"/>
+<text x="225.3" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#006600">Align</text>
+<path d="M 291.1 23.0 L 301.1 28.0 L 291.1 33.0 Z" fill="#8c8c8c"/>
+<rect x="303.1" y="9.0" width="127.6" height="38" rx="8" fill="#d9e8d9" stroke="#006600" stroke-width="2"/>
+<text x="366.9" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#006600">Markers</text>
+<path d="M 432.7 23.0 L 442.7 28.0 L 432.7 33.0 Z" fill="#8c8c8c"/>
+<rect x="444.7" y="9.0" width="127.6" height="38" rx="8" fill="#006600" stroke="#006600" stroke-width="2"/>
+<text x="508.4" y="35.0" text-anchor="middle" font-size="21" font-weight="bold" fill="#ffffff">Cloud</text>
+<path d="M 574.2 23.0 L 584.2 28.0 L 574.2 33.0 Z" fill="#8c8c8c"/>
+<rect x="586.2" y="9.0" width="127.6" height="38" rx="8" fill="#f2f2f2" stroke="#8c8c8c" stroke-width="2"/>
+<text x="650.0" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#8c8c8c">Model</text>
+<path d="M 715.8 23.0 L 725.8 28.0 L 715.8 33.0 Z" fill="#8c8c8c"/>
+<rect x="727.8" y="9.0" width="127.6" height="38" rx="8" fill="#f2f2f2" stroke="#8c8c8c" stroke-width="2"/>
+<text x="791.6" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#8c8c8c">Texture</text>
+<path d="M 857.3 23.0 L 867.3 28.0 L 857.3 33.0 Z" fill="#8c8c8c"/>
+<rect x="869.3" y="9.0" width="127.6" height="38" rx="8" fill="#f2f2f2" stroke="#8c8c8c" stroke-width="2"/>
+<text x="933.1" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#8c8c8c">DEM</text>
+<path d="M 998.9 23.0 L 1008.9 28.0 L 998.9 33.0 Z" fill="#8c8c8c"/>
+<rect x="1010.9" y="9.0" width="127.6" height="38" rx="8" fill="#f2f2f2" stroke="#8c8c8c" stroke-width="2"/>
+<text x="1074.7" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#8c8c8c">Ortho</text>
+<path d="M 1140.4 23.0 L 1150.4 28.0 L 1140.4 33.0 Z" fill="#8c8c8c"/>
+<rect x="1152.4" y="9.0" width="127.6" height="38" rx="8" fill="#f2f2f2" stroke="#8c8c8c" stroke-width="2"/>
+<text x="1216.2" y="35.0" text-anchor="middle" font-size="21" font-weight="normal" fill="#8c8c8c">Export</text>
+</svg>
