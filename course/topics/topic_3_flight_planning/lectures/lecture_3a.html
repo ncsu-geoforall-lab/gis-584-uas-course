@@ -10,7 +10,7 @@
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
-  <meta name="author" content="Justyna Jeziorska, Helena Mitasova &amp; Corey White">
+  <meta name="author" content="Corey White adapted from Justyna Jeziorska and Helena Mitasova">
   <title>UAS Mapping and Analytics – Flight Planning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,12 +36,10 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-ba7c2d9ea7f371164fb256f6d836f0a3.css">
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-5480ceb7a1ce4baa9b13cd8d69b87f4c.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -142,374 +140,1014 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Justyna Jeziorska, Helena Mitasova &amp; Corey White
+Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 </div>
 </div>
 
 </section>
-<section id="objectives" class="slide level2 center">
+<section id="objectives" class="slide level2">
 <h2>Objectives</h2>
 <ul>
-<li class="fragment">Phases of flight planning</li>
-<li class="fragment">Safety procedures and checklists</li>
-<li class="fragment">Ground Control Points and its distirbution and accuracy</li>
-<li class="fragment">Flight planning software</li>
+<li class="fragment">Describe the four phases of flight planning, from project definition to flight control</li>
+<li class="fragment">Apply safety procedures and preflight checklists required under Part 107</li>
+<li class="fragment">Plan ground control point placement and relate GCP accuracy to ground sampling distance</li>
+<li class="fragment">Set the flight parameters that shape a mapping mission: altitude, overlap, pattern, speed, and lighting</li>
+<li class="fragment">Choose a flight planning platform for a given aircraft and project</li>
 </ul>
+<aside class="notes">
+<p>Topic 2 covered what processing needs from the imagery. Today is how to plan a flight that delivers it, and Wednesday we fly at Lake Wheeler. Two questions keep coming back through the deck: what is the aim of the project, and what resolution does it need. Every parameter later follows from those two answers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="pre-flight-considerations" class="slide level2 center">
-<h2>Pre-flight Considerations</h2>
+<section id="where-this-lecture-sits" class="slide level2 center text-center">
+<h2>Where this lecture sits</h2>
 
-<img data-src="../images/photogrammetric_process.webp" class="r-stretch"><p>Throughout the whole process, it is important to remember:</p>
+<img data-src="../images/photogrammetric_process.webp" style="width:85.0%" alt="UAS photogrammetric process: flight planning (highlighted), flight, data processing, data analysis" class="r-stretch"><div class="term-card">
+<p><strong>Four questions to keep asking</strong>: What is the aim of the project? What resolution does it need? What do the regulations allow? What will the weather do?</p>
+</div>
+<aside class="notes">
+<p>Flight planning is the first box of the pipeline, and it is the cheapest place to fix a problem. A flight that was planned wrong cannot be processed right.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="four-phases-of-flight-planning" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Four phases of flight planning</h2>
+
+<img data-src="../images/flowchart_green.webp" style="width:85.0%" alt="Flight planning phases: project definition, flight planning, site evaluation, flight control" class="r-stretch"><aside class="notes">
+<p>The strip at the top of the next slides tracks where we are: project definition, flight planning, site evaluation, and flight control.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="project-definition" class="slide level2 smaller">
+<h2>Project definition</h2>
+
+<img data-src="../images/flowchart_project.webp" style="width:100.0%" alt="Flight planning phases with project definition highlighted" class="r-stretch"><table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decision</th>
+<th>Driven by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spatial scale: resolution and extent</td>
+<td>Project aim, UAS and sensor capabilities, terrain constraints</td>
+</tr>
+<tr class="even">
+<td>UAS and sensor</td>
+<td>Required resolution, area size, budget</td>
+</tr>
+<tr class="odd">
+<td>Cost, labor, and time</td>
+<td>Area, number of flights, field crew, processing</td>
+</tr>
+<tr class="even">
+<td>Terrain information</td>
+<td>Existing DEMs, imagery, and local knowledge of the site</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Extent and resolution set everything downstream: the aircraft you need, the number of batteries, the number of photos, and the processing time. Collect what you can about the terrain before you commit to a sensor.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="project-definition-1" class="slide level2 smaller">
+<h2>Project definition</h2>
+
+<img data-src="../images/flowchart_project.webp" style="width:100.0%" alt="Flight planning phases with project definition highlighted" class="r-stretch"><div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Legal constraints</strong></p>
 <ul>
-<li>What is the aim of the project?</li>
-<li>What is the required resolution?</li>
-<li>Flight regulations</li>
-<li>Weather</li>
+<li>Airspace class and any authorization needed (Topic 1)</li>
+<li>Landowner permission for takeoff, landing, and access</li>
+<li>Local restrictions on the site</li>
 </ul>
-</section>
-<section id="project-definition" class="slide level2 center">
-<h2>Project Definition</h2>
-
-<img data-src="../images/flowchart_project.webp" class="r-stretch"><ul>
-<li>Define spatial scale (spatial resolution and extent)</li>
-<li>Choosing UAS and sensor</li>
-<li>Assessing the cost, labor, and time consumption</li>
-<li>Collecting information about terrain</li>
-</ul>
-</section>
-<section id="project-definition-1" class="slide level2 center">
-<h2>Project Definition</h2>
-
-<img data-src="../images/flowchart_project.webp" class="r-stretch"><ul>
-<li>Define the area (extent) and resolution based on:
+</div><div class="column" style="width:50%;">
+<p><strong>Coordinate system</strong></p>
 <ul>
-<li>UAS and sensor capabilities</li>
-<li>Terrain constraints</li>
-<li>Project requirements</li>
-</ul></li>
+<li>Chosen by the desired coordinate system of the final products</li>
+<li>Consistent with the coordinate system of the GCP survey</li>
+<li>Record the horizontal and vertical datum</li>
 </ul>
+</div></div>
+<div class="term-card">
+<p><strong>Decide the coordinate system before the survey</strong>: a GCP file without its coordinate system is a list of numbers, not coordinates</p>
+</div>
+<aside class="notes">
+<p>Two things people forget until it is too late: permission to be on the ground, and the coordinate system. Pick the CRS of the final product first, then survey the control in it, or in something you can transform exactly. Lecture 2B covered why the vertical datum matters here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="project-definition-2" class="slide level2 center">
-<h2>Project Definition</h2>
-
-<img data-src="../images/flowchart_project.webp" class="r-stretch"><ul>
-<li>Evaluate the legal constraints, obtain permission</li>
-<li>Defining the coordinate system:
-<ul>
-<li>Dependent on the desired coordinate system of the final data</li>
-<li>Consistent with the coordinate system of GCP survey</li>
-</ul></li>
-</ul>
-</section>
-<section id="flight-planning" class="slide level2 center">
+<section id="flight-planning" class="slide level2 smaller">
 <h2>Flight planning</h2>
 
-<img data-src="../images/flowchart_planning.webp" class="r-stretch"><ul>
+<img data-src="../images/flowchart_planning.webp" style="width:100.0%" alt="Flight planning phases with flight planning highlighted" class="r-stretch"><ul>
 <li>Mission area assessment</li>
-<li>Planning geometric parameters</li>
-<li>Choosing flight planning and flight logging platform</li>
-<li>Preliminary weather assessment (climate, season, forecasts)</li>
-<li>Creating a flight plan (software specific)</li>
+<li>Planning geometric parameters: altitude, overlap, pattern, and camera angle</li>
+<li>Choosing a flight planning and flight logging platform</li>
+<li>Preliminary weather assessment: climate, season, forecasts</li>
+<li>Creating the flight plan in the chosen software</li>
 </ul>
+<aside class="notes">
+<p>This phase is the desk work. The geometric parameters get their own section at the end of the lecture; the platform choice gets a table. Weather starts here as climate and season, and gets rechecked on the day.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="placing-ground-control-points-gcps" class="slide level2 smaller center">
-<h2>Placing Ground Control Points (GCPs)</h2>
+<section id="placing-ground-control-points" class="slide level2 smaller">
+<h2>Placing ground control points</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:55%;">
 <ul>
-<li>A <strong>minimum number</strong> of <strong>5 GCPs</strong> is recommended.</li>
-<li>5 to 10 GCPs are usually enough, even for large projects.</li>
-<li>In cases that the topography of the area is complex, use more GCPs</li>
-<li>The GCPs should be <strong>distributed evenly</strong> in the area</li>
-<li><strong>Do not place</strong> the GCPs exactly at the <strong>edges</strong> of the area</li>
+<li>A <strong>minimum of 5 GCPs</strong> is recommended; 5 to 10 are usually enough, even for large projects</li>
+<li>Use more GCPs when the topography is complex</li>
+<li>Distribute them <strong>evenly</strong> across the area</li>
+<li><strong>Do not place</strong> GCPs exactly at the <strong>edges</strong> of the area</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/GCP.webp"></p>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/GCP.webp" class="quarto-figure quarto-figure-center" style="width:90.0%" alt="Map of twelve GCP locations spread across the Lake Wheeler fields around a UAS elevation model"></p>
+</figure>
+</div>
 </div></div>
+<aside class="notes">
+<p>Even distribution matters more than count. Points clustered in one corner leave the rest of the model free to bow. Points on the very edge sit in weak image geometry and are hard to place on enough photos. Lecture 3B goes into control versus checkpoints.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="placing-ground-control-points-gcps-1" class="slide level2 center">
-<h2>Placing Ground Control Points (GCPs)</h2>
+<section id="surveying-the-gcps" class="slide level2 smaller">
+<h2>Surveying the GCPs</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<p>Before measuring the GCPs coordinates, the&nbsp;following items must be defined:</p>
+<div class="column" style="width:55%;">
+<p>Before measuring the GCP coordinates, define:</p>
 <ul>
-<li>GCP coordinate system</li>
-<li>GCP accuracy</li>
-<li>Topographic equipment (total station or hand held GPS?)</li>
+<li>The GCP coordinate system</li>
+<li>The GCP accuracy the project needs</li>
+<li>The survey equipment: RTK GNSS rover, total station, or handheld GPS</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/GCP_photo.webp"></p>
+<div class="term-card">
+<p><strong>Target size</strong>: 5 to 10 times the GSD, so the center is identifiable on the photos</p>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/GCP_photo.webp" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="An L-shaped white GCP target on grass next to a survey stake with orange flagging"></p>
+</figure>
+</div>
 </div></div>
+<aside class="notes">
+<p>A handheld GPS gives meters, an RTK rover gives centimeters, and the model can never be more accurate than the control. On Wednesday we survey with the Emlid rover; the GNSS field protocol on the topic page walks through it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="gcps-accuracy" class="slide level2 smaller center">
-<h2>GCPs Accuracy</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Factors for defining GCP accuracy:</p>
-<ul>
-<li>Accuracy needed for the final results</li>
-<li>Ground Sampling Distance* of the images:
-<ul>
-<li>GCP target size: 5-10 x</li>
-<li>GCP accuracy: at least 0.1 GSD</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/GSD2.webp" style="width:75.0%"></p>
-</div></div>
-<p><em>Distance between two consecutive pixel centers measured on the ground</em></p>
-</section>
-<section id="ground-sampling-distance" class="slide level2 smaller center">
-<h2>Ground Sampling Distance</h2>
+<section id="ground-sampling-distance" class="slide level2 smaller">
+<h2>Ground sampling distance</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p>Distance between two consecutive pixel centers measured on the ground:</p>
-<p>The formula to calculate GSD is:</p>
 <p><span class="math display">\[
-\text{GSD} = \frac{\text{A} \times \text{S}}{\text{F} \times \text{D}}
+\text{GSD} = \frac{H \times S_w}{f \times I_w}
 \]</span></p>
-<p>Where:</p>
-<ul>
-<li>A: Flight Altitude (m) (<em>AGL</em> - <em>Above Ground Level</em>)</li>
-<li>S: Sensor(hight, width) (mm)</li>
-<li>F: Focal Length (mm)</li>
-<li>D: Image Dimensions (height, width) (pixels)</li>
-</ul>
-<p><strong>Bigger GSD</strong> = lower spatial resolution<br>
-<strong>Smaller GSD</strong> = higher spatial resolution</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(H\)</span></td>
+<td>Flight altitude above ground level, AGL (m)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(S_w\)</span></td>
+<td>Sensor width (mm)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(f\)</span></td>
+<td>Focal length (mm)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(I_w\)</span></td>
+<td>Image width (pixels)</td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>Larger GSD</strong> means lower spatial resolution; <strong>smaller GSD</strong> means higher spatial resolution</p>
+</div>
 </div><div class="column" style="width:40%;">
-<p><img data-src="../images/GSD2.webp"></p>
-</div></div>
-</section>
-<section id="site-evaluation-and-checklists" class="slide level2 smaller center">
-<h2>Site evaluation and checklists</h2>
-
-<img data-src="../images/flowchart_site.webp" class="r-stretch"><ul>
-<li>Terrain check – high obstacles in the take-off, mission, landing, and alternative landing locations</li>
-<li>Ask the locals about possible air traffic or ground activities</li>
-<li><strong>Weather check</strong>
-<ul>
-<li>Temperature affects battery life</li>
-<li>Most of the UAS can’t operate in rain</li>
-</ul></li>
-<li>Use checklists, don’t rely on your memory!
-<ul>
-<li>Sample checklists: <a href="https://phantompilots.com/attachments/drone-checklist-pdf.41608/">paper (for Phantom)</a> and <a href="https://www.rmus.com/pages/rmus-uav-pilot-preflight-compliance-checklist">RMUS app</a></li>
-</ul></li>
-</ul>
-</section>
-<section id="site-evaluation-and-checklists-1" class="slide level2 center">
-<h2>Site evaluation and checklists</h2>
-
-<img data-src="../images/site.webp" class="r-stretch"></section>
-<section id="site-evaluation-and-checklists-2" class="slide level2 smaller center">
-<h2>Site evaluation and checklists</h2>
-<p><strong>Preflight inspection is required under Part 107.49;</strong><br>
-</p>
-<p><strong>Remote Pilot in Command (RPIC)</strong> is required to develop a <strong>preflight inspection checklist</strong> if the manufacturer has not developed one.</p>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li>The checklist is usually integrated into the UAS flight software or can be obtained from the UAS vendor</li>
-<li>In case that is not available, a standard Flight Checklist should be made and followed by the flight crew</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/checklistNC.webp"></p>
-</div></div>
-<blockquote>
-<p>Note: As of Dec.&nbsp;1, 2024, North Carolina no longer require commercial and government drone operators to obtain an N.C. permit</p>
-</blockquote>
-</section>
-<section id="flight-control" class="slide level2 smaller center">
-<h2>Flight control</h2>
-
-<img data-src="../images/flowchart_control.webp" class="r-stretch"><ul>
-<li>The UAS <strong>RPIC</strong> should <strong>launch, operate, and recover</strong> from <strong>preset locations</strong> so that the aircraft will fly according to the mission plan.</li>
-<li><strong>Visual Line of Sight (VLOS)</strong> - the flight crew should have a clear view of the aircraft at all times, called .</li>
-<li>Observation locations should be selected for the <strong>maximum line of sight</strong> throughout the planned flight operations area (Part 107.31).</li>
-</ul>
-</section>
-<section id="flight-control-1" class="slide level2 smaller center">
-<h2>Flight control</h2>
-
-<img data-src="../images/flowchart_control.webp" class="r-stretch"><ul>
-<li><strong>RP (Remote Pilot)</strong></li>
-<li><strong>PMC (Person Manipulating the Flight Controls)</strong>, - - <strong>VO (Visual Observer)</strong>
-<ul>
-<li>(if used): must be able to maintain effective communication with each other at all times (Part 107.33).</li>
-</ul></li>
-<li>Upon any failure during the flight or any loss of visual contact with the UAS, the RPIC should command the aircraft back to the recovery location or utilize the built-in fail-safe features to recover the aircraft.</li>
-</ul>
-</section>
-<section id="lake-wheeler---imagery" class="slide level2 center">
-<h2>Lake Wheeler - Imagery</h2>
-
-<!-- ## Lake Wheeler - Aeronautical chart
-
-![](../images/lake_wheeler1.webp){width="80%"} -->
-<img data-src="../images/LW_google.webp" style="width:80.0%" class="r-stretch"></section>
-<section id="lake-wheeler-test-site" class="slide level2 center">
-<h2>Lake Wheeler test site</h2>
-
-<img data-src="../images/lake_wheeler2.webp" style="width:80.0%" class="r-stretch"></section>
-<section id="flight-planning-software" class="slide level2 smaller center">
-<h2>Flight planning software</h2>
-<ul>
-<li>Multiple available platforms</li>
-<li>Some are dedicated for specific UAS and sold with the system by the manufacturer</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Commerical</strong></p>
-<ul>
-<li><a href="https://www.dronedeploy.com/">DroneDeploy</a></li>
-<li><a href="https://www.pix4d.com/product/pix4dcapture/">Pix4Dcapture Pro</a></li>
-<li><a href="https://www.dji.com/ground-station-pro">DJI GS PRO</a></li>
-<li><a href="https://www.sphengineering.com/flight-planning/ugcs">UgCS</a></li>
-<li><a href="https://www.dronelink.com/">DroneLink</a></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><strong>Open Source</strong></p>
-<ul>
-<li><a href="http://qgroundcontrol.com/">QGroundControl</a></li>
-<li><a href="https://ardupilot.org/planner/index.html">Mission Planner</a></li>
-</ul>
-</div></div>
-</section>
-<section id="how-to-plan-a-mapping-flight" class="slide level2 smaller center">
-<h2>How to plan a mapping flight?</h2>
-<p>UAS Photogrammetric process</p>
-<p><img data-src="../images/photogrammetric_process.webp"></p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/aerial_survey.webp"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/flight_track.webp"></p>
-</div></div>
-</section>
-<section id="location" class="slide level2 center">
-<h2>Location</h2>
-<ul>
-<li>Fly larger extent than you need.</li>
-<li>Think about the area you need for analysis</li>
-</ul>
-</section>
-<section id="camera-specs" class="slide level2 center">
-<h2>Camera Specs</h2>
-<p>General camera setting are usally fine.</p>
-</section>
-<section id="optional-settings" class="slide level2 center">
-<h2>Optional Settings</h2>
-<ul>
-<li>Mechanical Shutter: On</li>
-<li>Focus: inf</li>
-<li>Shutter Priority: 1/800</li>
-<li>Aspect Ratio: 3/2</li>
-</ul>
-</section>
-<section id="camera-angle" class="slide level2 center">
-<h2>Camera Angle</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Nadir (Straight down)</strong></p>
-<ul>
-<li>Most mapping</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><strong>Oblique (Pitched)</strong></p>
-<ul>
-<li>70-80 degrees</li>
-<li>Improved 3D</li>
-<li>Buildings</li>
-<li>Rough Terrain</li>
-</ul>
-</div></div>
-</section>
-<section id="altitude" class="slide level2 center">
-<h2>Altitude</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><p>Impacts the flight path</p></li>
-<li><p>AGL = Above Ground Level</p></li>
-<li><p>Altitude (AGL)</p>
-<ul>
-<li>70m - 120m</li>
-</ul></li>
-<li><p>Terrain Aware Fligh Path</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p>Altitude 70m <img data-src="../images/flight_plan_70m_75ol.webp" alt="Altitude 70m"> Altitude 120m <img data-src="../images/flight_plan_120m_75ol.webp" alt="Altitude 120m"></p>
-</div></div>
-</section>
-<section id="flight-patterns" class="slide level2 center">
-<h2>Flight Patterns</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Normal</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/flight_plan_120m_75ol.webp"></p>
-<figcaption>Lawnmower</figcaption>
+<p><img data-src="../images/GSD2.webp" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Diagram of a detector array, lens, and ground showing how focal length and altitude set the ground sampling distance"></p>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Same formula works with height and image height. Worked example for the Mavic Mini 2 on the later screenshots: 70 m altitude, 6.17 mm sensor, 4.36 mm lens, 4000 pixels wide gives about 2.5 cm per pixel. Halve the altitude, halve the GSD.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="gcp-accuracy-and-gsd" class="slide level2 smaller">
+<h2>GCP accuracy and GSD</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Requirement</th>
+<th>Rule of thumb</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GCP target size</td>
+<td>5 to 10 times the GSD</td>
+</tr>
+<tr class="even">
+<td>GCP survey accuracy</td>
+<td>Better than the accuracy you need in the products; finer than 0.1 times the GSD is wasted, because the target cannot be marked on the image more precisely than that</td>
+</tr>
+<tr class="odd">
+<td>Accuracy of the final products</td>
+<td>Sets the survey accuracy and the GSD, and so the altitude, in the first place</td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>Work backwards</strong>: required product accuracy sets the survey accuracy and the GSD, the GSD sets the altitude and the target size</p>
+</div>
+<aside class="notes">
+<p>At 2.5 cm GSD the target is 12 to 25 cm across, and there is no point surveying it better than about 2.5 mm. An RTK rover with a good fix gives 1 to 2 cm, and that is what actually limits the control. A handheld GPS at several meters would add error rather than remove it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="site-evaluation" class="slide level2 smaller">
+<h2>Site evaluation</h2>
+
+<img data-src="../images/flowchart_site.webp" style="width:100.0%" alt="Flight planning phases with site evaluation highlighted" class="r-stretch"><ul>
+<li><strong>Terrain check</strong>: high obstacles in the takeoff, mission, landing, and alternative landing locations</li>
+<li>Ask the locals about possible air traffic or ground activities</li>
+<li><strong>Weather check</strong>: temperature affects battery life, and most UAS cannot operate in rain</li>
+<li>Use checklists, do not rely on your memory</li>
+</ul>
+<div class="term-card">
+<p><strong>Sample checklists</strong>: <a href="https://phantompilots.com/attachments/drone-checklist-pdf.41608/">paper checklist for the Phantom</a> and the <a href="https://www.rmus.com/pages/rmus-uav-pilot-preflight-compliance-checklist">RMUS preflight app</a></p>
+</div>
+<aside class="notes">
+<p>Walk the site before the flight day if you can. Look up for wires and trees along the flight lines, and pick the alternative landing area before you need it. Cold cuts battery life hard, so plan fewer minutes per battery in winter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="site-layout" class="slide level2 smaller">
+<h2>Site layout</h2>
+
+<img data-src="../images/site.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:62.0%" alt="Aerial view of a field marked with the secure operational area, area of interest, command center, observer, safe area, and primary and emergency landing areas"><aside class="notes">
+<p>Everything on this picture is chosen on the ground before launch: the operational area, the area of interest inside it, the command center with the pilot, the observer position, the safe area for everyone else, and the primary and emergency landing areas.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="preflight-inspection" class="slide level2 smaller">
+<h2>Preflight inspection</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li>A preflight inspection is required under <strong>Part 107.49</strong>: weather, airspace, people and property on the surface, crew briefing, control links, power, and payload</li>
+<li>The rule lists what to check, not a checklist; the FAA advisory circular <strong>AC 107-2</strong> recommends the <strong>Remote Pilot in Command (RPIC)</strong> follow the manufacturer’s checklist, or develop one when none exists</li>
+<li>Checklists are usually built into the flight software or available from the vendor</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/checklistNC.webp" class="quarto-figure quarto-figure-center" style="width:95.0%" alt="Flight checklist with pre-flight, during-flight, and post-flight columns split into office, field, launch, landing, and post-landing tasks"></p>
+</figure>
+</div>
+</div></div>
+<div class="term-card">
+<p><strong>North Carolina</strong>: no separate N.C. permit is required for commercial and government operators since December 1, 2024</p>
+</div>
+<aside class="notes">
+<p>Part 107.49 makes the inspection mandatory; the checklist is how you prove to yourself you did it, and AC 107-2 Appendix E has a sample. Notice the checklist covers before, during, and after: the post-flight column is where data gets copied and the logbook gets written, and that is the column students skip.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="flight-control" class="slide level2 smaller">
+<h2>Flight control</h2>
+
+<img data-src="../images/flowchart_control.webp" style="width:100.0%" alt="Flight planning phases with flight control highlighted" class="r-stretch"><ul>
+<li>The RPIC should <strong>launch, operate, and recover</strong> from <strong>preset locations</strong> so the aircraft flies according to the mission plan</li>
+<li>Observation locations should be selected for <strong>maximum line of sight</strong> throughout the planned flight area (Part 107.31)</li>
+<li>On any failure or loss of visual contact, command the aircraft back to the recovery location or use the built-in fail-safe features</li>
+</ul>
+<div class="term-card">
+<p><strong>Visual Line of Sight (VLOS)</strong>: the flight crew must have a clear view of the aircraft at all times, without aids other than corrective lenses</p>
+</div>
+<aside class="notes">
+<p>Preset locations means the takeoff, landing, and observer spots from the site layout slide, not wherever the crew happens to be standing. Know the return-to-home behavior and altitude of your aircraft before you need it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="flight-crew-roles" class="slide level2 smaller">
+<h2>Flight crew roles</h2>
+
+<img data-src="../images/flowchart_control.webp" style="width:100.0%" alt="Flight planning phases with flight control highlighted" class="r-stretch"><table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Role</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>RPIC</strong>, Remote Pilot in Command</td>
+<td>Holds the certificate; responsible for the operation and the final say</td>
+</tr>
+<tr class="even">
+<td><strong>PMC</strong>, Person Manipulating the Controls</td>
+<td>Flies the aircraft under the direct supervision of the RPIC</td>
+</tr>
+<tr class="odd">
+<td><strong>VO</strong>, Visual Observer</td>
+<td>Watches the aircraft and the airspace; optional but recommended</td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>Part 107.33</strong>: the RPIC, the person manipulating the controls, and any visual observer must be able to communicate with each other at all times</p>
+</div>
+<aside class="notes">
+<p>On Wednesday: I am RPIC, some of you will fly under supervision as PMC, and everyone else is a visual observer. Communication means you can be heard without a radio, or with one that works.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lake-wheeler" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Lake Wheeler</h2>
+<aside class="notes">
+<p>Our site for the field flight and for the rest of the course data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lake-wheeler-road-field-laboratory" class="slide level2 smaller">
+<h2>Lake Wheeler Road Field Laboratory</h2>
+
+<img data-src="../images/LW_google.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:72.0%" alt="Satellite view of the Lake Wheeler Road Field Laboratory outlined in yellow, with the Mid Pines, Feed Tower, and Southeast fields and SECREF labeled"><aside class="notes">
+<p>NC State’s agricultural field laboratory, about five miles south of campus. Mid Pines is the field we fly, and the GCP layout you saw earlier is from there.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lake-wheeler-on-the-sectional-chart" class="slide level2 smaller">
+<h2>Lake Wheeler on the sectional chart</h2>
+
+<img data-src="../images/lake_wheeler2.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:68.0%" alt="Raleigh sectional aeronautical chart with Lake Wheeler circled inside the RDU Class C airspace shelf"><aside class="notes">
+<p>Read the chart as in Lecture 1B: Lake Wheeler sits under the outer shelf of the RDU Class C, marked 44/17, so the controlled airspace starts at 1,700 ft MSL and a Part 107 flight at or below 400 ft AGL is in uncontrolled airspace beneath it. Confirm that in a LAANC or B4UFLY app on the day, since the answer is the facility map, not the distance to the airport.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="planning-the-mapping-flight" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Planning the mapping flight</h2>
+<aside class="notes">
+<p>Now the parameters you set in the software: location, camera, angle, altitude, pattern, overlap, speed, and lighting.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="flight-planning-software" class="slide level2 smaller">
+<h2>Flight planning software</h2>
+<ul>
+<li>Multiple platforms are available; some are dedicated to a specific UAS and sold with the system</li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Commercial</th>
+<th>Open source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://www.dronedeploy.com/">DroneDeploy</a></td>
+<td><a href="http://qgroundcontrol.com/">QGroundControl</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://www.pix4d.com/product/pix4dcapture/">Pix4Dcapture Pro</a></td>
+<td><a href="https://ardupilot.org/planner/index.html">Mission Planner</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.dji.com/ground-station-pro">DJI GS PRO</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://www.sphengineering.com/flight-planning/ugcs">UgCS</a></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.dronelink.com/">DroneLink</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>What they share</strong>: draw the area, set altitude and overlap, and the app computes the flight lines, photo count, and flight time</p>
+</div>
+<aside class="notes">
+<p>The screenshots in this section are DroneLink with a Mavic Mini 2. The parameters are the same in every app; only the buttons move.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="overlap-geometry" class="slide level2 smaller">
+<h2>Overlap geometry</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/aerial_survey.webp" class="quarto-figure quarto-figure-center" style="width:90.0%" alt="Diagram of forward overlap between consecutive photos along a flight line and lateral overlap between flight lines"></p>
+</figure>
+</div>
+</div><div class="column" style="width:45%;">
+<p><img data-src="../images/flight_track.webp" style="width:100.0%" alt="GNSS flight track of a lawnmower survey pattern over farmland in Google Earth"></p>
+</div></div>
+<ul>
+<li><strong>Forward overlap</strong>: between consecutive photos on a flight line</li>
+<li><strong>Side (lateral) overlap</strong>: between adjacent flight lines</li>
+<li>The flight track on the right is the lawnmower pattern the plan produces</li>
+</ul>
+<aside class="notes">
+<p>Classic aerial photogrammetry got by with 60 forward and 20 to 40 side. SfM wants a lot more, because every point needs to be seen from many angles; that is why the recommended numbers on the next slides are higher than the diagram.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="location-and-camera" class="slide level2 smaller">
+<h2>Location and camera</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Location</strong></p>
+<ul>
+<li>Fly a larger extent than you need</li>
+<li>Think about the area you need for analysis, plus a buffer</li>
+<li>Edge accuracy is always worse than the middle</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Camera settings</strong></p>
+<p>General camera settings are usually fine. Optional:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mechanical shutter</td>
+<td>On</td>
+</tr>
+<tr class="even">
+<td>Focus</td>
+<td>Infinity</td>
+</tr>
+<tr class="odd">
+<td>Shutter priority</td>
+<td>1/800 s</td>
+</tr>
+<tr class="even">
+<td>Aspect ratio</td>
+<td>3:2</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<aside class="notes">
+<p>The buffer matters because the last flight line and the first photos on each line have the weakest geometry. A mechanical shutter avoids rolling-shutter distortion; a fast shutter avoids motion blur at mapping speed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="camera-angle" class="slide level2 smaller">
+<h2>Camera angle</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Nadir (straight down)</th>
+<th>Gently oblique</th>
+<th>Oblique (pitched)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Gimbal pitch</strong></td>
+<td>-90 degrees</td>
+<td>-55 to -75 degrees, 15 to 35 degrees off nadir</td>
+<td>About -45 degrees</td>
+</tr>
+<tr class="even">
+<td><strong>Best for</strong></td>
+<td>Most mapping: orthomosaics and DSMs</td>
+<td>A supplemental pass over a nadir block; rough or high-relief terrain</td>
+<td>Buildings, facades, 3D models</td>
+</tr>
+<tr class="odd">
+<td><strong>Trade-off</strong></td>
+<td>Simple, efficient</td>
+<td>Stronger self-calibration, less doming; more photos</td>
+<td>Full 3D detail; more photos and flight time, weaker orthomosaic</td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>Combine them</strong>: a nadir grid gives the map, an inclined pass fixes the camera model, and a steep oblique pass adds the facades</p>
+</div>
+<aside class="notes">
+<p>Nadir for everything we do this semester. The middle column is the doming fix from Lecture 2B: James and Robson showed that convergent, inclined images let self-calibration separate lens distortion from surface shape. Nesbit and Hugenholtz tested angles from 5 to 35 degrees and found 20 to 35 degrees off nadir gave the biggest gain; James and colleagues in 2020 warned that tilts under 15 degrees are not enough for consumer cameras like the Phantom family. Steep obliques near 45 degrees are for vertical structure, not for the map.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="altitude" class="slide level2 smaller">
+<h2>Altitude</h2>
+<ul>
+<li>Altitude above ground level (<strong>AGL</strong>) sets the GSD and the flight path; typical mapping altitude is <strong>70 m to 120 m</strong> AGL</li>
+<li>Higher altitude: fewer lines, shorter flight, coarser GSD</li>
+<li>Use a <strong>terrain-aware</strong> flight path on sloping sites so AGL stays constant</li>
+<li>Stay under the ceiling of the airspace authorization</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/flight_plan_70m_75ol.webp" style="width:92.0%" alt="DroneLink flight plan at 70 m altitude with dense flight lines over the Lake Wheeler field"></p>
+<figcaption>Altitude 70 m, 75% overlap</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
-<p>Crosshatch Pattern <img data-src="../images/flight_plan_lattice_120m.webp" alt="Grid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/flight_plan_120m_75ol.webp" style="width:92.0%" alt="DroneLink flight plan at 120 m altitude with fewer flight lines over the same field"></p>
+<figcaption>Altitude 120 m, 75% overlap</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Same field, same overlap, two altitudes. The 70 m plan has about 70 percent more lines and gives 2.5 cm GSD; the 120 m plan flies faster at about 4.2 cm. Part 107 caps you at 400 ft AGL, and the LAANC ceiling can be lower.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="flight-patterns" class="slide level2 smaller">
+<h2>Flight patterns</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/flight_plan_120m_75ol.webp" style="width:100.0%" alt="DroneLink flight plan with parallel lawnmower flight lines"></p>
+<figcaption>Normal (lawnmower)</figcaption>
+</figure>
+</div>
 <ul>
-<li>More detail</li>
-<li>Longer flight times</li>
+<li>One set of parallel lines</li>
+<li>Standard for orthomosaics and DSMs</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/flight_plan_lattice_120m.webp" style="width:100.0%" alt="DroneLink flight plan with a crosshatch grid of flight lines"></p>
+<figcaption>Crosshatch (grid)</figcaption>
+</figure>
+</div>
+<ul>
+<li>Two perpendicular sets of lines</li>
+<li>More detail and stronger geometry, longer flight time</li>
 </ul>
 </div></div>
+<aside class="notes">
+<p>Lawnmower for the field on Wednesday. Crosshatch doubles the flight time and is worth it for 3D models, for oblique work, and for sites where alignment struggled the first time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="overlap" class="slide level2 center">
+<section id="overlap" class="slide level2 smaller">
 <h2>Overlap</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Minimum</th>
+<th>Recommended for SfM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Forward</strong></td>
+<td>60%</td>
+<td>75 to 85%</td>
+</tr>
+<tr class="even">
+<td><strong>Side</strong></td>
+<td>40%</td>
+<td>60 to 80%</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:55%;">
 <ul>
-<li>Front and Side</li>
+<li>Homogeneous terrain (crops, sand, water) needs <strong>more</strong> overlap: fewer features to match</li>
+<li>More overlap means more photos, longer flights, and longer processing</li>
 </ul>
-<p>Min Overlap 60% forward 40% Laterial (Side)</p>
-<p>Homogeneous Terrian &gt; Overlap</p>
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/flight_plan_70m_75ol.webp" style="width:92.0%" alt="DroneLink flight plan at 70 m with 75 percent front and side overlap"></p>
+<figcaption>75% front and side overlap</figcaption>
+</figure>
 </div>
-<p><strong>Caution</strong></p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/flight_plan_70m_85ol.webp" style="width:92.0%" alt="DroneLink flight plan at 70 m with 85 percent front and side overlap, showing denser flight lines"></p>
+<figcaption>85% front and side overlap</figcaption>
+</figure>
 </div>
-<div class="callout-content">
-<p><strong>How will overlap impact your flight path?</strong></p>
+</div></div>
+<div class="term-card">
+<p><strong>Question</strong>: how will overlap impact your flight path?</p>
 </div>
-</div>
-</div>
+<aside class="notes">
+<p>Ask them before showing the second screenshot: raising side overlap from 75 to 85 percent at the same altitude adds about two thirds more flight lines, since line spacing goes from 25 to 15 percent of the footprint. Forward overlap costs photos, side overlap costs flight lines and batteries.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="drone-speed" class="slide level2 center">
-<h2>Drone Speed</h2>
-<p>~30 km/hr</p>
+<section id="drone-speed" class="slide level2 smaller">
+<h2>Drone speed</h2>
 <ul>
-<li>Lighting</li>
-<li>Camera Shutter</li>
-<li>Altitude</li>
-<li>Motion Blur</li>
+<li>Typical mapping speed: about <strong>30 km/h</strong>, set by the app from altitude and forward overlap</li>
+<li>The limit is the camera, not the aircraft</li>
 </ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Effect on speed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lighting</td>
+<td>Low light forces a slower shutter and a slower flight</td>
+</tr>
+<tr class="even">
+<td>Camera shutter</td>
+<td>Faster shutter allows faster flight</td>
+</tr>
+<tr class="odd">
+<td>Altitude</td>
+<td>Higher altitude allows faster flight for the same blur</td>
+</tr>
+<tr class="even">
+<td>Motion blur</td>
+<td>Blur is speed times exposure time; keep it under one GSD, under half a GSD for precision work</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>The app sets a maximum speed so the camera can keep up with the forward overlap. Check the blur yourself: 30 km/h is 8.3 m/s, at 1/800 s that is about 1 cm of smear, under half of the 2.5 cm GSD at 70 m. Slow down in low light or at low altitude; a blurred photo is worse than no photo, because it still gets matched.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="lighting" class="slide level2 center">
+<section id="lighting" class="slide level2 smaller">
 <h2>Lighting</h2>
-<ul>
-<li>Overcast</li>
-<li>Noon</li>
-<li>Avoid Shadows</li>
-<li>Partly Cloudly</li>
-</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Conditions</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Overcast, bright</strong></td>
+<td>Best: even illumination, no hard shadows</td>
+</tr>
+<tr class="even">
+<td><strong>Noon</strong></td>
+<td>Shortest shadows on a clear day</td>
+</tr>
+<tr class="odd">
+<td><strong>Partly cloudy</strong></td>
+<td>Exposure changes between photos; avoid if you can</td>
+</tr>
+<tr class="even">
+<td><strong>Low sun</strong></td>
+<td>Long shadows and glare; avoid</td>
+</tr>
+</tbody>
+</table>
+<div class="term-card">
+<p><strong>Avoid shadows</strong>: shadows move between photos and between flights, and they show up as seams in the orthomosaic and as noise in the DSM</p>
+</div>
+<aside class="notes">
+<p>A bright overcast day is the mapping pilot’s friend. If it has to be a clear day, fly near solar noon and finish before the shadows move. Water and glossy roofs give glare that no overlap can fix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="summary" class="slide level2 center">
-<h2>Summary</h2>
-<ul>
-<li>Phases of UAS flight planning</li>
-<li>Safety procedures and checklists for safe flight operations</li>
-<li>How does our study site look like</li>
-<li>How to plan a flight</li>
-</ul>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Assignment 3A</strong>: <a href="../../../../course/topics/topic_3_flight_planning/assignments/assignment_3a.html">Terrain analysis of the flight site using GIS tools</a>, a flight plan analysis for Lake Wheeler in GRASS</p>
+</div>
+<div class="term-card">
+<p><strong>Next</strong>: the UAS flight at Lake Wheeler on Wednesday; read the <a href="../../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html">GNSS field protocol</a> before the trip. Lecture 3B covers ground control, checkpoints, and accuracy</p>
+</div>
+<aside class="notes">
+<p>Four phases: define the project, plan the flight, evaluate the site, control the flight. The assignment analyzes the terrain of the site you are about to fly. Wednesday we put the site layout, the checklist, and the crew roles into practice.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 
 </section>
@@ -527,7 +1165,6 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
   <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -542,19 +1179,18 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': false,
+'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'chalkboard': {"buttons":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: true,
+        controls: false,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -600,7 +1236,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         disableLayout: false,
 
         // Vertical centering of slides
-        center: true,
+        center: false,
 
         // Enables touch navigation on devices with touch input
         touch: true,
@@ -676,7 +1312,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -696,9 +1332,9 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1400,
+        width: 1050,
 
-        height: 800,
+        height: 700,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -721,7 +1357,7 @@ Justyna Jeziorska, Helena Mitasova &amp; Corey White
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
           RevealMath,
           RevealNotes,
