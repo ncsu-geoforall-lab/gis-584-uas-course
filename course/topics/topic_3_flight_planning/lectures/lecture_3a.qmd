@@ -365,18 +365,18 @@ The buffer matters because the last flight line and the first photos on each lin
 
 ## Camera angle {.smaller}
 
-| | Nadir (straight down) | Oblique (pitched) |
-|---|---|---|
-| **Gimbal pitch** | -90 degrees (nadir) | -70 to -80 degrees, 10 to 20 degrees off nadir |
-| **Best for** | Most mapping: orthomosaics and DSMs | Buildings, rough terrain, 3D models |
-| **Trade-off** | Simple, efficient | Improved 3D, more photos and flight time |
+| | Nadir (straight down) | Gently oblique | Oblique (pitched) |
+|---|---|---|---|
+| **Gimbal pitch** | -90 degrees | -55 to -75 degrees, 15 to 35 degrees off nadir | About -45 degrees |
+| **Best for** | Most mapping: orthomosaics and DSMs | A supplemental pass over a nadir block; rough or high-relief terrain | Buildings, facades, 3D models |
+| **Trade-off** | Simple, efficient | Stronger self-calibration, less doming; more photos | Full 3D detail; more photos and flight time, weaker orthomosaic |
 
 ::: {.term-card}
-**Combine them** when you need both a clean orthomosaic and facades: a nadir grid plus an oblique pass
+**Combine them**: a nadir grid gives the map, an inclined pass fixes the camera model, and a steep oblique pass adds the facades
 :::
 
 ::: {.notes}
-Nadir for everything we do this semester. Oblique earns its keep on vertical structure, and adding one oblique pass also helps self-calibration, which Lecture 2B mentioned as the source of doming error.
+Nadir for everything we do this semester. The middle column is the doming fix from Lecture 2B: James and Robson showed that convergent, inclined images let self-calibration separate lens distortion from surface shape. Nesbit and Hugenholtz tested angles from 5 to 35 degrees and found 20 to 35 degrees off nadir gave the biggest gain; James and colleagues in 2020 warned that tilts under 15 degrees are not enough for consumer cameras like the Phantom family. Steep obliques near 45 degrees are for vertical structure, not for the map.
 :::
 
 ## Altitude {.smaller}
@@ -462,10 +462,10 @@ Ask them before showing the second screenshot: raising side overlap from 75 to 8
 | Lighting | Low light forces a slower shutter and a slower flight |
 | Camera shutter | Faster shutter allows faster flight |
 | Altitude | Higher altitude allows faster flight for the same blur |
-| Motion blur | Blur greater than about one GSD degrades matching |
+| Motion blur | Blur is speed times exposure time; keep it under one GSD, under half a GSD for precision work |
 
 ::: {.notes}
-The app sets a maximum speed so the camera can keep up with the forward overlap. Slow it down in low light or at low altitude; a blurred photo is worse than no photo, because it still gets matched.
+The app sets a maximum speed so the camera can keep up with the forward overlap. Check the blur yourself: 30 km/h is 8.3 m/s, at 1/800 s that is about 1 cm of smear, under half of the 2.5 cm GSD at 70 m. Slow down in low light or at low altitude; a blurred photo is worse than no photo, because it still gets matched.
 :::
 
 ## Lighting {.smaller}
