@@ -177,15 +177,15 @@ Same formula works with height and image height. Worked example for the Mavic Mi
 | Requirement | Rule of thumb |
 |---|---|
 | GCP target size | 5 to 10 times the GSD |
-| GCP survey accuracy | At least 0.1 times the GSD |
-| Accuracy of the final products | Sets the GSD, and so the altitude, in the first place |
+| GCP survey accuracy | Better than the accuracy you need in the products; finer than 0.1 times the GSD is wasted, because the target cannot be marked on the image more precisely than that |
+| Accuracy of the final products | Sets the survey accuracy and the GSD, and so the altitude, in the first place |
 
 ::: {.term-card}
-**Work backwards**: required product accuracy sets the GSD, the GSD sets the altitude and the target size, and the target size sets what the survey must deliver
+**Work backwards**: required product accuracy sets the survey accuracy and the GSD, the GSD sets the altitude and the target size
 :::
 
 ::: {.notes}
-At 2.5 cm GSD the target must be 12 to 25 cm across and surveyed to a few millimeters. That is what an RTK rover delivers with a good fix. A handheld GPS cannot, and control worse than the GSD adds error rather than removing it.
+At 2.5 cm GSD the target is 12 to 25 cm across, and there is no point surveying it better than about 2.5 mm. An RTK rover with a good fix gives 1 to 2 cm, and that is what actually limits the control. A handheld GPS at several meters would add error rather than remove it.
 :::
 
 ## Site evaluation {.smaller}
@@ -217,9 +217,9 @@ Everything on this picture is chosen on the ground before launch: the operationa
 
 ::: {.columns}
 ::: {.column width="55%"}
-- Required under **Part 107.49**
-- The **Remote Pilot in Command (RPIC)** must develop a preflight inspection checklist if the manufacturer has not provided one
-- Usually built into the flight software or available from the vendor; otherwise write a standard checklist and have the flight crew follow it
+- A preflight inspection is required under **Part 107.49**: weather, airspace, people and property on the surface, crew briefing, control links, power, and payload
+- The rule lists what to check, not a checklist; the FAA advisory circular **AC 107-2** recommends the **Remote Pilot in Command (RPIC)** follow the manufacturer's checklist, or develop one when none exists
+- Checklists are usually built into the flight software or available from the vendor
 :::
 ::: {.column width="45%"}
 ![](../images/checklistNC.webp){width="95%" fig-align="center" fig-alt="Flight checklist with pre-flight, during-flight, and post-flight columns split into office, field, launch, landing, and post-landing tasks"}
@@ -231,7 +231,7 @@ Everything on this picture is chosen on the ground before launch: the operationa
 :::
 
 ::: {.notes}
-Part 107.49 is the rule that makes the checklist mandatory, not optional. Notice the checklist covers before, during, and after: the post-flight column is where data gets copied and the logbook gets written, and that is the column students skip.
+Part 107.49 makes the inspection mandatory; the checklist is how you prove to yourself you did it, and AC 107-2 Appendix E has a sample. Notice the checklist covers before, during, and after: the post-flight column is where data gets copied and the logbook gets written, and that is the column students skip.
 :::
 
 ## Flight control {.smaller}
@@ -274,12 +274,12 @@ On Wednesday: I am RPIC, some of you will fly under supervision as PMC, and ever
 Our site for the field flight and for the rest of the course data.
 :::
 
-## Lake Wheeler Field Laboratory {.smaller}
+## Lake Wheeler Road Field Laboratory {.smaller}
 
-![](../images/LW_google.webp){width="72%" fig-align="center" fig-alt="Satellite view of the Lake Wheeler Field Laboratory outlined in yellow, with the Mid-Pines, Feed Tower, and Southeast fields and SECREF labeled"}
+![](../images/LW_google.webp){width="72%" fig-align="center" fig-alt="Satellite view of the Lake Wheeler Road Field Laboratory outlined in yellow, with the Mid Pines, Feed Tower, and Southeast fields and SECREF labeled"}
 
 ::: {.notes}
-NC State's agricultural field laboratory south of campus. The Mid-Pines field is where we fly, and the GCP layout you saw earlier is from here.
+NC State's agricultural field laboratory, about five miles south of campus. Mid Pines is the field we fly, and the GCP layout you saw earlier is from there.
 :::
 
 ## Lake Wheeler on the sectional chart {.smaller}
@@ -287,7 +287,7 @@ NC State's agricultural field laboratory south of campus. The Mid-Pines field is
 ![](../images/lake_wheeler2.webp){width="68%" fig-align="center" fig-alt="Raleigh sectional aeronautical chart with Lake Wheeler circled inside the RDU Class C airspace shelf"}
 
 ::: {.notes}
-Read the chart as in Topic 1: Lake Wheeler sits under the RDU Class C shelf, so the flight needs a LAANC authorization at the allowed ceiling. Check the ceiling before planning the altitude, not after.
+Read the chart as in Lecture 1B: Lake Wheeler sits under the outer shelf of the RDU Class C, marked 44/17, so the controlled airspace starts at 1,700 ft MSL and a Part 107 flight at or below 400 ft AGL is in uncontrolled airspace beneath it. Confirm that in a LAANC or B4UFLY app on the day, since the answer is the facility map, not the distance to the airport.
 :::
 
 ## Planning the mapping flight {.center .text-center .section-divider background-color="#e9f2e9"}
@@ -367,7 +367,7 @@ The buffer matters because the last flight line and the first photos on each lin
 
 | | Nadir (straight down) | Oblique (pitched) |
 |---|---|---|
-| **Gimbal pitch** | -90 degrees | 70 to 80 degrees |
+| **Gimbal pitch** | -90 degrees (nadir) | -70 to -80 degrees, 10 to 20 degrees off nadir |
 | **Best for** | Most mapping: orthomosaics and DSMs | Buildings, rough terrain, 3D models |
 | **Trade-off** | Simple, efficient | Improved 3D, more photos and flight time |
 
@@ -396,7 +396,7 @@ Nadir for everything we do this semester. Oblique earns its keep on vertical str
 :::
 
 ::: {.notes}
-Same field, same overlap, two altitudes. The 70 m plan has almost twice the lines and gives 2.5 cm GSD; the 120 m plan flies faster at about 4.3 cm. Part 107 caps you at 400 ft AGL, and the LAANC ceiling can be lower.
+Same field, same overlap, two altitudes. The 70 m plan has about 70 percent more lines and gives 2.5 cm GSD; the 120 m plan flies faster at about 4.2 cm. Part 107 caps you at 400 ft AGL, and the LAANC ceiling can be lower.
 :::
 
 ## Flight patterns {.smaller}
@@ -427,7 +427,7 @@ Lawnmower for the field on Wednesday. Crosshatch doubles the flight time and is 
 | | Minimum | Recommended for SfM |
 |---|---|---|
 | **Forward** | 60% | 75 to 85% |
-| **Side** | 40% | 65 to 85% |
+| **Side** | 40% | 60 to 80% |
 :::
 ::: {.column width="55%"}
 - Homogeneous terrain (crops, sand, water) needs **more** overlap: fewer features to match
@@ -449,7 +449,7 @@ Lawnmower for the field on Wednesday. Crosshatch doubles the flight time and is 
 :::
 
 ::: {.notes}
-Ask them before showing the second screenshot: raising side overlap from 75 to 85 percent at the same altitude nearly doubles the number of flight lines. Forward overlap costs photos, side overlap costs flight lines and batteries.
+Ask them before showing the second screenshot: raising side overlap from 75 to 85 percent at the same altitude adds about two thirds more flight lines, since line spacing goes from 25 to 15 percent of the footprint. Forward overlap costs photos, side overlap costs flight lines and batteries.
 :::
 
 ## Drone speed {.smaller}
