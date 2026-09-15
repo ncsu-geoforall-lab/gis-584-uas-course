@@ -43,6 +43,16 @@
   activity: "Assignment Due"
   assignment-due-date: 10/25/2026
 
+- date: 11/2/2026
+  activity: "Guest Speaker"
+  topic: "Guest Lecture"
+  title: "Guest lecture"
+
+- date: 11/4/2026
+  topic: "Catch-up Day"
+  title: "Catch-up Day - No Class"
+  activity: "No Class"
+
 - date: 11/23/2026
   topic: "Project"
   title: "Work on project"
