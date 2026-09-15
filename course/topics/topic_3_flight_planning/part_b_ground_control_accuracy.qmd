@@ -2,7 +2,7 @@
 topic: "Topic 3B: UAS Flight Planning"
 title: "Ground control, checkpoints, and accuracy"
 subtitle: "Topic 3: UAS Flight Planning"
-date: 10/26/2026
+date: 9/28/2026
 activity: Lecture
 bibliography: references.bib
 ---

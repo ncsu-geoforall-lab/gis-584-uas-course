@@ -2,8 +2,8 @@
 topic: "Topic 3B: UAS Flight Planning"
 title: "Assignment 3B"
 subtitle: "Validate the Lake Wheeler flight"
-date: 10/26/2026
-assignment-due-date: 11/9/2026
+date: 9/30/2026
+assignment-due-date: 10/14/2026
 activity: Lab
 bibliography: ../references.bib
 format:
