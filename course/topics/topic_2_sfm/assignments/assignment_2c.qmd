@@ -3,7 +3,7 @@ topic: "Topic 2C: Structure from Motion"
 title: "Assignment 2C"
 subtitle: "Processing the same imagery in WebODM"
 date: 9/23/2026
-assignment-due-date: 10/7/2026
+assignment-due-date: 10/5/2026
 activity: Lab
 bibliography: ../references.bib
 format: 
