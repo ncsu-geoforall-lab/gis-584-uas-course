@@ -2,8 +2,8 @@
 topic: "Topic 4B: GIS Analytics"
 subtitle: "Processing lidar and UAS SfM point clouds"
 title: "Assignment 4B"
-date: 10/7/2026
-assignment-due-date: 10/16/2026
+date: 10/14/2026
+assignment-due-date: 10/21/2026
 activity: Lab
 ---
 
