@@ -5,46 +5,48 @@ format:
         toc: true
 ---
 
-This is the protocol for the GNSS work at the {{< var course_params.term >}} Lake Wheeler field flight. We have the site from 10:15 to 11:30, and in that window we fly the block with the DJI Mavic Air 2 and survey the ground control and checkpoint coordinates that Topic 3B uses to validate the flight's orthomosaic and DSM. The two jobs run in parallel: the flight crew flies, the GNSS crew surveys, and the GNSS crew stays off the flight line.
+Read this before the {{< var course_params.term >}} Lake Wheeler field flight. The site is available from 10:15 to 11:30. In that window the class flies the block with a DJI Mavic Air 2 and surveys the ground control and checkpoint coordinates that Topic 3B uses to validate the flight's orthomosaic and DSM. You will be on one of two crews. The flight crew works with the instructor on the aircraft. The GNSS crew rotates through the Emlid Reach RS4 rover and stays off the flight line.
 
-Two things to keep in mind all day. First, the Mavic Air 2 has no RTK, so the ground targets are the only thing that puts the flight on the map; they are surveyed before anything else. Second, the rover gets its centimeter fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from our own base. The base on the tripod is a logger: it sits on the mark, writes a raw log all session, and gives the Topic 3B lab the data to establish that coordinate three ways. Once it is logging, nobody touches it.
+Two things to keep in mind all day. First, the Mavic Air 2 has no RTK, so the ground targets are the only thing that puts the flight on the map; they are laid and surveyed before anything else. Second, the rover gets its centimeter fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from the base on the tripod. The base is a logger: it sits on the mark, writes a raw log all session, and gives the Topic 3B lab the data to establish that mark's coordinate three ways. Once it is logging, nobody touches it.
 
-## Equipment checklist
+## Equipment
 
-- [ ] Emlid Reach RS4 rover on the survey pole, charged
-- [ ] Emlid Reach RS4 base, fixed-height tripod, and tribrach (the base is a logger today)
-- [ ] Tablet with [Emlid Flow](https://emlid.com/flow/), paired to both receivers, with cell data and the NCRTN RTK login entered before the trip
-- [ ] Four GCP targets
+The instructor brings:
+
+- [ ] Emlid Reach RS4 rover on a survey pole
+- [ ] Emlid Reach RS4 base with a fixed-height tripod and tribrach
+- [ ] Tablet running [Emlid Flow](https://emlid.com/flow/), paired to both receivers, with the NCRTN login entered
+- [ ] Four ground control targets
 - [ ] DJI Mavic Air 2 with two charged batteries and the flight plan loaded
-- [ ] Field sheet; a phone camera for point photos
-- [ ] Spare: LoRa radio link configured between base and rover, in case cell coverage drops
+- [ ] Field sheets
+- [ ] LoRa radio link between base and rover, as the fallback if cell coverage drops
+
+You bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for point photos. There is no bathroom or water at the site.
 
 ## Plan
 
-The flight is the point of the day. Everything below is ordered so the aircraft is in the air as early as possible, and the GNSS work fits around it. If time runs short, cut checkpoints first, then the re-occupation, then Method A; never the flight or the four targets.
-
-1. Arrive, park, and gather at the command area. Everyone gets settled.
-2. Welcome and overview of the day: what we are flying, why the targets and the checkpoints exist, who is on the flight crew and who is on the GNSS crew, where the flight line is and where not to stand.
-3. Flight crew lays the four targets on the pre-chosen spots and weights them down. GNSS crew does Method B: rover on the mark, 2 minute FIX from the network (section 1).
-4. Flight crew preflights the Mavic Air 2 and briefs. GNSS crew sets the base on the tripod over the mark and starts the log (section 2).
+1. Arrive and gather at the command area.
+2. The instructor gives an overview of the day: what is being flown, why the targets and the checkpoints exist, who is on which crew, and where the flight line is and where not to stand.
+3. The flight crew lays the four targets on the pre-chosen spots and weights them down. The GNSS crew does Method B: rover on the mark, 2 minute FIX from the network (section 1).
+4. The flight crew preflights the aircraft with the instructor. The GNSS crew sets the base on the tripod over the mark and starts the log (section 2).
 5. Launch. One battery over the target field (section 3).
-6. While the aircraft flies, the GNSS crew surveys the four targets first, 30 s each, then the checkpoints, 8 to 10 points, with groups rotating on the rover (section 4).
-7. Land. Flight crew checks the photo count and geotags. A second group re-occupies 3 checkpoints.
+6. While the aircraft flies, the GNSS crew surveys the four targets first, 30 seconds each, then the checkpoints, 8 to 10 points, with groups rotating on the rover (section 4).
+7. Land. The flight crew checks the photo count and geotags. A second GNSS group re-occupies 3 checkpoints.
 8. Stop the rover and export the project. Stop the base log last and download it. Pack up (section 5).
 
 ## 1. Method B: the mark's coordinate, by rover
 
-Do this first, before the base is set up, so the tripod never has to change modes.
+This comes first, before the base is set up, so the base never has to change modes.
 
-1. In Emlid Flow, connect the rover to the NCRTN NTRIP caster: host [rtn.nc.gov](https://rtn.nc.gov/), port 2101, mountpoint `VRS_RTCM34_MSM5` (all four constellations), your NCRTN login. Corrections reach the receiver through the tablet's cell data.
-2. Rover antenna height is the pole length. Confirm it once and do not change the pole length all day.
-3. Hold the pole plumb on the practice mark (35.727565, -78.697788). Wait for FIX (not FLOAT, not SINGLE), note the satellite count and correction age, and collect a 2 minute averaged occupation.
+1. In Emlid Flow, connect the rover to the NCRTN NTRIP caster: host [rtn.nc.gov](https://rtn.nc.gov/), port 2101, mountpoint `VRS_RTCM34_MSM5` (all four constellations), using the course login. Corrections reach the receiver through the tablet's cell data.
+2. The rover antenna height is the pole length. Confirm it once and do not change the pole length all day.
+3. Hold the pole plumb on the practice mark (35.727565, -78.697788). Wait for FIX (not FLOAT, not SINGLE), note the satellite count and correction age on the field sheet, and collect a 2 minute averaged occupation.
 4. Record the coordinate on the field sheet. This is the mark in NAD83(2011), Method B in the Topic 3B lab.
 
 ## 2. The base: a logger on the mark
 
 1. Set the tripod over the mark and level it carefully.
-2. Measure and record the antenna height to the bottom of the receiver, and write down that you measured to the bottom of the receiver. Emlid Flow adds the antenna phase center offset itself. A wrong antenna height puts a direct vertical error into Method C, and it is the single most common way to lose vertical accuracy.
+2. Measure the antenna height to the bottom of the receiver and record it, together with the words "to the bottom of the receiver." Emlid Flow adds the antenna phase center offset itself. A wrong antenna height puts a direct vertical error into Method C, and it is the single most common way to lose vertical accuracy.
 3. Confirm open sky view. Record the satellite count and PDOP.
 4. **Start the raw log**: RINEX at 1 Hz. Note the start time. This log is post-processed against the NCRTN station NCRD in the Topic 3B lab (Method C), so it runs until the last rover point is collected.
 5. **Method A**: with the base still in SINGLE, average its own position for 1 minute and record that coordinate. It is the deliberately wrong number the lab compares against. If time is short, skip it; the same number comes out of the log afterward.
@@ -52,44 +54,45 @@ Do this first, before the base is set up, so the tripod never has to change mode
 
 ## 3. Targets and the flight
 
-The flight crew works in parallel with sections 1 and 2.
+The instructor is the Remote Pilot in Command. Students on the flight crew act as visual observers and may take the controls under the instructor's direct supervision.
 
 - Lay the four targets on the pre-chosen spots: one toward each corner of the block, none on the very edge, spread across the elevation range. Weight them down. Once a target is laid and surveyed it does not move.
-- Preflight the Mavic Air 2 from its checklist. Lake Wheeler sits under the RDU Class C shelf, so a flight at or below 400 ft AGL needs no airspace authorization; confirm in B4UFLY the morning of the trip.
-- Fly one battery: a single block over the field the targets are on, planned so it finishes in about 20 minutes. Keep the second battery as the spare.
-- After landing, check the photo count against the plan and confirm the photos carry geotags before packing up.
+- Run the preflight checklist with the instructor. The flight needs no airspace authorization here: Lake Wheeler sits under the RDU Class C shelf, and the flight stays at or below 400 ft AGL.
+- The flight is one battery, a single block over the field the targets are on. The second battery is the spare.
+- After landing, check the photo count against the plan and confirm the photos carry geotags before the aircraft is packed.
 
 ## 4. Rover work: GCPs and checkpoints
 
-Project settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, the older NAD83(HARN) realization; at this site the two differ by about 2 cm horizontally, which is real money at checkpoint accuracy, so the datum realization is written down as part of the survey and the conversion after the trip is a real transformation, not a relabel.
+Before collecting, confirm the Emlid Flow project settings: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, the older NAD83(HARN) realization, which differs from NAD83(2011) by about 2 cm horizontally at this site. Two centimeters matters at checkpoint accuracy, so the datum realization you surveyed in is written on the field sheet as part of the survey.
 
-**Ground control targets first (4 points).** As soon as the targets are down, measure the center of each with a 30 second averaged FIX occupation. These four points are the only ones that will be used to control the photogrammetric processing, and the flight is not on the map without them.
+**Ground control targets first (4 points).** As soon as the targets are down, measure the center of each with a 30 second averaged FIX occupation. These four points are the only ones used to control the photogrammetric processing, and the flight is not on the map without them.
 
 **Checkpoints (8 to 10 points).** Everything else is withheld from processing and used to measure the accuracy of the final products. For each checkpoint:
 
 - Pick a point you will be able to find in the imagery: pavement corners, the junction of sidewalk joints, a manhole edge, a paint mark. Avoid grass, gravel, and anything that moves.
 - Hold the pole plumb (the RS4 tilt compensation helps, but a steady pole is better), confirm FIX, and collect a 30 second averaged occupation.
 - Photograph the point with the pole tip visible and note the point number on the field sheet.
-- Spread the points across the whole flight block, including the edges and the full elevation range, and put several on smooth level ground (those serve the vertical assessment).
+- Spread the points across the whole flight block, including the edges and the full elevation range, and put several on smooth level ground; those serve the vertical assessment.
 
 Groups rotate on the rover: each group takes one or two points, records them on the sheet, and hands off. One person calls FIX status and satellite count on every occupation.
 
 **Repeatability check.** A second group re-occupies 3 of the earlier checkpoints without looking at the first group's numbers. Agreement between independent occupations is the honest accuracy check, not the precision the software reports.
 
-## 5. What to upload at the end of the day
+## 5. What goes to the shared folder
 
-To the shared drive folder, same day:
+The GNSS lead uploads these to the shared drive folder the same day:
 
-1. The base RINEX log (stop logging, download from the receiver)
+1. The base RINEX log (stop logging, then download it from the receiver)
 2. The Emlid Flow project CSV export (all points, both height types)
 3. The Method A and Method B coordinates from the field sheet, with antenna heights and times
 4. The point photos, named by point number
 5. A photo of the field sheet
-6. The flight photos
+
+The instructor uploads the flight photos.
 
 ## If cell coverage drops
 
-The rover needs the NCRTN over the tablet's cell data. If coverage drops partway through, turn the base into a broadcasting base: enter the Method B coordinate from section 1 as its known position with the antenna height from section 2, start LoRa corrections, switch the rover to LoRa, and carry on. The log keeps running through the change. If there was never coverage, skip Method B, set the base to average its position in SINGLE, broadcast, and collect anyway; the whole survey shifts onto the correct datum later, when the base log is post-processed against NCRD (the lab's Method C). Nothing collected is lost; only the absolute coordinate arrives later.
+The rover needs the NCRTN over the tablet's cell data. If coverage drops partway through, the instructor turns the base into a broadcasting base: the Method B coordinate from section 1 goes in as its known position with the antenna height from section 2, LoRa corrections start, and the rover switches to LoRa. The log keeps running through the change, and collection carries on. If there was never coverage, Method B is skipped, the base averages its own position in SINGLE and broadcasts that, and collection carries on anyway; the whole survey shifts onto the correct datum later, when the base log is post-processed against NCRD (the lab's Method C). Nothing collected is lost; only the absolute coordinate arrives later.
 
 ## The reference station behind Methods B and C
 
@@ -97,11 +100,11 @@ Both accurate methods lean on the North Carolina Real Time Network. Method B tak
 
 ![The NCRTN Sensor Map with NCRD selected. Lake Wheeler sits south of Raleigh, 11.5 km from the station.](images/ncrtn_sensor_map_ncrd.webp){width="85%" fig-align="center" fig-alt="NCRTN sensor map of the Raleigh area with a popup for station NCRD giving its latitude, longitude, height, and Trimble Alloy sensor type"}
 
-The network watches every station's position continuously against its published coordinate. The scatter plot below is NCRD over one hour: 1 and 2 sigma round to 0.000 m and 3 sigma is 0.001 m. Every rover point today inherits its coordinate from a network of stations holding still to a millimeter, and the base log will be settled against the same station, which is why a two-meter error in a base coordinate can only come from the tripod, the antenna height, or a typo, never from the network.
+The network watches every station's position continuously against its published coordinate. The scatter plot below is NCRD over one hour: 1 and 2 sigma round to 0.000 m and 3 sigma is 0.001 m. Every rover point you collect inherits its coordinate from a network of stations holding still to a millimeter, and the base log is settled against the same station. That is why a two-meter error in a base coordinate can only come from the tripod, the antenna height, or a typo, never from the network.
 
 ![One hour of NCRD position scatter on the NCRTN: 3 sigma is 1 mm.](images/ncrtn_ncrd_scatter.webp){width="55%" fig-align="center" fig-alt="NCRTN position scatter plot for NCRD showing all points clustered at the origin inside 5, 7, and 10 centimeter threshold circles, with 1 sigma 0.000 m and 3 sigma 0.001 m"}
 
-Both pages are public at [rtn.nc.gov](https://rtn.nc.gov/) (Sensor Map and Status Messages) and are worth a look the morning of the trip for outages, maintenance windows, and GPS interference notices.
+Both pages are public at [rtn.nc.gov](https://rtn.nc.gov/) under Sensor Map and Status Messages, where the network posts outages, maintenance windows, and GPS interference notices.
 
 ::: {.callout-note collapse="true"}
 ## Instructor checklist (before the trip)
@@ -110,7 +113,7 @@ Both pages are public at [rtn.nc.gov](https://rtn.nc.gov/) (Sensor Map and Statu
 - NCRTN CORS download account working; the station to download for Method C is NCRD (Raleigh DOT), 11.5 km from the practice mark
 - RS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range as the fallback
 - Fixed-height tripod parts complete; pole tip checked
-- Mavic Air 2: two batteries charged, the block planned to fit one battery, B4UFLY checked the morning of
+- Mavic Air 2: two batteries charged, the block planned to fit one battery, B4UFLY and the NCRTN status page checked the morning of
 - Four target spots chosen on the block in advance so laying out takes minutes, not a walk
 - Field sheets printed; targets counted
 - After the trip: derive the two lab files from the Emlid Flow export: `checkpoints.csv` with exactly `name, easting, northing, height` (EPSG:3358, orthometric) and `checkpoints_full.csv` with everything, marking re-occupations in the name. The EPSG:6542 to EPSG:3358 step is a datum transformation (NGS NCAT), not a relabel
