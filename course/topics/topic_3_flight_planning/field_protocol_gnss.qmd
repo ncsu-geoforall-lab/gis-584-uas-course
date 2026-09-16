@@ -5,13 +5,11 @@ format:
         toc: true
 ---
 
-Read this before the {{< var course_params.term >}} Lake Wheeler field flight. The site is available from 10:15 to 11:30. The class surveys the ground control targets together with the Emlid Reach RS4 rover, then flies the block with a DJI Mavic Air 2. The coordinates feed the Topic 3B lab.
+Read this before the {{< var course_params.term >}} Lake Wheeler field flight.
 
 ::: {.callout-note}
 **Distance education students**: read this protocol, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the target placement and survey in sections 3 and 5.
 :::
-
-Two things to keep in mind. The Mavic Air 2 geotags its photos to within a few meters; the ground targets bring the flight to centimeters, so they go down first. The rover gets its fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from the base. The base is a logger on the mark for the Topic 3B lab, and nobody touches it once it is running.
 
 ## Equipment List
 
@@ -24,13 +22,13 @@ Two things to keep in mind. The Mavic Air 2 geotags its photos to within a few m
 - [ ] LoRa radio link between base and rover, as the fallback if cell coverage drops
 
 ::: {.callout-warning}
-You bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for point photos. There is no bathroom or water at the site.
+Bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for point photos. There is no bathroom or water at the site.
 :::
 
 ## Plan
 
 1. Arrive and gather at the command area.
-2. The instructor gives an overview: what is being flown, why the targets and checkpoints exist, and where not to stand during the flight.
+2. Overview: what is being flown, why the targets and checkpoints exist, and where not to stand during the flight.
 3. Method B on the mark with the rover (section 1).
 4. Set up the base on the mark and start the log (section 2).
 5. Lay the four targets and survey them, everyone together, rotating on the rover (section 3).
@@ -68,9 +66,23 @@ Project settings on the rover: NAD83(2011) / North Carolina in meters (EPSG:6542
 
 The instructor is the Remote Pilot in Command. Students act as visual observers and may take the controls under supervision.
 
-- Run the preflight checklist. No airspace authorization is needed: Lake Wheeler is under the RDU Class C shelf and the flight stays at or below 400 ft AGL.
+- Run the preflight checklist. Lake Wheeler is Class G airspace, so no authorization is needed, and the site is inside the North Carolina State University Lake Wheeler West FRIA, so Remote ID is not required. Daylight is 6:59 am to 7:22 pm. The flight stays at or below 400 ft AGL.
 - Fly one battery, one block over the target field. The second battery is the spare.
 - After landing, check the photo count and confirm the photos carry geotags.
+
+::: {.callout-warning}
+## GPS interference test on the flight day
+
+The FAA advisory [FTBRNC GPS 26-76](https://www.faasafety.gov/files/notices/2026/Sep/FTBRNC_26-76_GPS_Flight_Advisory.pdf) schedules GPS interference testing centered on Fort Bragg on September 14 to 16, daily 1500Z to 2300Z, which is 11:00 am to 7:00 pm EDT. The test starts in the middle of the field window. Lake Wheeler is 85 km (46 NM) from the center, and the advisory's area covers the whole state from the surface up.
+
+What this means on the day:
+
+- Method B, the base log, and the four targets are finished before 11:00. That is why they come first.
+- The aircraft launches before 11:00 if at all possible. If the GPS signal degrades in flight, the instructor lands it; the flight plan does not resume until the aircraft reports a normal satellite count.
+- After 11:00, watch the rover's status on every occupation. If FIX drops to FLOAT or SINGLE and does not come back within a minute, stop collecting checkpoints and note the time. Points collected without a FIX are not used.
+- The base log keeps running regardless. Its post-processing against NCRD is checked in the lab for the interference window.
+- The NCRTN posts interference notices on its Status Messages page; the instructor checks it the morning of the trip.
+:::
 
 ## 5. Checkpoints
 
@@ -120,7 +132,7 @@ Both pages are public at [rtn.nc.gov](https://rtn.nc.gov/) under Sensor Map and 
 - NCRTN CORS download account working; NCRD is the station for Method C
 - RS4 firmware and Emlid Flow updated; LoRa link tested at range
 - Fixed-height tripod parts complete; pole tip checked
-- Mavic Air 2: two batteries charged, the block planned for one battery, B4UFLY and the NCRTN status page checked the morning of
+- Mavic Air 2: two batteries charged, the block planned for one battery, B4UFLY and the NCRTN status page checked the morning of; GPS advisory FTBRNC GPS 26-76 runs 11:00 am to 7:00 pm EDT on the flight day, so launch before 11:00
 - Four target spots chosen in advance
 - Field sheets printed; targets counted
 - After the trip: derive `checkpoints.csv` (`name, easting, northing, height`, EPSG:3358, orthometric) and `checkpoints_full.csv` from the Emlid Flow export, marking re-occupations in the name. EPSG:6542 to EPSG:3358 is a datum transformation (NGS NCAT), not a relabel
