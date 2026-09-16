@@ -21,16 +21,16 @@ Two things to keep in mind all day. First, the Mavic Air 2 has no RTK, so the gr
 
 ## Plan
 
-Seventy-five minutes on site, split into six blocks. The GNSS and flight columns run at the same time.
+The flight is the point of the day. Everything below is ordered so the aircraft is in the air as early as possible, and the GNSS work fits around it. If time runs short, cut checkpoints first, then the re-occupation, then Method A; never the flight or the four targets.
 
-| Block | GNSS crew | Flight crew |
-|---|---|---|
-| First 10 minutes | Method B: rover on the mark, 2 minute FIX from the network. Then the base goes on the tripod over the same mark and starts logging (Method A read off the screen) | Lay the four targets, unpack and preflight the aircraft, crew briefing |
-| Next 5 minutes | Survey the four GCPs, 30 s each | Launch |
-| Next 25 minutes | Checkpoints, 8 to 10 points, 30 s each, groups rotating on the rover | One battery over the target field |
-| Next 10 minutes | A second group re-occupies 3 checkpoints | Land; check photo count and geotags |
-| Next 15 minutes | Stop the rover and export the project. Stop the base log last and download it | Pack the aircraft |
-| Last 10 minutes | Buffer; pack the tripod | |
+1. Arrive, park, and gather at the command area. Everyone gets settled.
+2. Welcome and overview of the day: what we are flying, why the targets and the checkpoints exist, who is on the flight crew and who is on the GNSS crew, where the flight line is and where not to stand.
+3. Flight crew lays the four targets on the pre-chosen spots and weights them down. GNSS crew does Method B: rover on the mark, 2 minute FIX from the network (section 1).
+4. Flight crew preflights the Mavic Air 2 and briefs. GNSS crew sets the base on the tripod over the mark and starts the log (section 2).
+5. Launch. One battery over the target field (section 3).
+6. While the aircraft flies, the GNSS crew surveys the four targets first, 30 s each, then the checkpoints, 8 to 10 points, with groups rotating on the rover (section 4).
+7. Land. Flight crew checks the photo count and geotags. A second group re-occupies 3 checkpoints.
+8. Stop the rover and export the project. Stop the base log last and download it. Pack up (section 5).
 
 ## 1. Method B: the mark's coordinate, by rover
 
