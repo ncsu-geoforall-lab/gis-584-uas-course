@@ -19,16 +19,18 @@ Two things to keep in mind all day. First, the Mavic Air 2 has no RTK, so the gr
 - [ ] Field sheet; a phone camera for point photos
 - [ ] Spare: LoRa radio link configured between base and rover, in case cell coverage drops
 
-## Run of show
+## Plan
 
-| Time | GNSS crew | Flight crew |
+Seventy-five minutes on site, split into six blocks. The GNSS and flight columns run at the same time.
+
+| Block | GNSS crew | Flight crew |
 |---|---|---|
-| 10:15 to 10:25 | Method B: rover on the mark, 2 minute FIX from the network. Then the base goes on the tripod over the same mark and starts logging (Method A read off the screen) | Lay the four targets, unpack and preflight the aircraft, crew briefing |
-| 10:25 to 10:30 | Survey the four GCPs, 30 s each | Launch |
-| 10:30 to 10:55 | Checkpoints, 8 to 10 points, 30 s each, groups rotating on the rover | One battery over the target field |
-| 10:55 to 11:05 | A second group re-occupies 3 checkpoints | Land; check photo count and geotags |
-| 11:05 to 11:20 | Stop the rover and export the project. Stop the base log last and download it | Pack the aircraft |
-| 11:20 to 11:30 | Buffer; pack the tripod | |
+| First 10 minutes | Method B: rover on the mark, 2 minute FIX from the network. Then the base goes on the tripod over the same mark and starts logging (Method A read off the screen) | Lay the four targets, unpack and preflight the aircraft, crew briefing |
+| Next 5 minutes | Survey the four GCPs, 30 s each | Launch |
+| Next 25 minutes | Checkpoints, 8 to 10 points, 30 s each, groups rotating on the rover | One battery over the target field |
+| Next 10 minutes | A second group re-occupies 3 checkpoints | Land; check photo count and geotags |
+| Next 15 minutes | Stop the rover and export the project. Stop the base log last and download it | Pack the aircraft |
+| Last 10 minutes | Buffer; pack the tripod | |
 
 ## 1. Method B: the mark's coordinate, by rover
 
