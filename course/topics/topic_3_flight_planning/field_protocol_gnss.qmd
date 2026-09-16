@@ -74,9 +74,41 @@ Set the rover project to NAD83(2011) / North Carolina in meters (EPSG:6542) with
 
 ## 4. The flight
 
-- Run the preflight checklist. Lake Wheeler is Class G airspace, so no authorization is needed, and the site is inside the North Carolina State University Lake Wheeler West FRIA, so Remote ID is not required. Daylight is 6:59 am to 7:22 pm. The flight stays at or below 400 ft AGL.
-- Fly one battery, one block over the GCP field. The second battery is the spare.
-- After landing, check the photo count and confirm the photos carry geotags.
+Lake Wheeler is Class G airspace, so no authorization is needed, and the site is inside the North Carolina State University Lake Wheeler West FRIA, so Remote ID is not required. Daylight is 6:59 am to 7:22 pm. The flight stays at or below 400 ft AGL. Fly one battery, one block over the GCP field; the second battery is the spare.
+
+### Preflight checklist
+
+Before leaving:
+
+- [ ] Two aircraft batteries and the controller charged; spare battery packed
+- [ ] Aircraft and controller firmware current; SD card in, formatted, with space for the flight
+- [ ] Flight plan loaded and checked: area covers all four GCPs, altitude, overlap, one battery
+- [ ] Weather checked: wind, precipitation, visibility
+- [ ] Airspace and NOTAMs checked, including the GPS interference advisory above
+
+At the site:
+
+- [ ] Walk the area: obstacles near the takeoff and landing spot and along the flight lines, people and vehicles nearby
+- [ ] Wind checked at the site
+- [ ] Takeoff and landing spot chosen, flat and clear; everyone briefed on where to stand
+- [ ] Visual observer assigned
+- [ ] Airframe inspected: propellers, arms, motors, gimbal cover off, battery seated and latched
+- [ ] Power on; compass and IMU status normal; satellite count adequate; home point recorded
+- [ ] Return-to-home altitude set above any obstacle
+- [ ] Camera set: photo mode, geotagging on, exposure checked, lens clean
+- [ ] Flight plan uploaded to the aircraft; mission start confirmed
+
+During the flight:
+
+- [ ] Aircraft in visual line of sight at all times
+- [ ] Battery level and satellite count watched; land at the app's battery warning
+- [ ] Anyone entering the flight area is called out and the aircraft is paused
+
+After landing:
+
+- [ ] Motors stopped, aircraft powered down, battery removed
+- [ ] Photo count matches the plan; photos carry geotags
+- [ ] Flight logged: time, battery, notes
 
 ::: {.callout-warning}
 ## GPS interference test on the flight day
