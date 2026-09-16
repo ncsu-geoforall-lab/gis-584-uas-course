@@ -9,9 +9,7 @@ Read this before the {{< var course_params.term >}} Lake Wheeler field flight. T
 
 Two things to keep in mind all day. First, the Mavic Air 2 has no RTK, so the ground targets are the only thing that puts the flight on the map; they are laid and surveyed before anything else. Second, the rover gets its centimeter fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from the base on the tripod. The base is a logger: it sits on the mark, writes a raw log all session, and gives the Topic 3B lab the data to establish that mark's coordinate three ways. Once it is logging, nobody touches it.
 
-## Equipment
-
-The instructor brings:
+## Equipment List
 
 - [ ] Emlid Reach RS4 rover on a survey pole
 - [ ] Emlid Reach RS4 base with a fixed-height tripod and tribrach
@@ -21,7 +19,9 @@ The instructor brings:
 - [ ] Field sheets
 - [ ] LoRa radio link between base and rover, as the fallback if cell coverage drops
 
+::: {.callout-warning}
 You bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for point photos. There is no bathroom or water at the site.
+:::
 
 ## Plan
 
