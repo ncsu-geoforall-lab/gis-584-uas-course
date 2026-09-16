@@ -9,14 +9,14 @@ This is the protocol for the GNSS work at the {{< var course_params.term >}} Lak
 
 The takeaway to keep in mind all day: the rover can measure a point to about a centimeter relative to the base, but every point inherits the base coordinate. If the base coordinate is wrong by two meters, every point is wrong by two meters, even with a FIX. Establishing that one coordinate carefully is most of the job.
 
-## Equipment
+## Equipment Check List
 
-- Emlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)
-- Fixed-height tripod with tribrach for the base; survey pole for the rover
-- Phone or tablet with [Emlid Flow](https://emlid.com/flow/) connected to each receiver
-- North Carolina Real Time Network (NCRTN) RTK login credentials, entered into Emlid Flow before the trip
-- Field notebook or the shared field sheet; a phone camera for point photos
-- Spare: LoRa radio link configured between base and rover, in case cell coverage drops
+- [ ] Emlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)
+- [ ] Fixed-height tripod with tribrach for the base; survey pole for the rover
+- [ ] Phone or tablet with [Emlid Flow](https://emlid.com/flow/) connected to each receiver
+- [ ] North Carolina Real Time Network (NCRTN) RTK login credentials, entered into Emlid Flow before the trip
+- [ ] Field notebook or the shared field sheet; a phone camera for point photos
+- [ ] Spare: LoRa radio link configured between base and rover, in case cell coverage drops
 
 ## Base setup
 
@@ -31,6 +31,18 @@ The takeaway to keep in mind all day: the rover can measure a point to about a c
    c. Occupy the mark with a 1 to 2 minute averaged collection. This is the mark's coordinate in NAD83(2011).
    d. Switch to Base mode and enter that coordinate manually as the known position.
    e. Start broadcasting corrections over LoRa. **From this point, do not reconfigure or restart the base**: the rover crews and the running log both depend on it.
+
+## The reference station behind Methods B and C
+
+Both accurate methods lean on the North Carolina Real Time Network. Method B takes live corrections from it over the cell connection; Method C post-processes the base log against one of its stations afterward. The station that matters for Lake Wheeler is **NCRD** (Raleigh DOT), operated by the NC Geodetic Survey on a Trimble Alloy receiver at 35.763752, -78.578998, ellipsoid height 51.802 m. That is 11.5 km from the practice mark; the next nearest stations are about 23 km (Jordan Lake), 35 km (Wilson's Mills), and 52 km (Sanford) away.
+
+![The NCRTN Sensor Map with NCRD selected. Lake Wheeler sits south of Raleigh, 11.5 km from the station.](images/ncrtn_sensor_map_ncrd.webp){width="85%" fig-align="center" fig-alt="NCRTN sensor map of the Raleigh area with a popup for station NCRD giving its latitude, longitude, height, and Trimble Alloy sensor type"}
+
+The network watches every station's position continuously against its published coordinate. The scatter plot below is NCRD over one hour: 1 and 2 sigma round to 0.000 m and 3 sigma is 0.001 m. The base you set up inherits its coordinate from a station that is holding still to a millimeter, which is why Method C gives the best vertical, and why a two-meter error in your base coordinate can only come from the tripod, the antenna height, or a typo, never from the network.
+
+![One hour of NCRD position scatter on the NCRTN: 3 sigma is 1 mm.](images/ncrtn_ncrd_scatter.webp){width="55%" fig-align="center" fig-alt="NCRTN position scatter plot for NCRD showing all points clustered at the origin inside 5, 7, and 10 centimeter threshold circles, with 1 sigma 0.000 m and 3 sigma 0.001 m"}
+
+Both pages are public at [rtn.nc.gov](https://rtn.nc.gov/) (Sensor Map and Status Messages) and are worth a look the morning of the trip for outages, maintenance windows, and GPS interference notices.
 
 ## Rover work: GCPs and checkpoints
 
@@ -65,7 +77,7 @@ Method B needs the NCRTN over a cell connection. If there is no coverage, skip s
 ## Instructor checklist (before the trip)
 
 - NCRTN RTK login tested in Emlid Flow on the actual field tablet, with a FIX obtained somewhere off campus
-- NCRTN CORS download account working; know the nearest CORS station ID to Lake Wheeler
+- NCRTN CORS download account working; the nearest CORS station to Lake Wheeler is NCRD (Raleigh DOT), 11.5 km from the practice mark, so its RINEX is the one to download for Method C
 - RS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range
 - Fixed-height tripod parts complete; pole tip checked
 - Field sheets printed; GCP targets counted
