@@ -5,10 +5,10 @@ format:
         toc: true
 ---
 
-Read this before the {{< var course_params.term >}} Lake Wheeler field flight. The site is available from 10:15 to 11:30. The class flies the block with a DJI Mavic Air 2 and surveys the ground control and checkpoint coordinates for the Topic 3B lab. You will be on the flight crew, with the instructor on the aircraft, or the GNSS crew, rotating through the Emlid Reach RS4 rover off the flight line.
+Read this before the {{< var course_params.term >}} Lake Wheeler field flight. The site is available from 10:15 to 11:30. The class surveys the ground control targets together with the Emlid Reach RS4 rover, then flies the block with a DJI Mavic Air 2. The coordinates feed the Topic 3B lab.
 
 ::: {.callout-note}
-**Distance education students**: read this protocol, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the target placement and survey in sections 3 and 4.
+**Distance education students**: read this protocol, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the target placement and survey in sections 3 and 5.
 :::
 
 Two things to keep in mind. The Mavic Air 2 geotags its photos to within a few meters; the ground targets bring the flight to centimeters, so they go down first. The rover gets its fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from the base. The base is a logger on the mark for the Topic 3B lab, and nobody touches it once it is running.
@@ -30,13 +30,13 @@ You bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for
 ## Plan
 
 1. Arrive and gather at the command area.
-2. The instructor gives an overview: what is being flown, why the targets and checkpoints exist, who is on which crew, and where not to stand.
-3. Flight crew lays the four targets. GNSS crew does Method B on the mark (section 1).
-4. Flight crew preflights the aircraft. GNSS crew sets up the base and starts the log (section 2).
-5. Launch. One battery over the target field (section 3).
-6. While the aircraft flies, the GNSS crew surveys the four targets, then 8 to 10 checkpoints (section 4).
-7. Land. Flight crew checks the photo count and geotags. A second GNSS group re-occupies 3 checkpoints.
-8. Stop the rover and export the project. Stop the base log last. Pack up (section 5).
+2. The instructor gives an overview: what is being flown, why the targets and checkpoints exist, and where not to stand during the flight.
+3. Method B on the mark with the rover (section 1).
+4. Set up the base on the mark and start the log (section 2).
+5. Lay the four targets and survey them, everyone together, rotating on the rover (section 3).
+6. Preflight and launch. One battery over the target field (section 4).
+7. While the aircraft flies, groups rotate on the rover for 8 to 10 checkpoints, off the flight line (section 5). Then a second group re-occupies 3 of them.
+8. Land and check the photo count and geotags. Stop the rover and export the project. Stop the base log last. Pack up (section 6).
 
 ## 1. Method B: the mark's coordinate, by rover
 
@@ -56,22 +56,25 @@ Do this before the base is set up.
 5. **Method A**: while still in SINGLE, average the position for 1 minute and record it. Skip if short on time; the log gives the same number later.
 6. **Do not reconfigure, restart, or bump the base** until the end.
 
-## 3. Targets and the flight
+## 3. Targets
 
-The instructor is the Remote Pilot in Command. Flight crew students act as visual observers and may take the controls under supervision.
+Project settings on the rover: NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height. The labs use EPSG:3358, NAD83(HARN), which differs by about 2 cm here, so write the datum on the field sheet.
 
 - Lay the four targets on the pre-chosen spots, one toward each corner, none on the very edge. Weight them down. A surveyed target does not move.
+- Measure the center of each with a 30 second averaged FIX, rotating on the rover so everyone runs an occupation. These are the only points used to control the processing.
+- Photograph each target with the pole tip visible and log its number.
+
+## 4. The flight
+
+The instructor is the Remote Pilot in Command. Students act as visual observers and may take the controls under supervision.
+
 - Run the preflight checklist. No airspace authorization is needed: Lake Wheeler is under the RDU Class C shelf and the flight stays at or below 400 ft AGL.
 - Fly one battery, one block over the target field. The second battery is the spare.
 - After landing, check the photo count and confirm the photos carry geotags.
 
-## 4. Rover work: GCPs and checkpoints
+## 5. Checkpoints
 
-Project settings: NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height. The labs use EPSG:3358, NAD83(HARN), which differs by about 2 cm here, so write the datum on the field sheet.
-
-**Targets first (4 points).** Measure the center of each with a 30 second averaged FIX. These are the only points used to control the processing.
-
-**Checkpoints (8 to 10 points).** Withheld from processing; they measure the accuracy of the products.
+Collected while the aircraft flies, off the flight line. Checkpoints are withheld from processing and measure the accuracy of the products.
 
 - Pick points you can find in the imagery: pavement corners, sidewalk joints, manhole edges, paint marks. Avoid grass and gravel.
 - Hold the pole plumb, confirm FIX, and collect a 30 second averaged occupation.
@@ -82,7 +85,7 @@ Groups rotate on the rover, one or two points each. One person calls FIX status 
 
 **Repeatability check.** A second group re-occupies 3 checkpoints without seeing the first numbers. Independent agreement is the honest accuracy check.
 
-## 5. What goes to the shared folder
+## 6. What goes to the shared folder
 
 The GNSS lead uploads, the same day:
 
