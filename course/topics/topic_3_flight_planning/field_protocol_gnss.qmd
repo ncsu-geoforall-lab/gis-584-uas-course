@@ -8,7 +8,7 @@ format:
 Read this before the {{< var course_params.term >}} Lake Wheeler field flight.
 
 ::: {.callout-note}
-**Distance education students**: read this protocol, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the target placement and survey in sections 3 and 5.
+**Distance education students**: read this protocol, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the GCP placement and survey in sections 3 and 5.
 :::
 
 ## Equipment List
@@ -16,7 +16,7 @@ Read this before the {{< var course_params.term >}} Lake Wheeler field flight.
 - [ ] Emlid Reach RS4 rover on a survey pole
 - [ ] Emlid Reach RS4 base with a fixed-height tripod and tribrach
 - [ ] Tablet running [Emlid Flow](https://emlid.com/flow/), paired to both receivers, with the NCRTN login entered
-- [ ] Four ground control targets
+- [ ] Four GCP targets
 - [ ] DJI Mavic Air 2 with two charged batteries and the flight plan loaded
 - [ ] Field sheets
 - [ ] LoRa radio link between base and rover, as the fallback if cell coverage drops
@@ -28,11 +28,11 @@ Bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for poi
 ## Plan
 
 1. Arrive and gather at the command area.
-2. Overview: what is being flown, why the targets and checkpoints exist, and where not to stand during the flight.
+2. Overview: what is being flown, why the GCPs and checkpoints exist, and where not to stand during the flight.
 3. Method B on the mark with the rover (section 1).
 4. Set up the base on the mark and start the log (section 2).
-5. Lay the four targets and survey them, everyone together, rotating on the rover (section 3).
-6. Preflight and launch. One battery over the target field (section 4).
+5. Lay the four GCPs and survey them, everyone together, rotating on the rover (section 3).
+6. Preflight and launch. One battery over the GCP field (section 4).
 7. While the aircraft flies, groups rotate on the rover for 8 to 10 checkpoints, off the flight line (section 5). Then a second group re-occupies 3 of them.
 8. Land and check the photo count and geotags. Stop the rover and export the project. Stop the base log last. Pack up (section 6).
 
@@ -54,20 +54,20 @@ Do this before the base is set up.
 5. **Method A**: while still in SINGLE, average the position for 1 minute and record it. Skip if short on time; the log gives the same number later.
 6. **Do not reconfigure, restart, or bump the base** until the end.
 
-## 3. Targets
+## 3. GCPs
 
 Project settings on the rover: NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height. The labs use EPSG:3358, NAD83(HARN), which differs by about 2 cm here, so write the datum on the field sheet.
 
-- Lay the four targets on the pre-chosen spots, one toward each corner, none on the very edge. Weight them down. A surveyed target does not move.
+- Lay the four GCPs on the pre-chosen spots, one toward each corner, none on the very edge. Weight them down. A surveyed GCP does not move.
 - Measure the center of each with a 30 second averaged FIX, rotating on the rover so everyone runs an occupation. These are the only points used to control the processing.
-- Photograph each target with the pole tip visible and log its number.
+- Photograph each GCP with the pole tip visible and log its number.
 
 ## 4. The flight
 
 The instructor is the Remote Pilot in Command. Students act as visual observers and may take the controls under supervision.
 
 - Run the preflight checklist. Lake Wheeler is Class G airspace, so no authorization is needed, and the site is inside the North Carolina State University Lake Wheeler West FRIA, so Remote ID is not required. Daylight is 6:59 am to 7:22 pm. The flight stays at or below 400 ft AGL.
-- Fly one battery, one block over the target field. The second battery is the spare.
+- Fly one battery, one block over the GCP field. The second battery is the spare.
 - After landing, check the photo count and confirm the photos carry geotags.
 
 ::: {.callout-warning}
@@ -77,7 +77,7 @@ The FAA advisory [FTBRNC GPS 26-76](https://www.faasafety.gov/files/notices/2026
 
 What this means on the day:
 
-- Method B, the base log, and the four targets are finished before 11:00. That is why they come first.
+- Method B, the base log, and the four GCPs are finished before 11:00. That is why they come first.
 - The aircraft launches before 11:00 if at all possible. If the GPS signal degrades in flight, the instructor lands it; the flight plan does not resume until the aircraft reports a normal satellite count.
 - After 11:00, watch the rover's status on every occupation. If FIX drops to FLOAT or SINGLE and does not come back within a minute, stop collecting checkpoints and note the time. Points collected without a FIX are not used.
 - The base log keeps running regardless. Its post-processing against NCRD is checked in the lab for the interference window.
@@ -133,8 +133,8 @@ Both pages are public at [rtn.nc.gov](https://rtn.nc.gov/) under Sensor Map and 
 - RS4 firmware and Emlid Flow updated; LoRa link tested at range
 - Fixed-height tripod parts complete; pole tip checked
 - Mavic Air 2: two batteries charged, the block planned for one battery, B4UFLY and the NCRTN status page checked the morning of; GPS advisory FTBRNC GPS 26-76 runs 11:00 am to 7:00 pm EDT on the flight day, so launch before 11:00
-- Four target spots chosen in advance
-- Field sheets printed; targets counted
+- Four GCP spots chosen in advance
+- Field sheets printed; GCP targets counted
 - After the trip: derive `checkpoints.csv` (`name, easting, northing, height`, EPSG:3358, orthometric) and `checkpoints_full.csv` from the Emlid Flow export, marking re-occupations in the name. EPSG:6542 to EPSG:3358 is a datum transformation (NGS NCAT), not a relabel
 - After the trip: download the NCRD RINEX for the session window and package it with the base log and the Method A and B coordinates as `base_bundle.zip`
 - After processing: upload the six product files, the two report PDFs, and `base_bundle.zip` to the GCS `091626/` folder under the names in `_variables.yml`
