@@ -7,6 +7,10 @@ format:
 
 Read this before the {{< var course_params.term >}} Lake Wheeler field flight. The site is available from 10:15 to 11:30. In that window the class flies the block with a DJI Mavic Air 2 and surveys the ground control and checkpoint coordinates that Topic 3B uses to validate the flight's orthomosaic and DSM. You will be on one of two crews. The flight crew works with the instructor on the aircraft. The GNSS crew rotates through the Emlid Reach RS4 rover and stays off the flight line.
 
+::: {.callout-note}
+**Distance education students**: you are not at the site, but you use the same data in the Topic 3B lab. Read this protocol so you know how the points were collected, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the target placement and survey the on-campus crews do in sections 3 and 4.
+:::
+
 Two things to keep in mind all day. First, the Mavic Air 2 has no RTK, so the ground targets are the only thing that puts the flight on the map; they are laid and surveyed before anything else. Second, the rover gets its centimeter fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from the base on the tripod. The base is a logger: it sits on the mark, writes a raw log all session, and gives the Topic 3B lab the data to establish that mark's coordinate three ways. Once it is logging, nobody touches it.
 
 ## Equipment List

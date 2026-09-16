@@ -25,6 +25,7 @@ activity: "Lecture & Lab"
 ## Field trip
 
 - [GNSS field protocol](field_protocol_gnss.qmd): base station setup and checkpoint collection with the Emlid Reach RS4 during the Lake Wheeler flight; read it before the trip
+- Distance education students: [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA), in place of the trip
 
 ## Supplemental materials
 
