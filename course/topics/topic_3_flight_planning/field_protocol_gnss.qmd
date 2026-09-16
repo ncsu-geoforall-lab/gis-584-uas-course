@@ -27,10 +27,10 @@ Bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for poi
 
 ## Base coordinate methods
 
-The base station sits on the practice mark at 35.727565, -78.697788. The Topic 3B lab establishes the coordinate of that mark three ways and compares them:
+The base station sits on a practice mark. We will establish the coordinate of that mark three ways and compare them:
 
-- **Method A**: the base receiver's own averaged position, with no corrections. Expect meters of error.
-- **Method B**: a real-time network (RTK) fix on the mark, collected with the rover using corrections from the North Carolina Real Time Network (NCRTN). Expect a few centimeters.
+- **Method A**: the base receiver's own averaged position, with no corrections.
+- **Method B**: a real-time network (RTK) fix on the mark, collected with the rover using corrections from the North Carolina Real Time Network (NCRTN).
 - **Method C**: the base receiver's raw log, post-processed after the trip against NCRTN station NCRD. This is the most accurate, especially in height.
 
 Methods A and B are collected in the field. Method C needs only the base log.
@@ -112,5 +112,3 @@ The network monitors each station's position against its published coordinate. O
 ![One hour of NCRD position scatter: 3 sigma is 1 mm.](images/ncrtn_ncrd_scatter.webp){width="55%" fig-align="center" fig-alt="NCRTN position scatter plot for NCRD showing all points clustered at the origin inside 5, 7, and 10 centimeter threshold circles, with 1 sigma 0.000 m and 3 sigma 0.001 m"}
 
 Both pages are public at [rtn.nc.gov](https://rtn.nc.gov/) under Sensor Map and Status Messages.
-
-The Methods A, B, and C comparison and the checkpoint validation continue in the Topic 3B lab.
