@@ -621,11 +621,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#equipment" id="toc-equipment" class="nav-link active" data-scroll-target="#equipment">Equipment</a></li>
-  <li><a href="#base-setup" id="toc-base-setup" class="nav-link" data-scroll-target="#base-setup">Base setup</a></li>
-  <li><a href="#rover-work-gcps-and-checkpoints" id="toc-rover-work-gcps-and-checkpoints" class="nav-link" data-scroll-target="#rover-work-gcps-and-checkpoints">Rover work: GCPs and checkpoints</a></li>
-  <li><a href="#what-to-upload-at-the-end-of-the-day" id="toc-what-to-upload-at-the-end-of-the-day" class="nav-link" data-scroll-target="#what-to-upload-at-the-end-of-the-day">What to upload at the end of the day</a></li>
-  <li><a href="#if-cell-coverage-drops" id="toc-if-cell-coverage-drops" class="nav-link" data-scroll-target="#if-cell-coverage-drops">If cell coverage drops</a></li>
+  <li><a href="#equipment-list" id="toc-equipment-list" class="nav-link active" data-scroll-target="#equipment-list">Equipment List</a></li>
+  <li><a href="#base-coordinate-methods" id="toc-base-coordinate-methods" class="nav-link" data-scroll-target="#base-coordinate-methods">Base coordinate methods</a></li>
+  <li><a href="#plan" id="toc-plan" class="nav-link" data-scroll-target="#plan">Plan</a></li>
+  <li><a href="#method-b-fix-the-mark-with-the-rover" id="toc-method-b-fix-the-mark-with-the-rover" class="nav-link" data-scroll-target="#method-b-fix-the-mark-with-the-rover">1. Method B: fix the mark with the rover</a></li>
+  <li><a href="#base-station-log" id="toc-base-station-log" class="nav-link" data-scroll-target="#base-station-log">2. Base station log</a></li>
+  <li><a href="#gcps" id="toc-gcps" class="nav-link" data-scroll-target="#gcps">3. GCPs</a></li>
+  <li><a href="#the-flight" id="toc-the-flight" class="nav-link" data-scroll-target="#the-flight">4. The flight</a>
+  <ul class="collapse">
+  <li><a href="#preflight-checklist" id="toc-preflight-checklist" class="nav-link" data-scroll-target="#preflight-checklist">Preflight checklist</a></li>
+  </ul></li>
+  <li><a href="#checkpoints" id="toc-checkpoints" class="nav-link" data-scroll-target="#checkpoints">5. Checkpoints</a></li>
+  <li><a href="#what-goes-to-the-shared-folder" id="toc-what-goes-to-the-shared-folder" class="nav-link" data-scroll-target="#what-goes-to-the-shared-folder">6. What goes to the shared folder</a></li>
+  <li><a href="#ncrtn-station-ncrd" id="toc-ncrtn-station-ncrd" class="nav-link" data-scroll-target="#ncrtn-station-ncrd">NCRTN station NCRD</a></li>
   </ul>
 </nav>
     </div>
@@ -655,91 +663,187 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is the protocol for the GNSS work at the Fall 2026 Lake Wheeler field flight. While the UAS flies, student groups rotate through the Emlid Reach RS4 base and rover to collect the ground control and checkpoint coordinates that Topic 3B uses to validate the flight’s orthomosaic and DSM. The flight itself is not affected by this work; the GNSS crew operates off the flight line.</p>
-<p>The takeaway to keep in mind all day: the rover can measure a point to about a centimeter relative to the base, but every point inherits the base coordinate. If the base coordinate is wrong by two meters, every point is wrong by two meters, even with a FIX. Establishing that one coordinate carefully is most of the job.</p>
-<section id="equipment" class="level2">
-<h2 class="anchored" data-anchor-id="equipment">Equipment</h2>
-<ul>
-<li>Emlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)</li>
-<li>Fixed-height tripod with tribrach for the base; survey pole for the rover</li>
-<li>Phone or tablet with <a href="https://emlid.com/flow/">Emlid Flow</a> connected to each receiver</li>
-<li>North Carolina Real Time Network (NCRTN) RTK login credentials, entered into Emlid Flow before the trip</li>
-<li>Field notebook or the shared field sheet; a phone camera for point photos</li>
-<li>Spare: LoRa radio link configured between base and rover, in case cell coverage drops</li>
-</ul>
-</section>
-<section id="base-setup" class="level2">
-<h2 class="anchored" data-anchor-id="base-setup">Base setup</h2>
-<ol type="1">
-<li>Set the tripod over the practice mark (35.727565, -78.697788) and level it carefully.</li>
-<li>Measure and record the antenna height, and write down what you measured to. Emlid Flow applies the antenna phase center offset itself; you enter the height to the antenna reference point (bottom of the receiver on a tribrach, or the pole length if pole-mounted). A wrong antenna height puts a direct vertical error into every point collected today; it is the single most common way to lose vertical accuracy.</li>
-<li>Confirm open sky view. Record the satellite count and PDOP before starting.</li>
-<li><strong>Start the raw log first</strong>: begin RINEX logging at 1 Hz on the base and leave it running all day. This log is post-processed against the NCRTN CORS in the Topic 3B lab (Method C), so it must cover the whole session. Note the start time.</li>
-<li><strong>Record Method A</strong> while still in Single mode: average the position for five minutes and record that autonomous coordinate. It is the deliberately wrong number the Topic 3B lab compares against.</li>
-<li><strong>Establish the base coordinate</strong> (Method B, which the lab compares against Methods A and C):
-<ol type="a">
-<li>Configure the receiver as a rover in Emlid Flow and connect to the NCRTN NTRIP caster (<a href="https://rtn.nc.gov/">rtn.nc.gov</a>) with the VRS mountpoint.</li>
-<li>Wait for FIX (not FLOAT, not SINGLE). Note satellites and correction age.</li>
-<li>Occupy the mark with a 1 to 2 minute averaged collection. This is the mark’s coordinate in NAD83(2011).</li>
-<li>Switch to Base mode and enter that coordinate manually as the known position.</li>
-<li>Start broadcasting corrections over LoRa. <strong>From this point, do not reconfigure or restart the base</strong>: the rover crews and the running log both depend on it.</li>
-</ol></li>
-</ol>
-</section>
-<section id="rover-work-gcps-and-checkpoints" class="level2">
-<h2 class="anchored" data-anchor-id="rover-work-gcps-and-checkpoints">Rover work: GCPs and checkpoints</h2>
-<p>Project settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542), geoid GEOID18, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, which is the older NAD83(HARN) realization; at this site the two realizations differ by about 2 cm horizontally, which is real money at checkpoint accuracy, so write down which one you used: stating the datum realization is part of the survey. Rover antenna height is the pole length; confirm it once and do not change the pole length during the day.</p>
-<p><strong>Ground control targets (3 to 5 points).</strong> Measure the center of each laid-out target with a 1 to 2 minute averaged FIX occupation. These are the only points that will be used to control the photogrammetric processing.</p>
-<p><strong>Checkpoints (12 to 20 points).</strong> Everything else is withheld from processing and used to measure the accuracy of the final products. For each checkpoint:</p>
-<ul>
-<li>Pick a point you will be able to find in the imagery at 2 to 3 cm resolution: pavement corners, the junction of sidewalk joints, a manhole edge, a paint mark. Avoid grass, gravel, and anything that moves.</li>
-<li>Hold the pole plumb (the RS4 tilt compensation helps, but a steady pole is better), confirm FIX, and collect a 1 to 2 minute averaged occupation.</li>
-<li>Photograph the point with the pole tip visible and note the point number on the field sheet.</li>
-<li>Spread the points across the whole flight block, including the edges and the full elevation range, and put several on smooth level ground (those serve the vertical assessment).</li>
-</ul>
-<p><strong>Repeatability check.</strong> A second group re-occupies 3 to 5 of the earlier checkpoints without looking at the first group’s numbers. Agreement between independent occupations is the honest accuracy check, not the precision the software reports.</p>
-</section>
-<section id="what-to-upload-at-the-end-of-the-day" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-upload-at-the-end-of-the-day">What to upload at the end of the day</h2>
-<p>To the shared drive folder, same day:</p>
-<ol type="1">
-<li>The base RINEX log (stop logging, download from the receiver)</li>
-<li>The Emlid Flow project CSV export (all points, both height types)</li>
-<li>The Method A autonomous coordinate and the Method B surveyed coordinate, with antenna heights and times</li>
-<li>The point photos, named by point number</li>
-<li>A photo of the field sheet</li>
-</ol>
-</section>
-<section id="if-cell-coverage-drops" class="level2">
-<h2 class="anchored" data-anchor-id="if-cell-coverage-drops">If cell coverage drops</h2>
-<p>Method B needs the NCRTN over a cell connection. If there is no coverage, skip step 6, keep the RINEX log from step 4 running, set the base to average its position in Single mode, and carry on collecting with LoRa corrections; the whole survey shifts onto the correct datum later, when the base RINEX is post-processed against the NCRTN CORS (the lab’s Method C). Nothing collected is lost; only the absolute coordinate arrives later.</p>
+<p>Read this before the Fall 2026 Lake Wheeler field flight.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Instructor checklist (before the trip)
+Note
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ul>
-<li>NCRTN RTK login tested in Emlid Flow on the actual field tablet, with a FIX obtained somewhere off campus</li>
-<li>NCRTN CORS download account working; know the nearest CORS station ID to Lake Wheeler</li>
-<li>RS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range</li>
-<li>Fixed-height tripod parts complete; pole tip checked</li>
-<li>Field sheets printed; GCP targets counted</li>
-<li>After the trip: derive the two lab files from the Emlid Flow export: <code>checkpoints.csv</code> with exactly <code>name, easting, northing, height</code> (EPSG:3358, orthometric) and <code>checkpoints_full.csv</code> with everything, marking re-occupations in the name</li>
-<li>After the trip: download the NCRTN CORS RINEX for the base session window and package it with the base RINEX log and the field-recorded Method A and B coordinates as <code>base_bundle.zip</code></li>
-<li>After processing: upload the six product files, the two processing report PDFs, and <code>base_bundle.zip</code> to the GCS <code>091626/</code> folder under the names in <code>_variables.yml</code></li>
-<li>Assign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line</li>
+<p><strong>Distance education students</strong>: read this protocol, then watch <a href="https://www.youtube.com/watch?v=uWDz1NpWGtA">How to Place Ground Control Points (GCPs) for Precise Drone Mapping</a> for the GCP placement and survey in sections 3 and 5.</p>
+</div>
+</div>
+<section id="equipment-list" class="level2">
+<h2 class="anchored" data-anchor-id="equipment-list">Equipment List</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Emlid Reach RS4 rover on a survey pole</label></li>
+<li><label><input type="checkbox">Emlid Reach RS4 base with a fixed-height tripod and tribrach</label></li>
+<li><label><input type="checkbox">Tablet running <a href="https://emlid.com/flow/">Emlid Flow</a>, paired to both receivers, with the NCRTN login entered</label></li>
+<li><label><input type="checkbox">Four GCP targets</label></li>
+<li><label><input type="checkbox">DJI Mavic Air 2 with two charged batteries and the flight plan loaded</label></li>
+<li><label><input type="checkbox">Field sheets</label></li>
+<li><label><input type="checkbox">LoRa radio link between base and rover, as the fallback if cell coverage drops</label></li>
 </ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Bring closed-toe shoes, clothes for an hour outdoors, water, and a phone for point photos. There is no bathroom or water at the site.</p>
 </div>
-<p>The base-coordinate comparison (Methods A, B, and C) and the checkpoint validation of the flight products continue in the Topic 3B lab.</p>
+</div>
+</section>
+<section id="base-coordinate-methods" class="level2">
+<h2 class="anchored" data-anchor-id="base-coordinate-methods">Base coordinate methods</h2>
+<p>The base station sits on a practice mark. We will establish the coordinate of that mark three ways and compare them:</p>
+<ul>
+<li><strong>Method A</strong>: the base receiver’s own averaged position, with no corrections.</li>
+<li><strong>Method B</strong>: a real-time network (RTK) fix on the mark, collected with the rover using corrections from the North Carolina Real Time Network (NCRTN).</li>
+<li><strong>Method C</strong>: the base receiver’s raw log, post-processed after the trip against NCRTN station NCRD. This is the most accurate, especially in height.</li>
+</ul>
+<p>Methods A and B are collected in the field. Method C needs only the base log.</p>
+</section>
+<section id="plan" class="level2">
+<h2 class="anchored" data-anchor-id="plan">Plan</h2>
+<ol type="1">
+<li>Arrive and gather at the command area.</li>
+<li>Overview: what is being flown, why the GCPs and checkpoints exist, and where not to stand during the flight.</li>
+<li>Method B on the mark with the rover (section 1).</li>
+<li>Set up the base on the mark and start the log (section 2).</li>
+<li>Lay the four GCPs and survey them, everyone together, rotating on the rover (section 3).</li>
+<li>Preflight and launch. One battery over the GCP field (section 4).</li>
+<li>While the aircraft flies, groups rotate on the rover for 8 to 10 checkpoints, off the flight line (section 5). Then a second group re-occupies 3 of them.</li>
+<li>Land and check the photo count and geotags. Stop the rover and export the project. Stop the base log last. Pack up (section 6).</li>
+</ol>
+</section>
+<section id="method-b-fix-the-mark-with-the-rover" class="level2">
+<h2 class="anchored" data-anchor-id="method-b-fix-the-mark-with-the-rover">1. Method B: fix the mark with the rover</h2>
+<p>Do this before the base is set up.</p>
+<ol type="1">
+<li>In Emlid Flow, connect the rover to the NCRTN caster: host <a href="https://rtn.nc.gov/">rtn.nc.gov</a>, port 2101, mountpoint <code>VRS_RTCM34_MSM5</code>, course login. Corrections come through the tablet’s cell data.</li>
+<li>Set the antenna height to the pole length. Do not change the pole length for the rest of the day.</li>
+<li>Hold the pole plumb on the mark. Wait for FIX. Record the satellite count and correction age. Collect a 2 minute averaged occupation.</li>
+<li>Record the coordinate on the field sheet as Method B.</li>
+</ol>
+</section>
+<section id="base-station-log" class="level2">
+<h2 class="anchored" data-anchor-id="base-station-log">2. Base station log</h2>
+<ol type="1">
+<li>Set the tripod over the mark and level it.</li>
+<li>Measure the antenna height from the mark to the bottom of the receiver. Record the height and note that it was measured to the bottom of the receiver. Emlid Flow adds the phase center offset. An antenna height error becomes a height error in Method C.</li>
+<li>Confirm open sky. Record the satellite count and PDOP.</li>
+<li>Start RINEX logging at 1 Hz. Record the start time. The log runs until the last rover point is collected.</li>
+<li>Method A: with the base in SINGLE, average its position for 1 minute and record the coordinate. Skip this if short on time; it can be computed from the log later.</li>
+<li>Do not reconfigure, restart, or bump the base until the end of the session.</li>
+</ol>
+</section>
+<section id="gcps" class="level2">
+<h2 class="anchored" data-anchor-id="gcps">3. GCPs</h2>
+<p>Set the rover project to NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height. Write the coordinate system on the field sheet. The processing labs use EPSG:3358 (NAD83(HARN)), which differs from NAD83(2011) by about 2 cm at this site.</p>
+<ul>
+<li>Lay the four GCPs on the pre-chosen spots, one toward each corner of the flight area, none on the very edge. Weight them down. Do not move a GCP after it has been surveyed.</li>
+<li>Measure the center of each GCP with a 30 second averaged FIX occupation. Rotate on the rover so everyone runs an occupation. These four points control the photogrammetric processing.</li>
+<li>Photograph each GCP with the pole tip visible and record its number on the field sheet.</li>
+</ul>
+</section>
+<section id="the-flight" class="level2">
+<h2 class="anchored" data-anchor-id="the-flight">4. The flight</h2>
+<p>Lake Wheeler is Class G airspace, so no authorization is needed, and the site is inside the North Carolina State University Lake Wheeler West FRIA, so Remote ID is not required. Daylight is 6:59 am to 7:22 pm. The flight stays at or below 400 ft AGL. Fly one battery, one block over the GCP field; the second battery is the spare.</p>
+<section id="preflight-checklist" class="level3">
+<h3 class="anchored" data-anchor-id="preflight-checklist">Preflight checklist</h3>
+<p>Before leaving:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Two aircraft batteries and the controller charged; spare battery packed</label></li>
+<li><label><input type="checkbox">Aircraft and controller firmware current; SD card in, formatted, with space for the flight</label></li>
+<li><label><input type="checkbox">Flight plan loaded and checked: area covers all four GCPs, altitude, overlap, one battery</label></li>
+<li><label><input type="checkbox">Weather checked: wind, precipitation, visibility</label></li>
+<li><label><input type="checkbox">Airspace and NOTAMs checked, including the GPS interference advisory above</label></li>
+</ul>
+<p>At the site:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Walk the area: obstacles near the takeoff and landing spot and along the flight lines, people and vehicles nearby</label></li>
+<li><label><input type="checkbox">Wind checked at the site</label></li>
+<li><label><input type="checkbox">Takeoff and landing spot chosen, flat and clear; everyone briefed on where to stand</label></li>
+<li><label><input type="checkbox">Visual observer assigned</label></li>
+<li><label><input type="checkbox">Airframe inspected: propellers, arms, motors, gimbal cover off, battery seated and latched</label></li>
+<li><label><input type="checkbox">Power on; compass and IMU status normal; satellite count adequate; home point recorded</label></li>
+<li><label><input type="checkbox">Return-to-home altitude set above any obstacle</label></li>
+<li><label><input type="checkbox">Camera set: photo mode, geotagging on, exposure checked, lens clean</label></li>
+<li><label><input type="checkbox">Flight plan uploaded to the aircraft; mission start confirmed</label></li>
+</ul>
+<p>During the flight:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Aircraft in visual line of sight at all times</label></li>
+<li><label><input type="checkbox">Battery level and satellite count watched; land at the app’s battery warning</label></li>
+<li><label><input type="checkbox">Anyone entering the flight area is called out and the aircraft is paused</label></li>
+</ul>
+<p>After landing:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Motors stopped, aircraft powered down, battery removed</label></li>
+<li><label><input type="checkbox">Photo count matches the plan; photos carry geotags</label></li>
+<li><label><input type="checkbox">Flight logged: time, battery, notes</label></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>GPS interference test on the flight day
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The FAA advisory <a href="https://www.faasafety.gov/files/notices/2026/Sep/FTBRNC_26-76_GPS_Flight_Advisory.pdf">FTBRNC GPS 26-76</a> schedules GPS interference testing centered on Fort Bragg on September 14 to 16, daily 1500Z to 2300Z, which is 11:00 am to 7:00 pm EDT. The test starts in the middle of the field window. Lake Wheeler is 85 km (46 NM) from the center, and the advisory’s area covers the whole state from the surface up.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="checkpoints" class="level2">
+<h2 class="anchored" data-anchor-id="checkpoints">5. Checkpoints</h2>
+<p>Checkpoints are withheld from processing and used to measure the accuracy of the products.</p>
+<ul>
+<li>Pick points you can find in the imagery: pavement corners, sidewalk joints, manhole edges, paint marks. Avoid grass and gravel.</li>
+<li>Hold the pole plumb, confirm FIX, and collect a 30 second averaged occupation.</li>
+<li>Photograph the point with the pole tip visible and record the point number on the field sheet.</li>
+<li>Spread the points across the area and its elevation range. Put several on level ground for the vertical check.</li>
+</ul>
+</section>
+<section id="what-goes-to-the-shared-folder" class="level2">
+<h2 class="anchored" data-anchor-id="what-goes-to-the-shared-folder">6. What goes to the shared folder</h2>
+<ol type="1">
+<li>The base RINEX log</li>
+<li>The Emlid Flow CSV export (all points, both height types)</li>
+<li>The Method A and B coordinates, with antenna heights and times</li>
+<li>The point photos, named by point number</li>
+<li>A photo of the field sheet</li>
+</ol>
+</section>
+<section id="ncrtn-station-ncrd" class="level2">
+<h2 class="anchored" data-anchor-id="ncrtn-station-ncrd">NCRTN station NCRD</h2>
+<p>Method B uses live corrections from the NCRTN. Method C post-processes the base log against one of its stations. The nearest station to Lake Wheeler is <strong>NCRD</strong> (Raleigh DOT), a Trimble Alloy at 35.763752, -78.578998, ellipsoid height 51.802 m, 11.5 km from the mark. The next nearest stations are 23 to 52 km away.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ncrtn_sensor_map_ncrd.webp" class="img-fluid figure-img" style="width:85.0%" alt="NCRTN sensor map of the Raleigh area with a popup for station NCRD giving its latitude, longitude, height, and Trimble Alloy sensor type"></p>
+<figcaption>The NCRTN Sensor Map with NCRD selected, 11.5 km from Lake Wheeler.</figcaption>
+</figure>
+</div>
+<p>The network monitors each station’s position against its published coordinate. Over one hour NCRD varies by 1 mm at 3 sigma.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ncrtn_ncrd_scatter.webp" class="img-fluid figure-img" style="width:55.0%" alt="NCRTN position scatter plot for NCRD showing all points clustered at the origin inside 5, 7, and 10 centimeter threshold circles, with 1 sigma 0.000 m and 3 sigma 0.001 m"></p>
+<figcaption>One hour of NCRD position scatter: 3 sigma is 1 mm.</figcaption>
+</figure>
+</div>
+<p>Both pages are public at <a href="https://rtn.nc.gov/">rtn.nc.gov</a> under Sensor Map and Status Messages.</p>
 
 
 </section>

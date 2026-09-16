@@ -970,7 +970,7 @@
     "href": "course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html#field-trip",
     "title": "UAS Flight Planning",
     "section": "Field trip",
-    "text": "Field trip\n\nGNSS field protocol: base station setup and checkpoint collection with the Emlid Reach RS4 during the Lake Wheeler flight; read it before the trip",
+    "text": "Field trip\n\nGNSS field protocol: base station setup and checkpoint collection with the Emlid Reach RS4 during the Lake Wheeler flight; read it before the trip\nDistance education students: How to Place Ground Control Points (GCPs) for Precise Drone Mapping, in place of the trip",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -1395,7 +1395,7 @@
     "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html",
     "title": "GNSS Field Protocol: Base Station and Checkpoints",
     "section": "",
-    "text": "This is the protocol for the GNSS work at the Fall 2026 Lake Wheeler field flight. While the UAS flies, student groups rotate through the Emlid Reach RS4 base and rover to collect the ground control and checkpoint coordinates that Topic 3B uses to validate the flight’s orthomosaic and DSM. The flight itself is not affected by this work; the GNSS crew operates off the flight line.\nThe takeaway to keep in mind all day: the rover can measure a point to about a centimeter relative to the base, but every point inherits the base coordinate. If the base coordinate is wrong by two meters, every point is wrong by two meters, even with a FIX. Establishing that one coordinate carefully is most of the job.",
+    "text": "Read this before the Fall 2026 Lake Wheeler field flight.",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -1403,11 +1403,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#equipment",
-    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#equipment",
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#equipment-list",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#equipment-list",
     "title": "GNSS Field Protocol: Base Station and Checkpoints",
-    "section": "Equipment",
-    "text": "Equipment\n\nEmlid Reach RS4 base and rover, charged (16 h battery life in RTK, but bring the charger)\nFixed-height tripod with tribrach for the base; survey pole for the rover\nPhone or tablet with Emlid Flow connected to each receiver\nNorth Carolina Real Time Network (NCRTN) RTK login credentials, entered into Emlid Flow before the trip\nField notebook or the shared field sheet; a phone camera for point photos\nSpare: LoRa radio link configured between base and rover, in case cell coverage drops",
+    "section": "Equipment List",
+    "text": "Equipment List\n\nEmlid Reach RS4 rover on a survey pole\nEmlid Reach RS4 base with a fixed-height tripod and tribrach\nTablet running Emlid Flow, paired to both receivers, with the NCRTN login entered\nFour GCP targets\nDJI Mavic Air 2 with two charged batteries and the flight plan loaded\nField sheets\nLoRa radio link between base and rover, as the fallback if cell coverage drops\n\n\n\n\n\n\n\nWarning\n\n\n\nBring closed-toe shoes, clothes for an hour outdoors, water, and a phone for point photos. There is no bathroom or water at the site.",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -1415,11 +1415,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-setup",
-    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-setup",
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-coordinate-methods",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-coordinate-methods",
     "title": "GNSS Field Protocol: Base Station and Checkpoints",
-    "section": "Base setup",
-    "text": "Base setup\n\nSet the tripod over the practice mark (35.727565, -78.697788) and level it carefully.\nMeasure and record the antenna height, and write down what you measured to. Emlid Flow applies the antenna phase center offset itself; you enter the height to the antenna reference point (bottom of the receiver on a tribrach, or the pole length if pole-mounted). A wrong antenna height puts a direct vertical error into every point collected today; it is the single most common way to lose vertical accuracy.\nConfirm open sky view. Record the satellite count and PDOP before starting.\nStart the raw log first: begin RINEX logging at 1 Hz on the base and leave it running all day. This log is post-processed against the NCRTN CORS in the Topic 3B lab (Method C), so it must cover the whole session. Note the start time.\nRecord Method A while still in Single mode: average the position for five minutes and record that autonomous coordinate. It is the deliberately wrong number the Topic 3B lab compares against.\nEstablish the base coordinate (Method B, which the lab compares against Methods A and C):\n\nConfigure the receiver as a rover in Emlid Flow and connect to the NCRTN NTRIP caster (rtn.nc.gov) with the VRS mountpoint.\nWait for FIX (not FLOAT, not SINGLE). Note satellites and correction age.\nOccupy the mark with a 1 to 2 minute averaged collection. This is the mark’s coordinate in NAD83(2011).\nSwitch to Base mode and enter that coordinate manually as the known position.\nStart broadcasting corrections over LoRa. From this point, do not reconfigure or restart the base: the rover crews and the running log both depend on it.",
+    "section": "Base coordinate methods",
+    "text": "Base coordinate methods\nThe base station sits on a practice mark. We will establish the coordinate of that mark three ways and compare them:\n\nMethod A: the base receiver’s own averaged position, with no corrections.\nMethod B: a real-time network (RTK) fix on the mark, collected with the rover using corrections from the North Carolina Real Time Network (NCRTN).\nMethod C: the base receiver’s raw log, post-processed after the trip against NCRTN station NCRD. This is the most accurate, especially in height.\n\nMethods A and B are collected in the field. Method C needs only the base log.",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -1427,11 +1427,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#rover-work-gcps-and-checkpoints",
-    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#rover-work-gcps-and-checkpoints",
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#plan",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#plan",
     "title": "GNSS Field Protocol: Base Station and Checkpoints",
-    "section": "Rover work: GCPs and checkpoints",
-    "text": "Rover work: GCPs and checkpoints\nProject settings in Emlid Flow before collecting: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542), geoid GEOID18, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, which is the older NAD83(HARN) realization; at this site the two realizations differ by about 2 cm horizontally, which is real money at checkpoint accuracy, so write down which one you used: stating the datum realization is part of the survey. Rover antenna height is the pole length; confirm it once and do not change the pole length during the day.\nGround control targets (3 to 5 points). Measure the center of each laid-out target with a 1 to 2 minute averaged FIX occupation. These are the only points that will be used to control the photogrammetric processing.\nCheckpoints (12 to 20 points). Everything else is withheld from processing and used to measure the accuracy of the final products. For each checkpoint:\n\nPick a point you will be able to find in the imagery at 2 to 3 cm resolution: pavement corners, the junction of sidewalk joints, a manhole edge, a paint mark. Avoid grass, gravel, and anything that moves.\nHold the pole plumb (the RS4 tilt compensation helps, but a steady pole is better), confirm FIX, and collect a 1 to 2 minute averaged occupation.\nPhotograph the point with the pole tip visible and note the point number on the field sheet.\nSpread the points across the whole flight block, including the edges and the full elevation range, and put several on smooth level ground (those serve the vertical assessment).\n\nRepeatability check. A second group re-occupies 3 to 5 of the earlier checkpoints without looking at the first group’s numbers. Agreement between independent occupations is the honest accuracy check, not the precision the software reports.",
+    "section": "Plan",
+    "text": "Plan\n\nArrive and gather at the command area.\nOverview: what is being flown, why the GCPs and checkpoints exist, and where not to stand during the flight.\nMethod B on the mark with the rover (section 1).\nSet up the base on the mark and start the log (section 2).\nLay the four GCPs and survey them, everyone together, rotating on the rover (section 3).\nPreflight and launch. One battery over the GCP field (section 4).\nWhile the aircraft flies, groups rotate on the rover for 8 to 10 checkpoints, off the flight line (section 5). Then a second group re-occupies 3 of them.\nLand and check the photo count and geotags. Stop the rover and export the project. Stop the base log last. Pack up (section 6).",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -1439,11 +1439,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#what-to-upload-at-the-end-of-the-day",
-    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#what-to-upload-at-the-end-of-the-day",
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#method-b-fix-the-mark-with-the-rover",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#method-b-fix-the-mark-with-the-rover",
     "title": "GNSS Field Protocol: Base Station and Checkpoints",
-    "section": "What to upload at the end of the day",
-    "text": "What to upload at the end of the day\nTo the shared drive folder, same day:\n\nThe base RINEX log (stop logging, download from the receiver)\nThe Emlid Flow project CSV export (all points, both height types)\nThe Method A autonomous coordinate and the Method B surveyed coordinate, with antenna heights and times\nThe point photos, named by point number\nA photo of the field sheet",
+    "section": "1. Method B: fix the mark with the rover",
+    "text": "1. Method B: fix the mark with the rover\nDo this before the base is set up.\n\nIn Emlid Flow, connect the rover to the NCRTN caster: host rtn.nc.gov, port 2101, mountpoint VRS_RTCM34_MSM5, course login. Corrections come through the tablet’s cell data.\nSet the antenna height to the pole length. Do not change the pole length for the rest of the day.\nHold the pole plumb on the mark. Wait for FIX. Record the satellite count and correction age. Collect a 2 minute averaged occupation.\nRecord the coordinate on the field sheet as Method B.",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -1451,11 +1451,71 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#if-cell-coverage-drops",
-    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#if-cell-coverage-drops",
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-station-log",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#base-station-log",
     "title": "GNSS Field Protocol: Base Station and Checkpoints",
-    "section": "If cell coverage drops",
-    "text": "If cell coverage drops\nMethod B needs the NCRTN over a cell connection. If there is no coverage, skip step 6, keep the RINEX log from step 4 running, set the base to average its position in Single mode, and carry on collecting with LoRa corrections; the whole survey shifts onto the correct datum later, when the base RINEX is post-processed against the NCRTN CORS (the lab’s Method C). Nothing collected is lost; only the absolute coordinate arrives later.\n\n\n\n\n\n\nNoteInstructor checklist (before the trip)\n\n\n\n\n\n\nNCRTN RTK login tested in Emlid Flow on the actual field tablet, with a FIX obtained somewhere off campus\nNCRTN CORS download account working; know the nearest CORS station ID to Lake Wheeler\nRS4 firmware and Emlid Flow updated; LoRa link between base and rover tested at range\nFixed-height tripod parts complete; pole tip checked\nField sheets printed; GCP targets counted\nAfter the trip: derive the two lab files from the Emlid Flow export: checkpoints.csv with exactly name, easting, northing, height (EPSG:3358, orthometric) and checkpoints_full.csv with everything, marking re-occupations in the name\nAfter the trip: download the NCRTN CORS RINEX for the base session window and package it with the base RINEX log and the field-recorded Method A and B coordinates as base_bundle.zip\nAfter processing: upload the six product files, the two processing report PDFs, and base_bundle.zip to the GCS 091626/ folder under the names in _variables.yml\nAssign a GNSS lead per student group and a rotation order that keeps the rover busy but off the flight line\n\n\n\n\nThe base-coordinate comparison (Methods A, B, and C) and the checkpoint validation of the flight products continue in the Topic 3B lab.",
+    "section": "2. Base station log",
+    "text": "2. Base station log\n\nSet the tripod over the mark and level it.\nMeasure the antenna height from the mark to the bottom of the receiver. Record the height and note that it was measured to the bottom of the receiver. Emlid Flow adds the phase center offset. An antenna height error becomes a height error in Method C.\nConfirm open sky. Record the satellite count and PDOP.\nStart RINEX logging at 1 Hz. Record the start time. The log runs until the last rover point is collected.\nMethod A: with the base in SINGLE, average its position for 1 minute and record the coordinate. Skip this if short on time; it can be computed from the log later.\nDo not reconfigure, restart, or bump the base until the end of the session.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#gcps",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#gcps",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "3. GCPs",
+    "text": "3. GCPs\nSet the rover project to NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height. Write the coordinate system on the field sheet. The processing labs use EPSG:3358 (NAD83(HARN)), which differs from NAD83(2011) by about 2 cm at this site.\n\nLay the four GCPs on the pre-chosen spots, one toward each corner of the flight area, none on the very edge. Weight them down. Do not move a GCP after it has been surveyed.\nMeasure the center of each GCP with a 30 second averaged FIX occupation. Rotate on the rover so everyone runs an occupation. These four points control the photogrammetric processing.\nPhotograph each GCP with the pole tip visible and record its number on the field sheet.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#the-flight",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#the-flight",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "4. The flight",
+    "text": "4. The flight\nLake Wheeler is Class G airspace, so no authorization is needed, and the site is inside the North Carolina State University Lake Wheeler West FRIA, so Remote ID is not required. Daylight is 6:59 am to 7:22 pm. The flight stays at or below 400 ft AGL. Fly one battery, one block over the GCP field; the second battery is the spare.\n\nPreflight checklist\nBefore leaving:\n\nTwo aircraft batteries and the controller charged; spare battery packed\nAircraft and controller firmware current; SD card in, formatted, with space for the flight\nFlight plan loaded and checked: area covers all four GCPs, altitude, overlap, one battery\nWeather checked: wind, precipitation, visibility\nAirspace and NOTAMs checked, including the GPS interference advisory above\n\nAt the site:\n\nWalk the area: obstacles near the takeoff and landing spot and along the flight lines, people and vehicles nearby\nWind checked at the site\nTakeoff and landing spot chosen, flat and clear; everyone briefed on where to stand\nVisual observer assigned\nAirframe inspected: propellers, arms, motors, gimbal cover off, battery seated and latched\nPower on; compass and IMU status normal; satellite count adequate; home point recorded\nReturn-to-home altitude set above any obstacle\nCamera set: photo mode, geotagging on, exposure checked, lens clean\nFlight plan uploaded to the aircraft; mission start confirmed\n\nDuring the flight:\n\nAircraft in visual line of sight at all times\nBattery level and satellite count watched; land at the app’s battery warning\nAnyone entering the flight area is called out and the aircraft is paused\n\nAfter landing:\n\nMotors stopped, aircraft powered down, battery removed\nPhoto count matches the plan; photos carry geotags\nFlight logged: time, battery, notes\n\n\n\n\n\n\n\nWarningGPS interference test on the flight day\n\n\n\nThe FAA advisory FTBRNC GPS 26-76 schedules GPS interference testing centered on Fort Bragg on September 14 to 16, daily 1500Z to 2300Z, which is 11:00 am to 7:00 pm EDT. The test starts in the middle of the field window. Lake Wheeler is 85 km (46 NM) from the center, and the advisory’s area covers the whole state from the surface up.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#checkpoints",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#checkpoints",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "5. Checkpoints",
+    "text": "5. Checkpoints\nCheckpoints are withheld from processing and used to measure the accuracy of the products.\n\nPick points you can find in the imagery: pavement corners, sidewalk joints, manhole edges, paint marks. Avoid grass and gravel.\nHold the pole plumb, confirm FIX, and collect a 30 second averaged occupation.\nPhotograph the point with the pole tip visible and record the point number on the field sheet.\nSpread the points across the area and its elevation range. Put several on level ground for the vertical check.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#what-goes-to-the-shared-folder",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#what-goes-to-the-shared-folder",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "6. What goes to the shared folder",
+    "text": "6. What goes to the shared folder\n\nThe base RINEX log\nThe Emlid Flow CSV export (all points, both height types)\nThe Method A and B coordinates, with antenna heights and times\nThe point photos, named by point number\nA photo of the field sheet",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "GNSS Field Protocol"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#ncrtn-station-ncrd",
+    "href": "course/topics/topic_3_flight_planning/field_protocol_gnss.html#ncrtn-station-ncrd",
+    "title": "GNSS Field Protocol: Base Station and Checkpoints",
+    "section": "NCRTN station NCRD",
+    "text": "NCRTN station NCRD\nMethod B uses live corrections from the NCRTN. Method C post-processes the base log against one of its stations. The nearest station to Lake Wheeler is NCRD (Raleigh DOT), a Trimble Alloy at 35.763752, -78.578998, ellipsoid height 51.802 m, 11.5 km from the mark. The next nearest stations are 23 to 52 km away.\n\n\n\nThe NCRTN Sensor Map with NCRD selected, 11.5 km from Lake Wheeler.\n\n\nThe network monitors each station’s position against its published coordinate. Over one hour NCRD varies by 1 mm at 3 sigma.\n\n\n\nOne hour of NCRD position scatter: 3 sigma is 1 mm.\n\n\nBoth pages are public at rtn.nc.gov under Sensor Map and Status Messages.",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4693,7 +4753,7 @@
     "href": "course/topics/topic_3_flight_planning/assignments/assignment_3b.html#part-1-the-base-coordinate-three-ways",
     "title": "Assignment 3B",
     "section": "Part 1: The base coordinate, three ways",
-    "text": "Part 1: The base coordinate, three ways\nEvery checkpoint inherits the base station coordinate, so the survey is only as good as that one position. The field protocol recorded it three ways; you compare them.\n\nMethod A (autonomous average): the five-minute Single-mode average recorded in the field. No correction source. Read it from the field records.\nMethod B (NCRTN VRS): the real-time network solution collected before the base started broadcasting. Read it from the field records.\nMethod C (static post-processing): compute it yourself. In Emlid Studio, use the Static workflow with the base RINEX as the rover input and the NCRTN CORS file as the base; use the CORS station’s published coordinate as the known base position with an antenna height of 0 m (the CORS values are already at the antenna reference point), enter your base receiver’s antenna height from the field sheet, then process and record the solved coordinate in NAD83(2011). In RTKLIB, the same files go through RTKPOST with positioning mode set to Static; the remaining defaults are fine.\n\nThen:\n\nPut the three coordinates in one table (easting, northing, ellipsoidal height, and the differences from Method C).\nMethod A should sit meters away; Methods B and C should agree within a few centimeters. State which axis disagrees most and why vertical is the weak axis.\nAnswer: if the base had broadcast the Method A coordinate all day, what error would every checkpoint carry, and could any later processing remove it?",
+    "text": "Part 1: The base coordinate, three ways\nEvery checkpoint inherits the base station coordinate, so the survey is only as good as that one position. The field protocol recorded it three ways; you compare them.\n\nMethod A (autonomous average): the one-minute Single-mode average recorded in the field, or, if the crew skipped it, a single-point solution of the first minutes of the base log. No correction source.\nMethod B (NCRTN VRS): the real-time network solution collected with the rover on the mark before the base was set up. Read it from the field records.\nMethod C (static post-processing): compute it yourself. In Emlid Studio, use the Static workflow with the base RINEX as the rover input and the NCRTN CORS file as the base; use the CORS station’s published coordinate as the known base position with an antenna height of 0 m (the CORS values are already at the antenna reference point), enter your base receiver’s antenna height from the field sheet, then process and record the solved coordinate in NAD83(2011). In RTKLIB, the same files go through RTKPOST with positioning mode set to Static; the remaining defaults are fine.\n\nThen:\n\nPut the three coordinates in one table (easting, northing, ellipsoidal height, and the differences from Method C).\nMethod A should sit meters away; Methods B and C should agree within a few centimeters. State which axis disagrees most and why vertical is the weak axis.\nAnswer: if the rover had worked off a base broadcasting the Method A coordinate all day, instead of the network, what error would every checkpoint carry, and could any later processing remove it?",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4893,7 +4953,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#how-many-gcps-and-where",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "How many GCPs, and where",
-    "text": "How many GCPs, and where\n\nCount in flight units: about 3 to 4 GCPs per 100 photos; below 1 per 100 accuracy degrades fast (Sanz-Ablanedo et al. 2018)\nHorizontal stops improving past about 3 per 100; vertical keeps improving to about 4 per 100\nDistribution beats count: an even triangular spread is twice as accurate as a poor layout with the same number\nEdge coverage first, then an even interior; more points past that buy better error structure, not lower RMSE (Dai et al. 2023)\n\n\nThe per-100-photos rule travels better than per-hectare rules because it scales with overlap and altitude automatically. Dai et al. 2023 is the modern synthesis: after the first few GCPs, RMSE barely moves but the spatial autocorrelation of the residual error keeps improving, which matters for differencing. Our 9/16 field design (3 to 5 targets on a 78-photo class of flight) sits right on the recommended density.",
+    "text": "How many GCPs, and where\n\nCount in flight units: about 3 to 4 GCPs per 100 photos; below 1 per 100 accuracy degrades fast (Sanz-Ablanedo et al. 2018)\nHorizontal stops improving past about 3 per 100; vertical keeps improving to about 4 per 100\nDistribution beats count: an even triangular spread is twice as accurate as a poor layout with the same number\nEdge coverage first, then an even interior; more points past that buy better error structure, not lower RMSE (Dai et al. 2023)\n\n\nThe per-100-photos rule travels better than per-hectare rules because it scales with overlap and altitude automatically. Dai et al. 2023 is the modern synthesis: after the first few GCPs, RMSE barely moves but the spatial autocorrelation of the residual error keeps improving, which matters for differencing. Our 9/16 field design (4 targets on a 78-photo class of flight) sits right on the recommended density.",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",

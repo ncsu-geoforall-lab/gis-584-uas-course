@@ -770,15 +770,15 @@ Note
 <h2 class="anchored" data-anchor-id="part-1-the-base-coordinate-three-ways">Part 1: The base coordinate, three ways</h2>
 <p>Every checkpoint inherits the base station coordinate, so the survey is only as good as that one position. The <a href="../../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html">field protocol</a> recorded it three ways; you compare them.</p>
 <ol type="1">
-<li><strong>Method A (autonomous average)</strong>: the five-minute Single-mode average recorded in the field. No correction source. Read it from the field records.</li>
-<li><strong>Method B (NCRTN VRS)</strong>: the real-time network solution collected before the base started broadcasting. Read it from the field records.</li>
+<li><strong>Method A (autonomous average)</strong>: the one-minute Single-mode average recorded in the field, or, if the crew skipped it, a single-point solution of the first minutes of the base log. No correction source.</li>
+<li><strong>Method B (NCRTN VRS)</strong>: the real-time network solution collected with the rover on the mark before the base was set up. Read it from the field records.</li>
 <li><strong>Method C (static post-processing)</strong>: compute it yourself. In Emlid Studio, use the Static workflow with the base RINEX as the rover input and the NCRTN CORS file as the base; use the CORS station’s published coordinate as the known base position with an antenna height of 0 m (the CORS values are already at the antenna reference point), enter your base receiver’s antenna height from the field sheet, then process and record the solved coordinate in NAD83(2011). In RTKLIB, the same files go through RTKPOST with positioning mode set to Static; the remaining defaults are fine.</li>
 </ol>
 <p>Then:</p>
 <ul>
 <li>Put the three coordinates in one table (easting, northing, ellipsoidal height, and the differences from Method C).</li>
 <li>Method A should sit meters away; Methods B and C should agree within a few centimeters. State which axis disagrees most and why vertical is the weak axis.</li>
-<li>Answer: if the base had broadcast the Method A coordinate all day, what error would every checkpoint carry, and could any later processing remove it?</li>
+<li>Answer: if the rover had worked off a base broadcasting the Method A coordinate all day, instead of the network, what error would every checkpoint carry, and could any later processing remove it?</li>
 </ul>
 </section>
 <section id="part-2-validate-the-products" class="level2">
