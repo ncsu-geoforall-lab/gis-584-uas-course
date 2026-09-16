@@ -81,7 +81,7 @@ Lake Wheeler is Class G airspace, so no authorization is needed, and the site is
 Before leaving:
 
 - [ ] Two aircraft batteries and the controller charged; spare battery packed
-- [ ] Aircraft and controller firmware current; SD card in, formatted, with space for the flight
+- [ ] Aircraft and controller firmware current; **SD card in, formatted, with space for the flight**
 - [ ] Flight plan loaded and checked: area covers all four GCPs, altitude, overlap, one battery
 - [ ] Weather checked: wind, precipitation, visibility
 - [ ] Airspace and NOTAMs checked, including the GPS interference advisory above
