@@ -8,10 +8,10 @@ format:
 Read this before the {{< var course_params.term >}} Lake Wheeler field flight. The site is available from 10:15 to 11:30. In that window the class flies the block with a DJI Mavic Air 2 and surveys the ground control and checkpoint coordinates that Topic 3B uses to validate the flight's orthomosaic and DSM. You will be on one of two crews. The flight crew works with the instructor on the aircraft. The GNSS crew rotates through the Emlid Reach RS4 rover and stays off the flight line.
 
 ::: {.callout-note}
-**Distance education students**: you are not at the site, but you use the same data in the Topic 3B lab. Read this protocol so you know how the points were collected, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the target placement and survey the on-campus crews do in sections 3 and 4.
+**Distance education students**: Read this protocol so you know how the points were collected, then watch [How to Place Ground Control Points (GCPs) for Precise Drone Mapping](https://www.youtube.com/watch?v=uWDz1NpWGtA) for the target placement and survey the on-campus crews do in sections 3 and 4.
 :::
 
-Two things to keep in mind all day. First, the Mavic Air 2 has no RTK, so the ground targets are the only thing that puts the flight on the map; they are laid and surveyed before anything else. Second, the rover gets its centimeter fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from the base on the tripod. The base is a logger: it sits on the mark, writes a raw log all session, and gives the Topic 3B lab the data to establish that mark's coordinate three ways. Once it is logging, nobody touches it.
+Two things to keep in mind all day. First, the Mavic Air 2 geotags every photo from its own GNSS, which puts the flight on the map to within a few meters and gives good results on its own. The ground targets are what bring it to centimeters and hold the vertical, so they are laid and surveyed before anything else. Second, the rover gets its centimeter fix from the North Carolina Real Time Network (NCRTN) over the tablet's cell connection, not from the base on the tripod. The base is a logger: it sits on the mark, writes a raw log all session, and gives the Topic 3B lab the data to establish that mark's coordinate three ways. Once it is logging, nobody touches it.
 
 ## Equipment List
 
@@ -69,7 +69,7 @@ The instructor is the Remote Pilot in Command. Students on the flight crew act a
 
 Before collecting, confirm the Emlid Flow project settings: coordinate system NAD83(2011) / North Carolina in meters (EPSG:6542) with NAVD88 (GEOID18) height, so orthometric heights are recorded; the CSV export also keeps the ellipsoidal heights. The course processing labs use EPSG:3358, the older NAD83(HARN) realization, which differs from NAD83(2011) by about 2 cm horizontally at this site. Two centimeters matters at checkpoint accuracy, so the datum realization you surveyed in is written on the field sheet as part of the survey.
 
-**Ground control targets first (4 points).** As soon as the targets are down, measure the center of each with a 30 second averaged FIX occupation. These four points are the only ones used to control the photogrammetric processing, and the flight is not on the map without them.
+**Ground control targets first (4 points).** As soon as the targets are down, measure the center of each with a 30 second averaged FIX occupation. These four points are the only ones used to control the photogrammetric processing; without them the products sit on the geotags alone, a few meters off and worse in height.
 
 **Checkpoints (8 to 10 points).** Everything else is withheld from processing and used to measure the accuracy of the final products. For each checkpoint:
 
