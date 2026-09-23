@@ -756,7 +756,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="menu-workflow-add-photos" class="level4">
 <h4 class="anchored" data-anchor-id="menu-workflow-add-photos">Menu &gt; Workflow &gt; Add Photos</h4>
 <p>Select all the photos in the downloaded folder. They appear in the Reference pane with local coordinates, because the coordinate system has not been set yet.</p>
-<p>Click the Settings icon <img src="images/settings_icon.webp" class="img-fluid" width="25" alt="Settings icon"> in the Reference pane toolbar and set the coordinate system to <code>WGS 84 (EPSG:4326)</code>.</p>
+<p>Click the <strong>Settings</strong> icon <img src="images/settings_icon.webp" class="img-fluid" width="25" alt="Settings icon"> in the Reference pane toolbar and set the coordinate system to <code>WGS 84 (EPSG:4326)</code>.</p>
 <p><img src="images/agi_reference.webp" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -784,7 +784,7 @@ Note
 </section>
 <section id="loading-camera-positions" class="level3">
 <h3 class="anchored" data-anchor-id="loading-camera-positions">Loading camera positions</h3>
-<p>Click the Import icon <img src="images/import_icon.webp" class="img-fluid" width="25" alt="Import icon"> in the Reference pane toolbar and select the camera positions file <code>2016_09_22_sample.txt</code>.</p>
+<p>Click the <strong>Import Reference</strong> icon <img src="images/import_icon.webp" class="img-fluid" width="25" alt="Import icon"> in the Reference pane toolbar and select the camera positions file <code>2016_09_22_sample.txt</code>.</p>
 <p><img src="images/log_load.webp" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -861,18 +861,8 @@ Note
 <p>Click View Errors <img src="images/view_errors_icon.webp" class="img-fluid" width="25" alt="View Errors icon"> in the Reference pane to see the current errors. The best results come from optimizing twice: first on the camera coordinates only, then on the GCP markers only.</p>
 <p>In the Reference pane, leave all cameras checked and uncheck all markers (select one, press Ctrl+A, right-click, <code>Uncheck</code>), so that this first pass adjusts on the camera coordinates only.</p>
 <p>Click Optimize Cameras <img src="images/optimize_icon.webp" class="img-fluid" width="25" alt="Optimize icon"> in the Reference pane toolbar. In the dialog, check every camera calibration parameter (f, cx, cy, k1 to k4, p1, p2, b1, b2) so that all of them are refined.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Depending on the Metashape version, the Optimize Cameras icon is a star or a camera with a wrench.</p>
-</div>
+<div class="callout-info">
+<p><a href="https://www.agisoftmetashape.com/what-camera-calibration-results-mean-in-agisoft-metashape-a-complete-guide/">Agisoft Metashape Post: What Camera Calibration Results Mean in Agisoft Metashape: A Complete Guide</a></p>
 </div>
 </section>
 <section id="optimizing-on-the-markers" class="level3">
