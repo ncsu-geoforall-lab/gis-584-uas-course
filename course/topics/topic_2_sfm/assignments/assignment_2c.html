@@ -776,7 +776,7 @@ Warning
 <li>Two files prepared for WebODM, explained below:
 <ul>
 <li><a href="assets/geo.txt">geo.txt</a>: the camera positions in WebODM’s image geolocation format</li>
-<li><a href="assets/gcp_seed_epsg4326.txt">gcp_seed_epsg4326.txt</a>: the three GCP coordinates in the layout the GCP interface reads (also available in UTM zone 17N as <a href="assets/gcp_seed_epsg32617.txt">gcp_seed_epsg32617.txt</a> if the interface asks for a projected system)</li>
+<li><a href="assets/gcp_seed_epsg32617.txt">gcp_seed_epsg32617.txt</a>: the three GCP coordinates in WGS84 UTM 17N, in the layout the GCP interface reads (also available in latitude and longitude as <a href="assets/gcp_seed_epsg4326.txt">gcp_seed_epsg4326.txt</a>)</li>
 </ul></li>
 </ul>
 <section id="why-geo.txt" class="level3">
@@ -808,7 +808,7 @@ DSC06169.jpg -78.69807484 35.72753443 177.82 0.0312571 -0.0901053 -3.09326</code
 <p>WebODM needs a <code>gcp_list.txt</code> file: for each GCP, its ground coordinates and its pixel position on every photo where it is visible. The built-in <strong>GCP Interface</strong> (left sidebar) creates it.</p>
 <ol type="1">
 <li>Open <strong>GCP Interface</strong>.</li>
-<li>Load the seed file <code>gcp_seed_epsg4326.txt</code>: it lists the three GCPs with their coordinates and no image positions yet. If the interface rejects the geographic coordinates, load <code>gcp_seed_epsg32617.txt</code> instead (same points in UTM zone 17N).</li>
+<li>Load the seed file <code>gcp_seed_epsg32617.txt</code>: it lists the three GCPs with their coordinates and no image positions yet. ODM recommends a projected system for ground control; <code>gcp_seed_epsg4326.txt</code> holds the same points in latitude and longitude if you need them.</li>
 <li>Load the 78 photos.</li>
 <li>For each GCP (UAV 3, UAV 6, UAV 8): select it in the list, find it on the map (the interface shows an aerial basemap), then open each photo that shows the target and click its center. Mark every GCP on <strong>at least 3 photos</strong>; 5 or more is better. Use the same photos you used in Metashape if you noted them.</li>
 <li><strong>Export File</strong> and save it as <code>gcp_list.txt</code>.</li>
