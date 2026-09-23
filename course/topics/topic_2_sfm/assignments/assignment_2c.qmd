@@ -154,21 +154,10 @@ If a task fails or you change an option, **Restart** lets you resume from a late
 
 ## Stage 4: Compare with Metashape
 
-Load the two orthomosaics and the two DSMs into GRASS (or QGIS). The Metashape products are in NC State Plane, EPSG:3358; WebODM writes its products in the UTM zone of the site, EPSG:32617, unless told otherwise. `r.import` reprojects on the way in:
-
-```bash
-# in a GRASS project in EPSG:3358
-r.import input=odm_dsm.tif output=dsm_webodm resolution=value resolution_value=0.15
-r.import input=metashape_dsm.tif output=dsm_metashape resolution=value resolution_value=0.15
-g.region raster=dsm_metashape
-r.mapcalc "dsm_diff = dsm_webodm - dsm_metashape"
-r.univar dsm_diff
-```
 
 Then look at:
 
 - **Orthomosaics** side by side at building edges, tree crowns, the road, and the field boundary: sharpness, seams, doubled or smeared features, extent.
-- **DSM difference**: the mean and standard deviation of `dsm_diff`, a map of it, and where the large differences are (vegetation, buildings, edges of the block). A constant offset between the two points at a vertical datum or GCP height difference rather than at the reconstruction.
 - **Quality report versus processing report**: GSD, number of reconstructed points, GCP errors, and processing time.
 
 ## Report
@@ -185,13 +174,11 @@ Prepare a report (3 to 5 pages including figures):
 Upload to Moodle, Assignment 2C:
 
 * Your report as a PDF, with the WebODM quality report attached or included as an appendix.
-* Optional: your `gcp_list.txt`, and the exported DSM difference map if it is under the Moodle size limit.
 
 ## Grading
 
-* **Setup**: installation route, options, GCP photos, and timing stated.
 * **Products**: orthomosaic and DSM shown, georeferenced, and described.
-* **Comparison**: the two tools are compared with figures and numbers, not impressions; the DSM difference is quantified.
+* **Comparison**: the two tools are compared with figures and numbers.
 * **Discussion**: differences are explained with the processing concepts from the lectures.
 * On-time submission.
 
