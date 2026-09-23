@@ -906,17 +906,9 @@ Note
 </section>
 <section id="stage-4-compare-with-metashape" class="level2">
 <h2 class="anchored" data-anchor-id="stage-4-compare-with-metashape">Stage 4: Compare with Metashape</h2>
-<p>Load the two orthomosaics and the two DSMs into GRASS (or QGIS). The Metashape products are in NC State Plane, EPSG:3358; WebODM writes its products in the UTM zone of the site, EPSG:32617, unless told otherwise. <code>r.import</code> reprojects on the way in:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in a GRASS project in EPSG:3358</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=odm_dsm.tif output=dsm_webodm resolution=value resolution_value=0.15</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=metashape_dsm.tif output=dsm_metashape resolution=value resolution_value=0.15</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=dsm_metashape</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"dsm_diff = dsm_webodm - dsm_metashape"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> dsm_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then look at:</p>
 <ul>
 <li><strong>Orthomosaics</strong> side by side at building edges, tree crowns, the road, and the field boundary: sharpness, seams, doubled or smeared features, extent.</li>
-<li><strong>DSM difference</strong>: the mean and standard deviation of <code>dsm_diff</code>, a map of it, and where the large differences are (vegetation, buildings, edges of the block). A constant offset between the two points at a vertical datum or GCP height difference rather than at the reconstruction.</li>
 <li><strong>Quality report versus processing report</strong>: GSD, number of reconstructed points, GCP errors, and processing time.</li>
 </ul>
 </section>
@@ -935,15 +927,13 @@ Note
 <p>Upload to Moodle, Assignment 2C:</p>
 <ul>
 <li>Your report as a PDF, with the WebODM quality report attached or included as an appendix.</li>
-<li>Optional: your <code>gcp_list.txt</code>, and the exported DSM difference map if it is under the Moodle size limit.</li>
 </ul>
 </section>
 <section id="grading" class="level2">
 <h2 class="anchored" data-anchor-id="grading">Grading</h2>
 <ul>
-<li><strong>Setup</strong>: installation route, options, GCP photos, and timing stated.</li>
 <li><strong>Products</strong>: orthomosaic and DSM shown, georeferenced, and described.</li>
-<li><strong>Comparison</strong>: the two tools are compared with figures and numbers, not impressions; the DSM difference is quantified.</li>
+<li><strong>Comparison</strong>: the two tools are compared with figures and numbers.</li>
 <li><strong>Discussion</strong>: differences are explained with the processing concepts from the lectures.</li>
 <li>On-time submission.</li>
 </ul>

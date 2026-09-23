@@ -4134,7 +4134,7 @@
     "href": "course/topics/topic_2_sfm/assignments/assignment_2c.html#stage-4-compare-with-metashape",
     "title": "Assignment 2C",
     "section": "Stage 4: Compare with Metashape",
-    "text": "Stage 4: Compare with Metashape\nLoad the two orthomosaics and the two DSMs into GRASS (or QGIS). The Metashape products are in NC State Plane, EPSG:3358; WebODM writes its products in the UTM zone of the site, EPSG:32617, unless told otherwise. r.import reprojects on the way in:\n# in a GRASS project in EPSG:3358\nr.import input=odm_dsm.tif output=dsm_webodm resolution=value resolution_value=0.15\nr.import input=metashape_dsm.tif output=dsm_metashape resolution=value resolution_value=0.15\ng.region raster=dsm_metashape\nr.mapcalc \"dsm_diff = dsm_webodm - dsm_metashape\"\nr.univar dsm_diff\nThen look at:\n\nOrthomosaics side by side at building edges, tree crowns, the road, and the field boundary: sharpness, seams, doubled or smeared features, extent.\nDSM difference: the mean and standard deviation of dsm_diff, a map of it, and where the large differences are (vegetation, buildings, edges of the block). A constant offset between the two points at a vertical datum or GCP height difference rather than at the reconstruction.\nQuality report versus processing report: GSD, number of reconstructed points, GCP errors, and processing time.",
+    "text": "Stage 4: Compare with Metashape\nThen look at:\n\nOrthomosaics side by side at building edges, tree crowns, the road, and the field boundary: sharpness, seams, doubled or smeared features, extent.\nQuality report versus processing report: GSD, number of reconstructed points, GCP errors, and processing time.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -4160,7 +4160,7 @@
     "href": "course/topics/topic_2_sfm/assignments/assignment_2c.html#submission",
     "title": "Assignment 2C",
     "section": "Submission",
-    "text": "Submission\nUpload to Moodle, Assignment 2C:\n\nYour report as a PDF, with the WebODM quality report attached or included as an appendix.\nOptional: your gcp_list.txt, and the exported DSM difference map if it is under the Moodle size limit.",
+    "text": "Submission\nUpload to Moodle, Assignment 2C:\n\nYour report as a PDF, with the WebODM quality report attached or included as an appendix.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -4173,7 +4173,7 @@
     "href": "course/topics/topic_2_sfm/assignments/assignment_2c.html#grading",
     "title": "Assignment 2C",
     "section": "Grading",
-    "text": "Grading\n\nSetup: installation route, options, GCP photos, and timing stated.\nProducts: orthomosaic and DSM shown, georeferenced, and described.\nComparison: the two tools are compared with figures and numbers, not impressions; the DSM difference is quantified.\nDiscussion: differences are explained with the processing concepts from the lectures.\nOn-time submission.",
+    "text": "Grading\n\nProducts: orthomosaic and DSM shown, georeferenced, and described.\nComparison: the two tools are compared with figures and numbers.\nDiscussion: differences are explained with the processing concepts from the lectures.\nOn-time submission.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
