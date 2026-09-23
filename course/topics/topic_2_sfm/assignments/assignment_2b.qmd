@@ -67,7 +67,7 @@ A preliminary alignment is needed before the GCPs can be located on the photos.
 
 Select all the photos in the downloaded folder. They appear in the Reference pane with local coordinates, because the coordinate system has not been set yet.
 
-Click the Settings icon ![Settings icon](images/settings_icon.webp){width=25} in the Reference pane toolbar and set the coordinate system to `WGS 84 (EPSG:4326)`.
+Click the **Settings** icon ![Settings icon](images/settings_icon.webp){width=25} in the Reference pane toolbar and set the coordinate system to `WGS 84 (EPSG:4326)`.
 
 ![](images/agi_reference.webp)
 
@@ -86,7 +86,7 @@ For this flight leave the defaults.
 
 ### Loading camera positions
 
-Click the Import icon ![Import icon](images/import_icon.webp){width=25} in the Reference pane toolbar and select the camera positions file `2016_09_22_sample.txt`.
+Click the **Import Reference** icon ![Import icon](images/import_icon.webp){width=25} in the Reference pane toolbar and select the camera positions file `2016_09_22_sample.txt`.
 
 ![](images/log_load.webp)
 
@@ -165,8 +165,8 @@ In the Reference pane, leave all cameras checked and uncheck all markers (select
 
 Click Optimize Cameras ![Optimize icon](images/optimize_icon.webp){width=25} in the Reference pane toolbar. In the dialog, check every camera calibration parameter (f, cx, cy, k1 to k4, p1, p2, b1, b2) so that all of them are refined.
 
-::: {.callout-warning}
-Depending on the Metashape version, the Optimize Cameras icon is a star or a camera with a wrench.
+::: {.callout-info}
+[Agisoft Metashape Post: What Camera Calibration Results Mean in Agisoft Metashape: A Complete Guide](https://www.agisoftmetashape.com/what-camera-calibration-results-mean-in-agisoft-metashape-a-complete-guide/)
 :::
 
 ### Optimizing on the markers
