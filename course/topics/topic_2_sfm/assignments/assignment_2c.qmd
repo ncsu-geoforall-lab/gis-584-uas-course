@@ -45,7 +45,7 @@ Once started, open [http://localhost:8000](http://localhost:8000) and create the
 - [Download the data]({{< var data.downsized_samples_url >}}) if you no longer have it from Assignment 2B: 78 photos, the flight log, and the coordinates of 3 GCPs.
 - Two files prepared for WebODM, explained below:
   - [geo.txt](assets/geo.txt): the camera positions in WebODM's image geolocation format
-  - [gcp_seed_epsg4326.txt](assets/gcp_seed_epsg4326.txt): the three GCP coordinates in the layout the GCP interface reads (also available in UTM zone 17N as [gcp_seed_epsg32617.txt](assets/gcp_seed_epsg32617.txt) if the interface asks for a projected system)
+  - [gcp_seed_epsg32617.txt](assets/gcp_seed_epsg32617.txt): the three GCP coordinates in WGS84 UTM 17N, in the layout the GCP interface reads (also available in latitude and longitude as [gcp_seed_epsg4326.txt](assets/gcp_seed_epsg4326.txt))
 
 ### Why geo.txt
 
@@ -83,7 +83,7 @@ On the dashboard click **Add Project** at the top right, enter a name and a desc
 WebODM needs a `gcp_list.txt` file: for each GCP, its ground coordinates and its pixel position on every photo where it is visible. The built-in **GCP Interface** (left sidebar) creates it.
 
 1. Open **GCP Interface**.
-2. Load the seed file `gcp_seed_epsg4326.txt`: it lists the three GCPs with their coordinates and no image positions yet. If the interface rejects the geographic coordinates, load `gcp_seed_epsg32617.txt` instead (same points in UTM zone 17N).
+2. Load the seed file `gcp_seed_epsg32617.txt`: it lists the three GCPs with their coordinates and no image positions yet. ODM recommends a projected system for ground control; `gcp_seed_epsg4326.txt` holds the same points in latitude and longitude if you need them.
 3. Load the 78 photos.
 4. For each GCP (UAV 3, UAV 6, UAV 8): select it in the list, find it on the map (the interface shows an aerial basemap), then open each photo that shows the target and click its center. Mark every GCP on **at least 3 photos**; 5 or more is better. Use the same photos you used in Metashape if you noted them.
 5. **Export File** and save it as `gcp_list.txt`.
