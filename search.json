@@ -4758,7 +4758,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#objectives",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Objectives",
-    "text": "Objectives\n\nExplain the relationship between flight GSD and the horizontal and vertical accuracy a UAS survey can actually achieve\nDesign ground control and checkpoint schemes, and defend the difference between the two\nChoose between GCP-based and RTK/PPK georeferencing, and know what each still needs\nRead an Agisoft and a WebODM processing report and state the accuracy of the products with the right numbers\nDecide, with arithmetic, whether a given flight can answer a given question: counting trees or measuring millimeters of erosion\n\n\nThis is the accuracy lecture the SfM topic has been pointing at since Topic 2: 2A said checkpoints are the honest number, 2B said quote the checkpoint RMSE, and today is where those numbers come from and what they permit. Everything is anchored to the reports students produced themselves in Assignments 2B and 2C and to the checkpoint data collected with the Emlid rover at the Lake Wheeler flight. The lab runs the full validation on the flight’s own products.",
+    "text": "Objectives\n\nRelate flight GSD to the horizontal and vertical accuracy a UAS survey can reach\nDesign ground control and checkpoint schemes\nChoose between GCP-based and RTK/PPK georeferencing\nRead an Agisoft or WebODM processing report\nDetermine the level of detection (LoD)\n\n\n\nThe accuracy lecture Topic 2 has been pointing at\n2A: checkpoints are the real number. 2B: quote the checkpoint RMSE\nToday: where those numbers come from and what they permit\nEverything runs on their own 2B and 2C reports and the 9/16 Emlid checkpoints\nThe lab validates the flight’s own products",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4771,7 +4771,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-report-number-is-not-the-accuracy",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "The report number is not the accuracy",
-    "text": "The report number is not the accuracy\nA worked example straight from the ASPRS standard (American Society for Photogrammetry and Remote Sensing 2024):\n\nYour DSM fits the checkpoints with RMSEV1 = 1 cm. The report says so.\nThe checkpoints themselves were surveyed with an RTK rover: RMSEV2 = 2 cm.\nThe accuracy you may claim is the quadrature sum:\n\n\\[\\text{RMSE}_V = \\sqrt{1^2 + 2^2} = 2.24 \\text{ cm}\\]\n\nEdition 2 rule: checkpoint survey error can no longer be ignored; reported accuracy includes it. Your product is never more accurate than the ruler you measured it with\n\n\nOpen with the arithmetic because it reframes the whole hour: the software prints a fit, not an accuracy. Edition 1 dodged this by requiring checkpoints three times better than the product, so their error was negligible; Edition 2 relaxed that to two times and made you carry the term instead. For our lab the rover repeatability from the field day is RMSE V2. This is also the first appearance of the lecture’s habit: every accuracy claim must say what it was measured against and how good the ruler was.",
+    "text": "The report number is not the accuracy\nA worked example from the ASPRS standard (American Society for Photogrammetry and Remote Sensing 2024):\n\nThe DSM fits the checkpoints with RMSEV1 = 1 cm\nThe checkpoints themselves were surveyed with an RTK rover: RMSEV2 = 2 cm\nYou may claim the quadrature sum: \\(\\text{RMSE}_V = \\sqrt{1^2 + 2^2} = 2.24\\) cm\n\n\n\n\nOpen with the arithmetic: the software prints a fit\nEdition 1 required checkpoints 3x better, so their error was negligible\nEdition 2 relaxed that to 2x and makes you carry the term\nFor the lab, RMSE V2 is the rover repeatability from the field day\nHabit for the hour: every claim says what it was measured against",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4784,7 +4784,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-gsd-buys-you",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "What GSD buys you",
-    "text": "What GSD buys you\n\nSection one: the floor that pixel size sets, and why you rarely stand on it.",
+    "text": "What GSD buys you\n\n\nSection 1: the floor pixel size sets, and why you rarely stand on it",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4797,7 +4797,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#gsd-sets-a-floor-not-the-accuracy",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "GSD sets a floor, not the accuracy",
-    "text": "GSD sets a floor, not the accuracy\n\n\n\n\n\n\n\n\n\n\nBest case (strong control, good geometry)\nFlat terrain envelope\nComplex terrain envelope\n\n\n\n\nHorizontal RMSE\nabout 1 x GSD (asymptote 0.66 x)\n1 to 3 x GSD\n1 to 7 x GSD\n\n\nVertical RMSE\n1.5 to 2 x GSD\n1 to 4.5 x GSD\n1.5 to 5 x GSD\n\n\n\n\nEnvelope columns from Jiménez-Jiménez et al. (2021); best-case column from Sanz-Ablanedo et al. (2018)\nVertical error runs about 2.5 x the horizontal error, consistently (Sanz-Ablanedo et al. 2018)\nVertical never reaches 1 x GSD, no matter how much control you add\nWith uncorrected navigation-grade georeferencing, errors reach meters, tens of GSD or more: the pixel size stops mattering entirely\n\n\nThe envelope is Jimenez-Jimenez et al. 2021; the asymptotes are Sanz-Ablanedo et al. 2018, from 3465 GCP combinations over a 1200 ha block. Teach the multipliers as a band, not a constant: the gap between the floor (1x) and what you get is governed by georeferencing and systematic error, not pixel size. Ask the class: your Lake Wheeler flight had roughly 2 to 3 cm GSD; what vertical accuracy should they predict before the lab? Write the predictions down; the lab checks them.",
+    "text": "GSD sets a floor, not the accuracy\n\n\nEnvelopes from Jiménez-Jiménez et al. (2021); best case from Sanz-Ablanedo et al. (2018)\nVertical error runs about 2.5 x the horizontal error (Sanz-Ablanedo et al. 2018)\nWith uncorrected navigation-grade georeferencing, errors reach meters and pixel size stops mattering\n\n\n\nEnvelope: Jimenez-Jimenez 2021. Asymptotes: Sanz-Ablanedo 2018, 3465 GCP combinations over 1200 ha\nTeach the multipliers as a band\nThe gap between the floor and what you get is georeferencing and systematic error\nAsk the class: Lake Wheeler was 2 to 3 cm GSD, what vertical accuracy do you predict?\nWrite the predictions down, the lab checks them",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4810,7 +4810,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#planning-with-gsd",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Planning with GSD",
-    "text": "Planning with GSD\n\nASPRS recommends source imagery GSD of 0.5 to 1.0 x the target horizontal accuracy class: a 5 cm class wants 2.5 to 5 cm GSD (American Society for Photogrammetry and Remote Sensing 2024)\nRead backwards: expect RMSEH of 1 to 2 x GSD from a well-run project\nThe standard is explicit that this is a planning heuristic, not an accuracy statement\n\n\nWorkflow: start from what you must measure, derive the accuracy that requires, derive the GSD, and only then the flying height (the Topic 3A formula)\n\n\nThis connects 3A’s GSD formula to a requirement instead of a preference. The design direction runs measurement to accuracy to GSD to altitude, never the other way. The standard’s own caveat is worth quoting: the table should not be used to reference product accuracy. It tells you what to fly, not what you achieved.",
+    "text": "Planning with GSD\n\n\n\n\n\nflowchart LR\n    A[\"What you must&lt;br&gt;measure\"] --&gt; B[\"The accuracy&lt;br&gt;that requires\"]\n    B --&gt; C[\"GSD:&lt;br&gt;0.5 to 1.0 x that\"]\n    C --&gt; D[\"Flying height&lt;br&gt;(Topic 3A)\"]\n\n\n\n\n\n\n\nASPRS recommends source imagery GSD of 0.5 to 1.0 x the target horizontal accuracy class: a 5 cm class wants 2.5 to 5 cm GSD (American Society for Photogrammetry and Remote Sensing 2024)\nRead backwards: expect RMSEH of 1 to 2 x GSD from a well-run project\nThe standard calls this a planning heuristic and says it may not be used to report accuracy\n\n\n\nConnects 3A’s GSD formula to a requirement instead of a preference\nThe chain runs left to right, never the other way\nQuote the standard’s caveat: the table tells you what to fly",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4823,7 +4823,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#ground-control",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Ground control",
-    "text": "Ground control\n\nSection two: how many points, where, and the difference between the points you fit and the points you judge with.",
+    "text": "Ground control\n\n\nSection 2: how many points, where, and which ones you are allowed to judge with",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4836,7 +4836,20 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#how-many-gcps-and-where",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "How many GCPs, and where",
-    "text": "How many GCPs, and where\n\nCount in flight units: about 3 to 4 GCPs per 100 photos; below 1 per 100 accuracy degrades fast (Sanz-Ablanedo et al. 2018)\nHorizontal stops improving past about 3 per 100; vertical keeps improving to about 4 per 100\nDistribution beats count: an even triangular spread is twice as accurate as a poor layout with the same number\nEdge coverage first, then an even interior; more points past that buy better error structure, not lower RMSE (Dai et al. 2023)\n\n\nThe per-100-photos rule travels better than per-hectare rules because it scales with overlap and altitude automatically. Dai et al. 2023 is the modern synthesis: after the first few GCPs, RMSE barely moves but the spatial autocorrelation of the residual error keeps improving, which matters for differencing. Our 9/16 field design (4 targets on a 78-photo class of flight) sits right on the recommended density.",
+    "text": "How many GCPs, and where\n\n\nAbout 3 to 4 GCPs per 100 photos; below 1 per 100 accuracy degrades fast (Sanz-Ablanedo et al. 2018)\nEdge coverage first, then an even interior; points past that improve error structure rather than RMSE (Dai et al. 2023)\n\n\n\nPer-100-photos scales with overlap and altitude; per-hectare rules do not\nDai 2023: after the first few GCPs, RMSE barely moves, spatial autocorrelation of the residual keeps improving\nThat structure is what matters for differencing\nOur 9/16 design, 4 targets on a 78-photo flight, sits on the recommended density",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#control-at-lake-wheeler",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#control-at-lake-wheeler",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Control at Lake Wheeler",
+    "text": "Control at Lake Wheeler\n\nOur own flight. Targets ring the site: a few become control, the rest stay checkpoints.\n\n\nTheir own orthomosaic from 9/16, their own targets\nPoint at the spread: edges first, then interior\nAsk which they would make control and why\nEvery target they do not use as control is a checkpoint they get for free",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4849,7 +4862,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#control-is-not-validation",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Control is not validation",
-    "text": "Control is not validation\n\n\n\nGCPs (control): used in the bundle adjustment; the model is fitted to them\n\n\nCheckpoints: surveyed the same way, withheld from processing entirely; the model is judged against them\n\n\n\nError reported on control points overstates accuracy by 3 x (dense control) to 4 to 8 x (sparse control) (Sanz-Ablanedo et al. 2018)\nThe adjustment was told to fit those points; their residuals are a statement about the fit, not the map\nASPRS: checkpoints must be independent, excluded from the aerial triangulation, and away from any GCP (American Society for Photogrammetry and Remote Sensing 2024)\n\n\n\nThe 3 to 8 times overestimation is the single most important number in this section, and it is why the field protocol withheld most of the surveyed points. If students remember one distinction from today, it is this one; the midterm will ask it.",
+    "text": "Control is not validation\n\n\nError reported on control points overstates accuracy by 3 x (dense control) to 4 to 8 x (sparse control) (Sanz-Ablanedo et al. 2018)\nASPRS: checkpoints must be independent, excluded from the aerial triangulation, and away from any GCP (American Society for Photogrammetry and Remote Sensing 2024)\n\n\n\nThe 3 to 8 times overestimation is the number to remember\nIt is why the field protocol withheld most of the surveyed points\nIf they keep one distinction from today, this is it\nThe midterm asks it",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4862,7 +4875,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#rtk-ppk-and-what-they-still-need",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "RTK, PPK, and what they still need",
-    "text": "RTK, PPK, and what they still need\n\nSection three: direct georeferencing moved the field in the last five years; here is the current state and the honest recipe.",
+    "text": "RTK, PPK, and what they still need\n\n\nSection 3: direct georeferencing moved fast in five years\nCurrent state and the working recipe",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4875,7 +4888,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#direct-georeferencing-today",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Direct georeferencing today",
-    "text": "Direct georeferencing today\n\n\n\n\n\n\n\nEvidence\nResult\n\n\n\n\nASPRS Addendum V (American Society for Photogrammetry and Remote Sensing 2024)\nPPK reaches 1 to 2 cm horizontal, 2 to 4 cm vertical “when used properly”; RTK typically 5 to 10 cm\n\n\nRTK aircraft, zero GCPs, purpose-built flight (Stott et al. 2020)\nVertical RMSE 6.6 cm over 2 km of river; adding 5 GCPs did not improve it\n\n\nPPK versus GCP workflows (Zhang et al. 2019)\nPPK matched GCP-workflow accuracy (MAE about 2 cm, RMSE about 3 cm); some missions carried a vertical bias that one GCP removed, improving vertical accuracy 20 to 30 percent\n\n\nRepeat surveys (Nota et al. 2022)\nCo-alignment of epochs gives sub-2 cm relative accuracy; ground control in at least one epoch still anchors absolute Z\n\n\n\n\nStott’s caveat is the teaching point: the zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir. Against the sparse target checkpoints, vertical errors still clustered spatially up to 0.14 m even though the dense validation found no consistent systematic error, so distributed checkpoints stayed mandatory. Zhang’s one-GCP result is the canonical citation for the vertical bias fix: the bias is near constant, so one known point kills it. Nota matters for the change-detection topic later: co-align the epochs and put control in one of them.",
+    "text": "Direct georeferencing today\n\n\n\n\n\n\n\nEvidence\nResult\n\n\n\n\nASPRS Addendum V (American Society for Photogrammetry and Remote Sensing 2024)\nPPK reaches 1 to 2 cm horizontal, 2 to 4 cm vertical “when used properly”; RTK typically 5 to 10 cm\n\n\nRTK aircraft, zero GCPs, purpose-built flight (Stott et al. 2020)\nVertical RMSE 6.6 cm over 2 km of river; adding 5 GCPs did not improve it\n\n\nPPK versus GCP workflows (Zhang et al. 2019)\nPPK matched GCP-workflow accuracy (MAE about 2 cm, RMSE about 3 cm); some missions carried a vertical bias that one GCP removed, improving vertical accuracy 20 to 30 percent\n\n\nRepeat surveys (Nota et al. 2022)\nCo-alignment of epochs gives sub-2 cm relative accuracy; ground control in at least one epoch still anchors absolute Z\n\n\n\n\n\nStott’s zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir\nAgainst sparse checkpoints, vertical errors still clustered spatially to 0.14 m\nSo distributed checkpoints stay mandatory\nZhang: the vertical bias is near constant, so one known point kills it\nNota matters for Topic 6: co-align epochs, put control in one of them",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4884,11 +4897,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#standards-caution",
-    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#standards-caution",
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#where-the-standard-disagrees",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#where-the-standard-disagrees",
     "title": "Ground Control, Checkpoints, and Accuracy",
-    "section": "Standard’s caution",
-    "text": "Standard’s caution\n\nDefaults: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint\n\n\nThe ASPRS standard is more conservative: GCPs remain “highly recommended” and should take priority over airborne positions in the adjustment, because camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations (American Society for Photogrammetry and Remote Sensing 2024)\nBoth are right: the journal results are conditional on strong flight geometry; the standard writes for contracts and courts\n\n\nPresent the tension honestly instead of resolving it: recent peer-reviewed results justify the light-control recipe when the flight design is strong; the standard assumes you must defend the number to a client. A student consultant should know both positions and say which regime they are operating in. Our lab uses the recipe: 3 targets as control, everything else checkpoints.",
+    "section": "Where the standard disagrees",
+    "text": "Where the standard disagrees\n\nWorking defaults: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, every other surveyed point withheld as a checkpoint\n\n\nASPRS keeps GCPs “highly recommended” and gives them priority over airborne positions in the adjustment: camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations (American Society for Photogrammetry and Remote Sensing 2024)\nThe journal results assume strong flight geometry; the standard is written for contracts and courts\n\n\n\nDo not resolve the tension, name it\nRecent results justify light control when the flight design is strong\nThe standard assumes you must defend the number to a client\nA consultant should know both and say which regime they are in\nOur lab uses the recipe: 3 targets as control, the rest checkpoints",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4897,11 +4910,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-receiver-in-your-hands",
-    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-receiver-in-your-hands",
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-base-coordinate-governs-everything",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-base-coordinate-governs-everything",
     "title": "Ground Control, Checkpoints, and Accuracy",
-    "section": "The receiver in your hands",
-    "text": "The receiver in your hands\n\nBase within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna (Famiglietti et al. 2021); the price gap between those two bases is roughly an order of magnitude\nAntenna beats receiver: a low-cost dual-frequency board matched geodetic instruments in network RTK only when paired with a geodetic-grade antenna; with a patch antenna it needed open sky (Janos and Kuras 2021)\nThe base coordinate governs absolute accuracy: the rover measures centimeters relative to the base, and every point inherits the base position (the field protocol’s Methods A, B, and C)\n\n\nThis slide connects the literature to the hardware students actually held. The Famiglietti comparison is the honest Emlid-class citation; the receivers have since improved. The publishable-gap card is real: nobody has published an RS4-versus-state-RTN evaluation, and the class dataset is a credible short note. Recruit interest for it here.",
+    "section": "The base coordinate governs everything",
+    "text": "The base coordinate governs everything\n\n\nBase within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna (Famiglietti et al. 2021), at roughly a tenth of the price\nAntenna beats receiver: a low-cost dual-frequency board matched geodetic instruments in network RTK only with a geodetic-grade antenna; with a patch antenna it needed open sky (Janos and Kuras 2021)\n\n\n\nConnects the literature to the hardware they held\nFamiglietti is the fair Emlid-class citation; receivers have improved since\nNobody has published RS4 versus state RTN: the class dataset is a credible short note\nRecruit interest for it here",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4914,7 +4927,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#systematic-error",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Systematic error",
-    "text": "Systematic error\n\nSection four: the error that does not average away, and that differencing cannot forgive.",
+    "text": "Systematic error\n\n\nSection 4: the error that does not average away and that differencing cannot forgive",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4927,7 +4940,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#doming",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Doming",
-    "text": "Doming\n\nNadir-only image blocks with self-calibration cannot separate radial lens distortion from surface shape\nCamera orientations off parallel by only 2 degrees produce a dome of about 0.2 m over 100 m (James and Robson 2014)\nFixes, in order of power: a known camera model with self-calibration off; oblique imagery (practical plans cut the deformation by one to two orders of magnitude; a convergent orbit reached under 2 mm in simulation); two flying heights; well-distributed control\nThe best camera angles in the tested 0 to 35 degree range were 20 to 35 degrees, worth nearly 50 percent better accuracy in high relief (Nesbit and Hugenholtz 2019)\nCaution: a gently tilted camera (under 15 degrees) can make things worse by exciting a different distortion correlation, especially on consumer wide-angle cameras with onboard lens correction (James et al. 2020)\n\n\nRecall the pitfalls table from 2A; here is the mechanism and the numbers. The 2020 caveat is the one practitioners miss: the popular “just tilt the camera a bit” advice backfires below 15 degrees on exactly the cameras students fly. More overlap, incidentally, does not fix doming; James et al. 2020 showed relative insensitivity to overlap, a common myth.",
+    "text": "Doming\n\n\nCamera orientations off parallel by only 2 degrees produce a dome of about 0.2 m over 100 m (James and Robson 2014)\nFixes in order of power: a known camera model with self-calibration off; oblique imagery (a convergent orbit reached under 2 mm in simulation); two flying heights; well-distributed control\nBest camera angles in the tested 0 to 35 degree range were 20 to 35 degrees, worth nearly 50 percent better accuracy in high relief (Nesbit and Hugenholtz 2019)\nA gently tilted camera (under 15 degrees) can make things worse on consumer wide-angle cameras with onboard lens correction (James et al. 2020)\n\n\n\nRecall the pitfalls table from 2A, here is the mechanism\nThe 2020 caveat is the one practitioners miss\n“Just tilt the camera a bit” backfires below 15 degrees on exactly the cameras they fly\nMore overlap does not fix doming: James 2020 showed relative insensitivity to overlap",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4936,11 +4949,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#why-systematic-error-is-the-enemy",
-    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#why-systematic-error-is-the-enemy",
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#why-systematic-error-matters-more",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#why-systematic-error-matters-more",
     "title": "Ground Control, Checkpoints, and Accuracy",
-    "section": "Why systematic error is the enemy",
-    "text": "Why systematic error is the enemy\n\nRandom error averages away in aggregates; a 2 cm systematic bias does not\nIn modern change detection, propagated uncertainty is dominated by low-magnitude, spatially correlated or systematic error, not by point precision (Anderson 2019)\nA noisy point cloud is a smaller problem than a quiet dome\n\n\nBlunder rule (American Society for Photogrammetry and Remote Sensing 2024): any checkpoint discrepancy beyond 3 x the target RMSE is a blunder to investigate, not average in; mean error should stay under 25 percent of the target RMSE\n\n\nThe mean-error rule is the practical doming detector in a report: a mean checkpoint error far from zero, or a mean above a quarter of the RMSE, says the surface is biased, not noisy. Students apply exactly this test to their DSM residuals in the lab.",
+    "section": "Why systematic error matters more",
+    "text": "Why systematic error matters more\n\n\nRandom error averages away in aggregates; a 2 cm systematic bias does not\nPropagated uncertainty in change detection is dominated by spatially correlated and systematic error, not point precision (Anderson 2019)\nBlunder and bias screens from the standard (American Society for Photogrammetry and Remote Sensing 2024)\n\n\n\nThe mean-error rule is the doming detector in a report\nA mean far from zero, or above a quarter of the RMSE, says biased\nStudents run exactly this test on their DSM residuals in the lab",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4953,7 +4966,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#reading-the-reports",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Reading the reports",
-    "text": "Reading the reports\n\nSection five: the week’s stated purpose. Bring up the students’ own 2B and 2C reports side by side on screen for this section; the slides give the map, the reports give the territory.",
+    "text": "Reading the reports\n\n\nSection 5: the week’s stated purpose\nPut their own 2B and 2C reports on screen here\nSlides give the map, the reports give the territory",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4962,11 +4975,37 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-same-facts-two-dialects",
-    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-same-facts-two-dialects",
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#a-processing-report-page-by-page",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#a-processing-report-page-by-page",
     "title": "Ground Control, Checkpoints, and Accuracy",
-    "section": "The same facts, two dialects",
-    "text": "The same facts, two dialects\n\n\n\n\n\n\n\n\nQuantity\nAgisoft Metashape report\nWebODM quality report\n\n\n\n\nGSD\nSurvey Data: ground resolution\nOverview: average GSD\n\n\nCoverage and photos\nSurvey Data: coverage area, aligned images\nOverview: area, reconstructed images\n\n\nOverlap\nCamera locations and image overlap figure\nSurvey Data overlap heatmap\n\n\nCamera model\nCalibrated values with uncertainties and residual plot\nCamera parameters, per-band\n\n\nCamera position error\nCamera Locations table: X, Y, Z error\nGPS/geolocation details, 3D errors\n\n\nControl fit\nGround Control Points table: control RMSE\nGCP errors section (when GCPs used)\n\n\nCheckpoint error\nCheck Points rows in the same table\nAbsent unless checkpoints were declared\n\n\n\n\nWalk each row on the projector with a real pair of reports. Two traps to name: both tools print camera-position errors that students mistake for map accuracy, and WebODM only reports what it was given, so a project processed without declared checkpoints reports no independent accuracy at all, which does not mean the map is accurate. The lab’s comparison table is this slide filled in with their numbers.",
+    "section": "A processing report, page by page",
+    "text": "A processing report, page by page\n\nSurvey overview, DEM, survey data with the overlap figure, camera calibration with residuals.\n\n\nWalk the four panels before the comparison table\nSurvey data page carries GSD, coverage, aligned images\nCamera calibration residual plot is where a bad lens model shows\nNone of these four pages is an accuracy statement",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#where-you-declare-your-ruler",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#where-you-declare-your-ruler",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "Where you declare your ruler",
+    "text": "Where you declare your ruler\n\nMarker accuracy is RMSEV2. The software weights the adjustment with it, then reports a fit that still does not include it.\n\n\nThis dialog is where the survey accuracy of the control goes in\nMarker accuracy 0.005 m says the targets are good to 5 mm\nCamera accuracy 10 m is the UX5 log: navigation grade, correctly downweighted\nWrong numbers here mis-weight the whole adjustment\nMetashape still does not carry marker accuracy into the reported RMSE; you do that",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Slides",
+      "Lecture 3B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-same-facts-in-two-reports",
+    "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-same-facts-in-two-reports",
+    "title": "Ground Control, Checkpoints, and Accuracy",
+    "section": "The same facts in two reports",
+    "text": "The same facts in two reports\n\n\n\n\n\n\n\n\nQuantity\nAgisoft Metashape report\nWebODM quality report\n\n\n\n\nGSD\nSurvey Data: ground resolution\nOverview: average GSD\n\n\nCoverage and photos\nSurvey Data: coverage area, aligned images\nOverview: area, reconstructed images\n\n\nOverlap\nCamera locations and image overlap figure\nSurvey Data overlap heatmap\n\n\nCamera model\nCalibrated values with uncertainties and residual plot\nCamera parameters, per-band\n\n\nCamera position error\nCamera Locations table: X, Y, Z error\nGPS/geolocation details, 3D errors\n\n\nControl fit\nGround Control Points table: control RMSE\nGCP errors section (when GCPs used)\n\n\nCheckpoint error\nCheck Points rows in the same table\nAbsent unless checkpoints were declared\n\n\n\n\n\nWalk each row on the projector with a real pair of reports\nTrap 1: both tools print camera-position errors that students read as map accuracy\nTrap 2: WebODM reports only what it was given, so no declared checkpoints means no accuracy at all\nThat silence does not mean the map is accurate\nThe lab’s comparison table is this slide filled in with their numbers",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4979,7 +5018,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-neither-report-tells-you",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "What neither report tells you",
-    "text": "What neither report tells you\n\nWhether the checkpoints were independent (the software trusts your labeling)\nThe survey accuracy of the control and checkpoints, so neither can do the quadrature for you\nWhether the error is spatially structured: a mean near zero can hide a dome that cancels\nAnything about the parts of the site with no checkpoints at all\n\n\nReport vocabulary (American Society for Photogrammetry and Remote Sensing 2024): report RMSEH and RMSEV (RMSE3D if asked); the old 95 percent confidence reporting is gone from Edition 2; 30 checkpoints is the standard’s minimum for a statistical claim, and Section 7.16.1 gives the honest wording when, as in a class lab, you have fewer\n\n\nSection 7.16.1 matters for every project the students will run this decade: small sites cannot afford 30 checkpoints, and the standard’s answer is truth in reporting rather than silence: report the RMSE, state the checkpoint count, and do not claim the statistical confidence the sample cannot support. The lab report requires exactly that sentence.",
+    "text": "What neither report tells you\n\nWhether the checkpoints were independent; the software trusts your labeling\nThe survey accuracy of the control and checkpoints, so neither can do the quadrature for you\nWhether the error is spatially structured: a mean near zero can hide a dome that cancels\nAnything about the parts of the site with no checkpoints\n\n\nReport vocabulary (American Society for Photogrammetry and Remote Sensing 2024): report RMSEH and RMSEV (RMSE3D if asked); Edition 2 drops the old 95 percent confidence reporting; 30 checkpoints is the minimum for a statistical claim, and Section 7.16.1 gives the wording for when you have fewer\n\n\n\nSection 7.16.1 applies to nearly every project they will run\nSmall sites cannot afford 30 checkpoints\nThe answer is truth in reporting: give the RMSE, state the count, claim no confidence the sample cannot support\nThe lab report requires that sentence",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -4992,7 +5031,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#what-can-you-measure",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "What can you measure",
-    "text": "What can you measure\n\nSection six: the payoff. The same flight either answers the question or it does not, and the arithmetic decides.",
+    "text": "What can you measure\n\n\nSection 6: the same flight either answers the question or it does not\nThe arithmetic decides",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -5005,7 +5044,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#the-level-of-detection",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "The level of detection",
-    "text": "The level of detection\nFor change between two surveys of similar quality, at 95 percent confidence:\n\\[\\text{LoD} = 1.96 \\sqrt{\\sigma_{z1}^2 + \\sigma_{z2}^2} \\approx 2.8\\,\\sigma_z\\]\nWorked example for a good flight: 3 cm GSD, strong control, so \\(\\sigma_z \\approx\\) 1.5 to 2 x GSD \\(\\approx\\) 5 cm:\n\\[\\text{LoD} \\approx 2.8 \\times 5 \\text{ cm} \\approx 14 \\text{ cm}\\]\n\nA 30 cm gully clears the threshold; 2 cm of sheet erosion is invisible\nThresholding is for gross change only; it biases net change, where random errors already cancel (Anderson 2019)\nSpatially variable LoD can exclude from a quarter to more than half of observed volumetric change (Wheaton et al. 2010)\n\n\nThe LoD arithmetic is the lecture’s destination: every accuracy number from the previous fifty minutes exists to be plugged in here. Wheaton’s Feshie numbers (24 to 31 percent of change excluded in dry years, 57 to 59 in wet) show the price of thresholding; Anderson’s correction says when to pay it: gross change yes, net change no, and error propagation is not thresholding. Zhang et al. 2019 reached sub-5 cm detection thresholds with PPK flights below 45 m, which is what chasing micro-topography actually requires.",
+    "text": "The level of detection\n\\[\\text{LoD} = 1.96 \\sqrt{\\sigma_{z1}^2 + \\sigma_{z2}^2} \\approx 2.8\\,\\sigma_z\\]\n\n\nThresholding is for gross change only; it biases net change, where random errors already cancel (Anderson 2019)\nSpatially variable LoD can exclude from a quarter to more than half of observed volumetric change (Wheaton et al. 2010)\n\n\n\nEvery accuracy number from the last fifty minutes gets plugged in here\nWheaton’s Feshie numbers: 24 to 31 percent of change excluded in dry years, 57 to 59 in wet\nAnderson’s correction: gross change yes, net change no; error propagation is not thresholding\nZhang 2019 reached sub-5 cm thresholds with PPK flights below 45 m",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -5018,7 +5057,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#trees-or-erosion",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Trees or erosion",
-    "text": "Trees or erosion\n\n\n\n\n\n\n\n\nQuestion\nBinding constraint\nVerdict at 3 cm GSD, 5 cm sigma-z\n\n\n\n\nCount the trees\nDetection in the orthomosaic\nEasy; accuracy barely matters\n\n\nMeasure canopy height\nCanopy and ground surfaces, not GSD: flying height 80 to 120 m showed no significant effect on tree height RMSE (1.8 to 3.2 m) (Grybas and Congalton 2022)\nExpect meters of error regardless of pixel size\n\n\nDetect a 30 cm rill or gully\nLoD about 14 cm\nYes, cleanly\n\n\nQuantify 2 cm sheet erosion\nLoD, dominated by systematic error\nNo; needs sub-2 cm sigma-z, near-ground flights, and bias control\n\n\n\n\nThe asymmetry is the thesis of the whole topic: for trees the limiting error lives in the canopy and the terrain model underneath it, so buying more GSD buys nothing; for micro-topography the limiting error is exactly the accuracy chain this lecture built, and every link (base coordinate, control, calibration, systematic bias) shows up in the final LoD. Students argue these verdicts with their own numbers in the lab’s part three.",
+    "text": "Trees or erosion\n\n\n\n\n\n\n\n\nQuestion\nBinding constraint\nVerdict at 3 cm GSD, 5 cm sigma-z\n\n\n\n\nCount the trees\nDetection in the orthomosaic\nEasy; accuracy barely matters\n\n\nMeasure canopy height\nCanopy and ground surfaces, not GSD: flying height 80 to 120 m showed no significant effect on tree height RMSE (1.8 to 3.2 m) (Grybas and Congalton 2022)\nExpect meters of error regardless of pixel size\n\n\nDetect a 30 cm rill or gully\nLoD about 14 cm\nYes, cleanly\n\n\nQuantify 2 cm sheet erosion\nLoD, dominated by systematic error\nNo; needs sub-2 cm sigma-z, near-ground flights, and bias control\n\n\n\n\n\nFor trees the limiting error lives in the canopy and the terrain underneath, so more GSD buys nothing\nFor micro-topography the limiting error is the whole chain built today\nBase coordinate, control, calibration, bias all show up in the LoD\nStudents argue these verdicts with their own numbers in part three of the lab",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -5031,7 +5070,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#key-terms",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Key terms",
-    "text": "Key terms\n\n\n\nCheckpoint: surveyed, withheld, judges the map; also called check point, validation point, independent test point\n\n\nDirect georeferencing: camera positions from RTK or PPK doing the work of control; also called GNSS-aided or GCP-free\n\n\nLevel of detection (LoD): the smallest elevation change distinguishable from error at a stated confidence\n\n\n\nDoming: broad systematic DEM deformation from the self-calibration ambiguity; also called bowling when inverted\n\n\nRMSEH, RMSEV, RMSE3D: Edition 2’s reporting quantities, replacing RMSEx/RMSEy/RMSEz and the 95 percent statistics\n\n\nQuadrature: accuracies add as the square root of summed squares; the product carries the checkpoint survey error\n\n\n\nThe synonym lists matter because students will search the literature and hit every variant. This is midterm vocabulary.",
+    "text": "Key terms\n\n\n\nCheckpoint: surveyed, withheld, judges the map; also called check point, validation point, independent test point\n\n\nDirect georeferencing: camera positions from RTK or PPK doing the work of control; also called GNSS-aided or GCP-free\n\n\nLevel of detection (LoD): the smallest elevation change distinguishable from error at a stated confidence\n\n\n\nDoming: broad systematic DEM deformation from the self-calibration ambiguity; also called bowling when inverted\n\n\nRMSEH, RMSEV, RMSE3D: Edition 2’s reporting quantities, replacing RMSEx/RMSEy/RMSEz and the 95 percent statistics\n\n\nQuadrature: accuracies add as the square root of summed squares; the product carries the checkpoint survey error\n\n\n\n\nThe synonym lists matter: they will hit every variant in the literature\nMidterm vocabulary",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -5044,7 +5083,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#wrap-up",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Wrap-up",
-    "text": "Wrap-up\n\nAssignment 3B: Validate the Lake Wheeler flight: establish the base coordinate three ways, evaluate the flight’s orthomosaic and DSM against the checkpoints you collected, and rule on what the flight can measure\n\n\nMidterm 11/4: the control versus checkpoint distinction, the quadrature rule, and the LoD arithmetic are all fair game\n\n\nRecap the chain: GSD sets the floor, georeferencing and systematic error set the distance above it, checkpoints measure that distance honestly, the quadrature keeps the claim honest, and the LoD converts the whole chain into a yes or no about the question you actually care about. The lab data is their own field work from 9/16, which is the point.",
+    "text": "Wrap-up\n\nAssignment 3B: Validate the Lake Wheeler flight: establish the base coordinate three ways, evaluate the flight’s orthomosaic and DSM against the checkpoints you collected, and rule on what the flight can measure\n\n\nMidterm 11/4: the control versus checkpoint distinction, the quadrature rule, and the LoD arithmetic are all fair game\n\n\n\nRecap the chain: GSD sets the floor\nGeoreferencing and systematic error set the distance above it\nCheckpoints measure that distance\nQuadrature keeps the claim defensible\nLoD turns the chain into a yes or no about the question you care about\nThe lab data is their own field work from 9/16",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
@@ -5070,7 +5109,7 @@
     "href": "course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html#outline",
     "title": "Ground control, checkpoints, and accuracy",
     "section": "Outline",
-    "text": "Outline\n\nWhat flight GSD buys you: the floor it sets on horizontal and vertical accuracy, and why you rarely stand on it\nGround control versus checkpoints: fitting the map versus judging it\nRTK and PPK direct georeferencing, and what still needs a ground point\nSystematic error: doming, why it beats random noise, and how to detect it in a report\nReading the Agisoft and WebODM reports side by side\nThe level of detection: deciding with arithmetic whether a flight can count trees or quantify micro erosion",
+    "text": "Outline\n\nWhat flight GSD buys you: the floor it sets on horizontal and vertical accuracy\nGround control versus checkpoints\nRTK and PPK direct georeferencing\nSystematic error\nReading the Agisoft and WebODM reports side by side\nThe level of detection",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 620" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .box { fill: #ffffff; stroke: #8c8c8c; stroke-width: 3; }
+      .boxc { fill: #e6f0e6; stroke: #006600; stroke-width: 3.5; }
+      .boxv { fill: #f0e6f0; stroke: #660066; stroke-width: 3.5; }
+      .t { font-size: 30px; font-weight: bold; fill: #3e3e3e; }
+      .sub { font-size: 24px; fill: #6b6b6b; }
+      .flow { stroke: #8c8c8c; stroke-width: 5; fill: none; }
+      .fitline { stroke: #006600; stroke-width: 5; fill: none; }
+      .judge { stroke: #660066; stroke-width: 5; fill: none; stroke-dasharray: 14 9; }
+      .cap { font-size: 26px; font-weight: bold; }
+    </style>
+    <marker id="a-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c8c8c"/>
+    </marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#006600"/>
+    </marker>
+    <marker id="a-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#660066"/>
+    </marker>
+  </defs>
+
+  <!-- GCPs -->
+  <rect x="430" y="40" width="300" height="90" rx="10" class="boxc"/>
+  <text x="580" y="82" class="t" fill="#006600" text-anchor="middle">GCPs (control)</text>
+  <text x="580" y="115" class="sub" text-anchor="middle">handed to the software</text>
+  <line x1="580" y1="130" x2="580" y2="218" class="fitline" marker-end="url(#a-green)"/>
+
+  <!-- photos -->
+  <rect x="60" y="230" width="220" height="110" rx="10" class="box"/>
+  <text x="170" y="278" class="t" text-anchor="middle">Photos</text>
+  <text x="170" y="312" class="sub" text-anchor="middle">+ camera positions</text>
+  <line x1="280" y1="285" x2="418" y2="285" class="flow" marker-end="url(#a-gray)"/>
+
+  <!-- bundle adjustment -->
+  <rect x="430" y="230" width="300" height="110" rx="10" class="box"/>
+  <text x="580" y="278" class="t" text-anchor="middle">Bundle adjustment</text>
+  <text x="580" y="312" class="sub" text-anchor="middle">fits the model to the GCPs</text>
+  <line x1="730" y1="285" x2="878" y2="285" class="flow" marker-end="url(#a-gray)"/>
+
+  <!-- products -->
+  <rect x="890" y="230" width="280" height="110" rx="10" class="box"/>
+  <text x="1030" y="278" class="t" text-anchor="middle">DSM + ortho</text>
+  <text x="1030" y="312" class="sub" text-anchor="middle">the map you deliver</text>
+
+  <!-- checkpoints, routed around the adjustment -->
+  <rect x="430" y="450" width="300" height="90" rx="10" class="boxv"/>
+  <text x="580" y="492" class="t" fill="#660066" text-anchor="middle">Checkpoints</text>
+  <text x="580" y="525" class="sub" text-anchor="middle">surveyed, then withheld</text>
+  <path class="judge" d="M 730 495 L 1030 495 L 1030 352" marker-end="url(#a-purple)"/>
+  <text x="1045" y="430" class="cap" fill="#660066">judged against</text>
+
+  <!-- blocked path into the adjustment -->
+  <line x1="580" y1="450" x2="580" y2="400" stroke="#c46210" stroke-width="4" stroke-dasharray="10 7"/>
+  <line x1="558" y1="378" x2="602" y2="422" stroke="#c46210" stroke-width="6" stroke-linecap="round"/>
+  <line x1="602" y1="378" x2="558" y2="422" stroke="#c46210" stroke-width="6" stroke-linecap="round"/>
+  <text x="625" y="408" class="sub" fill="#c46210" font-weight="bold">never enters the adjustment</text>
+
+  <!-- captions -->
+  <text x="770" y="70" class="cap" fill="#006600">residual here = the fit</text>
+  <text x="770" y="104" class="sub">3x optimistic with dense control,</text>
+  <text x="770" y="134" class="sub">4 to 8x with sparse control</text>
+
+  <text x="60" y="480" class="cap" fill="#660066">residual here = the accuracy</text>
+  <text x="60" y="514" class="sub">the only number you report</text>
+</svg>

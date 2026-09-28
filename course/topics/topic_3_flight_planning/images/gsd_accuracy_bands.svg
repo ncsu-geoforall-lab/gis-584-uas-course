@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 700" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .group { font-size: 30px; font-weight: bold; }
+      .row { font-size: 25px; fill: #3e3e3e; }
+      .val { font-size: 24px; fill: #3e3e3e; }
+      .axis { font-size: 24px; fill: #6b6b6b; }
+      .note { font-size: 25px; fill: #c46210; font-weight: bold; }
+      .grid { stroke: #d5d5d5; stroke-width: 2; }
+      .hbar { fill: #ccdfcc; stroke: #006600; stroke-width: 3; }
+      .hbest { fill: #006600; }
+      .vbar { fill: #dfccdf; stroke: #660066; stroke-width: 3; }
+      .vbest { fill: #660066; }
+    </style>
+  </defs>
+
+  <!-- gridlines at 1x .. 7x -->
+  <line x1="461" y1="100" x2="461" y2="600" class="grid"/>
+  <line x1="583" y1="100" x2="583" y2="600" class="grid"/>
+  <line x1="704" y1="100" x2="704" y2="600" class="grid"/>
+  <line x1="825" y1="100" x2="825" y2="600" class="grid"/>
+  <line x1="947" y1="100" x2="947" y2="600" class="grid"/>
+  <line x1="1068" y1="100" x2="1068" y2="600" class="grid"/>
+  <line x1="1189" y1="100" x2="1189" y2="600" class="grid"/>
+
+  <!-- the floor -->
+  <line x1="461" y1="100" x2="461" y2="600" stroke="#c46210" stroke-width="4" stroke-dasharray="12 8"/>
+  <text x="470" y="92" class="note">the floor: 1 x GSD</text>
+
+  <!-- horizontal group -->
+  <text x="40" y="150" class="group" fill="#006600">Horizontal RMSE</text>
+  <rect x="420" y="168" width="41" height="42" class="hbest"/>
+  <text x="40" y="198" class="row">best case</text>
+  <text x="475" y="198" class="val">0.66 to 1 x GSD</text>
+
+  <rect x="461" y="228" width="243" height="42" class="hbar"/>
+  <text x="40" y="258" class="row">flat terrain</text>
+  <text x="718" y="258" class="val">1 to 3 x GSD</text>
+
+  <rect x="461" y="288" width="728" height="42" class="hbar"/>
+  <text x="40" y="318" class="row">complex terrain</text>
+  <text x="1175" y="318" class="val" text-anchor="end">1 to 7 x GSD</text>
+
+  <!-- vertical group -->
+  <text x="40" y="400" class="group" fill="#660066">Vertical RMSE</text>
+  <rect x="522" y="418" width="61" height="42" class="vbest"/>
+  <text x="40" y="448" class="row">best case</text>
+  <text x="597" y="448" class="val">1.5 to 2 x GSD</text>
+
+  <rect x="461" y="478" width="425" height="42" class="vbar"/>
+  <text x="40" y="508" class="row">flat terrain</text>
+  <text x="900" y="508" class="val">1 to 4.5 x GSD</text>
+
+  <rect x="522" y="538" width="425" height="42" class="vbar"/>
+  <text x="40" y="568" class="row">complex terrain</text>
+  <text x="961" y="568" class="val">1.5 to 5 x GSD</text>
+
+  <!-- axis -->
+  <line x1="340" y1="600" x2="1250" y2="600" stroke="#8c8c8c" stroke-width="3"/>
+  <text x="461" y="632" class="axis" text-anchor="middle">1x</text>
+  <text x="583" y="632" class="axis" text-anchor="middle">2x</text>
+  <text x="704" y="632" class="axis" text-anchor="middle">3x</text>
+  <text x="825" y="632" class="axis" text-anchor="middle">4x</text>
+  <text x="947" y="632" class="axis" text-anchor="middle">5x</text>
+  <text x="1068" y="632" class="axis" text-anchor="middle">6x</text>
+  <text x="1189" y="632" class="axis" text-anchor="middle">7x</text>
+  <text x="795" y="674" class="axis" text-anchor="middle" font-size="27">accuracy in multiples of the flight GSD</text>
+
+  <!-- gap annotation -->
+  <text x="40" y="674" class="note">vertical never reaches 1 x GSD</text>
+</svg>

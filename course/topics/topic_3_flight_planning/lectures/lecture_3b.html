@@ -147,6 +147,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -168,14 +171,20 @@ Corey White
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
 <ul>
-<li class="fragment">Explain the relationship between flight GSD and the horizontal and vertical accuracy a UAS survey can actually achieve</li>
-<li class="fragment">Design ground control and checkpoint schemes, and defend the difference between the two</li>
-<li class="fragment">Choose between GCP-based and RTK/PPK georeferencing, and know what each still needs</li>
-<li class="fragment">Read an Agisoft and a WebODM processing report and state the accuracy of the products with the right numbers</li>
-<li class="fragment">Decide, with arithmetic, whether a given flight can answer a given question: counting trees or measuring millimeters of erosion</li>
+<li class="fragment">Relate flight GSD to the horizontal and vertical accuracy a UAS survey can reach</li>
+<li class="fragment">Design ground control and checkpoint schemes</li>
+<li class="fragment">Choose between GCP-based and RTK/PPK georeferencing</li>
+<li class="fragment">Read an Agisoft or WebODM processing report</li>
+<li class="fragment">Determine the level of detection (LoD)</li>
 </ul>
 <aside class="notes">
-<p>This is the accuracy lecture the SfM topic has been pointing at since Topic 2: 2A said checkpoints are the honest number, 2B said quote the checkpoint RMSE, and today is where those numbers come from and what they permit. Everything is anchored to the reports students produced themselves in Assignments 2B and 2C and to the checkpoint data collected with the Emlid rover at the Lake Wheeler flight. The lab runs the full validation on the flight’s own products.</p>
+<ul>
+<li>The accuracy lecture Topic 2 has been pointing at</li>
+<li>2A: checkpoints are the real number. 2B: quote the checkpoint RMSE</li>
+<li>Today: where those numbers come from and what they permit</li>
+<li>Everything runs on their own 2B and 2C reports and the 9/16 Emlid checkpoints</li>
+<li>The lab validates the flight’s own products</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -190,18 +199,21 @@ Corey White
 </section>
 <section id="the-report-number-is-not-the-accuracy" class="slide level2 smaller">
 <h2>The report number is not the accuracy</h2>
-<p>A worked example straight from the ASPRS standard <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>:</p>
+<p>A worked example from the ASPRS standard <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>:</p>
 <ul>
-<li>Your DSM fits the checkpoints with RMSE<sub>V1</sub> = 1 cm. The report says so.</li>
-<li>The checkpoints themselves were surveyed with an RTK rover: RMSE<sub>V2</sub> = 2 cm.</li>
-<li>The accuracy you may claim is the quadrature sum:</li>
+<li>The DSM fits the checkpoints with RMSE<sub>V1</sub> = 1 cm</li>
+<li>The checkpoints themselves were surveyed with an RTK rover: RMSE<sub>V2</sub> = 2 cm</li>
+<li>You may claim the quadrature sum: <span class="math inline">\(\text{RMSE}_V = \sqrt{1^2 + 2^2} = 2.24\)</span> cm</li>
 </ul>
-<p><span class="math display">\[\text{RMSE}_V = \sqrt{1^2 + 2^2} = 2.24 \text{ cm}\]</span></p>
-<div class="term-card">
-<p><strong>Edition 2 rule</strong>: checkpoint survey error can no longer be ignored; reported accuracy includes it. Your product is never more accurate than the ruler you measured it with</p>
-</div>
-<aside class="notes">
-<p>Open with the arithmetic because it reframes the whole hour: the software prints a fit, not an accuracy. Edition 1 dodged this by requiring checkpoints three times better than the product, so their error was negligible; Edition 2 relaxed that to two times and made you carry the term instead. For our lab the rover repeatability from the field day is RMSE V2. This is also the first appearance of the lecture’s habit: every accuracy claim must say what it was measured against and how good the ruler was.</p>
+
+<img data-src="../images/quadrature.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:66.0%" alt="A right triangle with a 1 cm vertical leg for the DSM fit, a 2 cm horizontal leg for the checkpoint survey, and a 2.24 cm hypotenuse for the accuracy that may be claimed"><aside class="notes">
+<ul>
+<li>Open with the arithmetic: the software prints a fit</li>
+<li>Edition 1 required checkpoints 3x better, so their error was negligible</li>
+<li>Edition 2 relaxed that to 2x and makes you carry the term</li>
+<li>For the lab, RMSE V2 is the rover repeatability from the field day</li>
+<li>Habit for the hour: every claim says what it was measured against</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -217,7 +229,9 @@ Corey White
 <section id="what-gsd-buys-you" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>What GSD buys you</h2>
 <aside class="notes">
-<p>Section one: the floor that pixel size sets, and why you rarely stand on it.</p>
+<ul>
+<li>Section 1: the floor pixel size sets, and why you rarely stand on it</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -232,44 +246,20 @@ Corey White
 </section>
 <section id="gsd-sets-a-floor-not-the-accuracy" class="slide level2 smaller">
 <h2>GSD sets a floor, not the accuracy</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Best case (strong control, good geometry)</th>
-<th>Flat terrain envelope</th>
-<th>Complex terrain envelope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Horizontal RMSE</strong></td>
-<td>about 1 x GSD (asymptote 0.66 x)</td>
-<td>1 to 3 x GSD</td>
-<td>1 to 7 x GSD</td>
-</tr>
-<tr class="even">
-<td><strong>Vertical RMSE</strong></td>
-<td>1.5 to 2 x GSD</td>
-<td>1 to 4.5 x GSD</td>
-<td>1.5 to 5 x GSD</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Envelope columns from <span class="citation" data-cites="jimenez-jimenez_digital_2021">Jiménez-Jiménez et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>; best-case column from <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">Sanz-Ablanedo et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></li>
-<li>Vertical error runs about <strong>2.5 x</strong> the horizontal error, consistently <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
-<li>Vertical never reaches 1 x GSD, no matter how much control you add</li>
-<li>With uncorrected navigation-grade georeferencing, errors reach meters, tens of GSD or more: the pixel size stops mattering entirely</li>
+
+<img data-src="../images/gsd_accuracy_bands.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:86.0%" alt="Bar chart of horizontal and vertical RMSE in multiples of GSD: horizontal best case 0.66 to 1x, flat terrain 1 to 3x, complex terrain 1 to 7x; vertical best case 1.5 to 2x, flat terrain 1 to 4.5x, complex terrain 1.5 to 5x"><ul>
+<li>Envelopes from <span class="citation" data-cites="jimenez-jimenez_digital_2021">Jiménez-Jiménez et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>; best case from <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">Sanz-Ablanedo et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></li>
+<li>Vertical error runs about <strong>2.5 x</strong> the horizontal error <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
+<li>With uncorrected navigation-grade georeferencing, errors reach meters and pixel size stops mattering</li>
 </ul>
 <aside class="notes">
-<p>The envelope is Jimenez-Jimenez et al.&nbsp;2021; the asymptotes are Sanz-Ablanedo et al.&nbsp;2018, from 3465 GCP combinations over a 1200 ha block. Teach the multipliers as a band, not a constant: the gap between the floor (1x) and what you get is governed by georeferencing and systematic error, not pixel size. Ask the class: your Lake Wheeler flight had roughly 2 to 3 cm GSD; what vertical accuracy should they predict before the lab? Write the predictions down; the lab checks them.</p>
+<ul>
+<li>Envelope: Jimenez-Jimenez 2021. Asymptotes: Sanz-Ablanedo 2018, 3465 GCP combinations over 1200 ha</li>
+<li>Teach the multipliers as a band</li>
+<li>The gap between the floor and what you get is georeferencing and systematic error</li>
+<li>Ask the class: Lake Wheeler was 2 to 3 cm GSD, what vertical accuracy do you predict?</li>
+<li>Write the predictions down, the lab checks them</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -282,18 +272,34 @@ Corey White
           display:block!important;
       }</style></aside>
 </section>
-<section id="planning-with-gsd" class="slide level2 smaller">
+<section id="planning-with-gsd" class="slide level2 smaller mermaid-wide">
 <h2>Planning with GSD</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["What you must&lt;br&gt;measure"] --&gt; B["The accuracy&lt;br&gt;that requires"]
+    B --&gt; C["GSD:&lt;br&gt;0.5 to 1.0 x that"]
+    C --&gt; D["Flying height&lt;br&gt;(Topic 3A)"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <ul>
 <li>ASPRS recommends source imagery GSD of <strong>0.5 to 1.0 x</strong> the target horizontal accuracy class: a 5 cm class wants 2.5 to 5 cm GSD <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
 <li>Read backwards: expect RMSE<sub>H</sub> of 1 to 2 x GSD from a well-run project</li>
-<li>The standard is explicit that this is a planning heuristic, not an accuracy statement</li>
+<li>The standard calls this a planning heuristic and says it may not be used to report accuracy</li>
 </ul>
-<div class="term-card">
-<p><strong>Workflow</strong>: start from what you must measure, derive the accuracy that requires, derive the GSD, and only then the flying height (the Topic 3A formula)</p>
-</div>
 <aside class="notes">
-<p>This connects 3A’s GSD formula to a requirement instead of a preference. The design direction runs measurement to accuracy to GSD to altitude, never the other way. The standard’s own caveat is worth quoting: the table should not be used to reference product accuracy. It tells you what to fly, not what you achieved.</p>
+<ul>
+<li>Connects 3A’s GSD formula to a requirement instead of a preference</li>
+<li>The chain runs left to right, never the other way</li>
+<li>Quote the standard’s caveat: the table tells you what to fly</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -309,7 +315,9 @@ Corey White
 <section id="ground-control" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Ground control</h2>
 <aside class="notes">
-<p>Section two: how many points, where, and the difference between the points you fit and the points you judge with.</p>
+<ul>
+<li>Section 2: how many points, where, and which ones you are allowed to judge with</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -324,14 +332,41 @@ Corey White
 </section>
 <section id="how-many-gcps-and-where" class="slide level2 smaller">
 <h2>How many GCPs, and where</h2>
-<ul>
-<li>Count in flight units: about <strong>3 to 4 GCPs per 100 photos</strong>; below 1 per 100 accuracy degrades fast <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
-<li>Horizontal stops improving past about 3 per 100; vertical keeps improving to about 4 per 100</li>
-<li><strong>Distribution beats count</strong>: an even triangular spread is twice as accurate as a poor layout with the same number</li>
-<li>Edge coverage first, then an even interior; more points past that buy better error <em>structure</em>, not lower RMSE <span class="citation" data-cites="dai_enhancing_2023">(<a href="#/references" role="doc-biblioref" onclick="">Dai et al. 2023</a>)</span></li>
+
+<img data-src="../images/gcp_density.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%" alt="Left panel: checkpoint RMSE against GCPs per 100 photos, horizontal flattening after 3 and vertical still gaining out to 4. Right panel: a clustered GCP layout beside an even layout with points on the edges and interior"><ul>
+<li>About <strong>3 to 4 GCPs per 100 photos</strong>; below 1 per 100 accuracy degrades fast <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
+<li>Edge coverage first, then an even interior; points past that improve error <em>structure</em> rather than RMSE <span class="citation" data-cites="dai_enhancing_2023">(<a href="#/references" role="doc-biblioref" onclick="">Dai et al. 2023</a>)</span></li>
 </ul>
 <aside class="notes">
-<p>The per-100-photos rule travels better than per-hectare rules because it scales with overlap and altitude automatically. Dai et al.&nbsp;2023 is the modern synthesis: after the first few GCPs, RMSE barely moves but the spatial autocorrelation of the residual error keeps improving, which matters for differencing. Our 9/16 field design (4 targets on a 78-photo class of flight) sits right on the recommended density.</p>
+<ul>
+<li>Per-100-photos scales with overlap and altitude; per-hectare rules do not</li>
+<li>Dai 2023: after the first few GCPs, RMSE barely moves, spatial autocorrelation of the residual keeps improving</li>
+<li>That structure is what matters for differencing</li>
+<li>Our 9/16 design, 4 targets on a 78-photo flight, sits on the recommended density</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="control-at-lake-wheeler" class="slide level2 smaller">
+<h2>Control at Lake Wheeler</h2>
+
+<img data-src="../images/gcps_fall_2026.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:46.0%" alt="Orthomosaic of the Lake Wheeler barn and surrounding fields from the September 2026 flight, with checkerboard ground control targets visible on the ground around the buildings"><p>Our own flight. Targets ring the site: a few become control, the rest stay checkpoints.</p>
+<aside class="notes">
+<ul>
+<li>Their own orthomosaic from 9/16, their own targets</li>
+<li>Point at the spread: edges first, then interior</li>
+<li>Ask which they would make control and why</li>
+<li>Every target they do not use as control is a checkpoint they get for free</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -346,23 +381,18 @@ Corey White
 </section>
 <section id="control-is-not-validation" class="slide level2 smaller">
 <h2>Control is not validation</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="term-card">
-<p><strong>GCPs (control)</strong>: used in the bundle adjustment; the model is fitted to them</p>
-</div>
-<div class="term-card">
-<p><strong>Checkpoints</strong>: surveyed the same way, withheld from processing entirely; the model is judged against them</p>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
+
+<img data-src="../images/control_vs_checkpoint.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:84.0%" alt="Flow diagram: GCPs feed the bundle adjustment which produces the DSM and orthomosaic, while checkpoints bypass the adjustment entirely and are used to judge the product"><ul>
 <li>Error reported on control points overstates accuracy by <strong>3 x</strong> (dense control) to <strong>4 to 8 x</strong> (sparse control) <span class="citation" data-cites="sanz-ablanedo_accuracy_2018">(<a href="#/references" role="doc-biblioref" onclick="">Sanz-Ablanedo et al. 2018</a>)</span></li>
-<li>The adjustment was told to fit those points; their residuals are a statement about the fit, not the map</li>
 <li>ASPRS: checkpoints must be independent, excluded from the aerial triangulation, and away from any GCP <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
 </ul>
-</div></div>
 <aside class="notes">
-<p>The 3 to 8 times overestimation is the single most important number in this section, and it is why the field protocol withheld most of the surveyed points. If students remember one distinction from today, it is this one; the midterm will ask it.</p>
+<ul>
+<li>The 3 to 8 times overestimation is the number to remember</li>
+<li>It is why the field protocol withheld most of the surveyed points</li>
+<li>If they keep one distinction from today, this is it</li>
+<li>The midterm asks it</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -378,7 +408,10 @@ Corey White
 <section id="rtk-ppk-and-what-they-still-need" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>RTK, PPK, and what they still need</h2>
 <aside class="notes">
-<p>Section three: direct georeferencing moved the field in the last five years; here is the current state and the honest recipe.</p>
+<ul>
+<li>Section 3: direct georeferencing moved fast in five years</li>
+<li>Current state and the working recipe</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -424,7 +457,13 @@ Corey White
 </tbody>
 </table>
 <aside class="notes">
-<p>Stott’s caveat is the teaching point: the zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir. Against the sparse target checkpoints, vertical errors still clustered spatially up to 0.14 m even though the dense validation found no consistent systematic error, so distributed checkpoints stayed mandatory. Zhang’s one-GCP result is the canonical citation for the vertical bias fix: the bias is near constant, so one known point kills it. Nota matters for the change-detection topic later: co-align the epochs and put control in one of them.</p>
+<ul>
+<li>Stott’s zero-GCP result required a double grid flown in opposing directions at 20 degrees off nadir</li>
+<li>Against sparse checkpoints, vertical errors still clustered spatially to 0.14 m</li>
+<li>So distributed checkpoints stay mandatory</li>
+<li>Zhang: the vertical bias is near constant, so one known point kills it</li>
+<li>Nota matters for Topic 6: co-align epochs, put control in one of them</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -437,17 +476,23 @@ Corey White
           display:block!important;
       }</style></aside>
 </section>
-<section id="standards-caution" class="slide level2 smaller">
-<h2>Standard’s caution</h2>
+<section id="where-the-standard-disagrees" class="slide level2 smaller">
+<h2>Where the standard disagrees</h2>
 <div class="term-card">
-<p><strong>Defaults</strong>: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, and every other surveyed point withheld as a checkpoint</p>
+<p><strong>Working defaults</strong>: RTK or PPK for georeferencing, 1 or 2 GCPs to control the vertical datum, every other surveyed point withheld as a checkpoint</p>
 </div>
 <ul>
-<li>The ASPRS standard is more conservative: GCPs remain “highly recommended” and should take priority over airborne positions in the adjustment, because camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
-<li>Both are right: the journal results are conditional on strong flight geometry; the standard writes for contracts and courts</li>
+<li>ASPRS keeps GCPs “highly recommended” and gives them priority over airborne positions in the adjustment: camera centers have fewer epochs and weaker geoid handling than survey-grade ground occupations <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
+<li>The journal results assume strong flight geometry; the standard is written for contracts and courts</li>
 </ul>
 <aside class="notes">
-<p>Present the tension honestly instead of resolving it: recent peer-reviewed results justify the light-control recipe when the flight design is strong; the standard assumes you must defend the number to a client. A student consultant should know both positions and say which regime they are operating in. Our lab uses the recipe: 3 targets as control, everything else checkpoints.</p>
+<ul>
+<li>Do not resolve the tension, name it</li>
+<li>Recent results justify light control when the flight design is strong</li>
+<li>The standard assumes you must defend the number to a client</li>
+<li>A consultant should know both and say which regime they are in</li>
+<li>Our lab uses the recipe: 3 targets as control, the rest checkpoints</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -460,15 +505,20 @@ Corey White
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-receiver-in-your-hands" class="slide level2 smaller">
-<h2>The receiver in your hands</h2>
-<ul>
-<li>Base within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna <span class="citation" data-cites="famiglietti_test_2021">(<a href="#/references" role="doc-biblioref" onclick="">Famiglietti et al. 2021</a>)</span>; the price gap between those two bases is roughly an order of magnitude</li>
-<li><strong>Antenna beats receiver</strong>: a low-cost dual-frequency board matched geodetic instruments in network RTK only when paired with a geodetic-grade antenna; with a patch antenna it needed open sky <span class="citation" data-cites="janos_evaluation_2021">(<a href="#/references" role="doc-biblioref" onclick="">Janos and Kuras 2021</a>)</span></li>
-<li>The base coordinate governs absolute accuracy: the rover measures centimeters <em>relative to the base</em>, and every point inherits the base position (the field protocol’s Methods A, B, and C)</li>
+<section id="the-base-coordinate-governs-everything" class="slide level2 smaller">
+<h2>The base coordinate governs everything</h2>
+
+<img data-src="../images/base_rover_chain.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="A base station on a fixed mark and a rover on a checkpoint joined by a baseline vector; an offset in the base coordinate shifts the rover position by the same amount"><ul>
+<li>Base within 0.5 mm: an Emlid Reach RS2 base gave DEM vertical RMSE of 1.94 cm versus 1.89 cm for a Trimble Alloy with a choke-ring antenna <span class="citation" data-cites="famiglietti_test_2021">(<a href="#/references" role="doc-biblioref" onclick="">Famiglietti et al. 2021</a>)</span>, at roughly a tenth of the price</li>
+<li><strong>Antenna beats receiver</strong>: a low-cost dual-frequency board matched geodetic instruments in network RTK only with a geodetic-grade antenna; with a patch antenna it needed open sky <span class="citation" data-cites="janos_evaluation_2021">(<a href="#/references" role="doc-biblioref" onclick="">Janos and Kuras 2021</a>)</span></li>
 </ul>
 <aside class="notes">
-<p>This slide connects the literature to the hardware students actually held. The Famiglietti comparison is the honest Emlid-class citation; the receivers have since improved. The publishable-gap card is real: nobody has published an RS4-versus-state-RTN evaluation, and the class dataset is a credible short note. Recruit interest for it here.</p>
+<ul>
+<li>Connects the literature to the hardware they held</li>
+<li>Famiglietti is the fair Emlid-class citation; receivers have improved since</li>
+<li>Nobody has published RS4 versus state RTN: the class dataset is a credible short note</li>
+<li>Recruit interest for it here</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -484,7 +534,9 @@ Corey White
 <section id="systematic-error" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Systematic error</h2>
 <aside class="notes">
-<p>Section four: the error that does not average away, and that differencing cannot forgive.</p>
+<ul>
+<li>Section 4: the error that does not average away and that differencing cannot forgive</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -499,15 +551,20 @@ Corey White
 </section>
 <section id="doming" class="slide level2 smaller">
 <h2>Doming</h2>
-<ul>
-<li>Nadir-only image blocks with self-calibration cannot separate radial lens distortion from surface shape</li>
+
+<img data-src="../images/doming.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:88.0%" alt="Left: parallel nadir views over a flat surface produce a domed reconstruction about 0.2 m high over 100 m. Right: convergent views tilted 20 to 35 degrees produce a reconstruction that sits on the true surface"><ul>
 <li>Camera orientations off parallel by only <strong>2 degrees</strong> produce a dome of about <strong>0.2 m over 100 m</strong> <span class="citation" data-cites="james_mitigating_2014">(<a href="#/references" role="doc-biblioref" onclick="">James and Robson 2014</a>)</span></li>
-<li>Fixes, in order of power: a known camera model with self-calibration off; <strong>oblique imagery</strong> (practical plans cut the deformation by one to two orders of magnitude; a convergent orbit reached under 2 mm in simulation); two flying heights; well-distributed control</li>
-<li>The best camera angles in the tested 0 to 35 degree range were <strong>20 to 35 degrees</strong>, worth nearly 50 percent better accuracy in high relief <span class="citation" data-cites="nesbit_enhancing_2019">(<a href="#/references" role="doc-biblioref" onclick="">Nesbit and Hugenholtz 2019</a>)</span></li>
-<li>Caution: a <em>gently</em> tilted camera (under 15 degrees) can make things worse by exciting a different distortion correlation, especially on consumer wide-angle cameras with onboard lens correction <span class="citation" data-cites="james_mitigating_2020">(<a href="#/references" role="doc-biblioref" onclick="">James et al. 2020</a>)</span></li>
+<li>Fixes in order of power: a known camera model with self-calibration off; <strong>oblique imagery</strong> (a convergent orbit reached under 2 mm in simulation); two flying heights; well-distributed control</li>
+<li>Best camera angles in the tested 0 to 35 degree range were <strong>20 to 35 degrees</strong>, worth nearly 50 percent better accuracy in high relief <span class="citation" data-cites="nesbit_enhancing_2019">(<a href="#/references" role="doc-biblioref" onclick="">Nesbit and Hugenholtz 2019</a>)</span></li>
+<li>A <em>gently</em> tilted camera (under 15 degrees) can make things worse on consumer wide-angle cameras with onboard lens correction <span class="citation" data-cites="james_mitigating_2020">(<a href="#/references" role="doc-biblioref" onclick="">James et al. 2020</a>)</span></li>
 </ul>
 <aside class="notes">
-<p>Recall the pitfalls table from 2A; here is the mechanism and the numbers. The 2020 caveat is the one practitioners miss: the popular “just tilt the camera a bit” advice backfires below 15 degrees on exactly the cameras students fly. More overlap, incidentally, does not fix doming; James et al.&nbsp;2020 showed relative insensitivity to overlap, a common myth.</p>
+<ul>
+<li>Recall the pitfalls table from 2A, here is the mechanism</li>
+<li>The 2020 caveat is the one practitioners miss</li>
+<li>“Just tilt the camera a bit” backfires below 15 degrees on exactly the cameras they fly</li>
+<li>More overlap does not fix doming: James 2020 showed relative insensitivity to overlap</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -520,18 +577,20 @@ Corey White
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-systematic-error-is-the-enemy" class="slide level2 smaller">
-<h2>Why systematic error is the enemy</h2>
-<ul>
+<section id="why-systematic-error-matters-more" class="slide level2 smaller">
+<h2>Why systematic error matters more</h2>
+
+<img data-src="../images/random_vs_systematic.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:88.0%" alt="Two panels of checkpoint residuals about a zero line: random error with a mean on zero and one blunder past the three sigma screen, and systematic error shaped like a dome with the mean well off zero"><ul>
 <li>Random error averages away in aggregates; a 2 cm systematic bias does not</li>
-<li>In modern change detection, propagated uncertainty is dominated by low-magnitude, spatially correlated or systematic error, not by point precision <span class="citation" data-cites="anderson_uncertainty_2019">(<a href="#/references" role="doc-biblioref" onclick="">Anderson 2019</a>)</span></li>
-<li>A noisy point cloud is a smaller problem than a quiet dome</li>
+<li>Propagated uncertainty in change detection is dominated by spatially correlated and systematic error, not point precision <span class="citation" data-cites="anderson_uncertainty_2019">(<a href="#/references" role="doc-biblioref" onclick="">Anderson 2019</a>)</span></li>
+<li>Blunder and bias screens from the standard <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span></li>
 </ul>
-<div class="term-card">
-<p><strong>Blunder rule</strong> <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>: any checkpoint discrepancy beyond 3 x the target RMSE is a blunder to investigate, not average in; mean error should stay under 25 percent of the target RMSE</p>
-</div>
 <aside class="notes">
-<p>The mean-error rule is the practical doming detector in a report: a mean checkpoint error far from zero, or a mean above a quarter of the RMSE, says the surface is biased, not noisy. Students apply exactly this test to their DSM residuals in the lab.</p>
+<ul>
+<li>The mean-error rule is the doming detector in a report</li>
+<li>A mean far from zero, or above a quarter of the RMSE, says biased</li>
+<li>Students run exactly this test on their DSM residuals in the lab</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -547,7 +606,11 @@ Corey White
 <section id="reading-the-reports" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>Reading the reports</h2>
 <aside class="notes">
-<p>Section five: the week’s stated purpose. Bring up the students’ own 2B and 2C reports side by side on screen for this section; the slides give the map, the reports give the territory.</p>
+<ul>
+<li>Section 5: the week’s stated purpose</li>
+<li>Put their own 2B and 2C reports on screen here</li>
+<li>Slides give the map, the reports give the territory</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -560,8 +623,55 @@ Corey White
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-same-facts-two-dialects" class="slide level2 smaller">
-<h2>The same facts, two dialects</h2>
+<section id="a-processing-report-page-by-page" class="slide level2 smaller">
+<h2>A processing report, page by page</h2>
+
+<img data-src="../images/agisoft_report_pages.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:58.0%" alt="Four pages of an Agisoft processing report: the survey overview with the reconstructed model, the digital elevation model, the survey data page with the camera location and overlap figure, and the camera calibration page with the residual plot"><p>Survey overview, DEM, survey data with the overlap figure, camera calibration with residuals.</p>
+<aside class="notes">
+<ul>
+<li>Walk the four panels before the comparison table</li>
+<li>Survey data page carries GSD, coverage, aligned images</li>
+<li>Camera calibration residual plot is where a bad lens model shows</li>
+<li>None of these four pages is an accuracy statement</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="where-you-declare-your-ruler" class="slide level2 smaller">
+<h2>Where you declare your ruler</h2>
+
+<img data-src="../images/agi_reference.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:54.0%" alt="Metashape Reference Settings dialog showing camera accuracy of 10 m, marker accuracy of 0.005 m, and image coordinate marker accuracy of 0.5 pixels"><p>Marker accuracy is RMSE<sub>V2</sub>. The software weights the adjustment with it, then reports a fit that still does not include it.</p>
+<aside class="notes">
+<ul>
+<li>This dialog is where the survey accuracy of the control goes in</li>
+<li>Marker accuracy 0.005 m says the targets are good to 5 mm</li>
+<li>Camera accuracy 10 m is the UX5 log: navigation grade, correctly downweighted</li>
+<li>Wrong numbers here mis-weight the whole adjustment</li>
+<li>Metashape still does not carry marker accuracy into the reported RMSE; you do that</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-same-facts-in-two-reports" class="slide level2 smaller">
+<h2>The same facts in two reports</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -614,7 +724,13 @@ Corey White
 </tbody>
 </table>
 <aside class="notes">
-<p>Walk each row on the projector with a real pair of reports. Two traps to name: both tools print camera-position errors that students mistake for map accuracy, and WebODM only reports what it was given, so a project processed without declared checkpoints reports no independent accuracy at all, which does not mean the map is accurate. The lab’s comparison table is this slide filled in with their numbers.</p>
+<ul>
+<li>Walk each row on the projector with a real pair of reports</li>
+<li>Trap 1: both tools print camera-position errors that students read as map accuracy</li>
+<li>Trap 2: WebODM reports only what it was given, so no declared checkpoints means no accuracy at all</li>
+<li>That silence does not mean the map is accurate</li>
+<li>The lab’s comparison table is this slide filled in with their numbers</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -630,16 +746,21 @@ Corey White
 <section id="what-neither-report-tells-you" class="slide level2 smaller">
 <h2>What neither report tells you</h2>
 <ul>
-<li>Whether the checkpoints were independent (the software trusts your labeling)</li>
+<li>Whether the checkpoints were independent; the software trusts your labeling</li>
 <li>The survey accuracy of the control and checkpoints, so neither can do the quadrature for you</li>
 <li>Whether the error is spatially structured: a mean near zero can hide a dome that cancels</li>
-<li>Anything about the parts of the site with no checkpoints at all</li>
+<li>Anything about the parts of the site with no checkpoints</li>
 </ul>
 <div class="term-card">
-<p><strong>Report vocabulary</strong> <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>: report RMSE<sub>H</sub> and RMSE<sub>V</sub> (RMSE<sub>3D</sub> if asked); the old 95 percent confidence reporting is gone from Edition 2; 30 checkpoints is the standard’s minimum for a statistical claim, and Section 7.16.1 gives the honest wording when, as in a class lab, you have fewer</p>
+<p><strong>Report vocabulary</strong> <span class="citation" data-cites="asprs_positional_2024">(<a href="#/references" role="doc-biblioref" onclick="">American Society for Photogrammetry and Remote Sensing 2024</a>)</span>: report RMSE<sub>H</sub> and RMSE<sub>V</sub> (RMSE<sub>3D</sub> if asked); Edition 2 drops the old 95 percent confidence reporting; 30 checkpoints is the minimum for a statistical claim, and Section 7.16.1 gives the wording for when you have fewer</p>
 </div>
 <aside class="notes">
-<p>Section 7.16.1 matters for every project the students will run this decade: small sites cannot afford 30 checkpoints, and the standard’s answer is truth in reporting rather than silence: report the RMSE, state the checkpoint count, and do not claim the statistical confidence the sample cannot support. The lab report requires exactly that sentence.</p>
+<ul>
+<li>Section 7.16.1 applies to nearly every project they will run</li>
+<li>Small sites cannot afford 30 checkpoints</li>
+<li>The answer is truth in reporting: give the RMSE, state the count, claim no confidence the sample cannot support</li>
+<li>The lab report requires that sentence</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -655,7 +776,10 @@ Corey White
 <section id="what-can-you-measure" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
 <h2>What can you measure</h2>
 <aside class="notes">
-<p>Section six: the payoff. The same flight either answers the question or it does not, and the arithmetic decides.</p>
+<ul>
+<li>Section 6: the same flight either answers the question or it does not</li>
+<li>The arithmetic decides</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -670,17 +794,19 @@ Corey White
 </section>
 <section id="the-level-of-detection" class="slide level2 smaller">
 <h2>The level of detection</h2>
-<p>For change between two surveys of similar quality, at 95 percent confidence:</p>
 <p><span class="math display">\[\text{LoD} = 1.96 \sqrt{\sigma_{z1}^2 + \sigma_{z2}^2} \approx 2.8\,\sigma_z\]</span></p>
-<p>Worked example for a good flight: 3 cm GSD, strong control, so <span class="math inline">\(\sigma_z \approx\)</span> 1.5 to 2 x GSD <span class="math inline">\(\approx\)</span> 5 cm:</p>
-<p><span class="math display">\[\text{LoD} \approx 2.8 \times 5 \text{ cm} \approx 14 \text{ cm}\]</span></p>
-<ul>
-<li>A 30 cm gully clears the threshold; 2 cm of sheet erosion is invisible</li>
+
+<img data-src="../images/lod_profile.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="An elevation difference profile with a shaded plus or minus 14 cm level of detection band; a 30 cm gully punches below the band while 2 cm of sheet erosion stays inside it"><ul>
 <li>Thresholding is for <strong>gross</strong> change only; it biases net change, where random errors already cancel <span class="citation" data-cites="anderson_uncertainty_2019">(<a href="#/references" role="doc-biblioref" onclick="">Anderson 2019</a>)</span></li>
 <li>Spatially variable LoD can exclude from a quarter to more than half of observed volumetric change <span class="citation" data-cites="wheaton_accounting_2010">(<a href="#/references" role="doc-biblioref" onclick="">Wheaton et al. 2010</a>)</span></li>
 </ul>
 <aside class="notes">
-<p>The LoD arithmetic is the lecture’s destination: every accuracy number from the previous fifty minutes exists to be plugged in here. Wheaton’s Feshie numbers (24 to 31 percent of change excluded in dry years, 57 to 59 in wet) show the price of thresholding; Anderson’s correction says when to pay it: gross change yes, net change no, and error propagation is not thresholding. Zhang et al.&nbsp;2019 reached sub-5 cm detection thresholds with PPK flights below 45 m, which is what chasing micro-topography actually requires.</p>
+<ul>
+<li>Every accuracy number from the last fifty minutes gets plugged in here</li>
+<li>Wheaton’s Feshie numbers: 24 to 31 percent of change excluded in dry years, 57 to 59 in wet</li>
+<li>Anderson’s correction: gross change yes, net change no; error propagation is not thresholding</li>
+<li>Zhang 2019 reached sub-5 cm thresholds with PPK flights below 45 m</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -732,7 +858,12 @@ Corey White
 </tbody>
 </table>
 <aside class="notes">
-<p>The asymmetry is the thesis of the whole topic: for trees the limiting error lives in the canopy and the terrain model underneath it, so buying more GSD buys nothing; for micro-topography the limiting error is exactly the accuracy chain this lecture built, and every link (base coordinate, control, calibration, systematic bias) shows up in the final LoD. Students argue these verdicts with their own numbers in the lab’s part three.</p>
+<ul>
+<li>For trees the limiting error lives in the canopy and the terrain underneath, so more GSD buys nothing</li>
+<li>For micro-topography the limiting error is the whole chain built today</li>
+<li>Base coordinate, control, calibration, bias all show up in the LoD</li>
+<li>Students argue these verdicts with their own numbers in part three of the lab</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -770,7 +901,10 @@ Corey White
 </div>
 </div></div>
 <aside class="notes">
-<p>The synonym lists matter because students will search the literature and hit every variant. This is midterm vocabulary.</p>
+<ul>
+<li>The synonym lists matter: they will hit every variant in the literature</li>
+<li>Midterm vocabulary</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -792,7 +926,14 @@ Corey White
 <p><strong>Midterm 11/4</strong>: the control versus checkpoint distinction, the quadrature rule, and the LoD arithmetic are all fair game</p>
 </div>
 <aside class="notes">
-<p>Recap the chain: GSD sets the floor, georeferencing and systematic error set the distance above it, checkpoints measure that distance honestly, the quadrature keeps the claim honest, and the LoD converts the whole chain into a yes or no about the question you actually care about. The lab data is their own field work from 9/16, which is the point.</p>
+<ul>
+<li>Recap the chain: GSD sets the floor</li>
+<li>Georeferencing and systematic error set the distance above it</li>
+<li>Checkpoints measure that distance</li>
+<li>Quadrature keeps the claim defensible</li>
+<li>LoD turns the chain into a yes or no about the question you care about</li>
+<li>The lab data is their own field work from 9/16</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

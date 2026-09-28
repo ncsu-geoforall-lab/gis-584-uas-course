@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 664" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .head { font-size: 38px; font-weight: bold; fill: #006600; }
+      .label { font-size: 32px; font-weight: bold; }
+      .sub { font-size: 27px; fill: #3e3e3e; }
+      .leader { stroke: #8c8c8c; stroke-width: 2.5; stroke-dasharray: 6 5; fill: none; }
+    </style>
+  </defs>
+
+  <!-- right-angle mark -->
+  <path d="M 300 520 L 350 520 L 350 570 L 300 570 Z" fill="none" stroke="#8c8c8c" stroke-width="3"/>
+
+  <!-- triangle: right angle at (300,570); 1 cm = 200 px -->
+  <line x1="300" y1="570" x2="700" y2="570" stroke="#c46210" stroke-width="10" stroke-linecap="round"/>
+  <line x1="300" y1="570" x2="300" y2="370" stroke="#006600" stroke-width="10" stroke-linecap="round"/>
+  <line x1="300" y1="370" x2="700" y2="570" stroke="#660066" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- vertical leg: the fit -->
+  <text x="40" y="440" class="label" fill="#006600">RMSE V1 = 1 cm</text>
+  <text x="40" y="478" class="sub">how well the DSM fits</text>
+  <text x="40" y="510" class="sub">the checkpoints</text>
+  <path class="leader" d="M 270 460 L 290 460"/>
+
+  <!-- horizontal leg: the survey -->
+  <text x="300" y="625" class="label" fill="#c46210">RMSE V2 = 2 cm</text>
+  <text x="640" y="625" class="sub">how well the checkpoints were surveyed</text>
+  <path class="leader" d="M 500 590 L 500 605"/>
+
+  <!-- hypotenuse: the claim -->
+  <text x="500" y="332" class="label" fill="#660066">RMSE V = 2.24 cm</text>
+  <text x="500" y="368" class="sub">what you may claim</text>
+  <path class="leader" d="M 530 382 L 495 442"/>
+
+  <!-- rule panel -->
+  <rect x="830" y="180" width="440" height="270" fill="#f2f7f2" stroke="#006600" stroke-width="3" rx="10"/>
+  <text x="865" y="245" class="head">Edition 2 rule</text>
+  <text x="865" y="300" class="sub">Checkpoint survey error</text>
+  <text x="865" y="334" class="sub">is carried, not dropped.</text>
+  <text x="865" y="388" class="sub">Your product is never more</text>
+  <text x="865" y="422" class="sub">accurate than the ruler.</text>
+</svg>

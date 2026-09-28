@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 620" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .t { font-size: 29px; font-weight: bold; }
+      .sub { font-size: 24px; fill: #3e3e3e; }
+      .small { font-size: 21px; fill: #6b6b6b; }
+      .prof { fill: none; stroke: #660066; stroke-width: 5; stroke-linejoin: round; }
+      .edge { stroke: #006600; stroke-width: 3; stroke-dasharray: 12 8; }
+      .leader { stroke: #8c8c8c; stroke-width: 2.5; stroke-dasharray: 6 5; fill: none; }
+    </style>
+  </defs>
+
+  <!-- LoD band: +/- 14 cm at 5 px per cm -->
+  <rect x="100" y="230" width="1100" height="140" fill="#e0ebe0"/>
+  <line x1="100" y1="230" x2="1200" y2="230" class="edge"/>
+  <line x1="100" y1="370" x2="1200" y2="370" class="edge"/>
+
+  <!-- zero -->
+  <line x1="100" y1="300" x2="1200" y2="300" stroke="#3e3e3e" stroke-width="3"/>
+
+  <!-- axis ticks -->
+  <text x="88" y="238" class="small" text-anchor="end">+14</text>
+  <text x="88" y="308" class="small" text-anchor="end">0</text>
+  <text x="88" y="378" class="small" text-anchor="end">-14</text>
+  <text x="88" y="458" class="small" text-anchor="end">-30</text>
+  <text x="52" y="300" class="small" text-anchor="middle" transform="rotate(-90 52 300)">elevation change (cm)</text>
+
+  <!-- difference profile -->
+  <path class="prof" d="M 100 300 L 140 292 L 180 308 L 220 296 L 260 304 L 300 294 L 340 306 L 380 298 L 420 302
+    L 460 300 L 490 360 L 510 450 L 540 452 L 560 380 L 590 302
+    L 630 296 L 670 306 L 710 298 L 750 303
+    L 790 312 L 840 316 L 900 314 L 960 318 L 1020 315 L 1080 317 L 1140 312 L 1200 302"/>
+
+  <!-- band label -->
+  <text x="150" y="196" class="t" fill="#006600">LoD band: change inside it is indistinguishable from error</text>
+
+  <!-- gully callout -->
+  <path class="leader" d="M 520 466 L 520 512"/>
+  <text x="520" y="544" class="t" fill="#660066" text-anchor="middle">30 cm gully</text>
+  <text x="520" y="576" class="sub" text-anchor="middle">clears the band: measured</text>
+
+  <!-- sheet erosion callout -->
+  <path class="leader" d="M 970 320 L 970 512"/>
+  <text x="970" y="544" class="t" fill="#c46210" text-anchor="middle">2 cm of sheet erosion</text>
+  <text x="970" y="576" class="sub" text-anchor="middle">buried in the band: invisible</text>
+
+  <!-- formula strip -->
+  <rect x="100" y="42" width="1100" height="106" rx="10" fill="#f2f7f2" stroke="#006600" stroke-width="3"/>
+  <text x="130" y="84" class="t" fill="#006600">LoD at 95 percent confidence</text>
+  <text x="130" y="122" class="sub">1.96 x the combined sigma of two epochs, about 2.8 sigma-z. At sigma-z = 5 cm, the LoD is 14 cm.</text>
+</svg>
