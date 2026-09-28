@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 560" font-family="Lato, sans-serif">
+  <defs>
+    <style>
+      .panel { font-size: 32px; font-weight: bold; fill: #006600; }
+      .sub { font-size: 24px; fill: #3e3e3e; }
+      .axis { font-size: 22px; fill: #6b6b6b; }
+      .note { font-size: 23px; fill: #c46210; font-weight: bold; }
+      .curveH { fill: none; stroke: #006600; stroke-width: 6; }
+      .curveV { fill: none; stroke: #660066; stroke-width: 6; stroke-dasharray: 14 9; }
+      .site { fill: #ffffff; stroke: #8c8c8c; stroke-width: 3; }
+      .gcp { fill: #c46210; }
+    </style>
+  </defs>
+
+  <!-- ===== Panel A: how many ===== -->
+  <text x="40" y="52" class="panel">How many</text>
+
+  <!-- recommended band 3 to 4 per 100 -->
+  <rect x="370" y="90" width="83" height="340" fill="#e6f0e6"/>
+  <text x="411" y="82" class="note" text-anchor="middle">3 to 4</text>
+
+  <!-- axes -->
+  <line x1="120" y1="430" x2="640" y2="430" stroke="#8c8c8c" stroke-width="3"/>
+  <line x1="120" y1="90" x2="120" y2="430" stroke="#8c8c8c" stroke-width="3"/>
+
+  <!-- curves -->
+  <path class="curveH" d="M 162 112 C 200 190, 260 258, 370 296 L 453 302 L 620 305"/>
+  <path class="curveV" d="M 162 96 C 200 158, 260 226, 370 272 C 410 290, 430 300, 453 306 L 620 312"/>
+
+  <line x1="150" y1="352" x2="196" y2="352" class="curveH"/>
+  <text x="208" y="361" class="sub" fill="#006600" font-weight="bold">horizontal: flat after 3</text>
+  <line x1="150" y1="398" x2="196" y2="398" class="curveV"/>
+  <text x="208" y="407" class="sub" fill="#660066" font-weight="bold">vertical: gains out to 4</text>
+
+  <!-- axis ticks -->
+  <text x="203" y="462" class="axis" text-anchor="middle">1</text>
+  <text x="287" y="462" class="axis" text-anchor="middle">2</text>
+  <text x="370" y="462" class="axis" text-anchor="middle">3</text>
+  <text x="453" y="462" class="axis" text-anchor="middle">4</text>
+  <text x="537" y="462" class="axis" text-anchor="middle">5</text>
+  <text x="620" y="462" class="axis" text-anchor="middle">6</text>
+  <text x="380" y="498" class="axis" text-anchor="middle" font-size="25">GCPs per 100 photos</text>
+  <text x="105" y="260" class="axis" font-size="25" text-anchor="middle" transform="rotate(-90 105 260)">checkpoint RMSE</text>
+
+  <!-- degradation warning -->
+  <text x="240" y="142" class="note">below 1 per 100: degrades fast</text>
+
+  <!-- ===== Panel B: where ===== -->
+  <text x="700" y="52" class="panel">Where</text>
+
+  <rect x="700" y="90" width="260" height="260" class="site"/>
+  <circle cx="770" cy="180" r="11" class="gcp"/>
+  <circle cx="800" cy="205" r="11" class="gcp"/>
+  <circle cx="762" cy="222" r="11" class="gcp"/>
+  <circle cx="815" cy="168" r="11" class="gcp"/>
+  <circle cx="790" cy="248" r="11" class="gcp"/>
+  <circle cx="742" cy="196" r="11" class="gcp"/>
+  <text x="830" y="390" class="sub" text-anchor="middle">clustered</text>
+  <text x="830" y="422" class="axis" text-anchor="middle">edges unconstrained</text>
+
+  <rect x="1010" y="90" width="260" height="260" class="site"/>
+  <circle cx="1040" cy="120" r="11" class="gcp"/>
+  <circle cx="1240" cy="120" r="11" class="gcp"/>
+  <circle cx="1040" cy="320" r="11" class="gcp"/>
+  <circle cx="1240" cy="320" r="11" class="gcp"/>
+  <circle cx="1140" cy="180" r="11" class="gcp"/>
+  <circle cx="1140" cy="280" r="11" class="gcp"/>
+  <text x="1140" y="390" class="sub" text-anchor="middle">edges first, then interior</text>
+  <text x="1140" y="422" class="axis" text-anchor="middle">even triangular spread</text>
+
+  <text x="985" y="498" class="note" text-anchor="middle">Same count. The even spread is about twice as accurate.</text>
+</svg>

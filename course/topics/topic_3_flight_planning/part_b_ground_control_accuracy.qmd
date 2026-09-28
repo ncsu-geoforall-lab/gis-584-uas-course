@@ -9,12 +9,12 @@ bibliography: references.bib
 
 ## Outline
 
-- What flight GSD buys you: the floor it sets on horizontal and vertical accuracy, and why you rarely stand on it
-- Ground control versus checkpoints: fitting the map versus judging it
-- RTK and PPK direct georeferencing, and what still needs a ground point
-- Systematic error: doming, why it beats random noise, and how to detect it in a report
+- What flight GSD buys you: the floor it sets on horizontal and vertical accuracy
+- Ground control versus checkpoints
+- RTK and PPK direct georeferencing
+- Systematic error
 - Reading the Agisoft and WebODM reports side by side
-- The level of detection: deciding with arithmetic whether a flight can count trees or quantify micro erosion
+- The level of detection
 
 ## Lecture
 
