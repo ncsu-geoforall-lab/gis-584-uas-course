@@ -3,7 +3,7 @@ topic: "Topic 2C: Structure from Motion"
 title: "Assignment 2C"
 subtitle: "Processing the same imagery in WebODM"
 date: 9/23/2026
-assignment-due-date: 10/5/2026
+assignment-due-date: 10/14/2026
 activity: Lab
 bibliography: ../references.bib
 format: 
@@ -171,7 +171,7 @@ Prepare a report (3 to 5 pages including figures):
 
 ## Submission
 
-Upload to Moodle, Assignment 2C:
+Assignments 2B and 2C are submitted together as one combined report, due on the same date. Upload to Moodle, Assignment 2C:
 
 * Your report as a PDF, with the WebODM quality report attached or included as an appendix.
 

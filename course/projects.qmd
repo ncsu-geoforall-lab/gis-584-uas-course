@@ -53,7 +53,7 @@ The project is worth 40% of the course grade (see [Logistics & Policies](policie
 |---|---|---|
 | Pre-proposal | 9/9 | required, not graded |
 | Proposal | 9/28 | 5% |
-| Progress report | 10/21 | required, not graded |
+| Progress report | 10/25 | required, not graded |
 | Presentation | 11/30 and 12/1 | 35% |
 | Final paper and portfolio | 12/7 | 60% |
 

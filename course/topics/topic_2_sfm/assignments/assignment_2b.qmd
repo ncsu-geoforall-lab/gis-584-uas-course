@@ -3,7 +3,7 @@ topic: "Topic 2B: Structure from Motion"
 title: "Assignment 2B"
 subtitle: "Imagery processing and structure from motion (SfM)"
 date: 9/21/2026
-assignment-due-date: 10/5/2026
+assignment-due-date: 10/14/2026
 activity: Lab
 format: 
     html:
@@ -340,7 +340,7 @@ Prepare a report (3 to 5 pages including figures) on generating the orthomosaic 
 
 ## Submission
 
-Upload to Moodle, Assignment 2B:
+Assignments 2B and 2C are submitted together as one combined report, due on the same date. Upload to Moodle, Assignment 2B:
 
 * Your report as a PDF, with the Metashape processing report attached or included as an appendix.
 * Optional: your exported orthomosaic and DSM (GeoTIFF) if they are under the Moodle size limit, or a link to them.
