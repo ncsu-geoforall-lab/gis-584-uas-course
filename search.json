@@ -1527,7 +1527,137 @@
     "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#task",
     "title": "Assignment 3A",
     "section": "Task",
-    "text": "Task\nIn order to execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Also remember that the ground altitude is measured in the take off localization and does not take into account local relief. It can be crucial in the mountainous areas. In our case trees, buildings and other man-made structures are more of a concern. Because both – terrain data (from lidar) and planned flight path are available, the elevation difference between the flight ceiling and the surface can be computed using GIS tools.\nIf you are unfamiliar with GRASS - visit the OSgeoLab youtube channel and watch at least the Getting started with GRASS GUI video.\n\nGeneral workflow:\n\nCompute a raster for elevation of the flight path\nGenerate DSM\nCalculate the elevation difference between the flight path and surface\n\n\n\nData\n\nGRASS Location (Lake_Wheeler_NCspm)\nMid Pines 2013 lidar data from las\nMid Pines 2013 lidar data from copc.laz\nFlight Path (KML)\n\n\n\nSoftware\n\nGRASS\n\n\n\nCompute a raster for elevation of the flight path\nFor this analysis you can run GRASS with the Lake_Wheeler_NCspm location. Create a new mapset to manage your flight analysis. *Copy the unzipped location folder into your grassdata folder (in Windows in Documents)\nREMEMBER\n\n\n\n\n\n\nNoteChange working directory\n\n\n\nSettings &gt; GRASS working environment &gt; Change working directory &gt; select/create any directory\nNow you can use the commands from the assignment requiring the text file without the need to specify the full path to the file\n\n\n\nDownload the flight path kml file (there is a file from another flight here, you can use it as a comparison), copy the file(s) to your working directory folder.\nLaunch GRASS\nImport downloaded kml into GRASS with v.import, which will reproject the input on the fly:\n\n\n\nv.import input=flight_path1.kml output=flight_track_kml\n\n\nConvert vector line to elevation points. Set the maximum distance between the points as 0.3 m\nv.to.points -i input=flight_track_kml output=flight_track_points dmax=0.3\nConvert vector to raster after setting the region to study area and 1m resolution\ng.region vect=flight_track_kml res=1\nv.to.rast input=flight_track_points output=flight_path_altitude_rast use=z\nMake the flight path line thick (wide) enough taking to account the wingspan of the UAV and weather impacts on the flight trajectory. Desired width of the path = 5m (radius 2.5m)\nr.grow -m input=flight_path_altitude_rast output=flight_path_wide radius=2.5\n\n\nGenerate DSM\n\nDownload lidar data for Mid Pines to your computer\nSet region to your study area using g.region or using the zoom function for setting the region\nImport lidar data to GRASS\n\n\nWindowsMac/Linux\n\n\nr.in.lidar mid_pines_spm_2013.las output=mid_pines_surface_max method=max \\\n class_filter=1,2 return_filter=first resolution=3 -oe \n\n\nr.in.pdal mid_pines_spm_2013.las output=mid_pines_surface_max method=max \\ \n class_filter=1,2 return_filter=first resolution=3 -oe \n\n\n\n\nNOTE - If you have any issues with the command r.in.lidar - you can download the interpolated DSMs for Mid Pines and use r.unpack to unpack the rasters.\n\n\n\nCalculate the elevation difference between the flight path and surface\nUse map algebra to compute difference between two rasters - elevation of your flight path and Surface of the terrain\nr.mapcalc expression=\"elev_diff = flight_path_wide - mid_pines_surface_max\"\nUse the acquired diffrence map to evaluate your flight plan, pay close attention to the obstacle free zones.\n\n\nVisualize results\nYou can use screenshots from your flight planning software of choice and GRASS. If you discovered any obstacles and needed to readjust the flight path.\n\ninclude the picture and description of the issue. You can display the orthophoto, COA boundaries for better understanding of the terrain. Sample orthophotos (for the Mid Pines area) can be downloaded from the folder - (Use r.unpack to unpack the rasters)\n\n\n\nExplain your choice of the flight area, parameters and takeoff and landing locations based on the performed analysis\nThe aim is to prove that the flight plan can be used to execute a safe and sucessful flight mission. Describe your thought process - what did you take into account first, what problems did you encouter? Did you need to change your initial plans based on software limitations, legal issues or the relief of the targeted area?",
+    "text": "Task\nTo execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Remember that the flight altitude is set relative to the takeoff location and does not take local relief into account, which can be crucial in mountainous areas. In our case trees, buildings, and other structures are the main concern. Because both the terrain data (from lidar) and the planned flight path are available, the clearance between the flight path and the surface can be computed with GIS tools.\nWork through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. Either way, the report is the same.\nIf you are unfamiliar with GRASS, work through the Get started tutorials and watch at least the Getting started with GRASS GUI video from the OSGeoLab YouTube channel.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#workflow",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#workflow",
+    "title": "Assignment 3A",
+    "section": "Workflow",
+    "text": "Workflow\n\nCompute a raster of the flight path elevation\nGenerate a DSM from the lidar point cloud\nCheck the vertical reference of the flight path and compute the clearance",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#data",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#data",
+    "title": "Assignment 3A",
+    "section": "Data",
+    "text": "Data\n\nGRASS project Lake_Wheeler_NCspm (EPSG:3358, NC State Plane meters; includes the NGAT_COA boundary and sample DSMs from earlier flights)\nFlight paths: flight_path1.kml and flight_path2.kml, planned in two different programs\nMid Pines 2013 lidar point cloud: las or copc.laz\nFallback if the lidar import fails: interpolated Mid Pines DEM and DSM (GRASS pack files, restore with r.unpack)\nOrthophotos for context: Nov 2015 and Mar 2017 (pack files)",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#software",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#software",
+    "title": "Assignment 3A",
+    "section": "Software",
+    "text": "Software\n\nGRASS 8.5",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#part-1-flight-path-elevation-raster",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#part-1-flight-path-elevation-raster",
+    "title": "Assignment 3A",
+    "section": "Part 1: Flight path elevation raster",
+    "text": "Part 1: Flight path elevation raster\nUnzip the Lake_Wheeler_NCspm project into your grassdata folder (in Windows, Documents\\grassdata), start GRASS in it, and create a new mapset, for example flight_analysis, for this assignment.\n\n\n\n\n\n\nNoteChange the working directory\n\n\n\nSettings &gt; GRASS working environment &gt; Change working directory, then pick the folder holding the downloaded files. The commands below can then refer to the files by name instead of by full path.\n\n\nDownload both flight path KML files into your working directory. Import the first one with v.import, which reprojects it from WGS84 geographic coordinates into the project’s coordinate system on the fly:\nv.import input=flight_path1.kml output=flight_track_kml\nv.import prints a long note about the transformation pipeline it selected; that is informational. Check that the imported line is 3D and note its altitude range:\nv.info -g flight_track_kml\ntop and bottom are the highest and lowest altitudes in the KML file. Write them down; you will need them in Part 3.\nConvert the line into points every 0.3 m along the path. The altitude (z) is interpolated between the vertices:\nv.to.points input=flight_track_kml output=flight_track_points dmax=0.3\nSet the computational region to the flight path at 1 m resolution and rasterize the points with altitude as the cell value:\ng.region vect=flight_track_kml res=1\nv.to.rast input=flight_track_points output=flight_path_altitude_rast use=z\nThe aircraft does not fly a line: wind pushes it off track and the airframe has a wingspan. Widen the path to 5 m (radius 2.5 m; the -m flag makes the radius map units rather than cells):\nr.grow -m input=flight_path_altitude_rast output=flight_path_wide radius=2.5",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#part-2-surface-model-from-lidar",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#part-2-surface-model-from-lidar",
+    "title": "Assignment 3A",
+    "section": "Part 2: Surface model from lidar",
+    "text": "Part 2: Surface model from lidar\nDownload the Mid Pines 2013 point cloud into your working directory and bin it into a 3 m raster. Keeping first returns of class 1 (unclassified, mostly vegetation and buildings) and class 2 (ground) and taking the maximum elevation in each cell gives the top of the canopy and roofs: a digital surface model (DSM). The -o flag skips the projection check (the file is already in NC State Plane meters) and -e extends the raster to the extent of the point cloud so the whole field is covered:\nr.in.pdal input=mid_pines_spm_2013.las output=mid_pines_surface_max method=max \\\n  class_filter=1,2 return_filter=first resolution=3 -oe\nThe lidar was flown in 2013 and trees have grown since; keep that in mind when judging small clearances.\n\n\n\n\n\n\nTipIf r.in.pdal is not available\n\n\n\nSome GRASS builds ship without PDAL support. Download the interpolated DEM and DSM, unzip the file into your working directory, and restore the DSM under the same name the rest of the assignment uses:\nr.unpack -o input=mid_pines_lidar2013_dsm.pack output=mid_pines_surface_max",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#part-3-vertical-reference-and-clearance",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#part-3-vertical-reference-and-clearance",
+    "title": "Assignment 3A",
+    "section": "Part 3: Vertical reference and clearance",
+    "text": "Part 3: Vertical reference and clearance\nBefore subtracting, check that both datasets measure altitude from the same zero. The lidar DSM is orthometric: height above the geoid (NAVD88), what most people call elevation above sea level. Flight planning software often exports KML altitudes as height above the WGS84 ellipsoid, and in central North Carolina the ellipsoid sits about 33 m below the geoid. Subtracting without checking would put the aircraft 33 m lower than it really flies.\nThe takeoff point is the one place where you know where the aircraft is: on the ground. Get the coordinates of the start of the line and read both rasters there:\nv.to.db -p flight_track_kml option=start\nr.what map=flight_path_wide,mid_pines_surface_max coordinates=&lt;easting&gt;,&lt;northing&gt;\nIf the flight path altitude at takeoff is a few meters above the lidar ground, both use the same reference and the offset is 0. If it is tens of meters below the ground, the KML altitude is ellipsoidal, and the difference is the geoid-ellipsoid separation at the site. Add it to the whole flight path, then compute the clearance:\nr.mapcalc \"flight_path_ortho = flight_path_wide + &lt;offset&gt;\"\nr.mapcalc \"clearance = flight_path_ortho - mid_pines_surface_max\"\nFlag every cell where the clearance is below a safety margin. 30 m is a reasonable starting point: it covers a decade of tree growth since the lidar, altitude hold error, and wind pushing the aircraft down. Change it if your flight parameters justify a different value, and say why in the report. Then summarize the results:\nr.mapcalc \"low_clearance = if(clearance &lt; 30, 1, null())\"\nr.colors map=clearance color=ryg\nr.univar -e clearance\nr.report map=low_clearance units=c,h\nThe takeoff and landing segments will always show low clearance, because the aircraft climbs from and descends to the ground there. Look for low clearance away from the takeoff point. Also convert the corrected flight altitude to height above ground at takeoff and compare it with the Part 107 limit from Lecture 3A.\nRepeat Parts 1 and 3 for flight_path2.kml with new map names. The two files were exported from different programs and do not necessarily use the same vertical reference, so run the takeoff check again rather than reusing the offset.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#visualize",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#visualize",
+    "title": "Assignment 3A",
+    "section": "Visualize",
+    "text": "Visualize\nDisplay the clearance map with the low-clearance cells over the DSM or an orthophoto, together with the NGAT_COA boundary. To use an orthophoto, unzip one of the packs from the Data list and restore it with r.unpack. Add screenshots from your flight planning software of choice. If you discovered obstacles and readjusted the flight path, include a picture and a description of the issue.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#report",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#report",
+    "title": "Assignment 3A",
+    "section": "Report",
+    "text": "Report\nPrepare a report (2 to 4 pages including figures):\n\nFlight plan: the flight path you analyzed, with a screenshot from your planning software, the flight altitude, the takeoff and landing location, and how the area was chosen within the COA boundary.\nClearance: for both flight paths, the clearance map with low-clearance cells shown over the DSM or orthophoto, the minimum and median clearance, the number and location of cells below your safety margin, and what is under them in the DSM.\nVertical reference: what reference each KML uses, how you found out, the offset you applied, and what the clearance map would have shown had you skipped the check. State the corrected flight altitude above ground at takeoff in feet against the Part 107 limit.\nDiscussion: the aim is to show that the flight plan can be flown safely. Describe your thought process: what did you take into account first, what problems did you encounter, and did you change your initial plan because of software limitations, legal limits, or the relief and obstacles of the area?",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#submission",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#submission",
+    "title": "Assignment 3A",
+    "section": "Submission",
+    "text": "Submission\nUpload to Moodle, Assignment 3A:\n\nYour report as a PDF.\nOptional: the exported clearance map (GeoTIFF), or your completed notebook (.ipynb) if you worked in Colab.",
+    "crumbs": [
+      "Topics",
+      "Topic 3: UAS Flight Planning",
+      "Assignments",
+      "Assignment 3A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#grading",
+    "href": "course/topics/topic_3_flight_planning/assignments/assignment_3a.html#grading",
+    "title": "Assignment 3A",
+    "section": "Grading",
+    "text": "Grading\n\nWorkflow: every step and parameter is stated (point spacing, resolution, path width, lidar filters, safety margin), so that someone else could reproduce your maps.\nClearance: the clearance maps for both flight paths are shown, georeferenced in EPSG:3358, with low-clearance cells identified, quantified, and explained.\nVertical reference: the check at the takeoff point is done for both files, the offset is justified, and its consequence is explained.\nDiscussion: the flight area, altitude, and takeoff and landing choices are tied to the flight planning concepts from Lecture 3A.\nOn-time submission.\n\n\nDue 10/7/2026",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
