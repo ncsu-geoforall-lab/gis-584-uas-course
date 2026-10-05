@@ -112,3 +112,9 @@ $mermaid-node-fg-color: $primary;
     max-width: 85% !important;
     height: auto;
 }
+
+/* Title slide: smaller author line under the subtitle */
+.reveal .quarto-title-block .quarto-title-author-name {
+    font-size: 0.6em;
+    color: $body-color;
+}
