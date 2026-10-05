@@ -114,8 +114,6 @@ website:
                   href: course/topics/topic_4_GIS_analytics/assignments/lab_dsm_analysis.qmd
                 - text: "Assignment 4B"
                   href: course/topics/topic_4_GIS_analytics/assignments/assignment_4b.qmd
-                - text: "Lab: Point Clouds"
-                  href: course/topics/topic_4_GIS_analytics/assignments/lab_point_clouds.qmd
         - section: "Topic 5: Advanced Analytics"
           href: course/topics/topic_5_advanced_analytics/index.qmd
           contents:

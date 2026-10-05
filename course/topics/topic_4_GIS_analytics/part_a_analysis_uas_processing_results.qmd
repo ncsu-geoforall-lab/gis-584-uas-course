@@ -16,12 +16,6 @@ activity: Lecture
 
 ## Lecture
 - [Lecture Slides](lectures/lecture_4a.qmd)
-<!-- - Lecture Recording: [Fall 2024]({{< var recordings.topic4.lecture4a >}}) (NCSU Only)
-- In-Class Recording: [Fall 2024]({{< var recordings.topic4.assignment4a >}}) (NCSU Only) -->
-
-::: {.callout-note}
-The accuracy of these products was established in Topic 3B: the checkpoints collected at the field flight measured how accurate these surfaces actually are, and what change they can detect. Keep those numbers in mind when you measure distances, areas, and volumes here.
-:::
 
 ## Supplemental materials
 - Bowl effect explained: [Mitigating systematic error in topographic models derived from UAV and ground-based image networks](https://onlinelibrary.wiley.com/doi/10.1002/esp.3609/epdf)

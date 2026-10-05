@@ -20,4 +20,3 @@ order: 4
   - [Lab: Measuring volumes in Agisoft Metashape](assignments/lab_volumes.qmd)
   - [Lab: Analysis of UAS-derived DSMs and orthophotos](assignments/lab_dsm_analysis.qmd)
 - [Assignment 4B: Processing lidar and UAS SfM point clouds](assignments/assignment_4b.qmd)
-  - [Lab: Processing lidar and UAS SfM point clouds](assignments/lab_point_clouds.qmd)
