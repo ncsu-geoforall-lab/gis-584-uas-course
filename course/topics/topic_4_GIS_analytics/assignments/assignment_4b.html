@@ -27,6 +27,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -47,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-e675effe03883cccd7c3b06ce9e3af21.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-233f4642ec526109732ad0564d688ace.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -447,12 +482,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Assignment 4B</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_point_clouds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab: Point Clouds</span></a>
-  </div>
-</li>
       </ul>
   </li>
       </ul>
@@ -617,7 +646,25 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#part-1-explore-the-point-clouds" id="toc-part-1-explore-the-point-clouds" class="nav-link" data-scroll-target="#part-1-explore-the-point-clouds">Part 1: Explore the point clouds</a></li>
+  <li><a href="#part-2-point-density" id="toc-part-2-point-density" class="nav-link" data-scroll-target="#part-2-point-density">Part 2: Point density</a></li>
+  <li><a href="#part-3-binned-surfaces-and-a-simple-classification" id="toc-part-3-binned-surfaces-and-a-simple-classification" class="nav-link" data-scroll-target="#part-3-binned-surfaces-and-a-simple-classification">Part 3: Binned surfaces and a simple classification</a></li>
+  <li><a href="#part-4-high-resolution-dem-and-dsm" id="toc-part-4-high-resolution-dem-and-dsm" class="nav-link" data-scroll-target="#part-4-high-resolution-dem-and-dsm">Part 4: High resolution DEM and DSM</a></li>
+  <li><a href="#part-5-validate-the-lidar-dem-against-the-gcps" id="toc-part-5-validate-the-lidar-dem-against-the-gcps" class="nav-link" data-scroll-target="#part-5-validate-the-lidar-dem-against-the-gcps">Part 5: Validate the lidar DEM against the GCPs</a></li>
+  <li><a href="#part-6-optional-classification-voxels-and-transects" id="toc-part-6-optional-classification-voxels-and-transects" class="nav-link" data-scroll-target="#part-6-optional-classification-voxels-and-transects">Part 6 (optional): Classification, voxels, and transects</a>
+  <ul class="collapse">
+  <li><a href="#ground-classification" id="toc-ground-classification" class="nav-link" data-scroll-target="#ground-classification">Ground classification</a></li>
+  <li><a href="#point-density-in-3d" id="toc-point-density-in-3d" class="nav-link" data-scroll-target="#point-density-in-3d">Point density in 3D</a></li>
+  <li><a href="#lidar-transect" id="toc-lidar-transect" class="nav-link" data-scroll-target="#lidar-transect">Lidar transect</a></li>
+  </ul></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" id="toc-due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="nav-link" data-scroll-target="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 10/28/2026</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -656,15 +703,272 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="task" class="level2">
 <h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>Analyze an airborne lidar point cloud and a UAS structure from motion (SfM) point cloud of the Mid Pines area at Lake Wheeler, and turn them into surfaces. You will explore the point clouds in a browser and in GRASS, compare their point densities, bin the lidar returns into raster surfaces and a simple land cover classification, interpolate a high resolution bare earth DEM and a canopy DSM with their topographic derivatives, and check the lidar DEM against the surveyed GCPs. Three optional parts go further: ground classification of the raw points, voxel models of the canopy, and lidar transects.</p>
+<p>The two point clouds represent the same ground in two different ways. Lidar records several returns per pulse and reaches the ground under the canopy; SfM reconstructs the first surface the camera sees. Keep that difference in mind when you compare densities and surfaces.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
 <ul>
-<li><a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_point_clouds.html">Processing lidar and UAS SfM point clouds</a></li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler GRASS project: Lake_Wheeler_NCspm</a> (EPSG:3358; you have it from the earlier assignments)</li>
+<li>2013 lidar point cloud for Mid Pines, classified: <a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las">LAS</a> or <a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.laz">cloud optimized LAZ</a></li>
+<li>2015 UAS SfM sample point cloud for a Mid Pines sub-area: <a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/2015_06_sample_points_NCspm.las">2015_06_sample_points_NCspm.las</a></li>
+<li>Surveyed GCPs: <a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/GCP_12_decimal.pack">GCP_12_decimal.pack</a> (GRASS vector pack, restore with <code>v.unpack</code>)</li>
+<li>Fallback if the lidar import fails: <a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip">interpolated Mid Pines DEM and DSM</a> (GRASS raster packs, restore with <code>r.unpack</code>)</li>
+<li><a href="https://github.com/ASPRSorg/LAS">ASPRS LAS 1.4 specification</a>, which defines the standard point classes (the PDF is under Releases)</li>
 </ul>
 </section>
-<section id="homework" class="level2">
-<h2 class="anchored" data-anchor-id="homework">Homework</h2>
-<p>Prepare report on analyzing point clouds, computing and visualizing bare earth and canopy surfaces.</p>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<ul>
+<li><a href="https://grass.osgeo.org/">GRASS</a> 8.5 with PDAL support (the standard Windows, macOS, and Ubuntu installers include it). The <code>r.in.pdal</code> and <code>v.in.pdal</code> tools used below also ship a <code>pdal</code> command line tool, used once in Part 1.</li>
+<li><a href="https://viewer.copc.io">COPC Viewer</a>, a browser point cloud viewer that opens the cloud optimized LAZ straight from its URL, for the first look at the lidar.</li>
+</ul>
+</section>
+<section id="part-1-explore-the-point-clouds" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-explore-the-point-clouds">Part 1: Explore the point clouds</h2>
+<p>Open the lidar cloud in the browser: paste the cloud optimized LAZ URL into COPC Viewer. Color the points by elevation, by classification, and by intensity, and look at the trees from the side. Note what is under the canopy; the UAS sample is not cloud optimized, so you will look at it in GRASS in Part 2, where the difference under the canopy is what the densities measure.</p>
+<p>Start GRASS in the <code>Lake_Wheeler_NCspm</code> project and create a new mapset for this assignment, for example <code>point_clouds</code>. Change the working directory to the folder holding the downloaded files (<em>Settings &gt; GRASS working environment &gt; Change working directory</em>) so the commands can refer to the files by name.</p>
+<p>Read the lidar file’s metadata, in particular its point classes, which you will filter on later:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdal</span> info <span class="at">--stats</span> <span class="at">--filters.stats.count</span><span class="op">=</span>Classification mid_pines_spm_2013.las</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>counts</code> block of the output lists each class and how many points fall in it. The 2013 data uses four codes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Meaning</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Unclassified (vegetation and buildings)</td>
+<td>1,340,658</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Ground</td>
+<td>2,580,704</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Low point (noise)</td>
+<td>66</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>Reserved in LAS 1.4; this provider used it for withheld points</td>
+<td>1,960,603</td>
+</tr>
+</tbody>
+</table>
+<p>Classes 1 and 2 are the ones you will work with. Get the extent of the point cloud and set the computational region to it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-g</span> input=mid_pines_spm_2013.las</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=220218 s=218694 e=637795 w=636271 <span class="at">-p</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If <code>r.in.pdal</code> is not available
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some GRASS builds ship without PDAL support. Download the <a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip">interpolated DEM and DSM</a>, unzip it into your working directory, and restore the two surfaces under the names Part 4 uses:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=mid_pines_lidar2013_dem.pack output=mid_pines_ground_elev</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=mid_pines_lidar2013_dsm.pack output=mid_pines_surface_elev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Skip the import commands in Parts 2 to 4 and continue with the analysis and visualization steps on these rasters.</p>
+</div>
+</div>
+</section>
+<section id="part-2-point-density" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-point-density">Part 2: Point density</h2>
+<p>Set the resolution to 1 m. The <code>-a</code> flag aligns the region boundaries to whole multiples of the resolution:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> res=1 <span class="at">-pa</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Count all points per cell with binning, then display the result with a legend and save the image for the report:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_dens_all method=n</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> mid_pines_dens_all</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.legend</span> <span class="at">-f</span> <span class="at">-s</span> <span class="at">-d</span> raster=mid_pines_dens_all at=5,50,7,10</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.out.file</span> mid_pines_dens_all.png</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>-o</code> flag skips the projection check: the file carries no CRS record but is in the project’s coordinate system. The import prints a line for every point that falls exactly on the region boundary and is ignored; that is expected.</p>
+<p>Count the ground points only, and give both density rasters the same histogram equalized color table so they can be compared:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_dens_ground class_filter=2 method=n</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=mid_pines_dens_all,mid_pines_dens_ground color=bcyr</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> mid_pines_dens_ground</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compare the two rasters: where does the ground density drop, and why?</p>
+<p>Now the UAS cloud. Find its extent, set a 1 m region over the sub-area, and bin it the same way:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-g</span> input=2015_06_sample_points_NCspm.las</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219660 s=219288 e=637287 w=636876 res=1 <span class="at">-pa</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-o</span> input=2015_06_sample_points_NCspm.las output=midpines_uas_06_1m_dens method=n</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=mid_pines_dens_all,mid_pines_dens_ground,midpines_uas_06_1m_dens color=bcyr</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> midpines_uas_06_1m_dens</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">d.legend</span> <span class="at">-f</span> <span class="at">-s</span> <span class="at">-d</span> raster=midpines_uas_06_1m_dens at=5,50,7,10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Zoom to the UAS sub-area and compare the lidar and UAS densities over the same ground. Save the images.</p>
+</section>
+<section id="part-3-binned-surfaces-and-a-simple-classification" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-binned-surfaces-and-a-simple-classification">Part 3: Binned surfaces and a simple classification</h2>
+<p>Binning assigns each cell a statistic of the points that fall in it, with no interpolation. Different returns and classes give different surfaces. Set a 2 m region over the whole lidar extent and build three of them.</p>
+<p>A surface from the highest point in each cell, using classes 1 and 2, is a DSM:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=220218 s=218694 e=637795 w=636271 res=2 <span class="at">-pa</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_all_max method=max class_filter=1,2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A surface from the last returns:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_last_mean method=mean return_filter=last class_filter=1,2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In <code>r.in.pdal</code>, <code>return_filter=last</code> keeps the last return only where the pulse produced more than one return, so here the surface marks the canopy, not the ground.</p>
+<p>In general, the <em>last return</em> is the final echo of a lidar pulse and is commonly used to find the ground.</p>
+</div>
+</div>
+<p>A surface from the points already classified as ground:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.in.pdal</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_ground_mean class_filter=2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Combine the three into classes: 1 ground, 2 vegetation, 3 buildings. A cell with a multi-return last echo is vegetation; a cell with a ground point but no multi-return echo is ground; a cell with a first return and neither is a building:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"classes = if( not(isnull(mid_pines_last_mean)), 2, if( not(isnull(mid_pines_ground_mean)), 1, if( not(isnull(mid_pines_all_max)), 3, null())))"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Set the colors with <code>r.colors</code> (right-click the <code>classes</code> layer, <em>Set color table</em>, Define tab, <em>enter values directly</em>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 220:220:180</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> 0:180:0</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> 150:0:0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Look for places where this simple rule fails to identify buildings, and save the image:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">d.out.file</span> classes.png</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="part-4-high-resolution-dem-and-dsm" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-high-resolution-dem-and-dsm">Part 4: High resolution DEM and DSM</h2>
+<p>Import the points as vectors, the ground class for the DEM and the first returns of classes 1 and 2 for the DSM:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.in.pdal</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_ground class_filter=2</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.in.pdal</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_surface class_filter=1,2 return_filter=first</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Remove the vector layers from the Layer Manager if they were added; drawing millions of points is slow.</p>
+<p>Estimate the point density and mean spacing of the ground points:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.outlier</span> <span class="at">-e</span> input=mid_pines_ground</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Estimated point density: 1.111 Estimated mean distance between points: 0.9487</p>
+</blockquote>
+<p>Set a smaller region at 0.5 m resolution and interpolate both surfaces with the regularized spline with tension, computing slope and profile curvature at the same time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219780 s=219100 e=637250 w=636575 res=0.5 <span class="at">-pa</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.surf.rst</span> input=mid_pines_ground elevation=mid_pines_ground_elev slope=mid_pines_ground_slope pcurv=mid_pines_ground_profcurv npmin=80 tension=20 smooth=1</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">v.surf.rst</span> input=mid_pines_surface elevation=mid_pines_surface_elev slope=mid_pines_surface_slope pcurv=mid_pines_surface_profcurv npmin=80 tension=20 smooth=1</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=mid_pines_ground_elev,mid_pines_surface_elev color=elevation</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A higher <code>npmin=150</code> reduces the segmentation artifacts visible in the slope and curvature maps, at a much longer run time.</p>
+<p>Visualize the DEM and DSM in the 3D view and use cross-sections. Leave only <code>mid_pines_surface_elev</code> in the Layer Manager, hide the legend, zoom to the computational region, switch to 3D, set the surface resolution to 1 and the color to the <code>classes</code> raster. Save the images.</p>
+</section>
+<section id="part-5-validate-the-lidar-dem-against-the-gcps" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-validate-the-lidar-dem-against-the-gcps">Part 5: Validate the lidar DEM against the GCPs</h2>
+<p>Restore the surveyed GCPs and add columns for the DEM height and the difference:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.unpack</span> <span class="at">-o</span> input=GCP_12_decimal.pack</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.db.addcolumn</span> map=GCP_12_decimal columns=<span class="st">"dem_height DOUBLE, height_difference DOUBLE"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The pack was written by an older GRASS whose CRS record differs in wording from the current project’s; <code>-o</code> accepts the project’s definition.</p>
+<p>Sample the DEM at the GCP locations (<code>-i</code> interpolates between the four nearest cells), compute the difference, and list the results:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.what.rast</span> <span class="at">-i</span> map=GCP_12_decimal raster=mid_pines_ground_elev column=dem_height</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.db.update</span> map=GCP_12_decimal column=height_difference query_column=<span class="st">"ASL - dem_height"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">v.db.select</span> map=GCP_12_decimal columns=ASL,dem_height,height_difference</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compute the statistics of the differences and map them:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.univar</span> <span class="at">-e</span> GCP_12_decimal column=height_difference</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect.thematic</span> map=GCP_12_decimal column=height_difference algorithm=int nclasses=4 colors=blue,30:144:255,173:216:230,255:192:203 icon=basic/circle size=20</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.legend.vect</span> at=10,40</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <em>Attribute Table Manager</em> shows the same table. Read the mean and the standard deviation the way Topic 3B read checkpoint residuals: the mean is the bias of the lidar DEM against the survey, and the RMSE of the differences is its vertical accuracy at these twelve points.</p>
+</section>
+<section id="part-6-optional-classification-voxels-and-transects" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-optional-classification-voxels-and-transects">Part 6 (optional): Classification, voxels, and transects</h2>
+<section id="ground-classification" class="level3">
+<h3 class="anchored" data-anchor-id="ground-classification">Ground classification</h3>
+<p>Install the <a href="https://grass.osgeo.org/grass-stable/manuals/addons/v.lidar.mcc.html">v.lidar.mcc</a> addon, which separates ground from non-ground points with a multiscale curvature classification:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> v.lidar.mcc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Import a small, unclassified sample and classify it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219511 s=219354 w=637071 e=637249 res=1</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.in.pdal</span> <span class="at">-r</span> <span class="at">-o</span> input=mid_pines_spm_2013.las output=mid_pines_sample</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">v.lidar.mcc</span> input=mid_pines_sample ground=ground nonground=nonground</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compare the result with the provider’s class 2 in 2D or 3D.</p>
+<p><img src="images/vlidarmcc.webp" class="img-fluid"></p>
+</section>
+<section id="point-density-in-3d" class="level3">
+<h3 class="anchored" data-anchor-id="point-density-in-3d">Point density in 3D</h3>
+<p>Set a small region with a vertical extent (<code>b</code>, <code>t</code>, <code>tbres</code>) for a 3D raster:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219502 s=219348 w=637070 e=637276 b=110 t=135 res=2 res3=2 tbres=0.5 <span class="at">-p3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>GRASS has no PDAL-based 3D raster import, so export the points inside this region to a text file with PDAL (about 100,000 points, one second) and bin the text file with <a href="https://grass.osgeo.org/grass-stable/manuals/r3.in.xyz.html">r3.in.xyz</a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdal</span> translate mid_pines_spm_2013.las mid_pines_sub.txt crop <span class="dt">\</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--filters.crop.bounds</span><span class="op">=</span><span class="st">"([637070,637276],[219348,219502])"</span> <span class="dt">\</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--writers.text.order</span><span class="op">=</span><span class="st">"X,Y,Z"</span> <span class="at">--writers.text.keep_unspecified</span><span class="op">=</span>false <span class="at">--writers.text.write_header</span><span class="op">=</span>false</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r3.in.xyz</span> input=mid_pines_sub.txt output=mid_pines_dens method=n separator=comma</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>r3.in.xyz</code> reads the file once per vertical slice, which is why the crop matters.</p>
+<p>Set a custom color table with <code>r3.colors</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">0%</span> 255:255:100</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">5%</span> green</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">100%</span> red</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Visualize the density in the 3D view with slices and isosurfaces:</p>
+<ol type="1">
+<li>Leave only the 3D raster <code>mid_pines_dens</code> in the Layer Manager.</li>
+<li>Set the computational region from the 3D raster and zoom to it.</li>
+<li>Switch to 3D.</li>
+<li>On the View page press Reset, set <em>Height</em> to 50 and <em>Z-exag</em> to 2. Nothing is visible yet.</li>
+<li>On the Data page, 3D raster, check <em>Draw wire box</em> and set the resolution to 1.</li>
+<li>Add an isosurface, set its value to 1, and press Enter.</li>
+<li>Check <em>toggle normal direction</em> and change the isosurface color.</li>
+<li>Try other isosurface levels (press Enter to apply each value).</li>
+<li>Remove the isosurface, change the draw mode to slices, add a slice, and set its axis to Z.</li>
+<li>Move the slice through the canopy.</li>
+<li>Save images for the report.</li>
+</ol>
+<p><img src="images/3d_trees.webp" class="img-fluid" style="width:80.0%"></p>
+</section>
+<section id="lidar-transect" class="level3">
+<h3 class="anchored" data-anchor-id="lidar-transect">Lidar transect</h3>
+<p>Install the <a href="https://grass.osgeo.org/grass-stable/manuals/addons/v.profile.points.html">v.profile.points</a> addon:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> v.profile.points</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cut a 5 m wide transect through the point cloud, straight from the LAS file, color the points by elevation, and display it. The output is the transect rotated into a vertical plane, so zoom to the vector map to see it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219511 s=219354 w=637071 e=637249 res=1</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.profile.points</span> file_input=mid_pines_spm_2013.las output=profile width=5 coordinates=637106,219373,637132,219451</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ex">v.colors</span> map=profile use=z color=elevation</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> map=profile color=none width=1 icon=basic/circle</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To profile points you already imported, pass them as <code>point_input=</code> instead; run <code>v.build</code> on them first, since <code>v.in.pdal</code> does not build topology and the selection step needs it.</p>
+<p><img src="images/3d_profile.webp" class="img-fluid"></p>
+</section>
+</section>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>Prepare a report (3 to 5 pages including figures):</p>
+<ol type="1">
+<li><strong>Point density</strong>: the lidar all-point and ground-point densities and the UAS density over the sub-area, with the same color table, and a paragraph on where and why they differ.</li>
+<li><strong>Classification</strong>: the <code>classes</code> raster, with examples of where the binning rule identifies buildings correctly and where it fails.</li>
+<li><strong>Surfaces</strong>: the interpolated DEM and DSM with their slope or curvature maps and a 3D view, and what the derivatives show that the elevation does not.</li>
+<li><strong>Validation</strong>: the GCP table with the DEM height and the difference, its mean and RMSE, and what they say about the vertical accuracy and bias of the lidar DEM.</li>
+<li><strong>Optional parts</strong>: figures and a short interpretation for any of Part 6 you completed.</li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Assignment 4B:</p>
+<ul>
+<li>Your report as a PDF.</li>
+<li>The GCP difference table (CSV export from the Attribute Table Manager or <code>v.db.select</code>).</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>Density</strong>: the three density maps are comparable and the differences between lidar and UAS are explained by how each sensor sees the ground.</li>
+<li><strong>Classification</strong>: the classes raster is produced and its failures are identified and explained.</li>
+<li><strong>Surfaces</strong>: the DEM and DSM are interpolated at 0.5 m with derivatives, visualized in 3D, and interpreted.</li>
+<li><strong>Validation</strong>: the GCP differences are computed, summarized, and read as bias and accuracy.</li>
+<li><strong>Interpretation</strong>: conclusions tie back to the lecture: returns, classes, binning versus interpolation.</li>
+<li>On-time submission.</li>
+</ul>
+<section id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="level3">
+<h3 class="anchored" data-anchor-id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 10/28/2026</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
