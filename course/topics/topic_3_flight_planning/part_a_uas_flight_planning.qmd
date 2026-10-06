@@ -54,7 +54,7 @@ activity: "Lecture & Lab"
 
 ## Assignment
 
-Prepare a flight plan:
+Analyze the provided flight plans:
 
 <!-- - [Flight planning in eMotion 3 software]() -->
 - [Flight plan analysis in GRASS](assignments/assignment_3a.qmd)

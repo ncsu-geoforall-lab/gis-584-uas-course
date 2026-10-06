@@ -17,7 +17,7 @@ resources:
 
 ## Task
 
-To execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Remember that the flight altitude is set relative to the takeoff location and does not take local relief into account, which can be crucial in mountainous areas. In our case trees, buildings, and other structures are the main concern. Because both the terrain data (from lidar) and the planned flight path are available, the clearance between the flight path and the surface can be computed with GIS tools.
+To execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Remember that the flight altitude is set relative to the takeoff location and does not take local relief into account, which can be crucial in mountainous areas. In our case trees, buildings, and other structures are the main concern. Because both the terrain data (from lidar) and the planned flight path are available, the clearance between the flight path and the surface can be computed with GIS tools. You do not need to plan your own flight for this assignment; analyze the two provided flight paths.
 
 Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. Either way, the report is the same.
 
@@ -142,13 +142,13 @@ Repeat Parts 1 and 3 for `flight_path2.kml` with new map names. The two files we
 
 ## Visualize
 
-Display the clearance map with the low-clearance cells over the DSM or an orthophoto, together with the `NGAT_COA` boundary. To use an orthophoto, unzip one of the packs from the Data list and restore it with `r.unpack`. Add screenshots from your flight planning software of choice. If you discovered obstacles and readjusted the flight path, include a picture and a description of the issue.
+Display the clearance map with the low-clearance cells over the DSM or an orthophoto, together with the `NGAT_COA` boundary. To use an orthophoto, unzip one of the packs from the Data list and restore it with `r.unpack`. A map of the flight path over the orthophoto or DSM is sufficient; you may also open the KML in Google Earth or a flight planner such as QGroundControl, but this is not required. If you discovered obstacles and readjusted the flight path, include a picture and a description of the issue.
 
 ## Report
 
 Prepare a report (2 to 4 pages including figures):
 
-1. **Flight plan**: the flight path you analyzed, with a screenshot from your planning software, the flight altitude, the takeoff and landing location, and how the area was chosen within the COA boundary.
+1. **Flight plan**: the flight path you analyzed, with a map of the path over the orthophoto or DSM, the flight altitude, the takeoff and landing location, and where the area sits within the COA boundary.
 2. **Clearance**: for both flight paths, the clearance map with low-clearance cells shown over the DSM or orthophoto, the minimum and median clearance, the number and location of cells below your safety margin, and what is under them in the DSM.
 3. **Vertical reference**: what reference each KML uses, how you found out, the offset you applied, and what the clearance map would have shown had you skipped the check. State the corrected flight altitude above ground at takeoff in feet against the Part 107 limit.
 4. **Discussion**: the aim is to show that the flight plan can be flown safely. Describe your thought process: what did you take into account first, what problems did you encounter, and did you change your initial plan because of software limitations, legal limits, or the relief and obstacles of the area?
