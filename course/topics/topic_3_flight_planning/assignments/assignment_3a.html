@@ -703,7 +703,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="task" class="level2">
 <h2 class="anchored" data-anchor-id="task">Task</h2>
-<p>To execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Remember that the flight altitude is set relative to the takeoff location and does not take local relief into account, which can be crucial in mountainous areas. In our case trees, buildings, and other structures are the main concern. Because both the terrain data (from lidar) and the planned flight path are available, the clearance between the flight path and the surface can be computed with GIS tools.</p>
+<p>To execute a safe flight, you need to make sure that the flight path will not cross any obstacles. Remember that the flight altitude is set relative to the takeoff location and does not take local relief into account, which can be crucial in mountainous areas. In our case trees, buildings, and other structures are the main concern. Because both the terrain data (from lidar) and the planned flight path are available, the clearance between the flight path and the surface can be computed with GIS tools. You do not need to plan your own flight for this assignment; analyze the two provided flight paths.</p>
 <p>Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. Either way, the report is the same.</p>
 <p><em>If you are unfamiliar with GRASS, work through the <a href="https://grass-tutorials.osgeo.org/#get-started">Get started tutorials</a> and watch at least the <a href="https://youtu.be/xqsnwtlP-2Y">Getting started with GRASS GUI</a> video from the OSGeoLab YouTube channel.</em></p>
 </section>
@@ -800,13 +800,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="visualize" class="level2">
 <h2 class="anchored" data-anchor-id="visualize">Visualize</h2>
-<p>Display the clearance map with the low-clearance cells over the DSM or an orthophoto, together with the <code>NGAT_COA</code> boundary. To use an orthophoto, unzip one of the packs from the Data list and restore it with <code>r.unpack</code>. Add screenshots from your flight planning software of choice. If you discovered obstacles and readjusted the flight path, include a picture and a description of the issue.</p>
+<p>Display the clearance map with the low-clearance cells over the DSM or an orthophoto, together with the <code>NGAT_COA</code> boundary. To use an orthophoto, unzip one of the packs from the Data list and restore it with <code>r.unpack</code>. A map of the flight path over the orthophoto or DSM is sufficient; you may also open the KML in Google Earth or a flight planner such as QGroundControl, but this is not required. If you discovered obstacles and readjusted the flight path, include a picture and a description of the issue.</p>
 </section>
 <section id="report" class="level2">
 <h2 class="anchored" data-anchor-id="report">Report</h2>
 <p>Prepare a report (2 to 4 pages including figures):</p>
 <ol type="1">
-<li><strong>Flight plan</strong>: the flight path you analyzed, with a screenshot from your planning software, the flight altitude, the takeoff and landing location, and how the area was chosen within the COA boundary.</li>
+<li><strong>Flight plan</strong>: the flight path you analyzed, with a map of the path over the orthophoto or DSM, the flight altitude, the takeoff and landing location, and where the area sits within the COA boundary.</li>
 <li><strong>Clearance</strong>: for both flight paths, the clearance map with low-clearance cells shown over the DSM or orthophoto, the minimum and median clearance, the number and location of cells below your safety margin, and what is under them in the DSM.</li>
 <li><strong>Vertical reference</strong>: what reference each KML uses, how you found out, the offset you applied, and what the clearance map would have shown had you skipped the check. State the corrected flight altitude above ground at takeoff in feet against the Part 107 limit.</li>
 <li><strong>Discussion</strong>: the aim is to show that the flight plan can be flown safely. Describe your thought process: what did you take into account first, what problems did you encounter, and did you change your initial plan because of software limitations, legal limits, or the relief and obstacles of the area?</li>
