@@ -5,13 +5,63 @@ subtitle: "Analysis of UAS data processing results"
 date: 10/7/2026
 assignment-due-date: 10/28/2026
 activity: Lab
+format:
+    html:
+        toc: true
+        toc-depth: 3
+notebook-view:
+  - notebook: dsm_analysis.ipynb
+    title: "Analysis of UAS-derived DSMs in GRASS"
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_4_GIS_analytics/assignments/dsm_analysis.ipynb
+resources:
+  - dsm_analysis.ipynb
 ---
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_4_GIS_analytics/assignments/dsm_analysis.ipynb)
 
 ## Task
 
-- [Execute measurements in Agisoft Metashape](lab_volumes.qmd)
-- [Analyze differences in DSMs](lab_dsm_analysis.qmd) generated using different techniques or acquired at different times. Distinguish between errors, artifacts, and real change in vegetation and/or bare ground surface.
+Perform measurements on UAS products in Agisoft Metashape, and compare DSMs in GRASS to assess their accuracy and to detect change. The assignment has two labs:
 
-## Homework
+- [Lab: Measuring volumes in Agisoft Metashape](lab_volumes.qmd): measure distances between GCPs and cameras, generate contours and a cross section on a DSM, and calculate the area and volume of a waste pile.
+- [Lab: Analysis of UAS-derived DSMs and orthophotos](lab_dsm_analysis.qmd): compare, in GRASS, DSMs generated with and without GCPs, DSMs of one flight generated in three software packages, and DSMs of two surveys of the same fields. Distinguish between errors, artifacts, and real change in vegetation and bare ground.
 
- Prepare report on the results of measurements in Agisoft and DSM comparison in GRASS GIS Include figures/graphs and calculations. 
+The Metashape lab is done in Metashape. For the DSM lab, work through the steps in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. Either way, the report is the same. The notebook ends with two optional exercises that are not required for the report.
+
+## Data
+
+- [Lake Wheeler GRASS project: Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (EPSG:3358; you have it from the earlier assignments)
+- [Processed Metashape project of the 02/06/2018 Lake Wheeler flight]({{< var data.lake_wheeler_flight_2018_agisoft_project_files >}}) (7.5 GB); start this download before the lab. The [photos of the flight]({{< var data.lake_wheeler_flight_2018_flight_data >}}) (3.2 GB) are optional; the measurements use the products stored in the project.
+- [Photos of the waste pile]({{< var data.imagery_2017 >}}) (120 MB), 25 photos from 02/07/2017, Wake County Waste Transfer Station, to be processed in the lab
+- [Orthophoto of Lake Wheeler, November 2015]({{< var data.lake_wheeler_flight_Nov_2015_orthos >}}) (GRASS raster pack, 280 MB) for the interpretation of change
+
+## Software
+
+- Agisoft Metashape Professional {{< var software.agisoft.version >}} with the license from Assignment 2B
+- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}}; the DSM lab optionally installs the addons `r.local.relief`, `r.shaded.pca`, and `r.skyview` with `g.extension`
+
+## Report
+
+Prepare a report (4 to 6 pages including figures) on the measurements in Metashape and the DSM comparison in GRASS:
+
+1. **Measurements**: the length of the building side with a screenshot of what you measured; the distance between UAV 9 and UAV 12 estimated by Metashape and calculated from the coordinates, with the calculation shown and the difference in meters and percent; the distance between the two cameras; the diameter and height of the sheaf; the cross section with a screenshot of its location; and the area and volume of the waste pile with a screenshot of the polygon, the base level you chose, and the processing settings.
+2. **Influence of GCPs**: the difference map of the DSMs with and without GCPs, with a legend, the mean and standard deviation of the difference, and a slope, aspect, or relief map that shows the bowl. Explain the bowl effect and its shape, referring to the location of the four GCPs.
+3. **Software comparison**: the two bowl maps and the three pairwise difference maps of the 2015-06-20 flight, with legends and the statistics of each. Which software has the larger vertical shift, which has the more curved bowl, how do the GCP-controlled products relate to each other, and what artifacts can you recognize?
+4. **Change between surveys**: the June to October 2015 difference map with a legend, the classified change map over the orthophoto, and the area of loss, stable ground, and gain in hectares. State the error you read on the roads and the threshold you used. Say which differences are real change in vegetation or bare ground, which are errors, and which are artifacts, and how you tell them apart.
+
+## Submission
+
+Upload to Moodle, Assignment 4A:
+
+* Your report as a PDF.
+* Optional: your completed notebook (`.ipynb`) if you worked in Colab.
+
+## Grading
+
+* **Measurements**: every value is reported with its units and a screenshot of what was measured, the distance calculation is shown, and the volume states the polygon, the base level, and the processing settings.
+* **GCPs**: the bowl effect is shown in the map and the statistics and explained by the GCP distribution.
+* **Software**: shift and curvature are separated and quantified from the statistics, and the artifacts are identified.
+* **Change**: real change, errors, and artifacts are separated with evidence from the roads, the area table, and the orthophoto.
+* On-time submission.
+
+### Due {{< meta assignment-due-date >}}

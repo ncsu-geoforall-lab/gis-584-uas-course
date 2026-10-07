@@ -5,79 +5,53 @@ format: html
 toc-depth: 4
 ---
 
-## GIS based analysis of UAS derived data processing outputs
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_4_GIS_analytics/assignments/dsm_analysis.ipynb)
 
-In this assignment, we analyze the DSMs derived from the UAS imagery in terms of their accuracy and type of distortions based on the use of GCPs and different processing software. Then we map the terrain change (due to vegetation growth, erosion, and other impacts using two different UAS surveys).
+## GIS based analysis of UAS data processing outputs
 
-- Including GCPs in geoprocessing improves the results. Does it have an effect on the phenomenon that you are investigating?
-- Agisoft is only one example of the software solutions available for the UAS data processing. In the GRASS location, DSMs are available, generated in different environments: Agisoft, Pix4D, and Trimble Business Center (for one example flight). Compare the differences between these DSMs.
-- In [Imagery processing assignment](../../topic_2_sfm/assignments/assignment_2b.qmd), you’ve used arbitrary given parameter values in each processing step. You can change various modes, quality, values, and options to investigate if it improves the results.
-   
-   [Agisoft Manual](https://www.agisoft.com/pdf/metashape-pro_1_5_en.pdf).
+The steps below are for the GRASS GUI or command line. The notebook (badge above) runs the same analysis in Python in Google Colab, with the maps and statistics produced for you.
+
+In this lab we analyze DSMs derived from UAS imagery in terms of their accuracy and the type of distortions they carry, depending on whether GCPs were used and on the processing software. Then we map terrain change between two UAS surveys (vegetation growth, erosion, and other impacts) and separate real change from errors and artifacts.
+
+- Including GCPs in the processing improves the results. Does it have an effect on the phenomenon you are investigating?
+- Agisoft Metashape is only one of the software solutions available for UAS data processing. The Lake Wheeler GRASS project holds DSMs of the same flight generated in Agisoft, Pix4D, and Trimble Business Center. Compare the differences between them.
+- In [Assignment 2B](../../topic_2_sfm/assignments/assignment_2b.qmd) you used given parameter values at each processing step. You can change modes, quality, values, and options to investigate whether they improve the results ([Metashape manual](https://www.agisoft.com/pdf/metashape-pro_2_3_en.pdf)).
 
 ### Data
 
-- [Lake Wheeler data set (formatted as GRASS location): Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (you should already have it from previous assignments)
+- [Lake Wheeler GRASS project: Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (EPSG:3358; you have it from the earlier assignments). All the rasters used below are in its PERMANENT mapset.
+- One orthophoto of Lake Wheeler for the interpretation of change, as a GRASS raster pack: [Nov 2015]({{< var data.lake_wheeler_flight_Nov_2015_orthos >}}) (280 MB). Orthophotos from [March 2017]({{< var data.lake_wheeler_flight_Mar_2017_orthos >}}) (420 MB) and [June 2017]({{< var data.lake_wheeler_flight_Jun_2017_orthos >}}) (550 MB) are available too, but not needed.
+
+### Getting started
+
+Start GRASS in the `Lake_Wheeler_NCspm` project and create a new mapset for this assignment, for example `analysis`.
+
+Every comparison in this lab produces a difference raster. Look at each one in two ways:
+
+- the map, with a color table that spreads the colors over the range where most of the values are
+- the statistics, from [r.univar](https://grass.osgeo.org/grass85/manuals/r.univar.html) (in the GUI: *Raster > Reports and statistics > Univariate raster statistics*, check *Extended statistics*):
+
+```bash
+r.univar -e map=GCP_noGCP
+```
+
+The mean of a difference raster is the vertical shift between the two DSMs. The standard deviation and the range between the center and the edges of the area describe the bowl. Note these numbers for each comparison; the report asks for them.
+
+To enter a color table, open [r.colors](https://grass.osgeo.org/grass85/manuals/r.colors.html) (in the GUI: right click the layer, *Set color table*), go to the *Define* tab, and type the rules into *enter values directly*.
 
 ### DSMs comparison - influence of GCPs
 
-In order to detect the bowl effect, an additional DSM needs to be computed. This time GCPs should not be used in the processing. You can repeat all the steps in Agisoft from the [Imagery processing assignment](../../topic_2_sfm/assignments/assignment_2b.qmd).
+`sample_DSM` was generated with 4 GCPs; `sample_DSM_noGCPs` is the same imagery processed without them. Add the `GCP_12_degrees` vector map to the display to see the GCPs; the four inside the extent of `sample_DSM` (UAV 3, 4, 6, and 8) are the ones that were used.
 
-Batch processing commands should be in this order:
-
-1. Align Photos
-2. Optimize Alignment (this is only based on camera coordinates)
-3. Build Dense Point cloud (quality: medium)
-4. Generate DEM
-
-Now you should have two DSMs:
-
-- [One generated in processing with 3 GCPs](https://drive.google.com/open?id=1RnYuH8_dhRyjfQ4rmqvnSO6uz-EuXqam) in the [Imagery processing assignment](../../topic_2_sfm/assignments/assignment_2b.qmd)
-
-- [One generated in processing without GCPs](https://drive.google.com/open?id=1j324mmeqtaYYpCgRLIfC6TE45sIGxghT)
-
-Packs are provided for those working in DEMO mode; save them in your working directory.
-
-#### Calculate differences between processed sample data
-
-We will use GRASS GIS to compare the DSMs.
-
-Open GRASS with the "Lake_Wheeler_NCspm" location and create a new mapset for this assignment (you can call it "analysis"). Then change your working directory `(Settings > GRASS working environment > Change working directory)` to where your DSM files are.
+Set the computational region to the DSM and compute the difference with raster map algebra:
 
 ```bash
-r.unpack DSMagi_2016_09_22_sample_noGCPs.pack -o
-r.unpack DSMagi_2016_09_22_sample.pack -o
-```
-
-Calculate the differences in elevation in the DSM generated with GCPs
-and the new one without GCPs in GRASS GIS using raster map algebra:
-
-```bash
-g.region rast=DSMagi_2016_09_22_sample
-r.mapcalc expression="GCP_noGCP_class = DSMagi_2016_09_22_sample - DSMagi_2016_09_22_sample_noGCPs"
-```
-
-Change the color map to better see the differences. You can experiment with your own color table or enter the following values directly in the [r.colors](https://grass.osgeo.org/grass84/manuals/r.colors.html) dialog (second tab: Define):
-
-```bash
-0 red
-35 orange
-36 yellow
-37 cyan
-38 aqua
-39 blue
-```
-
-#### Calculate differences between DSMs from larger area
-
-Your sample data has very limited extent. To fully understand the phenomenon caused by the absence of GCPs, compare the sample DSMs from the [Lake_Wheeler_NCspm_course]() location. There were 4 GCPs used for generating sample_DSM. You can see localization by adding the GCP_12 vector layer to the display.
-
-```bash
-g.region rast=sample_DSM
+g.region raster=sample_DSM
 r.mapcalc expression="GCP_noGCP = sample_DSM - sample_DSM_noGCPs"
+r.univar -e map=GCP_noGCP
 ```
 
-Change the color map to better see the differences. You can experiment with your own color table or enter the following values directly in the [r.colors](https://grass.osgeo.org/grass84/manuals/r.colors.html) dialog (second tab: Define):
+The statistics show that the DSM without GCPs is about 36 m too low everywhere, with most of the values between 35 and 39 m. A color table that spreads its colors over that band shows the shape of the error instead of the shift:
 
 ```bash
 0 red
@@ -88,22 +62,25 @@ Change the color map to better see the differences. You can experiment with your
 39 blue
 ```
 
-:::{callout-important}
-Why are these patterns different? Consider the distribution of the GCPs in both datasets and the shape of the area.
+Trees and buildings are reconstructed differently in the two DSMs and fall outside the band; they show as red or blue specks.
+
+::: {.callout-important}
+What is the shape of the difference? Consider the distribution of the GCPs and the shape of the area.
 :::
 
 ### Compare DSMs generated in different software
 
-For the flight from 2015-06-20, in the Lake_Wheeler_NCspm_course, there are DSMs with GCPs generated in 3 different software environments (Trimble Business Center, Agisoft, and Pix4D). Additionally, there are DSMs generated without GCPs in Agisoft and Pix4D.
+For the flight of 2015-06-20, the PERMANENT mapset holds DSMs with 11 GCPs generated in three software environments (Trimble Business Center, Agisoft, and Pix4D), and DSMs generated without GCPs in Agisoft and Pix4D.
 
-Check the bowl effect for the Agisoft generated products:
+Check the bowl effect for the Agisoft products:
 
 ```bash
-g.region rast=2015_06_20_DSM_agi_11GCP
+g.region raster=2015_06_20_DSM_agi_11GCP
 r.mapcalc expression="agi_GCP_agi_noGCP = 2015_06_20_DSM_agi_11GCP - 2015_06_20_DSM_agi_noGCP"
+r.univar -e map=agi_GCP_agi_noGCP
 ```
 
-Change the color table to better see the differences.
+Color table:
 
 ```bash
 0 red
@@ -114,13 +91,14 @@ Change the color table to better see the differences.
 42 blue
 ```
 
-Check the bowl effect for the Pix4D generated products:
+Check the bowl effect for the Pix4D products:
 
 ```bash
 r.mapcalc expression="p4d_GCP_p4d_noGCP = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_pix4d_NoGCP"
+r.univar -e map=p4d_GCP_p4d_noGCP
 ```
 
-Change the color map to better see the differences. You can experiment with your own color table or enter following values directly in the dialog [r.colors](https://grass.osgeo.org/grass84/manuals/r.colors.html) dialog `second tab Define`
+Color table:
 
 ```bash
 50 red
@@ -130,9 +108,12 @@ Change the color map to better see the differences. You can experiment with your
 72 aqua
 75 blue
 ```
+
 ::: {.callout-important}
-Which software generated a larger bowl effect?
+The two color tables cover different ranges, so do not compare the maps by color alone. Use the statistics. Which software has the larger vertical shift (the mean)? Which one has the more curved bowl (the standard deviation, and the range between the center and the edges)? These are two different questions and they do not have the same answer.
 :::
+
+Now compare the three DSMs generated with GCPs against each other. The sign of each difference follows the name: `agi_trimble` is positive where the Agisoft DSM is higher than the Trimble DSM.
 
 ```bash
 r.mapcalc expression="agi_trimble = 2015_06_20_DSM_agi_11GCP - 2015_06_20_DSM_Trimble_11GCP"
@@ -140,7 +121,7 @@ r.mapcalc expression="p4d_agi = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_agi_
 r.mapcalc expression="p4d_trimble = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_Trimble_11GCP"
 ```
 
-Apply the color table that varies from -1m to 1m to visualize results of the comparison using the [r.colors](https://grass.osgeo.org/grass84/manuals/r.colors.html)
+Apply a color table from -1 m to 1 m to each of them, with white for differences within 10 cm:
 
 ```bash
 -40 red
@@ -154,90 +135,122 @@ Apply the color table that varies from -1m to 1m to visualize results of the com
 35 blue
 ```
 
+The Trimble DSM covers a smaller area than the other two, so the maps that include it are empty (null) outside its extent. That is expected.
+
 ::: {.callout-important}
-Compare the maps. How do they relate to each other? What patterns (artifacts) can you recognize?
+Compare the maps. How do they relate to each other? What patterns (artifacts) can you recognize? Where are the differences: along tree lines and buildings, at the edges of the block, in stripes along the flight lines?
 :::
 
-### Detect terrain change using two UAS surveys
+### Terrain analysis of the DSMs
 
-It is also useful to a perform terrain analysis using GIS tools
-to see the differences even more clearly.
+Terrain analysis shows the bowl more clearly than the elevation does: a dome becomes a slow gradient in slope and a radial pattern in aspect, on top of the real terraces and tree lines.
 
-Run the [r.slope.aspect](https://grass.osgeo.org/grass84/manuals/r.slope.aspect.html) and [r.relief](https://grass.osgeo.org/grass84/manuals/r.relief.html) command for chosen DSMs,
-for example:
+Run [r.slope.aspect](https://grass.osgeo.org/grass85/manuals/r.slope.aspect.html) and [r.relief](https://grass.osgeo.org/grass85/manuals/r.relief.html) on the sample DSM with and without GCPs and compare the results side by side:
 
 ```bash
-g.region rast=sample_DSM
+g.region raster=sample_DSM
 r.slope.aspect elevation=sample_DSM slope=sample_DSM_slope aspect=sample_DSM_aspect pcurvature=sample_DSM_curv
 r.relief input=sample_DSM output=sample_DSM_relief
 r.slope.aspect elevation=sample_DSM_noGCPs slope=sample_DSM_noGCP_slope aspect=sample_DSM_noGCP_aspect pcurvature=sample_DSM_noGCP_curv
-r.relief input=sample_DSM output=sample_DSM_noGCP_relief
+r.relief input=sample_DSM_noGCPs output=sample_DSM_noGCP_relief
 ```
 
-You can also install [GRASS GIS Addons](https://grass.osgeo.org/grass84/manuals/keywords.html#addons) (via [g.extension](https://grass.osgeo.org/grass84/manuals/g.extension.html)):
+You can also install [GRASS addons](https://grass.osgeo.org/grass85/manuals/addons/) with [g.extension](https://grass.osgeo.org/grass85/manuals/g.extension.html):
 
-- [r.local.relief](https://grass.osgeo.org/grass84/manuals/addons/r.local.relief.html)
-- [r.shaded.pca](https://grass.osgeo.org/grass84/manuals/addons/r.shaded.pca.html)
-- [r.skyview](https://grass.osgeo.org/grass84/manuals/addons/r.skyview.html)
+- [r.local.relief](https://grass.osgeo.org/grass85/manuals/addons/r.local.relief.html)
+- [r.shaded.pca](https://grass.osgeo.org/grass85/manuals/addons/r.shaded.pca.html)
+- [r.skyview](https://grass.osgeo.org/grass85/manuals/addons/r.skyview.html)
 
-and apply this modules to sample data or your data.
+and apply them to the sample data or to your own data. The region is still set to `sample_DSM`.
 
-Set your computational region
-```bash
-g.region rast=sample_DSM
-```
+Install and run [r.local.relief](https://grass.osgeo.org/grass85/manuals/addons/r.local.relief.html):
 
-Install and run the [r.local.relief](https://grass.osgeo.org/grass84/manuals/addons/r.local.relief.html) addon.
 ```bash
 g.extension extension=r.local.relief
 r.local.relief input=sample_DSM output=local_relief_sample_DSM
 r.local.relief input=sample_DSM_noGCPs output=local_relief_sample_DSM_noGCPs
 ```
 
-Install and run [r.shaded.pca](https://grass.osgeo.org/grass84/manuals/addons/r.shaded.pca.html)
+Install and run [r.shaded.pca](https://grass.osgeo.org/grass85/manuals/addons/r.shaded.pca.html):
+
 ```bash
-g.extension extension=r.shaded.pca operation=add 
+g.extension extension=r.shaded.pca
 r.shaded.pca input=sample_DSM output=shaded_pca_sample_DSM
 r.shaded.pca input=sample_DSM_noGCPs output=shaded_pca_sample_DSM_noGCPs
 ```
 
-Install and run [r.skyview](https://grass.osgeo.org/grass84/manuals/addons/r.skyview.html)
+Install and run [r.skyview](https://grass.osgeo.org/grass85/manuals/addons/r.skyview.html):
 
 ```bash
-g.extension extension=r.skyview operation=add
+g.extension extension=r.skyview
 r.skyview input=sample_DSM output=skyview_sample_DSM
 r.skyview input=sample_DSM_noGCPs output=skyview_sample_DSM_noGCPs
 ```
 
 ### Detect terrain change using two UAS surveys
 
-```bash
-g.region rast=2015_06_20_DSM_agi_11GCP
-r.mapcalc "diff_jun_oct_agis = 2015_06_20_DSM_agi_11GCP - 2015_10_06_DSM_agi_8GCPs"
-```
-Apply the color table that varies from -1m to 1m to visualize results of the comparison
-using [r.colors](https://grass.osgeo.org/grass84/manuals/r.colors.html) module.
-
-In the `Define` tab, type the following rules in the `enter values directly` option.
+The PERMANENT mapset also holds the DSM of the flight of 2015-10-06, processed in Agisoft with 8 GCPs. Subtract it from the June DSM:
 
 ```bash
- -40 red
- -1 orange
- -0.5 yellow
- -0.1 grey
- 0 white
- 0.1 grey
- 0.5 cyan
- 1 aqua
- 35 blue
+g.region raster=2015_06_20_DSM_agi_11GCP
+r.mapcalc expression="diff_jun_oct_agis = 2015_06_20_DSM_agi_11GCP - 2015_10_06_DSM_agi_8GCPs"
+r.univar -e map=diff_jun_oct_agis
 ```
 
-Note the accuracy of the DSM along the roads, interpret the observed gain and loss in elevation.
+The difference is June minus October. Positive values mean the surface was higher in June: a **loss** of elevation by October, for example a harvested crop. Negative values mean the surface was higher in October: a **gain**, for example a crop that grew over the summer. Keep this sign in mind when you read the map.
 
-Use orthophotos from:
+Apply the same -1 m to 1 m color table as above:
 
-- [Nov 2015]({{< var data.lake_wheeler_flight_Nov_2015_orthos >}})
-- [March 2017]({{< var data.lake_wheeler_flight_Mar_2017_orthos >}})
-- [June 2017]({{< var data.lake_wheeler_flight_Jun_2017_orthos >}})
+```bash
+-40 red
+-1 orange
+-0.5 yellow
+-0.1 grey
+0 white
+0.1 grey
+0.5 cyan
+1 aqua
+35 blue
+```
 
+The roads did not change between June and October, so the difference on them is the error of the comparison. Note how large it is; anything smaller than that elsewhere cannot be called change.
 
+#### Classify and measure the change
+
+Call differences beyond half a meter loss or gain and everything in between stable, then let [r.report](https://grass.osgeo.org/grass85/manuals/r.report.html) sum the area of each class in hectares. Half a meter is well above the error on the roads; change the threshold if your reading of the roads suggests a different value, and say so in the report.
+
+```bash
+r.mapcalc expression="change_class = if(diff_jun_oct_agis > 0.5, 1, if(diff_jun_oct_agis < -0.5, 3, 2))"
+r.category map=change_class separator=: rules=- <<EOF
+1:loss (June higher)
+2:stable
+3:gain (October higher)
+EOF
+r.colors map=change_class rules=- <<EOF
+1 orange
+2 white
+3 blue
+EOF
+r.report -n map=change_class units=h,p
+```
+
+In the GUI, enter the category labels and the color rules through the *Define* tabs of [r.category](https://grass.osgeo.org/grass85/manuals/r.category.html) and r.colors, and run r.report from *Raster > Reports and statistics > Report basic information*.
+
+#### Orthophoto for context
+
+To interpret the change you need to know what was on the fields. The November 2015 orthophoto was flown after the harvest; it does not match either DSM date, but it shows the field boundaries, the roads, and the tree lines. Change the working directory to the folder you downloaded it to (*Settings > GRASS working environment > Change working directory*) and restore it with [r.unpack](https://grass.osgeo.org/grass85/manuals/r.unpack.html):
+
+```bash
+r.unpack ortho_2015_11_24.pack -o
+```
+
+Display the orthophoto with the change map on top of it. The change map is opaque, so set its opacity in the Layer Manager (right click the layer, *Change opacity level*) to about 50 percent, or display only the loss and gain cells:
+
+```bash
+r.mapcalc expression="change_only = if(change_class == 2, null(), change_class)"
+r.colors map=change_only raster=change_class
+```
+
+::: {.callout-important}
+Which of the loss and gain patches follow field boundaries (crops), which follow tree lines (canopy growth or leaf-off differences), and which follow flight lines or the edges of the block (processing artifacts)? What is the difference on the roads, and what does it say about the accuracy of a change map from two UAS surveys?
+:::
