@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap-233f4642ec526109732ad0564d688ace.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -644,17 +644,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#gis-based-analysis-of-uas-derived-data-processing-outputs" id="toc-gis-based-analysis-of-uas-derived-data-processing-outputs" class="nav-link active" data-scroll-target="#gis-based-analysis-of-uas-derived-data-processing-outputs">GIS based analysis of UAS derived data processing outputs</a>
+  <li><a href="#gis-based-analysis-of-uas-data-processing-outputs" id="toc-gis-based-analysis-of-uas-data-processing-outputs" class="nav-link active" data-scroll-target="#gis-based-analysis-of-uas-data-processing-outputs">GIS based analysis of UAS data processing outputs</a>
   <ul>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#dsms-comparison---influence-of-gcps" id="toc-dsms-comparison---influence-of-gcps" class="nav-link" data-scroll-target="#dsms-comparison---influence-of-gcps">DSMs comparison - influence of GCPs</a>
-  <ul class="collapse">
-  <li><a href="#calculate-differences-between-processed-sample-data" id="toc-calculate-differences-between-processed-sample-data" class="nav-link" data-scroll-target="#calculate-differences-between-processed-sample-data">Calculate differences between processed sample data</a></li>
-  <li><a href="#calculate-differences-between-dsms-from-larger-area" id="toc-calculate-differences-between-dsms-from-larger-area" class="nav-link" data-scroll-target="#calculate-differences-between-dsms-from-larger-area">Calculate differences between DSMs from larger area</a></li>
-  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#dsms-comparison---influence-of-gcps" id="toc-dsms-comparison---influence-of-gcps" class="nav-link" data-scroll-target="#dsms-comparison---influence-of-gcps">DSMs comparison - influence of GCPs</a></li>
   <li><a href="#compare-dsms-generated-in-different-software" id="toc-compare-dsms-generated-in-different-software" class="nav-link" data-scroll-target="#compare-dsms-generated-in-different-software">Compare DSMs generated in different software</a></li>
-  <li><a href="#detect-terrain-change-using-two-uas-surveys" id="toc-detect-terrain-change-using-two-uas-surveys" class="nav-link" data-scroll-target="#detect-terrain-change-using-two-uas-surveys">Detect terrain change using two UAS surveys</a></li>
-  <li><a href="#detect-terrain-change-using-two-uas-surveys-1" id="toc-detect-terrain-change-using-two-uas-surveys-1" class="nav-link" data-scroll-target="#detect-terrain-change-using-two-uas-surveys-1">Detect terrain change using two UAS surveys</a></li>
+  <li><a href="#terrain-analysis-of-the-dsms" id="toc-terrain-analysis-of-the-dsms" class="nav-link" data-scroll-target="#terrain-analysis-of-the-dsms">Terrain analysis of the DSMs</a></li>
+  <li><a href="#detect-terrain-change-using-two-uas-surveys" id="toc-detect-terrain-change-using-two-uas-surveys" class="nav-link" data-scroll-target="#detect-terrain-change-using-two-uas-surveys">Detect terrain change using two UAS surveys</a>
+  <ul class="collapse">
+  <li><a href="#classify-and-measure-the-change" id="toc-classify-and-measure-the-change" class="nav-link" data-scroll-target="#classify-and-measure-the-change">Classify and measure the change</a></li>
+  <li><a href="#orthophoto-for-context" id="toc-orthophoto-for-context" class="nav-link" data-scroll-target="#orthophoto-for-context">Orthophoto for context</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -686,93 +687,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="gis-based-analysis-of-uas-derived-data-processing-outputs" class="level2">
-<h2 class="anchored" data-anchor-id="gis-based-analysis-of-uas-derived-data-processing-outputs">GIS based analysis of UAS derived data processing outputs</h2>
-<p>In this assignment, we analyze the DSMs derived from the UAS imagery in terms of their accuracy and type of distortions based on the use of GCPs and different processing software. Then we map the terrain change (due to vegetation growth, erosion, and other impacts using two different UAS surveys).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_4_GIS_analytics/assignments/dsm_analysis.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
+<figcaption>Open in Colab</figcaption>
+</figure>
+</div>
+<section id="gis-based-analysis-of-uas-data-processing-outputs" class="level2">
+<h2 class="anchored" data-anchor-id="gis-based-analysis-of-uas-data-processing-outputs">GIS based analysis of UAS data processing outputs</h2>
+<p>The steps below are for the GRASS GUI or command line. The notebook (badge above) runs the same analysis in Python in Google Colab, with the maps and statistics produced for you.</p>
+<p>In this lab we analyze DSMs derived from UAS imagery in terms of their accuracy and the type of distortions they carry, depending on whether GCPs were used and on the processing software. Then we map terrain change between two UAS surveys (vegetation growth, erosion, and other impacts) and separate real change from errors and artifacts.</p>
 <ul>
-<li><p>Including GCPs in geoprocessing improves the results. Does it have an effect on the phenomenon that you are investigating?</p></li>
-<li><p>Agisoft is only one example of the software solutions available for the UAS data processing. In the GRASS location, DSMs are available, generated in different environments: Agisoft, Pix4D, and Trimble Business Center (for one example flight). Compare the differences between these DSMs.</p></li>
-<li><p>In <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">Imagery processing assignment</a>, you’ve used arbitrary given parameter values in each processing step. You can change various modes, quality, values, and options to investigate if it improves the results.</p>
-<p><a href="https://www.agisoft.com/pdf/metashape-pro_1_5_en.pdf">Agisoft Manual</a>.</p></li>
+<li>Including GCPs in the processing improves the results. Does it have an effect on the phenomenon you are investigating?</li>
+<li>Agisoft Metashape is only one of the software solutions available for UAS data processing. The Lake Wheeler GRASS project holds DSMs of the same flight generated in Agisoft, Pix4D, and Trimble Business Center. Compare the differences between them.</li>
+<li>In <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">Assignment 2B</a> you used given parameter values at each processing step. You can change modes, quality, values, and options to investigate whether they improve the results (<a href="https://www.agisoft.com/pdf/metashape-pro_2_3_en.pdf">Metashape manual</a>).</li>
 </ul>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <ul>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler data set (formatted as GRASS location): Lake_Wheeler_NCspm</a> (you should already have it from previous assignments)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler GRASS project: Lake_Wheeler_NCspm</a> (EPSG:3358; you have it from the earlier assignments). All the rasters used below are in its PERMANENT mapset.</li>
+<li>One orthophoto of Lake Wheeler for the interpretation of change, as a GRASS raster pack: <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/112415/ortho_2015_11_24.pack">Nov 2015</a> (280 MB). Orthophotos from <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/032917/ortho_2017_03_29.pack">March 2017</a> (420 MB) and <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack">June 2017</a> (550 MB) are available too, but not needed.</li>
 </ul>
+</section>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting started</h3>
+<p>Start GRASS in the <code>Lake_Wheeler_NCspm</code> project and create a new mapset for this assignment, for example <code>analysis</code>.</p>
+<p>Every comparison in this lab produces a difference raster. Look at each one in two ways:</p>
+<ul>
+<li>the map, with a color table that spreads the colors over the range where most of the values are</li>
+<li>the statistics, from <a href="https://grass.osgeo.org/grass85/manuals/r.univar.html">r.univar</a> (in the GUI: <em>Raster &gt; Reports and statistics &gt; Univariate raster statistics</em>, check <em>Extended statistics</em>):</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=GCP_noGCP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The mean of a difference raster is the vertical shift between the two DSMs. The standard deviation and the range between the center and the edges of the area describe the bowl. Note these numbers for each comparison; the report asks for them.</p>
+<p>To enter a color table, open <a href="https://grass.osgeo.org/grass85/manuals/r.colors.html">r.colors</a> (in the GUI: right click the layer, <em>Set color table</em>), go to the <em>Define</em> tab, and type the rules into <em>enter values directly</em>.</p>
 </section>
 <section id="dsms-comparison---influence-of-gcps" class="level3">
 <h3 class="anchored" data-anchor-id="dsms-comparison---influence-of-gcps">DSMs comparison - influence of GCPs</h3>
-<p>In order to detect the bowl effect, an additional DSM needs to be computed. This time GCPs should not be used in the processing. You can repeat all the steps in Agisoft from the <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">Imagery processing assignment</a>.</p>
-<p>Batch processing commands should be in this order:</p>
-<ol type="1">
-<li>Align Photos</li>
-<li>Optimize Alignment (this is only based on camera coordinates)</li>
-<li>Build Dense Point cloud (quality: medium)</li>
-<li>Generate DEM</li>
-</ol>
-<p>Now you should have two DSMs:</p>
-<ul>
-<li><p><a href="https://drive.google.com/open?id=1RnYuH8_dhRyjfQ4rmqvnSO6uz-EuXqam">One generated in processing with 3 GCPs</a> in the <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">Imagery processing assignment</a></p></li>
-<li><p><a href="https://drive.google.com/open?id=1j324mmeqtaYYpCgRLIfC6TE45sIGxghT">One generated in processing without GCPs</a></p></li>
-</ul>
-<p>Packs are provided for those working in DEMO mode; save them in your working directory.</p>
-<section id="calculate-differences-between-processed-sample-data" class="level4">
-<h4 class="anchored" data-anchor-id="calculate-differences-between-processed-sample-data">Calculate differences between processed sample data</h4>
-<p>We will use GRASS GIS to compare the DSMs.</p>
-<p>Open GRASS with the “Lake_Wheeler_NCspm” location and create a new mapset for this assignment (you can call it “analysis”). Then change your working directory <code>(Settings &gt; GRASS working environment &gt; Change working directory)</code> to where your DSM files are.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> DSMagi_2016_09_22_sample_noGCPs.pack <span class="at">-o</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> DSMagi_2016_09_22_sample.pack <span class="at">-o</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Calculate the differences in elevation in the DSM generated with GCPs and the new one without GCPs in GRASS GIS using raster map algebra:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> rast=DSMagi_2016_09_22_sample</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"GCP_noGCP_class = DSMagi_2016_09_22_sample - DSMagi_2016_09_22_sample_noGCPs"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Change the color map to better see the differences. You can experiment with your own color table or enter the following values directly in the <a href="https://grass.osgeo.org/grass84/manuals/r.colors.html">r.colors</a> dialog (second tab: Define):</p>
+<p><code>sample_DSM</code> was generated with 4 GCPs; <code>sample_DSM_noGCPs</code> is the same imagery processed without them. Add the <code>GCP_12_degrees</code> vector map to the display to see the GCPs; the four inside the extent of <code>sample_DSM</code> (UAV 3, 4, 6, and 8) are the ones that were used.</p>
+<p>Set the computational region to the DSM and compute the difference with raster map algebra:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=sample_DSM</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"GCP_noGCP = sample_DSM - sample_DSM_noGCPs"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=GCP_noGCP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The statistics show that the DSM without GCPs is about 36 m too low everywhere, with most of the values between 35 and 39 m. A color table that spreads its colors over that band shows the shape of the error instead of the shift:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> red</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">35</span> orange</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">36</span> yellow</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">37</span> cyan</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">38</span> aqua</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">39</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Trees and buildings are reconstructed differently in the two DSMs and fall outside the band; they show as red or blue specks.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the shape of the difference? Consider the distribution of the GCPs and the shape of the area.</p>
+</div>
+</div>
 </section>
-<section id="calculate-differences-between-dsms-from-larger-area" class="level4">
-<h4 class="anchored" data-anchor-id="calculate-differences-between-dsms-from-larger-area">Calculate differences between DSMs from larger area</h4>
-<p>Your sample data has very limited extent. To fully understand the phenomenon caused by the absence of GCPs, compare the sample DSMs from the <a href="">Lake_Wheeler_NCspm_course</a> location. There were 4 GCPs used for generating sample_DSM. You can see localization by adding the GCP_12 vector layer to the display.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> rast=sample_DSM</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"GCP_noGCP = sample_DSM - sample_DSM_noGCPs"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Change the color map to better see the differences. You can experiment with your own color table or enter the following values directly in the <a href="https://grass.osgeo.org/grass84/manuals/r.colors.html">r.colors</a> dialog (second tab: Define):</p>
+<section id="compare-dsms-generated-in-different-software" class="level3">
+<h3 class="anchored" data-anchor-id="compare-dsms-generated-in-different-software">Compare DSMs generated in different software</h3>
+<p>For the flight of 2015-06-20, the PERMANENT mapset holds DSMs with 11 GCPs generated in three software environments (Trimble Business Center, Agisoft, and Pix4D), and DSMs generated without GCPs in Agisoft and Pix4D.</p>
+<p>Check the bowl effect for the Agisoft products:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=2015_06_20_DSM_agi_11GCP</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"agi_GCP_agi_noGCP = 2015_06_20_DSM_agi_11GCP - 2015_06_20_DSM_agi_noGCP"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=agi_GCP_agi_noGCP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Color table:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> red</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">35</span> orange</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">36</span> yellow</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">37</span> cyan</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">38</span> aqua</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">39</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="{callout-important}">
-<p>Why are these patterns different? Consider the distribution of the GCPs in both datasets and the shape of the area.</p>
-</div>
-</section>
-</section>
-<section id="compare-dsms-generated-in-different-software" class="level3">
-<h3 class="anchored" data-anchor-id="compare-dsms-generated-in-different-software">Compare DSMs generated in different software</h3>
-<p>For the flight from 2015-06-20, in the Lake_Wheeler_NCspm_course, there are DSMs with GCPs generated in 3 different software environments (Trimble Business Center, Agisoft, and Pix4D). Additionally, there are DSMs generated without GCPs in Agisoft and Pix4D.</p>
-<p>Check the bowl effect for the Agisoft generated products:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> rast=2015_06_20_DSM_agi_11GCP</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"agi_GCP_agi_noGCP = 2015_06_20_DSM_agi_11GCP - 2015_06_20_DSM_agi_noGCP"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Change the color table to better see the differences.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> red</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">35</span> orange</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">36</span> yellow</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">37</span> cyan</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">38</span> aqua</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">42</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Check the bowl effect for the Pix4D generated products:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"p4d_GCP_p4d_noGCP = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_pix4d_NoGCP"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Change the color map to better see the differences. You can experiment with your own color table or enter following values directly in the dialog <a href="https://grass.osgeo.org/grass84/manuals/r.colors.html">r.colors</a> dialog <code>second tab Define</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">50</span> red</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">69</span> orange</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">70</span> yellow</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">71</span> cyan</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">72</span> aqua</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">75</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">42</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check the bowl effect for the Pix4D products:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"p4d_GCP_p4d_noGCP = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_pix4d_NoGCP"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=p4d_GCP_p4d_noGCP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Color table:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">50</span> red</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">69</span> orange</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">70</span> yellow</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">71</span> cyan</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">72</span> aqua</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">75</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -783,22 +784,24 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Which software generated a larger bowl effect?</p>
+<p>The two color tables cover different ranges, so do not compare the maps by color alone. Use the statistics. Which software has the larger vertical shift (the mean)? Which one has the more curved bowl (the standard deviation, and the range between the center and the edges)? These are two different questions and they do not have the same answer.</p>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"agi_trimble = 2015_06_20_DSM_agi_11GCP - 2015_06_20_DSM_Trimble_11GCP"</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"p4d_agi = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_agi_11GCP"</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"p4d_trimble = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_Trimble_11GCP"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Apply the color table that varies from -1m to 1m to visualize results of the comparison using the <a href="https://grass.osgeo.org/grass84/manuals/r.colors.html">r.colors</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-40</span> red</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-1</span> orange</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-0.5</span> yellow</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-0.1</span> grey</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> white</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0.1</span> grey</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0.5</span> cyan</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> aqua</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">35</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now compare the three DSMs generated with GCPs against each other. The sign of each difference follows the name: <code>agi_trimble</code> is positive where the Agisoft DSM is higher than the Trimble DSM.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"agi_trimble = 2015_06_20_DSM_agi_11GCP - 2015_06_20_DSM_Trimble_11GCP"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"p4d_agi = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_agi_11GCP"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"p4d_trimble = 2015_06_20_pix4d_11GCP_dsm - 2015_06_20_DSM_Trimble_11GCP"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Apply a color table from -1 m to 1 m to each of them, with white for differences within 10 cm:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-40</span> red</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-1</span> orange</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-0.5</span> yellow</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-0.1</span> grey</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> white</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0.1</span> grey</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0.5</span> cyan</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> aqua</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ex">35</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Trimble DSM covers a smaller area than the other two, so the maps that include it are empty (null) outside its extent. That is expected.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -809,65 +812,97 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Compare the maps. How do they relate to each other? What patterns (artifacts) can you recognize?</p>
+<p>Compare the maps. How do they relate to each other? What patterns (artifacts) can you recognize? Where are the differences: along tree lines and buildings, at the edges of the block, in stripes along the flight lines?</p>
 </div>
 </div>
+</section>
+<section id="terrain-analysis-of-the-dsms" class="level3">
+<h3 class="anchored" data-anchor-id="terrain-analysis-of-the-dsms">Terrain analysis of the DSMs</h3>
+<p>Terrain analysis shows the bowl more clearly than the elevation does: a dome becomes a slow gradient in slope and a radial pattern in aspect, on top of the real terraces and tree lines.</p>
+<p>Run <a href="https://grass.osgeo.org/grass85/manuals/r.slope.aspect.html">r.slope.aspect</a> and <a href="https://grass.osgeo.org/grass85/manuals/r.relief.html">r.relief</a> on the sample DSM with and without GCPs and compare the results side by side:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=sample_DSM</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=sample_DSM slope=sample_DSM_slope aspect=sample_DSM_aspect pcurvature=sample_DSM_curv</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=sample_DSM output=sample_DSM_relief</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=sample_DSM_noGCPs slope=sample_DSM_noGCP_slope aspect=sample_DSM_noGCP_aspect pcurvature=sample_DSM_noGCP_curv</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=sample_DSM_noGCPs output=sample_DSM_noGCP_relief</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can also install <a href="https://grass.osgeo.org/grass85/manuals/addons/">GRASS addons</a> with <a href="https://grass.osgeo.org/grass85/manuals/g.extension.html">g.extension</a>:</p>
+<ul>
+<li><a href="https://grass.osgeo.org/grass85/manuals/addons/r.local.relief.html">r.local.relief</a></li>
+<li><a href="https://grass.osgeo.org/grass85/manuals/addons/r.shaded.pca.html">r.shaded.pca</a></li>
+<li><a href="https://grass.osgeo.org/grass85/manuals/addons/r.skyview.html">r.skyview</a></li>
+</ul>
+<p>and apply them to the sample data or to your own data. The region is still set to <code>sample_DSM</code>.</p>
+<p>Install and run <a href="https://grass.osgeo.org/grass85/manuals/addons/r.local.relief.html">r.local.relief</a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.local.relief</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.local.relief</span> input=sample_DSM output=local_relief_sample_DSM</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.local.relief</span> input=sample_DSM_noGCPs output=local_relief_sample_DSM_noGCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Install and run <a href="https://grass.osgeo.org/grass85/manuals/addons/r.shaded.pca.html">r.shaded.pca</a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.shaded.pca</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.shaded.pca</span> input=sample_DSM output=shaded_pca_sample_DSM</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.shaded.pca</span> input=sample_DSM_noGCPs output=shaded_pca_sample_DSM_noGCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Install and run <a href="https://grass.osgeo.org/grass85/manuals/addons/r.skyview.html">r.skyview</a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.skyview</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.skyview</span> input=sample_DSM output=skyview_sample_DSM</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.skyview</span> input=sample_DSM_noGCPs output=skyview_sample_DSM_noGCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="detect-terrain-change-using-two-uas-surveys" class="level3">
 <h3 class="anchored" data-anchor-id="detect-terrain-change-using-two-uas-surveys">Detect terrain change using two UAS surveys</h3>
-<p>It is also useful to a perform terrain analysis using GIS tools to see the differences even more clearly.</p>
-<p>Run the <a href="https://grass.osgeo.org/grass84/manuals/r.slope.aspect.html">r.slope.aspect</a> and <a href="https://grass.osgeo.org/grass84/manuals/r.relief.html">r.relief</a> command for chosen DSMs, for example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> rast=sample_DSM</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=sample_DSM slope=sample_DSM_slope aspect=sample_DSM_aspect pcurvature=sample_DSM_curv</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=sample_DSM output=sample_DSM_relief</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=sample_DSM_noGCPs slope=sample_DSM_noGCP_slope aspect=sample_DSM_noGCP_aspect pcurvature=sample_DSM_noGCP_curv</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=sample_DSM output=sample_DSM_noGCP_relief</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You can also install <a href="https://grass.osgeo.org/grass84/manuals/keywords.html#addons">GRASS GIS Addons</a> (via <a href="https://grass.osgeo.org/grass84/manuals/g.extension.html">g.extension</a>):</p>
-<ul>
-<li><a href="https://grass.osgeo.org/grass84/manuals/addons/r.local.relief.html">r.local.relief</a></li>
-<li><a href="https://grass.osgeo.org/grass84/manuals/addons/r.shaded.pca.html">r.shaded.pca</a></li>
-<li><a href="https://grass.osgeo.org/grass84/manuals/addons/r.skyview.html">r.skyview</a></li>
-</ul>
-<p>and apply this modules to sample data or your data.</p>
-<p>Set your computational region</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> rast=sample_DSM</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Install and run the <a href="https://grass.osgeo.org/grass84/manuals/addons/r.local.relief.html">r.local.relief</a> addon.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.local.relief</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.local.relief</span> input=sample_DSM output=local_relief_sample_DSM</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.local.relief</span> input=sample_DSM_noGCPs output=local_relief_sample_DSM_noGCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Install and run <a href="https://grass.osgeo.org/grass84/manuals/addons/r.shaded.pca.html">r.shaded.pca</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.shaded.pca operation=add </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.shaded.pca</span> input=sample_DSM output=shaded_pca_sample_DSM</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.shaded.pca</span> input=sample_DSM_noGCPs output=shaded_pca_sample_DSM_noGCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Install and run <a href="https://grass.osgeo.org/grass84/manuals/addons/r.skyview.html">r.skyview</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.skyview operation=add</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.skyview</span> input=sample_DSM output=skyview_sample_DSM</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.skyview</span> input=sample_DSM_noGCPs output=skyview_sample_DSM_noGCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The PERMANENT mapset also holds the DSM of the flight of 2015-10-06, processed in Agisoft with 8 GCPs. Subtract it from the June DSM:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=2015_06_20_DSM_agi_11GCP</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"diff_jun_oct_agis = 2015_06_20_DSM_agi_11GCP - 2015_10_06_DSM_agi_8GCPs"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=diff_jun_oct_agis</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The difference is June minus October. Positive values mean the surface was higher in June: a <strong>loss</strong> of elevation by October, for example a harvested crop. Negative values mean the surface was higher in October: a <strong>gain</strong>, for example a crop that grew over the summer. Keep this sign in mind when you read the map.</p>
+<p>Apply the same -1 m to 1 m color table as above:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-40</span> red</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-1</span> orange</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-0.5</span> yellow</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-0.1</span> grey</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> white</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0.1</span> grey</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0.5</span> cyan</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> aqua</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">35</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The roads did not change between June and October, so the difference on them is the error of the comparison. Note how large it is; anything smaller than that elsewhere cannot be called change.</p>
+<section id="classify-and-measure-the-change" class="level4">
+<h4 class="anchored" data-anchor-id="classify-and-measure-the-change">Classify and measure the change</h4>
+<p>Call differences beyond half a meter loss or gain and everything in between stable, then let <a href="https://grass.osgeo.org/grass85/manuals/r.report.html">r.report</a> sum the area of each class in hectares. Half a meter is well above the error on the roads; change the threshold if your reading of the roads suggests a different value, and say so in the report.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"change_class = if(diff_jun_oct_agis &gt; 0.5, 1, if(diff_jun_oct_agis &lt; -0.5, 3, 2))"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> map=change_class separator=: rules=- <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">1:loss (June higher)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">2:stable</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">3:gain (October higher)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=change_class rules=- <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">1 orange</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">2 white</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st">3 blue</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=change_class units=h,p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the GUI, enter the category labels and the color rules through the <em>Define</em> tabs of <a href="https://grass.osgeo.org/grass85/manuals/r.category.html">r.category</a> and r.colors, and run r.report from <em>Raster &gt; Reports and statistics &gt; Report basic information</em>.</p>
 </section>
-<section id="detect-terrain-change-using-two-uas-surveys-1" class="level3">
-<h3 class="anchored" data-anchor-id="detect-terrain-change-using-two-uas-surveys-1">Detect terrain change using two UAS surveys</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> rast=2015_06_20_DSM_agi_11GCP</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"diff_jun_oct_agis = 2015_06_20_DSM_agi_11GCP - 2015_10_06_DSM_agi_8GCPs"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Apply the color table that varies from -1m to 1m to visualize results of the comparison using <a href="https://grass.osgeo.org/grass84/manuals/r.colors.html">r.colors</a> module.</p>
-<p>In the <code>Define</code> tab, type the following rules in the <code>enter values directly</code> option.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">-40</span> red</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">-1</span> orange</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">-0.5</span> yellow</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">-0.1</span> grey</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">0</span> white</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">0.1</span> grey</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">0.5</span> cyan</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> aqua</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">35</span> blue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Note the accuracy of the DSM along the roads, interpret the observed gain and loss in elevation.</p>
-<p>Use orthophotos from:</p>
-<ul>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/112415/ortho_2015_11_24.pack">Nov 2015</a></li>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/032917/ortho_2017_03_29.pack">March 2017</a></li>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack">June 2017</a></li>
-</ul>
+<section id="orthophoto-for-context" class="level4">
+<h4 class="anchored" data-anchor-id="orthophoto-for-context">Orthophoto for context</h4>
+<p>To interpret the change you need to know what was on the fields. The November 2015 orthophoto was flown after the harvest; it does not match either DSM date, but it shows the field boundaries, the roads, and the tree lines. Change the working directory to the folder you downloaded it to (<em>Settings &gt; GRASS working environment &gt; Change working directory</em>) and restore it with <a href="https://grass.osgeo.org/grass85/manuals/r.unpack.html">r.unpack</a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> ortho_2015_11_24.pack <span class="at">-o</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Display the orthophoto with the change map on top of it. The change map is opaque, so set its opacity in the Layer Manager (right click the layer, <em>Change opacity level</em>) to about 50 percent, or display only the loss and gain cells:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"change_only = if(change_class == 2, null(), change_class)"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=change_only raster=change_class</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Which of the loss and gain patches follow field boundaries (crops), which follow tree lines (canopy growth or leaf-off differences), and which follow flight lines or the edges of the block (processing artifacts)? What is the difference on the roads, and what does it say about the accuracy of a change map from two UAS surveys?</p>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap-233f4642ec526109732ad0564d688ace.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -646,20 +646,21 @@ window.Quarto = {
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#performing-measurements-on-a-model" id="toc-performing-measurements-on-a-model" class="nav-link" data-scroll-target="#performing-measurements-on-a-model">Performing measurements on a model</a>
   <ul class="collapse">
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data preparation</a></li>
   <li><a href="#distance-measurement" id="toc-distance-measurement" class="nav-link" data-scroll-target="#distance-measurement">Distance measurement</a></li>
   <li><a href="#distance-between-gcps" id="toc-distance-between-gcps" class="nav-link" data-scroll-target="#distance-between-gcps">Distance between GCPs</a></li>
   <li><a href="#distance-between-cameras" id="toc-distance-between-cameras" class="nav-link" data-scroll-target="#distance-between-cameras">Distance between cameras</a></li>
   </ul></li>
   <li><a href="#performing-measurements-on-dsms" id="toc-performing-measurements-on-dsms" class="nav-link" data-scroll-target="#performing-measurements-on-dsms">Performing measurements on DSMs</a>
   <ul class="collapse">
-  <li><a href="#point-and-distance-measurement" id="toc-point-and-distance-measurement" class="nav-link" data-scroll-target="#point-and-distance-measurement">Point and distance measurement:</a></li>
-  <li><a href="#contours" id="toc-contours" class="nav-link" data-scroll-target="#contours">Contours:</a></li>
-  <li><a href="#cross-section" id="toc-cross-section" class="nav-link" data-scroll-target="#cross-section">Cross Section:</a></li>
+  <li><a href="#point-and-distance-measurement" id="toc-point-and-distance-measurement" class="nav-link" data-scroll-target="#point-and-distance-measurement">Point and distance measurement</a></li>
+  <li><a href="#contours" id="toc-contours" class="nav-link" data-scroll-target="#contours">Contours</a></li>
+  <li><a href="#cross-section" id="toc-cross-section" class="nav-link" data-scroll-target="#cross-section">Cross section</a></li>
   </ul></li>
   <li><a href="#volume-and-area-measurements" id="toc-volume-and-area-measurements" class="nav-link" data-scroll-target="#volume-and-area-measurements">Volume and area measurements</a>
   <ul class="collapse">
-  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips">Tips</a></li>
+  <li><a href="#processing" id="toc-processing" class="nav-link" data-scroll-target="#processing">Processing</a></li>
+  <li><a href="#measurement" id="toc-measurement" class="nav-link" data-scroll-target="#measurement">Measurement</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -696,28 +697,27 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="measurements-in-agisoft-metashape">Measurements in Agisoft Metashape</h2>
 <section id="task" class="level3">
 <h3 class="anchored" data-anchor-id="task">Task</h3>
-<p>Perform measurements in Agisoft Metashape:</p>
+<p>Perform measurements in Agisoft Metashape 2.3.2:</p>
 <ul>
-<li>calculate distance, area and volume measuremens</li>
-<li>generate profiles and countour lines</li>
+<li>calculate distance, area, and volume measurements</li>
+<li>generate profiles and contour lines</li>
 </ul>
+<p>Metashape 2.x renamed several menu items. The instructions use the current names, with the Metashape 1.x name in parentheses the first time it appears; the screenshots are from 1.x.</p>
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <ul>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip">Imagery from 02/06/2018 Lake Wheeler flight</a></li>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip">Agisoft project files with processed data</a></li>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip">Imagery for the volume and area measurements</a> acquired 07/02/2017 at Wake Waste Transfer <a href="https://goo.gl/maps/hkYqDxZHcpT2">check localizations</a></li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip">Agisoft project files with the processed 02/06/2018 Lake Wheeler flight</a> (7.5 GB, required)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip">Imagery from the 02/06/2018 Lake Wheeler flight</a> (3.2 GB, optional, see below)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip">Imagery for the volume and area measurements</a> (120 MB), 25 photos acquired 02/07/2017 at the Wake County Waste Transfer Station (<a href="https://goo.gl/maps/hkYqDxZHcpT2">location</a>)</li>
 </ul>
 </section>
 <section id="performing-measurements-on-a-model" class="level3">
 <h3 class="anchored" data-anchor-id="performing-measurements-on-a-model">Performing measurements on a model</h3>
 <section id="data-preparation" class="level4">
-<h4 class="anchored" data-anchor-id="data-preparation">Data Preparation</h4>
-<p>In the first part of the assignment you will be working with <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/Flight_data.zip">data from 02/06/2018 Lake Wheeler flight</a>. Because the processing is very time consuming, the processed data (stored in the <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/project_files.zip">Agisoft project files</a> is provided).</p>
-<p>After opening the <strong>2018_02_06_assignment.psx</strong> file, you should see generated orthomosaic and DSM in the Workspace pane.</p>
-<p>All you have to do is to indicate the new location of the pictures.</p>
-<p>In order to do that <strong>right clik</strong> on any of the pictures in the Pictures pane and choose <code>Change Path...</code> and in the dialog window mark the <code>All cameras</code> option. This will automatically apply the updated location to all the pictures in the project.</p>
+<h4 class="anchored" data-anchor-id="data-preparation">Data preparation</h4>
+<p>In the first part of the lab you will be working with the 02/06/2018 Lake Wheeler flight. Because the processing is very time consuming, the processed project is provided. Start the download before the lab.</p>
+<p>Unzip the project files and open <strong>2018_02_06_assignment.psx</strong>. The Workspace pane lists the point cloud, model, DEM, and orthomosaic, which is everything the measurements below use. Metashape warns that it cannot find the photos; the measurements work without them. If you also downloaded the photos, <strong>right click</strong> on any picture in the Photos pane, choose <code>Change Path...</code>, and mark <code>All cameras</code> in the dialog. This applies the new location to all the pictures in the project.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/agi_change_path.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
@@ -726,14 +726,14 @@ window.Quarto = {
 </section>
 <section id="distance-measurement" class="level4">
 <h4 class="anchored" data-anchor-id="distance-measurement">Distance measurement</h4>
-<p>Using the <strong>Ruler</strong> instrument for the toolbar menu calculate the length of the longer side of the bigger building.</p>
+<p>Using the <strong>Ruler</strong> tool from the toolbar of the Model view, measure the length of the longer side of the largest building in the model. Take a screenshot that shows which building and which side you measured and include it in the report.</p>
 </section>
 <section id="distance-between-gcps" class="level4">
 <h4 class="anchored" data-anchor-id="distance-between-gcps">Distance between GCPs</h4>
-<p>To measure distance between two markers in Agisoft:</p>
+<p>To measure the distance between two markers in Metashape:</p>
 <ul>
-<li>Select both markers to be used for distance measurements on the Reference pane using <kbd title="Ctrl" aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> button</li>
-<li>Select Create Scale Bar command form the 3D view context menu (<em>Right click on the marker</em>). The scale bar will be created and an instant added to the Scale Bar list on the Reference pane.</li>
+<li>Select both markers on the Reference pane using the <kbd title="Ctrl" aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> key</li>
+<li>Right click on one of them and select <code>Create Scale Bar</code>. The scale bar is added to the Scale Bars list on the Reference pane.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -745,7 +745,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In order to see the estimated values, you need to be in the estimates display - on the Reference pane, following button needs to be active</p>
+<p>To see the estimated values, the Reference pane has to be in the estimates display; the following button needs to be active:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/agi_view_estimates.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
@@ -753,7 +753,7 @@ Note
 </div>
 </div>
 </div>
-<p>Compare distance between <strong>UAV 9</strong> and <strong>UAV 12</strong> estimated by Agisoft Metashape with the distance calculated from coordinates:</p>
+<p>Compare the distance between <strong>UAV 9</strong> and <strong>UAV 12</strong> estimated by Metashape with the distance calculated from the coordinates:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -788,35 +788,36 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Remember to take into account elevation difference in your calculations. <strong>Show your work</strong></p>
-<p>How much (in meters/percentage) do these values differ?</p>
-<p>Euclidean Distance formula: <span class="math display">\[
+<p>The scale bar distance is the straight line between the two markers in 3D, so include the elevation difference in your calculation. <strong>Show your work.</strong></p>
+<p>How much (in meters and in percent) do these values differ?</p>
+<p>Euclidean distance: <span class="math display">\[
 d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}
 \]</span></p>
-<p>Calculate distance in meters: <span class="math display">\[
+<p>Difference in meters: <span class="math display">\[
 \text{Difference in meters} = \left| \text{Metashape distance} - \text{Calculated distance} \right|
 \]</span></p>
-<p>Calculate percent difference: <span class="math display">\[
+<p>Percent difference: <span class="math display">\[
 \text{Percentage difference} = \left( \frac{\text{Difference}}{\text{Calculated distance}} \right) \times 100
 \]</span></p>
+<p>The coordinates are State Plane grid coordinates, and the grid scale factor at Lake Wheeler is about 0.9999. Metashape measures the true distance, so expect it to be a few centimeters longer than the calculated one even if the model were perfect. That part of the difference comes from the map projection, not from the model.</p>
 </div>
 </div>
 </section>
 <section id="distance-between-cameras" class="level4">
 <h4 class="anchored" data-anchor-id="distance-between-cameras">Distance between cameras</h4>
-<p>To measure distance between two cameras in Agisoft:</p>
+<p>To measure the distance between two cameras in Metashape:</p>
 <ul>
-<li>Select the two cameras on the Workspace or Reference pane using <kbd title="Ctrl" aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> button. Alternatively, the cameras can be selected in the Model view window using selecting tools from the Toolbar.</li>
-<li>Select Create Scale Bar command form the 3D view context menu. The scale bar will be created and an instant added to the Scale Bar list on the Reference pane.</li>
+<li>Select the two cameras on the Workspace or Reference pane using the <kbd title="Ctrl" aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> key. The Reference pane can be sorted by name to find them. Alternatively, select the cameras in the Model view with the selection tools from the toolbar.</li>
+<li>Right click on one of them and select <code>Create Scale Bar</code>. The scale bar is added to the Scale Bars list on the Reference pane.</li>
 </ul>
-<p>Measure distance between cameras <strong>DSC03341</strong> and <strong>DSC03752</strong>.</p>
+<p>Measure the distance between cameras <strong>DSC03341</strong> and <strong>DSC03752</strong>.</p>
 </section>
 </section>
 <section id="performing-measurements-on-dsms" class="level3">
 <h3 class="anchored" data-anchor-id="performing-measurements-on-dsms">Performing measurements on DSMs</h3>
-<p>Switch to Ortho view (double click on the Orthomosaic in the Workspace pane)</p>
+<p>Switch to the Ortho view (double click on the orthomosaic in the Workspace pane).</p>
 <section id="point-and-distance-measurement" class="level4">
-<h4 class="anchored" data-anchor-id="point-and-distance-measurement">Point and distance measurement:</h4>
+<h4 class="anchored" data-anchor-id="point-and-distance-measurement">Point and distance measurement</h4>
 <p>In the western part of the area, close to the forest edge, there are some sheaves.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -831,41 +832,47 @@ Tip
 <p><em>sheaf (sheaves)</em> - a bundle of grain stalks laid lengthwise and tied together after reaping.</p>
 </div>
 </div>
+<p>Estimate the diameter and the height of the northernmost sheaf. Include a screenshot of the sheaf you measured.</p>
 <ul>
-<li>Using Ruler instrument or Draw Polyline from the Toolbar of the Ortho view estimate the diameter and height of the very north sheaf.</li>
+<li>Diameter: use the Ruler tool or Draw Polyline from the Ortho view toolbar.</li>
+<li>Height: the Ortho view shows the coordinates and the DEM elevation of the point under the cursor in its bottom right corner. Read the elevation on top of the sheaf and on the ground next to it; the height is the difference. You can also draw a polyline across the sheaf and look at the cross section (see below).</li>
 </ul>
 </section>
 <section id="contours" class="level4">
-<h4 class="anchored" data-anchor-id="contours">Contours:</h4>
+<h4 class="anchored" data-anchor-id="contours">Contours</h4>
 <ul>
-<li>Select <code>Generate Contours...</code> command from Tools menu.</li>
-<li>Set round values for Minimal altitude, Maximal altitude parameters as well as the Interval for the contours.</li>
-<li>Set the transparency for the contours for 50% and do not display the labels. (You can do it in <code>Preferences</code> in the Contours context menu in the Workspace pane (contours are in the Shapes folder))</li>
+<li>Select <code>Tools &gt; DEM &gt; Generate Contours...</code> (<code>Tools &gt; Generate Contours...</code> in 1.x).</li>
+<li>Set round values for the Minimal altitude and Maximal altitude parameters as well as the Interval of the contours.</li>
+<li>Set the transparency of the contours to 50% and do not display the labels (<code>Preferences</code> in the context menu of the contours layer in the Workspace pane; contours are in the Shapes folder).</li>
 </ul>
 </section>
 <section id="cross-section" class="level4">
-<h4 class="anchored" data-anchor-id="cross-section">Cross Section:</h4>
-<p>Choose some interesting place for cross section (you can see from the contours where are some variations in terrain)</p>
+<h4 class="anchored" data-anchor-id="cross-section">Cross section</h4>
+<p>Choose an interesting place for a cross section (the contours show where the terrain varies).</p>
 <ul>
-<li>Indicate a line to make a cut of the model using Draw Polyline tool from the Ortho view toolbar (double click ends the line).</li>
-<li>Right button click on the polyline/polygon and select <code>Measure...</code> command from the context menu.</li>
-<li>Include in the report your profile with the and its location.</li>
+<li>Draw a line across it with the Draw Polyline tool from the Ortho view toolbar (double click ends the line).</li>
+<li>Right click on the polyline and select <code>Measure...</code> from the context menu. The Profile tab shows the cross section. If your version lists a separate <code>Measure Profile...</code> command, use that.</li>
+<li>Include the profile and a screenshot of its location in your report.</li>
 </ul>
 </section>
 </section>
 <section id="volume-and-area-measurements" class="level3">
 <h3 class="anchored" data-anchor-id="volume-and-area-measurements">Volume and area measurements</h3>
-<p>In this part of the assignment you will be working with <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip">imagery acquired Feb 2017 at Wake Waste Transfer</a>.</p>
-<p><strong>Calculate the volume and the area of the “waste pile”</strong> (for excact location see <a href="https://goo.gl/maps/hkYqDxZHcpT2">Google Maps</a>)</p>
-<section id="tips" class="level4">
-<h4 class="anchored" data-anchor-id="tips">Tips</h4>
+<p>In this part of the lab you will be working with the <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020618/images.zip">25 photos acquired in February 2017 at the Wake County Waste Transfer Station</a>.</p>
+<section id="processing" class="level4">
+<h4 class="anchored" data-anchor-id="processing">Processing</h4>
+<p>The photos have not been processed. Create a new project and process them as in <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html">Assignment 2B</a>: add the photos, align them, build the point cloud, the model, the DEM, and the orthomosaic. There are no GCPs for this flight, so the model is positioned and scaled by the camera geotags only. That is enough for a volume; the absolute position can be off by a few meters. With 25 photos the processing takes about 15 minutes at Medium quality.</p>
+<p>Use a high (or custom) face count when building the model, so that the surface of the pile is detailed.</p>
+</section>
+<section id="measurement" class="level4">
+<h4 class="anchored" data-anchor-id="measurement">Measurement</h4>
+<p><strong>Calculate the volume and the area of the “waste pile”</strong> (for the exact location see <a href="https://goo.gl/maps/hkYqDxZHcpT2">Google Maps</a>).</p>
 <ul>
-<li>Follow the Agisoft’s <a href="https://www.agisoft.com/pdf/PS_1.4_Tutorial%20(IL)%20-%20Measurements%20(DEM).pdf">tutorial on volume measurements</a></li>
-<li>the delimitation of the pile is up to you - you can examine whatever part of the pile you want to process</li>
-<li>use a high (or custom) face count setting in mesh generation to have detailed mesh</li>
-<li>remember to close mesh holes (level 100%)</li>
-<li>you can additionally generate contours</li>
+<li>Switch to the Ortho view and draw a polygon around the pile with the Draw Polygon tool. The delimitation of the pile is up to you; include a screenshot of the polygon in the report.</li>
+<li>Right click on the polygon and select <code>Measure...</code>. The dialog reports the perimeter, the area, and the volume above and below a base level. Agisoft’s tutorial on <a href="https://agisoft.freshdesk.com/support/solutions/articles/31000148884">DEM based measurements</a> shows the dialog.</li>
+<li>The base level is the surface the volume is measured from. Choose <code>Best fit plane</code> or <code>Mean level</code> and say in the report which one you used; the volume depends on it. Report the volume above the base level and the area.</li>
 </ul>
+<p>Optional: measure the volume on the model as well, with <code>Tools &gt; Model &gt; Measure Area and Volume...</code> (<code>Tools &gt; Mesh</code> in 1.x). This method needs a closed surface, so close the holes first (<code>Tools &gt; Model &gt; Close Holes</code>, level 100%) and remove everything but the pile from the model. Compare the two volumes.</p>
 
 
 </section>
