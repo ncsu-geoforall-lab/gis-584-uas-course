@@ -1427,7 +1427,7 @@
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#task",
     "title": "Assignment 4B",
     "section": "Task",
-    "text": "Task\nAnalyze an airborne lidar point cloud and a UAS structure from motion (SfM) point cloud of the Mid Pines area at Lake Wheeler, and turn them into surfaces. You will explore the point clouds in a browser and in GRASS, compare their point densities, bin the lidar returns into raster surfaces and a simple land cover classification, interpolate a high resolution bare earth DEM and a canopy DSM with their topographic derivatives, and check the lidar DEM against the surveyed GCPs. Three optional parts go further: ground classification of the raw points, voxel models of the canopy, and lidar transects.\nThe two point clouds represent the same ground in two different ways. Lidar records several returns per pulse and reaches the ground under the canopy; SfM reconstructs the first surface the camera sees. Keep that difference in mind when you compare densities and surfaces.",
+    "text": "Task\nAnalyze an airborne lidar point cloud and a UAS structure from motion (SfM) point cloud of the Mid Pines area at Lake Wheeler, and turn them into surfaces. You will explore the point clouds in a browser and in GRASS, compare their point densities, bin the lidar returns into raster surfaces and a simple land cover classification, interpolate a high resolution bare earth DEM and a canopy DSM with their topographic derivatives, and check the lidar DEM against the surveyed GCPs. Three optional parts go further: ground classification of the raw points, voxel models of the canopy, and lidar transects.\nThe two point clouds represent the same ground in two different ways. Lidar records several returns per pulse and reaches the ground under the canopy; SfM reconstructs the first surface the camera sees. Keep that difference in mind when you compare densities and surfaces.\nWork through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. The 3D views in Parts 4 and 6 are done in the GUI. Either way, the report is the same.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -1466,7 +1466,7 @@
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#part-1-explore-the-point-clouds",
     "title": "Assignment 4B",
     "section": "Part 1: Explore the point clouds",
-    "text": "Part 1: Explore the point clouds\nOpen the lidar cloud in the browser: paste the cloud optimized LAZ URL into COPC Viewer. Color the points by elevation, by classification, and by intensity, and look at the trees from the side. Note what is under the canopy; the UAS sample is not cloud optimized, so you will look at it in GRASS in Part 2, where the difference under the canopy is what the densities measure.\nStart GRASS in the Lake_Wheeler_NCspm project and create a new mapset for this assignment, for example point_clouds. Change the working directory to the folder holding the downloaded files (Settings &gt; GRASS working environment &gt; Change working directory) so the commands can refer to the files by name.\nRead the lidar file’s metadata, in particular its point classes, which you will filter on later:\npdal info --stats --filters.stats.count=Classification mid_pines_spm_2013.las\nThe counts block of the output lists each class and how many points fall in it. The 2013 data uses four codes:\n\n\n\n\n\n\n\n\nClass\nMeaning\nPoints\n\n\n\n\n1\nUnclassified (vegetation and buildings)\n1,340,658\n\n\n2\nGround\n2,580,704\n\n\n7\nLow point (noise)\n66\n\n\n11\nReserved in LAS 1.4; this provider used it for withheld points\n1,960,603\n\n\n\nClasses 1 and 2 are the ones you will work with. Get the extent of the point cloud and set the computational region to it:\nr.in.pdal -g input=mid_pines_spm_2013.las\ng.region n=220218 s=218694 e=637795 w=636271 -p\n\n\n\n\n\n\nTipIf r.in.pdal is not available\n\n\n\nSome GRASS builds ship without PDAL support. Download the interpolated DEM and DSM, unzip it into your working directory, and restore the two surfaces under the names Part 4 uses:\nr.unpack -o input=mid_pines_lidar2013_dem.pack output=mid_pines_ground_elev\nr.unpack -o input=mid_pines_lidar2013_dsm.pack output=mid_pines_surface_elev\nSkip the import commands in Parts 2 to 4 and continue with the analysis and visualization steps on these rasters.",
+    "text": "Part 1: Explore the point clouds\nOpen the lidar cloud in the browser: paste the cloud optimized LAZ URL into COPC Viewer. Color the points by elevation, by classification, and by intensity, and look at the trees from the side. Note what is under the canopy; the UAS sample is not cloud optimized, so you will look at it in GRASS in Part 2, where the difference under the canopy is what the densities measure.\nStart GRASS in the Lake_Wheeler_NCspm project and create a new mapset for this assignment, for example point_clouds. Change the working directory to the folder holding the downloaded files (Settings &gt; GRASS working environment &gt; Change working directory) so the commands can refer to the files by name.\nRead the lidar file’s metadata, in particular its point classes, which you will filter on later:\npdal info --stats --filters.stats.count=Classification mid_pines_spm_2013.las\nThe counts block of the output lists each class and how many points fall in it. The 2013 data uses four codes:\n\n\n\n\n\n\n\n\nClass\nMeaning\nPoints\n\n\n\n\n1\nUnclassified (vegetation and buildings)\n1,340,658\n\n\n2\nGround\n2,580,704\n\n\n7\nLow point (noise)\n66\n\n\n11\nReserved in LAS 1.4; this provider used it for withheld points\n1,960,603\n\n\n\nClasses 1 and 2 are the ones you will work with. Get the extent of the point cloud and set the computational region to it:\nr.in.pdal -g input=mid_pines_spm_2013.las\ng.region n=220218 s=218694 e=637795 w=636271 -p\n\n\n\n\n\n\nTipIf r.in.pdal is not available\n\n\n\nSome GRASS builds ship without PDAL support. Download the interpolated DEM and DSM and unzip it into your working directory. The zip holds four packs; use the two mid_pines_* files (the secref_* pair covers a different site) and restore them under the names Part 4 uses:\nr.unpack -o input=mid_pines_lidar2013_dem.pack output=mid_pines_ground_elev\nr.unpack -o input=mid_pines_lidar2013_dsm.pack output=mid_pines_surface_elev\nSkip the import commands in Parts 2 to 4 and continue with the analysis and visualization steps on these rasters.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -1479,7 +1479,7 @@
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#part-2-point-density",
     "title": "Assignment 4B",
     "section": "Part 2: Point density",
-    "text": "Part 2: Point density\nSet the resolution to 1 m. The -a flag aligns the region boundaries to whole multiples of the resolution:\ng.region res=1 -pa\nCount all points per cell with binning, then display the result with a legend and save the image for the report:\nr.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_dens_all method=n\nd.rast mid_pines_dens_all\nd.legend -f -s -d raster=mid_pines_dens_all at=5,50,7,10\nd.out.file mid_pines_dens_all.png\nThe -o flag skips the projection check: the file carries no CRS record but is in the project’s coordinate system. The import prints a line for every point that falls exactly on the region boundary and is ignored; that is expected.\nCount the ground points only, and give both density rasters the same histogram equalized color table so they can be compared:\nr.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_dens_ground class_filter=2 method=n\nr.colors -e map=mid_pines_dens_all,mid_pines_dens_ground color=bcyr\nd.rast mid_pines_dens_ground\nCompare the two rasters: where does the ground density drop, and why?\nNow the UAS cloud. Find its extent, set a 1 m region over the sub-area, and bin it the same way:\nr.in.pdal -g input=2015_06_sample_points_NCspm.las\ng.region n=219660 s=219288 e=637287 w=636876 res=1 -pa\nr.in.pdal -o input=2015_06_sample_points_NCspm.las output=midpines_uas_06_1m_dens method=n\nr.colors -e map=mid_pines_dens_all,mid_pines_dens_ground,midpines_uas_06_1m_dens color=bcyr\nd.rast midpines_uas_06_1m_dens\nd.legend -f -s -d raster=midpines_uas_06_1m_dens at=5,50,7,10\nZoom to the UAS sub-area and compare the lidar and UAS densities over the same ground. Save the images.",
+    "text": "Part 2: Point density\nSet the resolution to 1 m. The -a flag aligns the region boundaries to whole multiples of the resolution:\ng.region res=1 -pa\nCount all points per cell with binning, then display the result with a legend and save the image for the report:\nr.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_dens_all method=n\nd.rast mid_pines_dens_all\nd.legend -f -s -d raster=mid_pines_dens_all at=5,50,7,10\nd.out.file mid_pines_dens_all.png\nThe -o flag skips the projection check: the file’s CRS record is worded differently from the project’s, but it is the same coordinate system. A few thousand points that fall on the region boundary are skipped without a message; the count of processed points is slightly lower than the file’s point count, which is expected.\nCount the ground points only, and give both density rasters the same histogram equalized color table so they can be compared:\nr.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_dens_ground class_filter=2 method=n\nr.colors -e map=mid_pines_dens_all,mid_pines_dens_ground color=bcyr\nd.rast mid_pines_dens_ground\nCompare the two rasters: where does the ground density drop, and why?\nNow the UAS cloud. Find its extent, set a 1 m region over the sub-area, and bin it the same way:\nr.in.pdal -g input=2015_06_sample_points_NCspm.las\ng.region n=219660 s=219288 e=637287 w=636876 res=1 -pa\nr.in.pdal -o input=2015_06_sample_points_NCspm.las output=midpines_uas_06_1m_dens method=n\nr.colors -e map=mid_pines_dens_all,mid_pines_dens_ground,midpines_uas_06_1m_dens color=bcyr\nd.rast midpines_uas_06_1m_dens\nd.legend -f -s -d raster=midpines_uas_06_1m_dens at=5,50,7,10\nZoom to the UAS sub-area and compare the lidar and UAS densities over the same ground. Save the images.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -1505,7 +1505,7 @@
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#part-4-high-resolution-dem-and-dsm",
     "title": "Assignment 4B",
     "section": "Part 4: High resolution DEM and DSM",
-    "text": "Part 4: High resolution DEM and DSM\nImport the points as vectors, the ground class for the DEM and the first returns of classes 1 and 2 for the DSM:\nv.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_ground class_filter=2\nv.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_surface class_filter=1,2 return_filter=first\nRemove the vector layers from the Layer Manager if they were added; drawing millions of points is slow.\nEstimate the point density and mean spacing of the ground points:\nv.outlier -e input=mid_pines_ground\n\nEstimated point density: 1.111 Estimated mean distance between points: 0.9487\n\nSet a smaller region at 0.5 m resolution and interpolate both surfaces with the regularized spline with tension, computing slope and profile curvature at the same time:\ng.region n=219780 s=219100 e=637250 w=636575 res=0.5 -pa\nv.surf.rst input=mid_pines_ground elevation=mid_pines_ground_elev slope=mid_pines_ground_slope pcurv=mid_pines_ground_profcurv npmin=80 tension=20 smooth=1\nv.surf.rst input=mid_pines_surface elevation=mid_pines_surface_elev slope=mid_pines_surface_slope pcurv=mid_pines_surface_profcurv npmin=80 tension=20 smooth=1\nr.colors map=mid_pines_ground_elev,mid_pines_surface_elev color=elevation\nA higher npmin=150 reduces the segmentation artifacts visible in the slope and curvature maps, at a much longer run time.\nVisualize the DEM and DSM in the 3D view and use cross-sections. Leave only mid_pines_surface_elev in the Layer Manager, hide the legend, zoom to the computational region, switch to 3D, set the surface resolution to 1 and the color to the classes raster. Save the images.",
+    "text": "Part 4: High resolution DEM and DSM\nImport the points as vectors, the ground class for the DEM and the first returns of classes 1 and 2 for the DSM:\nv.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_ground class_filter=2\nv.in.pdal -o input=mid_pines_spm_2013.las output=mid_pines_surface class_filter=1,2 return_filter=first\nRemove the vector layers from the Layer Manager if they were added; drawing millions of points is slow.\nEstimate the point density and mean spacing of the ground points:\nv.outlier -e input=mid_pines_ground\n\nEstimated point density: 1.111 Estimated mean distance between points: 0.9487\n\nSet a smaller region at 0.5 m resolution and interpolate both surfaces with the regularized spline with tension, computing slope and profile curvature at the same time:\ng.region n=219780 s=219100 e=637250 w=636575 res=0.5 -pa\nv.surf.rst input=mid_pines_ground elevation=mid_pines_ground_elev slope=mid_pines_ground_slope pcurv=mid_pines_ground_profcurv npmin=80 tension=20 smooth=1\nv.surf.rst input=mid_pines_surface elevation=mid_pines_surface_elev slope=mid_pines_surface_slope pcurv=mid_pines_surface_profcurv npmin=80 tension=20 smooth=1\nr.colors map=mid_pines_ground_elev,mid_pines_surface_elev color=elevation\nEach surface takes under a minute. A higher npmin=150 reduces the segmentation artifacts visible in the slope and curvature maps, at a much longer run time.\nVisualize the DEM and DSM in the 3D view and use cross-sections. Leave only mid_pines_surface_elev in the Layer Manager, hide the legend, zoom to the computational region, switch to 3D, set the surface resolution to 1 and the color to the classes raster. Save the images.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -1518,7 +1518,7 @@
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#part-5-validate-the-lidar-dem-against-the-gcps",
     "title": "Assignment 4B",
     "section": "Part 5: Validate the lidar DEM against the GCPs",
-    "text": "Part 5: Validate the lidar DEM against the GCPs\nRestore the surveyed GCPs and add columns for the DEM height and the difference:\nv.unpack -o input=GCP_12_decimal.pack\nv.db.addcolumn map=GCP_12_decimal columns=\"dem_height DOUBLE, height_difference DOUBLE\"\nThe pack was written by an older GRASS whose CRS record differs in wording from the current project’s; -o accepts the project’s definition.\nSample the DEM at the GCP locations (-i interpolates between the four nearest cells), compute the difference, and list the results:\nv.what.rast -i map=GCP_12_decimal raster=mid_pines_ground_elev column=dem_height\nv.db.update map=GCP_12_decimal column=height_difference query_column=\"ASL - dem_height\"\nv.db.select map=GCP_12_decimal columns=ASL,dem_height,height_difference\nCompute the statistics of the differences and map them:\nv.univar -e GCP_12_decimal column=height_difference\nd.vect.thematic map=GCP_12_decimal column=height_difference algorithm=int nclasses=4 colors=blue,30:144:255,173:216:230,255:192:203 icon=basic/circle size=20\nd.legend.vect at=10,40\nThe Attribute Table Manager shows the same table. Read the mean and the standard deviation the way Topic 3B read checkpoint residuals: the mean is the bias of the lidar DEM against the survey, and the RMSE of the differences is its vertical accuracy at these twelve points.",
+    "text": "Part 5: Validate the lidar DEM against the GCPs\nRestore the surveyed GCPs and add columns for the DEM height and the difference:\nv.unpack -o input=GCP_12_decimal.pack\nv.db.addcolumn map=GCP_12_decimal columns=\"dem_height DOUBLE, height_difference DOUBLE\"\nThe pack was written by an older GRASS whose CRS record differs in wording from the current project’s; -o accepts the project’s definition.\nSample the DEM at the GCP locations (-i interpolates between the four nearest cells), compute the difference, and list the results:\nv.what.rast -i map=GCP_12_decimal raster=mid_pines_ground_elev column=dem_height\nv.db.update map=GCP_12_decimal column=height_difference query_column=\"ASL - dem_height\"\nv.db.select map=GCP_12_decimal columns=ASL,dem_height,height_difference\nCompute the statistics of the differences and map them:\nv.univar -e GCP_12_decimal column=height_difference\nd.vect.thematic map=GCP_12_decimal column=height_difference algorithm=int nclasses=4 colors=blue,30:144:255,173:216:230,255:192:203 icon=basic/circle size=20\nd.legend.vect at=10,40\nThe Attribute Table Manager shows the same table. Read the numbers the way Topic 3B read checkpoint residuals: the mean is the bias of the lidar DEM against the survey, and the RMSE of the differences is its vertical accuracy at these twelve points. v.univar prints the mean and the standard deviation but not the RMSE; compute it from those two, since RMSE is the square root of the mean squared plus the standard deviation squared, or from the twelve differences in the exported table.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -1531,7 +1531,7 @@
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#part-6-optional-classification-voxels-and-transects",
     "title": "Assignment 4B",
     "section": "Part 6 (optional): Classification, voxels, and transects",
-    "text": "Part 6 (optional): Classification, voxels, and transects\n\nGround classification\nInstall the v.lidar.mcc addon, which separates ground from non-ground points with a multiscale curvature classification:\ng.extension v.lidar.mcc\nImport a small, unclassified sample and classify it:\ng.region n=219511 s=219354 w=637071 e=637249 res=1\nv.in.pdal -r -o input=mid_pines_spm_2013.las output=mid_pines_sample\nv.lidar.mcc input=mid_pines_sample ground=ground nonground=nonground\nCompare the result with the provider’s class 2 in 2D or 3D.\n\n\n\nPoint density in 3D\nSet a small region with a vertical extent (b, t, tbres) for a 3D raster:\ng.region n=219502 s=219348 w=637070 e=637276 b=110 t=135 res=2 res3=2 tbres=0.5 -p3\nGRASS has no PDAL-based 3D raster import, so export the points inside this region to a text file with PDAL (about 100,000 points, one second) and bin the text file with r3.in.xyz:\npdal translate mid_pines_spm_2013.las mid_pines_sub.txt crop \\\n    --filters.crop.bounds=\"([637070,637276],[219348,219502])\" \\\n    --writers.text.order=\"X,Y,Z\" --writers.text.keep_unspecified=false --writers.text.write_header=false\nr3.in.xyz input=mid_pines_sub.txt output=mid_pines_dens method=n separator=comma\nr3.in.xyz reads the file once per vertical slice, which is why the crop matters.\nSet a custom color table with r3.colors:\n0% 255:255:100\n5% green\n100% red\nVisualize the density in the 3D view with slices and isosurfaces:\n\nLeave only the 3D raster mid_pines_dens in the Layer Manager.\nSet the computational region from the 3D raster and zoom to it.\nSwitch to 3D.\nOn the View page press Reset, set Height to 50 and Z-exag to 2. Nothing is visible yet.\nOn the Data page, 3D raster, check Draw wire box and set the resolution to 1.\nAdd an isosurface, set its value to 1, and press Enter.\nCheck toggle normal direction and change the isosurface color.\nTry other isosurface levels (press Enter to apply each value).\nRemove the isosurface, change the draw mode to slices, add a slice, and set its axis to Z.\nMove the slice through the canopy.\nSave images for the report.\n\n\n\n\nLidar transect\nInstall the v.profile.points addon:\ng.extension v.profile.points\nCut a 5 m wide transect through the point cloud, straight from the LAS file, color the points by elevation, and display it. The output is the transect rotated into a vertical plane, so zoom to the vector map to see it:\ng.region n=219511 s=219354 w=637071 e=637249 res=1\nv.profile.points file_input=mid_pines_spm_2013.las output=profile width=5 coordinates=637106,219373,637132,219451\nv.colors map=profile use=z color=elevation\nd.vect map=profile color=none width=1 icon=basic/circle\nTo profile points you already imported, pass them as point_input= instead; run v.build on them first, since v.in.pdal does not build topology and the selection step needs it.",
+    "text": "Part 6 (optional): Classification, voxels, and transects\n\nGround classification\nInstall the v.lidar.mcc addon, which separates ground from non-ground points with a multiscale curvature classification:\ng.extension v.lidar.mcc\nImport a small, unclassified sample and classify it:\ng.region n=219511 s=219354 w=637071 e=637249 res=1\nv.in.pdal -r -o input=mid_pines_spm_2013.las output=mid_pines_sample\nv.lidar.mcc input=mid_pines_sample ground=ground nonground=nonground\nCompare the result with the provider’s class 2 in 2D or 3D.\n\n\n\nPoint density in 3D\nSet a small region with a vertical extent (b, t, tbres) for a 3D raster:\ng.region n=219502 s=219348 w=637070 e=637276 b=110 t=135 res=2 res3=2 tbres=0.5 -p3\nGRASS has no PDAL-based 3D raster import, so export the points inside this region to a text file with PDAL (about 100,000 points, one second) and bin the text file with r3.in.xyz:\npdal translate mid_pines_spm_2013.las mid_pines_sub.txt crop \\\n    --filters.crop.bounds=\"([637070,637276],[219348,219502])\" \\\n    --writers.text.order=\"X,Y,Z\" --writers.text.keep_unspecified=false --writers.text.write_header=false\nr3.in.xyz input=mid_pines_sub.txt output=mid_pines_dens method=n separator=comma\nr3.in.xyz reads the file once per vertical slice, which is why the crop matters.\nSet a custom color table with r3.colors:\n0% 255:255:100\n5% green\n100% red\nVisualize the density in the 3D view with slices and isosurfaces:\n\nLeave only the 3D raster mid_pines_dens in the Layer Manager.\nSet the computational region from the 3D raster and zoom to it.\nSwitch to 3D.\nOn the View page press Reset, set Height to 50 and Z-exag to 2. Nothing is visible yet.\nOn the Data page, 3D raster, check Draw wire box and set the resolution to 1.\nAdd an isosurface, set its value to 1, and press Enter.\nCheck toggle normal direction and change the isosurface color.\nTry other isosurface levels (press Enter to apply each value).\nRemove the isosurface, change the draw mode to slices, add a slice, and set its axis to Z.\nMove the slice through the canopy.\nSave images for the report.\n\n\n\n\nLidar transect\nInstall the v.profile.points addon:\ng.extension v.profile.points\nCut a 5 m wide transect through the point cloud, straight from the LAS file, and display it. The output is the transect rotated into a vertical plane: its x axis is the distance along the line and its y axis is the elevation, so zoom to the vector map to see the side view. The output’s z coordinate is the offset of each point from the line, not its elevation, so the points are displayed in one color:\ng.region n=219511 s=219354 w=637071 e=637249 res=1\nv.profile.points file_input=mid_pines_spm_2013.las output=profile width=5 coordinates=637106,219373,637132,219451\ng.region vector=profile\nd.vect map=profile color=30:60:90 icon=basic/point size=3\nTo profile points you already imported, pass them as point_input= instead; run v.build on them first, since v.in.pdal does not build topology and the selection step needs it.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -1557,7 +1557,7 @@
     "href": "course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html#submission",
     "title": "Assignment 4B",
     "section": "Submission",
-    "text": "Submission\nUpload to Moodle, Assignment 4B:\n\nYour report as a PDF.\nThe GCP difference table (CSV export from the Attribute Table Manager or v.db.select).",
+    "text": "Submission\nUpload to Moodle, Assignment 4B:\n\nYour report as a PDF.\nThe GCP difference table (CSV export from the Attribute Table Manager or v.db.select).\nOptional: your completed notebook (.ipynb) if you worked in Colab.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6044,11 +6044,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#outline",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#outline",
-    "title": "Point cloud data analysis",
-    "section": "Outline",
-    "text": "Outline\n\nCharacteristics of UAS and lidar-based point cloud data\nPoint cloud data processing, visualization, and analysis\nComputing DEM / DSM, and topographic parameters\nVoxel-based analysis and vertical profiles",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#objectives",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#objectives",
+    "title": "Point Cloud Data Analysis",
+    "section": "Objectives",
+    "text": "Objectives\n\nCompare lidar and UAS SfM point cloud characteristics\nAnalyze point distribution by binning\nExtract bare ground and thin a point cloud\nComputing a DEM (DSM and DTM)\nAnalyze vertical structure with voxel models and transects\n\n\n\n4A compared surfaces; today we go one step back, to the points the surfaces are made from\nTwo clouds of the same site, Mid Pines at Lake Wheeler: 2013 airborne lidar and a 2015 UAS SfM flight\nThe lab (4B) bins, classifies, interpolates, and validates those two clouds in GRASS\nEvery concept today has a GRASS tool next to it; the lab uses them in the same order",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6057,11 +6057,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#what-are-point-clouds",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#what-are-point-clouds",
-    "title": "Point cloud data analysis",
-    "section": "What are point clouds?",
-    "text": "What are point clouds?\n\nDense set of points (x,y,z) defined in 3D space:\n\nDirectly measured using lidar\nDerived from overlapping images using SfM (see previous lectures)\n\n\n\nUAS SfM derived point cloud from Midpines viewed at Hunt library",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#two-kinds-of-point-clouds",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#two-kinds-of-point-clouds",
+    "title": "Point Cloud Data Analysis",
+    "section": "Two kinds of point clouds",
+    "text": "Two kinds of point clouds\n\n\nSection 1: what a point cloud is, and how a lidar cloud differs from an SfM cloud",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6070,11 +6070,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-acquisition",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-acquisition",
-    "title": "Point cloud data analysis",
-    "section": "Lidar point cloud acquisition",
-    "text": "Lidar point cloud acquisition\n\nMeasured time of pulse return is converted to distance\nGeoreferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#what-is-a-point-cloud",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#what-is-a-point-cloud",
+    "title": "Point Cloud Data Analysis",
+    "section": "What is a point cloud",
+    "text": "What is a point cloud\n\nPoint cloud: a dense set of points with x, y, z coordinates in 3D space, measured directly by lidar or derived from overlapping images by structure from motion\n\n\nUAS SfM point cloud of Mid Pines on the Hunt Library visualization wall.\n\n\nSame data structure from two very different sensors: lidar measures, SfM reconstructs (2A)\nEverything downstream, DEMs, DSMs, canopy models, starts from these points\nThe picture is the 2015 Mid Pines SfM cloud the lab uses",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6083,11 +6083,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#multiple-return-lidar-point-cloud",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#multiple-return-lidar-point-cloud",
-    "title": "Point cloud data analysis",
-    "section": "Multiple return lidar point cloud",
-    "text": "Multiple return lidar point cloud\nLidar pulse can penetrate the tree canopy leading to multiple pulse returns\n\nyellow: first return, dark brown: second return",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-acquisition",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-acquisition",
+    "title": "Point Cloud Data Analysis",
+    "section": "Lidar acquisition",
+    "text": "Lidar acquisition\n\n\n\n\n\n\nThe measured time of flight of each pulse is converted to a distance\nGeoreferencing comes from the platform’s position (GNSS) and orientation (IMU), fused in the INS\n\n\n\n\nActive sensor: it emits the pulse and times the echo, so it works regardless of texture and light\nPosition from GNSS plus attitude from the IMU place every point; the same two sensors a UAS uses for geotags (1A), with a far better IMU\nINS is the IMU plus the filter that integrates it with GNSS; spec sheets usually just say GNSS/IMU\nThe scan lines in the 3D view are the scanner sweeping across the flight line",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6096,11 +6096,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#multiple-return-point-cloud-profiles",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#multiple-return-point-cloud-profiles",
-    "title": "Point cloud data analysis",
-    "section": "Multiple return point cloud profiles",
-    "text": "Multiple return point cloud profiles\nMultiple return point cloud profile view of returns",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#multiple-returns",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#multiple-returns",
+    "title": "Point Cloud Data Analysis",
+    "section": "Multiple returns",
+    "text": "Multiple returns\n\nA lidar pulse can penetrate the tree canopy and produce several returns: yellow first returns, dark brown second returns.\n\n\nOne pulse, several echoes: the top of the crown, branches, and often the ground\nThis is what lets lidar map the ground under trees; SfM cannot do it\nThe lab filters on return number to build a canopy surface and a ground surface from one file",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6109,11 +6109,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-data",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-data",
-    "title": "Point cloud data analysis",
-    "section": "Lidar point cloud data",
-    "text": "Lidar point cloud data\nSet of [x, y, z, (r, i, c, …)] measured points reflected from Earth surface or objects on or above it, where:\n\n[x, y, z] are georeferenced coordinates\nr is the return number\ni is intensity\nc is class\n\nAdditional data: R:G:B, scan direction",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#returns-in-profile",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#returns-in-profile",
+    "title": "Point Cloud Data Analysis",
+    "section": "Returns in profile",
+    "text": "Returns in profile\n\n\n\nMost pulses give one return; a quarter give two, a few percent three or more\nLast return has the highest chance of being ground, but it is not ground: a dense crown stops the pulse\nHence the classified ground class in modern data, and the caution in the lab about last returns",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6122,11 +6122,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-preview",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-preview",
-    "title": "Point cloud data analysis",
-    "section": "Lidar point cloud preview",
-    "text": "Lidar point cloud preview\n\nVisible swath overlap",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-points",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-points",
+    "title": "Point Cloud Data Analysis",
+    "section": "Lidar points",
+    "text": "Lidar points\n\nLidar point: [x, y, z, r, i, c, …], a georeferenced position with the return number r, the intensity i of the echo, and a class c assigned by the provider\n\n\nAdditional attributes depend on the sensor and the provider: RGB from a camera, scan angle and direction, GPS time, number of returns per pulse\nClasses follow the ASPRS LAS standard: 1 unclassified, 2 ground, 7 noise, 9 water, and so on\n\n\n\nIntensity is the strength of the echo: roads dark, roofs bright, useful for classification\nClass is what a previous processing step decided; it can be wrong\nThe lab’s 2013 file uses classes 1, 2, 7, and 11; pdal info prints the counts",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6135,11 +6135,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-preview-1",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-point-cloud-preview-1",
-    "title": "Point cloud data analysis",
-    "section": "Lidar point cloud preview",
-    "text": "Lidar point cloud preview\n\nPoints distributed throughout canopy\nNo points on the wall of the building",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-preview-swath-overlap",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-preview-swath-overlap",
+    "title": "Point Cloud Data Analysis",
+    "section": "Lidar preview: swath overlap",
+    "text": "Lidar preview: swath overlap\n\n\n\nParallel flight lines overlap at their edges; the overlap band has twice the density\nDensity is not uniform, which matters when you pick a raster resolution\nThe lab’s density maps show these bands as stripes",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6148,11 +6148,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#sfm-derived-point-cloud-data",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#sfm-derived-point-cloud-data",
-    "title": "Point cloud data analysis",
-    "section": "SfM-derived point cloud data",
-    "text": "SfM-derived point cloud data\nSet of [x, y, z, (R, G, B)] points derived from overlapping imagery using Structure from Motion technique:\n\n[x, y, z] are georeferenced coordinates\nR, G, B are Red, Green, Blue channels derived from imagery\n\nAdditional data depend on sensor",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-preview-canopy-and-walls",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-preview-canopy-and-walls",
+    "title": "Point Cloud Data Analysis",
+    "section": "Lidar preview: canopy and walls",
+    "text": "Lidar preview: canopy and walls\n\n\nPoints distributed throughout the canopy\nNo points on the walls of the building\n\n\n\nNadir-looking scanner: roofs and ground, but a wall is parallel to the beam and gets nothing\nPoints inside the crowns come from the multiple returns\nKeep both in mind for the SfM comparison next",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6161,11 +6161,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-sfm-point-cloud-preview",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-sfm-point-cloud-preview",
-    "title": "Point cloud data analysis",
-    "section": "UAS SfM point cloud preview",
-    "text": "UAS SfM point cloud preview\n\nOnly top of tree canopy captured\nBuilding densely sampled including the wall\n\n\nUAS SfM point cloud preview\n\nMuch higher density of points with R:G:B included",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#sfm-points",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#sfm-points",
+    "title": "Point Cloud Data Analysis",
+    "section": "SfM points",
+    "text": "SfM points\n\nSfM point: [x, y, z, R, G, B], a position reconstructed from overlapping imagery with the color sampled from the photos\n\n\nNo returns, no intensity: the camera sees one surface, the first one in view\nClasses only if a later step assigns them (Metashape and WebODM can classify ground points)\nDensity depends on the GSD, the overlap, and the quality setting used in dense matching\n\n\n\nSame x, y, z, but the rest of the record is different: color instead of echo physics\nNothing under the canopy; the leaves are the surface the camera sees\nThe dense cloud quality setting from 2B decides how many points you get",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6174,11 +6174,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-cloud-data-formats",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-cloud-data-formats",
-    "title": "Point cloud data analysis",
-    "section": "Point cloud data formats",
-    "text": "Point cloud data formats\n\nASCII x,y,z, … format - older data\nBinary LAS format (header, record information, x,y,z,i, … ), industry lidar data exchange format\nCompressed LAZ format\nProprietary formats, especially for waveform data\n\nLearn more at ASPRS LAS1.4 Specification\nand USGS Lidar Base Specification",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-sfm-preview",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-sfm-preview",
+    "title": "Point Cloud Data Analysis",
+    "section": "UAS SfM preview",
+    "text": "UAS SfM preview\n\n\nOnly the top of the tree canopy is captured\nThe building is densely sampled, including the walls\n\n\n\nThe mirror image of the lidar slide: walls yes, canopy interior no\nOblique views from the overlapping photos see the walls\nTrees are solid shells; there is no ground under them in this cloud",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6187,11 +6187,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-cloud-data-processing",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-cloud-data-processing",
-    "title": "Point cloud data analysis",
-    "section": "Point cloud data processing",
-    "text": "Point cloud data processing\n\nPreview and analysis of point distribution\nFiltering outliers\nBare earth point extraction\nClassification: canopy, buildings …\nDecimation (point cloud thinning)\nTransformation to surfaces or 3D objects",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-sfm-preview-in-color",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-sfm-preview-in-color",
+    "title": "Point Cloud Data Analysis",
+    "section": "UAS SfM preview in color",
+    "text": "UAS SfM preview in color\n\nMuch higher density of points, with RGB from the photos.\n\n\nSeveral times the lidar density, and every point carries a color\nLooks like an orthophoto in 3D; that is also its weakness, it only knows what the photos show\nThe lab bins both clouds at 1 m to compare densities side by side",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6200,11 +6200,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution",
-    "title": "Point cloud data analysis",
-    "section": "Analysis of point distribution",
-    "text": "Analysis of point distribution\nBinning: point statistics for each grid cell at selected resolution\n\nNumber of points per grid cell - map of point densities\nRange, stddv of z-values - map of within cell vertical variability\nIdentify data gaps, potential for artifacts\nUse to select appropriate supported resolution for DEM",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-cloud-formats",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-cloud-formats",
+    "title": "Point Cloud Data Analysis",
+    "section": "Point cloud formats",
+    "text": "Point cloud formats\n\n\n\n\n\n\n\nFormat\nNotes\n\n\n\n\nASCII x, y, z\nOldest and simplest; large, slow, no attributes beyond the columns\n\n\nLAS\nBinary industry standard from ASPRS: header, point records with x, y, z, intensity, returns, class\n\n\nLAZ\nLosslessly compressed LAS; a fraction of the size, read by most software\n\n\nCOPC\nCloud optimized LAZ with a spatial index, streamed straight from a web server\n\n\n\nThe ASPRS LAS 1.4 specification defines the record and the standard classes; the USGS Lidar Base Specification sets what public lidar must deliver.\n\n\nLAS is what you get from providers; LAZ is what you store; COPC is what you stream\nThe lab opens the COPC version of the Mid Pines lidar in a browser before touching GRASS\nWaveform data (the full echo) has its own proprietary formats",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6213,11 +6213,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution-lidar",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution-lidar",
-    "title": "Point cloud data analysis",
-    "section": "Analysis of point distribution: lidar",
-    "text": "Analysis of point distribution: lidar\nIncreased densities along swath overlaps or close to terrestrial station position\n  \nCounty-wide 2013 lidar: all returns and bare earth, terrestrial lidar",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#looking-at-the-points",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#looking-at-the-points",
+    "title": "Point Cloud Data Analysis",
+    "section": "Looking at the points",
+    "text": "Looking at the points\n\n\nSection 2: before making a surface, find out how the points are distributed",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6226,11 +6226,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution-lidar-1",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution-lidar-1",
-    "title": "Point cloud data analysis",
-    "section": "Analysis of point distribution: lidar",
-    "text": "Analysis of point distribution: lidar\nChange in pattern along swath overlaps\n \nMidpines: number of points per 1m grid cell: for all returns and ground",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#processing-steps",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#processing-steps",
+    "title": "Point Cloud Data Analysis",
+    "section": "Processing steps",
+    "text": "Processing steps\n\nPreview, and analyze the point distribution\nFilter outliers\nExtract bare earth points\nClassify: canopy, buildings, and so on\nDecimate (thin) the cloud\nTransform the points into surfaces or 3D objects\n\n\n\nThe order matters: you cannot pick a resolution before you know the density\nProvider data arrives with some of this done (classes); check it rather than trust it\nThe lab does the first, the fourth by a simple rule, and the last two",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6239,11 +6239,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution-sfm",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-point-distribution-sfm",
-    "title": "Point cloud data analysis",
-    "section": "Analysis of point distribution: SfM",
-    "text": "Analysis of point distribution: SfM\nHigh point densities around trees and building edges\n\nMidpines: number of SfM-derived points per 1m grid cell",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#binning",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#binning",
+    "title": "Point Cloud Data Analysis",
+    "section": "Binning",
+    "text": "Binning\n\nBinning: computing a statistic of the points that fall into each cell of a grid at a chosen resolution, with no interpolation; in GRASS, r.in.pdal with method=\n\n\nNumber of points per cell: a map of point density\nRange or standard deviation of z within the cell: a map of vertical variability\nShows data gaps and where artifacts will appear\nThe basis for choosing a resolution the data can support\n\n\n\nThe cheapest thing you can do with a point cloud, and the most informative\nCount per cell is the density map; z range per cell says whether the cell holds flat ground or a tree\nLab Part 2 is exactly this at 1 m for both clouds",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6252,11 +6252,50 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-within-cell-z-range",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#analysis-of-within-cell-z-range",
-    "title": "Point cloud data analysis",
-    "section": "Analysis of within cell z-range",
-    "text": "Analysis of within cell z-range\nMaps of z-values range within 3m grid cell\n \nMidpines z-range lidar and UAS, lidar provides better data about the trees than the denser UAS point cloud",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-density-county-lidar",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-density-county-lidar",
+    "title": "Point Cloud Data Analysis",
+    "section": "Point density: county lidar",
+    "text": "Point density: county lidar\n\n\n\n\n\n\n\n\nAll returns and bare earth from the 2013 county lidar, and a terrestrial scan: density rises along swath overlaps and close to a terrestrial scanner.\n\n\nAirborne: the diagonal band is the swath overlap, twice the density\nBare earth: the white holes are buildings and dense canopy, no ground points there\nTerrestrial: density falls with distance from the tripod; the same instrument gives 100 points per cell nearby and none far away",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-density-mid-pines-lidar",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-density-mid-pines-lidar",
+    "title": "Point Cloud Data Analysis",
+    "section": "Point density: Mid Pines lidar",
+    "text": "Point density: Mid Pines lidar\n\n\n\nAll returns\n\n\nGround\n\n\n\nAll returns: trees light up red because every pulse through a crown gives several echoes\nGround only: about one point per square meter, zero under the building and in dense crowns\nThe diagonal stripes in both are the scan pattern; they will show up in any surface you bin",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-density-mid-pines-sfm",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#point-density-mid-pines-sfm",
+    "title": "Point Cloud Data Analysis",
+    "section": "Point density: Mid Pines SfM",
+    "text": "Point density: Mid Pines SfM\n\nHigh point densities around trees and building edges.\n\n\nTen to twenty points per square meter on the fields, several times the lidar\nHighest where the photos have the most texture: crowns and edges; the matcher finds more there\nDensity is not accuracy; the SfM cloud has no ground under those crowns at all",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-range-within-a-cell",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-range-within-a-cell",
+    "title": "Point Cloud Data Analysis",
+    "section": "Vertical range within a cell",
+    "text": "Vertical range within a cell\n\n\n\nLidar\n\n\nUAS SfM\n\nLidar reaches through the canopy, so it gives a larger z range and better information about the trees than the denser UAS cloud.\n\n\nRange of z per cell: zero on bare ground, tree height under a crown\nLidar’s range is the whole tree, crown to ground; SfM’s is only the crown’s shape\nDenser is not better here: the lidar knows the tree height, the SfM cloud does not",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6267,9 +6306,9 @@
   {
     "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#outliers",
     "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#outliers",
-    "title": "Point cloud data analysis",
+    "title": "Point Cloud Data Analysis",
     "section": "Outliers",
-    "text": "Outliers\n\nLidar: birds, particles, material properties\nSfM: errors in point matching\nFiltered by using local z-min, z-max or range thresholds\n\n\nCentennial Parkway - outlier present even in processed data",
+    "text": "Outliers\n\n\nLidar: birds, airborne particles, reflective materials\nSfM: errors in point matching\nFilter with local z-min, z-max, or range thresholds; outliers survive even in processed data\n\n\n\nThe spike is one point, hundreds of meters up; a bird, or a multipath echo\nProviders filter most outliers (class 7), not all\nBinning with min or max makes them obvious; interpolation would turn the spike into a cone",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6278,11 +6317,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#bare-ground-and-feature-extraction",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#bare-ground-and-feature-extraction",
-    "title": "Point cloud data analysis",
-    "section": "Bare ground and feature extraction",
-    "text": "Bare ground and feature extraction\n\nMultiple returns help but not necessary\nFeature or surface needs to be sampled by sufficient number of points\nMultiscale curvature-based algorithm by Evans and Hudak\nProgressive morphological filter by Zhang\n\n\nMidpines: above ground point cloud from lidar by MCC in GRASS",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#ground-and-thinning",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#ground-and-thinning",
+    "title": "Point Cloud Data Analysis",
+    "section": "Ground and thinning",
+    "text": "Ground and thinning\n\n\nSection 3: separating ground from everything else, and reducing the cloud to what you need",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#bare-ground-extraction",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#bare-ground-extraction",
+    "title": "Point Cloud Data Analysis",
+    "section": "Bare ground extraction",
+    "text": "Bare ground extraction\n\nGround classification: labeling the points that lie on the terrain so that a DEM can be built from them alone; the rest is vegetation, buildings, and noise\n\n\n\nMultiple returns help but are not required; the surface has to be sampled by enough points\nMultiscale curvature classification (Evans and Hudak 2007), v.lidar.mcc in GRASS\nProgressive morphological filter (Zhang et al. 2003)\n\n\n\nBoth algorithms grow a ground surface and reject points that stick up from it by more than a curvature or slope tolerance\nMCC works scale by scale, so it keeps terraces and rejects crowns; it is the addon in the lab’s optional part\nWorks on SfM clouds too, with no returns: the geometry is enough on open ground",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6293,9 +6345,9 @@
   {
     "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#decimation",
     "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#decimation",
-    "title": "Point cloud data analysis",
+    "title": "Point Cloud Data Analysis",
     "section": "Decimation",
-    "text": "Decimation\n\nThinning of point cloud - subsampling\nReduces the point cloud size - easier to manage data\nThinning threshold should be based on features that need to be preserved\nCount-based decimation: preserves variations in density\nGrid-based decimation: removes variations in density\nDistance and geometry based decimation: more computationally intensive",
+    "text": "Decimation\n\nThinning the cloud by subsampling, to make the data manageable\nThe thinning threshold follows from the features that must be preserved\nCount based: keep every n-th point; preserves variations in density\nGrid based: keep one point per cell; removes variations in density\nDistance and geometry based: keep points where the surface changes; more expensive\n\n\n\nA 5 GB cloud does not need 5 GB of points to make a 1 m DEM\nCount based is fast and keeps the swath overlap pattern; grid based evens it out\nv.in.pdal and r.in.pdal thin on import with the skip and preserve options",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6306,9 +6358,9 @@
   {
     "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#decimation-count-based",
     "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#decimation-count-based",
-    "title": "Point cloud data analysis",
-    "section": "Decimation: count-based",
-    "text": "Decimation: count-based\n \nPreserves relative point densities",
+    "title": "Point Cloud Data Analysis",
+    "section": "Decimation: count based",
+    "text": "Decimation: count based\n\n\n\nFull cloud\n\n\nEvery third point\n\nPreserves the relative point densities.\n\n\nOne point in three, everywhere; the density gradient of the terrestrial scan survives\nRight choice when you want the data to keep telling you where the sensor was strong",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6319,9 +6371,9 @@
   {
     "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#decimation-grid-based",
     "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#decimation-grid-based",
-    "title": "Point cloud data analysis",
-    "section": "Decimation: grid-based",
-    "text": "Decimation: grid-based\n \nRemoves variations in point densities",
+    "title": "Point Cloud Data Analysis",
+    "section": "Decimation: grid based",
+    "text": "Decimation: grid based\n\n\n\nFull cloud\n\n\nOne point per cell\n\nRemoves the variations in point density.\n\n\nOne point per cell: the near field loses most of its points, the far field keeps all of them\nRight choice before interpolation, when uneven density would bias the surface",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6330,11 +6382,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#computing-dem-binning",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#computing-dem-binning",
-    "title": "Point cloud data analysis",
-    "section": "Computing DEM: binning",
-    "text": "Computing DEM: binning\n\nPer cell statistics: mean, min, max, or nearest point z-value\nSufficient for many applications\nNo need to import the points, on-fly raster generation\nMay be noisy, with no-data areas",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#from-points-to-surfaces",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#from-points-to-surfaces",
+    "title": "Point Cloud Data Analysis",
+    "section": "From points to surfaces",
+    "text": "From points to surfaces\n\n\nSection 4: three ways to turn points into a DEM or DSM, and what each costs",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6343,11 +6395,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#computing-dem-tin",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#computing-dem-tin",
-    "title": "Point cloud data analysis",
-    "section": "Computing DEM: TIN",
-    "text": "Computing DEM: TIN\nMeshes are standard in 3D engineering and design systems:\n\nVariable resolution based on terrain complexity\nVariable level of detail visualization\n2D triangulation leads to TIN geometry not optimal for 3D, e.g. triangles on roads, artificial dams in valleys\nHarder to combine with other geospatial data\nLimited analytics available\nHarder to share - limited exchange formats",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#three-ways-to-a-surface",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#three-ways-to-a-surface",
+    "title": "Point Cloud Data Analysis",
+    "section": "Three ways to a surface",
+    "text": "Three ways to a surface\n\n\n\n\n\n\n\n\n\nMethod\nHow\nStrengths\nWeaknesses\n\n\n\n\nBinning\nPer cell statistic: mean, min, max, nearest\nNo import, fast, enough for many uses\nNoisy, no-data cells where points are missing\n\n\nTIN\nTriangulate the points into a mesh\nVariable resolution, standard in 3D design\nFlat triangles on roads, dams across valleys, few analysis tools, hard to share\n\n\nInterpolation\nFit a surface to the points and sample it on a raster\nResolution above the point spacing, smooth, every GIS tool applies\nResult depends on the method; large rasters\n\n\n\n\n\nBinning is r.in.pdal with method mean, min, or max; the lab’s Part 3\nTIN is what Metashape’s mesh is, with the same problems in valleys\nInterpolation is v.surf.rst; the lab’s Part 4 at 0.5 m from 1 m point spacing\nWith dense clouds most interpolation methods agree; the choice matters at the edges and under trees",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6356,11 +6408,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#computing-dem-interpolation-to-raster",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#computing-dem-interpolation-to-raster",
-    "title": "Point cloud data analysis",
-    "section": "Computing DEM: interpolation to raster",
-    "text": "Computing DEM: interpolation to raster\n\nSupports resolution higher than point density\nResults depend on the method used, but most methods work because of high point densities\nHigh resolution raster DEMs can be massive - works for most analytics, converts to TIN for 3D visualization\nEasy to share",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#binning-jockeys-ridge-1999-lidar",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#binning-jockeys-ridge-1999-lidar",
+    "title": "Point Cloud Data Analysis",
+    "section": "Binning: Jockey’s Ridge 1999 lidar",
+    "text": "Binning: Jockey’s Ridge 1999 lidar\n\n\n\nBinned at 1 m: many null cells\n\n\nBinned at 3 m\n\n\n\n1999 data at about one point per 3 m: at 1 m most cells are empty\n3 m is the resolution the density supports; binning works, but it is coarse\nThis is why the density map comes first",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6369,11 +6421,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#jockeys-ridge-lidar-1999",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#jockeys-ridge-lidar-1999",
-    "title": "Point cloud data analysis",
-    "section": "Jockey’s Ridge lidar 1999",
-    "text": "Jockey’s Ridge lidar 1999\nBinning at 1m resolution: many NULL cells",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#interpolation-jockeys-ridge-1999-lidar",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#interpolation-jockeys-ridge-1999-lidar",
+    "title": "Point Cloud Data Analysis",
+    "section": "Interpolation: Jockey’s Ridge 1999 lidar",
+    "text": "Interpolation: Jockey’s Ridge 1999 lidar\n\nInterpolated at 1 m from the same points.\n\n\nSame 1999 points, now a 1 m surface with no holes: the spline fills between points\nThe detail on the dune is real; the roughness on the flanks is the vegetation in the first returns\nThe price is that the surface is a model between the points, not a measurement",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6382,11 +6434,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#jockeys-ridge-lidar-1999-1",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#jockeys-ridge-lidar-1999-1",
-    "title": "Point cloud data analysis",
-    "section": "Jockey’s Ridge lidar 1999",
-    "text": "Jockey’s Ridge lidar 1999\nBinning at 3m resolution",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#tin-from-the-mid-pines-sfm-cloud",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#tin-from-the-mid-pines-sfm-cloud",
+    "title": "Point Cloud Data Analysis",
+    "section": "TIN from the Mid Pines SfM cloud",
+    "text": "TIN from the Mid Pines SfM cloud\n\n\n\nLow density\n\n\nHigh density\n\n\n\nMetashape’s mesh at two face counts; the 2B face count setting in action\nLow density: large triangles smear the building edges; high density: edges are sharp but every bush is a spike field\nEither way the mesh is for visualization and volumes, not for terrain analysis",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6395,11 +6447,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#jockeys-ridge-lidar-1999-2",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#jockeys-ridge-lidar-1999-2",
-    "title": "Point cloud data analysis",
-    "section": "Jockey’s Ridge lidar 1999",
-    "text": "Jockey’s Ridge lidar 1999\nInterpolation at 1m resolution\n\nYou can try TIN for comparison - provide data",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#smoothed-tin",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#smoothed-tin",
+    "title": "Point Cloud Data Analysis",
+    "section": "Smoothed TIN",
+    "text": "Smoothed TIN\n\n\n\nSmoothing removes the matching noise and also the sharp edges\nGood for a 3D model to look at; it has quietly changed the volume of every pile and building",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6408,11 +6460,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpines-uas-sfm",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpines-uas-sfm",
-    "title": "Point cloud data analysis",
-    "section": "Midpines UAS SfM",
-    "text": "Midpines UAS SfM\nLow density TIN",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#interpolated-sfm-surface",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#interpolated-sfm-surface",
+    "title": "Point Cloud Data Analysis",
+    "section": "Interpolated SfM surface",
+    "text": "Interpolated SfM surface\n\nHigh density SfM point cloud imported to GRASS and interpolated with the regularized spline with tension.\n\n\nv.surf.rst on the dense cloud: a raster DSM you can run every GRASS tool on\nThe trees are columns, not cones: the spline follows the crown shell and drops to the ground at the edge\nThis is the surface the 4A DSM comparisons were made from",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6421,50 +6473,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpiness-uas-sfm",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpiness-uas-sfm",
-    "title": "Point cloud data analysis",
-    "section": "Midpines’s UAS SfM",
-    "text": "Midpines’s UAS SfM\nHigh density TIN",
-    "crumbs": [
-      "Topics",
-      "Topic 4: GIS Analytics",
-      "Slides",
-      "Lecture 4B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpiness-uas-sfm-1",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpiness-uas-sfm-1",
-    "title": "Point cloud data analysis",
-    "section": "Midpines’s UAS SfM",
-    "text": "Midpines’s UAS SfM\nSmoothed high density TIN",
-    "crumbs": [
-      "Topics",
-      "Topic 4: GIS Analytics",
-      "Slides",
-      "Lecture 4B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpines-uas-sfm-1",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpines-uas-sfm-1",
-    "title": "Point cloud data analysis",
-    "section": "Midpines UAS SfM",
-    "text": "Midpines UAS SfM\nHigh density point cloud imported to GRASS GIS and interpolated by spline method",
-    "crumbs": [
-      "Topics",
-      "Topic 4: GIS Analytics",
-      "Slides",
-      "Lecture 4B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpines-interpolated-dsm",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#midpines-interpolated-dsm",
-    "title": "Point cloud data analysis",
-    "section": "Midpines interpolated DSM",
-    "text": "Midpines interpolated DSM\nLidar and UAS SfM based DSM",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-and-sfm-dsms-of-mid-pines",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-and-sfm-dsms-of-mid-pines",
+    "title": "Point Cloud Data Analysis",
+    "section": "Lidar and SfM DSMs of Mid Pines",
+    "text": "Lidar and SfM DSMs of Mid Pines\n\n\n\nLidar\n\n\nUAS SfM\n\n\n\nLidar at 1 point per square meter gives a smooth, slightly generalized surface\nSfM at 15 points per square meter resolves the plow rows; it also carries the matching noise\nThe lab interpolates the lidar at 0.5 m; Topic 5 differences the two",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6475,9 +6488,9 @@
   {
     "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis",
     "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis",
-    "title": "Point cloud data analysis",
+    "title": "Point Cloud Data Analysis",
     "section": "Topographic analysis",
-    "text": "Topographic analysis\nDeriving topographic parameters from point cloud based DEMs has challenges:\n\nDEMs are often noisy and parameters can reflect noise or scan pattern rather than actual topography\nHigh resolution leads to representation of landforms by 10s or 100s of points or grid cells\nStandard topographic analysis using 3x3 neighborhood leads to noisy patterns of topographic parameters or bias towards point distribution pattern",
+    "text": "Topographic analysis\n\n\nSection 5: slope, aspect, and curvature from point cloud surfaces, and why it is harder than it looks",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6486,11 +6499,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-using-splines",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-using-splines",
-    "title": "Point cloud data analysis",
-    "section": "Topographic analysis using splines",
-    "text": "Topographic analysis using splines\nSimultaneous computation of parameters with interpolation\n\nParameters derived from original points rather than raster\nExplicit equations for partial derivatives: RST\nTens or hundreds of points can be used\nTuning the level of detail by tension and smoothing parameters\n\n\n\n\n\n\n\nNote\n\n\nReference\n\nH.Mitasova, H., Mitas, L. and Harmon, R.S., 2005, Simultaneous spline interpolation and topographic analysis for lidar elevation data: methods for Open source GIS, IEEE GRSL 2(4), pp. 375- 379.",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#why-derivatives-are-hard-here",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#why-derivatives-are-hard-here",
+    "title": "Point Cloud Data Analysis",
+    "section": "Why derivatives are hard here",
+    "text": "Why derivatives are hard here\n\nPoint cloud DEMs are noisy, so slope and curvature can reflect the noise or the scan pattern rather than the terrain\nAt high resolution a landform is represented by tens or hundreds of cells, and a 3 x 3 window sees only a fraction of it\nThe result is noisy derivatives, or derivatives biased toward the point distribution\n\n\n\n4A ran r.slope.aspect on a 0.3 m DSM and the speckle was visible; that is this problem\nA terrace 5 m wide is 15 cells at 0.3 m; a 3 x 3 window is a tenth of the feature\nTwo fixes: smooth the DEM first, or compute the derivatives from the points",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6499,11 +6512,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-using-splines-1",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-using-splines-1",
-    "title": "Point cloud data analysis",
-    "section": "Topographic analysis using splines",
-    "text": "Topographic analysis using splines\nTuning the level of detail with tension parameter",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-with-splines",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-with-splines",
+    "title": "Point Cloud Data Analysis",
+    "section": "Topographic analysis with splines",
+    "text": "Topographic analysis with splines\n\nThe regularized spline with tension has explicit equations for its partial derivatives, so slope, aspect, and curvatures are computed in the same run as the interpolation (Mitasova et al. 2005)\nThe parameters come from the original points, tens to hundreds of them per location, not from a 3 x 3 window\nTension and smoothing tune the level of detail\n\n\nIn GRASS: v.surf.rst input=points elevation=dem slope=slope aspect=aspect pcurv=pcurv tension=20 smooth=1\n\n\n\nOne command, one pass over the points: the DEM and its derivatives, consistent with each other\nTension controls how stiff the surface is; smoothing how far it may depart from the points\nThe lab runs this on the ground points and on the first returns, with slope and profile curvature",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6512,11 +6525,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-using-splines-2",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#topographic-analysis-using-splines-2",
-    "title": "Point cloud data analysis",
-    "section": "Topographic analysis using splines",
-    "text": "Topographic analysis using splines\nTuning the level of detail with tension parameter\n\nProfile curvature and slope maps draped over 1m res. DEM",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#tuning-the-level-of-detail",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#tuning-the-level-of-detail",
+    "title": "Point Cloud Data Analysis",
+    "section": "Tuning the level of detail",
+    "text": "Tuning the level of detail\n\nSame points, different tension: high tension follows every point and the scan pattern, low tension shows the landforms.\n\n\nLeft: tension too high, the surface is tight to the points and the curvature maps the scan stripes\nRight: tension lower, the channels and ridges appear; the blobs are tree crowns in the first returns\nThere is no single right value; it depends on the feature size you are after",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6525,11 +6538,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-point-cloud-analysis",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-point-cloud-analysis",
-    "title": "Point cloud data analysis",
-    "section": "Vertical point cloud analysis",
-    "text": "Vertical point cloud analysis\nVoxel-based point analysis and 3D fragmentation index",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#curvature-and-slope-on-a-1-m-dem",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#curvature-and-slope-on-a-1-m-dem",
+    "title": "Point Cloud Data Analysis",
+    "section": "Curvature and slope on a 1 m DEM",
+    "text": "Curvature and slope on a 1 m DEM\n\nProfile curvature and slope draped over the 1 m DEM.\n\n\nCurvature finds the terrace edges and the channel; slope shows the valley sides\nBoth computed by the spline from the ground points, so the terraces are continuous, not stair steps\nnpmin in the lab controls how many points each segment uses; too few and segment seams appear",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6538,50 +6551,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-point-cloud-analysis-1",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-point-cloud-analysis-1",
-    "title": "Point cloud data analysis",
-    "section": "Vertical point cloud analysis",
-    "text": "Vertical point cloud analysis\n3D visualization of vertical fragmentation index cross-sections",
-    "crumbs": [
-      "Topics",
-      "Topic 4: GIS Analytics",
-      "Slides",
-      "Lecture 4B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mamoth-cave-park-data",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mamoth-cave-park-data",
-    "title": "Point cloud data analysis",
-    "section": "Mamoth Cave Park: data",
-    "text": "Mamoth Cave Park: data\n\nClassified point cloud in las format\nRaw full waveform in lwv format\nImagery",
-    "crumbs": [
-      "Topics",
-      "Topic 4: GIS Analytics",
-      "Slides",
-      "Lecture 4B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mamoth-cave-park-canopy",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mamoth-cave-park-canopy",
-    "title": "Point cloud data analysis",
-    "section": "Mamoth Cave Park: canopy",
-    "text": "Mamoth Cave Park: canopy",
-    "crumbs": [
-      "Topics",
-      "Topic 4: GIS Analytics",
-      "Slides",
-      "Lecture 4B"
-    ]
-  },
-  {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mamoth-cave-park-bare-earth",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mamoth-cave-park-bare-earth",
-    "title": "Point cloud data analysis",
-    "section": "Mamoth Cave Park: bare earth",
-    "text": "Mamoth Cave Park: bare earth",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-structure",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#vertical-structure",
+    "title": "Point Cloud Data Analysis",
+    "section": "Vertical structure",
+    "text": "Vertical structure\n\n\nSection 6: when a surface is not enough, keep the third dimension",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6592,9 +6566,9 @@
   {
     "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#voxel-models",
     "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#voxel-models",
-    "title": "Point cloud data analysis",
+    "title": "Point Cloud Data Analysis",
     "section": "Voxel models",
-    "text": "Voxel models\n \n\n\n\n\n\n\nNote\n\n\n\nPetras, V; Petrasova, A; Jeziorska, J; Mitasova, H, 2016, Processing UAV and lidar point clouds in GRASS GIS, ISPRS Archives.",
+    "text": "Voxel models\n\nVoxel model: a 3D raster whose cells hold a statistic of the points inside each volume element, for example the point count; in GRASS, r3.in.xyz after setting a 3D region\n\n\nVertical profile through the point cloud, and the same profile as voxels classified by a 3D fragmentation index.\n\n\nA DSM keeps one number per column; the voxel model keeps the whole column\nPoint count per voxel maps where the canopy is dense and where it is open\nThe fragmentation index classifies each voxel by its neighbors: interior, edge, perforated",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6603,11 +6577,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#advances-in-lidar-data-acquisition",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#advances-in-lidar-data-acquisition",
-    "title": "Point cloud data analysis",
-    "section": "Advances in lidar data acquisition",
-    "text": "Advances in lidar data acquisition\n\nWaveform, single photon and multispectral lidar\nVelodyne (lidar array - small and light)\nLidar is available for large UAS and helicopters, new small systems are still being tested for accuracy",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#voxel-cross-sections-in-3d",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#voxel-cross-sections-in-3d",
+    "title": "Point Cloud Data Analysis",
+    "section": "Voxel cross sections in 3D",
+    "text": "Voxel cross sections in 3D\n\n\n\nSlices through the 3D raster, placed where you want to look\nThe lab’s optional part builds this voxel model from the Mid Pines lidar and slices it in the 3D view",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6616,11 +6590,141 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-data-sources",
-    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-data-sources",
-    "title": "Point cloud data analysis",
-    "section": "Lidar data sources",
-    "text": "Lidar data sources\nPublic data sources (see the links here):\n\nNational map elevation data - used to be CLICK: raw point clouds usually in LAS format\nNOAA Digital Coast: coastal point clouds with on-fly binning\nNC Floodplain Mapping: bare Earth: points, 20ft DEM and 50ft DEM with carved channels\nNC data portal QL2 lidar and derived products\nOpenTopography: NCALM data\n\nMore about lidar in GRASS at https://grasswiki.osgeo.org/wiki/LIDAR",
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#full-waveform-lidar",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#full-waveform-lidar",
+    "title": "Point Cloud Data Analysis",
+    "section": "Full waveform lidar",
+    "text": "Full waveform lidar\n\n\n\n\n\nA discrete return lidar records a few peaks of the echo; a full waveform system records the entire echo\nMammoth Cave National Park: classified point cloud in LAS, raw waveform, and imagery\nVertical structure of the canopy from the waveform, not only its top\n\n\n\n\nThe returns we have been using are peaks picked from this curve by the instrument\nKeeping the curve gives the vegetation profile below the crown and bathymetry in clear water\nThe Mammoth Cave data set is the example for the next two slides",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mammoth-cave-canopy",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mammoth-cave-canopy",
+    "title": "Point Cloud Data Analysis",
+    "section": "Mammoth Cave: canopy",
+    "text": "Mammoth Cave: canopy\n\n\n\nCanopy height is DSM minus DEM, both from the same cloud\nCurvature of the first return surface: every crown is a bump, which is how individual trees are found\nThe cross section shows what the DEM hides: 30 m of forest on top of the terrain",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mammoth-cave-bare-earth",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#mammoth-cave-bare-earth",
+    "title": "Point Cloud Data Analysis",
+    "section": "Mammoth Cave: bare earth",
+    "text": "Mammoth Cave: bare earth\n\n\n\nGround points only, under a full canopy; this is the lidar’s whole advantage over imagery\nThe curvature map picks the plateau edge and the drainage; the sinkholes of the karst show as closed rings\nEverything here was computed from the classified LAS with the tools from this lecture",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#voxel-models-of-canopy-density",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#voxel-models-of-canopy-density",
+    "title": "Point Cloud Data Analysis",
+    "section": "Voxel models of canopy density",
+    "text": "Voxel models of canopy density\n\n\n\n\n\n\nPoint count per voxel as a percentage, sliced through two forest stands with different structure (Petras et al. 2016).\n\n\nSame voxel approach on the Mid Pines lidar: green sparse, red dense canopy\nThe two stands differ in where the dense layer sits, which no DSM would show\nThe paper is the lab’s reference for all of the GRASS point cloud tools",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-today",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#lidar-today",
+    "title": "Point Cloud Data Analysis",
+    "section": "Lidar today",
+    "text": "Lidar today\n\n\nSection 7: what is changing in lidar, and where to get public data",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#airborne-lidar-today",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#airborne-lidar-today",
+    "title": "Point Cloud Data Analysis",
+    "section": "Airborne lidar today",
+    "text": "Airborne lidar today\n\nManned aircraft carry the newest sensors: full waveform, multispectral, and single photon lidar\nSingle photon lidar detects one photon per return, so it maps terrain and forest structure over whole counties from high altitude in a few flights (Swatantran et al. 2016)\nAgainst full waveform lidar it needs fewer passes for the same density, but the cloud is noisier and needs more filtering (Mandlburger et al. 2019)\nGeiger mode lidar is the other photon counting design: each detector pixel records one photon per pulse, so the cloud is built from thousands of overlapping looks (Stoker et al. 2016)\n\n\n\nNone of these are UAS sensors; they are large-area mapping systems on manned aircraft\nSingle photon (Leica SPL100) and Geiger mode (L3Harris) are both photon counting, which is what lets them fly high and fast; they differ in the detector\nGeiger mode: avalanche photodiode array, one range per pixel per pulse, noise from sunlight, near infrared so no bathymetry; USGS tested both for 3DEP and found them usable for QL2 with more filtering than linear lidar\nSwatantran et al. mapped Garrett County, Maryland, at 12 points per square meter; canopy height and terrain matched conventional lidar\nMandlburger et al. flew both systems over Vienna in 2018: single photon precision was mostly under 10 cm, with more noise on slopes and grass\nFull waveform was the Mammoth Cave example a few slides back",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-lidar-today",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#uas-lidar-today",
+    "title": "Point Cloud Data Analysis",
+    "section": "UAS lidar today",
+    "text": "UAS lidar today\n\nSmall spinning and solid state scanners made UAS lidar routine\n\na DJI Zenmuse L2 on a Matrice 350 maps a field at several hundred points per square meter\n\nDiscrete return, a few returns per pulse, like the 2013 cloud in the lab\nAccuracy still rests on the GNSS and IMU of the platform\n\n\n\nTen years ago UAS lidar was experimental; now it is a camera-sized payload\nIt sees under the canopy like airborne lidar and at SfM densities; the GNSS/IMU quality decides the accuracy, not the scanner\nAn attitude error of 0.1 degree at 100 m range moves a point 17 cm; that is why UAS lidar payloads carry a better IMU than a camera needs\nSame trade as always: active sensor, no color, more expensive than a camera",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#public-lidar-data-sources",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#public-lidar-data-sources",
+    "title": "Point Cloud Data Analysis",
+    "section": "Public lidar data sources",
+    "text": "Public lidar data sources\n\n\n\nSource\nWhat you get\n\n\n\n\nUSGS 3DEP\nNationwide point clouds streamed as Entwine tiles, plus DEMs through The National Map\n\n\nNOAA Digital Coast\nCoastal point clouds with on the fly binning and download\n\n\nNC OneMap\nThe statewide QL2 lidar flown 2014 to 2017: points, DEMs, and derived products\n\n\nOpenTopography\nResearch lidar (NCALM and others) with on demand DEM generation\n\n\n\nMore on lidar in GRASS at the GRASS wiki, and a full workshop at Processing lidar and UAV point clouds in GRASS.\n\n\nThe 2013 Mid Pines data in the lab is the Wake County part of the NC statewide program\n3DEP through Entwine is the same COPC streaming idea as the lab’s browser viewer\nThe workshop page is the long form of today’s lecture, with every command",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#key-terms",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#key-terms",
+    "title": "Point Cloud Data Analysis",
+    "section": "Key terms",
+    "text": "Key terms\n\n\n\nReturn: one echo of a lidar pulse; a pulse through a canopy gives several, the last one most likely from the ground\n\n\nClass: the label a provider or an algorithm assigned to a point: ground, unclassified, noise, water\n\n\nBinning: a per cell statistic of the points, with no interpolation\n\n\n\nInterpolation: a surface fitted to the points and sampled on a raster, at a resolution the point spacing can support\n\n\nDEM vs DSM: ground points give the terrain; first returns or all points give the surface, canopy and roofs included\n\n\nVoxel model: a 3D raster of point statistics, keeping the vertical structure a DSM throws away\n\n\n\n\nMidterm vocabulary, and the words the lab report has to use correctly\nThe grading rubric asks for conclusions in these terms: returns, classes, binning versus interpolation",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#wrap-up",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#wrap-up",
+    "title": "Point Cloud Data Analysis",
+    "section": "Wrap-up",
+    "text": "Wrap-up\n\nAssignment 4B: Processing lidar and UAS SfM point clouds: bin and compare the densities of the two Mid Pines clouds, classify by returns, interpolate a DEM and DSM with their derivatives, and validate the lidar DEM against the surveyed GCPs\n\n\n\nRecap: lidar measures through the canopy with returns; SfM reconstructs the first surface in color\nLook at the density before choosing a resolution; bin for a quick look, interpolate for analysis\nDerivatives from the spline, not from a 3 x 3 window, when the DEM is noisy\nThe lab validates the lidar DEM with the twelve surveyed GCPs the UAS flights used",
+    "crumbs": [
+      "Topics",
+      "Topic 4: GIS Analytics",
+      "Slides",
+      "Lecture 4B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#references",
+    "href": "course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html#references",
+    "title": "Point Cloud Data Analysis",
+    "section": "References",
+    "text": "References\n\n\nEvans, Jeffrey S., and Andrew T. Hudak. 2007. “A Multiscale Curvature Algorithm for Classifying Discrete Return LiDAR in Forested Environments.” IEEE Transactions on Geoscience and Remote Sensing 45 (4): 1029–38. https://doi.org/10.1109/TGRS.2006.890412.\n\n\nMandlburger, Gottfried, Harald Lehner, and Norbert Pfeifer. 2019. “A Comparison of Single Photon and Full Waveform Lidar.” ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences IV-2/W5: 397–404. https://doi.org/10.5194/isprs-annals-IV-2-W5-397-2019.\n\n\nMitasova, Helena, Lubos Mitas, and Russell S. Harmon. 2005. “Simultaneous Spline Approximation and Topographic Analysis for Lidar Elevation Data in Open-Source GIS.” IEEE Geoscience and Remote Sensing Letters 2 (4): 375–79. https://doi.org/10.1109/LGRS.2005.848533.\n\n\nPetras, Vaclav, Anna Petrasova, Justyna Jeziorska, and Helena Mitasova. 2016. “Processing UAV and Lidar Point Clouds in GRASS GIS.” The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences XLI-B7: 945–52. https://doi.org/10.5194/isprs-archives-XLI-B7-945-2016.\n\n\nStoker, Jason, Qassim Abdullah, Amar Nayegandhi, and Jayna Winehouse. 2016. “Evaluation of Single Photon and Geiger Mode Lidar for the 3D Elevation Program.” Remote Sensing 8 (9): 767. https://doi.org/10.3390/rs8090767.\n\n\nSwatantran, Anu, Hao Tang, Terence Barrett, Phil DeCola, and Ralph Dubayah. 2016. “Rapid, High-Resolution Forest Structure and Terrain Mapping over Large Areas Using Single Photon Lidar.” Scientific Reports 6: 28277. https://doi.org/10.1038/srep28277.\n\n\nZhang, Keqi, Shu-Ching Chen, Dean Whitman, Mei-Ling Shyu, Jianhua Yan, and Chengcui Zhang. 2003. “A Progressive Morphological Filter for Removing Nonground Measurements from Airborne LIDAR Data.” IEEE Transactions on Geoscience and Remote Sensing 41 (4): 872–82. https://doi.org/10.1109/TGRS.2003.810682.",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6633,7 +6737,7 @@
     "href": "course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html#outline",
     "title": "Point cloud data analysis",
     "section": "Outline",
-    "text": "Outline\n\nCharacteristics of UAS SfM and lidar-based point cloud data\nPoint cloud data representation and formats\nPoint cloud data processing, visualization, and analysis\nBare earth point extraction\nWorking with classified point clouds\nComputing DEM and topographic analysis\nVoxel-based analysis and vertical profiles",
+    "text": "Outline\n\nCompare lidar and UAS SfM point clouds: how each sensor samples the ground, the canopy, and buildings\nRead a LAS file: returns, intensity, classes, and the LAS format\nAnalyze point distribution by binning: densities, vertical range, outliers, and the supported resolution\nExtract bare ground and thin a point cloud\nCompute DEMs and DSMs by binning, triangulation, and spline interpolation, with topographic parameters\nAnalyze vertical structure with voxel models and transects",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",
@@ -6657,7 +6761,7 @@
     "href": "course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html#supplemental-materials",
     "title": "Point cloud data analysis",
     "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nProcessing point clouds in GRASS, workshop presented at FOSS4G conference in Boston in 2017 (start with the section “Binning the point cloud”).\nUSGS 3DEP Data View\nLAS specification v1.4, maintained by ASPRS on GitHub (the PDF is under Releases)\nLidar and INS\nPast Lecture recordings:\n\nProperties\nProcessing\nDEMs and voxel models",
+    "text": "Supplemental materials\n\nProcessing point clouds in GRASS, workshop presented at FOSS4G conference in Boston in 2017 (start with the section “Binning the point cloud”).\nUSGS 3DEP Data View\nLAS specification v1.4, maintained by ASPRS on GitHub (the PDF is under Releases)\nMobile mapping with lidar: why is an INS essential, OXTS\nPast Lecture recordings:\n\nProperties\nProcessing\nDEMs and voxel models",
     "crumbs": [
       "Topics",
       "Topic 4: GIS Analytics",

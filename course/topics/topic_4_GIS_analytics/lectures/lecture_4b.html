@@ -10,8 +10,8 @@
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.19">
 
-  <meta name="author" content="Justyna Jeziorska, Helena Mitasova &amp; Corey White">
-  <title>UAS Mapping and Analytics – Point cloud data analysis</title>
+  <meta name="author" content="Corey White adapted from Justyna Jeziorska and Helena Mitasova">
+  <title>UAS Mapping and Analytics – Point Cloud Data Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -35,7 +35,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-8b516edf591b3223edeb7cb3456de664.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -134,399 +153,1414 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Point cloud data analysis</h1>
+  <h1 class="title">Point Cloud Data Analysis</h1>
   <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Justyna Jeziorska, Helena Mitasova &amp; Corey White
+Corey White adapted from Justyna Jeziorska and Helena Mitasova
 </div>
 </div>
 </div>
 
 </section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
+<section id="objectives" class="slide level2 smaller">
+<h2>Objectives</h2>
 <ul>
-<li>Characteristics of UAS and lidar-based point cloud data</li>
-<li>Point cloud data processing, visualization, and analysis</li>
-<li>Computing DEM / DSM, and topographic parameters</li>
-<li>Voxel-based analysis and vertical profiles</li>
+<li class="fragment">Compare lidar and UAS SfM point cloud characteristics</li>
+<li class="fragment">Analyze point distribution by binning</li>
+<li class="fragment">Extract bare ground and thin a point cloud</li>
+<li class="fragment">Computing a DEM (DSM and DTM)</li>
+<li class="fragment">Analyze vertical structure with voxel models and transects</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>4A compared surfaces; today we go one step back, to the points the surfaces are made from</li>
+<li>Two clouds of the same site, Mid Pines at Lake Wheeler: 2013 airborne lidar and a 2015 UAS SfM flight</li>
+<li>The lab (4B) bins, classifies, interpolates, and validates those two clouds in GRASS</li>
+<li>Every concept today has a GRASS tool next to it; the lab uses them in the same order</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="what-are-point-clouds" class="slide level2">
-<h2>What are point clouds?</h2>
+<section id="two-kinds-of-point-clouds" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Two kinds of point clouds</h2>
+<aside class="notes">
 <ul>
-<li>Dense set of points (x,y,z) defined in 3D space:
-<ul>
-<li>Directly measured using lidar</li>
-<li>Derived from overlapping images using SfM (see previous lectures)</li>
-</ul></li>
+<li>Section 1: what a point cloud is, and how a lidar cloud differs from an SfM cloud</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-point-cloud" class="slide level2 smaller">
+<h2>What is a point cloud</h2>
+<div class="term-card">
+<p><strong>Point cloud</strong>: a dense set of points with x, y, z coordinates in 3D space, measured directly by lidar or derived from overlapping images by structure from motion</p>
+</div>
 
-<img data-src="../images/hunt_uavpointcloud_bldg.webp" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">UAS SfM derived point cloud from Midpines viewed at Hunt library</p></section>
-<section id="lidar-point-cloud-acquisition" class="slide level2 smaller">
-<h2>Lidar point cloud acquisition</h2>
+<img data-src="../images/hunt_uavpointcloud_bldg.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%" alt="A person standing in front of a wall-sized projection of a UAS point cloud of the Mid Pines fields: a road, scattered trees, and a red-roofed building rendered as thousands of colored dots"><p>UAS SfM point cloud of Mid Pines on the Hunt Library visualization wall.</p>
+<aside class="notes">
 <ul>
-<li>Measured time of pulse return is converted to distance</li>
-<li>Georeferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform</li>
+<li>Same data structure from two very different sensors: lidar measures, SfM reconstructs (2A)</li>
+<li>Everything downstream, DEMs, DSMs, canopy models, starts from these points</li>
+<li>The picture is the 2015 Mid Pines SfM cloud the lab uses</li>
 </ul>
-<p><img data-src="../images/airborne_lidar_scann.webp" style="width:30.0%"> <img data-src="../images/lidar_secref_3d.webp" style="width:65.0%"></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="multiple-return-lidar-point-cloud" class="slide level2">
-<h2>Multiple return lidar point cloud</h2>
-<p>Lidar pulse can penetrate the tree canopy leading to multiple pulse returns</p>
+<section id="lidar-acquisition" class="slide level2 smaller">
+<h2>Lidar acquisition</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><img data-src="../images/airborne_lidar_scann.webp" alt="Diagram of airborne laser scanning: an aircraft with a GPS antenna and an INS sends a fan of laser pulses to the ground, where a building, trees, and a GPS base station are drawn on the terrain block"></p>
+</div><div class="column" style="width:65%;">
+<p><img data-src="../images/lidar_secref_3d.webp" alt="3D view of a lidar point cloud over a field and forest edge: ground points in orange in dense parallel scan lines, trees and roofs in green above them"></p>
+<ul>
+<li>The measured time of flight of each pulse is converted to a distance</li>
+<li>Georeferencing comes from the platform’s position (GNSS) and orientation (IMU), fused in the INS</li>
+</ul>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Active sensor: it emits the pulse and times the echo, so it works regardless of texture and light</li>
+<li>Position from GNSS plus attitude from the IMU place every point; the same two sensors a UAS uses for geotags (1A), with a far better IMU</li>
+<li>INS is the IMU plus the filter that integrates it with GNSS; spec sheets usually just say GNSS/IMU</li>
+<li>The scan lines in the 3D view are the scanner sweeping across the flight line</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="multiple-returns" class="slide level2 smaller">
+<h2>Multiple returns</h2>
 
-<img data-src="../images/lidarmrpts3dcolored.webp" style="width:85.0%" class="r-stretch"><p><em>yellow: first return, dark brown: second return</em></p>
+<img data-src="../images/lidarmrpts3dcolored.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="3D view of a lidar point cloud: a dense yellow carpet of first returns over the terrain with tree crowns rising above it, and dark brown second returns visible under the canopy at the forest edges"><p>A lidar pulse can penetrate the tree canopy and produce several returns: yellow first returns, dark brown second returns.</p>
+<aside class="notes">
+<ul>
+<li>One pulse, several echoes: the top of the crown, branches, and often the ground</li>
+<li>This is what lets lidar map the ground under trees; SfM cannot do it</li>
+<li>The lab filters on return number to build a canopy surface and a ground surface from one file</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="multiple-return-point-cloud-profiles" class="slide level2">
-<h2>Multiple return point cloud profiles</h2>
-<p>Multiple return point cloud profile view of returns</p>
+<section id="returns-in-profile" class="slide level2 smaller">
+<h2>Returns in profile</h2>
 
-<!-- <section>
-   <h2>Lidar point cloud data</h2>
-<p>
-Set of <i>[x, y, z, (r, i, c, ...)]</i> measured points reflected
-from Earth surface or objects on or above it, where:
+<img data-src="../images/Lect_lidar_returns.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%" alt="Five stacked profile views of the same forested hill: all returns from 16,664 pulses, then first returns in red, second returns in yellow (26 percent of pulses), third in green (4 percent), and fourth in blue (under 1 percent); a caption notes that DEMs are typically made from last returns, which do not necessarily mean ground"><aside class="notes">
 <ul>
-<li> <i>[x, y, z]</i> are georeferenced coordinates,
-<li><i>r</i> &nbsp; is the return number,
-<li><i>i</i> &nbsp; is intensity,
-<li><i>c</i> &nbsp; is class
+<li>Most pulses give one return; a quarter give two, a few percent three or more</li>
+<li>Last return has the highest chance of being ground, but it is not ground: a dense crown stops the pulse</li>
+<li>Hence the classified ground class in modern data, and the caution in the lab about last returns</li>
 </ul>
-<p>
-Additional data: R:G:B, scan direction
-</section> -->
-<img data-src="../images/Lect_lidar_returns.webp" style="width:80.0%" class="r-stretch"></section>
-<section id="lidar-point-cloud-data" class="slide level2">
-<h2>Lidar point cloud data</h2>
-<p>Set of <em>[x, y, z, (r, i, c, …)]</em> measured points reflected from Earth surface or objects on or above it, where:</p>
-<ul>
-<li><em>[x, y, z]</em> are georeferenced coordinates</li>
-<li><em>r</em> is the return number</li>
-<li><em>i</em> is intensity</li>
-<li><em>c</em> is class</li>
-</ul>
-<p>Additional data: R:G:B, scan direction</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="lidar-point-cloud-preview" class="slide level2">
-<h2>Lidar point cloud preview</h2>
+<section id="lidar-points" class="slide level2 smaller">
+<h2>Lidar points</h2>
+<div class="term-card">
+<p><strong>Lidar point</strong>: <em>[x, y, z, r, i, c, …]</em>, a georeferenced position with the return number <em>r</em>, the intensity <em>i</em> of the echo, and a class <em>c</em> assigned by the provider</p>
+</div>
 <ul>
-<li>Visible swath overlap</li>
+<li>Additional attributes depend on the sensor and the provider: RGB from a camera, scan angle and direction, GPS time, number of returns per pulse</li>
+<li>Classes follow the <a href="https://asprsorg.sharepoint.com/:b:/r/sites/PublicAccess/Shared%20Documents/Public_Documents/Standards/LAS/asprs_las_format_v15_r00_2025.pdf?d=wfe26e8cdedcb42e782babe5bdc65b11b&amp;csf=1&amp;web=1&amp;e=A5Vh5l">ASPRS LAS standard</a>: 1 unclassified, 2 ground, 7 noise, 9 water, and so on</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Intensity is the strength of the echo: roads dark, roofs bright, useful for classification</li>
+<li>Class is what a previous processing step decided; it can be wrong</li>
+<li>The lab’s 2013 file uses classes 1, 2, 7, and 11; pdal info prints the counts</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lidar-preview-swath-overlap" class="slide level2 smaller">
+<h2>Lidar preview: swath overlap</h2>
 
-<img data-src="../images/midpines_lidar_plasviewco.webp" style="width:90.0%" class="r-stretch"></section>
-<section id="lidar-point-cloud-preview-1" class="slide level2">
-<h2>Lidar point cloud preview</h2>
+<img data-src="../images/midpines_lidar_plasviewco.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%" alt="3D view of the Mid Pines lidar point cloud over the fields: regular scan lines across bare fields, trees along the field edges in reddish brown, and a visibly denser band where two flight swaths overlap"><aside class="notes">
 <ul>
-<li>Points distributed throughout canopy</li>
-<li>No points on the wall of the building</li>
+<li>Parallel flight lines overlap at their edges; the overlap band has twice the density</li>
+<li>Density is not uniform, which matters when you pick a raster resolution</li>
+<li>The lab’s density maps show these bands as stripes</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lidar-preview-canopy-and-walls" class="slide level2 smaller">
+<h2>Lidar preview: canopy and walls</h2>
 
-<img data-src="../images/midpines_lidar_plasviewcozoom.webp" style="width:70.0%" class="r-stretch"></section>
-<section id="sfm-derived-point-cloud-data" class="slide level2">
-<h2>SfM-derived point cloud data</h2>
-<p>Set of <em>[x, y, z, (R, G, B)]</em> points derived from overlapping imagery using Structure from Motion technique:</p>
-<ul>
-<li><em>[x, y, z]</em> are georeferenced coordinates</li>
-<li><em>R, G, B</em> are Red, Green, Blue channels derived from imagery</li>
+<img data-src="../images/midpines_lidar_plasviewcozoom.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%" alt="Close-up 3D view of the Mid Pines lidar cloud: points scattered through the tree crowns, the ground visible beneath them, and a building reduced to a flat roof with no points on its walls"><ul>
+<li>Points distributed throughout the canopy</li>
+<li>No points on the walls of the building</li>
 </ul>
-<p>Additional data depend on sensor</p>
-</section>
-<section id="uas-sfm-point-cloud-preview" class="slide level2">
-<h2>UAS SfM point cloud preview</h2>
+<aside class="notes">
 <ul>
-<li>Only top of tree canopy captured</li>
-<li>Building densely sampled including the wall</li>
+<li>Nadir-looking scanner: roofs and ground, but a wall is parallel to the beam and gets nothing</li>
+<li>Points inside the crowns come from the multiple returns</li>
+<li>Keep both in mind for the SfM comparison next</li>
 </ul>
-<p><img data-src="../images/midpines_uas_plasviewco2.webp" style="width:90.0%"></p>
-<h3 id="uas-sfm-point-cloud-preview-1">UAS SfM point cloud preview</h3>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sfm-points" class="slide level2 smaller">
+<h2>SfM points</h2>
+<div class="term-card">
+<p><strong>SfM point</strong>: <em>[x, y, z, R, G, B]</em>, a position reconstructed from overlapping imagery with the color sampled from the photos</p>
+</div>
 <ul>
-<li>Much higher density of points with R:G:B included</li>
+<li>No returns, no intensity: the camera sees one surface, the first one in view</li>
+<li>Classes only if a later step assigns them (Metashape and WebODM can classify ground points)</li>
+<li>Density depends on the GSD, the overlap, and the quality setting used in dense matching</li>
 </ul>
-<p><img data-src="../images/midpines_uas_plasviewrgb.webp" style="width:82.0%"></p>
-</section>
-<section id="point-cloud-data-formats" class="slide level2">
-<h2>Point cloud data formats</h2>
+<aside class="notes">
 <ul>
-<li>ASCII x,y,z, … format - older data</li>
-<li>Binary LAS format (header, record information, x,y,z,i, … ), industry lidar data exchange format</li>
-<li>Compressed LAZ format</li>
-<li>Proprietary formats, especially for waveform data</li>
+<li>Same x, y, z, but the rest of the record is different: color instead of echo physics</li>
+<li>Nothing under the canopy; the leaves are the surface the camera sees</li>
+<li>The dense cloud quality setting from 2B decides how many points you get</li>
 </ul>
-<p>Learn more at <a href="https://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf">ASPRS LAS1.4 Specification</a><br>
-and <a href="https://pubs.usgs.gov/tm/11b4/pdf/tm11-B4.pdf">USGS Lidar Base Specification</a></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="point-cloud-data-processing" class="slide level2">
-<h2>Point cloud data processing</h2>
+<section id="uas-sfm-preview" class="slide level2 smaller">
+<h2>UAS SfM preview</h2>
+
+<img data-src="../images/midpines_uas_plasviewco2.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%" alt="3D view of the Mid Pines UAS SfM point cloud: a dense carpet of points over bare fields and a road, tree crowns as solid reddish blobs, and a long building fully outlined including its walls"><ul>
+<li>Only the top of the tree canopy is captured</li>
+<li>The building is densely sampled, including the walls</li>
+</ul>
+<aside class="notes">
 <ul>
-<li>Preview and analysis of point distribution</li>
-<li>Filtering outliers</li>
-<li>Bare earth point extraction</li>
-<li>Classification: canopy, buildings …</li>
-<li>Decimation (point cloud thinning)</li>
-<li>Transformation to surfaces or 3D objects</li>
+<li>The mirror image of the lidar slide: walls yes, canopy interior no</li>
+<li>Oblique views from the overlapping photos see the walls</li>
+<li>Trees are solid shells; there is no ground under them in this cloud</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="analysis-of-point-distribution" class="slide level2">
-<h2>Analysis of point distribution</h2>
-<p>Binning: point statistics for each grid cell at selected resolution</p>
+<section id="uas-sfm-preview-in-color" class="slide level2 smaller">
+<h2>UAS SfM preview in color</h2>
+
+<img data-src="../images/midpines_uas_plasviewrgb.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%" alt="The same Mid Pines UAS point cloud colored by the photos: green crops, a pale dirt road, scattered dark tree crowns, and the red-roofed building, with the density of points visible as grain"><p>Much higher density of points, with RGB from the photos.</p>
+<aside class="notes">
 <ul>
-<li>Number of points per grid cell - map of point densities</li>
-<li>Range, stddv of z-values - map of within cell vertical variability</li>
-<li>Identify data gaps, potential for artifacts</li>
-<li>Use to select appropriate supported resolution for DEM</li>
+<li>Several times the lidar density, and every point carries a color</li>
+<li>Looks like an orthophoto in 3D; that is also its weakness, it only knows what the photos show</li>
+<li>The lab bins both clouds at 1 m to compare densities side by side</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="analysis-of-point-distribution-lidar" class="slide level2">
-<h2>Analysis of point distribution: lidar</h2>
-<p>Increased densities along swath overlaps or close to terrestrial station position</p>
-<p><img data-src="../images/lid2013_1r_n_3ftb.webp" height="210"> <img data-src="../images/lid2013_be_n_3ftb.webp" height="210"> <img data-src="../images/Ssecr_110309_ptdensity_20cm.webp" height="210"></p>
-<p><em>County-wide 2013 lidar: all returns and bare earth, terrestrial lidar</em></p>
+<section id="point-cloud-formats" class="slide level2 smaller">
+<h2>Point cloud formats</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Format</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ASCII x, y, z</td>
+<td>Oldest and simplest; large, slow, no attributes beyond the columns</td>
+</tr>
+<tr class="even">
+<td>LAS</td>
+<td>Binary industry standard from ASPRS: header, point records with x, y, z, intensity, returns, class</td>
+</tr>
+<tr class="odd">
+<td>LAZ</td>
+<td>Losslessly compressed LAS; a fraction of the size, read by most software</td>
+</tr>
+<tr class="even">
+<td>COPC</td>
+<td>Cloud optimized LAZ with a spatial index, streamed straight from a web server</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://github.com/ASPRSorg/LAS">ASPRS LAS 1.4 specification</a> defines the record and the standard classes; the <a href="https://pubs.usgs.gov/tm/11b4/pdf/tm11-B4.pdf">USGS Lidar Base Specification</a> sets what public lidar must deliver.</p>
+<aside class="notes">
+<ul>
+<li>LAS is what you get from providers; LAZ is what you store; COPC is what you stream</li>
+<li>The lab opens the COPC version of the Mid Pines lidar in a browser before touching GRASS</li>
+<li>Waveform data (the full echo) has its own proprietary formats</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="analysis-of-point-distribution-lidar-1" class="slide level2">
-<h2>Analysis of point distribution: lidar</h2>
-<p>Change in pattern along swath overlaps</p>
-<p><img data-src="../images/count_1m_lid_all.webp" height="320"> <img data-src="../images/count_1m_lid_ground.webp" height="320"></p>
-<p><em>Midpines: number of points per 1m grid cell: for all returns and ground</em></p>
+<section id="looking-at-the-points" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Looking at the points</h2>
+<aside class="notes">
+<ul>
+<li>Section 2: before making a surface, find out how the points are distributed</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="analysis-of-point-distribution-sfm" class="slide level2">
-<h2>Analysis of point distribution: SfM</h2>
-<p>High point densities around trees and building edges</p>
-<p><img data-src="../images/count_1m_uas.webp" height="420"></p>
-<p><em>Midpines: number of SfM-derived points per 1m grid cell</em></p>
+<section id="processing-steps" class="slide level2 smaller">
+<h2>Processing steps</h2>
+<ul>
+<li class="fragment">Preview, and analyze the point distribution</li>
+<li class="fragment">Filter outliers</li>
+<li class="fragment">Extract bare earth points</li>
+<li class="fragment">Classify: canopy, buildings, and so on</li>
+<li class="fragment">Decimate (thin) the cloud</li>
+<li class="fragment">Transform the points into surfaces or 3D objects</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>The order matters: you cannot pick a resolution before you know the density</li>
+<li>Provider data arrives with some of this done (classes); check it rather than trust it</li>
+<li>The lab does the first, the fourth by a simple rule, and the last two</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="analysis-of-within-cell-z-range" class="slide level2">
-<h2>Analysis of within cell z-range</h2>
-<p>Maps of z-values range within 3m grid cell</p>
-<p><img data-src="../images/lidar_range3m_zoom.webp" height="310"> <img data-src="../images/uas_range3m_sample.webp" height="310"></p>
-<p><em>Midpines z-range lidar and UAS, lidar provides better data about the trees than the denser UAS point cloud</em></p>
+<section id="binning" class="slide level2 smaller">
+<h2>Binning</h2>
+<div class="term-card">
+<p><strong>Binning</strong>: computing a statistic of the points that fall into each cell of a grid at a chosen resolution, with no interpolation; in GRASS, <code>r.in.pdal</code> with <code>method=</code></p>
+</div>
+<ul>
+<li>Number of points per cell: a map of point density</li>
+<li>Range or standard deviation of z within the cell: a map of vertical variability</li>
+<li>Shows data gaps and where artifacts will appear</li>
+<li>The basis for choosing a resolution the data can support</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>The cheapest thing you can do with a point cloud, and the most informative</li>
+<li>Count per cell is the density map; z range per cell says whether the cell holds flat ground or a tree</li>
+<li>Lab Part 2 is exactly this at 1 m for both clouds</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="point-density-county-lidar" class="slide level2 smaller">
+<h2>Point density: county lidar</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img data-src="../images/lid2013_1r_n_3ftb.webp" alt="Map of first return point counts per 3 ft cell from the 2013 county lidar: cyan at one to two points over most of the area, with an orange and red diagonal band of four to six points where two swaths overlap"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="../images/lid2013_be_n_3ftb.webp" alt="Map of bare earth point counts per 3 ft cell from the same lidar: mostly yellow and green at one to two points, with white gaps of zero points under buildings and tree stands"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="../images/Ssecr_110309_ptdensity_20cm.webp" alt="Map of terrestrial lidar point density at 20 cm cells: a red and magenta bullseye of over 100 points near the scanner position fading through blue to yellow near zero at the far edge"></p>
+</div></div>
+<p>All returns and bare earth from the 2013 county lidar, and a terrestrial scan: density rises along swath overlaps and close to a terrestrial scanner.</p>
+<aside class="notes">
+<ul>
+<li>Airborne: the diagonal band is the swath overlap, twice the density</li>
+<li>Bare earth: the white holes are buildings and dense canopy, no ground points there</li>
+<li>Terrestrial: density falls with distance from the tripod; the same instrument gives 100 points per cell nearby and none far away</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="point-density-mid-pines-lidar" class="slide level2 smaller">
+<h2>Point density: Mid Pines lidar</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/count_1m_lid_all.webp" alt="Map of all lidar returns per 1 m cell at Mid Pines: a speckled yellow and orange field of three to five points with diagonal scan stripes, red patches of ten or more points over tree crowns, and a 100 m scale bar"></p>
+<p>All returns</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/count_1m_lid_ground.webp" alt="Map of ground class lidar points per 1 m cell at Mid Pines: mostly cyan at one point with blue zero cells in stripes, and a solid dark blue rectangle with no ground points where a building stands"></p>
+<p>Ground</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>All returns: trees light up red because every pulse through a crown gives several echoes</li>
+<li>Ground only: about one point per square meter, zero under the building and in dense crowns</li>
+<li>The diagonal stripes in both are the scan pattern; they will show up in any surface you bin</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="point-density-mid-pines-sfm" class="slide level2 smaller">
+<h2>Point density: Mid Pines SfM</h2>
+
+<img data-src="../images/count_1m_uas.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:62.0%" alt="Map of UAS SfM points per 1 m cell at Mid Pines: a fairly even blue field of ten to twenty points with faint contour-like banding, green and yellow patches of fifty or more points on tree crowns and building edges"><p>High point densities around trees and building edges.</p>
+<aside class="notes">
+<ul>
+<li>Ten to twenty points per square meter on the fields, several times the lidar</li>
+<li>Highest where the photos have the most texture: crowns and edges; the matcher finds more there</li>
+<li>Density is not accuracy; the SfM cloud has no ground under those crowns at all</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="vertical-range-within-a-cell" class="slide level2 smaller">
+<h2>Vertical range within a cell</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/lidar_range3m_zoom.webp" alt="Map of the range of lidar z values per 3 m cell over a shaded relief of Mid Pines: grey near zero on the fields, and tree crowns as patches of green and cyan reaching 28 to 37 m of range"></p>
+<p>Lidar</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/uas_range3m_sample.webp" alt="Map of the range of UAS SfM z values per 3 m cell over shaded relief: fields near zero, the same trees as smaller orange and yellow patches of 9 to 28 m of range, and the plowed field pattern visible in the relief"></p>
+<p>UAS SfM</p>
+</div></div>
+<p>Lidar reaches through the canopy, so it gives a larger z range and better information about the trees than the denser UAS cloud.</p>
+<aside class="notes">
+<ul>
+<li>Range of z per cell: zero on bare ground, tree height under a crown</li>
+<li>Lidar’s range is the whole tree, crown to ground; SfM’s is only the crown’s shape</li>
+<li>Denser is not better here: the lidar knows the tree height, the SfM cloud does not</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="outliers" class="slide level2 smaller">
 <h2>Outliers</h2>
-<ul>
-<li>Lidar: birds, particles, material properties</li>
+
+<img data-src="../images/lid2013_793016_1ret_3ft.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:62.0%" alt="3D view of a binned first return lidar surface over an orthophoto of Centennial Parkway and a wooded campus: trees and buildings stand up correctly, and one thin vertical spike rises far above everything from a single stray point"><ul>
+<li>Lidar: birds, airborne particles, reflective materials</li>
 <li>SfM: errors in point matching</li>
-<li>Filtered by using local z-min, z-max or range thresholds</li>
+<li>Filter with local z-min, z-max, or range thresholds; outliers survive even in processed data</li>
 </ul>
-<p><img data-src="../images/lid2013_793016_1ret_3ft.webp" height="310"></p>
-<p><em>Centennial Parkway - outlier present even in processed data</em></p>
-</section>
-<section id="bare-ground-and-feature-extraction" class="slide level2 smaller">
-<h2>Bare ground and feature extraction</h2>
+<aside class="notes">
 <ul>
-<li>Multiple returns help but not necessary</li>
-<li>Feature or surface needs to be sampled by sufficient number of points</li>
-<li>Multiscale curvature-based algorithm by Evans and Hudak</li>
-<li>Progressive morphological filter by Zhang</li>
+<li>The spike is one point, hundreds of meters up; a bird, or a multipath echo</li>
+<li>Providers filter most outliers (class 7), not all</li>
+<li>Binning with min or max makes them obvious; interpolation would turn the spike into a cone</li>
 </ul>
-<p><img data-src="../images/mcc_default_smaller.webp" height="250"></p>
-<p><em>Midpines: above ground point cloud from lidar by MCC in GRASS</em></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ground-and-thinning" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Ground and thinning</h2>
+<aside class="notes">
+<ul>
+<li>Section 3: separating ground from everything else, and reducing the cloud to what you need</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bare-ground-extraction" class="slide level2 smaller">
+<h2>Bare ground extraction</h2>
+<div class="term-card">
+<p><strong>Ground classification</strong>: labeling the points that lie on the terrain so that a DEM can be built from them alone; the rest is vegetation, buildings, and noise</p>
+</div>
+
+<img data-src="../images/mcc_default_smaller.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:48.0%" alt="3D view of Mid Pines: a smooth green and yellow ground surface with the lidar points classified as above ground, trees and one long building, standing on it as dark green clusters"><ul>
+<li>Multiple returns help but are not required; the surface has to be sampled by enough points</li>
+<li>Multiscale curvature classification <span class="citation" data-cites="evans_multiscale_2007">(<a href="#/references" role="doc-biblioref" onclick="">Evans and Hudak 2007</a>)</span>, <code>v.lidar.mcc</code> in GRASS</li>
+<li>Progressive morphological filter <span class="citation" data-cites="zhang_progressive_2003">(<a href="#/references" role="doc-biblioref" onclick="">Zhang et al. 2003</a>)</span></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Both algorithms grow a ground surface and reject points that stick up from it by more than a curvature or slope tolerance</li>
+<li>MCC works scale by scale, so it keeps terraces and rejects crowns; it is the addon in the lab’s optional part</li>
+<li>Works on SfM clouds too, with no returns: the geometry is enough on open ground</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="decimation" class="slide level2 smaller">
 <h2>Decimation</h2>
 <ul>
-<li>Thinning of point cloud - subsampling</li>
-<li>Reduces the point cloud size - easier to manage data</li>
-<li>Thinning threshold should be based on features that need to be preserved</li>
-<li>Count-based decimation: preserves variations in density</li>
-<li>Grid-based decimation: removes variations in density</li>
-<li>Distance and geometry based decimation: more computationally intensive</li>
+<li class="fragment">Thinning the cloud by subsampling, to make the data manageable</li>
+<li class="fragment">The thinning threshold follows from the features that must be preserved</li>
+<li class="fragment">Count based: keep every n-th point; preserves variations in density</li>
+<li class="fragment">Grid based: keep one point per cell; removes variations in density</li>
+<li class="fragment">Distance and geometry based: keep points where the surface changes; more expensive</li>
 </ul>
-</section>
-<section id="decimation-count-based" class="slide level2">
-<h2>Decimation: count-based</h2>
-<p><img data-src="../images/decimation_secref_full.webp" height="350"> <img data-src="../images/decimation_secref_preserve_3.webp" height="350"></p>
-<p><em>Preserves relative point densities</em></p>
-</section>
-<section id="decimation-grid-based" class="slide level2">
-<h2>Decimation: grid-based</h2>
-<p><img data-src="../images/decimation_secref_full.webp" height="350"> <img data-src="../images/decimation_secref_grid_10.webp" height="350"></p>
-<p><em>Removes variations in point densities</em></p>
-</section>
-<section id="computing-dem-binning" class="slide level2">
-<h2>Computing DEM: binning</h2>
+<aside class="notes">
 <ul>
-<li>Per cell statistics: mean, min, max, or nearest point z-value</li>
-<li>Sufficient for many applications</li>
-<li>No need to import the points, on-fly raster generation</li>
-<li>May be noisy, with no-data areas</li>
+<li>A 5 GB cloud does not need 5 GB of points to make a 1 m DEM</li>
+<li>Count based is fast and keeps the swath overlap pattern; grid based evens it out</li>
+<li><code>v.in.pdal</code> and <code>r.in.pdal</code> thin on import with the skip and preserve options</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="computing-dem-tin" class="slide level2">
-<h2>Computing DEM: TIN</h2>
-<p>Meshes are standard in 3D engineering and design systems:</p>
+<section id="decimation-count-based" class="slide level2 smaller">
+<h2>Decimation: count based</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/decimation_secref_full.webp" alt="Plan view of a terrestrial lidar point cloud as red dots: very dense in the upper left near the scanner, thinning toward the lower right, with a diagonal ridge of higher density"></p>
+<p>Full cloud</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/decimation_secref_preserve_3.webp" alt="The same cloud keeping every third point: fewer dots everywhere, but the dense upper left and the sparse lower right are still visibly different"></p>
+<p>Every third point</p>
+</div></div>
+<p>Preserves the relative point densities.</p>
+<aside class="notes">
 <ul>
-<li>Variable resolution based on terrain complexity</li>
-<li>Variable level of detail visualization</li>
-<li>2D triangulation leads to TIN geometry not optimal for 3D, e.g.&nbsp;triangles on roads, artificial dams in valleys</li>
-<li>Harder to combine with other geospatial data</li>
-<li>Limited analytics available</li>
-<li>Harder to share - limited exchange formats</li>
+<li>One point in three, everywhere; the density gradient of the terrestrial scan survives</li>
+<li>Right choice when you want the data to keep telling you where the sensor was strong</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="computing-dem-interpolation-to-raster" class="slide level2">
-<h2>Computing DEM: interpolation to raster</h2>
+<section id="decimation-grid-based" class="slide level2 smaller">
+<h2>Decimation: grid based</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/decimation_secref_full.webp" alt="Plan view of the full terrestrial lidar point cloud as red dots, dense near the scanner and sparse far from it"></p>
+<p>Full cloud</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/decimation_secref_grid_10.webp" alt="The same cloud thinned to one point per grid cell: an even scatter of red dots across the whole area with no density gradient left"></p>
+<p>One point per cell</p>
+</div></div>
+<p>Removes the variations in point density.</p>
+<aside class="notes">
 <ul>
-<li>Supports resolution higher than point density</li>
-<li>Results depend on the method used, but most methods work because of high point densities</li>
-<li>High resolution raster DEMs can be massive - works for most analytics, converts to TIN for 3D visualization</li>
-<li>Easy to share</li>
+<li>One point per cell: the near field loses most of its points, the far field keeps all of them</li>
+<li>Right choice before interpolation, when uneven density would bias the surface</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="jockeys-ridge-lidar-1999" class="slide level2">
-<h2>Jockey’s Ridge lidar 1999</h2>
-<p>Binning at 1m resolution: many NULL cells</p>
-<p><img data-src="../images/lidstorast1m.webp" height="400"></p>
-</section>
-<section id="jockeys-ridge-lidar-1999-1" class="slide level2">
-<h2>Jockey’s Ridge lidar 1999</h2>
-<p>Binning at 3m resolution</p>
-<p><img data-src="../images/lidstorast.webp" height="400"></p>
-</section>
-<section id="jockeys-ridge-lidar-1999-2" class="slide level2">
-<h2>Jockey’s Ridge lidar 1999</h2>
-<p>Interpolation at 1m resolution</p>
-<p><img data-src="../images/liddfdm1e.webp" height="400"></p>
-<p>You can try TIN for comparison - provide data</p>
-</section>
-<section id="midpines-uas-sfm" class="slide level2">
-<h2>Midpines UAS SfM</h2>
-<p>Low density TIN</p>
-<p><img data-src="../images/lowdensity_tin.webp" height="400"></p>
-</section>
-<section id="midpiness-uas-sfm" class="slide level2">
-<h2>Midpines’s UAS SfM</h2>
-<p>High density TIN</p>
-<p><img data-src="../images/highdensity_tin.webp" height="400"></p>
-</section>
-<section id="midpiness-uas-sfm-1" class="slide level2">
-<h2>Midpines’s UAS SfM</h2>
-<p>Smoothed high density TIN</p>
-<p><img data-src="../images/smoothedHDtin.webp" height="400"></p>
-</section>
-<section id="midpines-uas-sfm-1" class="slide level2">
-<h2>Midpines UAS SfM</h2>
-<p>High density point cloud imported to GRASS GIS and interpolated by spline method</p>
-<p><img data-src="../images/agisoft_detail.webp" height="300"></p>
-</section>
-<section id="midpines-interpolated-dsm" class="slide level2">
-<h2>Midpines interpolated DSM</h2>
-<p>Lidar and UAS SfM based DSM</p>
-<p><img data-src="../images/lidar_dsm_zoom.webp" style="width:45.0%"> <img data-src="../images/uas_dsm3d_sample.webp" style="width:45.0%"></p>
-</section>
-<section id="topographic-analysis" class="slide level2">
-<h2>Topographic analysis</h2>
-<p>Deriving topographic parameters from point cloud based DEMs has challenges:</p>
+<section id="from-points-to-surfaces" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>From points to surfaces</h2>
+<aside class="notes">
 <ul>
-<li>DEMs are often noisy and parameters can reflect noise or scan pattern rather than actual topography</li>
-<li>High resolution leads to representation of landforms by 10s or 100s of points or grid cells</li>
-<li>Standard topographic analysis using 3x3 neighborhood leads to noisy patterns of topographic parameters or bias towards point distribution pattern</li>
+<li>Section 4: three ways to turn points into a DEM or DSM, and what each costs</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="topographic-analysis-using-splines" class="slide level2 smaller">
-<h2>Topographic analysis using splines</h2>
-<p>Simultaneous computation of parameters with interpolation</p>
+<section id="three-ways-to-a-surface" class="slide level2 smaller">
+<h2>Three ways to a surface</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>How</th>
+<th>Strengths</th>
+<th>Weaknesses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binning</td>
+<td>Per cell statistic: mean, min, max, nearest</td>
+<td>No import, fast, enough for many uses</td>
+<td>Noisy, no-data cells where points are missing</td>
+</tr>
+<tr class="even">
+<td>TIN</td>
+<td>Triangulate the points into a mesh</td>
+<td>Variable resolution, standard in 3D design</td>
+<td>Flat triangles on roads, dams across valleys, few analysis tools, hard to share</td>
+</tr>
+<tr class="odd">
+<td>Interpolation</td>
+<td>Fit a surface to the points and sample it on a raster</td>
+<td>Resolution above the point spacing, smooth, every GIS tool applies</td>
+<td>Result depends on the method; large rasters</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
 <ul>
-<li>Parameters derived from original points rather than raster</li>
-<li>Explicit equations for partial derivatives: RST</li>
-<li>Tens or hundreds of points can be used</li>
-<li>Tuning the level of detail by tension and smoothing parameters</li>
+<li>Binning is <code>r.in.pdal</code> with method mean, min, or max; the lab’s Part 3</li>
+<li>TIN is what Metashape’s mesh is, with the same problems in valleys</li>
+<li>Interpolation is <code>v.surf.rst</code>; the lab’s Part 4 at 0.5 m from 1 m point spacing</li>
+<li>With dense clouds most interpolation methods agree; the choice matters at the edges and under trees</li>
 </ul>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><em>Reference</em></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="binning-jockeys-ridge-1999-lidar" class="slide level2 smaller">
+<h2>Binning: Jockey’s Ridge 1999 lidar</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/lidstorast1m.webp" alt="3D view of a lidar dune field binned at 1 m: the dune shape is visible but the surface is riddled with white holes where cells have no points, and tall spikes stand along one edge"></p>
+<p>Binned at 1 m: many null cells</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/lidstorast.webp" alt="3D view of the same dunes binned at 3 m: a continuous grey shaded surface with the dune crests, a few remaining holes at the edges, and rough texture on the vegetated flanks"></p>
+<p>Binned at 3 m</p>
+</div></div>
+<aside class="notes">
 <ul>
-<li><a href="https://www4.ncsu.edu/~hmitaso/gmslab/papers/IEEEGRSL2005.pdf">H.Mitasova, H., Mitas, L. and Harmon, R.S., 2005, Simultaneous spline interpolation and topographic analysis for lidar elevation data: methods for Open source GIS, IEEE GRSL 2(4), pp.&nbsp;375- 379.</a></li>
+<li>1999 data at about one point per 3 m: at 1 m most cells are empty</li>
+<li>3 m is the resolution the density supports; binning works, but it is coarse</li>
+<li>This is why the density map comes first</li>
 </ul>
-</div>
-</div>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="topographic-analysis-using-splines-1" class="slide level2 text-center">
-<h2>Topographic analysis using splines</h2>
-<p>Tuning the level of detail with tension parameter</p>
-<p><img data-src="../images/curvatures_tension.webp" height="450"></p>
-</section>
-<section id="topographic-analysis-using-splines-2" class="slide level2 text-center">
-<h2>Topographic analysis using splines</h2>
-<p>Tuning the level of detail with tension parameter</p>
-<p><img data-src="../images/lidar_tension_curv.webp" height="450"></p>
-<p><em>Profile curvature and slope maps draped over 1m res. DEM</em></p>
-</section>
-<section id="vertical-point-cloud-analysis" class="slide level2 text-center">
-<h2>Vertical point cloud analysis</h2>
-<p>Voxel-based point analysis and 3D fragmentation index</p>
-<p><img data-src="../images/profiles_points_and_ff.webp" height="400"></p>
-</section>
-<section id="vertical-point-cloud-analysis-1" class="slide level2 text-center">
-<h2>Vertical point cloud analysis</h2>
-<p>3D visualization of vertical fragmentation index cross-sections</p>
-<p><img data-src="../images/profiles3d.webp" height="450"></p>
-</section>
-<section id="mamoth-cave-park-data" class="slide level2">
-<h2>Mamoth Cave Park: data</h2>
-<ul>
-<li>Classified point cloud in las format</li>
-<li>Raw full waveform in lwv format</li>
-<li>Imagery</li>
-</ul>
-<p><img data-src="../images/Lidar_waveformALPS_1LG.webp" height="350"></p>
-</section>
-<section id="mamoth-cave-park-canopy" class="slide level2 text-center">
-<h2>Mamoth Cave Park: canopy</h2>
-<p><img data-src="../images/mamothcave_canopy.webp" height="450"></p>
-</section>
-<section id="mamoth-cave-park-bare-earth" class="slide level2 text-center">
-<h2>Mamoth Cave Park: bare earth</h2>
+<section id="interpolation-jockeys-ridge-1999-lidar" class="slide level2 smaller">
+<h2>Interpolation: Jockey’s Ridge 1999 lidar</h2>
 
-<img data-src="../images/mamothcave_bare.webp" style="width:90.0%" class="r-stretch"></section>
-<section id="voxel-models" class="slide level2 smaller text-center">
+<img data-src="../images/liddfdm1e.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="3D shaded view of the Jockey's Ridge dunes interpolated at 1 m: a continuous smooth surface with the dune ridges, slip faces, and vegetation texture, and no holes"><p>Interpolated at 1 m from the same points.</p>
+<aside class="notes">
+<ul>
+<li>Same 1999 points, now a 1 m surface with no holes: the spline fills between points</li>
+<li>The detail on the dune is real; the roughness on the flanks is the vegetation in the first returns</li>
+<li>The price is that the surface is a model between the points, not a measurement</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tin-from-the-mid-pines-sfm-cloud" class="slide level2 smaller">
+<h2>TIN from the Mid Pines SfM cloud</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/lowdensity_tin.webp" alt="Close-up of a low density triangulated mesh of the Mid Pines SfM cloud in flat blue shading: a long building and a small structure as jagged blocks, trees as clusters of thin spikes, and large flat triangles between"></p>
+<p>Low density</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/highdensity_tin.webp" alt="The same area as a high density mesh: the building and structure have crisp edges, the ground shows fine texture, and the trees are dense spiky clusters"></p>
+<p>High density</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Metashape’s mesh at two face counts; the 2B face count setting in action</li>
+<li>Low density: large triangles smear the building edges; high density: edges are sharp but every bush is a spike field</li>
+<li>Either way the mesh is for visualization and volumes, not for terrain analysis</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="smoothed-tin" class="slide level2 smaller">
+<h2>Smoothed TIN</h2>
+
+<img data-src="../images/smoothedHDtin.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:66.0%" alt="The high density mesh after smoothing: the building and structure as rounded blocks, the ground as a gently undulating surface, and the trees as softened spiky mounds"><aside class="notes">
+<ul>
+<li>Smoothing removes the matching noise and also the sharp edges</li>
+<li>Good for a 3D model to look at; it has quietly changed the volume of every pile and building</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="interpolated-sfm-surface" class="slide level2 smaller">
+<h2>Interpolated SfM surface</h2>
+
+<img data-src="../images/agisoft_detail.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%" alt="Oblique 3D view of the Mid Pines SfM cloud interpolated by spline and draped with the orthophoto: a long red-roofed building, parked vehicles, a dirt road, and trees that stand up as solid green columns because the surface wraps the crowns"><p>High density SfM point cloud imported to GRASS and interpolated with the regularized spline with tension.</p>
+<aside class="notes">
+<ul>
+<li><code>v.surf.rst</code> on the dense cloud: a raster DSM you can run every GRASS tool on</li>
+<li>The trees are columns, not cones: the spline follows the crown shell and drops to the ground at the edge</li>
+<li>This is the surface the 4A DSM comparisons were made from</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lidar-and-sfm-dsms-of-mid-pines" class="slide level2 smaller">
+<h2>Lidar and SfM DSMs of Mid Pines</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/lidar_dsm_zoom.webp" alt="3D view of the interpolated lidar DSM of Mid Pines colored by elevation from green to yellow: smooth fields, a few rows of trees as pointed brown mounds, and the long building as a small block"></p>
+<p>Lidar</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/uas_dsm3d_sample.webp" alt="3D view of the interpolated UAS SfM DSM of the same area: the plowed strips and terraces of the fields stand out as fine texture, the trees are dense dark mounds, and the building is sharply outlined"></p>
+<p>UAS SfM</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Lidar at 1 point per square meter gives a smooth, slightly generalized surface</li>
+<li>SfM at 15 points per square meter resolves the plow rows; it also carries the matching noise</li>
+<li>The lab interpolates the lidar at 0.5 m; Topic 5 differences the two</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="topographic-analysis" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Topographic analysis</h2>
+<aside class="notes">
+<ul>
+<li>Section 5: slope, aspect, and curvature from point cloud surfaces, and why it is harder than it looks</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-derivatives-are-hard-here" class="slide level2 smaller">
+<h2>Why derivatives are hard here</h2>
+<ul>
+<li class="fragment">Point cloud DEMs are noisy, so slope and curvature can reflect the noise or the scan pattern rather than the terrain</li>
+<li class="fragment">At high resolution a landform is represented by tens or hundreds of cells, and a 3 x 3 window sees only a fraction of it</li>
+<li class="fragment">The result is noisy derivatives, or derivatives biased toward the point distribution</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>4A ran <code>r.slope.aspect</code> on a 0.3 m DSM and the speckle was visible; that is this problem</li>
+<li>A terrace 5 m wide is 15 cells at 0.3 m; a 3 x 3 window is a tenth of the feature</li>
+<li>Two fixes: smooth the DEM first, or compute the derivatives from the points</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="topographic-analysis-with-splines" class="slide level2 smaller">
+<h2>Topographic analysis with splines</h2>
+<ul>
+<li>The regularized spline with tension has explicit equations for its partial derivatives, so slope, aspect, and curvatures are computed in the same run as the interpolation <span class="citation" data-cites="mitasova_simultaneous_2005">(<a href="#/references" role="doc-biblioref" onclick="">Mitasova et al. 2005</a>)</span></li>
+<li>The parameters come from the original points, tens to hundreds of them per location, not from a 3 x 3 window</li>
+<li>Tension and smoothing tune the level of detail</li>
+</ul>
+<div class="term-card">
+<p>In GRASS: <code>v.surf.rst input=points elevation=dem slope=slope aspect=aspect pcurv=pcurv tension=20 smooth=1</code></p>
+</div>
+<aside class="notes">
+<ul>
+<li>One command, one pass over the points: the DEM and its derivatives, consistent with each other</li>
+<li>Tension controls how stiff the surface is; smoothing how far it may depart from the points</li>
+<li>The lab runs this on the ground points and on the first returns, with slope and profile curvature</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tuning-the-level-of-detail" class="slide level2 smaller">
+<h2>Tuning the level of detail</h2>
+
+<img data-src="../images/curvatures_tension.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:66.0%" alt="Two profile curvature maps of the same lidar area side by side: with high tension the map is a fine red and blue speckle that follows the scan lines; with low tension it shows branching red and blue valley and ridge patterns with round blobs for the trees; the caption reads same data, very different results"><p>Same points, different tension: high tension follows every point and the scan pattern, low tension shows the landforms.</p>
+<aside class="notes">
+<ul>
+<li>Left: tension too high, the surface is tight to the points and the curvature maps the scan stripes</li>
+<li>Right: tension lower, the channels and ridges appear; the blobs are tree crowns in the first returns</li>
+<li>There is no single right value; it depends on the feature size you are after</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="curvature-and-slope-on-a-1-m-dem" class="slide level2 smaller">
+<h2>Curvature and slope on a 1 m DEM</h2>
+
+<img data-src="../images/lidar_tension_curv.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:78.0%" alt="Two 3D views of a 1 m lidar DEM of a stream valley with cultivated terraces: on the left profile curvature in red, blue, and green speckle draped over the terrain; on the right slope in yellow and red, with the terrace faces and the valley sides standing out"><p>Profile curvature and slope draped over the 1 m DEM.</p>
+<aside class="notes">
+<ul>
+<li>Curvature finds the terrace edges and the channel; slope shows the valley sides</li>
+<li>Both computed by the spline from the ground points, so the terraces are continuous, not stair steps</li>
+<li><code>npmin</code> in the lab controls how many points each segment uses; too few and segment seams appear</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="vertical-structure" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Vertical structure</h2>
+<aside class="notes">
+<ul>
+<li>Section 6: when a surface is not enough, keep the third dimension</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="voxel-models" class="slide level2 smaller">
 <h2>Voxel models</h2>
-<p><img data-src="../images/raster_3d_slices.webp" style="width:45.0%"> <img data-src="../images/red_green_3d_labels.webp" style="width:45.0%"></p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="term-card">
+<p><strong>Voxel model</strong>: a 3D raster whose cells hold a statistic of the points inside each volume element, for example the point count; in GRASS, <code>r3.in.xyz</code> after setting a 3D region</p>
 </div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
+
+<img data-src="../images/profiles_points_and_ff.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%" alt="Top: a side profile of lidar points through a forest edge in green, showing crown shapes and the ground line, with a 50 m scale bar. Bottom: the same profile as a classified voxel slice, with interior canopy in green, edge and transitional cells in orange and red, and exterior in light blue"><p>Vertical profile through the point cloud, and the same profile as voxels classified by a 3D fragmentation index.</p>
+<aside class="notes">
 <ul>
-<li><em>Petras, V; Petrasova, A; Jeziorska, J; Mitasova, H, 2016, Processing UAV and lidar point clouds in GRASS GIS, ISPRS Archives.</em></li>
+<li>A DSM keeps one number per column; the voxel model keeps the whole column</li>
+<li>Point count per voxel maps where the canopy is dense and where it is open</li>
+<li>The fragmentation index classifies each voxel by its neighbors: interior, edge, perforated</li>
 </ul>
-</div>
-</div>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="advances-in-lidar-data-acquisition" class="slide level2 smaller">
-<h2>Advances in lidar data acquisition</h2>
+<section id="voxel-cross-sections-in-3d" class="slide level2 smaller">
+<h2>Voxel cross sections in 3D</h2>
+
+<img data-src="../images/profiles3d.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="3D view of a forest orthophoto with two vertical slices of a voxel model standing on it, along the far edge and across the middle, each slice showing the canopy as green cells with orange edge cells against a pale blue background"><aside class="notes">
 <ul>
-<li>Waveform, single photon and multispectral lidar</li>
-<li>Velodyne (lidar array - small and light)</li>
-<li>Lidar is available for large UAS and helicopters, new small systems are still being tested for accuracy</li>
+<li>Slices through the 3D raster, placed where you want to look</li>
+<li>The lab’s optional part builds this voxel model from the Mid Pines lidar and slices it in the 3D view</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="lidar-data-sources" class="slide level2 smaller">
-<h2>Lidar data sources</h2>
-<p>Public data sources (see the links <a href="https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/resources/data_providers.html">here</a>):</p>
+<section id="full-waveform-lidar" class="slide level2 smaller">
+<h2>Full waveform lidar</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/Lidar_waveformALPS_1LG.webp" alt="Diagram of an aircraft sending a laser pulse over trees and a coastal water block; two inset graphs of intensity against time show the full returned waveform, with peaks for the top of canopy, sub-canopy, and ground on land, and for the sea surface, water column, and bottom in water"></p>
+</div><div class="column" style="width:50%;">
 <ul>
-<li>National map elevation data - used to be CLICK: raw point clouds usually in LAS format</li>
-<li>NOAA Digital Coast: coastal point clouds with on-fly binning</li>
-<li>NC Floodplain Mapping: bare Earth: points, 20ft DEM and 50ft DEM with carved channels</li>
-<li>NC data portal QL2 lidar and derived products</li>
-<li>OpenTopography: NCALM data</li>
+<li>A discrete return lidar records a few peaks of the echo; a full waveform system records the entire echo</li>
+<li>Mammoth Cave National Park: classified point cloud in LAS, raw waveform, and imagery</li>
+<li>Vertical structure of the canopy from the waveform, not only its top</li>
 </ul>
-<p>More about lidar in GRASS at <a href="https://grasswiki.osgeo.org/wiki/LIDAR">https://grasswiki.osgeo.org/wiki/LIDAR</a></p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>The returns we have been using are peaks picked from this curve by the instrument</li>
+<li>Keeping the curve gives the vegetation profile below the crown and bathymetry in clear water</li>
+<li>The Mammoth Cave data set is the example for the next two slides</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="mammoth-cave-canopy" class="slide level2 smaller">
+<h2>Mammoth Cave: canopy</h2>
+
+<img data-src="../images/mamothcave_canopy.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="Three panels: a 3D canopy height model of a forested block colored green with a 0 to 50 m legend; a profile curvature map of the first return surface as dense red and blue speckle; and a cross section showing the canopy in green above the orange ground surface and grey bedrock block"><aside class="notes">
+<ul>
+<li>Canopy height is DSM minus DEM, both from the same cloud</li>
+<li>Curvature of the first return surface: every crown is a bump, which is how individual trees are found</li>
+<li>The cross section shows what the DEM hides: 30 m of forest on top of the terrain</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="mammoth-cave-bare-earth" class="slide level2 smaller">
+<h2>Mammoth Cave: bare earth</h2>
+
+<img data-src="../images/mamothcave_bare.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="Two 3D views of the Mammoth Cave bare earth DEM: on the left colored by elevation from blue valleys through green to orange and brown ridges, with a flat-topped plateau in one corner; on the right profile curvature in cyan and yellow with red along the sharp breaks of the plateau edge and the stream channels"><aside class="notes">
+<ul>
+<li>Ground points only, under a full canopy; this is the lidar’s whole advantage over imagery</li>
+<li>The curvature map picks the plateau edge and the drainage; the sinkholes of the karst show as closed rings</li>
+<li>Everything here was computed from the classified LAS with the tools from this lecture</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="voxel-models-of-canopy-density" class="slide level2 smaller">
+<h2>Voxel models of canopy density</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/raster_3d_slices.webp" alt="A translucent yellow 3D box with four vertical slices through it, each slice showing a wavy green and red line where the canopy surface cuts the slice"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/red_green_3d_labels.webp" alt="3D view of forested terrain with vertical yellow slices of a voxel model showing the canopy as a band colored from green for sparse to red for dense point count percentage; arrows mark a difference in vegetation structure between two stands and label dense and sparse canopy"></p>
+</div></div>
+<p>Point count per voxel as a percentage, sliced through two forest stands with different structure <span class="citation" data-cites="petras_processing_2016">(<a href="#/references" role="doc-biblioref" onclick="">Petras et al. 2016</a>)</span>.</p>
+<aside class="notes">
+<ul>
+<li>Same voxel approach on the Mid Pines lidar: green sparse, red dense canopy</li>
+<li>The two stands differ in where the dense layer sits, which no DSM would show</li>
+<li>The paper is the lab’s reference for all of the GRASS point cloud tools</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lidar-today" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Lidar today</h2>
+<aside class="notes">
+<ul>
+<li>Section 7: what is changing in lidar, and where to get public data</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="airborne-lidar-today" class="slide level2 smaller">
+<h2>Airborne lidar today</h2>
+<ul>
+<li class="fragment">Manned aircraft carry the newest sensors: full waveform, multispectral, and single photon lidar</li>
+<li class="fragment">Single photon lidar detects one photon per return, so it maps terrain and forest structure over whole counties from high altitude in a few flights <span class="citation" data-cites="swatantran_rapid_2016">(<a href="#/references" role="doc-biblioref" onclick="">Swatantran et al. 2016</a>)</span></li>
+<li class="fragment">Against full waveform lidar it needs fewer passes for the same density, but the cloud is noisier and needs more filtering <span class="citation" data-cites="mandlburger_comparison_2019">(<a href="#/references" role="doc-biblioref" onclick="">Mandlburger et al. 2019</a>)</span></li>
+<li class="fragment">Geiger mode lidar is the other photon counting design: each detector pixel records one photon per pulse, so the cloud is built from thousands of overlapping looks <span class="citation" data-cites="stoker_evaluation_2016">(<a href="#/references" role="doc-biblioref" onclick="">Stoker et al. 2016</a>)</span></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>None of these are UAS sensors; they are large-area mapping systems on manned aircraft</li>
+<li>Single photon (Leica SPL100) and Geiger mode (L3Harris) are both photon counting, which is what lets them fly high and fast; they differ in the detector</li>
+<li>Geiger mode: avalanche photodiode array, one range per pixel per pulse, noise from sunlight, near infrared so no bathymetry; USGS tested both for 3DEP and found them usable for QL2 with more filtering than linear lidar</li>
+<li>Swatantran et al.&nbsp;mapped Garrett County, Maryland, at 12 points per square meter; canopy height and terrain matched conventional lidar</li>
+<li>Mandlburger et al.&nbsp;flew both systems over Vienna in 2018: single photon precision was mostly under 10 cm, with more noise on slopes and grass</li>
+<li>Full waveform was the Mammoth Cave example a few slides back</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uas-lidar-today" class="slide level2 smaller">
+<h2>UAS lidar today</h2>
+<ul>
+<li class="fragment">Small spinning and solid state scanners made UAS lidar routine
+<ul>
+<li class="fragment">a DJI Zenmuse L2 on a Matrice 350 maps a field at several hundred points per square meter</li>
+</ul></li>
+<li class="fragment">Discrete return, a few returns per pulse, like the 2013 cloud in the lab</li>
+<li class="fragment">Accuracy still rests on the GNSS and IMU of the platform</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Ten years ago UAS lidar was experimental; now it is a camera-sized payload</li>
+<li>It sees under the canopy like airborne lidar and at SfM densities; the GNSS/IMU quality decides the accuracy, not the scanner</li>
+<li>An attitude error of 0.1 degree at 100 m range moves a point 17 cm; that is why UAS lidar payloads carry a better IMU than a camera needs</li>
+<li>Same trade as always: active sensor, no color, more expensive than a camera</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="public-lidar-data-sources" class="slide level2 smaller">
+<h2>Public lidar data sources</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>What you get</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://usgs.entwine.io/">USGS 3DEP</a></td>
+<td>Nationwide point clouds streamed as Entwine tiles, plus DEMs through The National Map</td>
+</tr>
+<tr class="even">
+<td><a href="https://coast.noaa.gov/digitalcoast/">NOAA Digital Coast</a></td>
+<td>Coastal point clouds with on the fly binning and download</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.nconemap.gov/">NC OneMap</a></td>
+<td>The statewide QL2 lidar flown 2014 to 2017: points, DEMs, and derived products</td>
+</tr>
+<tr class="even">
+<td><a href="https://opentopography.org/">OpenTopography</a></td>
+<td>Research lidar (NCALM and others) with on demand DEM generation</td>
+</tr>
+</tbody>
+</table>
+<p>More on lidar in GRASS at the <a href="https://grasswiki.osgeo.org/wiki/LIDAR">GRASS wiki</a>, and a full workshop at <a href="https://grasswiki.osgeo.org/wiki/Processing_lidar_and_UAV_point_clouds_in_GRASS_GIS_(workshop_at_FOSS4G_Boston_2017)">Processing lidar and UAV point clouds in GRASS</a>.</p>
+<aside class="notes">
+<ul>
+<li>The 2013 Mid Pines data in the lab is the Wake County part of the NC statewide program</li>
+<li>3DEP through Entwine is the same COPC streaming idea as the lab’s browser viewer</li>
+<li>The workshop page is the long form of today’s lecture, with every command</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-terms" class="slide level2 smaller">
+<h2>Key terms</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Return</strong>: one echo of a lidar pulse; a pulse through a canopy gives several, the last one most likely from the ground</p>
+</div>
+<div class="term-card">
+<p><strong>Class</strong>: the label a provider or an algorithm assigned to a point: ground, unclassified, noise, water</p>
+</div>
+<div class="term-card">
+<p><strong>Binning</strong>: a per cell statistic of the points, with no interpolation</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Interpolation</strong>: a surface fitted to the points and sampled on a raster, at a resolution the point spacing can support</p>
+</div>
+<div class="term-card">
+<p><strong>DEM vs DSM</strong>: ground points give the terrain; first returns or all points give the surface, canopy and roofs included</p>
+</div>
+<div class="term-card">
+<p><strong>Voxel model</strong>: a 3D raster of point statistics, keeping the vertical structure a DSM throws away</p>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Midterm vocabulary, and the words the lab report has to use correctly</li>
+<li>The grading rubric asks for conclusions in these terms: returns, classes, binning versus interpolation</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Assignment 4B</strong>: <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html">Processing lidar and UAS SfM point clouds</a>: bin and compare the densities of the two Mid Pines clouds, classify by returns, interpolate a DEM and DSM with their derivatives, and validate the lidar DEM against the surveyed GCPs</p>
+</div>
+<aside class="notes">
+<ul>
+<li>Recap: lidar measures through the canopy with returns; SfM reconstructs the first surface in color</li>
+<li>Look at the density before choosing a resolution; bin for a quick look, interpolate for analysis</li>
+<li>Derivatives from the spline, not from a 3 x 3 window, when the DEM is noisy</li>
+<li>The lab validates the lidar DEM with the twelve surveyed GCPs the UAS flights used</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-evans_multiscale_2007" class="csl-entry" role="listitem">
+Evans, Jeffrey S., and Andrew T. Hudak. 2007. <span>“A Multiscale Curvature Algorithm for Classifying Discrete Return <span>LiDAR</span> in Forested Environments.”</span> <em>IEEE Transactions on Geoscience and Remote Sensing</em> 45 (4): 1029–38. <a href="https://doi.org/10.1109/TGRS.2006.890412">https://doi.org/10.1109/TGRS.2006.890412</a>.
+</div>
+<div id="ref-mandlburger_comparison_2019" class="csl-entry" role="listitem">
+Mandlburger, Gottfried, Harald Lehner, and Norbert Pfeifer. 2019. <span>“A Comparison of Single Photon and Full Waveform Lidar.”</span> <em>ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences</em> IV-2/W5: 397–404. <a href="https://doi.org/10.5194/isprs-annals-IV-2-W5-397-2019">https://doi.org/10.5194/isprs-annals-IV-2-W5-397-2019</a>.
+</div>
+<div id="ref-mitasova_simultaneous_2005" class="csl-entry" role="listitem">
+Mitasova, Helena, Lubos Mitas, and Russell S. Harmon. 2005. <span>“Simultaneous Spline Approximation and Topographic Analysis for Lidar Elevation Data in Open-Source <span>GIS</span>.”</span> <em>IEEE Geoscience and Remote Sensing Letters</em> 2 (4): 375–79. <a href="https://doi.org/10.1109/LGRS.2005.848533">https://doi.org/10.1109/LGRS.2005.848533</a>.
+</div>
+<div id="ref-petras_processing_2016" class="csl-entry" role="listitem">
+Petras, Vaclav, Anna Petrasova, Justyna Jeziorska, and Helena Mitasova. 2016. <span>“Processing <span>UAV</span> and Lidar Point Clouds in <span>GRASS</span> <span>GIS</span>.”</span> <em>The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences</em> XLI-B7: 945–52. <a href="https://doi.org/10.5194/isprs-archives-XLI-B7-945-2016">https://doi.org/10.5194/isprs-archives-XLI-B7-945-2016</a>.
+</div>
+<div id="ref-stoker_evaluation_2016" class="csl-entry" role="listitem">
+Stoker, Jason, Qassim Abdullah, Amar Nayegandhi, and Jayna Winehouse. 2016. <span>“Evaluation of Single Photon and <span>Geiger</span> Mode Lidar for the <span>3D</span> <span>Elevation</span> <span>Program</span>.”</span> <em>Remote Sensing</em> 8 (9): 767. <a href="https://doi.org/10.3390/rs8090767">https://doi.org/10.3390/rs8090767</a>.
+</div>
+<div id="ref-swatantran_rapid_2016" class="csl-entry" role="listitem">
+Swatantran, Anu, Hao Tang, Terence Barrett, Phil DeCola, and Ralph Dubayah. 2016. <span>“Rapid, High-Resolution Forest Structure and Terrain Mapping over Large Areas Using Single Photon Lidar.”</span> <em>Scientific Reports</em> 6: 28277. <a href="https://doi.org/10.1038/srep28277">https://doi.org/10.1038/srep28277</a>.
+</div>
+<div id="ref-zhang_progressive_2003" class="csl-entry" role="listitem">
+Zhang, Keqi, Shu-Ching Chen, Dean Whitman, Mei-Ling Shyu, Jianhua Yan, and Chengcui Zhang. 2003. <span>“A Progressive Morphological Filter for Removing Nonground Measurements from Airborne <span>LIDAR</span> Data.”</span> <em>IEEE Transactions on Geoscience and Remote Sensing</em> 41 (4): 872–82. <a href="https://doi.org/10.1109/TGRS.2003.810682">https://doi.org/10.1109/TGRS.2003.810682</a>.
+</div>
+</div>
 
 
 </section>
@@ -586,7 +1620,7 @@ and <a href="https://pubs.usgs.gov/tm/11b4/pdf/tm11-B4.pdf">USGS Lidar Base Spec
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
