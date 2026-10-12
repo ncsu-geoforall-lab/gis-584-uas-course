@@ -8,13 +8,12 @@ activity: Lecture
 
 
 ## Outline
-- Characteristics of UAS SfM and lidar-based point cloud data
-- Point cloud data representation and formats
-- Point cloud data processing, visualization, and analysis
-- Bare earth point extraction
-- Working with classified point clouds
-- Computing DEM and topographic analysis
-- Voxel-based analysis and vertical profiles
+- Compare lidar and UAS SfM point clouds: how each sensor samples the ground, the canopy, and buildings
+- Read a LAS file: returns, intensity, classes, and the LAS format
+- Analyze point distribution by binning: densities, vertical range, outliers, and the supported resolution
+- Extract bare ground and thin a point cloud
+- Compute DEMs and DSMs by binning, triangulation, and spline interpolation, with topographic parameters
+- Analyze vertical structure with voxel models and transects
 
 ## Lecture
 - [Lecture slides](./lectures/lecture_4b.qmd)
@@ -25,7 +24,7 @@ activity: Lecture
 - [Processing point clouds in GRASS](https://grasswiki.osgeo.org/wiki/Processing_lidar_and_UAV_point_clouds_in_GRASS_GIS_(workshop_at_FOSS4G_Boston_2017)), workshop presented at FOSS4G conference in Boston in 2017 (start with the section "Binning the point cloud").
 - [USGS 3DEP Data View](https://usgs.entwine.io/)
 - [LAS specification v1.4](https://github.com/ASPRSorg/LAS), maintained by ASPRS on GitHub (the PDF is under Releases)
-- [Lidar and INS](https://www.oxts.com/technical-notes/why-use-an-inertial-navigation-system-ins-with-a-lidar/)
+- [Mobile mapping with lidar: why is an INS essential](https://www.oxts.com/mobile-mapping-with-lidar-why-is-an-ins-essential/), OXTS
 
 - Past Lecture recordings:
   - [Properties](https://youtu.be/X-27KYsG6kE)

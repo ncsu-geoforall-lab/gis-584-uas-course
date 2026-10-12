@@ -9,13 +9,23 @@ format:
     html:
         toc: true
         toc-depth: 3
+notebook-view:
+  - notebook: point_cloud_analysis.ipynb
+    title: "Processing lidar and UAS SfM point clouds in GRASS"
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_4_GIS_analytics/assignments/point_cloud_analysis.ipynb
+resources:
+  - point_cloud_analysis.ipynb
 ---
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_4_GIS_analytics/assignments/point_cloud_analysis.ipynb)
 
 ## Task
 
 Analyze an airborne lidar point cloud and a UAS structure from motion (SfM) point cloud of the Mid Pines area at Lake Wheeler, and turn them into surfaces. You will explore the point clouds in a browser and in GRASS, compare their point densities, bin the lidar returns into raster surfaces and a simple land cover classification, interpolate a high resolution bare earth DEM and a canopy DSM with their topographic derivatives, and check the lidar DEM against the surveyed GCPs. Three optional parts go further: ground classification of the raw points, voxel models of the canopy, and lidar transects.
 
 The two point clouds represent the same ground in two different ways. Lidar records several returns per pulse and reaches the ground under the canopy; SfM reconstructs the first surface the camera sees. Keep that difference in mind when you compare densities and surfaces.
+
+Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. The 3D views in Parts 4 and 6 are done in the GUI. Either way, the report is the same.
 
 ## Data
 
@@ -63,7 +73,7 @@ g.region n=220218 s=218694 e=637795 w=636271 -p
 
 #### If `r.in.pdal` is not available
 
-Some GRASS builds ship without PDAL support. Download the [interpolated DEM and DSM]({{< var data.secref_mid_pines_spm_elev >}}), unzip it into your working directory, and restore the two surfaces under the names Part 4 uses:
+Some GRASS builds ship without PDAL support. Download the [interpolated DEM and DSM]({{< var data.secref_mid_pines_spm_elev >}}) and unzip it into your working directory. The zip holds four packs; use the two `mid_pines_*` files (the `secref_*` pair covers a different site) and restore them under the names Part 4 uses:
 
 ```bash
 r.unpack -o input=mid_pines_lidar2013_dem.pack output=mid_pines_ground_elev
@@ -91,7 +101,7 @@ d.legend -f -s -d raster=mid_pines_dens_all at=5,50,7,10
 d.out.file mid_pines_dens_all.png
 ```
 
-The `-o` flag skips the projection check: the file carries no CRS record but is in the project's coordinate system. The import prints a line for every point that falls exactly on the region boundary and is ignored; that is expected.
+The `-o` flag skips the projection check: the file's CRS record is worded differently from the project's, but it is the same coordinate system. A few thousand points that fall on the region boundary are skipped without a message; the count of processed points is slightly lower than the file's point count, which is expected.
 
 Count the ground points only, and give both density rasters the same histogram equalized color table so they can be compared:
 
@@ -194,7 +204,7 @@ v.surf.rst input=mid_pines_surface elevation=mid_pines_surface_elev slope=mid_pi
 r.colors map=mid_pines_ground_elev,mid_pines_surface_elev color=elevation
 ```
 
-A higher `npmin=150` reduces the segmentation artifacts visible in the slope and curvature maps, at a much longer run time.
+Each surface takes under a minute. A higher `npmin=150` reduces the segmentation artifacts visible in the slope and curvature maps, at a much longer run time.
 
 Visualize the DEM and DSM in the 3D view and use cross-sections. Leave only `mid_pines_surface_elev` in the Layer Manager, hide the legend, zoom to the computational region, switch to 3D, set the surface resolution to 1 and the color to the `classes` raster. Save the images.
 
@@ -225,7 +235,7 @@ d.vect.thematic map=GCP_12_decimal column=height_difference algorithm=int nclass
 d.legend.vect at=10,40
 ```
 
-The *Attribute Table Manager* shows the same table. Read the mean and the standard deviation the way Topic 3B read checkpoint residuals: the mean is the bias of the lidar DEM against the survey, and the RMSE of the differences is its vertical accuracy at these twelve points.
+The *Attribute Table Manager* shows the same table. Read the numbers the way Topic 3B read checkpoint residuals: the mean is the bias of the lidar DEM against the survey, and the RMSE of the differences is its vertical accuracy at these twelve points. `v.univar` prints the mean and the standard deviation but not the RMSE; compute it from those two, since RMSE is the square root of the mean squared plus the standard deviation squared, or from the twelve differences in the exported table.
 
 ## Part 6 (optional): Classification, voxels, and transects
 
@@ -300,13 +310,13 @@ Install the [v.profile.points](https://grass.osgeo.org/grass-stable/manuals/addo
 g.extension v.profile.points
 ```
 
-Cut a 5 m wide transect through the point cloud, straight from the LAS file, color the points by elevation, and display it. The output is the transect rotated into a vertical plane, so zoom to the vector map to see it:
+Cut a 5 m wide transect through the point cloud, straight from the LAS file, and display it. The output is the transect rotated into a vertical plane: its x axis is the distance along the line and its y axis is the elevation, so zoom to the vector map to see the side view. The output's z coordinate is the offset of each point from the line, not its elevation, so the points are displayed in one color:
 
 ```bash
 g.region n=219511 s=219354 w=637071 e=637249 res=1
 v.profile.points file_input=mid_pines_spm_2013.las output=profile width=5 coordinates=637106,219373,637132,219451
-v.colors map=profile use=z color=elevation
-d.vect map=profile color=none width=1 icon=basic/circle
+g.region vector=profile
+d.vect map=profile color=30:60:90 icon=basic/point size=3
 ```
 
 To profile points you already imported, pass them as `point_input=` instead; run `v.build` on them first, since `v.in.pdal` does not build topology and the selection step needs it.
@@ -329,6 +339,7 @@ Upload to Moodle, Assignment 4B:
 
 * Your report as a PDF.
 * The GCP difference table (CSV export from the Attribute Table Manager or `v.db.select`).
+* Optional: your completed notebook (`.ipynb`) if you worked in Colab.
 
 ## Grading
 
