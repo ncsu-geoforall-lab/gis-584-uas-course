@@ -790,11 +790,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#outline",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#outline",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#task",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#task",
     "title": "Assignment 5A",
-    "section": "Outline",
-    "text": "Outline\n\nanalyze the differences between the lidar (2013, 2015 surveys) and UAS DEM/DSM\nfuse selected lidar and UAS DSM\nevaluate impact of fusion technique on water flow simulation",
+    "section": "Task",
+    "text": "Task\nIn this assignment you combine the 2013 airborne lidar surfaces of Mid Pines with the June 2015 UAS SfM DSM. You first compare the lidar DSM with the UAS DSMs from two SfM packages, as difference maps and along a profile on the road, to find systematic shifts and distortions and to pick the part of the UAS DSM worth keeping. You then patch that part into the lidar DSM, once by a simple patch and once by a weighted average across an overlap, and fuse the UAS bare ground with the lidar DEM using r.patch.smooth with a fixed and a spatially variable overlap. Finally you simulate overland flow on three of the surfaces and compare the flow patterns at the edges. The optional last part animates the simulation.\nKeep in mind what each surface represents. The lidar DEM is bare ground; the lidar DSM and the UAS DSM include the crop, which in June stands 1 to 2 m above the soil. A seam between two surfaces a few centimeters apart is invisible in an elevation map and obvious in shaded relief and in simulated flow.\nWork through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. The GUI Profile Tool in Part 1 and the Animation Tool in Part 5 are GUI only; the notebook plots the profile and the time steps instead. Either way, the report is the same.",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -807,7 +807,7 @@
     "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#data",
     "title": "Assignment 5A",
     "section": "Data",
-    "text": "Data\nYou should have everything already for Mid Pines area, get anything missing from the Course logistics web page\n\nGRASS Project: LakeWheeler_NCspm\n2013 lidar interpolated DEM and DSM: download, use r.unpack.",
+    "text": "Data\n\nLake Wheeler GRASS project: Lake_Wheeler_NCspm (EPSG:3358; you have it from the earlier assignments; it holds the 2015 UAS DSMs in PERMANENT)\n2013 lidar DEM and DSM of Mid Pines (zip with GRASS raster packs; you have it from Assignment 4B, restore with r.unpack)\nColor rules for difference maps: dif_lidar_uav.txt (a text file for r.colors)",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -816,11 +816,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#tools",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#tools",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#software",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#software",
     "title": "Assignment 5A",
-    "section": "Tools",
-    "text": "Tools\n\nGRASS GIS 8.5\nGRASS Addon: r.patch.smooth\n\nInstall r.patch.smooth with the following command:\ng.extension r.patch.smooth",
+    "section": "Software",
+    "text": "Software\n\nGRASS 8.5\nThe addon r.patch.smooth, installed from GRASS with:\n\ng.extension extension=r.patch.smooth",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -829,11 +829,102 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#workflow",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#workflow",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-1-compare-the-lidar-and-uas-dsms",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-1-compare-the-lidar-and-uas-dsms",
     "title": "Assignment 5A",
-    "section": "Workflow",
-    "text": "Workflow\nFirst we need to evaluate the DSMs to find out which are suitable for fusion\n\nCompute the difference between a selected lidar DSM and selected UAS DSMs: entire raster, along a stable linear feature (road and roof).\nUse the results to evaluate whether there is a significant systematic error, such as vertical shift in profiles along the road.\nUse the raster differences to identify distortions, look for unexpected patterns, verify with profile, and exclude distorted areas from study area.\nYou have lidar DEM, DSM and a low-distortion subset of UAS DSM:\n\nCreate a new DSM for the entire area using two approaches and compare how the two approaches work for water flow modeling.\nCombine parts of UAS and lidar DEM to create bare ground, model water flow and compare with water flow modeled on DSM.\n\n\n\n1. Analyze the difference between the lidar and UAS DSM\nDownload the suggested color table for differences, used in the workflow as dif_lidar_uav.txt.\nIf you run r.colors from command line, make sure the color table file is in your current working directory.\n -40 red\n -1 orange\n -0.5 yellow\n -0.1 grey\n 0 white\n 0.1 grey\n 0.5 cyan\n 1 aqua\n 35 blue\nDownload lidar DSM and DEMs if you haven’t done already, unzip it in your working directory and unpack:\nr.unpack -o input=mid_pines_lidar2013_dsm.pack\nr.unpack -o input=mid_pines_lidar2013_dem.pack\nCompute the differences between the lidar and UAS DSMs and evaluate their spatial distribution and\nsummary statistical properties:\ng.region rast=mid_pines_lidar2013_dsm -p\nr.mapcalc \"diff_lidardsm_agi_june = mid_pines_lidar2013_dsm - 2015_06_20_DSM_agi_11GCP\"\nr.colors diff_lidardsm_agi_june rules=dif_lidar_uav.txt\nr.univar diff_lidardsm_agi_june\nr.mapcalc \"diff_lidardsm_pix4d_june = mid_pines_lidar2013_dsm - 2015_06_20_pix4d_11GCP_dsm\"\nr.colors diff_lidardsm_pix4d_june rules=dif_lidar_uav.txt\nr.univar diff_lidardsm_pix4d_june\nEvaluate possible systematic shift along stable features using the following commands:\nr.profile -g input=diff_lidardsm_agi_june output=road.txt coordinates=637208,219491,637059,219734\nv.in.ascii input=road.txt output=profile_road separator=space columns=\"x double,y double,profile double,diff double\"\nv.univar map=profile_road column=diff\nFor more visual comparison use GUI Profile Tool.\n\nIn Map Display toolbar, find Analyze map - Profile surface map and select raster maps mid_pines_lidar2013_dsm, 2015_06_20_DSM_agi_11GCP, and 2015_06_20_pix4d_11GCP_dsm.\nIn Profile toolbar, use the second tool Draw transect in map display window and then click in Map Display on the road where you want to start the profile and then where you want to end it.\nUse Plot options to show legend and to set colors of the DSM profiles (look for the yellow wheel icon).\n\n\n\n\n\n\n\nWarning\n\n\n\nWhy are the distortions / errors low along the road but high in the fields?\n\n\nBecause the shift in the lidar and UAS DSM is small we will ignore it in our first set of fusion examples, but we will use the analysis above to select the region with minimal distortion in the UAS DSM and compute a clipped DSM:\ng.region n=219720.9 s=219257.1 w=636762.9 e=637190.4 res=0.3 -p\nr.mapcalc \"2015_06_20_DSM_agi_11GCP_cl = 2015_06_20_DSM_agi_11GCP\"\n\n\n2. Patch and fuse the lidar and UAS DSM\nFor the rest of the assignment we will use rasters 2015_06_20_DSM_agi_11GCP_cl, mid_pines_lidar2013_dsm, and mid_pines_lidar2013_dem. To make the instructions more readable, we will create a copy of these rasters with short names:\ng.copy raster=2015_06_20_DSM_agi_11GCP_cl,uas\ng.copy raster=mid_pines_lidar2013_dsm,lidar_dsm\ng.copy raster=mid_pines_lidar2013_dem,lidar_dem\nPatch UAS DSM with lidar DSM to cover the entire Mid Pines study area and use shaded relief to check for edges:\ng.region rast=lidar_dsm -p\nr.patch uas,lidar_dsm out=lid_uas_patch\nr.relief lid_uas_patch out=lid_uas_patch_relief zscale=5\nWe have visible discontinuity along the patch edges. Therefore we will use weighted average to smooth out the overlap with the following workflow. We will use two different overlap widths — 5 and 20 meters — compare the results and try to explain how the smoothing works in your report:\nr.grow.distance -n input=uas distance=distance\nr.mapcalc \"patched_smooth_5 = if(distance &gt; 5, uas, if(distance == 0, lidar_dsm, (1 - distance/5) * lidar_dsm + (distance/5 * uas)))\"\nr.mapcalc \"patched_smooth_20 = if(distance &gt; 20, uas, if(distance == 0, lidar_dsm, (1 - distance/20) * lidar_dsm + (distance/20 * uas)))\"\nr.relief patched_smooth_5 out=patched_smooth_5_relief zscale=5\nr.relief patched_smooth_20 out=patched_smooth_20_relief zscale=5\n\n\n3. Create bare ground by fusing UAS DSM and lidar DEM\nTo properly model water flow on the UAS DSM, we replace vegetation captured in the DSM with lidar bare ground (lidar_dem). We extract only those parts of UAS DSM where it is higher than lidar ground by 30 cm:\ng.region rast=uas -p\nr.mapcalc \"uas_ground = if(uas - lidar_dem &lt; 0.3, uas, null())\"\nNow we will fuse lidar and the UAS ground using the same method as above. This time, we will use addon r.patch.smooth:\ng.extension r.patch.smooth\nIn the first case we will use overlap width 10m:\ng.region rast=lidar_dsm -p\nr.patch.smooth input_a=uas_ground input_b=lidar_dem output=lidar_uas_ground_smooth smooth_dist=10\nr.relief lidar_uas_ground_smooth out=lidar_uas_ground_smooth_relief zscale=5\nIn the second case we will use an alternative approach (using -s flag) which uses spatially variable overlap width based on the elevation differences along the borders (see r.patch.smooth manual):\nr.patch.smooth -s input_a=uas_ground input_b=lidar_dem output=lidar_uas_ground_smooth2 overlap=overlap transition_angle=1.3 parallel_smoothing=13\nr.relief lidar_uas_ground_smooth2 out=lidar_uas_ground_smooth2_relief zscale=5\nAdd raster overlap to see the spatially variable overlap.\n\n\n4. Compare surface flow pattern on patched and fused DSMs\nThe aim of the processing is to investigate the flow pattern simulated on different DSMs and DEMs. The lidar 2013 and the timeseries of UAS-based DSMs will be used as input for simulations using r.sim.water.\nFirst, we examine the watershed boundaries to see which area to include:\ng.region rast=lidar_dem -p\nr.watershed elevation=lidar_dem threshold=50000 accumulation=flowacc basin=basin\nr.to.vect -t input=basin output=basin type=area\nWe will compute water flow on our fused DEM within our selected region. We need first order spatial derivatives which can be derived either using r.slope.aspect or during interpolation phase with v.surf.rst.\ng.region n=219728.7 s=219435 w=636708.9 e=637122.6 res=0.3 -pa\nr.slope.aspect elevation=lid_uas_patch dx=lid_uas_patch_dx dy=lid_uas_patch_dy\nThe simulation writes water depth and discharge raster maps so we can look at first results soon although the simulation takes a lot of time. Depending on your processing power, you can make the region smaller.\nr.sim.water -t elevation=lid_uas_patch dx=lid_uas_patch_dx dy=lid_uas_patch_dy rain_value=30 man_value=0.15 depth=lid_uas_patch_depth discharge=lid_uas_patch_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nNow we will compute the water flow simulation on the DSM patched using smooth fusion:\nr.slope.aspect elevation=patched_smooth_20 dx=patched_smooth_20_dx dy=patched_smooth_20_dy\nr.sim.water -t elevation=patched_smooth_20 dx=patched_smooth_20_dx dy=patched_smooth_20_dy rain_value=30 man_value=0.15 depth=patched_smooth_20_depth discharge=patched_smooth_20_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nNow compare the results (lid_uas_patch_depth.20 and patched_smooth_20_depth.20) at the edge of the datasets.\nFinally, we will simulate water flow on the bare ground fused from UAV DSM and lidar DEM:\nr.slope.aspect elevation=lidar_uas_ground_smooth dx=lidar_uas_ground_smooth_dx dy=lidar_uas_ground_smooth_dy\nr.sim.water -t elevation=lidar_uas_ground_smooth dx=lidar_uas_ground_smooth_dx dy=lidar_uas_ground_smooth_dy rain_value=30 man_value=0.15 depth=ground_depth discharge=ground_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nCompare ground_depth.20 with the previous results.\n\nAnimation and visualisation the results\nGRASS GIS Animation Tool allows to create animations from series of raster and vector maps and export animated gifs.\nPick one or more of the simulated flows and load all the corresponding *_depth maps to the animation tool. The water flow pattern is better visible in 2d when it’s draped over a shaded relief, so add corresponding relief raster and set its transparency to 50% (last icon in Add new animation/Edit animation dialog).\n\nExport the animation as GIF file.\nLook at this youtube video to see how to control Animation Tool.",
+    "section": "Part 1: Compare the lidar and UAS DSMs",
+    "text": "Part 1: Compare the lidar and UAS DSMs\nStart GRASS in the Lake_Wheeler_NCspm project and create a new mapset fusion for this assignment. Put the unzipped lidar packs and the color rules file in your working directory, then restore the lidar surfaces:\nr.unpack -o input=mid_pines_lidar2013_dsm.pack\nr.unpack -o input=mid_pines_lidar2013_dem.pack\n\nDifference maps\nSet the region to the lidar DSM and subtract the June 2015 UAS DSMs from it, first the one from Agisoft Metashape, then the one from Pix4D. Both were processed with the same eleven GCPs. Apply the color rules to both and look at the statistics:\ng.region raster=mid_pines_lidar2013_dsm -p\nr.mapcalc \"diff_lidardsm_agi_june = mid_pines_lidar2013_dsm - 2015_06_20_DSM_agi_11GCP\"\nr.colors map=diff_lidardsm_agi_june rules=dif_lidar_uav.txt\nr.univar map=diff_lidardsm_agi_june\nr.mapcalc \"diff_lidardsm_pix4d_june = mid_pines_lidar2013_dsm - 2015_06_20_pix4d_11GCP_dsm\"\nr.colors map=diff_lidardsm_pix4d_june rules=dif_lidar_uav.txt\nr.univar map=diff_lidardsm_pix4d_june\nThe color rules keep differences within 10 cm grey, so that only real differences show color, orange and red where the UAS surface is higher than the lidar and cyan and blue where it is lower:\n-40 red\n-1 orange\n-0.5 yellow\n-0.1 grey\n0 white\n0.1 grey\n0.5 cyan\n1 aqua\n40 blue\nIf you run r.colors from the command line, the rules file has to be in your current working directory, or give its full path.\n\ndiff_lidardsm_agi_june: mean -0.54, standard deviation 2.34 diff_lidardsm_pix4d_june: mean -0.40, standard deviation 2.42\n\nThe means are dominated by the crop, which the UAS surface includes and the 2013 lidar does not. The extremes of 30 m and more are tree crowns and building edges, where a half meter shift in position becomes a large difference in elevation. Look at the pattern instead: where are the two maps alike, and where does the Pix4D map show a difference the Agisoft map does not?\n\n\nProfile along the road\nStable, hard features show systematic shifts. Sample the Agisoft difference map along a line on the road, import the profile as points, and summarize the difference column:\nr.profile -g input=diff_lidardsm_agi_june output=road.txt coordinates=637208,219491,637059,219734\nv.in.ascii input=road.txt output=profile_road separator=space columns=\"x double,y double,profile double,diff double\"\nv.univar map=profile_road column=diff\nr.profile -g writes four columns, the coordinates, the distance along the line, and the raster value, which is why v.in.ascii is told the column names and types.\n\nn: 951 mean: 0.0785 population standard deviation: 0.0671\n\nThe UAS surface sits about 8 cm below the lidar along the road, with a spread of 7 cm. Repeat the three commands for diff_lidardsm_pix4d_june and compare the two means.\nFor a visual comparison, use the GUI Profile Tool:\n\nIn the Map Display toolbar, open Analyze map &gt; Profile surface map and select the rasters mid_pines_lidar2013_dsm, 2015_06_20_DSM_agi_11GCP, and 2015_06_20_pix4d_11GCP_dsm.\nIn the Profile toolbar, pick Draw transect, then click in the Map Display on the road where the profile should start and where it should end.\nUse Plot options (the yellow wheel icon) to show the legend and set the colors of the three profiles.\n\n\n\n\n\n\n\nTip\n\n\n\nWhy are the differences small along the road and large in the fields? Draw a second profile across a field to see what the crop does to the UAS surface.\n\n\n\n\nClip the UAS DSM\nThe shift of 8 cm is small compared with the differences in the fields, so we do not correct for it here. We do use the difference maps to pick the part of the Agisoft DSM with the least distortion and clip it to that region:\ng.region n=219720.9 s=219257.1 w=636762.9 e=637190.4 res=0.3 -p\nr.mapcalc \"2015_06_20_DSM_agi_11GCP_cl = 2015_06_20_DSM_agi_11GCP\"\nThe rest of the assignment uses 2015_06_20_DSM_agi_11GCP_cl, mid_pines_lidar2013_dsm, and mid_pines_lidar2013_dem. Copy them to short names to keep the commands readable:\ng.copy raster=2015_06_20_DSM_agi_11GCP_cl,uas\ng.copy raster=mid_pines_lidar2013_dsm,lidar_dsm\ng.copy raster=mid_pines_lidar2013_dem,lidar_dem",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-2-patch-the-uas-dsm-into-the-lidar-dsm",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-2-patch-the-uas-dsm-into-the-lidar-dsm",
+    "title": "Assignment 5A",
+    "section": "Part 2: Patch the UAS DSM into the lidar DSM",
+    "text": "Part 2: Patch the UAS DSM into the lidar DSM\n\nSimple patch\nSet the region to the whole lidar DSM, fill it with the UAS DSM where the UAS has data, and compute a shaded relief to look for seams:\ng.region raster=lidar_dsm -p\nr.patch input=uas,lidar_dsm output=lid_uas_patch\nr.relief input=lid_uas_patch output=lid_uas_patch_relief zscale=5\nr.patch takes the first input wherever it is not null, so the UAS clip wins inside its rectangle and the lidar fills the rest. The zscale=5 exaggerates the relief so that a step of a few centimeters casts a shadow. Zoom to the edge of the clip rectangle in the relief map.\n\n\nWeighted average across an overlap\nThe seam is a step between two surfaces that each have a few centimeters of noise. To remove it, blend the two with a weight that goes from the lidar at the edge of the UAS clip to the UAS a few meters inside it. Compute the distance from the edge inward, then blend with an overlap of 5 m and of 20 m:\nr.grow.distance -n input=uas distance=distance\nr.mapcalc \"patched_smooth_5 = if(distance &gt; 5, uas, if(distance == 0, lidar_dsm, (1 - distance/5) * lidar_dsm + (distance/5 * uas)))\"\nr.mapcalc \"patched_smooth_20 = if(distance &gt; 20, uas, if(distance == 0, lidar_dsm, (1 - distance/20) * lidar_dsm + (distance/20 * uas)))\"\nr.relief input=patched_smooth_5 output=patched_smooth_5_relief zscale=5\nr.relief input=patched_smooth_20 output=patched_smooth_20_relief zscale=5\nr.grow.distance -n measures the distance from the null cells inward, so distance is zero outside the UAS clip and grows toward its center. Compare the three relief maps at the clip edge and explain in your report how the weights work and what the overlap width changes.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-3-fuse-uas-bare-ground-with-the-lidar-dem",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-3-fuse-uas-bare-ground-with-the-lidar-dem",
+    "title": "Assignment 5A",
+    "section": "Part 3: Fuse UAS bare ground with the lidar DEM",
+    "text": "Part 3: Fuse UAS bare ground with the lidar DEM\n\nExtract the UAS bare ground\nTo model water flow on the UAS surface, the crop has to be removed, because water runs along the soil, not over the sorghum. The UAS cannot see the soil under the crop, so keep only the UAS cells that lie within 30 cm of the lidar bare ground and set the rest to null:\ng.region raster=uas -p\nr.mapcalc \"uas_ground = if(uas - lidar_dem &lt; 0.3, uas, null())\"\nAbout 59 percent of the cells in the clip pass this test: the bare field strips, the roads, and the lawns.\n\n\nFixed overlap\nFill the holes with the lidar DEM using r.patch.smooth, which does the same distance-weighted blend as Part 2 along every edge of the bare ground patches. First with an overlap of 10 m:\ng.region raster=lidar_dsm -p\nr.patch.smooth input_a=uas_ground input_b=lidar_dem output=lidar_uas_ground_smooth smooth_dist=10\nr.relief input=lidar_uas_ground_smooth output=lidar_uas_ground_smooth_relief zscale=5\n\n\nSpatially variable overlap\nThen with the -s flag, which lets the overlap width follow the elevation difference between the two surfaces along the edges, wide where they disagree and narrow where they agree. transition_angle is the angle of the transition in degrees, and parallel_smoothing is the size of the window, an odd number of cells, that smooths the zone along the edge (see the r.patch.smooth manual):\nr.patch.smooth -s input_a=uas_ground input_b=lidar_dem output=lidar_uas_ground_smooth2 overlap=overlap transition_angle=1.3 parallel_smoothing=13\nr.relief input=lidar_uas_ground_smooth2 output=lidar_uas_ground_smooth2_relief zscale=5\nBoth runs take a few seconds. Display the overlap raster over the relief to see how the width varies along the edges of the bare ground patches.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-4-compare-the-overland-flow-on-the-three-surfaces",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-4-compare-the-overland-flow-on-the-three-surfaces",
+    "title": "Assignment 5A",
+    "section": "Part 4: Compare the overland flow on the three surfaces",
+    "text": "Part 4: Compare the overland flow on the three surfaces\nAn overland flow simulation is a sensitive test of a fused surface, because the flow follows every step in the surface. We simulate overland flow with r.sim.water on the simply patched DSM, on the DSM blended with a 20 m overlap, and on the fused bare ground, and compare the depth maps at the seams.\nFirst look at the watershed boundaries on the lidar DEM to pick a region that drains within the study area:\ng.region raster=lidar_dem -p\nr.watershed elevation=lidar_dem threshold=50000 accumulation=flowacc basin=basin\nr.to.vect -t input=basin output=basin type=area\nThe simulation needs the first derivatives of the surface, from r.slope.aspect here, or from v.surf.rst when you interpolate the surface yourself. Set the region, then run the first simulation on the simply patched DSM:\ng.region n=219728.7 s=219435 w=636708.9 e=637122.6 res=0.3 -pa\nr.slope.aspect elevation=lid_uas_patch dx=lid_uas_patch_dx dy=lid_uas_patch_dy\nr.sim.water -t elevation=lid_uas_patch dx=lid_uas_patch_dx dy=lid_uas_patch_dy rain_value=30 man_value=0.15 depth=lid_uas_patch_depth discharge=lid_uas_patch_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nThe region reaches west of the UAS clip on purpose, so that the seam is inside it. The simulation runs 20 minutes of rainfall at 30 mm per hour (niterations and rain_value). With -t it writes a depth and a discharge map every simulated minute (output_step), named lid_uas_patch_depth.01 to lid_uas_patch_depth.20, so you can look at the first results while it runs. Each simulation takes 5 to 10 minutes on one processor core; add nprocs=4 (or however many cores you have) to run it in parallel, or make the region smaller.\nThen on the DSM blended with the 20 m overlap:\nr.slope.aspect elevation=patched_smooth_20 dx=patched_smooth_20_dx dy=patched_smooth_20_dy\nr.sim.water -t elevation=patched_smooth_20 dx=patched_smooth_20_dx dy=patched_smooth_20_dy rain_value=30 man_value=0.15 depth=patched_smooth_20_depth discharge=patched_smooth_20_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nCompare lid_uas_patch_depth.20 with patched_smooth_20_depth.20 at the edge of the UAS clip. Finally on the bare ground fused from the UAS DSM and the lidar DEM:\nr.slope.aspect elevation=lidar_uas_ground_smooth dx=lidar_uas_ground_smooth_dx dy=lidar_uas_ground_smooth_dy\nr.sim.water -t elevation=lidar_uas_ground_smooth dx=lidar_uas_ground_smooth_dx dy=lidar_uas_ground_smooth_dy rain_value=30 man_value=0.15 depth=ground_depth discharge=ground_disch nwalkers=100000 niterations=20 output_step=1 hmax=0.2 halpha=8.0 hbeta=1.0\nCompare ground_depth.20 with the two DSM results. The flow pattern is easiest to read in 2D with the depth map draped over the matching shaded relief, with the water depth color table set so that depths under a centimeter are transparent or near white.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-5-optional-animate-the-flow",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#part-5-optional-animate-the-flow",
+    "title": "Assignment 5A",
+    "section": "Part 5 (optional): Animate the flow",
+    "text": "Part 5 (optional): Animate the flow\nThe Animation Tool in the GUI builds an animation from a series of rasters and exports it as an animated GIF. Pick one or more of the simulations and load its twenty *_depth.NN maps into the tool. Add the matching relief raster underneath and set the transparency of the depth layer to 50 percent (the last icon in the Add new animation dialog) so that the flow reads against the terrain:\n\nExport the animation as a GIF. This video shows how to control the Animation Tool.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#report",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#report",
+    "title": "Assignment 5A",
+    "section": "Report",
+    "text": "Report\nPrepare a report (3 to 5 pages including figures):\n\nDifference maps and profile: the two difference maps with the same color rules and their statistics, the road profile statistics for both UAS DSMs, and a paragraph on what the patterns show: systematic shift, processing distortion, or real change, and which UAS DSM you would fuse and why.\nPatching: the shaded relief of the simple patch and of the 5 m and 20 m blends at the clip edge, with an explanation of how the weighted average works and what the overlap width changes.\nFused bare ground: the bare ground extraction, the two r.patch.smooth results, and the overlap raster, with a paragraph on where the variable overlap is wide and why.\nFlow comparison: the depth maps at the last minute of the simulation for the three surfaces, and an interpretation of the differences at the seams and in the fields: which patterns are artifacts of the surface and which are real drainage.\nOptional: the animated GIF, or a few frames from it, with a sentence on what the animation shows that the final map does not.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#submission",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#submission",
+    "title": "Assignment 5A",
+    "section": "Submission",
+    "text": "Submission\nUpload to Moodle, Assignment 5A:\n\nYour report as a PDF.\nOptional: your animated GIF.\nOptional: your completed notebook (.ipynb) if you worked in Colab.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#grading",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html#grading",
+    "title": "Assignment 5A",
+    "section": "Grading",
+    "text": "Grading\n\nDifference maps and profile: both difference maps use the given color rules, the road profile is summarized, and the patterns are read as shift, distortion, or change.\nPatching: the seam is shown in relief and the weighted average and the effect of the overlap width are explained correctly.\nFused bare ground: the bare ground test is explained, both r.patch.smooth runs are shown, and the variable overlap is interpreted.\nFlow comparison: the three simulations are compared at the seams and the artifacts are told apart from real drainage.\nInterpretation: conclusions tie back to the lecture: independent errors, systematic error, seam, overlap width, flow as a test.\nOn-time submission.\n\n\nDue 11/18/2026",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6859,11 +6950,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#outline",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#outline",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#objectives",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#objectives",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Outline",
-    "text": "Outline\n\nMotivation for combining lidar and UAS SfM data\nAnalysis of lidar and UAS SfM DSMs differences\nPatching and smooth fusion of UAS and lidar DSM\nOverland flow simulation on fused DEM",
+    "section": "Objectives",
+    "text": "Objectives\n\nExplain why lidar and UAS SfM surfaces of the same site differ\nEvaluate the differences with difference maps and with profiles along stable features\nSeparate systematic error, processing distortion, and real change in the landscape\nPatch and fuse DEMs with a fixed and a spatially variable overlap\nEvaluate a fused surface with an overland flow simulation\n\n\n\n4B built surfaces from the points; today we combine surfaces from two sensors into one\nSame site again: Mid Pines at Lake Wheeler, the 2013 lidar and the June 2015 UAS flights\nThe lab (5A) runs this whole sequence: difference maps, a road profile, patching, smooth fusion, and a flow simulation on each result\nEvery concept has a GRASS tool next to it; the lab uses them in the same order",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-data",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-data",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Lidar and UAS SfM data",
+    "text": "Lidar and UAS SfM data\n\n\nSection 1: properties of lidar and SfM data, and the motivation for fusion",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6875,8 +6979,8 @@
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#point-clouds-from-lidar",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#point-clouds-from-lidar",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Point Clouds from Lidar",
-    "text": "Point Clouds from Lidar\n\nMeasured variable is the time of return for each pulse\nGeoreferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform\n(x, y, z) is derived from time, GPS positioning, and INS parameters\n\n\nPoint cloud visualization from Lidar",
+    "section": "Point clouds from lidar",
+    "text": "Point clouds from lidar\n\n\nThe measured variable is the time of flight of each pulse\nGeoreferencing from the platform position (GNSS) and orientation (IMU), fused in the INS\nEach (x, y, z) comes from range, position, and attitude; ground control serves only as a check\n\n\n\nRecap from 4B: an active sensor, a few returns per pulse, about one point per square meter in this 2013 cloud\nPoints fall in scan lines; the ground under the trees is sampled\nAccuracy comes from the navigation system, not from targets on the ground",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6888,8 +6992,8 @@
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#point-clouds-from-sfm",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Point Clouds from SfM",
-    "text": "Point Clouds from SfM\n\nMeasured variable is reflected energy captured as imagery\nGeoreferencing can be done entirely from GCPs\n(x, y, z) is derived from overlapping images and GCPs\nAlternatively: GPS and INS for the position and orientation of images and camera parameters\n\n\nPoint cloud visualization from SfM",
+    "section": "Point clouds from SfM",
+    "text": "Point clouds from SfM\n\n\nThe measured variable is reflected light captured as overlapping images\nGeoreferencing from GCPs, or from the camera positions when the UAS carries RTK or PPK GNSS\nEach (x, y, z) is reconstructed from matched image features\n\n\n\nRecap from 2A and 3B: a passive sensor, tens to hundreds of points per square meter, color on every point\nThe cloud is a reconstruction of what the camera saw: the top of the crop, not the soil under it\nThe GCP layout and the camera model decide the accuracy; 4A showed what happens without GCPs",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6898,11 +7002,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparison-of-point-cloud-properties",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#properties-of-lidar-and-sfm-point-clouds",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#properties-of-lidar-and-sfm-point-clouds",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparison of Point Cloud Properties",
-    "text": "Comparison of Point Cloud Properties\n\n\nAirborne Lidar:\n\nPasses through vegetation, multiple returns\nShifts between swaths, corduroy effect\nRegional coverage\nHigh cost\n\n\nUAS SfM:\n\nVery high point density\nLimited capability to map under vegetation\nInfluenced by cast shadows\nLow cost but limited area\n\n\nDifferent distribution of errors and distortions:\nLidar and SfM provide an independent set of measurements.",
+    "section": "Properties of lidar and SfM point clouds",
+    "text": "Properties of lidar and SfM point clouds\n\n\nAirborne lidar\n\nPenetrates vegetation, several returns per pulse\nShifts between swaths, the corduroy effect\nRegional coverage, repeated every few years\nHigh cost per flight, low cost per hectare\n\n\nUAS SfM\n\nVery high point density, color on every point\nCannot see the ground under vegetation\nDistorted by cast shadows and by weak GCP layouts\nLow cost per flight, limited area, flown on demand\n\n\n\nThe errors and distortions of the two methods are different and independent, so each surface can be used to check the other\n\n\n\nLidar gives the ground and the wide area, SfM gives the detail and the date of your choice\nBecause the error sources are independent, a difference map between them shows the error of whichever surface is worse at that spot\nThe lab uses this: lidar ground under the UAS crop",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6911,11 +7015,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#motivation-for-lidar-and-uas-sfm-fusion",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#motivation-for-lidar-and-uas-sfm-fusion",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#motivation-for-fusion",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#motivation-for-fusion",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Motivation for Lidar and UAS SfM Fusion",
-    "text": "Motivation for Lidar and UAS SfM Fusion\n\nLow-cost DEM updates in rapidly changing landscapes (e.g., construction sites)\nReplacing vegetated areas in UAS SfM with bare ground\nWatershed analysis when only part of the watershed was mapped by UAS\nImprove accuracy and level of detail over stable features (buildings, bridges)\nAdd your suggestion",
+    "section": "Motivation for fusion",
+    "text": "Motivation for fusion\n\nLow cost DEM updates where the landscape changes fast: construction sites, mines, eroding coasts\nReplace vegetation in a UAS DSM with lidar bare ground\nWatershed analysis when the UAS mapped only part of the watershed\nMore accuracy and detail over stable features: buildings, bridges, road surfaces\n\n\n\nThe lidar serves as the base map and the UAS as the update\nThe second bullet is the lab’s Part 3: the crop in the UAS DSM is replaced by lidar ground so water can flow through it\nThe third is why the lab fuses first and simulates flow after: the UAS clip alone does not cover the drainage",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6927,8 +7031,8 @@
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-techniques",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-techniques",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion Techniques",
-    "text": "Fusion Techniques\n\nMerge the point clouds, decimate or bin at high resolution, interpolate: computationally demanding\nInterpolate DEMs, randomly sample, patch, and reinterpolate: loss of detail, time-consuming\nInterpolate DEMs and patch: sharp edges\nSmooth fusion - requires DEMs at the same resolution",
+    "section": "Fusion techniques",
+    "text": "Fusion techniques\n\n\n\n\n\n\n\nApproach\nCost\n\n\n\n\nMerge the point clouds, bin or decimate, interpolate once\nHeavy computation, one consistent surface\n\n\nInterpolate each, sample randomly, patch, reinterpolate\nLoss of detail, slow\n\n\nInterpolate each and patch the rasters\nFast, but a sharp edge at the seam\n\n\nSmooth fusion of the rasters\nFast, no edge; both DEMs must share a resolution\n\n\n\n\n\nThe first row gives the most consistent surface but is rarely practical with tens of points per square meter or more\nThe last row is what this lecture is about: a weighted blend across an overlap zone\nShared resolution is the precondition; in the lab both surfaces are at 0.3 m",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6941,7 +7045,7 @@
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#workflow",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
     "section": "Workflow",
-    "text": "Workflow\n\nEvaluate the point clouds, select resolution\nInterpolate lidar and UAS DEMs at the same resolution\nEvaluate the differences between the lidar and UAS DEMs\nIf applicable, identify errors and apply corrections\nApply smooth fusion",
+    "text": "Workflow\n\nEvaluate both point clouds and choose a common resolution\nInterpolate the lidar and the UAS DEMs at that resolution\nMap and measure the differences between them\nIdentify systematic errors and distortions; correct or exclude them\nFuse with a smooth overlap and check the result\n\n\n\nSteps 1 and 2 were 4B; today is steps 3 to 5\nStep 4 is often skipped; fusing a distorted DSM into a good DEM makes both worse\nThe check in step 5 is a shaded relief first, and a flow simulation when the surface is for hydrology",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6950,11 +7054,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identify-distortions-due-to-processing",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identify-distortions-due-to-processing",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#difference-maps-and-profiles",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#difference-maps-and-profiles",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Identify Distortions Due to Processing",
-    "text": "Identify Distortions Due to Processing\n\nIdentify the spatial pattern of distortions\nDifference maps between Lidar DSM and UAS SfM DSMs\n\n\n\nAgisoft\n\n\n\nDifference Maps\n\n\n\nPix4D\n\n\n\nDifference Maps",
+    "section": "Difference maps and profiles",
+    "text": "Difference maps and profiles\n\n\nSection 2: difference maps and profiles; distinguishing error from change",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6963,11 +7067,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identify-changes-in-topography",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identify-changes-in-topography",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identifying-distortions-from-processing",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identifying-distortions-from-processing",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Identify Changes in Topography",
-    "text": "Identify Changes in Topography\n\nVegetation growth or removal\nChange in elevation surface due to erosion processes\nUAS SfM - lidar difference maps with custom color\n\n\n\n\n\n\nElevation Difference Maps\n\n\n\n\n\n\nField Image",
+    "section": "Identifying distortions from processing",
+    "text": "Identifying distortions from processing\n\nDifference map: one surface subtracted from the other cell by cell, r.mapcalc; the pattern tells you whether you are looking at error, distortion, or real change\n\n\n\n\n\n\n\n\nLidar DSM minus Agisoft DSM\n\n\n\n\n\n\nLidar DSM minus Pix4D DSM\n\n\n\nSame images, same GCPs, two software packages: the crop fields look alike, the open fields do not\nThe cyan in the Pix4D map is a processing distortion, a gentle warp of the whole surface\nLab Part 1 computes both of these maps and their statistics with the same color rules",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6976,11 +7080,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparing-profiles-fields",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparing-profiles-fields",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identifying-changes-in-topography",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#identifying-changes-in-topography",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparing Profiles: Fields",
-    "text": "Comparing Profiles: Fields\n\nIdentify systematic errors (vertical shifts)\nDifferences due to vegetation growth, erosion/deposition\n\n\nProfiles Comparison Fields",
+    "section": "Identifying changes in topography",
+    "text": "Identifying changes in topography\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVegetation growth or removal: the crop strips, two years apart\nErosion and deposition: the red gully line\nCustom color rules center the scale on zero so that near-zero differences stay grey\n\n\n\nNot every difference is an error: here the green is sorghum that was not there in 2013\nThe red line is a gully, a real change of a few decimeters, visible only because the rest of the field is near zero\nThe lab provides a color rules file for this: grey within 10 cm, color beyond",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -6989,11 +7093,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparing-profiles-building",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparing-profiles-building",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#profiles-fields",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#profiles-fields",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparing Profiles: Building",
-    "text": "Comparing Profiles: Building\n\nHigh accuracy, lower level of detail in lidar data\nNegligible systematic error\n\n\nProfiles Comparison Building",
+    "section": "Profiles: fields",
+    "text": "Profiles: fields\n\n\nA vertical offset of the whole line is a systematic error\nA local bump is vegetation, or erosion and deposition\n\n\n\nProfiles show what a map does not: a constant offset versus a local change\nMarch and September lines sit on the lidar; June floats above it where the crop stands\nIn the lab the GUI Profile Tool draws this; r.profile gives the numbers",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7002,11 +7106,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparing-profiles-road",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#comparing-profiles-road",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#profiles-a-building",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#profiles-a-building",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Comparing Profiles: Road",
-    "text": "Comparing Profiles: Road\n\nRelatively easy to identify stable features\nHigh accuracy - differences between lidar and UAS SfM within 4cm\n\n\nProfiles Comparison Road",
+    "section": "Profiles: a building",
+    "text": "Profiles: a building\n\n\nHigh accuracy in all surfaces, less detail in the lidar at the roof edges\nNegligible systematic error between lidar and UAS\n\n\n\nA stable, hard feature: if the surfaces disagree here, one of them has a problem\nThe rounded corners are the one point per square meter lidar sampling, not an error\nSame test the lab does on the road",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7015,11 +7119,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#correct-for-systematic-error-and-distortions",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#correct-for-systematic-error-and-distortions",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#profiles-a-road",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#profiles-a-road",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Correct for Systematic Error and Distortions",
-    "text": "Correct for Systematic Error and Distortions\n\nSystematic error: if due to GPS shift, use median difference\nSystematic error: if tilt, use regression function\nComplex UAS SfM distortions can be reduced using interpolated GCP differences or differencing with lidar\nImportance of well-distributed, accurate GCPs",
+    "section": "Profiles: a road",
+    "text": "Profiles: a road\n\n\nRoads and parking lots are easy to find and do not grow\nLidar and UAS SfM agree within 4 cm here, with a mean offset under 1 cm\n\n\n\nThis is lab Part 1: r.profile of the difference map along the road, v.in.ascii to a vector, v.univar for the mean\nA mean near zero means no vertical shift; the 4 cm spread is noise in both surfaces\nThe lab’s longer transect along the same road gives a mean of about 8 cm for the Agisoft DSM and 16 cm for the Pix4D DSM\nIf the mean were 20 cm, you would subtract it before fusing",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7028,11 +7132,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#correcting-systematic-errors",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#correcting-systematic-errors",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Updating Lidar DEM by Patching",
-    "text": "Updating Lidar DEM by Patching\n\nReplace the grid cells in the updated area by UAS DEM\nAverage over an overlap\nUsually creates an edge - requires post-processing\n\n\n\n\n\n\nPatching Results\n\n\n\n\n\n\nPatching Results\n\n\n\nImages by Brendan Harmon",
+    "section": "Correcting systematic errors",
+    "text": "Correcting systematic errors\n\nSystematic error: a difference that follows a rule over the whole surface, a constant shift or a tilt, as opposed to random noise or local change\n\n\nA constant vertical shift (GNSS datum or antenna height): subtract the median difference over stable features\nA tilt (weak GCP geometry): fit a plane or a low-order polynomial to the differences and subtract it\nComplex SfM distortions: interpolate the GCP residuals or the lidar differences and subtract that surface\nWell distributed, accurate GCPs prevent most of this (4A)\n\n\n\nDiagnose first with the profile, then pick the correction that matches the pattern\nMedian, not mean: vegetation and outliers would pull the mean\nThe lab’s June Agisoft DSM is shifted about 8 cm along the road, small against the differences in the fields, so the lab does not correct it",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7041,11 +7145,37 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#updating-lidar-dem-by-patching-1",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#patching",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#patching",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Updating Lidar DEM by Patching",
-    "text": "Updating Lidar DEM by Patching\nEdge between lidar and UAS SfM DEMs\n\nEdge Visualization",
+    "section": "Patching",
+    "text": "Patching\n\n\nSection 3: patching and the edge it produces",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#updating-a-lidar-dem-by-patching",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#updating-a-lidar-dem-by-patching",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Updating a lidar DEM by patching",
+    "text": "Updating a lidar DEM by patching\n\nPatching: filling the cells of one raster with another where the first has data, r.patch; the first input wins wherever it is not null\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA UAS DEM patched into a lidar DEM, elevation and shaded relief (images by Brendan Harmon)\n\n\nThe elevation map looks fine; the shaded relief shows the seam at once\nAlways check a patch in relief: r.relief with an exaggerated zscale finds steps of a few centimeters\nLab Part 2 does this with the clipped UAS DSM and the lidar DSM",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#edge-between-the-patched-dems",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#edge-between-the-patched-dems",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Edge between the patched DEMs",
+    "text": "Edge between the patched DEMs\n\n\nA step of a few centimeters at the seam, and a change of texture\nWater flow follows the step: an artificial channel along the edge\n\n\n\nTwo surfaces that each have a few centimeters of noise will never meet exactly\nThe texture change is also real: the UAS sees crop rows the lidar never resolved\nThe step matters most for hydrology, as Section 5 shows",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7057,8 +7187,21 @@
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#smooth-fusion",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#smooth-fusion",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Smooth Fusion",
-    "text": "Smooth Fusion\n\nDerive overlap raster\nWeighted smoothing based on the distance from the edge\n\n\n\n\n\n\nFusion Results\n\n\n\n\n\n\nFusion Results",
+    "section": "Smooth fusion",
+    "text": "Smooth fusion\n\n\nSection 4: weighted blending across an overlap",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#smooth-fusion-1",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#smooth-fusion-1",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Smooth fusion",
+    "text": "Smooth fusion\n\nSmooth fusion: a weighted average of the two surfaces across an overlap zone along the edge, the weight going from one surface to the other with the distance from the edge; r.patch.smooth in GRASS\n\n\n\n\n\n\n\n\nPatched\n\n\n\n\n\n\nFused\n\n\n\nTwo steps: derive the overlap zone from the distance to the edge, then blend with distance-based weights\nThe lab does it by hand first with r.grow.distance and r.mapcalc, then with the addon\nDoing it by hand once shows what the addon’s smooth_dist parameter does",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7070,8 +7213,8 @@
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-method",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-method",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion Method",
-    "text": "Fusion Method\nLinear combination of elevation surfaces \\(z_{A}\\) and \\(z_{B}\\) with weights given by overlap width \\(s\\) and distance \\(d\\) to the edge of \\(z_{A}\\):\n\n\n\\[\nz_{AB} = z_{A} w + z_{B}(1 - w),\n\\\\[10pt]\nw = f(s, d) =\n\\begin{cases}\n  \\frac{d}{s} & 0 \\leq d &lt; s \\\\\n  1 & d \\geq s\n\\end{cases}\n\\]\n\n\n\n\nFusion Method Schema",
+    "section": "Fusion method",
+    "text": "Fusion method\nA linear combination of the two elevation surfaces \\(z_A\\) and \\(z_B\\), weighted by the distance \\(d\\) to the edge of \\(A\\) over an overlap of width \\(s\\):\n\n\n\\[\nz_{AB} = w\\, z_A + (1 - w)\\, z_B\n\\] \\[\nw = \\begin{cases} d / s & 0 \\le d &lt; s \\\\ 1 & d \\ge s \\end{cases}\n\\]\n\n\n\n\n\n\n\n\n\nAt the edge of A the weight is 0, so the fused surface equals B; s meters inside A it equals A\nIn the lab: r.grow.distance -n gives d, then one r.mapcalc expression does the blend: if(distance &gt; s, uas, if(distance == 0, lidar, (1 - distance/s) * lidar + distance/s * uas))\nr.grow.distance -n measures the distance inward from the null boundary, which is what d is here\nThe lab runs this with s of 5 m and 20 m and compares the relief",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7080,11 +7223,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#influence-of-overlap-width-s",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#influence-of-the-overlap-width-s",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#influence-of-the-overlap-width-s",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Influence of Overlap Width \\(s\\)",
-    "text": "Influence of Overlap Width \\(s\\)\n\nOverlap Influence",
+    "section": "Influence of the overlap width s",
+    "text": "Influence of the overlap width s\n\nOverlap width: how far into the updated surface the blend reaches; too narrow leaves a visible step, too wide erases detail of the better surface\n\n\n\n\nThe difference between the two surfaces at the edge decides the width you need\nWith a 3 cm step a few meters is enough; with a 30 cm step you need tens of meters\nThe next step lets the elevation difference set s",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7093,11 +7236,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-overlap",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-overlap",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion with Spatially Variable \\(s\\)",
-    "text": "Fusion with Spatially Variable \\(s\\)\nBy taking into account spatially variable differences \\(\\Delta z\\) between DEMs \\(A\\) and \\(B\\) along the overlap:\n\n\n\nWe get a more gradual transition where differences are high\nWe preserve subtle features of both DEMs where differences are small\n\n\n\n\n\nSpatially Variable Fusion",
+    "section": "Fusion with spatially variable overlap",
+    "text": "Fusion with spatially variable overlap\n\n\n\nThe width \\(s(x, y)\\) follows the elevation difference \\(\\Delta z\\) between the two surfaces along the edge\nWide transition where they disagree, narrow where they agree\nFine features of both surfaces survive where the difference is small\n\n\n\n\n\n\n\n\n\nIn GRASS: r.patch.smooth -s input_a=uas_ground input_b=lidar_dem output=fused overlap=overlap transition_angle=1.3 parallel_smoothing=13 (Petrasova et al. 2017)\n\n\n\nThe -s flag turns on the variable overlap; transition_angle is the angle of the transition in degrees (1 to 5 recommended), so the width grows with the elevation difference at the edge\nparallel_smoothing is the size of the window that smooths the zone along the edge, an odd number; larger values make the width less variable\nLab Part 3 runs both variants on the bare ground and looks at the overlap raster",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7106,11 +7249,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusion-with-spatially-variable-s-1",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#overlap-width-from-the-elevation-difference",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#overlap-width-from-the-elevation-difference",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusion with Spatially Variable \\(s\\)",
-    "text": "Fusion with Spatially Variable \\(s\\)\nAbsolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.\n\nFusion Visualization",
+    "section": "Overlap width from the elevation difference",
+    "text": "Overlap width from the elevation difference\n\n\n\nLeft: where the surfaces disagree by 20 to 30 cm; right: the weight raster the blend uses\nThe zone is a few meters wide where the difference is near zero and tens of meters where it is large\nThis is the overlap output the lab asks you to display",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7119,11 +7262,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#lidar-and-uas-sfm-patching-and-fusion",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#patched-and-fused-lidar-and-uas-dsms",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#patched-and-fused-lidar-and-uas-dsms",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Lidar and UAS SfM Patching and Fusion",
-    "text": "Lidar and UAS SfM Patching and Fusion\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\n\n\n\nPatched vs. Fused DSMs\n\n\n\nSimply patched vs. fused UAS and lidar DSMs with overlap width \\(s = 20\\ m\\)",
+    "section": "Patched and fused lidar and UAS DSMs",
+    "text": "Patched and fused lidar and UAS DSMs\n\n\n\nPatched\n\n\nFused, \\(s = 20\\) m\n\n\n\nLab Part 2 output: the clip boundary is a rectangle, so the seam is four straight lines\nAfter fusion the rectangle disappears; the UAS detail inside is untouched beyond 20 m from the edge\nCompare the two in relief, and later in flow",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7132,11 +7275,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusing-vegetated-patch-with-bare-ground",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusing-uas-bare-ground-with-the-lidar-dem",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#fusing-uas-bare-ground-with-the-lidar-dem",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Fusing Vegetated Patch with Bare Ground",
-    "text": "Fusing Vegetated Patch with Bare Ground\n\n\n\n\n\nBare Ground Fused\n\n\n\n\n\n\nBare Ground Fused\n\n\n\nVegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM.",
+    "section": "Fusing UAS bare ground with the lidar DEM",
+    "text": "Fusing UAS bare ground with the lidar DEM\n\n\n\n\n\n\n\nUAS cells within 0.3 m of the lidar ground, in yellow\n\n\n\n\n\n\nFused bare ground\n\n\n\nThe UAS cannot see the soil under the crop, so the crop cells are set to null and the lidar ground fills them\nThe test is the height above the lidar DEM: under 30 cm counts as ground\nThe result is a current bare ground surface with UAS detail where the ground was visible",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7145,11 +7288,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#spatially-variable-overlap",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#spatially-variable-overlap",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#spatially-variable-overlap-at-mid-pines",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#spatially-variable-overlap-at-mid-pines",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Spatially Variable Overlap",
-    "text": "Spatially Variable Overlap\n\nSpatial OverlapBare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap",
+    "section": "Spatially variable overlap at Mid Pines",
+    "text": "Spatially variable overlap at Mid Pines\n\n\n\nEvery crop strip edge gets its own transition zone\nWide bands where the UAS ground sits a few decimeters off the lidar, narrow bands where they agree\nThis is what overlap=overlap writes in Part 3",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7158,11 +7301,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#modeling-overland-flow",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#modeling-overland-flow",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#overland-flow-simulation",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#overland-flow-simulation",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Modeling Overland Flow",
-    "text": "Modeling Overland Flow\nMicrotopography captured at ultra-high resolution by UAS SfM poses special challenges to flow routing:\n\nReal depressions are important features\nComplex pattern of ponding, overflow of barriers is not supported by standard tools\nNoisy surface requires a robust algorithm",
+    "section": "Overland flow simulation",
+    "text": "Overland flow simulation\n\n\nSection 5: overland flow simulation as a test of a fused surface",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7171,11 +7314,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#path-sampling-method",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#path-sampling-method",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#modeling-overland-flow-at-high-resolution",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#modeling-overland-flow-at-high-resolution",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Path Sampling Method",
-    "text": "Path Sampling Method\nStochastic method for solving flow continuity equations\n\n\n\n\n\nFlow Animation\n\n\n\n\n\n\nFlow Animation\n\n\n\n\nMitasova et al., 2005",
+    "section": "Modeling overland flow at high resolution",
+    "text": "Modeling overland flow at high resolution\n\nReal depressions are features, not errors to fill\nWater ponds, overtops barriers, and splits: standard flow routing cannot represent this\nA noisy surface needs a robust algorithm that does not chase every cell\n\n\nPath sampling: a stochastic solution of the flow continuity equations; many walkers are released as rainfall and move downslope, and their density gives the water depth; r.sim.water in GRASS (Mitasova et al. 2004)\n\n\n\nr.watershed routes every cell to an outlet, through depressions; at 0.3 m that removes the ponding the surface really has\nPath sampling keeps the depressions and lets water accumulate in them\nThe lab uses r.sim.water with 100,000 walkers over 20 simulated minutes of rain at 30 mm per hour, writing a depth map every minute, on three surfaces",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7184,11 +7327,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-over-uas-mapped-field",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#path-sampling",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#path-sampling",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Flow Over UAS Mapped Field",
-    "text": "Flow Over UAS Mapped Field\nCrop surface creates barrier leading to artificial ponding\n\nFlow Over Mapped Field",
+    "section": "Path sampling",
+    "text": "Path sampling\n\n\n\nWalkers released over the terrain\n\n\nWater depth from the walker density\n\n\n\nEach walker carries a bit of water downslope following the gradient, with some randomness\nWhere walkers crowd together the depth is high: a stream, a pond\nThe method needs the first derivatives, hence r.slope.aspect with dx and dy before the simulation",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7197,11 +7340,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-over-patched-dems",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-over-patched-dems",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-over-a-uas-mapped-field",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-over-a-uas-mapped-field",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Flow Over Patched DEMs",
-    "text": "Flow Over Patched DEMs\nReplacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution\n\n\n\n\n\nFlow Pattern\n\n\n\n\n\n\nFlow Pattern",
+    "section": "Flow over a UAS mapped field",
+    "text": "Flow over a UAS mapped field\n\nThe crop surface acts as a barrier: water ponds against it instead of flowing through\n\n\nThis is a DSM, so the simulation runs water over the top of the sorghum\nReal water runs through the stems along the soil; the DSM is the wrong surface for hydrology\nThat is the motivation for fusing lidar ground into the UAS surface",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7210,11 +7353,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#example-from-assignment",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#example-from-assignment",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-on-a-patched-versus-a-fused-dem",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#flow-on-a-patched-versus-a-fused-dem",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Example from Assignment",
-    "text": "Example from Assignment\nWater flow on DSM created by simple patching vs. smooth patching\n\n\n\n\n\nFlow Comparison\n\n\n\n\n\n\nFlow Comparison",
+    "section": "Flow on a patched versus a fused DEM",
+    "text": "Flow on a patched versus a fused DEM\n\n\n\nPatched: an artificial channel along the seam\n\n\nFused: the flow follows the terrain\n\n\n\nThe seam step of a few centimeters is enough to capture the flow at 0.3 m resolution\nSmooth fusion removes the step and the artificial channel with it\nSame experiment, same site, in the lab’s Part 4",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7223,11 +7366,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#example-from-assignment-1",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#example-from-assignment-1",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#assignment-example-simple-and-smooth-patching",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#assignment-example-simple-and-smooth-patching",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "Example from Assignment",
-    "text": "Example from Assignment\nWater flow on DSM vs. bare ground fused from UAS DSM and lidar DEM\n\n\n\n\n\nFlow on DSM vs. Bare Ground\n\n\n\n\n\n\nFlow on DSM vs. Bare Ground",
+    "section": "Assignment example: simple and smooth patching",
+    "text": "Assignment example: simple and smooth patching\n\n\n\n\n\n\n\nr.patch\n\n\n\n\n\n\nWeighted average, \\(s = 20\\) m\n\n\n\nLeft: the blue lines along the clip rectangle are pure artifact\nRight: the artifact is gone, but water still ponds against the crop strips because this is still a DSM\nCompare the depth maps at the last minute of the simulation, at the edge of the UAS area",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7236,11 +7379,50 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#what-did-we-learn",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#what-did-we-learn",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#assignment-example-dsm-and-bare-ground",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#assignment-example-dsm-and-bare-ground",
     "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
-    "section": "What Did We Learn?",
-    "text": "What Did We Learn?\n\nEvaluation and interpretation of differences between lidar and UAS SfM DEMs\nTechniques for smooth fusion of high-resolution DEMs\nImpact of fusion technique on overland flow modeling",
+    "section": "Assignment example: DSM and bare ground",
+    "text": "Assignment example: DSM and bare ground\n\n\n\n\n\n\n\nSmooth patched DSM\n\n\n\n\n\n\nFused bare ground\n\n\n\nWith lidar ground under the crop the water follows the terrain to the stream\nThis is the surface you would use for erosion or runoff questions on this farm\nThe lab’s last part: simulate on all three and explain the differences",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#key-terms",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#key-terms",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Key terms",
+    "text": "Key terms\n\n\n\nDifference map: one surface minus the other, cell by cell; the pattern separates error, distortion and change\n\n\nSystematic error: a shift or tilt that follows a rule over the whole surface, found with profiles over stable features\n\n\nPatching: filling one raster with another where the first has data; fast, but leaves a seam\n\n\n\nSmooth fusion: a distance-weighted blend of two surfaces across an overlap zone along the edge\n\n\nOverlap width: how far the blend reaches; fixed, or variable with the elevation difference at the edge\n\n\nPath sampling: a stochastic overland flow simulation that keeps depressions and ponding; the test for a fused surface\n\n\n\n\nMidterm vocabulary, and the words the lab report has to use correctly\nThe grading asks for conclusions in these terms: difference pattern, systematic error, seam, overlap, flow artifact",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#wrap-up",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#wrap-up",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "Wrap-up",
+    "text": "Wrap-up\n\nAssignment 5A: Fusion of UAS and lidar data: map and measure the differences between the 2013 lidar DSM and two June 2015 UAS DSMs, patch and fuse the UAS DSM into the lidar, build a fused bare ground, and compare the overland flow simulated on each surface\n\n\n\nRecap: lidar and SfM have different error sources, so one checks the other; a difference map and a profile over a road show which\nPatching leaves a seam that water follows; smooth fusion across an overlap removes it\nLet the overlap width follow the difference, and test the result with r.sim.water\n5B takes the same UAS flights as a time series",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5A"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#references",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html#references",
+    "title": "UAS and Lidar Data: Comparison, Fusion, and Analysis",
+    "section": "References",
+    "text": "References\n\n\nMitasova, Helena, Chris Thaxton, Jaroslav Hofierka, Richard McLaughlin, Amber Moore, and Lubos Mitas. 2004. “Path Sampling Method for Modeling Overland Water Flow, Sediment Transport, and Short Term Terrain Evolution in Open Source GIS.” In Computational Methods in Water Resources: Proceedings of the XVth International Conference, vol. 55. Developments in Water Science. Elsevier. https://doi.org/10.1016/S0167-5648(04)80159-X.\n\n\nPetrasova, Anna, Helena Mitasova, Vaclav Petras, and Justyna Jeziorska. 2017. “Fusion of High-Resolution DEMs for Water Flow Modeling.” Open Geospatial Data, Software and Standards 2 (1): 6. https://doi.org/10.1186/s40965-017-0019-2.",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7253,7 +7435,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#outline",
     "title": "UAS and lidar data: comparison, fusion and analysis",
     "section": "Outline",
-    "text": "Outline\n\nAnalysis of lidar and UAS DSMs differences\nPatching and smooth fusion of UAS and lidar DSM\nOverland flow simulation on fused DEM",
+    "text": "Outline\n\nError sources of lidar and UAS SfM surfaces\nDifference maps and profiles\nPatching a UAS DEM into a LiDAR DEM\nSmooth fusion with a distance-weighted overlap\nOverland flow simulation",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7265,7 +7447,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#lecture",
     "title": "UAS and lidar data: comparison, fusion and analysis",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture Slides &lt;!– - Lecture Recording: Fall 2024 (NCSU Only)\nIn-Class Assignment Recording: Fall 2024 (NCSU Only) –&gt;",
+    "text": "Lecture\n\nLecture slides",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7277,7 +7459,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#supplemental-materials",
     "title": "UAS and lidar data: comparison, fusion and analysis",
     "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nDrone LiDAR vs Photogrammetry: A Technical Guide, brief article from SPAR3D (online news on 3D technology: sensing, processing and visualization)\nFusion of multi-scale DEMs using a regularized super-resolution method. Linwei Yue , Huanfeng Shen , Qiangqiang Yuan , Liangpei Zhang. International Journal of Geographical Information Science. Vol. 29, Iss. 12, 2015\nPetrasova et al. 2017, Fusion of high-resolution DEMs for water flow modeling. Open Geospatial Data, Software and Standards 2:6.",
+    "text": "Supplemental materials\n\nDrone lidar vs photogrammetry: a technical guide, Geo Week News\nFusion of multi-scale DEMs using a regularized super-resolution method, Yue, Shen, Yuan, and Zhang, International Journal of Geographical Information Science 29(12), 2015\nFusion of high-resolution DEMs for water flow modeling, Petrasova, Mitasova, Petras, and Jeziorska, Open Geospatial Data, Software and Standards 2:6, 2017\nr.patch.smooth and r.sim.water manual pages",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -7289,7 +7471,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html#assignment-homework",
     "title": "UAS and lidar data: comparison, fusion and analysis",
     "section": "Assignment & Homework",
-    "text": "Assignment & Homework\nAssignment 5A: Fusion of UAS and lidar data\n\nOptional, advanced topic: Python Scripting for UAS/lidar analysis in GRASS GIS",
+    "text": "Assignment & Homework\nAssignment 5A: Fusion of UAS and lidar data\n\nOptional, advanced topic: Python scripting for UAS and lidar analysis in GRASS",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",

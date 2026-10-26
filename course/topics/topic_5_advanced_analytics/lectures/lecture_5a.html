@@ -10,7 +10,7 @@
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.19">
 
-  <meta name="author" content="Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White">
+  <meta name="author" content="Corey White adapted from Helena Mitasova, Anna Petrasova, and Justyna Jeziorska">
   <title>UAS Mapping and Analytics – UAS and Lidar Data: Comparison, Fusion, and Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -35,7 +35,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-8b516edf591b3223edeb7cb3456de664.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -135,431 +154,1078 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">UAS and Lidar Data: Comparison, Fusion, and Analysis</h1>
-  <p class="subtitle"><a href="https://geospatial.ncsu.edu/">Center for Geospatial Analytics</a> <a href="http://www.ncsu.edu/">at North Carolina State University</a></p>
+  <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White
+Corey White adapted from Helena Mitasova, Anna Petrasova, and Justyna Jeziorska
 </div>
 </div>
 </div>
 
 </section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
+<section id="objectives" class="slide level2 smaller">
+<h2>Objectives</h2>
 <ul>
-<li>Motivation for combining lidar and UAS SfM data</li>
-<li>Analysis of lidar and UAS SfM DSMs differences</li>
-<li>Patching and smooth fusion of UAS and lidar DSM</li>
-<li>Overland flow simulation on fused DEM</li>
+<li class="fragment">Explain why lidar and UAS SfM surfaces of the same site differ</li>
+<li class="fragment">Evaluate the differences with difference maps and with profiles along stable features</li>
+<li class="fragment">Separate systematic error, processing distortion, and real change in the landscape</li>
+<li class="fragment">Patch and fuse DEMs with a fixed and a spatially variable overlap</li>
+<li class="fragment">Evaluate a fused surface with an overland flow simulation</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>4B built surfaces from the points; today we combine surfaces from two sensors into one</li>
+<li>Same site again: Mid Pines at Lake Wheeler, the 2013 lidar and the June 2015 UAS flights</li>
+<li>The lab (5A) runs this whole sequence: difference maps, a road profile, patching, smooth fusion, and a flow simulation on each result</li>
+<li>Every concept has a GRASS tool next to it; the lab uses them in the same order</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lidar-and-uas-sfm-data" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Lidar and UAS SfM data</h2>
+<aside class="notes">
+<ul>
+<li>Section 1: properties of lidar and SfM data, and the motivation for fusion</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="point-clouds-from-lidar" class="slide level2 smaller">
-<h2>Point Clouds from Lidar</h2>
-<ul>
-<li>Measured variable is the time of return for each pulse</li>
-<li>Georeferencing is based on the position (measured by GPS) and exterior orientation (measured by inertial navigation system INS) of the platform</li>
-<li>(x, y, z) is derived from time, GPS positioning, and INS parameters</li>
-</ul>
+<h2>Point clouds from lidar</h2>
 
-<img data-src="../images/midpines_lidar_plasviewcozoom.webp" class="r-stretch quarto-figure-center"><p class="caption">Point cloud visualization from Lidar</p></section>
+<img data-src="../images/midpines_lidar_plasviewcozoom.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="3D view of the Mid Pines lidar point cloud: sparse white ground points in regular scan lines on a black background, red-brown tree points along the far edge, and a rectangular building footprint"><ul>
+<li>The measured variable is the time of flight of each pulse</li>
+<li>Georeferencing from the platform position (GNSS) and orientation (IMU), fused in the INS</li>
+<li>Each (x, y, z) comes from range, position, and attitude; ground control serves only as a check</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Recap from 4B: an active sensor, a few returns per pulse, about one point per square meter in this 2013 cloud</li>
+<li>Points fall in scan lines; the ground under the trees is sampled</li>
+<li>Accuracy comes from the navigation system, not from targets on the ground</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="point-clouds-from-sfm" class="slide level2 smaller">
-<h2>Point Clouds from SfM</h2>
-<ul>
-<li>Measured variable is reflected energy captured as imagery</li>
-<li>Georeferencing can be done entirely from GCPs</li>
-<li>(x, y, z) is derived from overlapping images and GCPs</li>
-<li>Alternatively: GPS and INS for the position and orientation of images and camera parameters</li>
-</ul>
+<h2>Point clouds from SfM</h2>
 
-<img data-src="../images/midpines_uas_plasviewco2.webp" class="r-stretch quarto-figure-center"><p class="caption">Point cloud visualization from SfM</p></section>
-<section id="comparison-of-point-cloud-properties" class="slide level2 smaller">
-<h2>Comparison of Point Cloud Properties</h2>
+<img data-src="../images/midpines_uas_plasviewco2.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Perspective view of the dense UAS SfM point cloud of the same fields: near-continuous light-toned ground, crop rows as dark stripes, red-brown trees at the horizon, and a building"><ul>
+<li>The measured variable is reflected light captured as overlapping images</li>
+<li>Georeferencing from GCPs, or from the camera positions when the UAS carries RTK or PPK GNSS</li>
+<li>Each (x, y, z) is reconstructed from matched image features</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Recap from 2A and 3B: a passive sensor, tens to hundreds of points per square meter, color on every point</li>
+<li>The cloud is a reconstruction of what the camera saw: the top of the crop, not the soil under it</li>
+<li>The GCP layout and the camera model decide the accuracy; 4A showed what happens without GCPs</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="properties-of-lidar-and-sfm-point-clouds" class="slide level2 smaller">
+<h2>Properties of lidar and SfM point clouds</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<h4 id="airborne-lidar">Airborne Lidar:</h4>
+<p><strong>Airborne lidar</strong></p>
 <ul>
-<li>Passes through vegetation, multiple returns</li>
-<li>Shifts between swaths, corduroy effect</li>
-<li>Regional coverage</li>
-<li>High cost</li>
+<li>Penetrates vegetation, several returns per pulse</li>
+<li>Shifts between swaths, the corduroy effect</li>
+<li>Regional coverage, repeated every few years</li>
+<li>High cost per flight, low cost per hectare</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<h4 id="uas-sfm">UAS SfM:</h4>
+<p><strong>UAS SfM</strong></p>
 <ul>
-<li>Very high point density</li>
-<li>Limited capability to map under vegetation</li>
-<li>Influenced by cast shadows</li>
-<li>Low cost but limited area</li>
+<li>Very high point density, color on every point</li>
+<li>Cannot see the ground under vegetation</li>
+<li>Distorted by cast shadows and by weak GCP layouts</li>
+<li>Low cost per flight, limited area, flown on demand</li>
 </ul>
 </div></div>
-<p>Different distribution of errors and distortions:<br>
-Lidar and SfM provide an independent set of measurements.</p>
-</section>
-<section id="motivation-for-lidar-and-uas-sfm-fusion" class="slide level2">
-<h2>Motivation for Lidar and UAS SfM Fusion</h2>
+<div class="term-card">
+<p>The errors and distortions of the two methods are different and independent, so each surface can be used to check the other</p>
+</div>
+<aside class="notes">
 <ul>
-<li>Low-cost DEM updates in rapidly changing landscapes (e.g., construction sites)</li>
-<li>Replacing vegetated areas in UAS SfM with bare ground</li>
-<li>Watershed analysis when only part of the watershed was mapped by UAS</li>
-<li>Improve accuracy and level of detail over stable features (buildings, bridges)</li>
-<li>Add your suggestion</li>
+<li>Lidar gives the ground and the wide area, SfM gives the detail and the date of your choice</li>
+<li>Because the error sources are independent, a difference map between them shows the error of whichever surface is worse at that spot</li>
+<li>The lab uses this: lidar ground under the UAS crop</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="fusion-techniques" class="slide level2">
-<h2>Fusion Techniques</h2>
+<section id="motivation-for-fusion" class="slide level2 smaller">
+<h2>Motivation for fusion</h2>
 <ul>
-<li>Merge the point clouds, decimate or bin at high resolution, interpolate: computationally demanding</li>
-<li>Interpolate DEMs, randomly sample, patch, and reinterpolate: loss of detail, time-consuming</li>
-<li>Interpolate DEMs and patch: sharp edges</li>
-<li>Smooth fusion - requires DEMs at the same resolution</li>
+<li class="fragment">Low cost DEM updates where the landscape changes fast: construction sites, mines, eroding coasts</li>
+<li class="fragment">Replace vegetation in a UAS DSM with lidar bare ground</li>
+<li class="fragment">Watershed analysis when the UAS mapped only part of the watershed</li>
+<li class="fragment">More accuracy and detail over stable features: buildings, bridges, road surfaces</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>The lidar serves as the base map and the UAS as the update</li>
+<li>The second bullet is the lab’s Part 3: the crop in the UAS DSM is replaced by lidar ground so water can flow through it</li>
+<li>The third is why the lab fuses first and simulates flow after: the UAS clip alone does not cover the drainage</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="workflow" class="slide level2">
+<section id="fusion-techniques" class="slide level2 smaller">
+<h2>Fusion techniques</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Merge the point clouds, bin or decimate, interpolate once</td>
+<td>Heavy computation, one consistent surface</td>
+</tr>
+<tr class="even">
+<td>Interpolate each, sample randomly, patch, reinterpolate</td>
+<td>Loss of detail, slow</td>
+</tr>
+<tr class="odd">
+<td>Interpolate each and patch the rasters</td>
+<td>Fast, but a sharp edge at the seam</td>
+</tr>
+<tr class="even">
+<td>Smooth fusion of the rasters</td>
+<td>Fast, no edge; both DEMs must share a resolution</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<ul>
+<li>The first row gives the most consistent surface but is rarely practical with tens of points per square meter or more</li>
+<li>The last row is what this lecture is about: a weighted blend across an overlap zone</li>
+<li>Shared resolution is the precondition; in the lab both surfaces are at 0.3 m</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="workflow" class="slide level2 smaller">
 <h2>Workflow</h2>
+<ol type="1">
+<li class="fragment">Evaluate both point clouds and choose a common resolution</li>
+<li class="fragment">Interpolate the lidar and the UAS DEMs at that resolution</li>
+<li class="fragment">Map and measure the differences between them</li>
+<li class="fragment">Identify systematic errors and distortions; correct or exclude them</li>
+<li class="fragment">Fuse with a smooth overlap and check the result</li>
+</ol>
+<aside class="notes">
 <ul>
-<li>Evaluate the point clouds, select resolution</li>
-<li>Interpolate lidar and UAS DEMs at the same resolution</li>
-<li>Evaluate the differences between the lidar and UAS DEMs</li>
-<li>If applicable, identify errors and apply corrections</li>
-<li>Apply smooth fusion</li>
+<li>Steps 1 and 2 were 4B; today is steps 3 to 5</li>
+<li>Step 4 is often skipped; fusing a distorted DSM into a good DEM makes both worse</li>
+<li>The check in step 5 is a shaded relief first, and a flow simulation when the surface is for hydrology</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="identify-distortions-due-to-processing" class="slide level2 smaller">
-<h2>Identify Distortions Due to Processing</h2>
+<section id="difference-maps-and-profiles" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Difference maps and profiles</h2>
+<aside class="notes">
 <ul>
-<li>Identify the spatial pattern of distortions</li>
-<li>Difference maps between Lidar DSM and UAS SfM DSMs</li>
+<li>Section 2: difference maps and profiles; distinguishing error from change</li>
 </ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h5 id="agisoft">Agisoft</h5>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/dif_lid_agi_junesh.webp" style="width:70.0%"></p>
-<figcaption>Difference Maps</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<h5 id="pix4d">Pix4D</h5>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/dif_lid_pix4d_junesh.webp" style="width:70.0%"></p>
-<figcaption>Difference Maps</figcaption>
-</figure>
-</div>
-</div></div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="identify-changes-in-topography" class="slide level2 smaller">
-<h2>Identify Changes in Topography</h2>
-<ul>
-<li>Vegetation growth or removal</li>
-<li>Change in elevation surface due to erosion processes</li>
-<li>UAS SfM - lidar difference maps with custom color</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/diff_lid_uavGCPjune.webp" style="width:70.0%"></p>
-<figcaption>Elevation Difference Maps</figcaption>
-</figure>
+<section id="identifying-distortions-from-processing" class="slide level2 smaller">
+<h2>Identifying distortions from processing</h2>
+<div class="term-card">
+<p><strong>Difference map</strong>: one surface subtracted from the other cell by cell, <code>r.mapcalc</code>; the pattern tells you whether you are looking at error, distortion, or real change</p>
 </div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/field_rill_photo.webp" style="width:50.0%"></p>
-<figcaption>Field Image</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="comparing-profiles-fields" class="slide level2">
-<h2>Comparing Profiles: Fields</h2>
-<ul>
-<li>Identify systematic errors (vertical shifts)</li>
-<li>Differences due to vegetation growth, erosion/deposition</li>
-</ul>
-
-<img data-src="../images/Anna_profile_fields.webp" class="r-stretch quarto-figure-center"><p class="caption">Profiles Comparison Fields</p></section>
-<section id="comparing-profiles-building" class="slide level2">
-<h2>Comparing Profiles: Building</h2>
-<ul>
-<li>High accuracy, lower level of detail in lidar data</li>
-<li>Negligible systematic error</li>
-</ul>
-
-<img data-src="../images/Anna_profile_house.webp" class="r-stretch quarto-figure-center"><p class="caption">Profiles Comparison Building</p></section>
-<section id="comparing-profiles-road" class="slide level2">
-<h2>Comparing Profiles: Road</h2>
-<ul>
-<li>Relatively easy to identify stable features</li>
-<li>High accuracy - differences between lidar and UAS SfM within 4cm</li>
-</ul>
-
-<img data-src="../images/subregion_road_profile_2.webp" class="r-stretch quarto-figure-center"><p class="caption">Profiles Comparison Road</p></section>
-<section id="correct-for-systematic-error-and-distortions" class="slide level2 smaller">
-<h2>Correct for Systematic Error and Distortions</h2>
-<ul>
-<li>Systematic error: if due to GPS shift, use median difference</li>
-<li>Systematic error: if tilt, use regression function</li>
-<li>Complex UAS SfM distortions can be reduced using interpolated GCP differences or differencing with lidar</li>
-<li>Importance of well-distributed, accurate GCPs</li>
-</ul>
-</section>
-<section id="updating-lidar-dem-by-patching" class="slide level2 smaller">
-<h2>Updating Lidar DEM by Patching</h2>
-<ul>
-<li>Replace the grid cells in the updated area by UAS DEM</li>
-<li>Average over an overlap</li>
-<li>Usually creates an edge - requires post-processing</li>
-</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/Brendaninitial_fusion.webp" style="width:75.0%"></p>
-<figcaption>Patching Results</figcaption>
+<p><img data-src="../images/dif_lid_agi_junesh.webp" class="quarto-figure quarto-figure-center" style="width:62.0%" alt="Difference map of the lidar DSM minus the June 2015 Agisoft DSM over shaded relief: curved crop fields in yellow and orange where the UAS surface is 0.5 to 1 m higher, cyan patches where it is lower, forest edges in orange and blue, legend from minus 1 to 1 m, 500 m scale bar"></p>
 </figure>
 </div>
+<p>Lidar DSM minus Agisoft DSM</p>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/Brendaninitial_fusion_relief.webp" style="width:75.0%"></p>
-<figcaption>Patching Results</figcaption>
+<p><img data-src="../images/dif_lid_pix4d_junesh.webp" class="quarto-figure quarto-figure-center" style="width:62.0%" alt="The same difference map computed with the Pix4D DSM: the same yellow and orange crop fields, with larger cyan areas in the northern fields where the Pix4D surface sits below the lidar"></p>
+</figure>
+</div>
+<p>Lidar DSM minus Pix4D DSM</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Same images, same GCPs, two software packages: the crop fields look alike, the open fields do not</li>
+<li>The cyan in the Pix4D map is a processing distortion, a gentle warp of the whole surface</li>
+<li>Lab Part 1 computes both of these maps and their statistics with the same color rules</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="identifying-changes-in-topography" class="slide level2 smaller">
+<h2>Identifying changes in topography</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/diff_lid_uavGCPjune.webp" class="quarto-figure quarto-figure-center" style="width:75.0%" alt="Difference map of the 2013 lidar DSM minus the June UAS DSM: crop field strips in green where the UAS surface is up to 2.5 m above the lidar, yellow strips near zero, grey roads and bare ground, legend from 0.7 to minus 2.5 m, 100 m scale bar"></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/diff_lid_uavGCPjune_gully.webp" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="Zoom of the same difference map: green crop strips and a yellow bare strip, with a thin red line where a gully has cut into the field since the lidar flight"></p>
+</figure>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/field_rill_photo.webp" class="quarto-figure quarto-figure-center" style="width:55.0%" alt="Two photographs: tall sorghum beside a mown grass path, and below it a rill eroded into bare soil between crop rows"></p>
 </figure>
 </div>
 </div></div>
-<p>Images by Brendan Harmon</p>
-</section>
-<section id="updating-lidar-dem-by-patching-1" class="slide level2 smaller">
-<h2>Updating Lidar DEM by Patching</h2>
-<p>Edge between lidar and UAS SfM DEMs</p>
-
-<img data-src="../images/patchingedge.webp" class="r-stretch quarto-figure-center"><p class="caption">Edge Visualization</p></section>
-<section id="smooth-fusion" class="slide level2">
-<h2>Smooth Fusion</h2>
 <ul>
-<li>Derive overlap raster</li>
-<li>Weighted smoothing based on the distance from the edge</li>
+<li>Vegetation growth or removal: the crop strips, two years apart</li>
+<li>Erosion and deposition: the red gully line</li>
+<li>Custom color rules center the scale on zero so that near-zero differences stay grey</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Not every difference is an error: here the green is sorghum that was not there in 2013</li>
+<li>The red line is a gully, a real change of a few decimeters, visible only because the rest of the field is near zero</li>
+<li>The lab provides a color rules file for this: grey within 10 cm, color beyond</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="profiles-fields" class="slide level2 smaller">
+<h2>Profiles: fields</h2>
+
+<img data-src="../images/Anna_profile_fields.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="Profile plot of the lidar DSM and four UAS DSMs along a 250 m line down a slope from 119 to 110 m: the lines coincide on bare ground, and the green June line rises 1 to 2 m above the others where it crosses the crop; the map at right shows the black transect"><ul>
+<li>A vertical offset of the whole line is a systematic error</li>
+<li>A local bump is vegetation, or erosion and deposition</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Profiles show what a map does not: a constant offset versus a local change</li>
+<li>March and September lines sit on the lidar; June floats above it where the crop stands</li>
+<li>In the lab the GUI Profile Tool draws this; <code>r.profile</code> gives the numbers</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="profiles-a-building" class="slide level2 smaller">
+<h2>Profiles: a building</h2>
+
+<img data-src="../images/Anna_profile_house.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="Profile plot across a flat-roofed building: all five surfaces coincide, with the roof at 117.5 m and the ground at 113 m; the lidar line has slightly rounded corners at the roof edges; the map at right shows the transect across a rectangular roof"><ul>
+<li>High accuracy in all surfaces, less detail in the lidar at the roof edges</li>
+<li>Negligible systematic error between lidar and UAS</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>A stable, hard feature: if the surfaces disagree here, one of them has a problem</li>
+<li>The rounded corners are the one point per square meter lidar sampling, not an error</li>
+<li>Same test the lab does on the road</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="profiles-a-road" class="slide level2 smaller">
+<h2>Profiles: a road</h2>
+
+<img data-src="../images/subregion_road_profile_2.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%" alt="GRASS GUI with the Profile Tool plotting the lidar minus Agisoft difference along a 50 m road transect, values between minus 0.04 and 0.05 m, a Statistics window showing a mean of 0.009 m and a standard deviation of 0.02 m, and the map display with the difference map and the dashed transect on the road"><ul>
+<li>Roads and parking lots are easy to find and do not grow</li>
+<li>Lidar and UAS SfM agree within 4 cm here, with a mean offset under 1 cm</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>This is lab Part 1: <code>r.profile</code> of the difference map along the road, <code>v.in.ascii</code> to a vector, <code>v.univar</code> for the mean</li>
+<li>A mean near zero means no vertical shift; the 4 cm spread is noise in both surfaces</li>
+<li>The lab’s longer transect along the same road gives a mean of about 8 cm for the Agisoft DSM and 16 cm for the Pix4D DSM</li>
+<li>If the mean were 20 cm, you would subtract it before fusing</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="correcting-systematic-errors" class="slide level2 smaller">
+<h2>Correcting systematic errors</h2>
+<div class="term-card">
+<p><strong>Systematic error</strong>: a difference that follows a rule over the whole surface, a constant shift or a tilt, as opposed to random noise or local change</p>
+</div>
+<ul>
+<li class="fragment">A constant vertical shift (GNSS datum or antenna height): subtract the median difference over stable features</li>
+<li class="fragment">A tilt (weak GCP geometry): fit a plane or a low-order polynomial to the differences and subtract it</li>
+<li class="fragment">Complex SfM distortions: interpolate the GCP residuals or the lidar differences and subtract that surface</li>
+<li class="fragment">Well distributed, accurate GCPs prevent most of this (4A)</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Diagnose first with the profile, then pick the correction that matches the pattern</li>
+<li>Median, not mean: vegetation and outliers would pull the mean</li>
+<li>The lab’s June Agisoft DSM is shifted about 8 cm along the road, small against the differences in the fields, so the lab does not correct it</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="patching" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Patching</h2>
+<aside class="notes">
+<ul>
+<li>Section 3: patching and the edge it produces</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="updating-a-lidar-dem-by-patching" class="slide level2 smaller">
+<h2>Updating a lidar DEM by patching</h2>
+<div class="term-card">
+<p><strong>Patching</strong>: filling the cells of one raster with another where the first has data, <code>r.patch</code>; the first input wins wherever it is not null</p>
+</div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/Anna_patching.webp"></p>
-<figcaption>Fusion Results</figcaption>
+<p><img data-src="../images/Brendaninitial_fusion.webp" class="quarto-figure quarto-figure-center" style="width:78.0%" alt="Elevation map from 88 to 156 m in green, yellow and orange with a textured UAS patch inserted into the smooth lidar DEM along a straight seam"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/Anna_fusion.webp"></p>
-<figcaption>Fusion Results</figcaption>
+<p><img data-src="../images/Brendaninitial_fusion_relief.webp" class="quarto-figure quarto-figure-center" style="width:78.0%" alt="Shaded relief of the patched DEM: smooth lidar surface on the left, textured UAS surface with crop rows on the right, and a visible vertical seam and a horizontal step between them"></p>
 </figure>
 </div>
 </div></div>
+<p>A UAS DEM patched into a lidar DEM, elevation and shaded relief (images by Brendan Harmon)</p>
+<aside class="notes">
+<ul>
+<li>The elevation map looks fine; the shaded relief shows the seam at once</li>
+<li>Always check a patch in relief: <code>r.relief</code> with an exaggerated <code>zscale</code> finds steps of a few centimeters</li>
+<li>Lab Part 2 does this with the clipped UAS DSM and the lidar DSM</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="edge-between-the-patched-dems" class="slide level2 smaller">
+<h2>Edge between the patched DEMs</h2>
+
+<img data-src="../images/patchingedge.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:75.0%" alt="Shaded relief labeled UAS at the top and Lidar at the bottom: a sharp line separates the smooth lidar relief from the UAS relief with its crop rows"><ul>
+<li>A step of a few centimeters at the seam, and a change of texture</li>
+<li>Water flow follows the step: an artificial channel along the edge</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Two surfaces that each have a few centimeters of noise will never meet exactly</li>
+<li>The texture change is also real: the UAS sees crop rows the lidar never resolved</li>
+<li>The step matters most for hydrology, as Section 5 shows</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="smooth-fusion" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Smooth fusion</h2>
+<aside class="notes">
+<ul>
+<li>Section 4: weighted blending across an overlap</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="smooth-fusion-1" class="slide level2 smaller">
+<h2>Smooth fusion</h2>
+<div class="term-card">
+<p><strong>Smooth fusion</strong>: a weighted average of the two surfaces across an overlap zone along the edge, the weight going from one surface to the other with the distance from the edge; <code>r.patch.smooth</code> in GRASS</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/Anna_patching.webp" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="Colored shaded relief, yellow to green by elevation, of a patched DSM with a visible horizontal seam line running across the field"></p>
+</figure>
+</div>
+<p>Patched</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/Anna_fusion.webp" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="The same area after smooth fusion: no seam, and the curved crop rows blend into the smooth surrounding surface"></p>
+</figure>
+</div>
+<p>Fused</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Two steps: derive the overlap zone from the distance to the edge, then blend with distance-based weights</li>
+<li>The lab does it by hand first with <code>r.grow.distance</code> and <code>r.mapcalc</code>, then with the addon</li>
+<li>Doing it by hand once shows what the addon’s <code>smooth_dist</code> parameter does</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="fusion-method" class="slide level2 smaller">
-<h2>Fusion Method</h2>
-<p>Linear combination of elevation surfaces <span class="math inline">\(z_{A}\)</span> and <span class="math inline">\(z_{B}\)</span> with weights given by overlap width <span class="math inline">\(s\)</span> and distance <span class="math inline">\(d\)</span> to the edge of <span class="math inline">\(z_{A}\)</span>:</p>
+<h2>Fusion method</h2>
+<p>A linear combination of the two elevation surfaces <span class="math inline">\(z_A\)</span> and <span class="math inline">\(z_B\)</span>, weighted by the distance <span class="math inline">\(d\)</span> to the edge of <span class="math inline">\(A\)</span> over an overlap of width <span class="math inline">\(s\)</span>:</p>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:45%;">
 <p><span class="math display">\[
-z_{AB} = z_{A} w + z_{B}(1 - w),
-\\[10pt]
-w = f(s, d) =
-\begin{cases}
-  \frac{d}{s} &amp; 0 \leq d &lt; s \\
-  1 &amp; d \geq s
-\end{cases}
+z_{AB} = w\, z_A + (1 - w)\, z_B
+\]</span> <span class="math display">\[
+w = \begin{cases} d / s &amp; 0 \le d &lt; s \\ 1 &amp; d \ge s \end{cases}
 \]</span></p>
-</div><div class="column" style="width:60%;">
+</div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../images/schema2.webp"></p>
-<figcaption>Fusion Method Schema</figcaption>
+<p><img data-src="../images/schema2.webp" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="Diagram: at the top, area A in black inside area B in grey with an overlap band of width s along the edge of A; below, profiles of A, B and the fused AB, with weight w equal to 1 inside A, between 0 and 1 across the overlap, and 0 outside"></p>
 </figure>
 </div>
 </div></div>
-</section>
-<section id="influence-of-overlap-width-s" class="slide level2">
-<h2>Influence of Overlap Width <span class="math inline">\(s\)</span></h2>
-
-<img data-src="../images/sm_all.webp" class="r-stretch quarto-figure-center"><p class="caption">Overlap Influence</p></section>
-<section id="fusion-with-spatially-variable-s" class="slide level2 smaller">
-<h2>Fusion with Spatially Variable <span class="math inline">\(s\)</span></h2>
-<p>By taking into account spatially variable differences <span class="math inline">\(\Delta z\)</span> between DEMs <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> along the overlap:</p>
-<div class="columns">
-<div class="column" style="width:40%;">
+<aside class="notes">
 <ul>
-<li>We get a more gradual transition where differences are high</li>
-<li>We preserve subtle features of both DEMs where differences are small</li>
+<li>At the edge of A the weight is 0, so the fused surface equals B; s meters inside A it equals A</li>
+<li>In the lab: <code>r.grow.distance -n</code> gives d, then one <code>r.mapcalc</code> expression does the blend: <code>if(distance &gt; s, uas, if(distance == 0, lidar, (1 - distance/s) * lidar + distance/s * uas))</code></li>
+<li><code>r.grow.distance -n</code> measures the distance inward from the null boundary, which is what d is here</li>
+<li>The lab runs this with s of 5 m and 20 m and compares the relief</li>
 </ul>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/schema3.webp"></p>
-<figcaption>Spatially Variable Fusion</figcaption>
-</figure>
-</div>
-</div></div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="fusion-with-spatially-variable-s-1" class="slide level2">
-<h2>Fusion with Spatially Variable <span class="math inline">\(s\)</span></h2>
-<p>Absolute elevation difference between lidar and UAS DEM controls the width of the transition overlap.</p>
+<section id="influence-of-the-overlap-width-s" class="slide level2 smaller">
+<h2>Influence of the overlap width s</h2>
+<div class="term-card">
+<p><strong>Overlap width</strong>: how far into the updated surface the blend reaches; too narrow leaves a visible step, too wide erases detail of the better surface</p>
+</div>
 
-<img data-src="../images/fusionv2.webp" class="r-stretch quarto-figure-center"><p class="caption">Fusion Visualization</p></section>
-<section id="lidar-and-uas-sfm-patching-and-fusion" class="slide level2 smaller">
-<h2>Lidar and UAS SfM Patching and Fusion</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_patched.webp" style="width:75.0%"></p>
-<figcaption>Patched vs.&nbsp;Fused DSMs</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_fused.webp" style="width:75.0%"></p>
-<figcaption>Patched vs.&nbsp;Fused DSMs</figcaption>
-</figure>
-</div>
-</div></div>
-<p>Simply patched vs.&nbsp;fused UAS and lidar DSMs with overlap width <span class="math inline">\(s = 20\ m\)</span></p>
-</section>
-<section id="fusing-vegetated-patch-with-bare-ground" class="slide level2 smaller">
-<h2>Fusing Vegetated Patch with Bare Ground</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_uas_ground.webp" style="width:75.0%"></p>
-<figcaption>Bare Ground Fused</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_fused_ground.webp" style="width:75.0%"></p>
-<figcaption>Bare Ground Fused</figcaption>
-</figure>
-</div>
-</div></div>
-<p>Vegetated areas in UAS DSM are replaced with lidar DEM. Yellow shows bare ground in UAS DSM.</p>
-</section>
-<section id="spatially-variable-overlap" class="slide level2 smaller">
-<h2>Spatially Variable Overlap</h2>
-
-<img data-src="../images/assignment_overlap.webp" class="r-stretch quarto-figure-center"><p class="caption">Spatial Overlap</p><p>Bare ground UAS DSM is used to update lidar bare ground DEM using spatially variable overlap</p>
-</section>
-<section id="modeling-overland-flow" class="slide level2">
-<h2>Modeling Overland Flow</h2>
-<p>Microtopography captured at ultra-high resolution by UAS SfM poses special challenges to flow routing:</p>
+<img data-src="../images/sm_all.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%" alt="Three shaded relief panels of the same patch edge with overlap widths of 0, 5 and 20 m: the seam is sharp at 0 m, faint at 5 m, and gone at 20 m"><aside class="notes">
 <ul>
-<li>Real depressions are important features</li>
-<li>Complex pattern of ponding, overflow of barriers is not supported by standard tools</li>
-<li>Noisy surface requires a robust algorithm</li>
+<li>The difference between the two surfaces at the edge decides the width you need</li>
+<li>With a 3 cm step a few meters is enough; with a 30 cm step you need tens of meters</li>
+<li>The next step lets the elevation difference set s</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="path-sampling-method" class="slide level2">
-<h2>Path Sampling Method</h2>
-<p>Stochastic method for solving flow continuity equations</p>
+<section id="fusion-with-spatially-variable-overlap" class="slide level2 smaller">
+<h2>Fusion with spatially variable overlap</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/fanimwalk.webp" style="width:75.0%"></p>
-<figcaption>Flow Animation</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/fanimhhcolp.webp" style="width:75.0%"></p>
-<figcaption>Flow Animation</figcaption>
-</figure>
-</div>
-</div></div>
-<blockquote>
-<p><a href="http://www4.ncsu.edu/~hmitaso/gmslab/papers/II.6.8_Mitasova_044.pdf">Mitasova et al., 2005</a></p>
-</blockquote>
-</section>
-<section id="flow-over-uas-mapped-field" class="slide level2">
-<h2>Flow Over UAS Mapped Field</h2>
-<p>Crop surface creates barrier leading to artificial ponding</p>
-
-<img data-src="../images/agisoft_june.webp" class="r-stretch quarto-figure-center"><p class="caption">Flow Over Mapped Field</p></section>
-<section id="flow-over-patched-dems" class="slide level2 smaller">
-<h2>Flow Over Patched DEMs</h2>
-<p>Replacing crop surface by lidar bare ground: patching creates artificial flow pattern, smooth fusion improves accuracy of flow distribution</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/problem_water_scale.webp" style="width:100.0%"></p>
-<figcaption>Flow Pattern</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/problem_solution_man_scale.webp" style="width:100.0%"></p>
-<figcaption>Flow Pattern</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="example-from-assignment" class="slide level2 smaller">
-<h2>Example from Assignment</h2>
-<p>Water flow on DSM created by simple patching vs.&nbsp;smooth patching</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_flow_patched.webp" style="width:100.0%"></p>
-<figcaption>Flow Comparison</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_flow_smooth_patched.webp" style="width:100.0%"></p>
-<figcaption>Flow Comparison</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="example-from-assignment-1" class="slide level2 smaller">
-<h2>Example from Assignment</h2>
-<p>Water flow on DSM vs.&nbsp;bare ground fused from UAS DSM and lidar DEM</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_flow_smooth_patched.webp" style="width:100.0%"></p>
-<figcaption>Flow on DSM vs.&nbsp;Bare Ground</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../images/assignment_flow_ground.webp" style="width:100.0%"></p>
-<figcaption>Flow on DSM vs.&nbsp;Bare Ground</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="what-did-we-learn" class="slide level2">
-<h2>What Did We Learn?</h2>
+<div class="column" style="width:45%;">
 <ul>
-<li>Evaluation and interpretation of differences between lidar and UAS SfM DEMs</li>
-<li>Techniques for smooth fusion of high-resolution DEMs</li>
-<li>Impact of fusion technique on overland flow modeling</li>
+<li>The width <span class="math inline">\(s(x, y)\)</span> follows the elevation difference <span class="math inline">\(\Delta z\)</span> between the two surfaces along the edge</li>
+<li>Wide transition where they disagree, narrow where they agree</li>
+<li>Fine features of both surfaces survive where the difference is small</li>
 </ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/schema3.webp" class="quarto-figure quarto-figure-center" style="width:78.0%" alt="The same fusion diagram with a spatially variable overlap width s of x and y around area A, and the elevation difference delta z between the A and B profiles marked at the edge"></p>
+</figure>
+</div>
+</div></div>
+<div class="term-card">
+<p>In GRASS: <code>r.patch.smooth -s input_a=uas_ground input_b=lidar_dem output=fused overlap=overlap transition_angle=1.3 parallel_smoothing=13</code> <span class="citation" data-cites="petrasova_fusion_2017">(<a href="#/references" role="doc-biblioref" onclick="">Petrasova et al. 2017</a>)</span></p>
+</div>
+<aside class="notes">
+<ul>
+<li>The <code>-s</code> flag turns on the variable overlap; <code>transition_angle</code> is the angle of the transition in degrees (1 to 5 recommended), so the width grows with the elevation difference at the edge</li>
+<li><code>parallel_smoothing</code> is the size of the window that smooths the zone along the edge, an odd number; larger values make the width less variable</li>
+<li>Lab Part 3 runs both variants on the bare ground and looks at the <code>overlap</code> raster</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="overlap-width-from-the-elevation-difference" class="slide level2 smaller">
+<h2>Overlap width from the elevation difference</h2>
+
+<img data-src="../images/fusionv2.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%" alt="Two panels over shaded relief: the absolute difference between the two DEMs from 0 to 0.3 m in pink to red, labeled small difference and large difference, and the resulting weight raster from 0 to 1 in purple to yellow, labeled narrow zone and wide zone; 50 m scale bar"><aside class="notes">
+<ul>
+<li>Left: where the surfaces disagree by 20 to 30 cm; right: the weight raster the blend uses</li>
+<li>The zone is a few meters wide where the difference is near zero and tens of meters where it is large</li>
+<li>This is the <code>overlap</code> output the lab asks you to display</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="patched-and-fused-lidar-and-uas-dsms" class="slide level2 smaller">
+<h2>Patched and fused lidar and UAS DSMs</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/assignment_patched.webp" alt="Shaded relief of the Mid Pines fields with the clipped UAS DSM patched into the lidar DSM: textured crop rows inside the UAS area and straight seams visible along the clip boundary; 100 m scale bar"></p>
+<p>Patched</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/assignment_fused.webp" alt="The same area after smooth fusion with a 20 m overlap: the seams along the clip boundary are gone"></p>
+<p>Fused, <span class="math inline">\(s = 20\)</span> m</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Lab Part 2 output: the clip boundary is a rectangle, so the seam is four straight lines</li>
+<li>After fusion the rectangle disappears; the UAS detail inside is untouched beyond 20 m from the edge</li>
+<li>Compare the two in relief, and later in flow</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fusing-uas-bare-ground-with-the-lidar-dem" class="slide level2 smaller">
+<h2>Fusing UAS bare ground with the lidar DEM</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/assignment_uas_ground.webp" class="quarto-figure quarto-figure-center" style="width:78.0%" alt="Shaded relief with the UAS bare ground highlighted in yellow: the bare field strips, roads and lawns are yellow, while the crop strips stay unhighlighted and textured"></p>
+</figure>
+</div>
+<p>UAS cells within 0.3 m of the lidar ground, in yellow</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/assignment_fused_ground.webp" class="quarto-figure quarto-figure-center" style="width:78.0%" alt="Shaded relief of the fused bare ground: the textured crop strips are replaced by smooth lidar ground, with yellow where the UAS ground was kept"></p>
+</figure>
+</div>
+<p>Fused bare ground</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>The UAS cannot see the soil under the crop, so the crop cells are set to null and the lidar ground fills them</li>
+<li>The test is the height above the lidar DEM: under 30 cm counts as ground</li>
+<li>The result is a current bare ground surface with UAS detail where the ground was visible</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="spatially-variable-overlap-at-mid-pines" class="slide level2 smaller">
+<h2>Spatially variable overlap at Mid Pines</h2>
+
+<img data-src="../images/assignment_overlap.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="The spatially variable overlap raster drawn over shaded relief: purple to yellow bands along the edges of every bare ground patch, wide where the UAS and lidar surfaces differ and narrow where they agree; 100 m scale bar"><aside class="notes">
+<ul>
+<li>Every crop strip edge gets its own transition zone</li>
+<li>Wide bands where the UAS ground sits a few decimeters off the lidar, narrow bands where they agree</li>
+<li>This is what <code>overlap=overlap</code> writes in Part 3</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="overland-flow-simulation" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Overland flow simulation</h2>
+<aside class="notes">
+<ul>
+<li>Section 5: overland flow simulation as a test of a fused surface</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="modeling-overland-flow-at-high-resolution" class="slide level2 smaller">
+<h2>Modeling overland flow at high resolution</h2>
+<ul>
+<li class="fragment">Real depressions are features, not errors to fill</li>
+<li class="fragment">Water ponds, overtops barriers, and splits: standard flow routing cannot represent this</li>
+<li class="fragment">A noisy surface needs a robust algorithm that does not chase every cell</li>
+</ul>
+<div class="term-card">
+<p><strong>Path sampling</strong>: a stochastic solution of the flow continuity equations; many walkers are released as rainfall and move downslope, and their density gives the water depth; <code>r.sim.water</code> in GRASS <span class="citation" data-cites="mitasova_path_2004">(<a href="#/references" role="doc-biblioref" onclick="">Mitasova et al. 2004</a>)</span></p>
+</div>
+<aside class="notes">
+<ul>
+<li><code>r.watershed</code> routes every cell to an outlet, through depressions; at 0.3 m that removes the ponding the surface really has</li>
+<li>Path sampling keeps the depressions and lets water accumulate in them</li>
+<li>The lab uses <code>r.sim.water</code> with 100,000 walkers over 20 simulated minutes of rain at 30 mm per hour, writing a depth map every minute, on three surfaces</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="path-sampling" class="slide level2 smaller">
+<h2>Path sampling</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/fanimwalk.webp" alt="3D view of a hilly terrain covered with thousands of small blue dots, the walkers of a path sampling simulation"></p>
+<p>Walkers released over the terrain</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/fanimhhcolp.webp" alt="The same 3D terrain with the simulated water depth in yellow: streams in the valleys and ponds in the flat areas"></p>
+<p>Water depth from the walker density</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Each walker carries a bit of water downslope following the gradient, with some randomness</li>
+<li>Where walkers crowd together the depth is high: a stream, a pond</li>
+<li>The method needs the first derivatives, hence <code>r.slope.aspect</code> with <code>dx</code> and <code>dy</code> before the simulation</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="flow-over-a-uas-mapped-field" class="slide level2 smaller">
+<h2>Flow over a UAS mapped field</h2>
+
+<img data-src="../images/agisoft_june.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:62.0%" alt="3D view of simulated water depth from 0 to 0.34 m, yellow to blue, on the June UAS DSM: water pools in cyan along the edges of the crop fields, with the crop rows acting as barriers"><p>The crop surface acts as a barrier: water ponds against it instead of flowing through</p>
+<aside class="notes">
+<ul>
+<li>This is a DSM, so the simulation runs water over the top of the sorghum</li>
+<li>Real water runs through the stems along the soil; the DSM is the wrong surface for hydrology</li>
+<li>That is the motivation for fusing lidar ground into the UAS surface</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="flow-on-a-patched-versus-a-fused-dem" class="slide level2 smaller">
+<h2>Flow on a patched versus a fused DEM</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/problem_water_scale.webp" alt="Simulated water depth over shaded relief of a patched DEM: a straight blue channel follows the patch edge across the field; 50 ft scale bar"></p>
+<p>Patched: an artificial channel along the seam</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/problem_solution_man_scale.webp" alt="The same area on a smoothly fused DEM: the water follows a natural channel and the straight artificial channel is gone"></p>
+<p>Fused: the flow follows the terrain</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>The seam step of a few centimeters is enough to capture the flow at 0.3 m resolution</li>
+<li>Smooth fusion removes the step and the artificial channel with it</li>
+<li>Same experiment, same site, in the lab’s Part 4</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="assignment-example-simple-and-smooth-patching" class="slide level2 smaller">
+<h2>Assignment example: simple and smooth patching</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/assignment_flow_patched.webp" class="quarto-figure quarto-figure-center" style="width:82.0%" alt="Simulated water depth, yellow to blue, over the Mid Pines fields on the simply patched DSM: water collects in blue lines along the straight patch edges and along the field boundaries"></p>
+</figure>
+</div>
+<p><code>r.patch</code></p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/assignment_flow_smooth_patched.webp" class="quarto-figure quarto-figure-center" style="width:82.0%" alt="The same simulation on the DSM smoothed with a 20 m overlap: the straight edge lines are gone, and water still pools along the crop strips"></p>
+</figure>
+</div>
+<p>Weighted average, <span class="math inline">\(s = 20\)</span> m</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Left: the blue lines along the clip rectangle are pure artifact</li>
+<li>Right: the artifact is gone, but water still ponds against the crop strips because this is still a DSM</li>
+<li>Compare the depth maps at the last minute of the simulation, at the edge of the UAS area</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="assignment-example-dsm-and-bare-ground" class="slide level2 smaller">
+<h2>Assignment example: DSM and bare ground</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/assignment_flow_smooth_patched.webp" class="quarto-figure quarto-figure-center" style="width:72.0%" alt="Simulated water depth on the smoothly patched DSM: water pools in blue along the crop strips and field edges"></p>
+</figure>
+</div>
+<p>Smooth patched DSM</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/assignment_flow_ground.webp" class="quarto-figure quarto-figure-center" style="width:72.0%" alt="The same simulation on the fused bare ground: water flows in natural channels across the fields toward the stream in the southeast, and the crop barriers are gone"></p>
+</figure>
+</div>
+<p>Fused bare ground</p>
+</div></div>
+<aside class="notes">
+<ul>
+<li>With lidar ground under the crop the water follows the terrain to the stream</li>
+<li>This is the surface you would use for erosion or runoff questions on this farm</li>
+<li>The lab’s last part: simulate on all three and explain the differences</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-terms" class="slide level2 smaller">
+<h2>Key terms</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Difference map</strong>: one surface minus the other, cell by cell; the pattern separates error, distortion and change</p>
+</div>
+<div class="term-card">
+<p><strong>Systematic error</strong>: a shift or tilt that follows a rule over the whole surface, found with profiles over stable features</p>
+</div>
+<div class="term-card">
+<p><strong>Patching</strong>: filling one raster with another where the first has data; fast, but leaves a seam</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Smooth fusion</strong>: a distance-weighted blend of two surfaces across an overlap zone along the edge</p>
+</div>
+<div class="term-card">
+<p><strong>Overlap width</strong>: how far the blend reaches; fixed, or variable with the elevation difference at the edge</p>
+</div>
+<div class="term-card">
+<p><strong>Path sampling</strong>: a stochastic overland flow simulation that keeps depressions and ponding; the test for a fused surface</p>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Midterm vocabulary, and the words the lab report has to use correctly</li>
+<li>The grading asks for conclusions in these terms: difference pattern, systematic error, seam, overlap, flow artifact</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Assignment 5A</strong>: <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html">Fusion of UAS and lidar data</a>: map and measure the differences between the 2013 lidar DSM and two June 2015 UAS DSMs, patch and fuse the UAS DSM into the lidar, build a fused bare ground, and compare the overland flow simulated on each surface</p>
+</div>
+<aside class="notes">
+<ul>
+<li>Recap: lidar and SfM have different error sources, so one checks the other; a difference map and a profile over a road show which</li>
+<li>Patching leaves a seam that water follows; smooth fusion across an overlap removes it</li>
+<li>Let the overlap width follow the difference, and test the result with <code>r.sim.water</code></li>
+<li>5B takes the same UAS flights as a time series</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-mitasova_path_2004" class="csl-entry" role="listitem">
+Mitasova, Helena, Chris Thaxton, Jaroslav Hofierka, Richard McLaughlin, Amber Moore, and Lubos Mitas. 2004. <span>“Path Sampling Method for Modeling Overland Water Flow, Sediment Transport, and Short Term Terrain Evolution in <span>Open</span> <span>Source</span> <span>GIS</span>.”</span> In <em>Computational Methods in Water Resources: Proceedings of the <span>XVth</span> International Conference</em>, vol. 55. Developments in Water Science. Elsevier. <a href="https://doi.org/10.1016/S0167-5648(04)80159-X">https://doi.org/10.1016/S0167-5648(04)80159-X</a>.
+</div>
+<div id="ref-petrasova_fusion_2017" class="csl-entry" role="listitem">
+Petrasova, Anna, Helena Mitasova, Vaclav Petras, and Justyna Jeziorska. 2017. <span>“Fusion of High-Resolution <span>DEMs</span> for Water Flow Modeling.”</span> <em>Open Geospatial Data, Software and Standards</em> 2 (1): 6. <a href="https://doi.org/10.1186/s40965-017-0019-2">https://doi.org/10.1186/s40965-017-0019-2</a>.
+</div>
+</div>
 
 
 </section>
@@ -619,7 +1285,7 @@ w = f(s, d) =
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
