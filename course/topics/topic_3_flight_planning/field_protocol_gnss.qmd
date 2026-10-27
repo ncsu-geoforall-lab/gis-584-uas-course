@@ -78,6 +78,8 @@ Lake Wheeler is Class G airspace, so no authorization is needed, and the site is
 
 ### Preflight checklist
 
+The [NGAT field checklists]({{< var docs.zajkowski_checklists_pdf >}}) cover the same steps for a full crew; the list below is the short version for the course flight.
+
 Before leaving:
 
 - [ ] Two aircraft batteries and the controller charged; spare battery packed
