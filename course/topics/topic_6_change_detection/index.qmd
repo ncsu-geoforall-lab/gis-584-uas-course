@@ -16,4 +16,5 @@ order: 6
 
 ## Assignments
 
+- [Lab: Vegetation indices](assignments/lab_vegetation_indices.qmd)
 - [Assignment 6A: UAS Image Classification](assignments/assignment_6a.qmd)
