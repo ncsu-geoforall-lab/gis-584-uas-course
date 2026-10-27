@@ -133,6 +133,8 @@ website:
                   href: course/topics/topic_5_advanced_analytics/assignments/assignment_5a.qmd
                 - text: "Assignment 5B"
                   href: course/topics/topic_5_advanced_analytics/assignments/assignment_5b.qmd
+                - text: "Lab: Python Scripting"
+                  href: course/topics/topic_5_advanced_analytics/assignments/lab_python_scripting.qmd
         - section: "Topic 6: Machine Learning & AI"
           href: course/topics/topic_6_change_detection/index.qmd
           contents:

@@ -1,0 +1,419 @@
+---
+title: "Lab: Python scripting in GRASS"
+subtitle: "Optional, advanced topic"
+format: html
+toc-depth: 4
+notebook-view:
+  - notebook: python_scripting.ipynb
+    title: "Python scripting in GRASS"
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_5_advanced_analytics/assignments/python_scripting.ipynb
+resources:
+  - python_scripting.ipynb
+---
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_5_advanced_analytics/assignments/python_scripting.ipynb)
+
+## Task
+
+The earlier assignments ran each GRASS tool once, by hand, in the GUI or on the command line. A real project repeats the same steps on many files and many maps: every tile of a lidar delivery, every DSM of a time series, every pair of surfaces to compare. This lab shows how to write those repetitions in Python. You call GRASS tools from Python and read their output, import a folder of lidar tiles with a loop that skips the tiles outside the area of interest, interpolate a DEM on several cores, compute every pairwise difference of a set of DSMs, generate an HTML report with statistics and images, plot terrain profiles with matplotlib, and turn one step into a standalone script with its own command line interface.
+
+The lab is written for the notebook (badge above), which runs in Google Colab or locally with GRASS {{< var software.grass.version >}}. The same code runs in the *Python* tab of the GRASS GUI console, one statement at a time, or as a file in the *Simple Python Editor* (*File > Simple Python Editor*); Part 7 shows how to run a script from a terminal. The code below is Python unless marked as a shell command.
+
+## Data
+
+- [Lake Wheeler GRASS project: Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (EPSG:3358; you have it from the earlier assignments; it holds the 2015 UAS DSMs in `PERMANENT`)
+- [2013 lidar point cloud of Mid Pines: mid_pines_spm_2013.las]({{< var data.mid_pines_lidar_url >}}) (165 MB; you have it from Assignment 4B)
+- [2013 lidar DEM and DSM of Mid Pines]({{< var data.secref_mid_pines_spm_elev >}}) (zip with GRASS raster packs; you have it from Assignment 5A)
+
+## Software
+
+- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}} with PDAL support (the standard installers include it) and its `pdal` command line tool, used once in Part 2
+- The Python packages pandas, numpy, and matplotlib (the notebook installs them; locally, the Python that GRASS uses needs them)
+
+Start GRASS in the `Lake_Wheeler_NCspm` project and create a new mapset `python` for this lab. In the notebook, the mapset is created and the session started for you, and a `Tools` object named `tools` is ready:
+
+```python
+import grass.script as gs
+import grass.jupyter as gj
+from grass.tools import Tools
+
+session = gj.init("~/grassdata/Lake_Wheeler_NCspm/python")
+tools = Tools(session=session, overwrite=True)
+```
+
+The reference for everything in Part 1 is the [GRASS Python introduction](https://grass.osgeo.org/grass85/manuals/python_intro.html); every tool's manual page shows its command line, `grass.tools`, and `grass.script` forms side by side.
+
+## Part 1: The Python API
+
+### Calling tools
+
+A GRASS tool is called as a method of the `Tools` object: the dots in the tool name become underscores, parameters become keyword arguments, and flags go into `flags`. The command `r.neighbors -c input=... output=... method=average size=15` becomes:
+
+```python
+tools.g_region(raster="2015_06_20_DSM_agi_11GCP@PERMANENT")
+tools.r_neighbors(input="2015_06_20_DSM_agi_11GCP@PERMANENT", output="dsm_smoothed",
+                  method="average", size=15, flags="c")
+```
+
+### Reading output
+
+Tools that print something return a result object. `.text` holds the raw text, `.keyval` parses `key=value` lines (the `-g` flag of many tools) into a dictionary, and `format="json"` returns the parsed JSON with the numbers already converted. Use the JSON form in scripts.
+
+```python
+print(tools.g_region(flags="p").text)
+
+stats = tools.r_univar(map="dsm_smoothed", flags="g").keyval
+print(stats["mean"])
+
+stats = tools.r_univar(map="dsm_smoothed", format="json").json
+print(f"{stats['n']:,} cells, mean {stats['mean']:.2f} m")
+
+proj = tools.g_proj(flags="g").keyval
+```
+
+> 6,536,207 cells, mean 111.31 m
+
+### Text input
+
+Tools that read from standard input (`input=-` on the command line) take an `io.StringIO` object. Here `v.in.ascii` creates a vector map with two points from a string, and `r.what` samples the DSM at the same coordinates:
+
+```python
+import io
+
+points = """637160.45|219373.24|road
+637072.44|219400.61|field
+"""
+tools.v_in_ascii(input=io.StringIO(points), output="sample_points", separator="pipe",
+                 columns="x double precision, y double precision, label text")
+
+for rec in tools.r_what(map="2015_06_20_DSM_agi_11GCP@PERMANENT",
+                        coordinates=(637160.45, 219373.24, 637072.44, 219400.61), format="json").json:
+    print(rec["easting"], rec["northing"], rec["2015_06_20_DSM_agi_11GCP@PERMANENT"]["value"])
+```
+
+### Map algebra, the region, and listing maps
+
+`r.mapcalc` takes the expression as a string. `g.region` with `format="json"` is how a script learns the resolution or the cell area, and `g.list` with `format="json"` returns one record per map with its name and mapset.
+
+```python
+tools.r_mapcalc(expression="dsm_above_115 = if(2015_06_20_DSM_agi_11GCP@PERMANENT > 115, 2015_06_20_DSM_agi_11GCP@PERMANENT, null())")
+
+region = tools.g_region(flags="p", format="json").json
+print(region["rows"], region["cols"], region["nsres"] * region["ewres"])
+
+for item in tools.g_list(type="raster", pattern="2015_06_*", mapset="PERMANENT", format="json").json:
+    print(item["fullname"])
+```
+
+### The classic grass.script functions
+
+Older scripts and many examples use `grass.script`, imported as `gs`: `run_command` runs a tool, `read_command` returns its text, `parse_command` parses `key=value` output, and `write_command` passes text on standard input. The parameters are the same; `grass.tools` only wraps them with better return values.
+
+```python
+gs.run_command("g.region", raster="2015_06_20_DSM_agi_11GCP@PERMANENT")
+print(gs.read_command("g.region", flags="g"))
+print(gs.parse_command("r.univar", map="dsm_smoothed", flags="g")["mean"])
+gs.write_command("v.in.ascii", input="-", stdin="637080|219480|road2", output="one_point", separator="pipe")
+```
+
+### PyGRASS: individual vector features
+
+`grass.tools` runs whole tools. To create or read individual features, PyGRASS gives Python classes backed by the GRASS C library. This writes two points with an attribute table and reads them back:
+
+```python
+from grass.pygrass.vector import VectorTopo
+from grass.pygrass.vector.geometry import Point
+
+cols = [("cat", "INTEGER PRIMARY KEY"), ("name", "TEXT")]
+with VectorTopo("places", mode="w", tab_cols=cols, overwrite=True) as places:
+    places.write(Point(637160.45, 219373.24), cat=1, attrs=("road",))
+    places.write(Point(637072.44, 219400.61), cat=2, attrs=("field",))
+    places.table.conn.commit()
+
+with VectorTopo("places", mode="r") as places:
+    for point in places:
+        print(point, point.attrs["name"])
+```
+
+## Part 2: Import many point clouds
+
+Lidar deliveries come as tiles, dozens or hundreds of files that cover a county. To build a surface for a small study area, a script has to find the tiles that touch the area, import only those, and merge them. We make such a tile set from the 2013 Mid Pines point cloud with the `pdal tile` command: 500 m tiles aligned to the lower left corner of the data, which `r.in.pdal -g` reports without importing anything. The one-line `n=... s=...` output is parsed with `gs.parse_key_val`.
+
+```python
+ext = gs.parse_key_val(tools.r_in_pdal(input="mid_pines_spm_2013.las", output="dummy", flags="g").text,
+                       vsep=" ", val_type=float)
+```
+
+Shell command (in the notebook, prefixed with `!`):
+
+```bash
+pdal tile --length 500 --origin_x 636271.27 --origin_y 218694.44 mid_pines_spm_2013.las "tiles/tile_#.las"
+```
+
+This writes 16 tiles. The study area is the field block of Assignment 5A. For every tile the loop reads its extent and compares it with the region; a tile is skipped when it lies entirely north, south, east, or west of the region. The tiles that touch the region are imported with `v.in.pdal`, limited to the region (`-r`) and to the ground class (`class_filter=2`); `v.build` adds the topology that `v.patch` needs. The imported tiles are merged and removed.
+
+```python
+from pathlib import Path
+
+tools.g_region(n=219637, s=219254, w=636730, e=637193, res=1, flags="p")
+region = tools.g_region(flags="g").keyval
+
+imported = []
+for las in sorted(Path("tiles").glob("*.las")):
+    ext = gs.parse_key_val(tools.r_in_pdal(input=str(las), output="dummy", flags="g").text,
+                           vsep=" ", val_type=float)
+    if ext["n"] < region["s"] or ext["s"] > region["n"] or ext["e"] < region["w"] or ext["w"] > region["e"]:
+        print(f"skipping {las.name}")
+        continue
+    name = las.stem
+    tools.v_in_pdal(input=str(las), output=name, flags="r", class_filter=2)
+    tools.v_build(map=name)
+    print(name, tools.v_info(map=name, format="json").json["points"])
+    imported.append(name)
+
+tools.v_patch(input=imported, output="ground_2013")
+tools.g_remove(type="vector", name=imported, flags="f")
+```
+
+> Two tiles touch the region, `tile_0_1` with 20,894 ground points and `tile_1_1` with 200,279; the other 14 are skipped, and the merged map has 221,173 points.
+
+The same loop imports any number of files of any format PDAL reads. A quick look at a point cloud is a density raster from `r.in.pdal` with `method=n`, which counts the points per cell.
+
+## Part 3: Parallel interpolation
+
+`v.surf.rst` interpolates the ground points into a 1 m DEM. Since GRASS 8.3 the tool has an `nprocs` option that splits the work over several cores; the result is the same, only faster. Time the run with one core and with all the cores of your machine:
+
+```python
+import os
+import time
+
+for n in (1, os.cpu_count()):
+    start = time.time()
+    tools.v_surf_rst(input="ground_2013", elevation="dem_2013_1m", tension=30, smooth=1, npmin=100, nprocs=n)
+    print(f"nprocs={n}: {time.time() - start:.1f} s")
+```
+
+> On an eight core laptop the run takes about 9 s on one core and 2 s on eight. Colab usually gives two cores.
+
+Tools without an `nprocs` option can still be run in parallel by tiling the region and running one process per tile; PyGRASS provides [GridModule](https://grass.osgeo.org/grass85/manuals/libpython/pygrass_modules.html#launching-grass-modules-in-parallel) for that:
+
+```python
+from grass.pygrass.modules.grid import GridModule
+
+grd = GridModule("v.surf.rst", width=250, height=250, overlap=20, processes=4,
+                 input="ground_2013", elevation="dem_2013_1m", tension=30, smooth=1, npmin=100)
+grd.run()
+```
+
+Tiling costs time for patching the tiles back together, and it only works for tools whose result in one cell depends on a neighborhood of bounded size (the `overlap`). A simulation such as `r.sim.water`, where water flows across the whole area, cannot be tiled this way; it has its own `nprocs` option.
+
+## Part 4: Many maps at once
+
+In Topic 4 you compared the DSMs of the June 2015 flight produced by three software packages. Two nested loops produce every pairwise difference. The name of the difference raster is built from the names of the inputs (an `@mapset` suffix is not allowed in a new name, so it is replaced), `r.mapcalc` computes the difference, and `r.colors` gives each result the `differences` color table.
+
+```python
+rasters = ["2015_06_20_pix4d_11GCP_dsm", "2015_06_20_DSM_Trimble_11GCP", "2015_06_20_DSM_agi_11GCP"]
+tools.g_region(raster=rasters[0])
+
+for raster_a in rasters:
+    for raster_b in rasters:
+        if raster_a == raster_b:
+            continue
+        difference = f"diff_{raster_a.replace('@', '_')}_{raster_b.replace('@', '_')}"
+        tools.r_mapcalc(expression=f"{difference} = {raster_a} - {raster_b}")
+        tools.r_colors(map=difference, color="differences")
+        stats = tools.r_univar(map=difference, format="json").json
+        print(f"{difference}: mean {stats['mean']:6.2f} m, stddev {stats['stddev']:5.2f} m")
+```
+
+> Pix4D minus Trimble: mean -0.09 m, stddev 1.20 m. Pix4D minus Agisoft: mean -0.07 m, stddev 1.82 m. Trimble minus Agisoft: mean 0.14 m, stddev 1.12 m. The other three are the same with the sign reversed.
+
+Loops create many maps; `g.remove` with a pattern removes them again:
+
+```python
+tools.g_remove(type="raster", pattern="diff_*", flags="f")
+```
+
+## Part 5: A generated report
+
+A report for a set of maps needs the same things for each map: statistics, a shaded relief, and an image. We list the June 2015 DSMs with `g.list`, loop over them, collect the statistics in a dictionary, compute the relief, and render each map to a PNG with `gj.Map`, which writes the file named in `filename`.
+
+```python
+rasters = [item["fullname"] for item in tools.g_list(type="raster", pattern="2015_06_*", mapset="PERMANENT", format="json").json]
+tools.g_region(raster=rasters[0])
+
+stats = {}
+for raster in rasters:
+    stats[raster] = tools.r_univar(map=raster, format="json").json
+    relief = raster.replace("@", "_") + "_relief"
+    tools.r_relief(input=raster, output=relief)
+    tools.r_colors(map=raster, color="elevation")
+    m = gj.Map(width=400, height=400, use_region=True, filename=raster.replace("@", "_") + ".png")
+    m.d_shade(shade=relief, color=raster)
+    m.d_legend(raster=raster, at=(5, 45, 3, 6), flags="sb", bgcolor="white")
+```
+
+The dictionary of statistics becomes a pandas table, which is easy to inspect, sort, and save as CSV:
+
+```python
+import pandas as pd
+
+table = pd.DataFrame(stats).T[["n", "min", "max", "mean", "stddev"]]
+table.to_csv("dsm_stats.csv")
+```
+
+> The three DSMs with GCPs have means within 0.5 m of each other (111.85 to 112.29 m); the two without GCPs sit 37 m and 71 m too low, which is the bowl and shift you saw in Topic 4.
+
+The HTML report is a template filled in once per map. The images are embedded in the file so that it can be opened anywhere, and the file can be printed to PDF from a browser.
+
+```python
+import base64
+
+template = """<h2>Raster map {name}</h2>
+<table border="1" cellpadding="4">
+<tr><td>Cells</td><td>{n:,}</td></tr>
+<tr><td>Minimum</td><td>{min:.2f} m</td></tr>
+<tr><td>Maximum</td><td>{max:.2f} m</td></tr>
+<tr><td>Mean</td><td>{mean:.2f} m</td></tr>
+<tr><td>Standard deviation</td><td>{stddev:.2f} m</td></tr>
+</table>
+<img src="data:image/png;base64,{image}">
+"""
+
+with open("report.html", "w") as output:
+    output.write("<h1>June 2015 DSMs of Mid Pines</h1>")
+    for raster in sorted(rasters):
+        image = base64.b64encode(Path(raster.replace("@", "_") + ".png").read_bytes()).decode()
+        output.write(template.format(name=raster, image=image, **stats[raster]))
+```
+
+## Part 6: Terrain profiles
+
+`r.profile` samples a raster along a line given by its vertices. We sample the October 2015 UAS DSM and the 2013 lidar DEM (restored from its raster pack) along the same line, which crosses the road and a field, read the output into pandas, and plot both.
+
+```python
+import matplotlib.pyplot as plt
+
+tools.r_unpack(input="mid_pines_lidar2013_dem.pack", flags="o")
+tools.g_region(raster="2015_10_06_DSM_agi_8GCPs@PERMANENT")
+
+coordinates = [637160.446919, 219373.236976, 637105.693795, 219392.416036, 637072.439779, 219400.613538]
+profiles = {}
+for raster in ["2015_10_06_DSM_agi_8GCPs@PERMANENT", "mid_pines_lidar2013_dem"]:
+    text = tools.r_profile(input=raster, coordinates=coordinates, flags="g").text
+    profiles[raster] = pd.read_csv(io.StringIO(text), sep=r"\s+", names=["x", "y", "distance", "elevation"])
+
+fig, ax = plt.subplots(figsize=(9, 3.5))
+for raster, profile in profiles.items():
+    ax.plot(profile["distance"], profile["elevation"], label=raster.split("@")[0])
+ax.set_xlabel("Distance along the line (m)")
+ax.set_ylabel("Elevation (m)")
+ax.legend()
+plt.show()
+```
+
+With the elevations in a numpy array we describe each profile: range, mean, median, spread, and a simple roughness measure, the standard deviation of the differences between consecutive samples.
+
+```python
+import numpy as np
+
+rows = []
+for raster, profile in profiles.items():
+    z = profile["elevation"].to_numpy()
+    rows.append({"raster": raster.split("@")[0], "min": z.min(), "max": z.max(), "mean": z.mean(),
+                 "median": np.median(z), "stddev": z.std(), "roughness": np.std(np.diff(z))})
+profile_stats = pd.DataFrame(rows).set_index("raster")
+profile_stats.to_csv("profile_stats.csv")
+```
+
+> Along this line the UAS DSM and the lidar DEM agree to 3 cm in the mean (112.73 m and 112.69 m); the UAS surface is slightly rougher (0.016 versus 0.014).
+
+## Part 7: From notebook to script
+
+A notebook is for exploring. Once the steps are settled, the same code becomes a script that can be run again on new data from the command line, with parameters instead of edited constants. A GRASS script declares its parameters in a comment header; `gs.parser()` reads them from the command line, and the same header gives the script a dialog in the GUI. This script writes the statistics of all rasters matching a pattern to a CSV file:
+
+```python
+#!/usr/bin/env python3
+
+# %module
+# % description: Writes univariate statistics of the rasters matching a pattern to a CSV file.
+# % keyword: raster
+# % keyword: statistics
+# %end
+# %option
+# % key: pattern
+# % type: string
+# % description: Pattern of raster names (wildcards allowed)
+# % required: yes
+# %end
+# %option G_OPT_F_OUTPUT
+# % key: output
+# % description: Name of the CSV file to write
+# %end
+# %option G_OPT_M_MAPSET
+# % key: mapset
+# % description: Restrict the search to this mapset (default: all mapsets)
+# % required: no
+# %end
+
+import csv
+import sys
+
+import grass.script as gs
+from grass.tools import Tools
+
+
+def main():
+    options, flags = gs.parser()
+    tools = Tools()
+    search = {"mapset": options["mapset"]} if options["mapset"] else {}
+    rasters = [item["fullname"] for item in tools.g_list(type="raster", pattern=options["pattern"], format="json", **search).json]
+    with open(options["output"], "w", newline="") as output:
+        writer = csv.writer(output)
+        writer.writerow(["raster", "n", "min", "max", "mean", "stddev"])
+        for raster in rasters:
+            s = tools.r_univar(map=raster, format="json").json
+            writer.writerow([raster, s["n"], s["min"], s["max"], s["mean"], s["stddev"]])
+    gs.message(f"Wrote statistics of {len(rasters)} rasters to {options['output']}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+`grass <mapset> --exec <command>` runs a command inside a GRASS session without opening a shell or the GUI, so the script runs from any terminal:
+
+```bash
+grass ~/grassdata/Lake_Wheeler_NCspm/python --exec python3 dsm_stats.py --help
+grass ~/grassdata/Lake_Wheeler_NCspm/python --exec python3 dsm_stats.py pattern="2015_06_*" mapset=PERMANENT output=dsm_stats.csv
+```
+
+A script with a parser header can also be installed with `g.extension` and then appears as a tool of its own, with a GUI dialog generated from the header.
+
+## Report
+
+This lab is optional. If you submit it, prepare a short report (2 to 3 pages including figures):
+
+1. **Import loop**: which tiles were imported and which were skipped, the number of merged ground points, and what you would change in the loop to import all returns rather than the ground class.
+2. **Parallel interpolation**: the two run times and the number of cores, why the speedup is less than the number of cores, and which step of the lab could not be sped up by tiling.
+3. **Generated report**: extend the report loop with one more product per raster, for example a viewshed from a point of your choice (`r.viewshed`) or a slope map, and include the result and the lines you changed.
+4. **Profiles**: run the profile step with a line of your own and describe where the UAS DSM and the lidar DEM agree, where they differ, and what the roughness value captures.
+
+## Submission
+
+Upload to Moodle, Lab: Python scripting:
+
+* Your report as a PDF.
+* Your completed notebook (`.ipynb`) or your script (`.py`).
+
+## Grading
+
+* **Import loop**: the loop output is reported and the change for all returns is correct.
+* **Parallel interpolation**: both timings are reported and the limits of parallel runs are explained.
+* **Generated report**: the report contains the added product for every raster and the changed code is shown.
+* **Profiles**: the profile plot and statistics are interpreted in terms of the two surfaces.
+
+---
+
+Part 1 is adapted from the FOSS4G Europe 2015 workshop [How to write a Python GRASS GIS 7 addon](https://github.com/wenzeslaus/python-grass-addon) by Vaclav Petras and Anna Petrasova, updated to the GRASS 8.5 API.
