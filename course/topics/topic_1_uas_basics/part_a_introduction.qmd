@@ -25,6 +25,8 @@ bibliography: references.bib
 
 * [Drone Mapping Software](https://dronemappingsoftware.com/) - Searchable list of software
 * [RPV, UAV, UAS, RPAS...or just drone?](https://onlinelibrary.wiley.com/doi/10.1111/phor.12244) - Editorial by Stuart I, Granshw, 2018 discussing the origin and usage of the language used to describe Drones, UAV, etc [@granshaw_20218]
+* [UAS payloads]({{< var docs.zajkowski_payload_pdf >}}) - Slides by Thomas Zajkowski (NextGen Air Transportation Center, 2017) on sensors and payload selection
+* [Drone buying guide](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/lectures/Workshop_Drone_guide.html) - Workshop slides from 2017; the models are dated, the selection criteria still apply
 
 ### Systems
 

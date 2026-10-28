@@ -29,6 +29,11 @@ activity: "Lecture & Lab"
 
 ## Supplemental materials
 
+### Field references
+
+- [Flight planning]({{< var docs.zajkowski_flight_planning_pdf >}}): slides by Thomas Zajkowski (NextGen Air Transportation Center, 2017) on mission planning, site assessment, and crew roles
+- [Preflight and field checklists]({{< var docs.zajkowski_checklists_pdf >}}): the NGAT checklists for site setup, preflight, flight, and postflight
+
 ### Flight - watch the following if you were unable to attend the flight session
 
 - Fixed wing flight (eBee X): [set up](https://youtu.be/jBgrxB6-pj4), [launch](https://youtu.be/BlsHC1kSrE4) and [landing](https://youtu.be/_9o2zZMSXOw)

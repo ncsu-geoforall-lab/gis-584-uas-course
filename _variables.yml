@@ -8,6 +8,11 @@ course_params:
   moodle_project_proposal_link: "https://moodle-courses2527.wolfware.ncsu.edu/mod/assign/view.php?id=1478415"
   panopto_link: "https://ncsu.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=a33b90fe-d4d1-47bb-9a0f-b1c1016650f3"
 
+docs:
+  zajkowski_payload_pdf: https://storage.googleapis.com/gis-course-data/gis584/docs/Tom_UAS_Payload.pdf
+  zajkowski_flight_planning_pdf: https://storage.googleapis.com/gis-course-data/gis584/docs/Tom_flight_planning.pdf
+  zajkowski_checklists_pdf: https://storage.googleapis.com/gis-course-data/gis584/docs/Tom_checklists.pdf
+
 software:
   grass:
     website: "https://grass.osgeo.org/"
