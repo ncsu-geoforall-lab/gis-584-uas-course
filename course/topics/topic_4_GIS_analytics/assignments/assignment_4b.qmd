@@ -38,7 +38,8 @@ Work through the steps below in the GRASS GUI or command line, or open the noteb
 
 ## Software
 
-- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}} with PDAL support (the standard Windows, macOS, and Ubuntu installers include it). The `r.in.pdal` and `v.in.pdal` tools used below also ship a `pdal` command line tool, used once in Part 1.
+- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}} built with PDAL support, which provides the `r.in.pdal` and `v.in.pdal` tools used below. The macOS installer and the conda-forge package include it. The Windows installer from OSGeo4W and the Ubuntu package do not, and reinstalling does not add it. On Windows, install GRASS from conda-forge instead: install [Miniforge](https://conda-forge.org/download/), open the Miniforge Prompt, and run `mamba create -n grass -c conda-forge grass pdal`, then `mamba activate grass` and `grass`. Check with `r.in.pdal --help` once GRASS starts. The course [Codespace](https://codespaces.new/ncsu-geoforall-lab/gis-584-uas-course) is a second option that needs no install; see the README in the repository.
+- The `pdal` command line tool, used once in Part 1. It comes with the conda-forge package above and with the Codespace, and is a separate package in the OSGeo4W installer.
 - [COPC Viewer](https://viewer.copc.io), a browser point cloud viewer that opens the cloud optimized LAZ straight from its URL, for the first look at the lidar.
 
 ## Part 1: Explore the point clouds
@@ -73,7 +74,7 @@ g.region n=220218 s=218694 e=637795 w=636271 -p
 
 #### If `r.in.pdal` is not available
 
-Some GRASS builds ship without PDAL support. Download the [interpolated DEM and DSM]({{< var data.secref_mid_pines_spm_elev >}}) and unzip it into your working directory. The zip holds four packs; use the two `mid_pines_*` files (the `secref_*` pair covers a different site) and restore them under the names Part 4 uses:
+The Windows installer from OSGeo4W and the Ubuntu package ship without PDAL support, so GRASS reports that `r.in.pdal` is not recognized. If you cannot switch to one of the builds listed under Software, download the [interpolated DEM and DSM]({{< var data.secref_mid_pines_spm_elev >}}) and unzip it into your working directory. The zip holds four packs; use the two `mid_pines_*` files (the `secref_*` pair covers a different site) and restore them under the names Part 4 uses:
 
 ```bash
 r.unpack -o input=mid_pines_lidar2013_dem.pack output=mid_pines_ground_elev
