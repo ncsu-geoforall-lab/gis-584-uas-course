@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lab: Python scripting in GRASS – UAS Mapping and Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-568b1c850ec3aaf20faca8799bbfaa5a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">UAS Mapping and Analytics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/policies.html"> 
+<span class="menu-text">Logistics &amp; Policies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../../course/topics/index.html" aria-current="page"> 
+<span class="menu-text">Topics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/index.html">Topic 5: Advanced Analytics</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/assignments/lab_python_scripting.html">Lab: Python Scripting</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_1_uas_basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic 1: UAS Basics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/part_a_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1A: Introduction to UAS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/part_b_rules_regs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1B: Rules and Regulations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/faa_part_107_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference: FAA Part 107 Guide</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_2_sfm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic 2: Structure from Motion</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/part_a_images_to_3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A: Photogrammetry and SfM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/part_b_img_processing_sfm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B: Imagery Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2C</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/sfm_demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demo: Structure from Motion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_3_flight_planning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic 3: UAS Flight Planning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3A: UAS Flight Planning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3B: Ground Control &amp; Accuracy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/lectures/lecture_3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/lectures/lecture_3b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/assignments/assignment_3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 3A</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GNSS Field Protocol</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_4_GIS_analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic 4: GIS Analytics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4A: Analysis of UAS Data Products</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4B: Point Cloud Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_volumes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Volumes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_dsm_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: DSM Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_5_advanced_analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic 5: Advanced Analytics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5A: UAS and Lidar Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5B: Multitemporal UAS Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 5A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 5B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/lab_python_scripting.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab: Python Scripting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_6_change_detection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic 6: Machine Learning &amp; AI</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/part_a_image_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6A: Image Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/part_b_change_detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6B: Change Detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Slides</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 6A</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/midterm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/midterm/fall2025.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm Rubric</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#part-1-the-python-api" id="toc-part-1-the-python-api" class="nav-link" data-scroll-target="#part-1-the-python-api">Part 1: The Python API</a>
+  <ul>
+  <li><a href="#calling-tools" id="toc-calling-tools" class="nav-link" data-scroll-target="#calling-tools">Calling tools</a></li>
+  <li><a href="#reading-output" id="toc-reading-output" class="nav-link" data-scroll-target="#reading-output">Reading output</a></li>
+  <li><a href="#text-input" id="toc-text-input" class="nav-link" data-scroll-target="#text-input">Text input</a></li>
+  <li><a href="#map-algebra-the-region-and-listing-maps" id="toc-map-algebra-the-region-and-listing-maps" class="nav-link" data-scroll-target="#map-algebra-the-region-and-listing-maps">Map algebra, the region, and listing maps</a></li>
+  <li><a href="#the-classic-grass.script-functions" id="toc-the-classic-grass.script-functions" class="nav-link" data-scroll-target="#the-classic-grass.script-functions">The classic grass.script functions</a></li>
+  <li><a href="#pygrass-individual-vector-features" id="toc-pygrass-individual-vector-features" class="nav-link" data-scroll-target="#pygrass-individual-vector-features">PyGRASS: individual vector features</a></li>
+  </ul></li>
+  <li><a href="#part-2-import-many-point-clouds" id="toc-part-2-import-many-point-clouds" class="nav-link" data-scroll-target="#part-2-import-many-point-clouds">Part 2: Import many point clouds</a></li>
+  <li><a href="#part-3-parallel-interpolation" id="toc-part-3-parallel-interpolation" class="nav-link" data-scroll-target="#part-3-parallel-interpolation">Part 3: Parallel interpolation</a></li>
+  <li><a href="#part-4-many-maps-at-once" id="toc-part-4-many-maps-at-once" class="nav-link" data-scroll-target="#part-4-many-maps-at-once">Part 4: Many maps at once</a></li>
+  <li><a href="#part-5-a-generated-report" id="toc-part-5-a-generated-report" class="nav-link" data-scroll-target="#part-5-a-generated-report">Part 5: A generated report</a></li>
+  <li><a href="#part-6-terrain-profiles" id="toc-part-6-terrain-profiles" class="nav-link" data-scroll-target="#part-6-terrain-profiles">Part 6: Terrain profiles</a></li>
+  <li><a href="#part-7-from-notebook-to-script" id="toc-part-7-from-notebook-to-script" class="nav-link" data-scroll-target="#part-7-from-notebook-to-script">Part 7: From notebook to script</a></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<!-- banner.html -->
+<div class="banner-image">
+    <img src="../../../../includes/images/banner.jpg" alt="Banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/index.html">Topic 5: Advanced Analytics</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/assignments/lab_python_scripting.html">Lab: Python Scripting</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lab: Python scripting in GRASS</h1>
+<p class="subtitle lead">Optional, advanced topic</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_5_advanced_analytics/assignments/python_scripting.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
+<figcaption>Open in Colab</figcaption>
+</figure>
+</div>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>The earlier assignments ran each GRASS tool once, by hand, in the GUI or on the command line. A real project repeats the same steps on many files and many maps: every tile of a lidar delivery, every DSM of a time series, every pair of surfaces to compare. This lab shows how to write those repetitions in Python. You call GRASS tools from Python and read their output, import a folder of lidar tiles with a loop that skips the tiles outside the area of interest, interpolate a DEM on several cores, compute every pairwise difference of a set of DSMs, generate an HTML report with statistics and images, plot terrain profiles with matplotlib, and turn one step into a standalone script with its own command line interface.</p>
+<p>The lab is written for the notebook (badge above), which runs in Google Colab or locally with GRASS 8.5. The same code runs in the <em>Python</em> tab of the GRASS GUI console, one statement at a time, or as a file in the <em>Simple Python Editor</em> (<em>File &gt; Simple Python Editor</em>); Part 7 shows how to run a script from a terminal. The code below is Python unless marked as a shell command.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler GRASS project: Lake_Wheeler_NCspm</a> (EPSG:3358; you have it from the earlier assignments; it holds the 2015 UAS DSMs in <code>PERMANENT</code>)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.las">2013 lidar point cloud of Mid Pines: mid_pines_spm_2013.las</a> (165 MB; you have it from Assignment 4B)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip">2013 lidar DEM and DSM of Mid Pines</a> (zip with GRASS raster packs; you have it from Assignment 5A)</li>
+</ul>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<ul>
+<li><a href="https://grass.osgeo.org/">GRASS</a> 8.5 with PDAL support (the standard installers include it) and its <code>pdal</code> command line tool, used once in Part 2</li>
+<li>The Python packages pandas, numpy, and matplotlib (the notebook installs them; locally, the Python that GRASS uses needs them)</li>
+</ul>
+<p>Start GRASS in the <code>Lake_Wheeler_NCspm</code> project and create a new mapset <code>python</code> for this lab. In the notebook, the mapset is created and the session started for you, and a <code>Tools</code> object named <code>tools</code> is ready:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> grass.script <span class="im">as</span> gs</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> grass.jupyter <span class="im">as</span> gj</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> grass.tools <span class="im">import</span> Tools</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> gj.init(<span class="st">"~/grassdata/Lake_Wheeler_NCspm/python"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>tools <span class="op">=</span> Tools(session<span class="op">=</span>session, overwrite<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The reference for everything in Part 1 is the <a href="https://grass.osgeo.org/grass85/manuals/python_intro.html">GRASS Python introduction</a>; every tool’s manual page shows its command line, <code>grass.tools</code>, and <code>grass.script</code> forms side by side.</p>
+</section>
+<section id="part-1-the-python-api" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-the-python-api">Part 1: The Python API</h2>
+<section id="calling-tools" class="level3">
+<h3 class="anchored" data-anchor-id="calling-tools">Calling tools</h3>
+<p>A GRASS tool is called as a method of the <code>Tools</code> object: the dots in the tool name become underscores, parameters become keyword arguments, and flags go into <code>flags</code>. The command <code>r.neighbors -c input=... output=... method=average size=15</code> becomes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tools.g_region(raster<span class="op">=</span><span class="st">"2015_06_20_DSM_agi_11GCP@PERMANENT"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tools.r_neighbors(<span class="bu">input</span><span class="op">=</span><span class="st">"2015_06_20_DSM_agi_11GCP@PERMANENT"</span>, output<span class="op">=</span><span class="st">"dsm_smoothed"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                  method<span class="op">=</span><span class="st">"average"</span>, size<span class="op">=</span><span class="dv">15</span>, flags<span class="op">=</span><span class="st">"c"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="reading-output" class="level3">
+<h3 class="anchored" data-anchor-id="reading-output">Reading output</h3>
+<p>Tools that print something return a result object. <code>.text</code> holds the raw text, <code>.keyval</code> parses <code>key=value</code> lines (the <code>-g</code> flag of many tools) into a dictionary, and <code>format="json"</code> returns the parsed JSON with the numbers already converted. Use the JSON form in scripts.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tools.g_region(flags<span class="op">=</span><span class="st">"p"</span>).text)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span><span class="st">"dsm_smoothed"</span>, flags<span class="op">=</span><span class="st">"g"</span>).keyval</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stats[<span class="st">"mean"</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span><span class="st">"dsm_smoothed"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>stats[<span class="st">'n'</span>]<span class="sc">:,}</span><span class="ss"> cells, mean </span><span class="sc">{</span>stats[<span class="st">'mean'</span>]<span class="sc">:.2f}</span><span class="ss"> m"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>proj <span class="op">=</span> tools.g_proj(flags<span class="op">=</span><span class="st">"g"</span>).keyval</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>6,536,207 cells, mean 111.31 m</p>
+</blockquote>
+</section>
+<section id="text-input" class="level3">
+<h3 class="anchored" data-anchor-id="text-input">Text input</h3>
+<p>Tools that read from standard input (<code>input=-</code> on the command line) take an <code>io.StringIO</code> object. Here <code>v.in.ascii</code> creates a vector map with two points from a string, and <code>r.what</code> samples the DSM at the same coordinates:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> <span class="st">"""637160.45|219373.24|road</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">637072.44|219400.61|field</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tools.v_in_ascii(<span class="bu">input</span><span class="op">=</span>io.StringIO(points), output<span class="op">=</span><span class="st">"sample_points"</span>, separator<span class="op">=</span><span class="st">"pipe"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                 columns<span class="op">=</span><span class="st">"x double precision, y double precision, label text"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rec <span class="kw">in</span> tools.r_what(<span class="bu">map</span><span class="op">=</span><span class="st">"2015_06_20_DSM_agi_11GCP@PERMANENT"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                        coordinates<span class="op">=</span>(<span class="fl">637160.45</span>, <span class="fl">219373.24</span>, <span class="fl">637072.44</span>, <span class="fl">219400.61</span>), <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(rec[<span class="st">"easting"</span>], rec[<span class="st">"northing"</span>], rec[<span class="st">"2015_06_20_DSM_agi_11GCP@PERMANENT"</span>][<span class="st">"value"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="map-algebra-the-region-and-listing-maps" class="level3">
+<h3 class="anchored" data-anchor-id="map-algebra-the-region-and-listing-maps">Map algebra, the region, and listing maps</h3>
+<p><code>r.mapcalc</code> takes the expression as a string. <code>g.region</code> with <code>format="json"</code> is how a script learns the resolution or the cell area, and <code>g.list</code> with <code>format="json"</code> returns one record per map with its name and mapset.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tools.r_mapcalc(expression<span class="op">=</span><span class="st">"dsm_above_115 = if(2015_06_20_DSM_agi_11GCP@PERMANENT &gt; 115, 2015_06_20_DSM_agi_11GCP@PERMANENT, null())"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>region <span class="op">=</span> tools.g_region(flags<span class="op">=</span><span class="st">"p"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(region[<span class="st">"rows"</span>], region[<span class="st">"cols"</span>], region[<span class="st">"nsres"</span>] <span class="op">*</span> region[<span class="st">"ewres"</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> tools.g_list(<span class="bu">type</span><span class="op">=</span><span class="st">"raster"</span>, pattern<span class="op">=</span><span class="st">"2015_06_*"</span>, mapset<span class="op">=</span><span class="st">"PERMANENT"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(item[<span class="st">"fullname"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-classic-grass.script-functions" class="level3">
+<h3 class="anchored" data-anchor-id="the-classic-grass.script-functions">The classic grass.script functions</h3>
+<p>Older scripts and many examples use <code>grass.script</code>, imported as <code>gs</code>: <code>run_command</code> runs a tool, <code>read_command</code> returns its text, <code>parse_command</code> parses <code>key=value</code> output, and <code>write_command</code> passes text on standard input. The parameters are the same; <code>grass.tools</code> only wraps them with better return values.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gs.run_command(<span class="st">"g.region"</span>, raster<span class="op">=</span><span class="st">"2015_06_20_DSM_agi_11GCP@PERMANENT"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gs.read_command(<span class="st">"g.region"</span>, flags<span class="op">=</span><span class="st">"g"</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gs.parse_command(<span class="st">"r.univar"</span>, <span class="bu">map</span><span class="op">=</span><span class="st">"dsm_smoothed"</span>, flags<span class="op">=</span><span class="st">"g"</span>)[<span class="st">"mean"</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>gs.write_command(<span class="st">"v.in.ascii"</span>, <span class="bu">input</span><span class="op">=</span><span class="st">"-"</span>, stdin<span class="op">=</span><span class="st">"637080|219480|road2"</span>, output<span class="op">=</span><span class="st">"one_point"</span>, separator<span class="op">=</span><span class="st">"pipe"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="pygrass-individual-vector-features" class="level3">
+<h3 class="anchored" data-anchor-id="pygrass-individual-vector-features">PyGRASS: individual vector features</h3>
+<p><code>grass.tools</code> runs whole tools. To create or read individual features, PyGRASS gives Python classes backed by the GRASS C library. This writes two points with an attribute table and reads them back:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> grass.pygrass.vector <span class="im">import</span> VectorTopo</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> grass.pygrass.vector.geometry <span class="im">import</span> Point</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [(<span class="st">"cat"</span>, <span class="st">"INTEGER PRIMARY KEY"</span>), (<span class="st">"name"</span>, <span class="st">"TEXT"</span>)]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> VectorTopo(<span class="st">"places"</span>, mode<span class="op">=</span><span class="st">"w"</span>, tab_cols<span class="op">=</span>cols, overwrite<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> places:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    places.write(Point(<span class="fl">637160.45</span>, <span class="fl">219373.24</span>), cat<span class="op">=</span><span class="dv">1</span>, attrs<span class="op">=</span>(<span class="st">"road"</span>,))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    places.write(Point(<span class="fl">637072.44</span>, <span class="fl">219400.61</span>), cat<span class="op">=</span><span class="dv">2</span>, attrs<span class="op">=</span>(<span class="st">"field"</span>,))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    places.table.conn.commit()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> VectorTopo(<span class="st">"places"</span>, mode<span class="op">=</span><span class="st">"r"</span>) <span class="im">as</span> places:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> point <span class="kw">in</span> places:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(point, point.attrs[<span class="st">"name"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="part-2-import-many-point-clouds" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-import-many-point-clouds">Part 2: Import many point clouds</h2>
+<p>Lidar deliveries come as tiles, dozens or hundreds of files that cover a county. To build a surface for a small study area, a script has to find the tiles that touch the area, import only those, and merge them. We make such a tile set from the 2013 Mid Pines point cloud with the <code>pdal tile</code> command: 500 m tiles aligned to the lower left corner of the data, which <code>r.in.pdal -g</code> reports without importing anything. The one-line <code>n=... s=...</code> output is parsed with <code>gs.parse_key_val</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ext <span class="op">=</span> gs.parse_key_val(tools.r_in_pdal(<span class="bu">input</span><span class="op">=</span><span class="st">"mid_pines_spm_2013.las"</span>, output<span class="op">=</span><span class="st">"dummy"</span>, flags<span class="op">=</span><span class="st">"g"</span>).text,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                       vsep<span class="op">=</span><span class="st">" "</span>, val_type<span class="op">=</span><span class="bu">float</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Shell command (in the notebook, prefixed with <code>!</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdal</span> tile <span class="at">--length</span> 500 <span class="at">--origin_x</span> 636271.27 <span class="at">--origin_y</span> 218694.44 mid_pines_spm_2013.las <span class="st">"tiles/tile_#.las"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This writes 16 tiles. The study area is the field block of Assignment 5A. For every tile the loop reads its extent and compares it with the region; a tile is skipped when it lies entirely north, south, east, or west of the region. The tiles that touch the region are imported with <code>v.in.pdal</code>, limited to the region (<code>-r</code>) and to the ground class (<code>class_filter=2</code>); <code>v.build</code> adds the topology that <code>v.patch</code> needs. The imported tiles are merged and removed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tools.g_region(n<span class="op">=</span><span class="dv">219637</span>, s<span class="op">=</span><span class="dv">219254</span>, w<span class="op">=</span><span class="dv">636730</span>, e<span class="op">=</span><span class="dv">637193</span>, res<span class="op">=</span><span class="dv">1</span>, flags<span class="op">=</span><span class="st">"p"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>region <span class="op">=</span> tools.g_region(flags<span class="op">=</span><span class="st">"g"</span>).keyval</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>imported <span class="op">=</span> []</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> las <span class="kw">in</span> <span class="bu">sorted</span>(Path(<span class="st">"tiles"</span>).glob(<span class="st">"*.las"</span>)):</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    ext <span class="op">=</span> gs.parse_key_val(tools.r_in_pdal(<span class="bu">input</span><span class="op">=</span><span class="bu">str</span>(las), output<span class="op">=</span><span class="st">"dummy"</span>, flags<span class="op">=</span><span class="st">"g"</span>).text,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                           vsep<span class="op">=</span><span class="st">" "</span>, val_type<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ext[<span class="st">"n"</span>] <span class="op">&lt;</span> region[<span class="st">"s"</span>] <span class="kw">or</span> ext[<span class="st">"s"</span>] <span class="op">&gt;</span> region[<span class="st">"n"</span>] <span class="kw">or</span> ext[<span class="st">"e"</span>] <span class="op">&lt;</span> region[<span class="st">"w"</span>] <span class="kw">or</span> ext[<span class="st">"w"</span>] <span class="op">&gt;</span> region[<span class="st">"e"</span>]:</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"skipping </span><span class="sc">{</span>las<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> las.stem</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    tools.v_in_pdal(<span class="bu">input</span><span class="op">=</span><span class="bu">str</span>(las), output<span class="op">=</span>name, flags<span class="op">=</span><span class="st">"r"</span>, class_filter<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    tools.v_build(<span class="bu">map</span><span class="op">=</span>name)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(name, tools.v_info(<span class="bu">map</span><span class="op">=</span>name, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json[<span class="st">"points"</span>])</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    imported.append(name)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>tools.v_patch(<span class="bu">input</span><span class="op">=</span>imported, output<span class="op">=</span><span class="st">"ground_2013"</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>tools.g_remove(<span class="bu">type</span><span class="op">=</span><span class="st">"vector"</span>, name<span class="op">=</span>imported, flags<span class="op">=</span><span class="st">"f"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Two tiles touch the region, <code>tile_0_1</code> with 20,894 ground points and <code>tile_1_1</code> with 200,279; the other 14 are skipped, and the merged map has 221,173 points.</p>
+</blockquote>
+<p>The same loop imports any number of files of any format PDAL reads. A quick look at a point cloud is a density raster from <code>r.in.pdal</code> with <code>method=n</code>, which counts the points per cell.</p>
+</section>
+<section id="part-3-parallel-interpolation" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-parallel-interpolation">Part 3: Parallel interpolation</h2>
+<p><code>v.surf.rst</code> interpolates the ground points into a 1 m DEM. Since GRASS 8.3 the tool has an <code>nprocs</code> option that splits the work over several cores; the result is the same, only faster. Time the run with one core and with all the cores of your machine:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> (<span class="dv">1</span>, os.cpu_count()):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> time.time()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    tools.v_surf_rst(<span class="bu">input</span><span class="op">=</span><span class="st">"ground_2013"</span>, elevation<span class="op">=</span><span class="st">"dem_2013_1m"</span>, tension<span class="op">=</span><span class="dv">30</span>, smooth<span class="op">=</span><span class="dv">1</span>, npmin<span class="op">=</span><span class="dv">100</span>, nprocs<span class="op">=</span>n)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"nprocs=</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>time<span class="sc">.</span>time() <span class="op">-</span> start<span class="sc">:.1f}</span><span class="ss"> s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>On an eight core laptop the run takes about 9 s on one core and 2 s on eight. Colab usually gives two cores.</p>
+</blockquote>
+<p>Tools without an <code>nprocs</code> option can still be run in parallel by tiling the region and running one process per tile; PyGRASS provides <a href="https://grass.osgeo.org/grass85/manuals/libpython/pygrass_modules.html#launching-grass-modules-in-parallel">GridModule</a> for that:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> grass.pygrass.modules.grid <span class="im">import</span> GridModule</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>grd <span class="op">=</span> GridModule(<span class="st">"v.surf.rst"</span>, width<span class="op">=</span><span class="dv">250</span>, height<span class="op">=</span><span class="dv">250</span>, overlap<span class="op">=</span><span class="dv">20</span>, processes<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                 <span class="bu">input</span><span class="op">=</span><span class="st">"ground_2013"</span>, elevation<span class="op">=</span><span class="st">"dem_2013_1m"</span>, tension<span class="op">=</span><span class="dv">30</span>, smooth<span class="op">=</span><span class="dv">1</span>, npmin<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>grd.run()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tiling costs time for patching the tiles back together, and it only works for tools whose result in one cell depends on a neighborhood of bounded size (the <code>overlap</code>). A simulation such as <code>r.sim.water</code>, where water flows across the whole area, cannot be tiled this way; it has its own <code>nprocs</code> option.</p>
+</section>
+<section id="part-4-many-maps-at-once" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-many-maps-at-once">Part 4: Many maps at once</h2>
+<p>In Topic 4 you compared the DSMs of the June 2015 flight produced by three software packages. Two nested loops produce every pairwise difference. The name of the difference raster is built from the names of the inputs (an <code>@mapset</code> suffix is not allowed in a new name, so it is replaced), <code>r.mapcalc</code> computes the difference, and <code>r.colors</code> gives each result the <code>differences</code> color table.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rasters <span class="op">=</span> [<span class="st">"2015_06_20_pix4d_11GCP_dsm"</span>, <span class="st">"2015_06_20_DSM_Trimble_11GCP"</span>, <span class="st">"2015_06_20_DSM_agi_11GCP"</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tools.g_region(raster<span class="op">=</span>rasters[<span class="dv">0</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> raster_a <span class="kw">in</span> rasters:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> raster_b <span class="kw">in</span> rasters:</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> raster_a <span class="op">==</span> raster_b:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        difference <span class="op">=</span> <span class="ss">f"diff_</span><span class="sc">{</span>raster_a<span class="sc">.</span>replace(<span class="st">'@'</span>, <span class="st">'_'</span>)<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>raster_b<span class="sc">.</span>replace(<span class="st">'@'</span>, <span class="st">'_'</span>)<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        tools.r_mapcalc(expression<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>difference<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>raster_a<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>raster_b<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        tools.r_colors(<span class="bu">map</span><span class="op">=</span>difference, color<span class="op">=</span><span class="st">"differences"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        stats <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span>difference, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>difference<span class="sc">}</span><span class="ss">: mean </span><span class="sc">{</span>stats[<span class="st">'mean'</span>]<span class="sc">:6.2f}</span><span class="ss"> m, stddev </span><span class="sc">{</span>stats[<span class="st">'stddev'</span>]<span class="sc">:5.2f}</span><span class="ss"> m"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Pix4D minus Trimble: mean -0.09 m, stddev 1.20 m. Pix4D minus Agisoft: mean -0.07 m, stddev 1.82 m. Trimble minus Agisoft: mean 0.14 m, stddev 1.12 m. The other three are the same with the sign reversed.</p>
+</blockquote>
+<p>Loops create many maps; <code>g.remove</code> with a pattern removes them again:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tools.g_remove(<span class="bu">type</span><span class="op">=</span><span class="st">"raster"</span>, pattern<span class="op">=</span><span class="st">"diff_*"</span>, flags<span class="op">=</span><span class="st">"f"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="part-5-a-generated-report" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-a-generated-report">Part 5: A generated report</h2>
+<p>A report for a set of maps needs the same things for each map: statistics, a shaded relief, and an image. We list the June 2015 DSMs with <code>g.list</code>, loop over them, collect the statistics in a dictionary, compute the relief, and render each map to a PNG with <code>gj.Map</code>, which writes the file named in <code>filename</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rasters <span class="op">=</span> [item[<span class="st">"fullname"</span>] <span class="cf">for</span> item <span class="kw">in</span> tools.g_list(<span class="bu">type</span><span class="op">=</span><span class="st">"raster"</span>, pattern<span class="op">=</span><span class="st">"2015_06_*"</span>, mapset<span class="op">=</span><span class="st">"PERMANENT"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tools.g_region(raster<span class="op">=</span>rasters[<span class="dv">0</span>])</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> {}</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> raster <span class="kw">in</span> rasters:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    stats[raster] <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span>raster, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    relief <span class="op">=</span> raster.replace(<span class="st">"@"</span>, <span class="st">"_"</span>) <span class="op">+</span> <span class="st">"_relief"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    tools.r_relief(<span class="bu">input</span><span class="op">=</span>raster, output<span class="op">=</span>relief)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    tools.r_colors(<span class="bu">map</span><span class="op">=</span>raster, color<span class="op">=</span><span class="st">"elevation"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> gj.Map(width<span class="op">=</span><span class="dv">400</span>, height<span class="op">=</span><span class="dv">400</span>, use_region<span class="op">=</span><span class="va">True</span>, filename<span class="op">=</span>raster.replace(<span class="st">"@"</span>, <span class="st">"_"</span>) <span class="op">+</span> <span class="st">".png"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    m.d_shade(shade<span class="op">=</span>relief, color<span class="op">=</span>raster)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    m.d_legend(raster<span class="op">=</span>raster, at<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">45</span>, <span class="dv">3</span>, <span class="dv">6</span>), flags<span class="op">=</span><span class="st">"sb"</span>, bgcolor<span class="op">=</span><span class="st">"white"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The dictionary of statistics becomes a pandas table, which is easy to inspect, sort, and save as CSV:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> pd.DataFrame(stats).T[[<span class="st">"n"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>, <span class="st">"mean"</span>, <span class="st">"stddev"</span>]]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>table.to_csv(<span class="st">"dsm_stats.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>The three DSMs with GCPs have means within 0.5 m of each other (111.85 to 112.29 m); the two without GCPs sit 37 m and 71 m too low, which is the bowl and shift you saw in Topic 4.</p>
+</blockquote>
+<p>The HTML report is a template filled in once per map. The images are embedded in the file so that it can be opened anywhere, and the file can be printed to PDF from a browser.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> base64</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> <span class="st">"""&lt;h2&gt;Raster map </span><span class="sc">{name}</span><span class="st">&lt;/h2&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="1" cellpadding="4"&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;tr&gt;&lt;td&gt;Cells&lt;/td&gt;&lt;td&gt;</span><span class="sc">{n:,}</span><span class="st">&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;tr&gt;&lt;td&gt;Minimum&lt;/td&gt;&lt;td&gt;</span><span class="sc">{min:.2f}</span><span class="st"> m&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;tr&gt;&lt;td&gt;Maximum&lt;/td&gt;&lt;td&gt;</span><span class="sc">{max:.2f}</span><span class="st"> m&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;tr&gt;&lt;td&gt;Mean&lt;/td&gt;&lt;td&gt;</span><span class="sc">{mean:.2f}</span><span class="st"> m&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;tr&gt;&lt;td&gt;Standard deviation&lt;/td&gt;&lt;td&gt;</span><span class="sc">{stddev:.2f}</span><span class="st"> m&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;img src="data:image/png;base64,</span><span class="sc">{image}</span><span class="st">"&gt;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"report.html"</span>, <span class="st">"w"</span>) <span class="im">as</span> output:</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    output.write(<span class="st">"&lt;h1&gt;June 2015 DSMs of Mid Pines&lt;/h1&gt;"</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> raster <span class="kw">in</span> <span class="bu">sorted</span>(rasters):</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        image <span class="op">=</span> base64.b64encode(Path(raster.replace(<span class="st">"@"</span>, <span class="st">"_"</span>) <span class="op">+</span> <span class="st">".png"</span>).read_bytes()).decode()</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        output.write(template.<span class="bu">format</span>(name<span class="op">=</span>raster, image<span class="op">=</span>image, <span class="op">**</span>stats[raster]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="part-6-terrain-profiles" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-terrain-profiles">Part 6: Terrain profiles</h2>
+<p><code>r.profile</code> samples a raster along a line given by its vertices. We sample the October 2015 UAS DSM and the 2013 lidar DEM (restored from its raster pack) along the same line, which crosses the road and a field, read the output into pandas, and plot both.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>tools.r_unpack(<span class="bu">input</span><span class="op">=</span><span class="st">"mid_pines_lidar2013_dem.pack"</span>, flags<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>tools.g_region(raster<span class="op">=</span><span class="st">"2015_10_06_DSM_agi_8GCPs@PERMANENT"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>coordinates <span class="op">=</span> [<span class="fl">637160.446919</span>, <span class="fl">219373.236976</span>, <span class="fl">637105.693795</span>, <span class="fl">219392.416036</span>, <span class="fl">637072.439779</span>, <span class="fl">219400.613538</span>]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>profiles <span class="op">=</span> {}</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> raster <span class="kw">in</span> [<span class="st">"2015_10_06_DSM_agi_8GCPs@PERMANENT"</span>, <span class="st">"mid_pines_lidar2013_dem"</span>]:</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> tools.r_profile(<span class="bu">input</span><span class="op">=</span>raster, coordinates<span class="op">=</span>coordinates, flags<span class="op">=</span><span class="st">"g"</span>).text</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    profiles[raster] <span class="op">=</span> pd.read_csv(io.StringIO(text), sep<span class="op">=</span><span class="vs">r"</span><span class="dv">\s</span><span class="op">+</span><span class="vs">"</span>, names<span class="op">=</span>[<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"distance"</span>, <span class="st">"elevation"</span>])</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="fl">3.5</span>))</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> raster, profile <span class="kw">in</span> profiles.items():</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    ax.plot(profile[<span class="st">"distance"</span>], profile[<span class="st">"elevation"</span>], label<span class="op">=</span>raster.split(<span class="st">"@"</span>)[<span class="dv">0</span>])</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Distance along the line (m)"</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Elevation (m)"</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>With the elevations in a numpy array we describe each profile: range, mean, median, spread, and a simple roughness measure, the standard deviation of the differences between consecutive samples.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> raster, profile <span class="kw">in</span> profiles.items():</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> profile[<span class="st">"elevation"</span>].to_numpy()</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">"raster"</span>: raster.split(<span class="st">"@"</span>)[<span class="dv">0</span>], <span class="st">"min"</span>: z.<span class="bu">min</span>(), <span class="st">"max"</span>: z.<span class="bu">max</span>(), <span class="st">"mean"</span>: z.mean(),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"median"</span>: np.median(z), <span class="st">"stddev"</span>: z.std(), <span class="st">"roughness"</span>: np.std(np.diff(z))})</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>profile_stats <span class="op">=</span> pd.DataFrame(rows).set_index(<span class="st">"raster"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>profile_stats.to_csv(<span class="st">"profile_stats.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Along this line the UAS DSM and the lidar DEM agree to 3 cm in the mean (112.73 m and 112.69 m); the UAS surface is slightly rougher (0.016 versus 0.014).</p>
+</blockquote>
+</section>
+<section id="part-7-from-notebook-to-script" class="level2">
+<h2 class="anchored" data-anchor-id="part-7-from-notebook-to-script">Part 7: From notebook to script</h2>
+<p>A notebook is for exploring. Once the steps are settled, the same code becomes a script that can be run again on new data from the command line, with parameters instead of edited constants. A GRASS script declares its parameters in a comment header; <code>gs.parser()</code> reads them from the command line, and the same header gives the script a dialog in the GUI. This script writes the statistics of all rasters matching a pattern to a CSV file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># %module</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># % description: Writes univariate statistics of the rasters matching a pattern to a CSV file.</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># % keyword: raster</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># % keyword: statistics</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># %end</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># %option</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># % key: pattern</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># % type: string</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># % description: Pattern of raster names (wildcards allowed)</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># % required: yes</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># %end</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># %option G_OPT_F_OUTPUT</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># % key: output</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># % description: Name of the CSV file to write</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co"># %end</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># %option G_OPT_M_MAPSET</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># % key: mapset</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># % description: Restrict the search to this mapset (default: all mapsets)</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># % required: no</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co"># %end</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> grass.script <span class="im">as</span> gs</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> grass.tools <span class="im">import</span> Tools</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    options, flags <span class="op">=</span> gs.parser()</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    tools <span class="op">=</span> Tools()</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    search <span class="op">=</span> {<span class="st">"mapset"</span>: options[<span class="st">"mapset"</span>]} <span class="cf">if</span> options[<span class="st">"mapset"</span>] <span class="cf">else</span> {}</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    rasters <span class="op">=</span> [item[<span class="st">"fullname"</span>] <span class="cf">for</span> item <span class="kw">in</span> tools.g_list(<span class="bu">type</span><span class="op">=</span><span class="st">"raster"</span>, pattern<span class="op">=</span>options[<span class="st">"pattern"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>, <span class="op">**</span>search).json]</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(options[<span class="st">"output"</span>], <span class="st">"w"</span>, newline<span class="op">=</span><span class="st">""</span>) <span class="im">as</span> output:</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>        writer <span class="op">=</span> csv.writer(output)</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>        writer.writerow([<span class="st">"raster"</span>, <span class="st">"n"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>, <span class="st">"mean"</span>, <span class="st">"stddev"</span>])</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> raster <span class="kw">in</span> rasters:</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>            s <span class="op">=</span> tools.r_univar(<span class="bu">map</span><span class="op">=</span>raster, <span class="bu">format</span><span class="op">=</span><span class="st">"json"</span>).json</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>            writer.writerow([raster, s[<span class="st">"n"</span>], s[<span class="st">"min"</span>], s[<span class="st">"max"</span>], s[<span class="st">"mean"</span>], s[<span class="st">"stddev"</span>]])</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    gs.message(<span class="ss">f"Wrote statistics of </span><span class="sc">{</span><span class="bu">len</span>(rasters)<span class="sc">}</span><span class="ss"> rasters to </span><span class="sc">{</span>options[<span class="st">'output'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>grass &lt;mapset&gt; --exec &lt;command&gt;</code> runs a command inside a GRASS session without opening a shell or the GUI, so the script runs from any terminal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">grass</span> ~/grassdata/Lake_Wheeler_NCspm/python <span class="at">--exec</span> python3 dsm_stats.py <span class="at">--help</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">grass</span> ~/grassdata/Lake_Wheeler_NCspm/python <span class="at">--exec</span> python3 dsm_stats.py pattern=<span class="st">"2015_06_*"</span> mapset=PERMANENT output=dsm_stats.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A script with a parser header can also be installed with <code>g.extension</code> and then appears as a tool of its own, with a GUI dialog generated from the header.</p>
+</section>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>This lab is optional. If you submit it, prepare a short report (2 to 3 pages including figures):</p>
+<ol type="1">
+<li><strong>Import loop</strong>: which tiles were imported and which were skipped, the number of merged ground points, and what you would change in the loop to import all returns rather than the ground class.</li>
+<li><strong>Parallel interpolation</strong>: the two run times and the number of cores, why the speedup is less than the number of cores, and which step of the lab could not be sped up by tiling.</li>
+<li><strong>Generated report</strong>: extend the report loop with one more product per raster, for example a viewshed from a point of your choice (<code>r.viewshed</code>) or a slope map, and include the result and the lines you changed.</li>
+<li><strong>Profiles</strong>: run the profile step with a line of your own and describe where the UAS DSM and the lidar DEM agree, where they differ, and what the roughness value captures.</li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Lab: Python scripting:</p>
+<ul>
+<li>Your report as a PDF.</li>
+<li>Your completed notebook (<code>.ipynb</code>) or your script (<code>.py</code>).</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>Import loop</strong>: the loop output is reported and the change for all returns is correct.</li>
+<li><strong>Parallel interpolation</strong>: both timings are reported and the limits of parallel runs are explained.</li>
+<li><strong>Generated report</strong>: the report contains the added product for every raster and the changed code is shown.</li>
+<li><strong>Profiles</strong>: the profile plot and statistics are interpreted in terms of the two surfaces.</li>
+</ul>
+<hr>
+<p>Part 1 is adapted from the FOSS4G Europe 2015 workshop <a href="https://github.com/wenzeslaus/python-grass-addon">How to write a Python GRASS GIS 7 addon</a> by Vaclav Petras and Anna Petrasova, updated to the GRASS 8.5 API.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478358">
+<p>Moodle</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://help.ncsu.edu/">
+<p>Computing Help</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/">
+<p>MGIST Home</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.ncsu.edu/policies/prr-disclaimer.php">
+<p>Disclaimer</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://oit.ncsu.edu/itaccess">
+<p>Accessibility</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<p>© 2026 GeoForAll Lab CC BY-SA</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ncsu-geoforall-lab/gis-584-uas-course">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/geoforall/">
+<p>GeoForAll Lab</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
