@@ -1,0 +1,276 @@
+---
+title: "Lab: Vegetation indices from UAS imagery"
+subtitle: "Image classification"
+format: html
+toc-depth: 4
+notebook-view:
+  - notebook: vegetation_indices.ipynb
+    title: "Vegetation indices from UAS imagery"
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/vegetation_indices.ipynb
+resources:
+  - vegetation_indices.ipynb
+bibliography: ../references.bib
+---
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/vegetation_indices.ipynb)
+
+## Task
+
+A spectral index combines the bands of an orthomosaic into one number per cell that tracks a property of the surface, mostly the amount of green vegetation. Indices are the first features of the image classification in Assignment 6A, and they are the standard product of multispectral UAS flights in agriculture and vegetation monitoring. In this lab you compute indices from two kinds of imagery: the RGB orthophoto of Lake Wheeler from July 2024, where only the visible bands are available, and a 10-band MicaSense RedEdge-MX Dual orthomosaic from a USGS calibration campaign, where the near infrared and red edge bands allow the standard vegetation indices. The USGS data come in two calibrations of the same flight, so you also see how much the calibration changes an index.
+
+Keep in mind what an index measures. It is a transformation of the bands of one sensor, not a physical quantity: NDVI from a satellite, from a MicaSense camera, and from a different flight date are three different numbers for the same field until the bands are calibrated to reflectance. RGB indices such as VARI separate green vegetation from soil and pavement; they say little about plant condition, which needs the red edge and near infrared.
+
+Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and tables for you. Either way, the report is the same.
+
+## Data
+
+- [Lake Wheeler GRASS project: Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (EPSG:3358; you have it from the earlier assignments)
+- [Lake Wheeler orthophoto, July 17, 2024]({{< var data.lake_wheeler_flight_July_17_2024_orthophoto >}}): WebODM orthomosaic, RGB plus alpha, 7 cm, UTM zone 17N, cloud optimized GeoTIFF (read directly from the URL, no download needed)
+- USGS EROS calibration site, July 18, 2023, MicaSense RedEdge-MX Dual, 10 bands, 4.2 cm, reflectance [@irwin_eccoe_2025]: [manufacturer calibration]({{< var data.eros_eccoe_multispectral_panels_cog >}}) and [empirical line method calibration]({{< var data.eros_eccoe_multispectral_elm_cog >}}), cloud optimized GeoTIFFs (read from the URL). The original data release is public domain (CC0) on [ScienceBase](https://www.sciencebase.gov/catalog/item/682b85aad4be024992ebd701).
+
+The bands of the USGS orthomosaics, in order:
+
+| Band | Center (nm) | Name |
+|---|---|---|
+| 1 | 444 | coastal blue |
+| 2 | 475 | blue |
+| 3 | 531 | green (531) |
+| 4 | 560 | green |
+| 5 | 650 | red (650) |
+| 6 | 668 | red |
+| 7 | 705 | red edge (705) |
+| 8 | 717 | red edge |
+| 9 | 740 | red edge (740) |
+| 10 | 842 | near infrared |
+
+## Software
+
+- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}}; the tools used are `r.import`, `r.mapcalc`, `i.vi`, `r.colors`, `r.univar`, `r.what`, `r.category`, and `r.stats`. No addons.
+
+## Part 1: RGB indices, Lake Wheeler 2024
+
+### Import a block of the orthophoto
+
+Start GRASS in the `Lake_Wheeler_NCspm` project and create a new mapset `indices`. The 2024 orthophoto is stored in UTM zone 17N with four bands: red, green, blue, and an alpha band that marks the area outside the mosaic. Set the region to a 500 by 400 m block of the fields at 0.2 m and let `r.import` read, reproject, and resample only that block. The original resolution is 7 cm; 20 cm is enough for indices and ten times faster (about half a minute).
+
+```bash
+g.region n=219700 s=219300 w=636700 e=637200 res=0.2 -p
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif" output=ortho_2024 extent=region resolution=region
+g.list type=raster pattern="ortho_2024*"
+```
+
+The import creates `ortho_2024.1` to `ortho_2024.4`. Display the block in true color (in the GUI: *Add RGB map layer*, or on the command line):
+
+```bash
+d.rgb red=ortho_2024.1 green=ortho_2024.2 blue=ortho_2024.3
+```
+
+Create five sample points on surfaces you can recognize in the orthophoto: bare soil, crop rows, tree canopy, the paved road, and a grassed waterway.
+
+```bash
+v.in.ascii input=- output=samples separator=pipe columns="x double precision, y double precision, label text" <<EOF
+636733|219551|bare soil
+636853|219634|crop
+637135|219480|trees
+637150|219625|paved road
+637050|219490|grass
+EOF
+```
+
+### Indices from the visible bands
+
+Without a near infrared band, the indices use the contrast between green and red that chlorophyll creates in the visible range. The bands are 8-bit digital numbers, so the expressions use `float()` to avoid integer division.
+
+- VARI, visible atmospherically resistant index [@gitelson_novel_2002]: (G - R) / (G + R - B). The denominator is near zero on very dark cells, so the expression sets zero to null and clamps the result to -1 to 1.
+- GLI, green leaf index: (2G - R - B) / (2G + R + B)
+- ExG, excess green: 2g - r - b, where g, r, and b are the band values divided by their sum
+- BI, brightness: the root mean square of the three bands. Not a vegetation index, but it separates bright soil and pavement from everything else.
+
+```bash
+r.mapcalc "vari = if(ortho_2024.2 + ortho_2024.1 - ortho_2024.3 == 0, null(), max(-1.0, min(1.0, float(ortho_2024.2 - ortho_2024.1) / (ortho_2024.2 + ortho_2024.1 - ortho_2024.3))))"
+r.mapcalc "gli = float(2 * ortho_2024.2 - ortho_2024.1 - ortho_2024.3) / (2 * ortho_2024.2 + ortho_2024.1 + ortho_2024.3)"
+r.mapcalc "exg = (2.0 * ortho_2024.2 - ortho_2024.1 - ortho_2024.3) / (ortho_2024.1 + ortho_2024.2 + ortho_2024.3)"
+r.mapcalc "bi = sqrt((ortho_2024.1 * ortho_2024.1 + ortho_2024.2 * ortho_2024.2 + ortho_2024.3 * ortho_2024.3) / 3.0)"
+r.colors map=vari,gli,exg color=ndvi
+r.colors -e map=bi color=grey
+r.univar -e map=vari
+```
+
+The `ndvi` color table runs from red through white to green between -1 and 1 and suits any normalized index. Display VARI and GLI with the sample points on top.
+
+> VARI in the block has a mean of 0.07 and a standard deviation of 0.13.
+
+### Index values at the sample points
+
+`r.what` reads every raster at the sample points:
+
+```bash
+r.what map=ortho_2024.1,ortho_2024.2,ortho_2024.3,vari,gli,exg,bi points=samples separator=comma
+```
+
+> | Surface | Red | Green | Blue | VARI | GLI | ExG | BI |
+> |---|---|---|---|---|---|---|---|
+> | bare soil | 198 | 177 | 157 | -0.10 | 0.00 | 0.00 | 178 |
+> | crop | 174 | 173 | 139 | 0.00 | 0.05 | 0.07 | 163 |
+> | trees | 52 | 75 | 38 | 0.26 | 0.25 | 0.36 | 57 |
+> | paved road | 176 | 159 | 141 | -0.09 | 0.00 | 0.00 | 159 |
+> | grass | 108 | 134 | 92 | 0.17 | 0.15 | 0.20 | 113 |
+
+VARI and GLI are near zero on soil and pavement and rise with the amount of green leaf. The crop point falls between, because a 20 cm cell in July mixes leaves with the soil between the rows; the brightness separates the shaded canopy from the sunlit field.
+
+### A threshold map
+
+A simple classification by VARI: below 0 is bare soil and pavement, 0 to 0.1 is mixed, above 0.1 is green vegetation. `r.category` labels the classes and `r.report` gives their areas.
+
+```bash
+r.mapcalc "vari_class = if(vari < 0, 1, if(vari < 0.1, 2, 3))"
+r.category map=vari_class separator=":" rules=- <<EOF
+1:bare and built
+2:mixed
+3:green vegetation
+EOF
+r.report map=vari_class units=h,p
+```
+
+> bare and built 6.5 ha (33 percent), mixed 6.5 ha (33 percent), green vegetation 6.8 ha (34 percent) of the 20 ha block.
+
+## Part 2: NIR and red edge indices, USGS EROS 2023
+
+### A second project
+
+The USGS site is in South Dakota, in NAD83(2011) UTM zone 14N. Create a new project `eros_eccoe` from EPSG:6343 (in the GUI startup screen, or `grass -c EPSG:6343 ~/grassdata/eros_eccoe`) and start GRASS in its `PERMANENT` mapset.
+
+### Import the two orthomosaics
+
+Set the region to the 220 by 240 m block of the site used in the lab, with the grass field, crop rows, a gravel road, the asphalt road with the calibration targets, and trees, at 10 cm (the orthomosaics are 4.2 cm), and import both orthomosaics for that region. Each import creates ten rasters, one per band in the order of the table above, and takes a minute or two because the bands are read from the cloud optimized GeoTIFF on the bucket.
+
+```bash
+g.region n=4845640 s=4845400 w=690700 e=690920 res=0.1 -pa
+r.import input="/vsicurl/{{< var data.eros_eccoe_multispectral_elm_cog >}}" output=elm_raw extent=region resolution=region
+r.import input="/vsicurl/{{< var data.eros_eccoe_multispectral_panels_cog >}}" output=panels_raw extent=region resolution=region
+g.list type=raster pattern="elm_raw*"
+r.univar map=elm_raw.10
+```
+
+### Clamp the bands to the physical range
+
+The empirical line fit extrapolates: deep shadow comes out slightly below zero reflectance and the white tarp above one. A ratio of two bands near zero gives huge index values, so clamp every band to 0 to 1 before computing indices, for both products so they stay comparable:
+
+```bash
+for i in 1 2 3 4 5 6 7 8 9 10; do
+  r.mapcalc "elm.$i = max(0, min(1, elm_raw.$i))"
+  r.mapcalc "panels.$i = max(0, min(1, panels_raw.$i))"
+done
+g.remove -f type=raster pattern="*_raw.*"
+```
+
+The reflectance of grass and soil is low, so a composite of the raw values is dark. `i.colors.enhance` stretches the color tables of the three bands before `d.rgb` draws them (in the GUI: *Imagery > Manage image colors > Enhance colors*):
+
+```bash
+i.colors.enhance red=elm.6 green=elm.4 blue=elm.2 strength=95
+d.rgb red=elm.6 green=elm.4 blue=elm.2
+```
+
+### NDVI two ways
+
+`i.vi` computes the common indices from the band rasters; `r.mapcalc` does the same from the formula [@rouse_monitoring_1974]. Compute NDVI both ways and check that they agree.
+
+```bash
+i.vi output=ndvi viname=ndvi red=elm.6 nir=elm.10
+r.mapcalc "ndvi_calc = (elm.10 - elm.6) / (elm.10 + elm.6)"
+r.mapcalc "ndvi_check = abs(ndvi - ndvi_calc)"
+r.univar map=ndvi_check
+```
+
+### Red edge, soil adjusted, and green indices
+
+```bash
+r.mapcalc "ndre = (elm.10 - elm.8) / (elm.10 + elm.8)"
+r.mapcalc "savi = 1.5 * (elm.10 - elm.6) / (elm.10 + elm.6 + 0.5)"
+r.mapcalc "gndvi = (elm.10 - elm.4) / (elm.10 + elm.4)"
+r.colors map=ndvi,ndre,savi,gndvi color=ndvi
+r.univar -e map=ndvi
+r.univar -e map=ndre
+```
+
+NDRE uses the 717 nm red edge band in place of red; it saturates later than NDVI in dense canopies. SAVI [@huete_soil-adjusted_1988] adds the soil adjustment L = 0.5 for sparse vegetation over bright soil. GNDVI uses green in place of red.
+
+> NDVI from `i.vi` and from `r.mapcalc` differ by less than 0.000001 (float rounding). NDVI: mean 0.57, median 0.56, standard deviation 0.20. NDRE: mean 0.29, median 0.27, standard deviation 0.13. SAVI: mean 0.36. GNDVI: mean 0.56. The NDRE values are about half the NDVI values on the same surfaces because the 717 nm band sits on the rise of the red edge, where leaves already reflect more than in the red.
+
+### The distribution of NDVI and a threshold map
+
+The histogram of NDVI (in the GUI: *Raster > Reports and statistics > Histogram*, or `d.histogram`; on the command line `r.stats -cn nsteps=50`) shows how the values group: one broad peak between 0.4 and 0.7 (the grass field, two thirds of the cells), a second group between 0.8 and 1 (the crop rows and trees), a small group between 0 and 0.2 (roads, targets, vehicles), and almost nothing between 0.2 and 0.3. The gap is where the threshold goes. Take cells above 0.3 as green vegetation:
+
+```bash
+r.mapcalc "green = if(ndvi > 0.3, 1, 2)"
+r.category map=green separator=":" rules=- <<EOF
+1:green vegetation
+2:other
+EOF
+r.report map=green units=h,p
+```
+
+> green vegetation 4.92 ha (93 percent), other 0.36 ha (7 percent) of the 5.28 ha block. The other class is the asphalt and gravel roads, the targets and vehicles, and the bare strips between the crop rows.
+
+## Part 3: Calibration and the index
+
+The `panels` orthomosaic is the same flight processed with the manufacturer's workflow: the reflectance panel imaged before the flight and the sun sensor on the aircraft. The `elm` orthomosaic was corrected afterwards with the empirical line method, a per-band linear fit between the imagery and reflectance measured on several targets in the field. @shrestha_absolute_2025 found the manufacturer workflow about 0.015 too low in reflectance and the ELM within 0.005. @poncet_multispectral_2019 compared five calibration methods for a Parrot Sequoia camera and found no method best in every band: the manufacturer method was about as accurate as the best empirical line fit, an empirical fit applied to the finished orthomosaic beat one applied to the raw images, the red edge and NIR bands had the smallest errors, and the indices were most accurate over dense vegetation. @laliberte_multispectral_2011 describe the full workflow, from band alignment through calibration to classification, for a six-band rangeland camera.
+
+```bash
+r.mapcalc "ndvi_panels = (panels.10 - panels.6) / (panels.10 + panels.6)"
+r.mapcalc "ndvi_diff = ndvi - ndvi_panels"
+r.colors map=ndvi_diff rules=- <<EOF
+-0.1 blue
+0 white
+0.1 red
+EOF
+r.univar -e map=ndvi_diff
+```
+
+Read all ten bands of both products at one calibration target to see the offset band by band:
+
+```bash
+r.what map=elm.1,elm.2,elm.3,elm.4,elm.5,elm.6,elm.7,elm.8,elm.9,elm.10 coordinates=690865.4,4845586.9
+r.what map=panels.1,panels.2,panels.3,panels.4,panels.5,panels.6,panels.7,panels.8,panels.9,panels.10 coordinates=690865.4,4845586.9
+```
+
+> NDVI mean 0.587 with the manufacturer calibration and 0.573 with the ELM; the difference (ELM minus manufacturer) has mean -0.014, median -0.012, standard deviation 0.030. At the grey tarp the ELM product reads 0.33 to 0.36 in every band and the manufacturer product 0.30 to 0.32, so the ELM added 0.02 (NIR) to 0.06 (coastal blue) of reflectance. An offset added to both bands of a ratio lowers the ratio, which is why the ELM NDVI is lower by 0.01 to 0.03 over the whole field; the tree shadows and field edges go the other way because the manufacturer product has reflectance below zero there, clamped to zero. The threshold map is the same with either product; the offset matters when reflectance values or indices are compared between flights, sensors, or published thresholds.
+
+## Part 4: Reading the indices
+
+| Index | Bands | Range | Responds to |
+|---|---|---|---|
+| VARI, GLI, ExG | RGB | about -1 to 1 | Green leaf cover; no information on plant condition |
+| NDVI | NIR, red | -1 to 1; crops and forest 0.2 to 0.8 | Green vegetation; saturates in dense canopies |
+| NDRE | NIR, red edge | -1 to 1 | Chlorophyll in dense canopies, late season crops |
+| SAVI | NIR, red | about -1.5 to 1.5 | Sparse vegetation over bright soil |
+| GNDVI | NIR, green | -1 to 1 | Chlorophyll; less saturation than NDVI |
+
+Compare VARI on Lake Wheeler with NDVI on the USGS site on the same kinds of surface: both are near zero on bare soil and pavement, but NDVI reaches 0.8 on grass where VARI stays below 0.3, because the near infrared reflectance of leaves is five to ten times the green. That contrast is what the RGB camera cannot see.
+
+## Report
+
+Prepare a report (2 to 3 pages including figures):
+
+1. **RGB indices**: the VARI or GLI map of the Lake Wheeler block, the index values at the five sample points, and the areas of the three VARI classes, with a paragraph on which surfaces the RGB indices separate and where they fail.
+2. **NIR and red edge indices**: the NDVI and NDRE maps with their statistics, the NDVI histogram, and the area above the threshold, with a paragraph on where NDVI and NDRE differ and why.
+3. **Calibration**: the statistics of the NDVI difference between the two calibrations and the two spectra of the target, with a sentence on whether the difference changes the threshold map and when it would matter.
+4. **Choosing an index**: which index you would use for the Lake Wheeler classification in Assignment 6A and what a multispectral camera would add.
+
+## Submission
+
+Upload to Moodle, Lab: Vegetation indices:
+
+* Your report as a PDF.
+* Optional: your completed notebook (`.ipynb`) if you worked in Colab.
+
+## Grading
+
+* **RGB indices**: the map, the sample values, and the class areas are reported and interpreted by surface type.
+* **NIR and red edge indices**: the four indices are computed on the reflectance data and NDVI and NDRE are compared.
+* **Calibration**: the two products are compared and the effect on the threshold is judged.
+* **Choosing an index**: the choice is argued from the lab results.
+
+---
+
+This lab is adapted from the multispectral imagery lab of the earlier course, which followed chapter 17 of @frazier_fundamentals_2021. The USGS data are from @irwin_eccoe_2025 (public domain).

@@ -12,6 +12,7 @@ activity: Lecture
 
 - Understand the principles of image classification in UAS mapping  
 - Differentiate between **supervised**, **unsupervised** learning methods
+- Derive spectral indices from RGB and multispectral UAS imagery and read them as features
 - Learn how to apply classification workflows in **GRASS**  
 - Interpret and validate classification results using **accuracy assessment metrics**  
 - Explore real-world applications of UAS classification for **environmental monitoring**
@@ -24,7 +25,12 @@ activity: Lecture
 
 - [Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion](https://www.mdpi.com/2072-4292/14/7/1718)
 - Jensen, J.R. Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed.; Prentice Hall Press: Upper Saddle River, NJ, USA, 2015.
+- [i.vi](https://grass.osgeo.org/grass85/manuals/i.vi.html) manual page: the vegetation indices GRASS computes and their formulas
+- [UAS for Wetland Mapping and Hydrological Modeling](https://doi.org/10.3390/rs11171997), Jeziorska, Remote Sensing 11(17), 2019: a review of UAS sensors, including the multispectral cameras compared in the lecture
+- [Absolute Radiometric Calibration Evaluation of UAS Headwall and MicaSense Sensors](https://doi.org/10.3390/rs17223738), Shrestha et al., Remote Sensing 17(22), 2025: the USGS calibration campaign whose data the lab uses
+- [Guidelines for calibration of uncrewed aircraft systems imagery](https://pubs.usgs.gov/publication/ofr20231033/full), Sampath et al., USGS Open-File Report 2023-1033
 
 ## Assignment & Homework
 
-[Assignment 6A: Image Classification](assignments/assignment_6a.qmd)
+- [Lab: Vegetation indices](assignments/lab_vegetation_indices.qmd): spectral indices from the 2024 Lake Wheeler orthophoto and from a 10-band multispectral orthomosaic; do it before the assignment
+- [Assignment 6A: Image Classification](assignments/assignment_6a.qmd)
