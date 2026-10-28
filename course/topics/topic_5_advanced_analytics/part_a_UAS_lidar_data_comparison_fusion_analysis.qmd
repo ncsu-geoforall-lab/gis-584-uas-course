@@ -21,9 +21,10 @@ activity: Lecture
 - [Fusion of multi-scale DEMs using a regularized super-resolution method](https://doi.org/10.1080/13658816.2015.1063639), Yue, Shen, Yuan, and Zhang, International Journal of Geographical Information Science 29(12), 2015
 - [Fusion of high-resolution DEMs for water flow modeling](https://opengeospatialdata.springeropen.com/articles/10.1186/s40965-017-0019-2), Petrasova, Mitasova, Petras, and Jeziorska, Open Geospatial Data, Software and Standards 2:6, 2017
 - [r.patch.smooth](https://grass.osgeo.org/grass-stable/manuals/addons/r.patch.smooth.html) and [r.sim.water](https://grass.osgeo.org/grass-stable/manuals/r.sim.water.html) manual pages
+- [GRASS Python introduction](https://grass.osgeo.org/grass85/manuals/python_intro.html) and the [migration guide to the grass.tools API](https://grass.osgeo.org/grass85/manuals/migration_to_grass_tools_python_api.html), for the optional scripting lab
 
 ## Assignment & Homework
 
 [Assignment 5A: Fusion of UAS and lidar data](assignments/assignment_5a.qmd)
 
-- Optional, advanced topic: [Python scripting for UAS and lidar analysis in GRASS](https://ncsu-geoforall-lab.github.io/uav-lidar-analytics-course/assignments/python.html)
+- Optional, advanced topic: [Lab: Python scripting in GRASS](assignments/lab_python_scripting.qmd)

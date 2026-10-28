@@ -18,3 +18,4 @@ order: 5
 
 - [Assignment 5A: Fusion of UAS and lidar data](assignments/assignment_5a.qmd)
 - [Assignment 5B: Analysis of multitemporal UAS data and its applications](assignments/assignment_5b.qmd)
+- [Lab: Python scripting in GRASS](assignments/lab_python_scripting.qmd) (optional)
