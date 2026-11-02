@@ -1,74 +1,82 @@
 ---
 topic: "Topic 5B: Advanced Analytics"
-subtitle: "Analysis of multitemporal UAS data and its applications"
 title: "Assignment 5B"
-assignment-due-date: 11/18/2026
-author: 
-    - Anna Petrasova
-    - Corey White
+subtitle: "Analysis of multitemporal UAS data"
 date: 10/28/2026
-format: html
-toc-depth: 4
+assignment-due-date: 11/18/2026
 activity: Lab
+format:
+    html:
+        toc: true
+        toc-depth: 3
+notebook-view:
+  - notebook: multitemporal_analysis.ipynb
+    title: "Analysis of multitemporal UAS data in GRASS"
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_5_advanced_analytics/assignments/multitemporal_analysis.ipynb
+resources:
+  - multitemporal_analysis.ipynb
 ---
 
-## Outline
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_5_advanced_analytics/assignments/multitemporal_analysis.ipynb)
 
-- Introduction to GRASS temporal framework
-- Analyze the time series of UAS DEMs
-- Estimate crop biomas and its temporal change
-- Evaluate impact of vegetation change on viewshed extent
-- Estimate volume of eroded and deposited soil
- 
+## Task
+
+In this assignment you analyze the seven UAS DSMs of Mid Pines flown between March and October 2015 as a time series. You register them as a space-time raster dataset in the GRASS temporal framework, find the area covered by every survey, and aggregate the series by month. You derive the core surface, compare it with the lidar bare ground to find the two distorted surveys, and recompute the core without them. You then apply the series: crop height and biomass from map algebra on the series, a webcam viewshed on the lidar DSM and on the envelope DSM, and the volume of a building.
+
+Keep in mind that the seven flights were processed with different numbers of GCPs, from two to eleven. The surveys with few GCPs are the ones the core surface exposes. Everything in Parts 2 to 4 is computed inside the intersection of the surveys and under a mask, so the statistics refer to that area only.
+
+Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. The Timeline Tool and the Temporal Plot Tool in Part 1 are GUI only; the notebook plots the same things. Either way, the report is the same.
 
 ## Data
 
-You should have everything already for Mid Pines area, get anything missing from the [Course logistics web page](/course/policies.qmd):
+- [Lake Wheeler GRASS project: Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (EPSG:3358; you have it from the earlier assignments; the seven 2015 DSMs are in `PERMANENT`)
+- [2013 lidar DEM and DSM of Mid Pines]({{< var data.secref_mid_pines_spm_elev >}}) (zip with GRASS raster packs; you have it from Assignments 4B and 5A, restore with `r.unpack`)
+- [Fields raster: fields.pack]({{< var data.fields_pack_url >}}) (GRASS raster pack of the crop fields, 1 inside the fields, null elsewhere)
+- [Series file: series.txt]({{< var data.uas_dsm_series_txt_url >}}) (the DSM names and their dates, for `t.register`)
+- [Color rules for difference maps: dif_lidar_uav.txt]({{< var data.dif_lidar_uav_colors_url >}}) (the same file as in Assignment 5A)
 
-- GRASS Project: [LakeWheeler_NCspm]({{< var data.lake_wheeler_url >}})
-- 2013 lidar interpolated DEM and DSM: [download]({{< var data.secref_mid_pines_spm_elev >}}),
-        use `r.unpack`.
-- [Fields polygon as packed raster](./resources/fields.pack) use `r.unpack` in your mapset to import it
-- [Text file](./resources/series.txt) with timeseries
+## Software
 
-## Tools
-
-- GRASS {{< var software.grass.version >}}
-- GRASS Addon: [r.patch.smooth](https://grass.osgeo.org/grass84/manuals/addons/r.patch.smooth.html)
-
-Install [r.patch.smooth](https://grass.osgeo.org/grass84/manuals/addons/r.patch.smooth.html) with the following command:
+- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}}
+- The addon [r.patch.smooth](https://grass.osgeo.org/grass85/manuals/addons/r.patch.smooth.html), which you installed in Assignment 5A; if not:
 
 ```bash
-g.extension r.patch.smooth
+g.extension extension=r.patch.smooth
 ```
 
-## Analyze time series of UAS DSMs
+## Part 1: Register the time series
 
-### Create a new mapset and copy the UAS DSMs
+### Create a mapset and copy the DSMs
 
-Start GRASS in Lake_Wheeler_NCspm project and create a new mapset. Open GRASS in this mapset
+Start GRASS in the `Lake_Wheeler_NCspm` project, create a new mapset `multitemporal`, and switch to it. Put the data files in your working directory.
+
+```bash
+g.mapset -c mapset=multitemporal
+```
+
+The temporal database lives in the mapset, and maps from other mapsets cannot be registered in it, so copy the seven DSMs from `PERMANENT`:
 
 ```bash
 g.copy raster=2015_03_18_DSM_agi_6GCP@PERMANENT,2015_03_18_DSM_agi_6GCP
 g.copy raster=2015_06_20_DSM_agi_11GCP@PERMANENT,2015_06_20_DSM_agi_11GCP
-g.copy raster=2015_07_27_DSM_agi_2GCP_4ID@PERMANENT,2015_07_27_DSM_agi_2GCP_4ID 
-g.copy raster=2015_08_14_DSM_agi_3GCP_4ID@PERMANENT,2015_08_14_DSM_agi_3GCP_4ID 
+g.copy raster=2015_07_27_DSM_agi_2GCP_4ID@PERMANENT,2015_07_27_DSM_agi_2GCP_4ID
+g.copy raster=2015_08_14_DSM_agi_3GCP_4ID@PERMANENT,2015_08_14_DSM_agi_3GCP_4ID
 g.copy raster=2015_09_04_DSM_agi_6GCP@PERMANENT,2015_09_04_DSM_agi_6GCP
 g.copy raster=2015_09_21_DSM_agi_6GCP@PERMANENT,2015_09_21_DSM_agi_6GCP
 g.copy raster=2015_10_06_DSM_agi_8GCPs@PERMANENT,2015_10_06_DSM_agi_8GCPs
 ```
 
-### Register the time series in temporal framework
+The names record the flight date and the number of GCPs used in processing.
 
-First, create a space-time raster dataset (STRDS) with absolute temporal type:
+### Create and register the dataset
+
+Create a space-time raster dataset (STRDS) with absolute time:
 
 ```bash
 t.create output=uas_dsm type=strds temporaltype=absolute semantictype=mean title="UAS_DSM" description="UAS-based 2015 DSMs processed by Agisoft"
 ```
 
-Now, create a text file named "series.txt" with the following content in your working directory, or [download the prepared file](./resources/series.txt) into your working directory.
-
-These are the DSMs with their time stamps:
+The file `series.txt` lists each DSM with its date, one per line, separated by a pipe:
 
 ```
 2015_03_18_DSM_agi_6GCP|2015-03-18
@@ -80,209 +88,179 @@ These are the DSMs with their time stamps:
 2015_10_06_DSM_agi_8GCPs|2015-10-06
 ```
 
-Register the DSMs into the created STRDS uas_dsm:
+Register the DSMs in the dataset and check the result:
 
 ```bash
 t.register input=uas_dsm file=series.txt
-```
-
-Now check it was registered correctly:
-
-```bash
 t.info input=uas_dsm
 ```
 
-See different ways we can list raster maps registered in the dataset:
+`t.rast.list` lists the registered maps; the `where` clause is SQL on the time columns, and `columns` can include statistics of each map:
 
 ```bash
 t.rast.list input=uas_dsm columns=name,start_time where="start_time >= '2015-08-01'"
 t.rast.list input=uas_dsm columns=name,start_time,min,max
 ```
 
-Verify the listed raster maps are actually in the database:
+The maps are still ordinary rasters in the mapset, which `g.list type=raster pattern="2015*"` or the **Data** tab in the Layer Manager shows. Registration only records their time in the database.
 
-```bash
-g.list type=raster pattern="2015*"
-```
+### Look at the series
 
-You can also use the **Data** tab in Layer Manager.
-
-We can set common color table to all maps in the dataset:
+Set one color table for all maps in the dataset and display two of them:
 
 ```bash
 t.rast.colors input=uas_dsm color=elevation
-d.rast 2015_06_20_DSM_agi_11GCP
-d.rast 2015_10_06_DSM_agi_8GCPs
+d.rast map=2015_06_20_DSM_agi_11GCP
+d.rast map=2015_10_06_DSM_agi_8GCPs
 ```
 
-To get better idea about the dates and spatial extents, we can use *Timeline tool*
-accessible from *Temporal - GUI tools - Timeline tool*. 
+The **Timeline Tool** (*Temporal > GUI tools > Timeline tool*) shows when each map was taken. Select the dataset `uas_dsm`, click on the points, and check *3D plot of spatio-temporal extents* to see that the flights covered different areas.
 
-Select dataset `uas_dsm`, you can click on the drawn data points, and then also check *3D plot of spatio-temporal extents*. Stretch the window as needed.
+The **Temporal Plot Tool** (*Temporal > GUI tools > Temporal plot tool*) plots the elevation of every map at one location. Select the dataset `uas_dsm`, click the arrow next to the X and Y coordinates field, click a point in the Map Display, and press *Draw*. Try a point on the road, in a field, and on the building.
 
-We can plot the elevation timeseries using *Temporal Plot Tool*. 
+## Part 2: Intersection and aggregation
 
-1. Open the tool from *Temporal - GUI tools - Temporal plot tool*. 
-2. Select dataset `uas_dsm` and click on the arrow next to the X and Y coordinates field.
-3. Then click somewhere on the Map Display and press *Draw*. 
+### Area mapped by all surveys
 
-You should see a plot of elevation values. Try different places (road, field, building).
-
-### Find the area mapped by all surveys
-
-We will find area mapped by all surveys. First we will set the extent to the maximum bounding box, use t.info to get the values:
+Per-cell statistics over the series are only meaningful where every survey has data. Set the region to the union of the extents, which `t.info -g` reports, then count the maps with data in each cell with `t.rast.series`. With the `-n` flag the count is null wherever any map is null, which gives the intersection:
 
 ```bash
 t.info input=uas_dsm -g
-g.region n=219942 s=219037 e=637439 w=636456 -pa res=0.3
-```
-
-Next, we use t.rast.series to derive raster representing the number of
-overlapping DSMs. By using [-n flag](https://grass.osgeo.org/grass84/manuals/t.rast.series.html)
-we create masking raster representing the intersection of all DSMs, and then we change computational
-region to the extent of its non-null bounding box:
-
-```bash
+g.region n=219942 s=219037 e=637439 w=636456 res=0.3 -pa
 t.rast.series input=uas_dsm method=count output=count
 t.rast.series input=uas_dsm method=count output=intersection -n
-d.rast count
-d.rast intersection
-g.region zoom=intersection -p
-r.mask raster=intersection
+d.rast map=count
+d.rast map=intersection
 ```
 
-:::{.callout-tip title="Question"}
-How large is the area? (use r.report)
-:::
-
-### Temporal aggregation
-
-Our space-time raster dataset contains two DSMs from September:
+Shrink the region to the intersection and set it as the mask for the rest of Parts 2 to 4:
 
 ```bash
-t.rast.list input=uas_dsm columns=name,start_time
+g.region zoom=intersection -p
+r.mask raster=intersection
+r.report -n map=intersection units=h
 ```
 
-We will temporally aggregate the dataset by month by averaging all DSMs within each month
-(in this case averaging the September DSMs):
+> 18.65 hectares
+
+Every raster command from here on reads and writes only inside the mask, until `r.mask -r` at the end of Part 4.
+
+### Monthly aggregation
+
+The dataset has two surveys in September. `t.rast.aggregate` combines the maps that fall in each interval of a chosen granularity into one map, here the monthly average, and registers the results as a new dataset with interval time stamps:
 
 ```bash
 t.rast.aggregate input=uas_dsm output=uas_dsm_aggr basename=uas_dsm_aggr suffix=time granularity="1 months" method=average
-t.rast.list input=uas_dsm_aggr columns=name,start_time
+t.rast.list input=uas_dsm_aggr columns=name,start_time,end_time
 ```
 
-### Minimum elevation (core)
+Six monthly maps result; only the September one averages two surveys.
 
-You should already have [lidar DSM and DEMs]({{< var data.secref_mid_pines_spm_elev >}}) if you haven't done already, unzip it in your working directory and unpack:
+## Part 3: Core surface and distorted surveys
+
+### Minimum elevation
+
+Restore the lidar surfaces from Assignment 5A, then compute the core surface, the minimum elevation of the series at each cell, and subtract it from the lidar bare ground:
 
 ```bash
 r.unpack -o input=mid_pines_lidar2013_dsm.pack
 r.unpack -o input=mid_pines_lidar2013_dem.pack
-```
-
-:::{.callout-tip title="Question"}
-Find the minimum elevation (core) - how close it is to lidar bare ground?
-:::
-
-```bash
 t.rast.series input=uas_dsm method=minimum output=minimum
 r.mapcalc "diff_lidar_uas = mid_pines_lidar2013_dem - minimum"
 r.colors map=diff_lidar_uas color=differences
-d.rast diff_lidar_uas
+r.univar map=diff_lidar_uas
+d.rast map=diff_lidar_uas
 ```
 
-Parts of the minimum raster are significantly below lidar ground, find out which DSM is causing it:
+> mean: 0.87, minimum: -4.35, maximum: 15.34
+
+A DSM cannot lie below the ground it was flown over, so a core surface well below the lidar DEM points at a distorted survey. Over much of the area the core is close to the lidar ground, but in places it lies meters below it.
+
+### Which survey is responsible
+
+`method=min_raster` writes, for each cell, the index of the map that supplied the minimum, counted from 0 in the order of the time stamps:
 
 ```bash
 t.rast.series input=uas_dsm method=min_raster output=min_raster
-d.rast min_raster
-```
-
-Display resulting raster `min_raster` and query it 
-(select the layer in Layer Manager and use Query tool in Map Display)
-or use `r.what`:
-
-```bash
+d.rast map=min_raster
 r.what map=min_raster coordinates=636879,219432
 r.what map=min_raster coordinates=637232,219651
+r.report -n map=min_raster units=p nsteps=7
 ```
 
-Value 2 represents third (numbering starts with 0) raster in our time series.
-Since there is some problem with the third and fourth raster (`2015_07_27_DSM_agi_2GCP_4ID, 2015_08_14_DSM_agi_3GCP_4ID`), we will exclude them from the analysis:
+> 636879|219432||2
+> 637232|219651||3
+
+Index 2 is the third map, the July 27 survey, and index 3 the fourth, August 14. Together they supply the minimum in two thirds of the cells. These two flights were processed with only two and three GCPs.
+
+### Recompute the core without them
+
+Exclude the two surveys with a `where` clause on the time stamps and recompute the core and the difference:
 
 ```bash
-t.rast.series input=uas_dsm method=minimum output=minimum where="start_time < '2015-07-01' or start_time > '2015-09-01'" --o
-r.mapcalc "diff_lidar_uas = mid_pines_lidar2013_dem - minimum" --o
-r.colors map=diff_lidar_uas color=differences
-```
-
-Apply now the color table [dif_lidar_uav.txt](./resources/dif_lidar.uav.txt) we used for highlighting differences in the last assignment:
-
-```text
- -40 red
- -1 orange
- -0.5 yellow
- -0.1 grey
- 0 white
- 0.1 grey
- 0.5 cyan
- 1 aqua
- 40 blue
-```
-
-```bash
+t.rast.series input=uas_dsm method=minimum output=minimum where="start_time < '2015-07-01' or start_time > '2015-09-01'" --overwrite
+r.mapcalc "diff_lidar_uas = mid_pines_lidar2013_dem - minimum" --overwrite
+r.univar map=diff_lidar_uas
 r.colors map=diff_lidar_uas rules=dif_lidar_uav.txt
+d.rast map=diff_lidar_uas
 ```
 
+> mean: 0.08
 
-:::{.callout-tip title="Question"}
-Explain what you see.
-:::
+The mean difference drops from 0.87 m to 0.08 m. The color rules file is the one from Assignment 5A: grey within 10 cm, color beyond. What remains colored, and why?
 
-Let's look now which temporal datasets we have:
+`t.list` shows the datasets in the mapset:
 
 ```bash
 t.list columns=id,number_of_maps,start_time
 ```
 
-## Estimate crop biomass
+## Part 4: Crop height and biomass
 
-We will use raster algebra on the time series to compute crop biomass.
-First we need to make sure that we take into account only fields (not forests).
-
-You can use get the [packed raster representation of fields](./resources/fields.pack) (link is at the top).
-
-We assume crop is anything higher than 0.3 and lower than 2 m (to exclude the building for example):
+Map algebra on a series applies one expression to every map and registers the results as a new dataset. We compute the height of the UAS surface above the lidar bare ground, keep it only inside the crop fields and between 0.3 and 2 m, to drop the soil noise below and the building and trees above, and set the rest to null. The `fields` raster comes from the pack:
 
 ```bash
-r.unpack -o fields.pack
+r.unpack -o input=fields.pack
 t.rast.mapcalc inputs=uas_dsm expression="if (fields, if(uas_dsm - mid_pines_lidar2013_dem > 0.3 && uas_dsm - mid_pines_lidar2013_dem < 2, uas_dsm - mid_pines_lidar2013_dem, null()))" output=veg_uas_lidar basename=veg_uas_lidar
+t.rast.list input=veg_uas_lidar columns=name,start_time
+```
+
+In the expression, `uas_dsm` stands for each registered map in turn. The outputs are named `veg_uas_lidar_1` to `veg_uas_lidar_7`, numbered from 1 in time order, so `veg_uas_lidar_2` is June 20. Summarize the crop height per survey, leaving out the two distorted ones:
+
+```bash
 t.rast.univar input=veg_uas_lidar where="start_time < '2015-07-01' or start_time > '2015-09-01'"
-d.rast veg_uas_lidar_2
-r.report -n map=veg_uas_lidar_2 units=me nsteps=1
+```
+
+The June survey has by far the most cells with crop and a mean height of 0.8 m. Look at it and compute its crop area and volume:
+
+```bash
+d.rast map=veg_uas_lidar_2
+r.report -n map=veg_uas_lidar_2 units=me
 r.univar map=veg_uas_lidar_2
 ```
 
-Use Python shell (*tab in Layer Manager*) to compute the biomass volume for June (*paste each line into Python shell and press Enter*):
+The volume of crop above ground is the sum of the heights times the cell area. In the **Python** tab of the Layer Manager, run:
 
 ```python
-sum = gs.parse_command('r.univar', map='veg_uas_lidar_2', flags='g')['sum']
-float(sum) * gs.region()['nsres'] * gs.region()['ewres']
+import grass.script as gs
+stats = gs.parse_command("r.univar", map="veg_uas_lidar_2", flags="g")
+region = gs.region()
+float(stats["sum"]) * region["nsres"] * region["ewres"]
 ```
 
-Remove the mask before we proceed in further analysis:
+> 49,605 cubic meters over 62,232 square meters of crop
+
+Remove the mask before Part 5, which works on the whole study area:
 
 ```bash
 r.mask -r
 ```
 
-## Evaluate impact of vegetation change on viewshed extent
+## Part 5: Viewsheds and the envelope DSM
 
-We would like to set up a webcam to monitor this area.
-First we will compute a **cumulative viewshed** of this area
-to find places from which we will have likely good visibility.
-We pick several places distributed all over the area from which we compute viewsheds
-on a lidar DSM with observer height of 3 meters (webcam height).
+### Cumulative viewshed
+
+We want to place a webcam that watches the fields. First compute a cumulative viewshed from six candidate points on the lidar DSM, with the camera 3 m above the ground, at 1 m resolution:
 
 ```bash
 g.region raster=mid_pines_lidar2013_dsm res=1 -pa
@@ -294,72 +272,91 @@ r.viewshed input=mid_pines_lidar2013_dsm output=vshed_5 coordinates=636665,21952
 r.viewshed input=mid_pines_lidar2013_dsm output=vshed_6 coordinates=636863,219503 observer_elevation=3
 ```
 
-Now we compute the cumulative viewshed as the number of places (from the coordinates above)
-from which a cell is visible. This gives us better idea which places are visually more prominent
-and therefore likely to have good view of the fields.
+Each viewshed holds the vertical angle to the visible cells and null elsewhere. Count, for every cell, from how many of the six points it is visible:
 
 ```bash
 r.series input=vshed_1,vshed_2,vshed_3,vshed_4,vshed_5,vshed_6 output=cum_viewshed method=count
-d.rast cum_viewshed
+d.rast map=cum_viewshed
 ```
 
-Display the result with legend to see which places are potentially good for placing a webcam.
+Display the result with a legend. Cells visible from many points are the prominent places; a camera there would see much of the area. About half of the area is visible from none of the six points.
 
-Since we need the webcam to capture the field during entire year we can run [t.rast.series](https://grass.osgeo.org/grass84/manuals/t.rast.series.html) with method=maximum on the time series of UAS DSMs to derive the DSM series envelope surface and use it to analyze the viewshed. Of course, this assumes that the crops will be the same the following year. We exclude the problematic DSMs as we did while deriving the core surface:
+### Envelope DSM
+
+The camera has to see the fields through the whole season, so the test surface is the envelope of the series, the maximum elevation at each cell, fused into the lidar DSM inside the fields. Compute the envelope without the two distorted surveys at the native resolution, clip it to the fields, and fuse it with `r.patch.smooth` as in Assignment 5A:
 
 ```bash
-g.region raster=mid_pines_lidar2013_dsm
+g.region raster=mid_pines_lidar2013_dsm -p
 t.rast.series input=uas_dsm method=maximum output=maximum where="start_time < '2015-07-01' or start_time > '2015-09-01'"
-```
-
-We need to update the lidar-based DSM with the  UAS envelope data and analyze the viewshed while taking into account the corn growing in the field. First we need to make sure that we take into account entire field
-to create a lidar-based DSM updated in the fields using UAS data.
-
-```bash
-r.mapcalc "maximum_clip = if (fields, maximum)"
+r.mapcalc "maximum_clip = if(fields, maximum)"
 r.patch.smooth input_a=maximum_clip input_b=mid_pines_lidar2013_dsm output=lidar_maximum_dsm smooth_dist=10
-r.relief lidar_maximum_dsm out=lidar_maximum_dsm_relief zscale=5
-d.rast lidar_maximum_dsm_relief
+r.relief input=lidar_maximum_dsm output=lidar_maximum_dsm_relief zscale=5
+d.rast map=lidar_maximum_dsm_relief
 ```
 
-:::{.callout-tip title="Question"}
-Look at the relief map around the building - where do people park their cars?
-:::
+This assumes next year's crop looks like this year's. Look at the relief around the building: the envelope keeps everything that was ever there, including the parked cars.
 
+### Compare the viewsheds
 
-Now we selected a location based on the cumulative viewshed and look at the difference between the viewshed based on lidar and the envelope surface:
+Pick a camera location from the cumulative viewshed, here a point with a wide view, and compute its viewshed on the lidar DSM and on the envelope DSM at 1 m resolution:
 
 ```bash
-r.viewshed input=mid_pines_lidar2013_dsm output=viewshed_lidar_dsm observer_elevation=3 coordinates=636917,219223
-r.viewshed input=lidar_maximum_dsm output=viewshed_maximum observer_elevation=3 coordinates=636917,219223
-
-r.colors viewshed_lidar_dsm co=reds
-r.colors viewshed_maximum co=greens
+g.region raster=mid_pines_lidar2013_dsm res=1 -pa
+r.viewshed input=mid_pines_lidar2013_dsm output=viewshed_lidar_dsm coordinates=636917,219223 observer_elevation=3
+r.viewshed input=lidar_maximum_dsm output=viewshed_maximum coordinates=636917,219223 observer_elevation=3
+r.colors map=viewshed_lidar_dsm color=reds
+r.colors map=viewshed_maximum color=greens
+r.report -n map=viewshed_lidar_dsm units=h
+r.report -n map=viewshed_maximum units=h
 ```
 
-To compare the viewsheds display the resulting maps with transparency.
+> viewshed_lidar_dsm: 11.0 hectares
+> viewshed_maximum: 6.4 hectares
 
-:::{.callout-tip title="Question"}
-Discuss the result. Can you find a better place for the webcam? Would placing the webcam higher help?
-:::
+Display both with transparency to see where the crop closes the view. Would a higher camera or another candidate point do better?
 
-### Estimate volume of a building
+## Part 6: Volume of a building
 
-We need to first extract the mask of the building: 
+The difference between a DSM and the bare ground over the footprint of a feature gives its volume. Set the region to the building, compute the height of the June DSM above the lidar DEM, and take everything more than 2 m high as the footprint:
 
 ```bash
 g.region n=219388.5 s=219366.9 w=637100.1 e=637138.5 res=0.3 -pa
 r.mapcalc "building = 2015_06_20_DSM_agi_11GCP - mid_pines_lidar2013_dem"
 r.mapcalc "building_mask = if(building > 2, 1, null())"
-```
-
-Now we compute the volume
-
-```bash
 r.volume input=building clump=building_mask
 ```
-:::{.callout-tip title="Question"}
-What is the volume of the building?
-:::
 
+> Total Volume = 897.44
 
+`r.volume` sums the height over the clump and multiplies by the cell area: 2,473 cells, 223 square meters, an average height of 4 m, and a volume of about 900 cubic meters.
+
+## Report
+
+Prepare a report (3 to 5 pages including figures):
+
+1. **Series and intersection**: the registered dataset (`t.info` output or the Timeline Tool), the count and intersection maps, the intersection area, and a temporal plot at a field point and a road point with a sentence on what each curve shows.
+2. **Aggregation**: the list of monthly maps and what the September aggregate represents.
+3. **Core surface**: the lidar minus core map before and after excluding the distorted surveys, with their means, the `min_raster` map, and how you identified the two surveys and why they are distorted.
+4. **Crop height and biomass**: the June crop height map, the `t.rast.univar` table for the valid surveys, the June crop area and volume, and a paragraph on how the crop changes through the season.
+5. **Viewsheds**: the cumulative viewshed, the two viewsheds at your camera point with their areas, and a discussion of how the crop changes the view and where you would put the camera.
+6. **Building volume**: the volume, how the footprint was defined, and what limits the accuracy of the estimate.
+
+## Submission
+
+Upload to Moodle, Assignment 5B:
+
+* Your report as a PDF.
+* Optional: your completed notebook (`.ipynb`) if you worked in Colab.
+
+## Grading
+
+* **Series and intersection**: the dataset is registered with correct dates, the intersection is derived and used as the mask, and the temporal plots are read correctly.
+* **Aggregation**: the monthly dataset is produced and explained.
+* **Core surface**: the two distorted surveys are identified from the core and `min_raster`, and the improvement after excluding them is quantified.
+* **Crop height and biomass**: the height series is derived with map algebra, the June area and volume are computed, and the seasonal change is interpreted.
+* **Viewsheds**: the cumulative and the two single viewsheds are computed and the effect of the crop on visibility is explained.
+* **Building volume**: the volume is computed and its limitations are stated.
+* **Interpretation**: conclusions tie back to the lecture: space-time dataset, intersection, aggregation, core and envelope, distorted surveys.
+* On-time submission.
+
+### Due {{< meta assignment-due-date >}}
