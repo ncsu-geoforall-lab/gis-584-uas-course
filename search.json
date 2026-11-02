@@ -388,7 +388,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html#outline",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "Outline",
-    "text": "Outline\n\nmonitoring landscape changes using UAS\nintroduction to temporal data framework\nbasic analysis of 3D time series\napplications: monitoring plant growth, coastal erosion, soil erosion, flooding",
+    "text": "Outline\n\nMonitoring change with UAS: applications, metrics, and survey design\nThe GRASS temporal framework: space-time raster datasets, time stamps, listing and plotting a series\nAggregation and per-cell statistics over time: count and intersection, monthly aggregates, core and envelope surfaces\nIdentifying distorted surveys from the core surface\nApplications: crop height and biomass from map algebra on the series, viewsheds on the lidar and envelope DSMs, volumes of structures",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -400,7 +400,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html#lecture",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "Lecture",
-    "text": "Lecture\n\nLecture slides &lt;!– - Lecture Recording: Fall 2024 (NCSU Only)\nIn-Class Assignment Recording: Fall 2024 (NCSU Only) –&gt;",
+    "text": "Lecture\n\nLecture slides",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -412,7 +412,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html#supplemental-materials",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "Supplemental materials",
-    "text": "Supplemental materials\n\nSpatio-temporal data handling and visualization in GRASS GIS (FOSS4G 2014 workshop)\nGIS-based Analysis of Coastal Lidar Time-Series, Springer brief available for free through NCSU libraries\nPast Lecture recordings:\n\nIntroduction\nAnalysis",
+    "text": "Supplemental materials\n\nSpatio-temporal data handling and visualization in GRASS, FOSS4G 2014 workshop\nGRASS temporal data processing, the manual’s introduction to the temporal framework\nA temporal GIS for field based environmental modeling, Gebbert and Pebesma, Environmental Modelling and Software 53, 2014\nGIS-based Analysis of Coastal Lidar Time-Series, Springer brief, available through the NCSU Libraries\nPast Lecture recordings:\n\nIntroduction\nAnalysis",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -424,7 +424,7 @@
     "href": "course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html#assignment-homework",
     "title": "Analysis of multitemporal UAS data and its applications",
     "section": "Assignment & Homework",
-    "text": "Assignment & Homework\nPrepare report on mapping plant growth, viewsheds and water flow patterns using ultrahigh resolution DEMs.\nAssignment",
+    "text": "Assignment & Homework\nAssignment 5B: Analysis of multitemporal UAS data",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -432,11 +432,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#outline",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#outline",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Outline",
-    "text": "Outline\n\nMotivation for time series data acquisition\nUAS-based monitoring survey design\nProcessing UAS data time series, temporal data framework\nBasic analysis of 3D data time series, volumes\nDynamic visualization of time series\nApplications in crop monitoring, viewsheds",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#objectives",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#objectives",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Objectives",
+    "text": "Objectives\n\nDesign a UAS monitoring campaign: metrics, spatial and temporal resolution, ground control\nRegister a series of DSMs as a space-time raster dataset and query it by time\nAggregate the series over time and compute per-cell statistics\nDerive core and envelope surfaces and use them to find distorted surveys\nApply the series to crop height and biomass, viewsheds, and volumes\n\n\n\n5A fused one UAS DSM with the lidar; today we work with all seven 2015 flights of Mid Pines as a time series\nThe GRASS temporal framework does the bookkeeping: which map is from when, what they have in common, and how they change\nThe lab (5B) registers the seven DSMs, finds the two distorted ones, and applies the series to crop biomass, a webcam viewshed, and a building volume\nEvery concept today has a GRASS tool next to it; the lab uses them in the same order",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -445,11 +445,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#uas-for-monitoring-changes",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#uas-for-monitoring-changes",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "UAS for monitoring changes",
-    "text": "UAS for monitoring changes\nLow cost and rapid deployment: excellent for monitoring changes at local scale (fields, small watersheds)\n\ncrop monitoring: growth, disease, stress\nerosion processes: coastal, stream bank, rills and gullies\nnatural disasters: flooding, landslides, fire\nIndustrial: mining, construction sites",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#monitoring-with-uas",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#monitoring-with-uas",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Monitoring with UAS",
+    "text": "Monitoring with UAS\n\n\nSection 1: what UAS monitoring is good for, and how to design a campaign so that the data can be analyzed as a series",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#uas-for-monitoring-change",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#uas-for-monitoring-change",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "UAS for monitoring change",
+    "text": "UAS for monitoring change\nLow cost and rapid deployment make UAS suited to monitoring change at the local scale: fields, small watersheds, construction sites\n\nCrop monitoring: growth, disease, stress\nErosion: coastal, stream bank, rills and gullies\nNatural hazards: flooding, landslides, fire\nIndustrial: mining, construction sites, stockpiles\n\n\n\nAirborne lidar is flown every few years; a UAS can fly the same field every two weeks\nThe common thread is a surface that changes faster than any regional dataset is updated\nMid Pines in 2015 is a crop monitoring series: seven flights from March to October",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -460,9 +473,9 @@
   {
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#monitoring-design",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#monitoring-design",
-    "title": "Analysis of multitemporal UAS data and its applications",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
     "section": "Monitoring design",
-    "text": "Monitoring design\n\nMetrics to quantify changes: relative height, volume, feature migration\nSpatial resolution: needed to capture the changes\nTemporal resolution: regular intervals, events\nAccessibility: flying over people, line of sight, suitable GCPs\nGeoreferencing, rectification: GCPs distribution and survey",
+    "text": "Monitoring design\n\n\n\n\n\n\n\nDecision\nWhat to settle before the first flight\n\n\n\n\nMetrics\nRelative height, volume, feature migration: what quantity answers the question\n\n\nSpatial resolution\nFine enough to capture the change, coarse enough to process a series\n\n\nTemporal resolution\nRegular intervals, or flights timed to events such as storms or harvest\n\n\nAccessibility\nFlying over people, line of sight, places for GCPs\n\n\nGeoreferencing\nThe same GCPs surveyed once and used for every flight\n\n\n\n\n\nThe metric decides everything else: crop height needs a DSM and a bare ground; a stockpile volume needs two DSMs\nThe hardest requirement is the last one: a series is only comparable if every flight is referenced the same way\nThe Mid Pines flights used different numbers of GCPs, and the lab finds out what that did to two of them",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -471,11 +484,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#processing-time-series",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#processing-time-series",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Processing time series",
-    "text": "Processing time series\n\nAnalyze and interpolate point clouds: DSMs with aligned, common resolution grids\nData: raster DSMs are more suitable for time series than TIN\nAccuracy: use GCPs and permanent features to evaluate accuracy, correct errors and distortions\nTemporal data: assign time stamps and register raster DSMs within GIS-based temporal data framework",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#processing-a-time-series",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#processing-a-time-series",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Processing a time series",
+    "text": "Processing a time series\n\nInterpolate every point cloud to a DSM on the same aligned grid at a common resolution\nRasters suit a series better than TINs: the same cell in every map\nCheck each DSM against GCPs and permanent features; correct shifts, flag distortions (5A)\nGive every DSM a time stamp and register the set in the temporal framework\n\n\n\nAligned grid means the same extent, resolution, and cell origin, otherwise per-cell statistics compare different ground\nThe quality check per flight is 5A’s difference map and profile\nRegistering the maps is what turns a folder of rasters into a dataset you can query by time",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -484,11 +497,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-data-framework",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-data-framework",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Temporal data framework",
-    "text": "Temporal data framework\n\nsupports efficient processing, management and analysis of space-time data sets\nspace-time dataset is a set of maps (raster, vector) registered in a temporal database\nspace-time dataset may represent a dynamic process\nindividual maps represent the states of the dynamic system at a given time\n\nGebbert, S. and Pebesma, E. (2014). A temporal GIS for field based environmental modeling. Environmental Modelling and Software, 53, 1–12.",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#space-time-datasets-in-grass",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#space-time-datasets-in-grass",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Space-time datasets in GRASS",
+    "text": "Space-time datasets in GRASS\n\n\nSection 2: the temporal framework, time stamps, and the tools that list and plot a registered series",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -497,11 +510,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#timestamp-type",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#timestamp-type",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Timestamp type",
-    "text": "Timestamp type\n\nTimestamp: assigns time to an individual map in space-time data set\ntime instant: snapshot at given time: 2013-10-15 13:00:00 (absolute time)\ntime interval: defined by start and end time: day, month, year (relative time)\nTemporal Aggregation: a single UAS survey represents a snapshot (state) which can be agreggated by time intervals",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#the-temporal-framework",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#the-temporal-framework",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "The temporal framework",
+    "text": "The temporal framework\n\nSpace-time raster dataset (STRDS): a set of raster maps registered in a temporal database, each with a time stamp; the maps are the states of a changing surface, and the dataset is treated as one object (Gebbert and Pebesma 2014)\n\n\nEfficient processing, management, and analysis of space-time data\nThe dataset can hold rasters, 3D rasters, or vectors\nTools work on the whole dataset: list by time, aggregate, compute statistics, apply map algebra\nIn GRASS: t.create makes the dataset, t.register adds the maps with their times\n\n\n\nThe maps themselves do not change; the database records which map belongs to which time\nEverything that follows, from aggregation to core and envelope, is a t.* tool reading that database\nLab Part 1: t.create for uas_dsm, then t.register with a text file of map names and dates",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -510,11 +523,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#registered-time-series",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#registered-time-series",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Registered time series",
-    "text": "Registered time series\nTimeline tool: time and spatial extent of registered maps",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#time-stamps",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#time-stamps",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Time stamps",
+    "text": "Time stamps\n\nTime stamp: the time assigned to one map in the dataset, as an instant (2015-06-20) or an interval (2015-06-01 to 2015-07-01), in absolute calendar time or in relative units such as days or years\n\n\nA UAS survey is a snapshot: an instant\nAggregating snapshots over months or seasons turns them into intervals\nThe dataset’s temporal type, absolute or relative, is set when it is created\n\n\n\n\nInstant versus interval is independent of absolute versus relative; the lab uses absolute instants, one date per flight\nThe series file is two columns: map name and date, separated by a pipe\nt.info reports the type and the time span of the dataset after registration",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#the-registered-series",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#the-registered-series",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "The registered series",
+    "text": "The registered series\n\n\nThe Timeline Tool shows when each map was taken and, in 3D, its spatial extent\nt.rast.list lists the maps with their times and statistics, optionally filtered with a where clause\n\n\n\nSeven flights: March, June, late July, mid August, two in September, early October\nThe 3D plot shows the extents differ from flight to flight, which matters for the intersection in Section 3\nThe lab lists maps with where=\"start_time &gt;= '2015-08-01'\"; SQL on the time column",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -525,9 +551,9 @@
   {
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-plot",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-plot",
-    "title": "Analysis of multitemporal UAS data and its applications",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
     "section": "Temporal plot",
-    "text": "Temporal plot\n\nPlot time series of elevation values at a given location",
+    "text": "Temporal plot\n\nThe Temporal Plot Tool plots the value of every map in the series at one location\n\n\nPick a point on a road, in a field, and on a building and compare the three curves\nA field should rise through the season and drop at harvest; a road should stay flat\nThe August spike at both points is a warning: that survey is off, which Section 3 confirms",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -536,11 +562,24 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-count-and-intersection",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-count-and-intersection",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Temporal count and intersection",
-    "text": "Temporal count and intersection\n\nCount: number of maps (temporal snapshots) where the given cell has non-null value (overlap)\nIntersection: grid cells with non-null values from each map in time series",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#aggregation-and-per-cell-statistics",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#aggregation-and-per-cell-statistics",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Aggregation and per-cell statistics",
+    "text": "Aggregation and per-cell statistics\n\n\nSection 3: what the series has in common, how to aggregate it, and the per-cell statistics that summarize change",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#count-and-intersection",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#count-and-intersection",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Count and intersection",
+    "text": "Count and intersection\n\n\n\n\n\n\n\nCount: maps with a value in each cell\n\n\n\n\n\n\nIntersection: cells covered by every map\n\n\nIn GRASS: t.rast.series input=uas_dsm method=count output=count, and with -n the count is null where any map is null, which is the intersection\n\n\n\nThe flights had different extents, so per-cell statistics are only meaningful where every map has data\nThe intersection raster becomes the mask for the rest of the lab: r.mask raster=intersection\nLab Part 2 computes both and zooms the region to the intersection",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -551,9 +590,9 @@
   {
     "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-aggregation",
     "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#temporal-aggregation",
-    "title": "Analysis of multitemporal UAS data and its applications",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
     "section": "Temporal aggregation",
-    "text": "Temporal aggregation\n\nTemporally aggregate maps over a given period of time - for example to derive monthly average elevation",
+    "text": "Temporal aggregation\n\nTemporal aggregation: combining the maps that fall in each interval of a chosen granularity into one map with a statistic, such as the monthly mean; t.rast.aggregate\n\n\n\n\nSeptember has two flights; a monthly aggregation averages them into one September map\nThe output is a new dataset with interval time stamps, one per month that has data\nLab Part 2: t.rast.aggregate ... granularity=\"1 months\" method=average",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -562,11 +601,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#basic-time-series-analysis",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#basic-time-series-analysis",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Basic time series analysis",
-    "text": "Basic time series analysis\nPer cell statistics computed for each cell over the time series:\n\nMean and standard deviation\nMin, max elevation and range\nTime at minimum, time at maximum\nLinear regression: slope, offset, regression coefficient\n\nReference:\nMitasova, H., Hardin, E., Overton, M., and Harmon, R.S., 2009, New spatial measures of terrain dynamics derived from time series of lidar data, Proc. 17th Int. Conf. Geoinformatics, Fairfax, VA.",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#per-cell-statistics-over-time",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#per-cell-statistics-over-time",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Per-cell statistics over time",
+    "text": "Per-cell statistics over time\n\nMean and standard deviation of the elevation at each cell\nMinimum, maximum, and range\nTime of the minimum and time of the maximum: which map it came from\nLinear regression through time: slope, offset, and coefficient of determination\n\n\nIn GRASS: t.rast.series input=uas_dsm method=minimum|maximum|min_raster|max_raster|average|stddev|slope ... (Mitasova et al. 2009)\n\n\n\nEach statistic is one raster computed down the stack of maps, cell by cell\nmin_raster and max_raster return the index of the map, counted from zero, not the elevation\nThe lab uses minimum, min_raster, and maximum; regression needs a longer, regular series",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -575,11 +614,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#basic-time-series-analysis-core-envelope",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#basic-time-series-analysis-core-envelope",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Basic time series analysis: core, envelope",
-    "text": "Basic time series analysis: core, envelope\n\nCore surface: minimum elevation measured for each cell\nEnvelope: maximum elevation measured for each cell\n\nExample: cutting plane with lidar, core and envelope",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#core-and-envelope",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#core-and-envelope",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Core and envelope",
+    "text": "Core and envelope\n\nCore surface: the minimum elevation measured at each cell over the series. Envelope: the maximum. Everything the surface ever did lies between them\n\n\n\n\n\n\n\nCutting planes through the lidar ground, the core, and the envelope of the series\n\n\nOn a crop field the core is close to bare ground and the envelope is the canopy at its tallest\nOn a building both are the roof, so the difference is zero: a built-in test of the series\nThe two surfaces come from t.rast.series with method=minimum and method=maximum",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -588,11 +627,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#detecting-surveys-with-large-distortions",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#detecting-surveys-with-large-distortions",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Detecting surveys with large distortions",
-    "text": "Detecting surveys with large distortions\n\nDerive core surface from UAS time series\nCompute difference between UAS core and lidar bare ground surface\nCompute time of minimum raster to identify the distorted DSMs with elevation well below lidar bare ground",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#finding-distorted-surveys",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#finding-distorted-surveys",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Finding distorted surveys",
+    "text": "Finding distorted surveys\n\n\n\n\n\n\n\nLidar ground minus core\n\n\n\n\n\n\nIndex of the map with the minimum\n\n\nCompute the core and subtract it from the lidar bare ground\nWhere the core lies well below the ground, min_raster names the survey responsible\n\n\n\nA bare ground DSM cannot be below the real ground, so a core far under the lidar DEM is an error\nHere indexes 2 and 3, the late July and mid August flights, flown with two and three GCPs, supply most of those minima\nLab Part 3: r.what on min_raster at two points, then exclude the two surveys with a where clause",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -601,11 +640,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#corrected-uas-core-surface",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#corrected-uas-core-surface",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Corrected UAS core surface",
-    "text": "Corrected UAS core surface\n\nRemove distorted DSMs from derivation of core surface\nDifference between UAS core and lidar bare ground surface is now very small\nHist. equalized color ramp for differences highlights a small shift in lidar swath",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#corrected-core-surface",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#corrected-core-surface",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Corrected core surface",
+    "text": "Corrected core surface\n\n\n\n\n\n\n\nWithout the two distorted surveys\n\n\n\n\n\n\nHistogram-equalized colors\n\n\nRemove the distorted DSMs and recompute the core: the difference to the lidar ground is now small\nA histogram-equalized color table stretches the small differences and reveals a shift between two lidar swaths\n\n\n\nThe second map is the same data; only the colors changed, and a straight line appears\nThat line is a seam between two lidar flight lines, a few centimeters apart: the corduroy effect from 5A\nEqualized colors are the way to find small systematic patterns in a difference map",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -614,11 +653,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-and-range-applications",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-and-range-applications",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Envelope and range applications",
-    "text": "Envelope and range applications\n\nEnvelope: what is the max height of crop in each pixel over the monitored period?\nTime of maximum - when was the crop highest at each grid cell?\nWhere is the largest range and variability in crop height?",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-and-range",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-and-range",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Envelope and range",
+    "text": "Envelope and range\n\n\n\n\n\n\n\nLidar ground minus envelope: the tallest crop at each cell\n\n\n\n\n\n\nThe envelope surface in 3D\n\n\nEnvelope minus ground: the maximum crop height over the season at each cell\nTime of maximum: when each cell was highest\nRange: where the surface varied most\n\n\n\nThe envelope is the season’s tallest crop, field by field, in one map\nmax_raster gives the flight of the maximum, which differs between fields planted at different times\nThe lab uses the envelope for the webcam viewshed, as the worst case for visibility",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -627,11 +666,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-and-range-applications-1",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-and-range-applications-1",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Envelope and range applications",
-    "text": "Envelope and range applications\n\nUse envelope to show all cars ever parked at the site\nCore, snapshot, envelope, surfaces can be used to manage parking area",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-of-a-parking-area",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#envelope-of-a-parking-area",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Envelope of a parking area",
+    "text": "Envelope of a parking area\n\n\nThe envelope shows every car that was parked at the site during any flight\nCore, snapshot, and envelope surfaces together describe how an area is used\n\n\n\nA light example of the same statistic: anything that was ever there is in the envelope\nThe core, by contrast, shows the lot empty\nLab Part 5 asks you to look at the relief of the envelope DSM around the building for exactly this",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -640,11 +679,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#basic-time-series-analysis-regression",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#basic-time-series-analysis-regression",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Basic time series analysis: regression",
-    "text": "Basic time series analysis: regression\n\nApplies to well designed, systematic monitoring with longer time series\nSelect subset where the changes are close to linear - e.g. crop growth period\nCompute per cell linear regression analysis: map of regression slope and offset",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#regression-through-time",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#regression-through-time",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Regression through time",
+    "text": "Regression through time\n\nNeeds a well designed, systematic series: regular flights over a longer period\nChoose the part of the series where the change is close to linear, such as a growth period\nPer-cell linear regression gives a map of the rate of change and a map of the fit\n\n\n\nSeven irregular flights with two bad ones are not enough for a regression; this is where a designed campaign pays\nThe slope map is the growth rate in meters per day, cell by cell\nt.rast.series method=slope and method=detcoeff",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -653,11 +692,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#map-algebra-for-time-series",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#map-algebra-for-time-series",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Map algebra for time series",
-    "text": "Map algebra for time series\n\nApply map algebra expression for each map in the time series at each grid cell\nOutput is new time series which is registered as a new space-time dataset\nThis is different (and much simpler) from temporal map algebra",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#map-algebra-on-a-series",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#map-algebra-on-a-series",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Map algebra on a series",
+    "text": "Map algebra on a series\n\nApply one map algebra expression to every map in the series, cell by cell\nThe result is a new series, registered as a new dataset with the same time stamps\nSimpler than temporal algebra, which combines maps across time\n\n\nIn GRASS: t.rast.mapcalc inputs=uas_dsm expression=\"uas_dsm - lidar_dem\" output=height basename=height, where uas_dsm stands for each map in turn\n\n\n\nThe dataset name in the expression is replaced by each registered map\nOther rasters in the expression, like the lidar DEM, are the same for every map\nLab Part 4 uses this to turn the DSM series into a crop height series",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -666,11 +705,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#extract-crop-height-time-series",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#extract-crop-height-time-series",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Extract crop height time series",
-    "text": "Extract crop height time series\nMap algebra can be used to extract grid cells with elevation above lidar bare ground within a selected elevation interval (z1,z2)\n  \nMaps of relative elevation (0.3m, 2.0m) above bare ground lidar for 3 time snapshots in our time series. The middle map shows distortions rather than crop.",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#applications",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#applications",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Applications",
+    "text": "Applications\n\n\nSection 4: three uses of the series the lab works through: crop height and biomass, a viewshed, and a volume",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -679,11 +718,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#estimate-crop-volume",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#estimate-crop-volume",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Estimate crop volume",
-    "text": "Estimate crop volume\nSummary statistics can be used to estimate above ground crop biomass",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#crop-height-series",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#crop-height-series",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Crop height series",
+    "text": "Crop height series\n\n\n\nJune 20\n\n\nJuly 27\n\n\nOctober 6\n\nHeight above the lidar bare ground between 0.3 and 2 m, from t.rast.mapcalc with if() on the fields raster\n\n\nThe window of 0.3 to 2 m keeps the crop and drops the soil noise below and the building and trees above\nThe July map shows distortion rather than crop: the pattern ignores the field boundaries\nLab Part 4: t.rast.mapcalc with the fields mask, then t.rast.univar for the statistics per date",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -692,11 +731,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#estimate-volume-of-structures",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#estimate-volume-of-structures",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Estimate volume of structures",
-    "text": "Estimate volume of structures\n\nCompute volume based on difference between bare ground and above ground feature, such as building",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#crop-volume",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#crop-volume",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Crop volume",
+    "text": "Crop volume\n\n\nSum of the crop height over the field cells, times the cell area, is the crop volume above ground\nA proxy for above ground biomass, and its change through the season\n\n\n\nr.univar gives the sum of heights; multiply by the cell area for cubic meters\nComparing the volume per flight gives the growth curve of the field\nLab Part 4 computes the June volume from veg_uas_lidar_2 with r.univar",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -705,11 +744,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#analysis-viewsheds",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#analysis-viewsheds",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Analysis: Viewsheds",
-    "text": "Analysis: Viewsheds\nEvaluate influence of vegetation on the viewshed area\n\nSpatial extent of viewshed changes over time depending on the height of surrounding vegetation, different colors show the spatial extent of viewshed at different times",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#volume-of-a-structure",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#volume-of-a-structure",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Volume of a structure",
+    "text": "Volume of a structure\n\n\nDifference between the DSM and the bare ground over the footprint of the feature\nr.volume sums the difference over a clump of cells and reports the volume\n\n\n\nSame idea as the crop volume, for one object: a building, a stockpile, a dune\nThe footprint comes from a threshold on the difference, here everything more than 2 m above the ground\nLab Part 6 does this for the building at Mid Pines",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -718,11 +757,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#analysis-viewsheds-1",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#analysis-viewsheds-1",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Analysis: Viewsheds",
-    "text": "Analysis: Viewsheds\nProvide analysis to support siting of a monitoring webcam\n\nSpatial extent of viewshed changes over time depending on the height of surrounding vegetation",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#viewsheds-on-a-changing-surface",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#viewsheds-on-a-changing-surface",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Viewsheds on a changing surface",
+    "text": "Viewsheds on a changing surface\n\nCumulative viewshed: the number of observer points from which each cell is visible; r.viewshed per observer, then r.series method=count\n\n\n\nThe vegetation height decides what a camera sees, so the viewshed changes through the season\nCompute the viewshed on the lidar DSM and on the envelope DSM to see the best and worst case\n\n\n\nDifferent colors are the viewshed extent at different times: the crop closes the view as it grows\nLab Part 5 sites a webcam: a cumulative viewshed from six candidate points on the lidar DSM, then the view from the chosen point on the envelope DSM\nThe envelope DSM is built by fusing the UAS envelope into the lidar DSM with r.patch.smooth from 5A",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -731,11 +770,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#dynamic-visualization",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#dynamic-visualization",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "Dynamic visualization",
-    "text": "Dynamic visualization\n\nSee Terrain time series visualization in the GRASS temporal workshop\nWe covered the basics in the flow modeling example",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#visualizing-a-series",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#visualizing-a-series",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Visualizing a series",
+    "text": "Visualizing a series\n\nAnimation Tool: one frame per map, draped over a shaded relief, exported as a GIF (5A)\nTemporal Plot Tool: the value through time at a point\n3D view of two surfaces with a cutting plane: core, envelope, and lidar ground\nThe GRASS temporal workshop has the terrain time series example\n\n\n\nThe flow animation in 5A used the same Animation Tool on a series of depth maps\nFor a DSM series, drape the crop height over the relief and step through the flights\nThe notebook does this with a series map in place of the GUI tool",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -744,11 +783,37 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#what-we-have-learned",
-    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#what-we-have-learned",
-    "title": "Analysis of multitemporal UAS data and its applications",
-    "section": "What we have learned",
-    "text": "What we have learned\n\nUAS 3D monitoring basic considerations\nTemporal framework concept\nComputing core and envelope and its application\nIdentification of distorted DSMs in time series\nEstimation of volumes\nAnalyzing changing viewsheds\nDynamic visualization",
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#key-terms",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#key-terms",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Key terms",
+    "text": "Key terms\n\n\n\nSpace-time raster dataset: a set of rasters registered with time stamps and handled as one object\n\n\nTime stamp: an instant or an interval, in absolute or relative time, assigned to each map\n\n\nTemporal aggregation: one map per interval of a chosen granularity, with a statistic such as the mean\n\n\n\nCore surface: the per-cell minimum over the series; near bare ground on a field\n\n\nEnvelope surface: the per-cell maximum over the series; the tallest the surface ever was\n\n\nCumulative viewshed: the number of observer points from which each cell is visible\n\n\n\n\nMidterm vocabulary, and the words the lab report has to use correctly\nThe grading asks for conclusions in these terms: intersection, aggregation, core and envelope, distorted survey",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#wrap-up",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#wrap-up",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "Wrap-up",
+    "text": "Wrap-up\n\nAssignment 5B: Analysis of multitemporal UAS data\n\n\n\nRecap: register once, then every analysis is a t.* tool on the dataset\nCore and envelope bracket everything the surface did; a core below bare ground points at a bad survey\nMap algebra on the series turns DSMs into the quantity you care about: crop height, then biomass\nNext: the guest lecture and the midterm, then Topic 6 on image classification and change detection",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Slides",
+      "Lecture 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#references",
+    "href": "course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html#references",
+    "title": "Analysis of Multitemporal UAS Data and Its Applications",
+    "section": "References",
+    "text": "References\n\n\nGebbert, Sören, and Edzer Pebesma. 2014. “A Temporal GIS for Field Based Environmental Modeling.” Environmental Modelling & Software 53: 1–12. https://doi.org/10.1016/j.envsoft.2013.11.001.\n\n\nMitasova, Helena, Eric Hardin, Margery Overton, and Russell S. Harmon. 2009. “New Spatial Measures of Terrain Dynamics Derived from Time Series of Lidar Data.” 2009 17th International Conference on Geoinformatics, 1–6. https://doi.org/10.1109/GEOINFORMATICS.2009.5293539.",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -790,11 +855,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#outline",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#outline",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#task",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#task",
     "title": "Assignment 5B",
-    "section": "Outline",
-    "text": "Outline\n\nIntroduction to GRASS temporal framework\nAnalyze the time series of UAS DEMs\nEstimate crop biomas and its temporal change\nEvaluate impact of vegetation change on viewshed extent\nEstimate volume of eroded and deposited soil",
+    "section": "Task",
+    "text": "Task\nIn this assignment you analyze the seven UAS DSMs of Mid Pines flown between March and October 2015 as a time series. You register them as a space-time raster dataset in the GRASS temporal framework, find the area covered by every survey, and aggregate the series by month. You derive the core surface, compare it with the lidar bare ground to find the two distorted surveys, and recompute the core without them. You then apply the series: crop height and biomass from map algebra on the series, a webcam viewshed on the lidar DSM and on the envelope DSM, and the volume of a building.\nKeep in mind that the seven flights were processed with different numbers of GCPs, from two to eleven. The surveys with few GCPs are the ones the core surface exposes. Everything in Parts 2 to 4 is computed inside the intersection of the surveys and under a mask, so the statistics refer to that area only.\nWork through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. The Timeline Tool and the Temporal Plot Tool in Part 1 are GUI only; the notebook plots the same things. Either way, the report is the same.",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -807,7 +872,7 @@
     "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#data",
     "title": "Assignment 5B",
     "section": "Data",
-    "text": "Data\nYou should have everything already for Mid Pines area, get anything missing from the Course logistics web page:\n\nGRASS Project: LakeWheeler_NCspm\n2013 lidar interpolated DEM and DSM: download, use r.unpack.\nFields polygon as packed raster use r.unpack in your mapset to import it\nText file with timeseries",
+    "text": "Data\n\nLake Wheeler GRASS project: Lake_Wheeler_NCspm (EPSG:3358; you have it from the earlier assignments; the seven 2015 DSMs are in PERMANENT)\n2013 lidar DEM and DSM of Mid Pines (zip with GRASS raster packs; you have it from Assignments 4B and 5A, restore with r.unpack)\nFields raster: fields.pack (GRASS raster pack of the crop fields, 1 inside the fields, null elsewhere)\nSeries file: series.txt (the DSM names and their dates, for t.register)\nColor rules for difference maps: dif_lidar_uav.txt (the same file as in Assignment 5A)",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -816,11 +881,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#tools",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#tools",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#software",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#software",
     "title": "Assignment 5B",
-    "section": "Tools",
-    "text": "Tools\n\nGRASS 8.5\nGRASS Addon: r.patch.smooth\n\nInstall r.patch.smooth with the following command:\ng.extension r.patch.smooth",
+    "section": "Software",
+    "text": "Software\n\nGRASS 8.5\nThe addon r.patch.smooth, which you installed in Assignment 5A; if not:\n\ng.extension extension=r.patch.smooth",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -829,11 +894,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#analyze-time-series-of-uas-dsms",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#analyze-time-series-of-uas-dsms",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-1-register-the-time-series",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-1-register-the-time-series",
     "title": "Assignment 5B",
-    "section": "Analyze time series of UAS DSMs",
-    "text": "Analyze time series of UAS DSMs\n\nCreate a new mapset and copy the UAS DSMs\nStart GRASS in Lake_Wheeler_NCspm project and create a new mapset. Open GRASS in this mapset\ng.copy raster=2015_03_18_DSM_agi_6GCP@PERMANENT,2015_03_18_DSM_agi_6GCP\ng.copy raster=2015_06_20_DSM_agi_11GCP@PERMANENT,2015_06_20_DSM_agi_11GCP\ng.copy raster=2015_07_27_DSM_agi_2GCP_4ID@PERMANENT,2015_07_27_DSM_agi_2GCP_4ID \ng.copy raster=2015_08_14_DSM_agi_3GCP_4ID@PERMANENT,2015_08_14_DSM_agi_3GCP_4ID \ng.copy raster=2015_09_04_DSM_agi_6GCP@PERMANENT,2015_09_04_DSM_agi_6GCP\ng.copy raster=2015_09_21_DSM_agi_6GCP@PERMANENT,2015_09_21_DSM_agi_6GCP\ng.copy raster=2015_10_06_DSM_agi_8GCPs@PERMANENT,2015_10_06_DSM_agi_8GCPs\n\n\nRegister the time series in temporal framework\nFirst, create a space-time raster dataset (STRDS) with absolute temporal type:\nt.create output=uas_dsm type=strds temporaltype=absolute semantictype=mean title=\"UAS_DSM\" description=\"UAS-based 2015 DSMs processed by Agisoft\"\nNow, create a text file named “series.txt” with the following content in your working directory, or download the prepared file into your working directory.\nThese are the DSMs with their time stamps:\n2015_03_18_DSM_agi_6GCP|2015-03-18\n2015_06_20_DSM_agi_11GCP|2015-06-20\n2015_07_27_DSM_agi_2GCP_4ID|2015-07-27\n2015_08_14_DSM_agi_3GCP_4ID|2015-08-14\n2015_09_04_DSM_agi_6GCP|2015-09-04\n2015_09_21_DSM_agi_6GCP|2015-09-21\n2015_10_06_DSM_agi_8GCPs|2015-10-06\nRegister the DSMs into the created STRDS uas_dsm:\nt.register input=uas_dsm file=series.txt\nNow check it was registered correctly:\nt.info input=uas_dsm\nSee different ways we can list raster maps registered in the dataset:\nt.rast.list input=uas_dsm columns=name,start_time where=\"start_time &gt;= '2015-08-01'\"\nt.rast.list input=uas_dsm columns=name,start_time,min,max\nVerify the listed raster maps are actually in the database:\ng.list type=raster pattern=\"2015*\"\nYou can also use the Data tab in Layer Manager.\nWe can set common color table to all maps in the dataset:\nt.rast.colors input=uas_dsm color=elevation\nd.rast 2015_06_20_DSM_agi_11GCP\nd.rast 2015_10_06_DSM_agi_8GCPs\nTo get better idea about the dates and spatial extents, we can use Timeline tool accessible from Temporal - GUI tools - Timeline tool.\nSelect dataset uas_dsm, you can click on the drawn data points, and then also check 3D plot of spatio-temporal extents. Stretch the window as needed.\nWe can plot the elevation timeseries using Temporal Plot Tool.\n\nOpen the tool from Temporal - GUI tools - Temporal plot tool.\nSelect dataset uas_dsm and click on the arrow next to the X and Y coordinates field.\nThen click somewhere on the Map Display and press Draw.\n\nYou should see a plot of elevation values. Try different places (road, field, building).\n\n\nFind the area mapped by all surveys\nWe will find area mapped by all surveys. First we will set the extent to the maximum bounding box, use t.info to get the values:\nt.info input=uas_dsm -g\ng.region n=219942 s=219037 e=637439 w=636456 -pa res=0.3\nNext, we use t.rast.series to derive raster representing the number of overlapping DSMs. By using -n flag we create masking raster representing the intersection of all DSMs, and then we change computational region to the extent of its non-null bounding box:\nt.rast.series input=uas_dsm method=count output=count\nt.rast.series input=uas_dsm method=count output=intersection -n\nd.rast count\nd.rast intersection\ng.region zoom=intersection -p\nr.mask raster=intersection\n\n\n\n\n\n\nTipQuestion\n\n\n\nHow large is the area? (use r.report)\n\n\n\n\nTemporal aggregation\nOur space-time raster dataset contains two DSMs from September:\nt.rast.list input=uas_dsm columns=name,start_time\nWe will temporally aggregate the dataset by month by averaging all DSMs within each month (in this case averaging the September DSMs):\nt.rast.aggregate input=uas_dsm output=uas_dsm_aggr basename=uas_dsm_aggr suffix=time granularity=\"1 months\" method=average\nt.rast.list input=uas_dsm_aggr columns=name,start_time\n\n\nMinimum elevation (core)\nYou should already have lidar DSM and DEMs if you haven’t done already, unzip it in your working directory and unpack:\nr.unpack -o input=mid_pines_lidar2013_dsm.pack\nr.unpack -o input=mid_pines_lidar2013_dem.pack\n\n\n\n\n\n\nTipQuestion\n\n\n\nFind the minimum elevation (core) - how close it is to lidar bare ground?\n\n\nt.rast.series input=uas_dsm method=minimum output=minimum\nr.mapcalc \"diff_lidar_uas = mid_pines_lidar2013_dem - minimum\"\nr.colors map=diff_lidar_uas color=differences\nd.rast diff_lidar_uas\nParts of the minimum raster are significantly below lidar ground, find out which DSM is causing it:\nt.rast.series input=uas_dsm method=min_raster output=min_raster\nd.rast min_raster\nDisplay resulting raster min_raster and query it (select the layer in Layer Manager and use Query tool in Map Display) or use r.what:\nr.what map=min_raster coordinates=636879,219432\nr.what map=min_raster coordinates=637232,219651\nValue 2 represents third (numbering starts with 0) raster in our time series. Since there is some problem with the third and fourth raster (2015_07_27_DSM_agi_2GCP_4ID, 2015_08_14_DSM_agi_3GCP_4ID), we will exclude them from the analysis:\nt.rast.series input=uas_dsm method=minimum output=minimum where=\"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'\" --o\nr.mapcalc \"diff_lidar_uas = mid_pines_lidar2013_dem - minimum\" --o\nr.colors map=diff_lidar_uas color=differences\nApply now the color table dif_lidar_uav.txt we used for highlighting differences in the last assignment:\n -40 red\n -1 orange\n -0.5 yellow\n -0.1 grey\n 0 white\n 0.1 grey\n 0.5 cyan\n 1 aqua\n 40 blue\nr.colors map=diff_lidar_uas rules=dif_lidar_uav.txt\n\n\n\n\n\n\nTipQuestion\n\n\n\nExplain what you see.\n\n\nLet’s look now which temporal datasets we have:\nt.list columns=id,number_of_maps,start_time",
+    "section": "Part 1: Register the time series",
+    "text": "Part 1: Register the time series\n\nCreate a mapset and copy the DSMs\nStart GRASS in the Lake_Wheeler_NCspm project, create a new mapset multitemporal, and switch to it. Put the data files in your working directory.\ng.mapset -c mapset=multitemporal\nThe temporal database lives in the mapset, and maps from other mapsets cannot be registered in it, so copy the seven DSMs from PERMANENT:\ng.copy raster=2015_03_18_DSM_agi_6GCP@PERMANENT,2015_03_18_DSM_agi_6GCP\ng.copy raster=2015_06_20_DSM_agi_11GCP@PERMANENT,2015_06_20_DSM_agi_11GCP\ng.copy raster=2015_07_27_DSM_agi_2GCP_4ID@PERMANENT,2015_07_27_DSM_agi_2GCP_4ID\ng.copy raster=2015_08_14_DSM_agi_3GCP_4ID@PERMANENT,2015_08_14_DSM_agi_3GCP_4ID\ng.copy raster=2015_09_04_DSM_agi_6GCP@PERMANENT,2015_09_04_DSM_agi_6GCP\ng.copy raster=2015_09_21_DSM_agi_6GCP@PERMANENT,2015_09_21_DSM_agi_6GCP\ng.copy raster=2015_10_06_DSM_agi_8GCPs@PERMANENT,2015_10_06_DSM_agi_8GCPs\nThe names record the flight date and the number of GCPs used in processing.\n\n\nCreate and register the dataset\nCreate a space-time raster dataset (STRDS) with absolute time:\nt.create output=uas_dsm type=strds temporaltype=absolute semantictype=mean title=\"UAS_DSM\" description=\"UAS-based 2015 DSMs processed by Agisoft\"\nThe file series.txt lists each DSM with its date, one per line, separated by a pipe:\n2015_03_18_DSM_agi_6GCP|2015-03-18\n2015_06_20_DSM_agi_11GCP|2015-06-20\n2015_07_27_DSM_agi_2GCP_4ID|2015-07-27\n2015_08_14_DSM_agi_3GCP_4ID|2015-08-14\n2015_09_04_DSM_agi_6GCP|2015-09-04\n2015_09_21_DSM_agi_6GCP|2015-09-21\n2015_10_06_DSM_agi_8GCPs|2015-10-06\nRegister the DSMs in the dataset and check the result:\nt.register input=uas_dsm file=series.txt\nt.info input=uas_dsm\nt.rast.list lists the registered maps; the where clause is SQL on the time columns, and columns can include statistics of each map:\nt.rast.list input=uas_dsm columns=name,start_time where=\"start_time &gt;= '2015-08-01'\"\nt.rast.list input=uas_dsm columns=name,start_time,min,max\nThe maps are still ordinary rasters in the mapset, which g.list type=raster pattern=\"2015*\" or the Data tab in the Layer Manager shows. Registration only records their time in the database.\n\n\nLook at the series\nSet one color table for all maps in the dataset and display two of them:\nt.rast.colors input=uas_dsm color=elevation\nd.rast map=2015_06_20_DSM_agi_11GCP\nd.rast map=2015_10_06_DSM_agi_8GCPs\nThe Timeline Tool (Temporal &gt; GUI tools &gt; Timeline tool) shows when each map was taken. Select the dataset uas_dsm, click on the points, and check 3D plot of spatio-temporal extents to see that the flights covered different areas.\nThe Temporal Plot Tool (Temporal &gt; GUI tools &gt; Temporal plot tool) plots the elevation of every map at one location. Select the dataset uas_dsm, click the arrow next to the X and Y coordinates field, click a point in the Map Display, and press Draw. Try a point on the road, in a field, and on the building.",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -842,11 +907,11 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#estimate-crop-biomass",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#estimate-crop-biomass",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-2-intersection-and-aggregation",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-2-intersection-and-aggregation",
     "title": "Assignment 5B",
-    "section": "Estimate crop biomass",
-    "text": "Estimate crop biomass\nWe will use raster algebra on the time series to compute crop biomass. First we need to make sure that we take into account only fields (not forests).\nYou can use get the packed raster representation of fields (link is at the top).\nWe assume crop is anything higher than 0.3 and lower than 2 m (to exclude the building for example):\nr.unpack -o fields.pack\nt.rast.mapcalc inputs=uas_dsm expression=\"if (fields, if(uas_dsm - mid_pines_lidar2013_dem &gt; 0.3 && uas_dsm - mid_pines_lidar2013_dem &lt; 2, uas_dsm - mid_pines_lidar2013_dem, null()))\" output=veg_uas_lidar basename=veg_uas_lidar\nt.rast.univar input=veg_uas_lidar where=\"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'\"\nd.rast veg_uas_lidar_2\nr.report -n map=veg_uas_lidar_2 units=me nsteps=1\nr.univar map=veg_uas_lidar_2\nUse Python shell (tab in Layer Manager) to compute the biomass volume for June (paste each line into Python shell and press Enter):\nsum = gs.parse_command('r.univar', map='veg_uas_lidar_2', flags='g')['sum']\nfloat(sum) * gs.region()['nsres'] * gs.region()['ewres']\nRemove the mask before we proceed in further analysis:\nr.mask -r",
+    "section": "Part 2: Intersection and aggregation",
+    "text": "Part 2: Intersection and aggregation\n\nArea mapped by all surveys\nPer-cell statistics over the series are only meaningful where every survey has data. Set the region to the union of the extents, which t.info -g reports, then count the maps with data in each cell with t.rast.series. With the -n flag the count is null wherever any map is null, which gives the intersection:\nt.info input=uas_dsm -g\ng.region n=219942 s=219037 e=637439 w=636456 res=0.3 -pa\nt.rast.series input=uas_dsm method=count output=count\nt.rast.series input=uas_dsm method=count output=intersection -n\nd.rast map=count\nd.rast map=intersection\nShrink the region to the intersection and set it as the mask for the rest of Parts 2 to 4:\ng.region zoom=intersection -p\nr.mask raster=intersection\nr.report -n map=intersection units=h\n\n18.65 hectares\n\nEvery raster command from here on reads and writes only inside the mask, until r.mask -r at the end of Part 4.\n\n\nMonthly aggregation\nThe dataset has two surveys in September. t.rast.aggregate combines the maps that fall in each interval of a chosen granularity into one map, here the monthly average, and registers the results as a new dataset with interval time stamps:\nt.rast.aggregate input=uas_dsm output=uas_dsm_aggr basename=uas_dsm_aggr suffix=time granularity=\"1 months\" method=average\nt.rast.list input=uas_dsm_aggr columns=name,start_time,end_time\nSix monthly maps result; only the September one averages two surveys.",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",
@@ -855,11 +920,89 @@
     ]
   },
   {
-    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#evaluate-impact-of-vegetation-change-on-viewshed-extent",
-    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#evaluate-impact-of-vegetation-change-on-viewshed-extent",
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-3-core-surface-and-distorted-surveys",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-3-core-surface-and-distorted-surveys",
     "title": "Assignment 5B",
-    "section": "Evaluate impact of vegetation change on viewshed extent",
-    "text": "Evaluate impact of vegetation change on viewshed extent\nWe would like to set up a webcam to monitor this area. First we will compute a cumulative viewshed of this area to find places from which we will have likely good visibility. We pick several places distributed all over the area from which we compute viewsheds on a lidar DSM with observer height of 3 meters (webcam height).\ng.region raster=mid_pines_lidar2013_dsm res=1 -pa\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_1 coordinates=637087,219376 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_2 coordinates=637004,219653 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_3 coordinates=636782,219374 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_4 coordinates=636839,219150 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_5 coordinates=636665,219527 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_6 coordinates=636863,219503 observer_elevation=3\nNow we compute the cumulative viewshed as the number of places (from the coordinates above) from which a cell is visible. This gives us better idea which places are visually more prominent and therefore likely to have good view of the fields.\nr.series input=vshed_1,vshed_2,vshed_3,vshed_4,vshed_5,vshed_6 output=cum_viewshed method=count\nd.rast cum_viewshed\nDisplay the result with legend to see which places are potentially good for placing a webcam.\nSince we need the webcam to capture the field during entire year we can run t.rast.series with method=maximum on the time series of UAS DSMs to derive the DSM series envelope surface and use it to analyze the viewshed. Of course, this assumes that the crops will be the same the following year. We exclude the problematic DSMs as we did while deriving the core surface:\ng.region raster=mid_pines_lidar2013_dsm\nt.rast.series input=uas_dsm method=maximum output=maximum where=\"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'\"\nWe need to update the lidar-based DSM with the UAS envelope data and analyze the viewshed while taking into account the corn growing in the field. First we need to make sure that we take into account entire field to create a lidar-based DSM updated in the fields using UAS data.\nr.mapcalc \"maximum_clip = if (fields, maximum)\"\nr.patch.smooth input_a=maximum_clip input_b=mid_pines_lidar2013_dsm output=lidar_maximum_dsm smooth_dist=10\nr.relief lidar_maximum_dsm out=lidar_maximum_dsm_relief zscale=5\nd.rast lidar_maximum_dsm_relief\n\n\n\n\n\n\nTipQuestion\n\n\n\nLook at the relief map around the building - where do people park their cars?\n\n\nNow we selected a location based on the cumulative viewshed and look at the difference between the viewshed based on lidar and the envelope surface:\nr.viewshed input=mid_pines_lidar2013_dsm output=viewshed_lidar_dsm observer_elevation=3 coordinates=636917,219223\nr.viewshed input=lidar_maximum_dsm output=viewshed_maximum observer_elevation=3 coordinates=636917,219223\n\nr.colors viewshed_lidar_dsm co=reds\nr.colors viewshed_maximum co=greens\nTo compare the viewsheds display the resulting maps with transparency.\n\n\n\n\n\n\nTipQuestion\n\n\n\nDiscuss the result. Can you find a better place for the webcam? Would placing the webcam higher help?\n\n\n\nEstimate volume of a building\nWe need to first extract the mask of the building:\ng.region n=219388.5 s=219366.9 w=637100.1 e=637138.5 res=0.3 -pa\nr.mapcalc \"building = 2015_06_20_DSM_agi_11GCP - mid_pines_lidar2013_dem\"\nr.mapcalc \"building_mask = if(building &gt; 2, 1, null())\"\nNow we compute the volume\nr.volume input=building clump=building_mask\n\n\n\n\n\n\nTipQuestion\n\n\n\nWhat is the volume of the building?",
+    "section": "Part 3: Core surface and distorted surveys",
+    "text": "Part 3: Core surface and distorted surveys\n\nMinimum elevation\nRestore the lidar surfaces from Assignment 5A, then compute the core surface, the minimum elevation of the series at each cell, and subtract it from the lidar bare ground:\nr.unpack -o input=mid_pines_lidar2013_dsm.pack\nr.unpack -o input=mid_pines_lidar2013_dem.pack\nt.rast.series input=uas_dsm method=minimum output=minimum\nr.mapcalc \"diff_lidar_uas = mid_pines_lidar2013_dem - minimum\"\nr.colors map=diff_lidar_uas color=differences\nr.univar map=diff_lidar_uas\nd.rast map=diff_lidar_uas\n\nmean: 0.87, minimum: -4.35, maximum: 15.34\n\nA DSM cannot lie below the ground it was flown over, so a core surface well below the lidar DEM points at a distorted survey. Over much of the area the core is close to the lidar ground, but in places it lies meters below it.\n\n\nWhich survey is responsible\nmethod=min_raster writes, for each cell, the index of the map that supplied the minimum, counted from 0 in the order of the time stamps:\nt.rast.series input=uas_dsm method=min_raster output=min_raster\nd.rast map=min_raster\nr.what map=min_raster coordinates=636879,219432\nr.what map=min_raster coordinates=637232,219651\nr.report -n map=min_raster units=p nsteps=7\n\n636879|219432||2 637232|219651||3\n\nIndex 2 is the third map, the July 27 survey, and index 3 the fourth, August 14. Together they supply the minimum in two thirds of the cells. These two flights were processed with only two and three GCPs.\n\n\nRecompute the core without them\nExclude the two surveys with a where clause on the time stamps and recompute the core and the difference:\nt.rast.series input=uas_dsm method=minimum output=minimum where=\"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'\" --overwrite\nr.mapcalc \"diff_lidar_uas = mid_pines_lidar2013_dem - minimum\" --overwrite\nr.univar map=diff_lidar_uas\nr.colors map=diff_lidar_uas rules=dif_lidar_uav.txt\nd.rast map=diff_lidar_uas\n\nmean: 0.08\n\nThe mean difference drops from 0.87 m to 0.08 m. The color rules file is the one from Assignment 5A: grey within 10 cm, color beyond. What remains colored, and why?\nt.list shows the datasets in the mapset:\nt.list columns=id,number_of_maps,start_time",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-4-crop-height-and-biomass",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-4-crop-height-and-biomass",
+    "title": "Assignment 5B",
+    "section": "Part 4: Crop height and biomass",
+    "text": "Part 4: Crop height and biomass\nMap algebra on a series applies one expression to every map and registers the results as a new dataset. We compute the height of the UAS surface above the lidar bare ground, keep it only inside the crop fields and between 0.3 and 2 m, to drop the soil noise below and the building and trees above, and set the rest to null. The fields raster comes from the pack:\nr.unpack -o input=fields.pack\nt.rast.mapcalc inputs=uas_dsm expression=\"if (fields, if(uas_dsm - mid_pines_lidar2013_dem &gt; 0.3 && uas_dsm - mid_pines_lidar2013_dem &lt; 2, uas_dsm - mid_pines_lidar2013_dem, null()))\" output=veg_uas_lidar basename=veg_uas_lidar\nt.rast.list input=veg_uas_lidar columns=name,start_time\nIn the expression, uas_dsm stands for each registered map in turn. The outputs are named veg_uas_lidar_1 to veg_uas_lidar_7, numbered from 1 in time order, so veg_uas_lidar_2 is June 20. Summarize the crop height per survey, leaving out the two distorted ones:\nt.rast.univar input=veg_uas_lidar where=\"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'\"\nThe June survey has by far the most cells with crop and a mean height of 0.8 m. Look at it and compute its crop area and volume:\nd.rast map=veg_uas_lidar_2\nr.report -n map=veg_uas_lidar_2 units=me\nr.univar map=veg_uas_lidar_2\nThe volume of crop above ground is the sum of the heights times the cell area. In the Python tab of the Layer Manager, run:\nimport grass.script as gs\nstats = gs.parse_command(\"r.univar\", map=\"veg_uas_lidar_2\", flags=\"g\")\nregion = gs.region()\nfloat(stats[\"sum\"]) * region[\"nsres\"] * region[\"ewres\"]\n\n49,605 cubic meters over 62,232 square meters of crop\n\nRemove the mask before Part 5, which works on the whole study area:\nr.mask -r",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-5-viewsheds-and-the-envelope-dsm",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-5-viewsheds-and-the-envelope-dsm",
+    "title": "Assignment 5B",
+    "section": "Part 5: Viewsheds and the envelope DSM",
+    "text": "Part 5: Viewsheds and the envelope DSM\n\nCumulative viewshed\nWe want to place a webcam that watches the fields. First compute a cumulative viewshed from six candidate points on the lidar DSM, with the camera 3 m above the ground, at 1 m resolution:\ng.region raster=mid_pines_lidar2013_dsm res=1 -pa\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_1 coordinates=637087,219376 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_2 coordinates=637004,219653 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_3 coordinates=636782,219374 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_4 coordinates=636839,219150 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_5 coordinates=636665,219527 observer_elevation=3\nr.viewshed input=mid_pines_lidar2013_dsm output=vshed_6 coordinates=636863,219503 observer_elevation=3\nEach viewshed holds the vertical angle to the visible cells and null elsewhere. Count, for every cell, from how many of the six points it is visible:\nr.series input=vshed_1,vshed_2,vshed_3,vshed_4,vshed_5,vshed_6 output=cum_viewshed method=count\nd.rast map=cum_viewshed\nDisplay the result with a legend. Cells visible from many points are the prominent places; a camera there would see much of the area. About half of the area is visible from none of the six points.\n\n\nEnvelope DSM\nThe camera has to see the fields through the whole season, so the test surface is the envelope of the series, the maximum elevation at each cell, fused into the lidar DSM inside the fields. Compute the envelope without the two distorted surveys at the native resolution, clip it to the fields, and fuse it with r.patch.smooth as in Assignment 5A:\ng.region raster=mid_pines_lidar2013_dsm -p\nt.rast.series input=uas_dsm method=maximum output=maximum where=\"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'\"\nr.mapcalc \"maximum_clip = if(fields, maximum)\"\nr.patch.smooth input_a=maximum_clip input_b=mid_pines_lidar2013_dsm output=lidar_maximum_dsm smooth_dist=10\nr.relief input=lidar_maximum_dsm output=lidar_maximum_dsm_relief zscale=5\nd.rast map=lidar_maximum_dsm_relief\nThis assumes next year’s crop looks like this year’s. Look at the relief around the building: the envelope keeps everything that was ever there, including the parked cars.\n\n\nCompare the viewsheds\nPick a camera location from the cumulative viewshed, here a point with a wide view, and compute its viewshed on the lidar DSM and on the envelope DSM at 1 m resolution:\ng.region raster=mid_pines_lidar2013_dsm res=1 -pa\nr.viewshed input=mid_pines_lidar2013_dsm output=viewshed_lidar_dsm coordinates=636917,219223 observer_elevation=3\nr.viewshed input=lidar_maximum_dsm output=viewshed_maximum coordinates=636917,219223 observer_elevation=3\nr.colors map=viewshed_lidar_dsm color=reds\nr.colors map=viewshed_maximum color=greens\nr.report -n map=viewshed_lidar_dsm units=h\nr.report -n map=viewshed_maximum units=h\n\nviewshed_lidar_dsm: 11.0 hectares viewshed_maximum: 6.4 hectares\n\nDisplay both with transparency to see where the crop closes the view. Would a higher camera or another candidate point do better?",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-6-volume-of-a-building",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#part-6-volume-of-a-building",
+    "title": "Assignment 5B",
+    "section": "Part 6: Volume of a building",
+    "text": "Part 6: Volume of a building\nThe difference between a DSM and the bare ground over the footprint of a feature gives its volume. Set the region to the building, compute the height of the June DSM above the lidar DEM, and take everything more than 2 m high as the footprint:\ng.region n=219388.5 s=219366.9 w=637100.1 e=637138.5 res=0.3 -pa\nr.mapcalc \"building = 2015_06_20_DSM_agi_11GCP - mid_pines_lidar2013_dem\"\nr.mapcalc \"building_mask = if(building &gt; 2, 1, null())\"\nr.volume input=building clump=building_mask\n\nTotal Volume = 897.44\n\nr.volume sums the height over the clump and multiplies by the cell area: 2,473 cells, 223 square meters, an average height of 4 m, and a volume of about 900 cubic meters.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#report",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#report",
+    "title": "Assignment 5B",
+    "section": "Report",
+    "text": "Report\nPrepare a report (3 to 5 pages including figures):\n\nSeries and intersection: the registered dataset (t.info output or the Timeline Tool), the count and intersection maps, the intersection area, and a temporal plot at a field point and a road point with a sentence on what each curve shows.\nAggregation: the list of monthly maps and what the September aggregate represents.\nCore surface: the lidar minus core map before and after excluding the distorted surveys, with their means, the min_raster map, and how you identified the two surveys and why they are distorted.\nCrop height and biomass: the June crop height map, the t.rast.univar table for the valid surveys, the June crop area and volume, and a paragraph on how the crop changes through the season.\nViewsheds: the cumulative viewshed, the two viewsheds at your camera point with their areas, and a discussion of how the crop changes the view and where you would put the camera.\nBuilding volume: the volume, how the footprint was defined, and what limits the accuracy of the estimate.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#submission",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#submission",
+    "title": "Assignment 5B",
+    "section": "Submission",
+    "text": "Submission\nUpload to Moodle, Assignment 5B:\n\nYour report as a PDF.\nOptional: your completed notebook (.ipynb) if you worked in Colab.",
+    "crumbs": [
+      "Topics",
+      "Topic 5: Advanced Analytics",
+      "Assignments",
+      "Assignment 5B"
+    ]
+  },
+  {
+    "objectID": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#grading",
+    "href": "course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html#grading",
+    "title": "Assignment 5B",
+    "section": "Grading",
+    "text": "Grading\n\nSeries and intersection: the dataset is registered with correct dates, the intersection is derived and used as the mask, and the temporal plots are read correctly.\nAggregation: the monthly dataset is produced and explained.\nCore surface: the two distorted surveys are identified from the core and min_raster, and the improvement after excluding them is quantified.\nCrop height and biomass: the height series is derived with map algebra, the June area and volume are computed, and the seasonal change is interpreted.\nViewsheds: the cumulative and the two single viewsheds are computed and the effect of the crop on visibility is explained.\nBuilding volume: the volume is computed and its limitations are stated.\nInterpretation: conclusions tie back to the lecture: space-time dataset, intersection, aggregation, core and envelope, distorted surveys.\nOn-time submission.\n\n\nDue 11/18/2026",
     "crumbs": [
       "Topics",
       "Topic 5: Advanced Analytics",

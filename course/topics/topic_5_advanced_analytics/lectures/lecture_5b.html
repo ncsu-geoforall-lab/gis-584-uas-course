@@ -7,11 +7,11 @@
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.20">
 
-  <meta name="author" content="Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White">
-  <title>UAS Mapping and Analytics – Analysis of multitemporal UAS data and its applications</title>
+  <meta name="author" content="Corey White adapted from Helena Mitasova, Anna Petrasova, and Justyna Jeziorska">
+  <title>UAS Mapping and Analytics – Analysis of Multitemporal UAS Data and Its Applications</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -35,7 +35,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-8b516edf591b3223edeb7cb3456de664.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -134,226 +153,862 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Analysis of multitemporal UAS data and its applications</h1>
-  <p class="subtitle"><a href="https://geospatial.ncsu.edu/">Center for Geospatial Analytics</a> <a href="http://www.ncsu.edu/">at North Carolina State University</a></p>
+  <h1 class="title">Analysis of Multitemporal UAS Data and Its Applications</h1>
+  <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White
+Corey White adapted from Helena Mitasova, Anna Petrasova, and Justyna Jeziorska
 </div>
 </div>
 </div>
 
 </section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
+<section id="objectives" class="slide level2 smaller">
+<h2>Objectives</h2>
 <ul>
-<li>Motivation for time series data acquisition</li>
-<li>UAS-based monitoring survey design</li>
-<li>Processing UAS data time series, temporal data framework</li>
-<li>Basic analysis of 3D data time series, volumes</li>
-<li>Dynamic visualization of time series</li>
-<li>Applications in crop monitoring, viewsheds</li>
+<li class="fragment">Design a UAS monitoring campaign: metrics, spatial and temporal resolution, ground control</li>
+<li class="fragment">Register a series of DSMs as a space-time raster dataset and query it by time</li>
+<li class="fragment">Aggregate the series over time and compute per-cell statistics</li>
+<li class="fragment">Derive core and envelope surfaces and use them to find distorted surveys</li>
+<li class="fragment">Apply the series to crop height and biomass, viewsheds, and volumes</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>5A fused one UAS DSM with the lidar; today we work with all seven 2015 flights of Mid Pines as a time series</li>
+<li>The GRASS temporal framework does the bookkeeping: which map is from when, what they have in common, and how they change</li>
+<li>The lab (5B) registers the seven DSMs, finds the two distorted ones, and applies the series to crop biomass, a webcam viewshed, and a building volume</li>
+<li>Every concept today has a GRASS tool next to it; the lab uses them in the same order</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="uas-for-monitoring-changes" class="slide level2">
-<h2>UAS for monitoring changes</h2>
-<p>Low cost and rapid deployment: excellent for monitoring changes at local scale (fields, small watersheds)</p>
+<section id="monitoring-with-uas" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Monitoring with UAS</h2>
+<aside class="notes">
 <ul>
-<li><strong>crop monitoring:</strong> growth, disease, stress</li>
-<li><strong>erosion processes:</strong> coastal, stream bank, rills and gullies</li>
-<li><strong>natural disasters:</strong> flooding, landslides, fire</li>
-<li><strong>Industrial:</strong> mining, construction sites</li>
+<li>Section 1: what UAS monitoring is good for, and how to design a campaign so that the data can be analyzed as a series</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uas-for-monitoring-change" class="slide level2 smaller">
+<h2>UAS for monitoring change</h2>
+<p>Low cost and rapid deployment make UAS suited to monitoring change at the local scale: fields, small watersheds, construction sites</p>
+<ul>
+<li class="fragment"><strong>Crop monitoring</strong>: growth, disease, stress</li>
+<li class="fragment"><strong>Erosion</strong>: coastal, stream bank, rills and gullies</li>
+<li class="fragment"><strong>Natural hazards</strong>: flooding, landslides, fire</li>
+<li class="fragment"><strong>Industrial</strong>: mining, construction sites, stockpiles</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Airborne lidar is flown every few years; a UAS can fly the same field every two weeks</li>
+<li>The common thread is a surface that changes faster than any regional dataset is updated</li>
+<li>Mid Pines in 2015 is a crop monitoring series: seven flights from March to October</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="monitoring-design" class="slide level2 smaller">
 <h2>Monitoring design</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decision</th>
+<th>What to settle before the first flight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Metrics</td>
+<td>Relative height, volume, feature migration: what quantity answers the question</td>
+</tr>
+<tr class="even">
+<td>Spatial resolution</td>
+<td>Fine enough to capture the change, coarse enough to process a series</td>
+</tr>
+<tr class="odd">
+<td>Temporal resolution</td>
+<td>Regular intervals, or flights timed to events such as storms or harvest</td>
+</tr>
+<tr class="even">
+<td>Accessibility</td>
+<td>Flying over people, line of sight, places for GCPs</td>
+</tr>
+<tr class="odd">
+<td>Georeferencing</td>
+<td>The same GCPs surveyed once and used for every flight</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
 <ul>
-<li><strong>Metrics to quantify changes:</strong> relative height, volume, feature migration</li>
-<li><strong>Spatial resolution:</strong> needed to capture the changes</li>
-<li><strong>Temporal resolution:</strong> regular intervals, events</li>
-<li><strong>Accessibility:</strong> flying over people, line of sight, suitable GCPs</li>
-<li><strong>Georeferencing, rectification:</strong> GCPs distribution and survey</li>
+<li>The metric decides everything else: crop height needs a DSM and a bare ground; a stockpile volume needs two DSMs</li>
+<li>The hardest requirement is the last one: a series is only comparable if every flight is referenced the same way</li>
+<li>The Mid Pines flights used different numbers of GCPs, and the lab finds out what that did to two of them</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="processing-time-series" class="slide level2 smaller">
-<h2>Processing time series</h2>
+<section id="processing-a-time-series" class="slide level2 smaller">
+<h2>Processing a time series</h2>
 <ul>
-<li><strong>Analyze and interpolate point clouds:</strong> DSMs with aligned, common resolution grids</li>
-<li><strong>Data:</strong> raster DSMs are more suitable for time series than TIN</li>
-<li><strong>Accuracy:</strong> use GCPs and permanent features to evaluate accuracy, correct errors and distortions</li>
-<li><strong>Temporal data:</strong> assign time stamps and register raster DSMs within GIS-based temporal data framework</li>
+<li class="fragment">Interpolate every point cloud to a DSM on the same aligned grid at a common resolution</li>
+<li class="fragment">Rasters suit a series better than TINs: the same cell in every map</li>
+<li class="fragment">Check each DSM against GCPs and permanent features; correct shifts, flag distortions (5A)</li>
+<li class="fragment">Give every DSM a time stamp and register the set in the temporal framework</li>
 </ul>
-</section>
-<section id="temporal-data-framework" class="slide level2 smaller">
-<h2>Temporal data framework</h2>
+<aside class="notes">
 <ul>
-<li>supports efficient processing, management and analysis of space-time data sets</li>
-<li>space-time dataset is a set of maps (raster, vector) registered in a temporal database</li>
-<li>space-time dataset may represent a dynamic process</li>
-<li>individual maps represent the states of the dynamic system at a given time</li>
+<li>Aligned grid means the same extent, resolution, and cell origin, otherwise per-cell statistics compare different ground</li>
+<li>The quality check per flight is 5A’s difference map and profile</li>
+<li>Registering the maps is what turns a folder of rasters into a dataset you can query by time</li>
 </ul>
-<p><em>Gebbert, S. and Pebesma, E. (2014). <a href="https://www.sciencedirect.com/science/article/pii/S136481521300282X">A temporal GIS for field based environmental modeling.</a> Environmental Modelling and Software, 53, 1–12.</em></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="timestamp-type" class="slide level2 smaller">
-<h2>Timestamp type</h2>
+<section id="space-time-datasets-in-grass" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Space-time datasets in GRASS</h2>
+<aside class="notes">
 <ul>
-<li><strong>Timestamp:</strong> assigns time to an individual map in space-time data set</li>
-<li><strong>time instant:</strong> snapshot at given time: 2013-10-15 13:00:00 (absolute time)</li>
-<li><strong>time interval:</strong> defined by start and end time: day, month, year (relative time)</li>
-<li><strong>Temporal Aggregation:</strong> a single UAS survey represents a snapshot (state) which can be agreggated by time intervals</li>
+<li>Section 2: the temporal framework, time stamps, and the tools that list and plot a registered series</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-temporal-framework" class="slide level2 smaller">
+<h2>The temporal framework</h2>
+<div class="term-card">
+<p><strong>Space-time raster dataset (STRDS)</strong>: a set of raster maps registered in a temporal database, each with a time stamp; the maps are the states of a changing surface, and the dataset is treated as one object <span class="citation" data-cites="gebbert_temporal_2014">(<a href="#/references" role="doc-biblioref" onclick="">Gebbert and Pebesma 2014</a>)</span></p>
+</div>
+<ul>
+<li class="fragment">Efficient processing, management, and analysis of space-time data</li>
+<li class="fragment">The dataset can hold rasters, 3D rasters, or vectors</li>
+<li class="fragment">Tools work on the whole dataset: list by time, aggregate, compute statistics, apply map algebra</li>
+<li class="fragment">In GRASS: <code>t.create</code> makes the dataset, <code>t.register</code> adds the maps with their times</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>The maps themselves do not change; the database records which map belongs to which time</li>
+<li>Everything that follows, from aggregation to core and envelope, is a <code>t.*</code> tool reading that database</li>
+<li>Lab Part 1: <code>t.create</code> for <code>uas_dsm</code>, then <code>t.register</code> with a text file of map names and dates</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="time-stamps" class="slide level2 smaller">
+<h2>Time stamps</h2>
+<div class="term-card">
+<p><strong>Time stamp</strong>: the time assigned to one map in the dataset, as an instant (2015-06-20) or an interval (2015-06-01 to 2015-07-01), in absolute calendar time or in relative units such as days or years</p>
+</div>
+<ul>
+<li class="fragment">A UAS survey is a snapshot: an instant</li>
+<li class="fragment">Aggregating snapshots over months or seasons turns them into intervals</li>
+<li class="fragment">The dataset’s temporal type, absolute or relative, is set when it is created</li>
 </ul>
 
-<img data-src="../images/st_dataset.webp" class="r-stretch"></section>
-<section id="registered-time-series" class="slide level2">
-<h2>Registered time series</h2>
-<p>Timeline tool: time and spatial extent of registered maps</p>
+<img data-src="../images/st_dataset.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%" alt="Five small shaded relief DSMs of the Mid Pines fields in a row, labeled 2015-03-18, 2015-06-20, 2015-09-04, 2015-09-21, and 2015-10-06"><aside class="notes">
+<ul>
+<li>Instant versus interval is independent of absolute versus relative; the lab uses absolute instants, one date per flight</li>
+<li>The series file is two columns: map name and date, separated by a pipe</li>
+<li><code>t.info</code> reports the type and the time span of the dataset after registration</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-registered-series" class="slide level2 smaller">
+<h2>The registered series</h2>
 
-<img data-src="../images/uas2015_timeline.webp" class="r-stretch"></section>
-<section id="temporal-plot" class="slide level2">
+<img data-src="../images/uas2015_timeline.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%" alt="Timeline Tool output: a plot with seven points on a time axis from March to October 2015 for the dataset uas_dsm, and below it a 3D plot of the seven map extents stacked by time, showing that the extents differ"><ul>
+<li>The Timeline Tool shows when each map was taken and, in 3D, its spatial extent</li>
+<li><code>t.rast.list</code> lists the maps with their times and statistics, optionally filtered with a <code>where</code> clause</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Seven flights: March, June, late July, mid August, two in September, early October</li>
+<li>The 3D plot shows the extents differ from flight to flight, which matters for the intersection in Section 3</li>
+<li>The lab lists maps with <code>where="start_time &gt;= '2015-08-01'"</code>; SQL on the time column</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="temporal-plot" class="slide level2 smaller">
 <h2>Temporal plot</h2>
-<ul>
-<li>Plot time series of elevation values at a given location</li>
-</ul>
 
-<img data-src="../images/tplots.webp" class="r-stretch"></section>
-<section id="temporal-count-and-intersection" class="slide level2 smaller">
-<h2>Temporal count and intersection</h2>
+<img data-src="../images/tplots.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%" alt="A shaded relief map with two red points, and two line plots of DSM elevation at those points across the 2015 flights: one point stays near 110.5 m and spikes to 112 m in August, the other rises from 112.4 m to 114.4 m in August and drops to 112.3 m in September"><p>The Temporal Plot Tool plots the value of every map in the series at one location</p>
+<aside class="notes">
 <ul>
-<li><strong>Count:</strong> number of maps (temporal snapshots) where the given cell has non-null value (overlap)</li>
-<li><strong>Intersection:</strong> grid cells with non-null values from each map in time series</li>
+<li>Pick a point on a road, in a field, and on a building and compare the three curves</li>
+<li>A field should rise through the season and drop at harvest; a road should stay flat</li>
+<li>The August spike at both points is a warning: that survey is off, which Section 3 confirms</li>
 </ul>
-<p><img data-src="../images/series_overlap_count.webp" style="width:45.0%"> <img data-src="../images/intersection.webp" style="width:45.0%"></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="temporal-aggregation" class="slide level2">
+<section id="aggregation-and-per-cell-statistics" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Aggregation and per-cell statistics</h2>
+<aside class="notes">
+<ul>
+<li>Section 3: what the series has in common, how to aggregate it, and the per-cell statistics that summarize change</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="count-and-intersection" class="slide level2 smaller">
+<h2>Count and intersection</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/series_overlap_count.webp" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="Map of the number of DSMs covering each cell, 0 to 7, from dark purple at the edges to yellow in the center where all seven flights overlap, with nested footprints visible; 100 m scale bar"></p>
+</figure>
+</div>
+<p>Count: maps with a value in each cell</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/intersection.webp" class="quarto-figure quarto-figure-center" style="width:80.0%" alt="A single yellow polygon on a coordinate grid: the area covered by all seven DSMs; 100 m scale bar"></p>
+</figure>
+</div>
+<p>Intersection: cells covered by every map</p>
+</div></div>
+<div class="term-card">
+<p>In GRASS: <code>t.rast.series input=uas_dsm method=count output=count</code>, and with <code>-n</code> the count is null where any map is null, which is the intersection</p>
+</div>
+<aside class="notes">
+<ul>
+<li>The flights had different extents, so per-cell statistics are only meaningful where every map has data</li>
+<li>The intersection raster becomes the mask for the rest of the lab: <code>r.mask raster=intersection</code></li>
+<li>Lab Part 2 computes both and zooms the region to the intersection</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="temporal-aggregation" class="slide level2 smaller">
 <h2>Temporal aggregation</h2>
-<ul>
-<li>Temporally aggregate maps over a given period of time - for example to derive monthly average elevation</li>
-</ul>
+<div class="term-card">
+<p><strong>Temporal aggregation</strong>: combining the maps that fall in each interval of a chosen granularity into one map with a statistic, such as the monthly mean; <code>t.rast.aggregate</code></p>
+</div>
 
-<img data-src="../images/aggregated_sept.webp" style="width:75.0%" class="r-stretch"></section>
-<section id="basic-time-series-analysis" class="slide level2 smaller">
-<h2>Basic time series analysis</h2>
-<p>Per cell statistics computed for each cell over the time series:</p>
+<img data-src="../images/aggregated_sept.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%" alt="Three shaded relief panels of the same fields: the 2015-09-04 DSM, the 2015-09-21 DSM, and their aggregated average"><aside class="notes">
 <ul>
-<li>Mean and standard deviation</li>
-<li>Min, max elevation and range</li>
-<li>Time at minimum, time at maximum</li>
-<li>Linear regression: slope, offset, regression coefficient</li>
+<li>September has two flights; a monthly aggregation averages them into one September map</li>
+<li>The output is a new dataset with interval time stamps, one per month that has data</li>
+<li>Lab Part 2: <code>t.rast.aggregate ... granularity="1 months" method=average</code></li>
 </ul>
-<p><em>Reference:</em><br>
-<a href="http://www4.ncsu.edu/~hmitaso/gmslab/papers/MitasovaFinalGeoinf09.pdf">Mitasova, H., Hardin, E., Overton, M., and Harmon, R.S., 2009, New spatial measures of terrain dynamics derived from time series of lidar data, Proc. 17th Int. Conf. Geoinformatics, Fairfax, VA.</a></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="basic-time-series-analysis-core-envelope" class="slide level2">
-<h2>Basic time series analysis: core, envelope</h2>
+<section id="per-cell-statistics-over-time" class="slide level2 smaller">
+<h2>Per-cell statistics over time</h2>
 <ul>
-<li><strong>Core surface:</strong> minimum elevation measured for each cell</li>
-<li><strong>Envelope:</strong> maximum elevation measured for each cell</li>
+<li class="fragment">Mean and standard deviation of the elevation at each cell</li>
+<li class="fragment">Minimum, maximum, and range</li>
+<li class="fragment">Time of the minimum and time of the maximum: which map it came from</li>
+<li class="fragment">Linear regression through time: slope, offset, and coefficient of determination</li>
 </ul>
-<p>Example: cutting plane with lidar, core and envelope</p>
-<p><img data-src="../images/cutplane1.webp" style="width:47.0%"> <img data-src="../images/cutplane2.webp" style="width:47.0%"></p>
+<div class="term-card">
+<p>In GRASS: <code>t.rast.series input=uas_dsm method=minimum|maximum|min_raster|max_raster|average|stddev|slope ...</code> <span class="citation" data-cites="mitasova_new_2009">(<a href="#/references" role="doc-biblioref" onclick="">Mitasova et al. 2009</a>)</span></p>
+</div>
+<aside class="notes">
+<ul>
+<li>Each statistic is one raster computed down the stack of maps, cell by cell</li>
+<li><code>min_raster</code> and <code>max_raster</code> return the index of the map, counted from zero, not the elevation</li>
+<li>The lab uses minimum, min_raster, and maximum; regression needs a longer, regular series</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="detecting-surveys-with-large-distortions" class="slide level2 smaller">
-<h2>Detecting surveys with large distortions</h2>
+<section id="core-and-envelope" class="slide level2 smaller">
+<h2>Core and envelope</h2>
+<div class="term-card">
+<p><strong>Core surface</strong>: the minimum elevation measured at each cell over the series. <strong>Envelope</strong>: the maximum. Everything the surface ever did lies between them</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/cutplane1.webp" alt="3D view of crop fields cut by a vertical plane: the dark green crop canopy, the envelope, stands above the yellow bare ground, the core, and the cut face shows the volume between them"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/cutplane2.webp" alt="3D view of a long building cut by a vertical plane: the building rises in dark green from the yellow ground surface and the cut face shows its cross section"></p>
+</div></div>
+<p>Cutting planes through the lidar ground, the core, and the envelope of the series</p>
+<aside class="notes">
 <ul>
-<li>Derive core surface from UAS time series</li>
-<li>Compute difference between UAS core and lidar bare ground surface</li>
-<li>Compute time of minimum raster to identify the distorted DSMs with elevation well below lidar bare ground</li>
+<li>On a crop field the core is close to bare ground and the envelope is the canopy at its tallest</li>
+<li>On a building both are the roof, so the difference is zero: a built-in test of the series</li>
+<li>The two surfaces come from <code>t.rast.series</code> with <code>method=minimum</code> and <code>method=maximum</code></li>
 </ul>
-<p><img data-src="../images/diff_lid_uasmin.webp" style="width:47.0%"> <img data-src="../images/minraster.webp" style="width:47.0%"></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="corrected-uas-core-surface" class="slide level2 smaller">
-<h2>Corrected UAS core surface</h2>
+<section id="finding-distorted-surveys" class="slide level2 smaller">
+<h2>Finding distorted surveys</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/diff_lid_uasmin.webp" class="quarto-figure quarto-figure-center" style="width:85.0%" alt="Map of the lidar bare ground minus the core surface: mostly white, with pink and red patches where the core lies up to 15 m below the lidar ground, and a blue building; legend from minus 4.3 to 15.3 m, 100 m scale bar"></p>
+</figure>
+</div>
+<p>Lidar ground minus core</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/minraster.webp" class="quarto-figure quarto-figure-center" style="width:85.0%" alt="Map of which survey gave the minimum at each cell, indexed 0 to 6: large teal areas for index 3, green and blue for index 2, purple for 0, and yellow patches for 6; 100 m scale bar"></p>
+</figure>
+</div>
+<p>Index of the map with the minimum</p>
+</div></div>
 <ul>
-<li>Remove distorted DSMs from derivation of core surface</li>
-<li>Difference between UAS core and lidar bare ground surface is now very small</li>
-<li>Hist. equalized color ramp for differences highlights a small shift in lidar swath</li>
+<li>Compute the core and subtract it from the lidar bare ground</li>
+<li>Where the core lies well below the ground, <code>min_raster</code> names the survey responsible</li>
 </ul>
-<p><img data-src="../images/diff_lid_uasmin2.webp" style="width:45.0%"> <img data-src="../images/diff_lid_uasmin2_histeq.webp" style="width:45.0%"></p>
+<aside class="notes">
+<ul>
+<li>A bare ground DSM cannot be below the real ground, so a core far under the lidar DEM is an error</li>
+<li>Here indexes 2 and 3, the late July and mid August flights, flown with two and three GCPs, supply most of those minima</li>
+<li>Lab Part 3: <code>r.what</code> on <code>min_raster</code> at two points, then exclude the two surveys with a <code>where</code> clause</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="envelope-and-range-applications" class="slide level2 smaller">
-<h2>Envelope and range applications</h2>
+<section id="corrected-core-surface" class="slide level2 smaller">
+<h2>Corrected core surface</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/diff_lid_uasmin2.webp" class="quarto-figure quarto-figure-center" style="width:85.0%" alt="Lidar ground minus the core recomputed without the two distorted surveys: nearly white everywhere, with faint blue along the forest edge in the east and a blue building; legend from minus 4.8 to 8.5 m"></p>
+</figure>
+</div>
+<p>Without the two distorted surveys</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/diff_lid_uasmin2_histeq.webp" class="quarto-figure quarto-figure-center" style="width:85.0%" alt="The same difference with a histogram-equalized color table: the northwest half is red and the southeast half blue, split along a straight diagonal line"></p>
+</figure>
+</div>
+<p>Histogram-equalized colors</p>
+</div></div>
 <ul>
-<li>Envelope: what is the max height of crop in each pixel over the monitored period?</li>
-<li>Time of maximum - when was the crop highest at each grid cell?</li>
-<li>Where is the largest range and variability in crop height?</li>
+<li>Remove the distorted DSMs and recompute the core: the difference to the lidar ground is now small</li>
+<li>A histogram-equalized color table stretches the small differences and reveals a shift between two lidar swaths</li>
 </ul>
-<p><img data-src="../images/diff_lid_uasmax.webp" style="width:40.0%"> <img data-src="../images/max2.webp" style="width:40.0%"></p>
+<aside class="notes">
+<ul>
+<li>The second map is the same data; only the colors changed, and a straight line appears</li>
+<li>That line is a seam between two lidar flight lines, a few centimeters apart: the corduroy effect from 5A</li>
+<li>Equalized colors are the way to find small systematic patterns in a difference map</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="envelope-and-range-applications-1" class="slide level2">
-<h2>Envelope and range applications</h2>
+<section id="envelope-and-range" class="slide level2 smaller">
+<h2>Envelope and range</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/diff_lid_uasmax.webp" class="quarto-figure quarto-figure-center" style="width:62.0%" alt="Map of the lidar ground minus the envelope surface: crop fields in deep blue down to minus 3 m, bare ground and roads near white, forest in blue along the east edge; legend from 0 to minus 3 m"></p>
+</figure>
+</div>
+<p>Lidar ground minus envelope: the tallest crop at each cell</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/max2.webp" class="quarto-figure quarto-figure-center" style="width:72.0%" alt="3D view of the envelope surface in yellow and orange: the crop fields at their tallest, trees and a building rising above them"></p>
+</figure>
+</div>
+<p>The envelope surface in 3D</p>
+</div></div>
 <ul>
-<li>Use envelope to show all cars ever parked at the site</li>
-<li>Core, snapshot, envelope, surfaces can be used to manage parking area</li>
+<li>Envelope minus ground: the maximum crop height over the season at each cell</li>
+<li>Time of maximum: when each cell was highest</li>
+<li>Range: where the surface varied most</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>The envelope is the season’s tallest crop, field by field, in one map</li>
+<li><code>max_raster</code> gives the flight of the maximum, which differs between fields planted at different times</li>
+<li>The lab uses the envelope for the webcam viewshed, as the worst case for visibility</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="envelope-of-a-parking-area" class="slide level2 smaller">
+<h2>Envelope of a parking area</h2>
 
-<img data-src="../images/cars.webp" style="width:50.0%" class="r-stretch"></section>
-<section id="basic-time-series-analysis-regression" class="slide level2">
-<h2>Basic time series analysis: regression</h2>
-<ul>
-<li>Applies to well designed, systematic monitoring with longer time series</li>
-<li>Select subset where the changes are close to linear - e.g.&nbsp;crop growth period</li>
-<li>Compute per cell linear regression analysis: map of regression slope and offset</li>
+<img data-src="../images/cars.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:65.0%" alt="Shaded relief of the envelope surface around a long building: a row of car-sized bumps along the road, several more beside the building, and trees"><ul>
+<li>The envelope shows every car that was parked at the site during any flight</li>
+<li>Core, snapshot, and envelope surfaces together describe how an area is used</li>
 </ul>
-</section>
-<section id="map-algebra-for-time-series" class="slide level2">
-<h2>Map algebra for time series</h2>
+<aside class="notes">
 <ul>
-<li>Apply map algebra expression for each map in the time series at each grid cell</li>
-<li>Output is new time series which is registered as a new space-time dataset</li>
-<li>This is different (and much simpler) from temporal map algebra</li>
+<li>A light example of the same statistic: anything that was ever there is in the envelope</li>
+<li>The core, by contrast, shows the lot empty</li>
+<li>Lab Part 5 asks you to look at the relief of the envelope DSM around the building for exactly this</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="extract-crop-height-time-series" class="slide level2 smaller">
-<h2>Extract crop height time series</h2>
-<p>Map algebra can be used to extract grid cells with elevation above lidar bare ground within a selected elevation interval (z1,z2)</p>
-<p><img data-src="../images/veg_uas_lidar2.webp" style="width:32.0%"> <img data-src="../images/veg_uas_lidar3.webp" style="width:32.0%"> <img data-src="../images/veg_uas_lidar7.webp" style="width:32.0%"></p>
-<p><em>Maps of relative elevation (0.3m, 2.0m) above bare ground lidar for 3 time snapshots in our time series. The middle map shows distortions rather than crop.</em></p>
+<section id="regression-through-time" class="slide level2 smaller">
+<h2>Regression through time</h2>
+<ul>
+<li class="fragment">Needs a well designed, systematic series: regular flights over a longer period</li>
+<li class="fragment">Choose the part of the series where the change is close to linear, such as a growth period</li>
+<li class="fragment">Per-cell linear regression gives a map of the rate of change and a map of the fit</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Seven irregular flights with two bad ones are not enough for a regression; this is where a designed campaign pays</li>
+<li>The slope map is the growth rate in meters per day, cell by cell</li>
+<li><code>t.rast.series method=slope</code> and <code>method=detcoeff</code></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="estimate-crop-volume" class="slide level2">
-<h2>Estimate crop volume</h2>
-<p>Summary statistics can be used to estimate above ground crop biomass</p>
+<section id="map-algebra-on-a-series" class="slide level2 smaller">
+<h2>Map algebra on a series</h2>
+<ul>
+<li class="fragment">Apply one map algebra expression to every map in the series, cell by cell</li>
+<li class="fragment">The result is a new series, registered as a new dataset with the same time stamps</li>
+<li class="fragment">Simpler than temporal algebra, which combines maps across time</li>
+</ul>
+<div class="term-card">
+<p>In GRASS: <code>t.rast.mapcalc inputs=uas_dsm expression="uas_dsm - lidar_dem" output=height basename=height</code>, where <code>uas_dsm</code> stands for each map in turn</p>
+</div>
+<aside class="notes">
+<ul>
+<li>The dataset name in the expression is replaced by each registered map</li>
+<li>Other rasters in the expression, like the lidar DEM, are the same for every map</li>
+<li>Lab Part 4 uses this to turn the DSM series into a crop height series</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="applications" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Applications</h2>
+<aside class="notes">
+<ul>
+<li>Section 4: three uses of the series the lab works through: crop height and biomass, a viewshed, and a volume</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="crop-height-series" class="slide level2 smaller">
+<h2>Crop height series</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img data-src="../images/veg_uas_lidar2.webp" alt="Crop height above the lidar ground on 2015-06-20, 0.3 to 2 m in purple to yellow: the curved field strips filled with 1 to 2 m crop, bare strips and roads blank"></p>
+<p>June 20</p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="../images/veg_uas_lidar3.webp" alt="The same map for 2015-07-27: scattered purple and yellow patches across the whole area and along the forest edge, not following the fields, the signature of a distorted survey"></p>
+<p>July 27</p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="../images/veg_uas_lidar7.webp" alt="The same map for 2015-10-06: thin purple remnants on a few strips after harvest, the rest blank"></p>
+<p>October 6</p>
+</div></div>
+<p>Height above the lidar bare ground between 0.3 and 2 m, from <code>t.rast.mapcalc</code> with <code>if()</code> on the fields raster</p>
+<aside class="notes">
+<ul>
+<li>The window of 0.3 to 2 m keeps the crop and drops the soil noise below and the building and trees above</li>
+<li>The July map shows distortion rather than crop: the pattern ignores the field boundaries</li>
+<li>Lab Part 4: <code>t.rast.mapcalc</code> with the fields mask, then <code>t.rast.univar</code> for the statistics per date</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="crop-volume" class="slide level2 smaller">
+<h2>Crop volume</h2>
 
-<img data-src="../images/cutplane1.webp" style="width:70.0%" class="r-stretch"></section>
-<section id="estimate-volume-of-structures" class="slide level2">
-<h2>Estimate volume of structures</h2>
-<ul>
-<li>Compute volume based on difference between bare ground and above ground feature, such as building</li>
+<img data-src="../images/cutplane1.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:65.0%" alt="3D view of crop fields cut by a vertical plane, the dark green canopy above the yellow bare ground with the volume between them exposed on the cut face"><ul>
+<li>Sum of the crop height over the field cells, times the cell area, is the crop volume above ground</li>
+<li>A proxy for above ground biomass, and its change through the season</li>
 </ul>
+<aside class="notes">
+<ul>
+<li><code>r.univar</code> gives the sum of heights; multiply by the cell area for cubic meters</li>
+<li>Comparing the volume per flight gives the growth curve of the field</li>
+<li>Lab Part 4 computes the June volume from <code>veg_uas_lidar_2</code> with <code>r.univar</code></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="volume-of-a-structure" class="slide level2 smaller">
+<h2>Volume of a structure</h2>
 
-<img data-src="../images/cutplane2.webp" style="width:70.0%" class="r-stretch"></section>
-<section id="analysis-viewsheds" class="slide level2 smaller">
-<h2>Analysis: Viewsheds</h2>
-<p>Evaluate influence of vegetation on the viewshed area</p>
-<p><img data-src="../images/Anna_viewshed.webp" height="380"></p>
-<p><em>Spatial extent of viewshed changes over time depending on the height of surrounding vegetation, different colors show the spatial extent of viewshed at different times</em></p>
-</section>
-<section id="analysis-viewsheds-1" class="slide level2 smaller">
-<h2>Analysis: Viewsheds</h2>
-<p>Provide analysis to support siting of a monitoring webcam</p>
-<p><img data-src="../images/Anna_viewshed.webp" height="380"></p>
-<p><em>Spatial extent of viewshed changes over time depending on the height of surrounding vegetation</em></p>
-</section>
-<section id="dynamic-visualization" class="slide level2 smaller">
-<h2>Dynamic visualization</h2>
-<ul>
-<li>See Terrain time series visualization in the <a href="http://ncsu-geoforall-lab.github.io/grass-temporal-workshop/">GRASS temporal workshop</a></li>
-<li>We covered the basics in the flow modeling example</li>
+<img data-src="../images/cutplane2.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:65.0%" alt="3D view of a long building rising in dark green from the yellow ground surface, cut by a vertical plane that shows its cross section"><ul>
+<li>Difference between the DSM and the bare ground over the footprint of the feature</li>
+<li><code>r.volume</code> sums the difference over a clump of cells and reports the volume</li>
 </ul>
-<p><img data-src="../images/agisoft_june.webp" height="300"></p>
-</section>
-<section id="what-we-have-learned" class="slide level2">
-<h2>What we have learned</h2>
+<aside class="notes">
 <ul>
-<li>UAS 3D monitoring basic considerations</li>
-<li>Temporal framework concept</li>
-<li>Computing core and envelope and its application</li>
-<li>Identification of distorted DSMs in time series</li>
-<li>Estimation of volumes</li>
-<li>Analyzing changing viewsheds</li>
-<li>Dynamic visualization</li>
+<li>Same idea as the crop volume, for one object: a building, a stockpile, a dune</li>
+<li>The footprint comes from a threshold on the difference, here everything more than 2 m above the ground</li>
+<li>Lab Part 6 does this for the building at Mid Pines</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="viewsheds-on-a-changing-surface" class="slide level2 smaller">
+<h2>Viewsheds on a changing surface</h2>
+<div class="term-card">
+<p><strong>Cumulative viewshed</strong>: the number of observer points from which each cell is visible; <code>r.viewshed</code> per observer, then <code>r.series method=count</code></p>
+</div>
+
+<img data-src="../images/Anna_viewshed.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:48.0%" alt="Shaded relief with the extent of a viewshed drawn in orange, pink, and yellow for different dates, spreading from an observer point across the fields; a cyan rectangle marks the study area"><ul>
+<li>The vegetation height decides what a camera sees, so the viewshed changes through the season</li>
+<li>Compute the viewshed on the lidar DSM and on the envelope DSM to see the best and worst case</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Different colors are the viewshed extent at different times: the crop closes the view as it grows</li>
+<li>Lab Part 5 sites a webcam: a cumulative viewshed from six candidate points on the lidar DSM, then the view from the chosen point on the envelope DSM</li>
+<li>The envelope DSM is built by fusing the UAS envelope into the lidar DSM with <code>r.patch.smooth</code> from 5A</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="visualizing-a-series" class="slide level2 smaller">
+<h2>Visualizing a series</h2>
+<ul>
+<li class="fragment">Animation Tool: one frame per map, draped over a shaded relief, exported as a GIF (5A)</li>
+<li class="fragment">Temporal Plot Tool: the value through time at a point</li>
+<li class="fragment">3D view of two surfaces with a cutting plane: core, envelope, and lidar ground</li>
+<li class="fragment">The <a href="https://ncsu-geoforall-lab.github.io/grass-temporal-workshop/">GRASS temporal workshop</a> has the terrain time series example</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>The flow animation in 5A used the same Animation Tool on a series of depth maps</li>
+<li>For a DSM series, drape the crop height over the relief and step through the flights</li>
+<li>The notebook does this with a series map in place of the GUI tool</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-terms" class="slide level2 smaller">
+<h2>Key terms</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Space-time raster dataset</strong>: a set of rasters registered with time stamps and handled as one object</p>
+</div>
+<div class="term-card">
+<p><strong>Time stamp</strong>: an instant or an interval, in absolute or relative time, assigned to each map</p>
+</div>
+<div class="term-card">
+<p><strong>Temporal aggregation</strong>: one map per interval of a chosen granularity, with a statistic such as the mean</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Core surface</strong>: the per-cell minimum over the series; near bare ground on a field</p>
+</div>
+<div class="term-card">
+<p><strong>Envelope surface</strong>: the per-cell maximum over the series; the tallest the surface ever was</p>
+</div>
+<div class="term-card">
+<p><strong>Cumulative viewshed</strong>: the number of observer points from which each cell is visible</p>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Midterm vocabulary, and the words the lab report has to use correctly</li>
+<li>The grading asks for conclusions in these terms: intersection, aggregation, core and envelope, distorted survey</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Assignment 5B</strong>: <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html">Analysis of multitemporal UAS data</a></p>
+</div>
+<aside class="notes">
+<ul>
+<li>Recap: register once, then every analysis is a <code>t.*</code> tool on the dataset</li>
+<li>Core and envelope bracket everything the surface did; a core below bare ground points at a bad survey</li>
+<li>Map algebra on the series turns DSMs into the quantity you care about: crop height, then biomass</li>
+<li>Next: the guest lecture and the midterm, then Topic 6 on image classification and change detection</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-gebbert_temporal_2014" class="csl-entry" role="listitem">
+Gebbert, Sören, and Edzer Pebesma. 2014. <span>“A Temporal <span>GIS</span> for Field Based Environmental Modeling.”</span> <em>Environmental Modelling &amp; Software</em> 53: 1–12. <a href="https://doi.org/10.1016/j.envsoft.2013.11.001">https://doi.org/10.1016/j.envsoft.2013.11.001</a>.
+</div>
+<div id="ref-mitasova_new_2009" class="csl-entry" role="listitem">
+Mitasova, Helena, Eric Hardin, Margery Overton, and Russell S. Harmon. 2009. <span>“New Spatial Measures of Terrain Dynamics Derived from Time Series of Lidar Data.”</span> <em>2009 17th International Conference on Geoinformatics</em>, 1–6. <a href="https://doi.org/10.1109/GEOINFORMATICS.2009.5293539">https://doi.org/10.1109/GEOINFORMATICS.2009.5293539</a>.
+</div>
+</div>
 
 
 </section>
@@ -413,7 +1068,7 @@ Helena Mitasova, Anna Petrasova, Justyna Jeziorska &amp; Corey White
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

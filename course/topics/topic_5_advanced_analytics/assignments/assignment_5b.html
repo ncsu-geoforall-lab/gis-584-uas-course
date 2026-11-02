@@ -2,12 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.10.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Anna Petrasova">
-<meta name="author" content="Corey White">
 <meta name="dcterms.date" content="2026-10-28">
 
 <title>Assignment 5B – UAS Mapping and Analytics</title>
@@ -81,10 +79,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-568b1c850ec3aaf20faca8799bbfaa5a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-9c00526d2f807eea17e6e7908f32d22d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -653,21 +651,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
-  <li><a href="#analyze-time-series-of-uas-dsms" id="toc-analyze-time-series-of-uas-dsms" class="nav-link" data-scroll-target="#analyze-time-series-of-uas-dsms">Analyze time series of UAS DSMs</a>
-  <ul>
-  <li><a href="#create-a-new-mapset-and-copy-the-uas-dsms" id="toc-create-a-new-mapset-and-copy-the-uas-dsms" class="nav-link" data-scroll-target="#create-a-new-mapset-and-copy-the-uas-dsms">Create a new mapset and copy the UAS DSMs</a></li>
-  <li><a href="#register-the-time-series-in-temporal-framework" id="toc-register-the-time-series-in-temporal-framework" class="nav-link" data-scroll-target="#register-the-time-series-in-temporal-framework">Register the time series in temporal framework</a></li>
-  <li><a href="#find-the-area-mapped-by-all-surveys" id="toc-find-the-area-mapped-by-all-surveys" class="nav-link" data-scroll-target="#find-the-area-mapped-by-all-surveys">Find the area mapped by all surveys</a></li>
-  <li><a href="#temporal-aggregation" id="toc-temporal-aggregation" class="nav-link" data-scroll-target="#temporal-aggregation">Temporal aggregation</a></li>
-  <li><a href="#minimum-elevation-core" id="toc-minimum-elevation-core" class="nav-link" data-scroll-target="#minimum-elevation-core">Minimum elevation (core)</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#part-1-register-the-time-series" id="toc-part-1-register-the-time-series" class="nav-link" data-scroll-target="#part-1-register-the-time-series">Part 1: Register the time series</a>
+  <ul class="collapse">
+  <li><a href="#create-a-mapset-and-copy-the-dsms" id="toc-create-a-mapset-and-copy-the-dsms" class="nav-link" data-scroll-target="#create-a-mapset-and-copy-the-dsms">Create a mapset and copy the DSMs</a></li>
+  <li><a href="#create-and-register-the-dataset" id="toc-create-and-register-the-dataset" class="nav-link" data-scroll-target="#create-and-register-the-dataset">Create and register the dataset</a></li>
+  <li><a href="#look-at-the-series" id="toc-look-at-the-series" class="nav-link" data-scroll-target="#look-at-the-series">Look at the series</a></li>
   </ul></li>
-  <li><a href="#estimate-crop-biomass" id="toc-estimate-crop-biomass" class="nav-link" data-scroll-target="#estimate-crop-biomass">Estimate crop biomass</a></li>
-  <li><a href="#evaluate-impact-of-vegetation-change-on-viewshed-extent" id="toc-evaluate-impact-of-vegetation-change-on-viewshed-extent" class="nav-link" data-scroll-target="#evaluate-impact-of-vegetation-change-on-viewshed-extent">Evaluate impact of vegetation change on viewshed extent</a>
-  <ul>
-  <li><a href="#estimate-volume-of-a-building" id="toc-estimate-volume-of-a-building" class="nav-link" data-scroll-target="#estimate-volume-of-a-building">Estimate volume of a building</a></li>
+  <li><a href="#part-2-intersection-and-aggregation" id="toc-part-2-intersection-and-aggregation" class="nav-link" data-scroll-target="#part-2-intersection-and-aggregation">Part 2: Intersection and aggregation</a>
+  <ul class="collapse">
+  <li><a href="#area-mapped-by-all-surveys" id="toc-area-mapped-by-all-surveys" class="nav-link" data-scroll-target="#area-mapped-by-all-surveys">Area mapped by all surveys</a></li>
+  <li><a href="#monthly-aggregation" id="toc-monthly-aggregation" class="nav-link" data-scroll-target="#monthly-aggregation">Monthly aggregation</a></li>
+  </ul></li>
+  <li><a href="#part-3-core-surface-and-distorted-surveys" id="toc-part-3-core-surface-and-distorted-surveys" class="nav-link" data-scroll-target="#part-3-core-surface-and-distorted-surveys">Part 3: Core surface and distorted surveys</a>
+  <ul class="collapse">
+  <li><a href="#minimum-elevation" id="toc-minimum-elevation" class="nav-link" data-scroll-target="#minimum-elevation">Minimum elevation</a></li>
+  <li><a href="#which-survey-is-responsible" id="toc-which-survey-is-responsible" class="nav-link" data-scroll-target="#which-survey-is-responsible">Which survey is responsible</a></li>
+  <li><a href="#recompute-the-core-without-them" id="toc-recompute-the-core-without-them" class="nav-link" data-scroll-target="#recompute-the-core-without-them">Recompute the core without them</a></li>
+  </ul></li>
+  <li><a href="#part-4-crop-height-and-biomass" id="toc-part-4-crop-height-and-biomass" class="nav-link" data-scroll-target="#part-4-crop-height-and-biomass">Part 4: Crop height and biomass</a></li>
+  <li><a href="#part-5-viewsheds-and-the-envelope-dsm" id="toc-part-5-viewsheds-and-the-envelope-dsm" class="nav-link" data-scroll-target="#part-5-viewsheds-and-the-envelope-dsm">Part 5: Viewsheds and the envelope DSM</a>
+  <ul class="collapse">
+  <li><a href="#cumulative-viewshed" id="toc-cumulative-viewshed" class="nav-link" data-scroll-target="#cumulative-viewshed">Cumulative viewshed</a></li>
+  <li><a href="#envelope-dsm" id="toc-envelope-dsm" class="nav-link" data-scroll-target="#envelope-dsm">Envelope DSM</a></li>
+  <li><a href="#compare-the-viewsheds" id="toc-compare-the-viewsheds" class="nav-link" data-scroll-target="#compare-the-viewsheds">Compare the viewsheds</a></li>
+  </ul></li>
+  <li><a href="#part-6-volume-of-a-building" id="toc-part-6-volume-of-a-building" class="nav-link" data-scroll-target="#part-6-volume-of-a-building">Part 6: Volume of a building</a></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" id="toc-due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="nav-link" data-scroll-target="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 11/18/2026</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -682,20 +698,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/index.html">Topic 5: Advanced Analytics</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html">Assignment 5B</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Assignment 5B</h1>
-<p class="subtitle lead">Analysis of multitemporal UAS data and its applications</p>
+<p class="subtitle lead">Analysis of multitemporal UAS data</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Authors</div>
-    <div class="quarto-title-meta-contents">
-             <p>Anna Petrasova </p>
-             <p>Corey White </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -712,54 +721,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<ul>
-<li>Introduction to GRASS temporal framework</li>
-<li>Analyze the time series of UAS DEMs</li>
-<li>Estimate crop biomas and its temporal change</li>
-<li>Evaluate impact of vegetation change on viewshed extent</li>
-<li>Estimate volume of eroded and deposited soil</li>
-</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_5_advanced_analytics/assignments/multitemporal_analysis.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
+<figcaption>Open in Colab</figcaption>
+</figure>
+</div>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>In this assignment you analyze the seven UAS DSMs of Mid Pines flown between March and October 2015 as a time series. You register them as a space-time raster dataset in the GRASS temporal framework, find the area covered by every survey, and aggregate the series by month. You derive the core surface, compare it with the lidar bare ground to find the two distorted surveys, and recompute the core without them. You then apply the series: crop height and biomass from map algebra on the series, a webcam viewshed on the lidar DSM and on the envelope DSM, and the volume of a building.</p>
+<p>Keep in mind that the seven flights were processed with different numbers of GCPs, from two to eleven. The surveys with few GCPs are the ones the core surface exposes. Everything in Parts 2 to 4 is computed inside the intersection of the surveys and under a mask, so the statistics refer to that area only.</p>
+<p>Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and statistics for you. The Timeline Tool and the Temporal Plot Tool in Part 1 are GUI only; the notebook plots the same things. Either way, the report is the same.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>You should have everything already for Mid Pines area, get anything missing from the <a href="../../../../course/policies.html">Course logistics web page</a>:</p>
 <ul>
-<li>GRASS Project: <a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">LakeWheeler_NCspm</a></li>
-<li>2013 lidar interpolated DEM and DSM: <a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip">download</a>, use <code>r.unpack</code>.</li>
-<li><a href="./resources/fields.pack">Fields polygon as packed raster</a> use <code>r.unpack</code> in your mapset to import it</li>
-<li><a href="./resources/series.txt">Text file</a> with timeseries</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler GRASS project: Lake_Wheeler_NCspm</a> (EPSG:3358; you have it from the earlier assignments; the seven 2015 DSMs are in <code>PERMANENT</code>)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip">2013 lidar DEM and DSM of Mid Pines</a> (zip with GRASS raster packs; you have it from Assignments 4B and 5A, restore with <code>r.unpack</code>)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/fields.pack">Fields raster: fields.pack</a> (GRASS raster pack of the crop fields, 1 inside the fields, null elsewhere)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/series.txt">Series file: series.txt</a> (the DSM names and their dates, for <code>t.register</code>)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/dif_lidar_uav.txt">Color rules for difference maps: dif_lidar_uav.txt</a> (the same file as in Assignment 5A)</li>
 </ul>
 </section>
-<section id="tools" class="level2">
-<h2 class="anchored" data-anchor-id="tools">Tools</h2>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
 <ul>
-<li>GRASS 8.5</li>
-<li>GRASS Addon: <a href="https://grass.osgeo.org/grass84/manuals/addons/r.patch.smooth.html">r.patch.smooth</a></li>
+<li><a href="https://grass.osgeo.org/">GRASS</a> 8.5</li>
+<li>The addon <a href="https://grass.osgeo.org/grass85/manuals/addons/r.patch.smooth.html">r.patch.smooth</a>, which you installed in Assignment 5A; if not:</li>
 </ul>
-<p>Install <a href="https://grass.osgeo.org/grass84/manuals/addons/r.patch.smooth.html">r.patch.smooth</a> with the following command:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.patch.smooth</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.patch.smooth</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="analyze-time-series-of-uas-dsms" class="level2">
-<h2 class="anchored" data-anchor-id="analyze-time-series-of-uas-dsms">Analyze time series of UAS DSMs</h2>
-<section id="create-a-new-mapset-and-copy-the-uas-dsms" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-new-mapset-and-copy-the-uas-dsms">Create a new mapset and copy the UAS DSMs</h3>
-<p>Start GRASS in Lake_Wheeler_NCspm project and create a new mapset. Open GRASS in this mapset</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_03_18_DSM_agi_6GCP@PERMANENT,2015_03_18_DSM_agi_6GCP</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_06_20_DSM_agi_11GCP@PERMANENT,2015_06_20_DSM_agi_11GCP</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_07_27_DSM_agi_2GCP_4ID@PERMANENT,2015_07_27_DSM_agi_2GCP_4ID </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_08_14_DSM_agi_3GCP_4ID@PERMANENT,2015_08_14_DSM_agi_3GCP_4ID </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_09_04_DSM_agi_6GCP@PERMANENT,2015_09_04_DSM_agi_6GCP</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_09_21_DSM_agi_6GCP@PERMANENT,2015_09_21_DSM_agi_6GCP</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_10_06_DSM_agi_8GCPs@PERMANENT,2015_10_06_DSM_agi_8GCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="part-1-register-the-time-series" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-register-the-time-series">Part 1: Register the time series</h2>
+<section id="create-a-mapset-and-copy-the-dsms" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-mapset-and-copy-the-dsms">Create a mapset and copy the DSMs</h3>
+<p>Start GRASS in the <code>Lake_Wheeler_NCspm</code> project, create a new mapset <code>multitemporal</code>, and switch to it. Put the data files in your working directory.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.mapset</span> <span class="at">-c</span> mapset=multitemporal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The temporal database lives in the mapset, and maps from other mapsets cannot be registered in it, so copy the seven DSMs from <code>PERMANENT</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_03_18_DSM_agi_6GCP@PERMANENT,2015_03_18_DSM_agi_6GCP</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_06_20_DSM_agi_11GCP@PERMANENT,2015_06_20_DSM_agi_11GCP</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_07_27_DSM_agi_2GCP_4ID@PERMANENT,2015_07_27_DSM_agi_2GCP_4ID</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_08_14_DSM_agi_3GCP_4ID@PERMANENT,2015_08_14_DSM_agi_3GCP_4ID</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_09_04_DSM_agi_6GCP@PERMANENT,2015_09_04_DSM_agi_6GCP</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_09_21_DSM_agi_6GCP@PERMANENT,2015_09_21_DSM_agi_6GCP</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=2015_10_06_DSM_agi_8GCPs@PERMANENT,2015_10_06_DSM_agi_8GCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The names record the flight date and the number of GCPs used in processing.</p>
 </section>
-<section id="register-the-time-series-in-temporal-framework" class="level3">
-<h3 class="anchored" data-anchor-id="register-the-time-series-in-temporal-framework">Register the time series in temporal framework</h3>
-<p>First, create a space-time raster dataset (STRDS) with absolute temporal type:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.create</span> output=uas_dsm type=strds temporaltype=absolute semantictype=mean title=<span class="st">"UAS_DSM"</span> description=<span class="st">"UAS-based 2015 DSMs processed by Agisoft"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now, create a text file named “series.txt” with the following content in your working directory, or <a href="./resources/series.txt">download the prepared file</a> into your working directory.</p>
-<p>These are the DSMs with their time stamps:</p>
+<section id="create-and-register-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="create-and-register-the-dataset">Create and register the dataset</h3>
+<p>Create a space-time raster dataset (STRDS) with absolute time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.create</span> output=uas_dsm type=strds temporaltype=absolute semantictype=mean title=<span class="st">"UAS_DSM"</span> description=<span class="st">"UAS-based 2015 DSMs processed by Agisoft"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The file <code>series.txt</code> lists each DSM with its date, one per line, separated by a pipe:</p>
 <pre><code>2015_03_18_DSM_agi_6GCP|2015-03-18
 2015_06_20_DSM_agi_11GCP|2015-06-20
 2015_07_27_DSM_agi_2GCP_4ID|2015-07-27
@@ -767,217 +779,211 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2015_09_04_DSM_agi_6GCP|2015-09-04
 2015_09_21_DSM_agi_6GCP|2015-09-21
 2015_10_06_DSM_agi_8GCPs|2015-10-06</code></pre>
-<p>Register the DSMs into the created STRDS uas_dsm:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.register</span> input=uas_dsm file=series.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now check it was registered correctly:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.info</span> input=uas_dsm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>See different ways we can list raster maps registered in the dataset:</p>
+<p>Register the DSMs in the dataset and check the result:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.register</span> input=uas_dsm file=series.txt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.info</span> input=uas_dsm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>t.rast.list</code> lists the registered maps; the <code>where</code> clause is SQL on the time columns, and <code>columns</code> can include statistics of each map:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.list</span> input=uas_dsm columns=name,start_time where=<span class="st">"start_time &gt;= '2015-08-01'"</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.list</span> input=uas_dsm columns=name,start_time,min,max</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Verify the listed raster maps are actually in the database:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.list</span> type=raster pattern=<span class="st">"2015*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You can also use the <strong>Data</strong> tab in Layer Manager.</p>
-<p>We can set common color table to all maps in the dataset:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.colors</span> input=uas_dsm color=elevation</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> 2015_06_20_DSM_agi_11GCP</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> 2015_10_06_DSM_agi_8GCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>To get better idea about the dates and spatial extents, we can use <em>Timeline tool</em> accessible from <em>Temporal - GUI tools - Timeline tool</em>.</p>
-<p>Select dataset <code>uas_dsm</code>, you can click on the drawn data points, and then also check <em>3D plot of spatio-temporal extents</em>. Stretch the window as needed.</p>
-<p>We can plot the elevation timeseries using <em>Temporal Plot Tool</em>.</p>
+<p>The maps are still ordinary rasters in the mapset, which <code>g.list type=raster pattern="2015*"</code> or the <strong>Data</strong> tab in the Layer Manager shows. Registration only records their time in the database.</p>
+</section>
+<section id="look-at-the-series" class="level3">
+<h3 class="anchored" data-anchor-id="look-at-the-series">Look at the series</h3>
+<p>Set one color table for all maps in the dataset and display two of them:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.colors</span> input=uas_dsm color=elevation</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=2015_06_20_DSM_agi_11GCP</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=2015_10_06_DSM_agi_8GCPs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <strong>Timeline Tool</strong> (<em>Temporal &gt; GUI tools &gt; Timeline tool</em>) shows when each map was taken. Select the dataset <code>uas_dsm</code>, click on the points, and check <em>3D plot of spatio-temporal extents</em> to see that the flights covered different areas.</p>
+<p>The <strong>Temporal Plot Tool</strong> (<em>Temporal &gt; GUI tools &gt; Temporal plot tool</em>) plots the elevation of every map at one location. Select the dataset <code>uas_dsm</code>, click the arrow next to the X and Y coordinates field, click a point in the Map Display, and press <em>Draw</em>. Try a point on the road, in a field, and on the building.</p>
+</section>
+</section>
+<section id="part-2-intersection-and-aggregation" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-intersection-and-aggregation">Part 2: Intersection and aggregation</h2>
+<section id="area-mapped-by-all-surveys" class="level3">
+<h3 class="anchored" data-anchor-id="area-mapped-by-all-surveys">Area mapped by all surveys</h3>
+<p>Per-cell statistics over the series are only meaningful where every survey has data. Set the region to the union of the extents, which <code>t.info -g</code> reports, then count the maps with data in each cell with <code>t.rast.series</code>. With the <code>-n</code> flag the count is null wherever any map is null, which gives the intersection:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.info</span> input=uas_dsm <span class="at">-g</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219942 s=219037 e=637439 w=636456 res=0.3 <span class="at">-pa</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=count output=count</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=count output=intersection <span class="at">-n</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=count</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=intersection</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Shrink the region to the intersection and set it as the mask for the rest of Parts 2 to 4:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> zoom=intersection <span class="at">-p</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> raster=intersection</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=intersection units=h</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>18.65 hectares</p>
+</blockquote>
+<p>Every raster command from here on reads and writes only inside the mask, until <code>r.mask -r</code> at the end of Part 4.</p>
+</section>
+<section id="monthly-aggregation" class="level3">
+<h3 class="anchored" data-anchor-id="monthly-aggregation">Monthly aggregation</h3>
+<p>The dataset has two surveys in September. <code>t.rast.aggregate</code> combines the maps that fall in each interval of a chosen granularity into one map, here the monthly average, and registers the results as a new dataset with interval time stamps:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.aggregate</span> input=uas_dsm output=uas_dsm_aggr basename=uas_dsm_aggr suffix=time granularity=<span class="st">"1 months"</span> method=average</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.list</span> input=uas_dsm_aggr columns=name,start_time,end_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Six monthly maps result; only the September one averages two surveys.</p>
+</section>
+</section>
+<section id="part-3-core-surface-and-distorted-surveys" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-core-surface-and-distorted-surveys">Part 3: Core surface and distorted surveys</h2>
+<section id="minimum-elevation" class="level3">
+<h3 class="anchored" data-anchor-id="minimum-elevation">Minimum elevation</h3>
+<p>Restore the lidar surfaces from Assignment 5A, then compute the core surface, the minimum elevation of the series at each cell, and subtract it from the lidar bare ground:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=mid_pines_lidar2013_dsm.pack</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=mid_pines_lidar2013_dem.pack</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=minimum output=minimum</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"diff_lidar_uas = mid_pines_lidar2013_dem - minimum"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=diff_lidar_uas color=differences</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=diff_lidar_uas</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=diff_lidar_uas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>mean: 0.87, minimum: -4.35, maximum: 15.34</p>
+</blockquote>
+<p>A DSM cannot lie below the ground it was flown over, so a core surface well below the lidar DEM points at a distorted survey. Over much of the area the core is close to the lidar ground, but in places it lies meters below it.</p>
+</section>
+<section id="which-survey-is-responsible" class="level3">
+<h3 class="anchored" data-anchor-id="which-survey-is-responsible">Which survey is responsible</h3>
+<p><code>method=min_raster</code> writes, for each cell, the index of the map that supplied the minimum, counted from 0 in the order of the time stamps:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=min_raster output=min_raster</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=min_raster</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.what</span> map=min_raster coordinates=636879,219432</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.what</span> map=min_raster coordinates=637232,219651</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=min_raster units=p nsteps=7</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>636879|219432||2 637232|219651||3</p>
+</blockquote>
+<p>Index 2 is the third map, the July 27 survey, and index 3 the fourth, August 14. Together they supply the minimum in two thirds of the cells. These two flights were processed with only two and three GCPs.</p>
+</section>
+<section id="recompute-the-core-without-them" class="level3">
+<h3 class="anchored" data-anchor-id="recompute-the-core-without-them">Recompute the core without them</h3>
+<p>Exclude the two surveys with a <code>where</code> clause on the time stamps and recompute the core and the difference:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=minimum output=minimum where=<span class="st">"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'"</span> <span class="at">--overwrite</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"diff_lidar_uas = mid_pines_lidar2013_dem - minimum"</span> <span class="at">--overwrite</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=diff_lidar_uas</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=diff_lidar_uas rules=dif_lidar_uav.txt</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=diff_lidar_uas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>mean: 0.08</p>
+</blockquote>
+<p>The mean difference drops from 0.87 m to 0.08 m. The color rules file is the one from Assignment 5A: grey within 10 cm, color beyond. What remains colored, and why?</p>
+<p><code>t.list</code> shows the datasets in the mapset:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.list</span> columns=id,number_of_maps,start_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="part-4-crop-height-and-biomass" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-crop-height-and-biomass">Part 4: Crop height and biomass</h2>
+<p>Map algebra on a series applies one expression to every map and registers the results as a new dataset. We compute the height of the UAS surface above the lidar bare ground, keep it only inside the crop fields and between 0.3 and 2 m, to drop the soil noise below and the building and trees above, and set the rest to null. The <code>fields</code> raster comes from the pack:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=fields.pack</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.mapcalc</span> inputs=uas_dsm expression=<span class="st">"if (fields, if(uas_dsm - mid_pines_lidar2013_dem &gt; 0.3 &amp;&amp; uas_dsm - mid_pines_lidar2013_dem &lt; 2, uas_dsm - mid_pines_lidar2013_dem, null()))"</span> output=veg_uas_lidar basename=veg_uas_lidar</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.list</span> input=veg_uas_lidar columns=name,start_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the expression, <code>uas_dsm</code> stands for each registered map in turn. The outputs are named <code>veg_uas_lidar_1</code> to <code>veg_uas_lidar_7</code>, numbered from 1 in time order, so <code>veg_uas_lidar_2</code> is June 20. Summarize the crop height per survey, leaving out the two distorted ones:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.univar</span> input=veg_uas_lidar where=<span class="st">"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The June survey has by far the most cells with crop and a mean height of 0.8 m. Look at it and compute its crop area and volume:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=veg_uas_lidar_2</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=veg_uas_lidar_2 units=me</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=veg_uas_lidar_2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The volume of crop above ground is the sum of the heights times the cell area. In the <strong>Python</strong> tab of the Layer Manager, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> grass.script <span class="im">as</span> gs</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> gs.parse_command(<span class="st">"r.univar"</span>, <span class="bu">map</span><span class="op">=</span><span class="st">"veg_uas_lidar_2"</span>, flags<span class="op">=</span><span class="st">"g"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>region <span class="op">=</span> gs.region()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(stats[<span class="st">"sum"</span>]) <span class="op">*</span> region[<span class="st">"nsres"</span>] <span class="op">*</span> region[<span class="st">"ewres"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>49,605 cubic meters over 62,232 square meters of crop</p>
+</blockquote>
+<p>Remove the mask before Part 5, which works on the whole study area:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> <span class="at">-r</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="part-5-viewsheds-and-the-envelope-dsm" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-viewsheds-and-the-envelope-dsm">Part 5: Viewsheds and the envelope DSM</h2>
+<section id="cumulative-viewshed" class="level3">
+<h3 class="anchored" data-anchor-id="cumulative-viewshed">Cumulative viewshed</h3>
+<p>We want to place a webcam that watches the fields. First compute a cumulative viewshed from six candidate points on the lidar DSM, with the camera 3 m above the ground, at 1 m resolution:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=mid_pines_lidar2013_dsm res=1 <span class="at">-pa</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_1 coordinates=637087,219376 observer_elevation=3</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_2 coordinates=637004,219653 observer_elevation=3</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_3 coordinates=636782,219374 observer_elevation=3</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_4 coordinates=636839,219150 observer_elevation=3</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_5 coordinates=636665,219527 observer_elevation=3</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_6 coordinates=636863,219503 observer_elevation=3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each viewshed holds the vertical angle to the visible cells and null elsewhere. Count, for every cell, from how many of the six points it is visible:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.series</span> input=vshed_1,vshed_2,vshed_3,vshed_4,vshed_5,vshed_6 output=cum_viewshed method=count</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=cum_viewshed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Display the result with a legend. Cells visible from many points are the prominent places; a camera there would see much of the area. About half of the area is visible from none of the six points.</p>
+</section>
+<section id="envelope-dsm" class="level3">
+<h3 class="anchored" data-anchor-id="envelope-dsm">Envelope DSM</h3>
+<p>The camera has to see the fields through the whole season, so the test surface is the envelope of the series, the maximum elevation at each cell, fused into the lidar DSM inside the fields. Compute the envelope without the two distorted surveys at the native resolution, clip it to the fields, and fuse it with <code>r.patch.smooth</code> as in Assignment 5A:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=mid_pines_lidar2013_dsm <span class="at">-p</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=maximum output=maximum where=<span class="st">"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"maximum_clip = if(fields, maximum)"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.patch.smooth</span> input_a=maximum_clip input_b=mid_pines_lidar2013_dsm output=lidar_maximum_dsm smooth_dist=10</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=lidar_maximum_dsm output=lidar_maximum_dsm_relief zscale=5</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=lidar_maximum_dsm_relief</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This assumes next year’s crop looks like this year’s. Look at the relief around the building: the envelope keeps everything that was ever there, including the parked cars.</p>
+</section>
+<section id="compare-the-viewsheds" class="level3">
+<h3 class="anchored" data-anchor-id="compare-the-viewsheds">Compare the viewsheds</h3>
+<p>Pick a camera location from the cumulative viewshed, here a point with a wide view, and compute its viewshed on the lidar DSM and on the envelope DSM at 1 m resolution:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=mid_pines_lidar2013_dsm res=1 <span class="at">-pa</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=viewshed_lidar_dsm coordinates=636917,219223 observer_elevation=3</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=lidar_maximum_dsm output=viewshed_maximum coordinates=636917,219223 observer_elevation=3</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=viewshed_lidar_dsm color=reds</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=viewshed_maximum color=greens</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=viewshed_lidar_dsm units=h</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=viewshed_maximum units=h</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>viewshed_lidar_dsm: 11.0 hectares viewshed_maximum: 6.4 hectares</p>
+</blockquote>
+<p>Display both with transparency to see where the crop closes the view. Would a higher camera or another candidate point do better?</p>
+</section>
+</section>
+<section id="part-6-volume-of-a-building" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-volume-of-a-building">Part 6: Volume of a building</h2>
+<p>The difference between a DSM and the bare ground over the footprint of a feature gives its volume. Set the region to the building, compute the height of the June DSM above the lidar DEM, and take everything more than 2 m high as the footprint:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219388.5 s=219366.9 w=637100.1 e=637138.5 res=0.3 <span class="at">-pa</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"building = 2015_06_20_DSM_agi_11GCP - mid_pines_lidar2013_dem"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"building_mask = if(building &gt; 2, 1, null())"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.volume</span> input=building clump=building_mask</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Total Volume = 897.44</p>
+</blockquote>
+<p><code>r.volume</code> sums the height over the clump and multiplies by the cell area: 2,473 cells, 223 square meters, an average height of 4 m, and a volume of about 900 cubic meters.</p>
+</section>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>Prepare a report (3 to 5 pages including figures):</p>
 <ol type="1">
-<li>Open the tool from <em>Temporal - GUI tools - Temporal plot tool</em>.</li>
-<li>Select dataset <code>uas_dsm</code> and click on the arrow next to the X and Y coordinates field.</li>
-<li>Then click somewhere on the Map Display and press <em>Draw</em>.</li>
+<li><strong>Series and intersection</strong>: the registered dataset (<code>t.info</code> output or the Timeline Tool), the count and intersection maps, the intersection area, and a temporal plot at a field point and a road point with a sentence on what each curve shows.</li>
+<li><strong>Aggregation</strong>: the list of monthly maps and what the September aggregate represents.</li>
+<li><strong>Core surface</strong>: the lidar minus core map before and after excluding the distorted surveys, with their means, the <code>min_raster</code> map, and how you identified the two surveys and why they are distorted.</li>
+<li><strong>Crop height and biomass</strong>: the June crop height map, the <code>t.rast.univar</code> table for the valid surveys, the June crop area and volume, and a paragraph on how the crop changes through the season.</li>
+<li><strong>Viewsheds</strong>: the cumulative viewshed, the two viewsheds at your camera point with their areas, and a discussion of how the crop changes the view and where you would put the camera.</li>
+<li><strong>Building volume</strong>: the volume, how the footprint was defined, and what limits the accuracy of the estimate.</li>
 </ol>
-<p>You should see a plot of elevation values. Try different places (road, field, building).</p>
 </section>
-<section id="find-the-area-mapped-by-all-surveys" class="level3">
-<h3 class="anchored" data-anchor-id="find-the-area-mapped-by-all-surveys">Find the area mapped by all surveys</h3>
-<p>We will find area mapped by all surveys. First we will set the extent to the maximum bounding box, use t.info to get the values:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.info</span> input=uas_dsm <span class="at">-g</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219942 s=219037 e=637439 w=636456 <span class="at">-pa</span> res=0.3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Next, we use t.rast.series to derive raster representing the number of overlapping DSMs. By using <a href="https://grass.osgeo.org/grass84/manuals/t.rast.series.html">-n flag</a> we create masking raster representing the intersection of all DSMs, and then we change computational region to the extent of its non-null bounding box:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=count output=count</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=count output=intersection <span class="at">-n</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> count</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> intersection</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> zoom=intersection <span class="at">-p</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> raster=intersection</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How large is the area? (use r.report)</p>
-</div>
-</div>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Assignment 5B:</p>
+<ul>
+<li>Your report as a PDF.</li>
+<li>Optional: your completed notebook (<code>.ipynb</code>) if you worked in Colab.</li>
+</ul>
 </section>
-<section id="temporal-aggregation" class="level3">
-<h3 class="anchored" data-anchor-id="temporal-aggregation">Temporal aggregation</h3>
-<p>Our space-time raster dataset contains two DSMs from September:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.list</span> input=uas_dsm columns=name,start_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>We will temporally aggregate the dataset by month by averaging all DSMs within each month (in this case averaging the September DSMs):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.aggregate</span> input=uas_dsm output=uas_dsm_aggr basename=uas_dsm_aggr suffix=time granularity=<span class="st">"1 months"</span> method=average</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.list</span> input=uas_dsm_aggr columns=name,start_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="minimum-elevation-core" class="level3">
-<h3 class="anchored" data-anchor-id="minimum-elevation-core">Minimum elevation (core)</h3>
-<p>You should already have <a href="https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip">lidar DSM and DEMs</a> if you haven’t done already, unzip it in your working directory and unpack:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=mid_pines_lidar2013_dsm.pack</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> input=mid_pines_lidar2013_dem.pack</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Find the minimum elevation (core) - how close it is to lidar bare ground?</p>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=minimum output=minimum</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"diff_lidar_uas = mid_pines_lidar2013_dem - minimum"</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=diff_lidar_uas color=differences</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> diff_lidar_uas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Parts of the minimum raster are significantly below lidar ground, find out which DSM is causing it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=min_raster output=min_raster</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> min_raster</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Display resulting raster <code>min_raster</code> and query it (select the layer in Layer Manager and use Query tool in Map Display) or use <code>r.what</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.what</span> map=min_raster coordinates=636879,219432</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.what</span> map=min_raster coordinates=637232,219651</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Value 2 represents third (numbering starts with 0) raster in our time series. Since there is some problem with the third and fourth raster (<code>2015_07_27_DSM_agi_2GCP_4ID, 2015_08_14_DSM_agi_3GCP_4ID</code>), we will exclude them from the analysis:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=minimum output=minimum where=<span class="st">"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'"</span> <span class="at">--o</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"diff_lidar_uas = mid_pines_lidar2013_dem - minimum"</span> <span class="at">--o</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=diff_lidar_uas color=differences</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Apply now the color table <a href="./resources/dif_lidar.uav.txt">dif_lidar_uav.txt</a> we used for highlighting differences in the last assignment:</p>
-<pre class="text"><code> -40 red
- -1 orange
- -0.5 yellow
- -0.1 grey
- 0 white
- 0.1 grey
- 0.5 cyan
- 1 aqua
- 40 blue</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=diff_lidar_uas rules=dif_lidar_uav.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Explain what you see.</p>
-</div>
-</div>
-<p>Let’s look now which temporal datasets we have:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">t.list</span> columns=id,number_of_maps,start_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="estimate-crop-biomass" class="level2">
-<h2 class="anchored" data-anchor-id="estimate-crop-biomass">Estimate crop biomass</h2>
-<p>We will use raster algebra on the time series to compute crop biomass. First we need to make sure that we take into account only fields (not forests).</p>
-<p>You can use get the <a href="./resources/fields.pack">packed raster representation of fields</a> (link is at the top).</p>
-<p>We assume crop is anything higher than 0.3 and lower than 2 m (to exclude the building for example):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.unpack</span> <span class="at">-o</span> fields.pack</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.mapcalc</span> inputs=uas_dsm expression=<span class="st">"if (fields, if(uas_dsm - mid_pines_lidar2013_dem &gt; 0.3 &amp;&amp; uas_dsm - mid_pines_lidar2013_dem &lt; 2, uas_dsm - mid_pines_lidar2013_dem, null()))"</span> output=veg_uas_lidar basename=veg_uas_lidar</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.univar</span> input=veg_uas_lidar where=<span class="st">"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'"</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> veg_uas_lidar_2</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> <span class="at">-n</span> map=veg_uas_lidar_2 units=me nsteps=1</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=veg_uas_lidar_2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Use Python shell (<em>tab in Layer Manager</em>) to compute the biomass volume for June (<em>paste each line into Python shell and press Enter</em>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> gs.parse_command(<span class="st">'r.univar'</span>, <span class="bu">map</span><span class="op">=</span><span class="st">'veg_uas_lidar_2'</span>, flags<span class="op">=</span><span class="st">'g'</span>)[<span class="st">'sum'</span>]</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="bu">sum</span>) <span class="op">*</span> gs.region()[<span class="st">'nsres'</span>] <span class="op">*</span> gs.region()[<span class="st">'ewres'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Remove the mask before we proceed in further analysis:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> <span class="at">-r</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="evaluate-impact-of-vegetation-change-on-viewshed-extent" class="level2">
-<h2 class="anchored" data-anchor-id="evaluate-impact-of-vegetation-change-on-viewshed-extent">Evaluate impact of vegetation change on viewshed extent</h2>
-<p>We would like to set up a webcam to monitor this area. First we will compute a <strong>cumulative viewshed</strong> of this area to find places from which we will have likely good visibility. We pick several places distributed all over the area from which we compute viewsheds on a lidar DSM with observer height of 3 meters (webcam height).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=mid_pines_lidar2013_dsm res=1 <span class="at">-pa</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_1 coordinates=637087,219376 observer_elevation=3</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_2 coordinates=637004,219653 observer_elevation=3</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_3 coordinates=636782,219374 observer_elevation=3</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_4 coordinates=636839,219150 observer_elevation=3</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_5 coordinates=636665,219527 observer_elevation=3</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=vshed_6 coordinates=636863,219503 observer_elevation=3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now we compute the cumulative viewshed as the number of places (from the coordinates above) from which a cell is visible. This gives us better idea which places are visually more prominent and therefore likely to have good view of the fields.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.series</span> input=vshed_1,vshed_2,vshed_3,vshed_4,vshed_5,vshed_6 output=cum_viewshed method=count</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> cum_viewshed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Display the result with legend to see which places are potentially good for placing a webcam.</p>
-<p>Since we need the webcam to capture the field during entire year we can run <a href="https://grass.osgeo.org/grass84/manuals/t.rast.series.html">t.rast.series</a> with method=maximum on the time series of UAS DSMs to derive the DSM series envelope surface and use it to analyze the viewshed. Of course, this assumes that the crops will be the same the following year. We exclude the problematic DSMs as we did while deriving the core surface:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=mid_pines_lidar2013_dsm</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">t.rast.series</span> input=uas_dsm method=maximum output=maximum where=<span class="st">"start_time &lt; '2015-07-01' or start_time &gt; '2015-09-01'"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>We need to update the lidar-based DSM with the UAS envelope data and analyze the viewshed while taking into account the corn growing in the field. First we need to make sure that we take into account entire field to create a lidar-based DSM updated in the fields using UAS data.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"maximum_clip = if (fields, maximum)"</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.patch.smooth</span> input_a=maximum_clip input_b=mid_pines_lidar2013_dsm output=lidar_maximum_dsm smooth_dist=10</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> lidar_maximum_dsm out=lidar_maximum_dsm_relief zscale=5</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> lidar_maximum_dsm_relief</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Look at the relief map around the building - where do people park their cars?</p>
-</div>
-</div>
-<p>Now we selected a location based on the cumulative viewshed and look at the difference between the viewshed based on lidar and the envelope surface:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=mid_pines_lidar2013_dsm output=viewshed_lidar_dsm observer_elevation=3 coordinates=636917,219223</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.viewshed</span> input=lidar_maximum_dsm output=viewshed_maximum observer_elevation=3 coordinates=636917,219223</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> viewshed_lidar_dsm co=reds</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> viewshed_maximum co=greens</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>To compare the viewsheds display the resulting maps with transparency.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Discuss the result. Can you find a better place for the webcam? Would placing the webcam higher help?</p>
-</div>
-</div>
-<section id="estimate-volume-of-a-building" class="level3">
-<h3 class="anchored" data-anchor-id="estimate-volume-of-a-building">Estimate volume of a building</h3>
-<p>We need to first extract the mask of the building:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219388.5 s=219366.9 w=637100.1 e=637138.5 res=0.3 <span class="at">-pa</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"building = 2015_06_20_DSM_agi_11GCP - mid_pines_lidar2013_dem"</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"building_mask = if(building &gt; 2, 1, null())"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now we compute the volume</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.volume</span> input=building clump=building_mask</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What is the volume of the building?</p>
-</div>
-</div>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>Series and intersection</strong>: the dataset is registered with correct dates, the intersection is derived and used as the mask, and the temporal plots are read correctly.</li>
+<li><strong>Aggregation</strong>: the monthly dataset is produced and explained.</li>
+<li><strong>Core surface</strong>: the two distorted surveys are identified from the core and <code>min_raster</code>, and the improvement after excluding them is quantified.</li>
+<li><strong>Crop height and biomass</strong>: the height series is derived with map algebra, the June area and volume are computed, and the seasonal change is interpreted.</li>
+<li><strong>Viewsheds</strong>: the cumulative and the two single viewsheds are computed and the effect of the crop on visibility is explained.</li>
+<li><strong>Building volume</strong>: the volume is computed and its limitations are stated.</li>
+<li><strong>Interpretation</strong>: conclusions tie back to the lecture: space-time dataset, intersection, aggregation, core and envelope, distorted surveys.</li>
+<li>On-time submission.</li>
+</ul>
+<section id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="level3">
+<h3 class="anchored" data-anchor-id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 11/18/2026</h3>
 
 
 </section>
