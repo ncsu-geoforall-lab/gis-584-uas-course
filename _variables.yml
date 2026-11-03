@@ -52,6 +52,8 @@ data:
   mid_pines_copc_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/mid_pines_spm_2013.laz
   mid_pines_2015_las_url: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/2015_06_sample_points_NCspm.las
   secref_mid_pines_spm_elev: https://storage.googleapis.com/gis-course-data/gis584/lidar-data/Midpines/secref_mid_pines_spm_elev.zip
+  eros_eccoe_multispectral_panels_cog: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/EROS_ECCOE_USGS/071823/2023-07-18_1200_MicaSenseDual_ortho_panels_cog.tif
+  eros_eccoe_multispectral_elm_cog: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/EROS_ECCOE_USGS/071823/2023-07-18_1200_MicaSenseDual_ortho_panels_Reflectance_ELM_cog.tif
   dif_lidar_uav_colors_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/dif_lidar_uav.txt
   fields_pack_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/fields.pack
   uas_dsm_series_txt_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/series.txt

@@ -34,20 +34,20 @@ Download imagery data from March and June flights during 2017.
 
 Create a new mapset within your `Lake_Wheeler_NCspm` project and set your working directory.
 
-Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is save as a [*Cloud Optimized GeoTIFF (COG)*](http://cogeo.org/) which allows us to directory import the data using r.import with needing to download the data beforehand.
+Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is saved as a [*Cloud Optimized GeoTIFF (COG)*](http://cogeo.org/), which lets `r.import` read it directly from its URL without downloading the file first.
 
 ```bash
 r.import input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif resample=nearest output=odm_071724_ortho
 ```
 
-Let's set the compuational region to the ortho imagery.
+Set the computational region to the ortho imagery.
 
 ```bash
 g.region raster=odm_071724_ortho.1
 ```
 
 :::{.callout-important}
-**Task:** What is the spatial resolution and how many pixels are include in the compuational region?
+**Task:** What is the spatial resolution and how many pixels are included in the computational region?
 :::
 
 <!-- ### Find overlaping areas
@@ -96,7 +96,7 @@ r.mask raster=img_mask
 
 #### Spectral Indices
 
-Calculate `VARI (Visible Atmospherically Resistant Index)` index [Gitelson et al. (2002)](https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&context=natrespapers).
+The [vegetation indices lab](lab_vegetation_indices.qmd) defines the indices used here and compares them on RGB and multispectral imagery. Calculate the `VARI (Visible Atmospherically Resistant Index)` index [Gitelson et al. (2002)](https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&context=natrespapers).
 
 ```bash
 r.mapcalc expression="vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"
