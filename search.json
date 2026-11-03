@@ -2674,7 +2674,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2b.html#the-photogrammetric-pipeline",
     "title": "UAS Imagery Processing",
     "section": "The photogrammetric pipeline",
-    "text": "The photogrammetric pipeline\n\n\n\n\n\nflowchart LR\n  subgraph A[\"Pre-processing\"]\n    IMAGES[\"UAS images\"]\n    LOG[\"Flight log / EXIF\"]\n    GCP[\"GCPs\"]\n  end\n  subgraph B[\"Data processing\"]\n    MATCH[\"Feature matching\"]\n    SOLVE[\"Camera solving&lt;br/&gt;(bundle adjustment)\"]\n    DENSE[\"Point cloud\"]\n    MESH[\"Model / surface\"]\n  end\n  subgraph C[\"Analysis and export\"]\n    ORTHO[\"Orthomosaic\"]\n    DSM[\"DSM / DTM\"]\n    PCLOUD[\"Classified point cloud\"]\n    TEXMODEL[\"Textured 3D model\"]\n    REPORT[\"Processing report\"]\n  end\n  IMAGES --&gt; MATCH --&gt; SOLVE --&gt; DENSE --&gt; MESH\n  SOLVE -. re-optimize .-&gt; IMAGES\n  LOG --&gt; SOLVE\n  GCP --&gt; SOLVE\n  DENSE --&gt; ORTHO\n  DENSE --&gt; DSM\n  DENSE --&gt; PCLOUD\n  MESH --&gt; TEXMODEL\n  SOLVE --&gt; REPORT\n  GCP --&gt; REPORT\n\n\n\n\n\n\n\nImages come in. Features get matched, cameras get solved, dense geometry gets built, products get exported. See the dashed arrow: when alignment is weak, we go back, clean images or add control, and re-optimize. This is iterative, not a single pass. That loop is normal, not failure.",
+    "text": "The photogrammetric pipeline\n\n\n\n\n\n\nflowchart LR\n  subgraph A[\"Pre-processing\"]\n    IMAGES[\"UAS images\"]\n    LOG[\"Flight log / EXIF\"]\n    GCP[\"GCPs\"]\n  end\n  subgraph B[\"Data processing\"]\n    MATCH[\"Feature matching\"]\n    SOLVE[\"Camera solving&lt;br/&gt;(bundle adjustment)\"]\n    DENSE[\"Point cloud\"]\n    MESH[\"Model / surface\"]\n  end\n  subgraph C[\"Analysis and export\"]\n    ORTHO[\"Orthomosaic\"]\n    DSM[\"DSM / DTM\"]\n    PCLOUD[\"Classified point cloud\"]\n    TEXMODEL[\"Textured 3D model\"]\n    REPORT[\"Processing report\"]\n  end\n  IMAGES --&gt; MATCH --&gt; SOLVE --&gt; DENSE --&gt; MESH\n  SOLVE -. re-optimize .-&gt; IMAGES\n  LOG --&gt; SOLVE\n  GCP --&gt; SOLVE\n  DENSE --&gt; ORTHO\n  DENSE --&gt; DSM\n  DENSE --&gt; PCLOUD\n  MESH --&gt; TEXMODEL\n  SOLVE --&gt; REPORT\n  GCP --&gt; REPORT\n\n\n\n\n\n\n\nImages come in. Features get matched, cameras get solved, dense geometry gets built, products get exported. See the dashed arrow: when alignment is weak, we go back, clean images or add control, and re-optimize. This is iterative, not a single pass. That loop is normal, not failure.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -4007,18 +4007,18 @@
     "href": "course/topics/midterm/index.html#details",
     "title": "Midterm Exam",
     "section": "Details",
-    "text": "Details\nThis is a take home, open book exam handled in Moodle, no on-campus presence needed. The exam is the same for the on-campus and distance sections. You can use any on-line and printed resources, but the responses should be your own work. Questions will be available in Moodle. See the Schedule for the dates.",
+    "text": "Details\nThis is a take home, open book exam handled in Moodle, no on-campus presence needed. The exam is the same for the on-campus and distance sections. You can use any online and printed resources, but the responses should be your own work. Questions will be available in Moodle. See the Schedule for the dates.",
     "crumbs": [
       "Topics",
       "Midterm"
     ]
   },
   {
-    "objectID": "course/topics/midterm/index.html#grading",
-    "href": "course/topics/midterm/index.html#grading",
+    "objectID": "course/topics/midterm/index.html#sample-questions",
+    "href": "course/topics/midterm/index.html#sample-questions",
     "title": "Midterm Exam",
-    "section": "Grading",
-    "text": "Grading\n\nMidterm Rubric",
+    "section": "Sample questions",
+    "text": "Sample questions\n\nGenerate a DSM and Orthoimagery from a subset of UAS data.\nCreate a flight plan for a UAS flight at a given location and UAS.\nQuantitatively compare your DSM take at different dates.\nProvide a detailed analysis of a processing report generated from Agisoft Metashape or WebODM.",
     "crumbs": [
       "Topics",
       "Midterm"
@@ -4029,7 +4029,7 @@
     "href": "course/topics/index.html",
     "title": "Topics",
     "section": "",
-    "text": "The course is organized into the topics below. Each topic page links to its content pages, lecture slides, and assignments. See the schedule for dates and deadlines.\n\n\n\n\n\nTopic 1: UAS Basics\n\n\nIntroduction to Unmanned Aerial Systems, their applications, and the rules and regulations for UAS operations.\n\n\n\n\n\n\n\n\n\n\nTopic 2: Structure from Motion\n\n\nPhotogrammetry and Structure from Motion concepts, and processing UAS imagery into orthophotos and surface models.\n\n\n\n\n\n\n\n\n\n\nTopic 3: UAS Flight Planning\n\n\nPlanning and executing UAS data collection: mission parameters, terrain analysis, and ground control.\n\n\n\n\n\n\n\n\n\n\nTopic 4: GIS Analytics\n\n\nGIS-based analysis of UAS processing outputs: DSM and orthophoto comparison, volumes, and point cloud analysis.\n\n\n\n\n\n\n\n\n\n\nTopic 5: Advanced Analytics\n\n\nComparing and fusing UAS and lidar data, and analyzing multitemporal UAS data for monitoring applications.\n\n\n\n\n\n\n\n\n\n\nTopic 6: Machine Learning & AI\n\n\nImage classification and change detection with multitemporal UAS data using machine learning methods.\n\n\n\n\n\n\n\n\n\n\nMidterm Exam\n\n\nTake-home, open-book exam handled in Moodle.\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "The course is organized into the topics below. Each topic page links to its content pages, lecture slides, and assignments. See the schedule for dates and deadlines.\n\n\n\n\n\nTopic 1: UAS Basics\n\n\n\nIntroduction to Unmanned Aerial Systems, their applications, and the rules and regulations for UAS operations.\n\n\n\n\n\n\n\n\n\n\nTopic 2: Structure from Motion\n\n\n\nPhotogrammetry and Structure from Motion concepts, and processing UAS imagery into orthophotos and surface models.\n\n\n\n\n\n\n\n\n\n\nTopic 3: UAS Flight Planning\n\n\n\nPlanning and executing UAS data collection: mission parameters, terrain analysis, and ground control.\n\n\n\n\n\n\n\n\n\n\nTopic 4: GIS Analytics\n\n\n\nGIS-based analysis of UAS processing outputs: DSM and orthophoto comparison, volumes, and point cloud analysis.\n\n\n\n\n\n\n\n\n\n\nTopic 5: Advanced Analytics\n\n\n\nComparing and fusing UAS and lidar data, and analyzing multitemporal UAS data for monitoring applications.\n\n\n\n\n\n\n\n\n\n\nTopic 6: Machine Learning & AI\n\n\n\nImage classification and change detection with multitemporal UAS data using machine learning methods.\n\n\n\n\n\n\n\n\n\n\nMidterm Exam\n\n\n\nTake-home, open-book exam handled in Moodle.\n\n\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Topics",
       "Overview"
@@ -4951,7 +4951,7 @@
     "href": "course/topics/topic_1_uas_basics/lectures/lecture_1a.html#the-uas-mapping-workflow",
     "title": "Introduction to UAS",
     "section": "The UAS mapping workflow",
-    "text": "The UAS mapping workflow\nHow the rest of this course fits together:\n\n\n\n\n\nflowchart TB\n    R[\"Rules & regulations\"] -.-&gt; A\n    A[\"Plan the flight\"] --&gt; B[\"Collect imagery\"]\n    B --&gt; C[\"SfM processing\"]\n    C --&gt; D[\"GIS analytics\"]\n    %% D --&gt; E[\"Object/Change Detection\"]\n\n\n\n\n\n\n\nThe orientation slide for the whole semester: every later topic is one box in this pipeline. Point out that the arrows run both ways in practice; analysis needs (resolution, accuracy) drive flight planning choices, which is why planning comes after the processing topics have taught what the data must support. The field trip is where the left half becomes real.",
+    "text": "The UAS mapping workflow\nHow the rest of this course fits together:\n\n\n\n\n\n\nflowchart TB\n    R[\"Rules & regulations\"] -.-&gt; A\n    A[\"Plan the flight\"] --&gt; B[\"Collect imagery\"]\n    B --&gt; C[\"SfM processing\"]\n    C --&gt; D[\"GIS analytics\"]\n    %% D --&gt; E[\"Object/Change Detection\"]\n\n\n\n\n\n\n\nThe orientation slide for the whole semester: every later topic is one box in this pipeline. Point out that the arrows run both ways in practice; analysis needs (resolution, accuracy) drive flight planning choices, which is why planning comes after the processing topics have taught what the data must support. The field trip is where the left half becomes real.",
     "crumbs": [
       "Topics",
       "Topic 1: UAS Basics",
@@ -5285,7 +5285,7 @@
     "href": "course/topics/topic_2_sfm/lectures/lecture_2a.html#remote-sensing-and-photogrammetry",
     "title": "Photogrammetry and Structure from Motion Concepts",
     "section": "Remote sensing and photogrammetry",
-    "text": "Remote sensing and photogrammetry\n\n\n\n\n\nflowchart TB\n    IMG[\"Aerial and UAS images\"]\n    RS[\"Remote sensing&lt;br/&gt;What is it?&lt;br/&gt;land cover, vegetation, temperature\"]\n    PG[\"Photogrammetry&lt;br/&gt;Where is it, how big is it?&lt;br/&gt;position, shape, elevation\"]\n    GIS[\"GIS&lt;br/&gt;analysis, data fusion, maps\"]\n    IMG --&gt; RS\n    IMG --&gt; PG\n    RS --&gt; GIS\n    PG --&gt; GIS\n    style PG fill:#006600,stroke:#006600,color:#ffffff\n\n\n\n\n\n\n\nTwo disciplines that share the same input. Remote sensing asks what is in the image (land cover, vegetation health, temperature); photogrammetry asks where things are and how big they are. UAS mapping needs both, and GIS is where they meet. In this course, Topic 2 is photogrammetry, Topics 4 and 5 lean on remote sensing, and the change-detection topic combines them.",
+    "text": "Remote sensing and photogrammetry\n\n\n\n\n\n\nflowchart TB\n    IMG[\"Aerial and UAS images\"]\n    RS[\"Remote sensing&lt;br/&gt;What is it?&lt;br/&gt;land cover, vegetation, temperature\"]\n    PG[\"Photogrammetry&lt;br/&gt;Where is it, how big is it?&lt;br/&gt;position, shape, elevation\"]\n    GIS[\"GIS&lt;br/&gt;analysis, data fusion, maps\"]\n    IMG --&gt; RS\n    IMG --&gt; PG\n    RS --&gt; GIS\n    PG --&gt; GIS\n    style PG fill:#006600,stroke:#006600,color:#ffffff\n\n\n\n\n\n\n\nTwo disciplines that share the same input. Remote sensing asks what is in the image (land cover, vegetation health, temperature); photogrammetry asks where things are and how big they are. UAS mapping needs both, and GIS is where they meet. In this course, Topic 2 is photogrammetry, Topics 4 and 5 lean on remote sensing, and the change-detection topic combines them.",
     "crumbs": [
       "Topics",
       "Topic 2: Structure from Motion",
@@ -5870,7 +5870,7 @@
     "href": "course/topics/topic_3_flight_planning/lectures/lecture_3b.html#planning-with-gsd",
     "title": "Ground Control, Checkpoints, and Accuracy",
     "section": "Planning with GSD",
-    "text": "Planning with GSD\n\n\n\n\n\nflowchart LR\n    A[\"What you must&lt;br&gt;measure\"] --&gt; B[\"The accuracy&lt;br&gt;that requires\"]\n    B --&gt; C[\"GSD:&lt;br&gt;0.5 to 1.0 x that\"]\n    C --&gt; D[\"Flying height&lt;br&gt;(Topic 3A)\"]\n\n\n\n\n\n\n\nASPRS recommends source imagery GSD of 0.5 to 1.0 x the target horizontal accuracy class: a 5 cm class wants 2.5 to 5 cm GSD (American Society for Photogrammetry and Remote Sensing 2024)\nRead backwards: expect RMSEH of 1 to 2 x GSD from a well-run project\nThe standard calls this a planning heuristic and says it may not be used to report accuracy\n\n\n\nConnects 3A’s GSD formula to a requirement instead of a preference\nThe chain runs left to right, never the other way\nQuote the standard’s caveat: the table tells you what to fly",
+    "text": "Planning with GSD\n\n\n\n\n\n\nflowchart LR\n    A[\"What you must&lt;br&gt;measure\"] --&gt; B[\"The accuracy&lt;br&gt;that requires\"]\n    B --&gt; C[\"GSD:&lt;br&gt;0.5 to 1.0 x that\"]\n    C --&gt; D[\"Flying height&lt;br&gt;(Topic 3A)\"]\n\n\n\n\n\n\n\nASPRS recommends source imagery GSD of 0.5 to 1.0 x the target horizontal accuracy class: a 5 cm class wants 2.5 to 5 cm GSD (American Society for Photogrammetry and Remote Sensing 2024)\nRead backwards: expect RMSEH of 1 to 2 x GSD from a well-run project\nThe standard calls this a planning heuristic and says it may not be used to report accuracy\n\n\n\nConnects 3A’s GSD formula to a requirement instead of a preference\nThe chain runs left to right, never the other way\nQuote the standard’s caveat: the table tells you what to fly",
     "crumbs": [
       "Topics",
       "Topic 3: UAS Flight Planning",
