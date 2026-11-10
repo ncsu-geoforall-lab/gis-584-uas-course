@@ -35,26 +35,7 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
+  </style>
   <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-157b806d10da31b12d0e5295aa3d58e5.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -198,7 +179,7 @@ Corey White
 <section id="uas-data-characteristics" class="slide level2 center">
 <h2>UAS Data Characteristics</h2>
 <ul>
-<li>High spatial resolution (1 to 10 cm)</li>
+<li>High spatial resolution (1–10 cm)</li>
 <li>Limited spectral bands (RGB or multispectral)</li>
 <li>High within-class variability</li>
 <li>Shadows, BRDF effects, and illumination differences</li>
@@ -280,179 +261,18 @@ Corey White
 <li>Used to derive <strong>spectral indices</strong> for classification</li>
 </ul>
 </section>
-<section id="reflectance-spectra-and-sensor-bands" class="slide level2 smaller center">
-<h2>Reflectance spectra and sensor bands</h2>
-
-<img data-src="../images/ms_reflectance_spectra.webp" style="width:78.0%" alt="Reflectance against wavelength from 400 to 1000 nm for green vegetation, dry soil, and clear water, with the five MicaSense RedEdge bands drawn as shaded strips: blue 475, green 560, red 668, red edge 717, and NIR 842 nm. Vegetation is low in the visible with a small green peak, rises steeply across the red edge, and stays high in the NIR; soil rises slowly; water falls toward zero." class="r-stretch"><p>Schematic spectra; the band positions are those of the MicaSense RedEdge (center wavelength, width in the shaded strip).</p>
-<aside class="notes">
-<p>The eye sees 400 to 700 nm. Green vegetation reflects little red and blue (chlorophyll absorbs them), a little more green, and about half of the near infrared, because the leaf cell structure scatters it. The steep rise between 700 and 740 nm is the red edge. Dry soil rises slowly and smoothly across the whole range; clear water reflects almost nothing in the NIR. A camera band is a slice of this curve: a 10 nm red band at 668 nm reads the bottom of the chlorophyll absorption, a 40 nm NIR band at 842 nm reads the plateau. Every index in this lecture is a combination of such slices.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="spectral-bands" class="slide level2 text-center center">
+<h2>Spectral Bands</h2>
+<h4 id="rgb">RGB</h4>
+<p><img data-src="../images/ortho_r.png" style="width:25.0%" alt="red"> <img data-src="../images/ortho_g.png" style="width:25.0%" alt="green"> <img data-src="../images/ortho_b.png" style="width:25.0%" alt="blue"></p>
 </section>
-<section id="the-bands-of-a-multispectral-uas-camera" class="slide level2 smaller center">
-<h2>The bands of a multispectral UAS camera</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Band</th>
-<th>Typical range</th>
-<th>What it responds to</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Green</td>
-<td>500 to 600 nm, peak near 550</td>
-<td>Chlorophyll reflection; healthy leaves look green</td>
-</tr>
-<tr class="even">
-<td>Red</td>
-<td>600 to 700 nm</td>
-<td>Chlorophyll absorption; low for vegetation, higher for soil</td>
-</tr>
-<tr class="odd">
-<td>Red edge</td>
-<td>700 to 730 nm</td>
-<td>The transition from absorption to NIR reflection; sensitive to chlorophyll content and stress</td>
-</tr>
-<tr class="even">
-<td>NIR</td>
-<td>700 nm to 1.3 µm</td>
-<td>Leaf cell structure; the strongest reflectance of healthy vegetation</td>
-</tr>
-</tbody>
-</table>
-<aside class="notes">
-<p>RGB cameras give three wide bands; a multispectral camera adds narrow red edge and NIR bands, and often a narrow red and green as well. The red edge is the most informative band for plant condition because its position shifts with chlorophyll content: a stressed plant absorbs less red, and the rise moves toward shorter wavelengths. NIR separates vegetation from soil and water better than any visible band. Thermal and shortwave infrared are different sensors and are not covered here.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="multispectral-cameras" class="slide level2 smaller center">
-<h2>Multispectral cameras</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p><img data-src="../images/ms_cameras.webp" style="width:92.0%" alt="Six multispectral UAS cameras photographed side by side: Buzzard Camera six, MicaSense RedEdge, Parrot Sequoia plus, Sentera Quad, Tetracam ADC Micro, and Tetracam MiniMCA6. Each has several small lenses, one per band."></p>
-</div><div class="column" style="width:52%;">
-<p><img data-src="../images/ms_camera_table.webp" style="width:62.0%" alt="Table of the same cameras with resolution, pixel size, weight, and the center wavelength and width of each band, for example MicaSense RedEdge: blue 475, green 560, red 668, red edge 717, NIR 840 nm."></p>
-</div></div>
-<p>Figure and table from <span class="citation" data-cites="jeziorska_uas_2019">Jeziorska (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>. One lens and sensor per band, so the bands are offset and aligned in processing.</p>
-<aside class="notes">
-<p>These are the common cameras of the last decade; the DJI Mavic 3 Multispectral and the MicaSense RedEdge-P and Altum are the current equivalents. The design is the same: one small sensor per band behind its own filter, so a frame is really four to ten frames taken from slightly different positions. Photogrammetry software aligns them during processing; a raw frame shows color fringes along edges. The band widths matter: a 10 nm red band and a 40 nm NIR band read different parts of the spectra on the previous slide than the wide bands of an RGB camera.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="from-digital-numbers-to-reflectance" class="slide level2 smaller center">
-<h2>From digital numbers to reflectance</h2>
-<ul>
-<li>A camera records <strong>digital numbers</strong>: counts that depend on the sun, the atmosphere, the exposure, and the surface</li>
-<li>Indices and comparisons between dates need <strong>reflectance</strong>: the fraction of incoming light the surface reflects</li>
-<li>Calibration: a <strong>reflectance panel</strong> of known reflectance imaged before and after the flight, plus a <strong>downwelling light sensor</strong> on the aircraft that records the incoming light during the flight</li>
-<li>The <strong>empirical line method</strong> fits a line between the digital numbers of several targets and their measured reflectance, per band</li>
-</ul>
-<aside class="notes">
-<p>Processing software (Metashape, Pix4D) does the panel and sun sensor correction when told which images show the panel. The USGS campaign in the lab tested how good that correction is: the manufacturer workflow left the MicaSense reflectance about 0.015 too low, and the empirical line method with two well sized targets brought the error under 0.005 <span class="citation" data-cites="shrestha_absolute_2025">(<a href="#/references" role="doc-biblioref" onclick="">Shrestha et al. 2025</a>)</span>. For a single flight and a single index the offset hardly matters; for comparing dates, sensors, or thresholds published elsewhere it does. The USGS guidelines report <span class="citation" data-cites="sampath_guidelines_2023">(<a href="#/references" role="doc-biblioref" onclick="">Sampath et al. 2023</a>)</span> describes both methods, and <span class="citation" data-cites="poncet_multispectral_2019">Poncet et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> compare five of them for a Parrot Sequoia camera, with the manufacturer method about as accurate as the best empirical fit.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="vegetation-indices" class="slide level2 smaller center">
-<h2>Vegetation indices</h2>
-<ul>
-<li>An index combines bands arithmetically so that one number tracks one property, mostly green vegetation</li>
-<li>Normalized differences, (A - B) / (A + B), range from -1 to 1 and cancel part of the illumination differences</li>
-<li>NDVI <span class="citation" data-cites="rouse_monitoring_1974">(<a href="#/references" role="doc-biblioref" onclick="">Rouse et al. 1974</a>)</span> is the reference; VARI <span class="citation" data-cites="gitelson_novel_2002">(<a href="#/references" role="doc-biblioref" onclick="">Gitelson et al. 2002</a>)</span> does the same job with RGB only; SAVI <span class="citation" data-cites="huete_soil-adjusted_1988">(<a href="#/references" role="doc-biblioref" onclick="">Huete 1988</a>)</span> corrects for bright soil between sparse plants</li>
-</ul>
-<aside class="notes">
-<p>An index is a transformation of the bands, not a measurement of its own: the numbers depend on the sensor bands and the calibration. The idea behind all of them is the contrast between the visible, where chlorophyll absorbs, and the NIR, where leaves reflect. With an RGB camera the NIR is missing, so VARI and the green leaf index use the contrast between green and red instead; they work for separating green vegetation from soil and pavement, less well for plant condition. In GRASS, <code>i.vi</code> computes the common ones from the band rasters and <code>r.mapcalc</code> any other.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="index-maps-from-the-lab" class="slide level2 smaller center">
-<h2>Index maps from the lab</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="../images/ms_eros_rgb.webp" style="width:100.0%" alt="True color composite of a 220 by 240 m block at the USGS EROS site: a grass field, crop rows on the left, a gravel road, an asphalt road with a row of calibration targets, and trees in the corners."></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../images/ms_eros_ndvi.webp" style="width:100.0%" alt="NDVI map of the same block: the grass field in medium green, crop rows and trees in dark green, the roads and targets in white and tan near zero."></p>
-</div></div>
-<p>MicaSense RedEdge-MX Dual, 10 bands, July 18, 2023, EROS calibration site, South Dakota <span class="citation" data-cites="irwin_eccoe_2025">(<a href="#/references" role="doc-biblioref" onclick="">Irwin et al. 2025</a>)</span>. NDVI from the 668 and 842 nm bands: grass 0.5 to 0.7, crop rows and trees 0.8 to 1, roads near zero.</p>
-<aside class="notes">
-<p>These are two maps from the vegetation indices lab. The left panel is the composite of the red, green, and blue bands after a color stretch; reflectance of grass is only a few percent, so the raw composite is dark. The right panel is NDVI. The field is a mown grass plot and reads 0.5 to 0.7; the crop rows on the left and the trees reach 0.9; the asphalt and gravel roads, the calibration tarps, and the vehicles are near zero. The histogram of this map has almost no cells between 0.2 and 0.3, which is where a vegetation threshold belongs. The lab computes the same NDVI from the manufacturer-calibrated and the empirical line calibrated versions of the flight and compares them.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="common-spectral-indices" class="slide level2 smaller center">
+<section id="common-spectral-indices" class="slide level2 center">
 <h2>Common Spectral Indices</h2>
 <table class="caption-top">
-<colgroup>
-<col style="width: 21%">
-<col style="width: 26%">
-<col style="width: 26%">
-<col style="width: 26%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Index</th>
 <th>Formula</th>
-<th>Bands</th>
 <th>Purpose</th>
 </tr>
 </thead>
@@ -460,50 +280,22 @@ Corey White
 <tr class="odd">
 <td>NDVI</td>
 <td>(NIR - Red) / (NIR + Red)</td>
-<td>NIR, red</td>
-<td>Green vegetation; 0.2 to 0.8 for crops and forest</td>
-</tr>
-<tr class="even">
-<td>NDRE</td>
-<td>(NIR - RedEdge) / (NIR + RedEdge)</td>
-<td>NIR, red edge</td>
-<td>Chlorophyll in dense canopies, late season crops</td>
-</tr>
-<tr class="odd">
-<td>SAVI</td>
-<td>(1 + L) (NIR - Red) / (NIR + Red + L), L = 0.5</td>
-<td>NIR, red</td>
-<td>Sparse vegetation over bright soil</td>
-</tr>
-<tr class="even">
-<td>GNDVI</td>
-<td>(NIR - Green) / (NIR + Green)</td>
-<td>NIR, green</td>
-<td>Chlorophyll, less saturation than NDVI</td>
-</tr>
-<tr class="odd">
-<td>NDWI</td>
-<td>(Green - NIR) / (Green + NIR)</td>
-<td>green, NIR</td>
-<td>Open water</td>
+<td>Vegetation health</td>
 </tr>
 <tr class="even">
 <td>VARI</td>
-<td>(Green - Red) / (Green + Red - Blue)</td>
-<td>RGB</td>
+<td>(G - R) / (G + R - B)</td>
 <td>Green vegetation from RGB</td>
 </tr>
 <tr class="odd">
-<td>GLI</td>
-<td>(2 Green - Red - Blue) / (2 Green + Red + Blue)</td>
-<td>RGB</td>
-<td>Green vegetation from RGB</td>
+<td>NDWI</td>
+<td>(G - NIR) / (G + NIR)</td>
+<td>Water detection</td>
 </tr>
 <tr class="even">
 <td>NDBI</td>
 <td>(SWIR - NIR) / (SWIR + NIR)</td>
-<td>SWIR, NIR</td>
-<td>Built-up areas (satellite sensors)</td>
+<td>Built-up detection</td>
 </tr>
 </tbody>
 </table>
@@ -646,35 +438,6 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <li>Nonstationarity</li>
 <li>Processing/Training</li>
 </ul>
-</section>
-<section id="references" class="slide level2 smaller scrollable">
-<h2>References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-gitelson_novel_2002" class="csl-entry" role="listitem">
-Gitelson, Anatoly A., Yoram J. Kaufman, Robert Stark, and Don Rundquist. 2002. <span>“Novel Algorithms for Remote Estimation of Vegetation Fraction.”</span> <em>Remote Sensing of Environment</em> 80 (1): 76–87. <a href="https://doi.org/10.1016/S0034-4257(01)00289-9">https://doi.org/10.1016/S0034-4257(01)00289-9</a>.
-</div>
-<div id="ref-huete_soil-adjusted_1988" class="csl-entry" role="listitem">
-Huete, Alfredo R. 1988. <span>“A Soil-Adjusted Vegetation Index (<span>SAVI</span>).”</span> <em>Remote Sensing of Environment</em> 25 (3): 295–309. <a href="https://doi.org/10.1016/0034-4257(88)90106-X">https://doi.org/10.1016/0034-4257(88)90106-X</a>.
-</div>
-<div id="ref-irwin_eccoe_2025" class="csl-entry" role="listitem">
-Irwin, Jeffrey R., Victoria M. Scholl, Mahesh Shrestha, et al. 2025. <em>2023 <span>ECCOE</span> <span>UAS</span> Multispectral and Hyperspectral Imagery Radiometric Calibration Evaluation Field Data</em>. U.S. Geological Survey. <a href="https://doi.org/10.5066/P14FFHW5">https://doi.org/10.5066/P14FFHW5</a>.
-</div>
-<div id="ref-jeziorska_uas_2019" class="csl-entry" role="listitem">
-Jeziorska, Justyna. 2019. <span>“<span>UAS</span> for Wetland Mapping and Hydrological Modeling.”</span> <em>Remote Sensing</em> 11 (17): 1997. <a href="https://doi.org/10.3390/rs11171997">https://doi.org/10.3390/rs11171997</a>.
-</div>
-<div id="ref-poncet_multispectral_2019" class="csl-entry" role="listitem">
-Poncet, Aurelie M., Thorsten Knappenberger, Christian Brodbeck, Michael Fogle, Joey N. Shaw, and Brenda V. Ortiz. 2019. <span>“Multispectral <span>UAS</span> Data Accuracy for Different Radiometric Calibration Methods.”</span> <em>Remote Sensing</em> 11 (16): 1917. <a href="https://doi.org/10.3390/rs11161917">https://doi.org/10.3390/rs11161917</a>.
-</div>
-<div id="ref-rouse_monitoring_1974" class="csl-entry" role="listitem">
-Rouse, John W., Rudolf H. Haas, John A. Schell, and Donald W. Deering. 1974. <span>“Monitoring Vegetation Systems in the Great Plains with <span>ERTS</span>.”</span> <em>Third Earth Resources Technology Satellite-1 Symposium, Volume 1: Technical Presentations, <span>NASA</span> <span>SP</span>-351</em>, 309–17.
-</div>
-<div id="ref-sampath_guidelines_2023" class="csl-entry" role="listitem">
-Sampath, Aparajithan, Mahesh Shrestha, Michelle While, and Victoria Mary Scholl. 2023. <em>Guidelines for Calibration of Uncrewed Aircraft Systems Imagery</em>. Nos. 2023-1033. U.S. Geological Survey. <a href="https://doi.org/10.3133/ofr20231033">https://doi.org/10.3133/ofr20231033</a>.
-</div>
-<div id="ref-shrestha_absolute_2025" class="csl-entry" role="listitem">
-Shrestha, Mahesh, Victoria Scholl, Aparajithan Sampath, et al. 2025. <span>“Absolute Radiometric Calibration Evaluation of Uncrewed Aerial System (<span>UAS</span>) Headwall and <span>MicaSense</span> Sensors and Improving Data Quality Using the Empirical Line Method.”</span> <em>Remote Sensing</em> 17 (22): 3738. <a href="https://doi.org/10.3390/rs17223738">https://doi.org/10.3390/rs17223738</a>.
-</div>
-</div>
 
 
 </section>
