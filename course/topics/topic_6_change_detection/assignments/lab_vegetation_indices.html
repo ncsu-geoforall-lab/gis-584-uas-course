@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lab: Vegetation indices from UAS imagery – UAS Mapping and Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-05ef257ffea5c5fd5ca58f032a70e1a4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">UAS Mapping and Analytics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/policies.html"> 
+<span class="menu-text">Logistics &amp; Policies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../../course/topics/index.html" aria-current="page"> 
+<span class="menu-text">Topics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Lab: Vegetation Indices</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_1_uas_basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Topic 1: UAS Basics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: Topic 1: UAS Basics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/part_a_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1A: Introduction to UAS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/part_b_rules_regs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1B: Rules and Regulations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/faa_part_107_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference: FAA Part 107 Guide</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_2_sfm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Topic 2: Structure from Motion</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Topic 2: Structure from Motion">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/part_a_images_to_3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A: Photogrammetry and SfM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/part_b_img_processing_sfm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B: Imagery Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2C</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/sfm_demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demo: Structure from Motion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_3_flight_planning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Topic 3: UAS Flight Planning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: Topic 3: UAS Flight Planning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3A: UAS Flight Planning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3B: Ground Control &amp; Accuracy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-8-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/lectures/lecture_3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/lectures/lecture_3b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-controls="quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-9-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-9" aria-labelledby="quarto-sidebar-section-9-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/assignments/assignment_3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 3A</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GNSS Field Protocol</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_4_GIS_analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-10-label">Topic 4: GIS Analytics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-controls="quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section: Topic 4: GIS Analytics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-10" aria-labelledby="quarto-sidebar-section-10-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4A: Analysis of UAS Data Products</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4B: Point Cloud Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-controls="quarto-sidebar-section-11" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-11-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-11" aria-labelledby="quarto-sidebar-section-11-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-controls="quarto-sidebar-section-12" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-12-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-12" aria-labelledby="quarto-sidebar-section-12-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_volumes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Volumes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_dsm_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: DSM Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_5_advanced_analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-13-label">Topic 5: Advanced Analytics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-controls="quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section: Topic 5: Advanced Analytics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-13" aria-labelledby="quarto-sidebar-section-13-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5A: UAS and Lidar Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5B: Multitemporal UAS Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-controls="quarto-sidebar-section-14" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-14-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-14" aria-labelledby="quarto-sidebar-section-14-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-controls="quarto-sidebar-section-15" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-15-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-15" aria-labelledby="quarto-sidebar-section-15-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 5A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 5B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/lab_python_scripting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Python Scripting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_6_change_detection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-16-label">Topic 6: Machine Learning &amp; AI</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-controls="quarto-sidebar-section-16" aria-expanded="true" aria-label="Toggle section: Topic 6: Machine Learning &amp; AI">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-16" aria-labelledby="quarto-sidebar-section-16-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/part_a_image_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6A: Image Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/part_b_change_detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6B: Change Detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-controls="quarto-sidebar-section-17" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-17-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-17" aria-labelledby="quarto-sidebar-section-17-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-controls="quarto-sidebar-section-18" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-18-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-18" aria-labelledby="quarto-sidebar-section-18-label" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab: Vegetation Indices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 6A</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/midterm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-19-label">Midterm</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-controls="quarto-sidebar-section-19" aria-expanded="false" aria-label="Toggle section: Midterm">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-19" aria-labelledby="quarto-sidebar-section-19-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/midterm/fall2025.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm Rubric</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#part-1-rgb-indices-lake-wheeler-2024" id="toc-part-1-rgb-indices-lake-wheeler-2024" class="nav-link" data-scroll-target="#part-1-rgb-indices-lake-wheeler-2024">Part 1: RGB indices, Lake Wheeler 2024</a>
+  <ul>
+  <li><a href="#import-a-block-of-the-orthophoto" id="toc-import-a-block-of-the-orthophoto" class="nav-link" data-scroll-target="#import-a-block-of-the-orthophoto">Import a block of the orthophoto</a></li>
+  <li><a href="#indices-from-the-visible-bands" id="toc-indices-from-the-visible-bands" class="nav-link" data-scroll-target="#indices-from-the-visible-bands">Indices from the visible bands</a></li>
+  <li><a href="#index-values-at-the-sample-points" id="toc-index-values-at-the-sample-points" class="nav-link" data-scroll-target="#index-values-at-the-sample-points">Index values at the sample points</a></li>
+  <li><a href="#a-threshold-map" id="toc-a-threshold-map" class="nav-link" data-scroll-target="#a-threshold-map">A threshold map</a></li>
+  </ul></li>
+  <li><a href="#part-2-nir-and-red-edge-indices-usgs-eros-2023" id="toc-part-2-nir-and-red-edge-indices-usgs-eros-2023" class="nav-link" data-scroll-target="#part-2-nir-and-red-edge-indices-usgs-eros-2023">Part 2: NIR and red edge indices, USGS EROS 2023</a>
+  <ul>
+  <li><a href="#a-second-project" id="toc-a-second-project" class="nav-link" data-scroll-target="#a-second-project">A second project</a></li>
+  <li><a href="#import-the-two-orthomosaics" id="toc-import-the-two-orthomosaics" class="nav-link" data-scroll-target="#import-the-two-orthomosaics">Import the two orthomosaics</a></li>
+  <li><a href="#clamp-the-bands-to-the-physical-range" id="toc-clamp-the-bands-to-the-physical-range" class="nav-link" data-scroll-target="#clamp-the-bands-to-the-physical-range">Clamp the bands to the physical range</a></li>
+  <li><a href="#ndvi-two-ways" id="toc-ndvi-two-ways" class="nav-link" data-scroll-target="#ndvi-two-ways">NDVI two ways</a></li>
+  <li><a href="#red-edge-soil-adjusted-and-green-indices" id="toc-red-edge-soil-adjusted-and-green-indices" class="nav-link" data-scroll-target="#red-edge-soil-adjusted-and-green-indices">Red edge, soil adjusted, and green indices</a></li>
+  <li><a href="#the-distribution-of-ndvi-and-a-threshold-map" id="toc-the-distribution-of-ndvi-and-a-threshold-map" class="nav-link" data-scroll-target="#the-distribution-of-ndvi-and-a-threshold-map">The distribution of NDVI and a threshold map</a></li>
+  </ul></li>
+  <li><a href="#part-3-calibration-and-the-index" id="toc-part-3-calibration-and-the-index" class="nav-link" data-scroll-target="#part-3-calibration-and-the-index">Part 3: Calibration and the index</a></li>
+  <li><a href="#part-4-reading-the-indices" id="toc-part-4-reading-the-indices" class="nav-link" data-scroll-target="#part-4-reading-the-indices">Part 4: Reading the indices</a></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+<!-- banner.html -->
+<div class="banner-image">
+    <img src="../../../../includes/images/banner.jpg" alt="Banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Lab: Vegetation Indices</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lab: Vegetation indices from UAS imagery</h1>
+<p class="subtitle lead">Image classification</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/vegetation_indices.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
+<figcaption>Open in Colab</figcaption>
+</figure>
+</div>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>A spectral index combines the bands of an orthomosaic into one number per cell that tracks a property of the surface, mostly the amount of green vegetation. Indices are the first features of the image classification in Assignment 6A, and they are the standard product of multispectral UAS flights in agriculture and vegetation monitoring. In this lab you compute indices from two kinds of imagery: the RGB orthophoto of Lake Wheeler from July 2024, where only the visible bands are available, and a 10-band MicaSense RedEdge-MX Dual orthomosaic from a USGS calibration campaign, where the near infrared and red edge bands allow the standard vegetation indices. The USGS data come in two calibrations of the same flight, so you also see how much the calibration changes an index.</p>
+<p>Keep in mind what an index measures. It is a transformation of the bands of one sensor, not a physical quantity: NDVI from a satellite, from a MicaSense camera, and from a different flight date are three different numbers for the same field until the bands are calibrated to reflectance. RGB indices such as VARI separate green vegetation from soil and pavement; they say little about plant condition, which needs the red edge and near infrared.</p>
+<p>Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and tables for you. Either way, the report is the same.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler GRASS project: Lake_Wheeler_NCspm</a> (EPSG:3358; you have it from the earlier assignments)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif">Lake Wheeler orthophoto, July 17, 2024</a>: WebODM orthomosaic, RGB plus alpha, 7 cm, UTM zone 17N, cloud optimized GeoTIFF (read directly from the URL, no download needed)</li>
+<li>USGS EROS calibration site, July 18, 2023, MicaSense RedEdge-MX Dual, 10 bands, 4.2 cm, reflectance <span class="citation" data-cites="irwin_eccoe_2025">(<a href="#ref-irwin_eccoe_2025" role="doc-biblioref">Irwin et al. 2025</a>)</span>: <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/EROS_ECCOE_USGS/071823/2023-07-18_1200_MicaSenseDual_ortho_panels_cog.tif">manufacturer calibration</a> and <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/EROS_ECCOE_USGS/071823/2023-07-18_1200_MicaSenseDual_ortho_panels_Reflectance_ELM_cog.tif">empirical line method calibration</a>, cloud optimized GeoTIFFs (read from the URL). The original data release is public domain (CC0) on <a href="https://www.sciencebase.gov/catalog/item/682b85aad4be024992ebd701">ScienceBase</a>.</li>
+</ul>
+<p>The bands of the USGS orthomosaics, in order:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Band</th>
+<th>Center (nm)</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>444</td>
+<td>coastal blue</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>475</td>
+<td>blue</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>531</td>
+<td>green (531)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>560</td>
+<td>green</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>650</td>
+<td>red (650)</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>668</td>
+<td>red</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>705</td>
+<td>red edge (705)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>717</td>
+<td>red edge</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>740</td>
+<td>red edge (740)</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>842</td>
+<td>near infrared</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<ul>
+<li><a href="https://grass.osgeo.org/">GRASS</a> 8.5; the tools used are <code>r.import</code>, <code>r.mapcalc</code>, <code>i.vi</code>, <code>r.colors</code>, <code>r.univar</code>, <code>r.what</code>, <code>r.category</code>, and <code>r.stats</code>. No addons.</li>
+</ul>
+</section>
+<section id="part-1-rgb-indices-lake-wheeler-2024" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-rgb-indices-lake-wheeler-2024">Part 1: RGB indices, Lake Wheeler 2024</h2>
+<section id="import-a-block-of-the-orthophoto" class="level3">
+<h3 class="anchored" data-anchor-id="import-a-block-of-the-orthophoto">Import a block of the orthophoto</h3>
+<p>Start GRASS in the <code>Lake_Wheeler_NCspm</code> project and create a new mapset <code>indices</code>. The 2024 orthophoto is stored in UTM zone 17N with four bands: red, green, blue, and an alpha band that marks the area outside the mosaic. Set the region to a 500 by 400 m block of the fields at 0.2 m and let <code>r.import</code> read, reproject, and resample only that block. The original resolution is 7 cm; 20 cm is enough for indices and ten times faster (about half a minute).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219700 s=219300 w=636700 e=637200 res=0.2 <span class="at">-p</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif"</span> output=ortho_2024 extent=region resolution=region</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">g.list</span> type=raster pattern=<span class="st">"ortho_2024*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The import creates <code>ortho_2024.1</code> to <code>ortho_2024.4</code>. Display the block in true color (in the GUI: <em>Add RGB map layer</em>, or on the command line):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rgb</span> red=ortho_2024.1 green=ortho_2024.2 blue=ortho_2024.3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Create five sample points on surfaces you can recognize in the orthophoto: bare soil, crop rows, tree canopy, the paved road, and a grassed waterway.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.in.ascii</span> input=- output=samples separator=pipe columns=<span class="st">"x double precision, y double precision, label text"</span> <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">636733|219551|bare soil</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">636853|219634|crop</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">637135|219480|trees</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">637150|219625|paved road</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">637050|219490|grass</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="indices-from-the-visible-bands" class="level3">
+<h3 class="anchored" data-anchor-id="indices-from-the-visible-bands">Indices from the visible bands</h3>
+<p>Without a near infrared band, the indices use the contrast between green and red that chlorophyll creates in the visible range. The bands are 8-bit digital numbers, so the expressions use <code>float()</code> to avoid integer division.</p>
+<ul>
+<li>VARI, visible atmospherically resistant index <span class="citation" data-cites="gitelson_novel_2002">(<a href="#ref-gitelson_novel_2002" role="doc-biblioref">Gitelson et al. 2002</a>)</span>: (G - R) / (G + R - B). The denominator is near zero on very dark cells, so the expression sets zero to null and clamps the result to -1 to 1.</li>
+<li>GLI, green leaf index: (2G - R - B) / (2G + R + B)</li>
+<li>ExG, excess green: 2g - r - b, where g, r, and b are the band values divided by their sum</li>
+<li>BI, brightness: the root mean square of the three bands. Not a vegetation index, but it separates bright soil and pavement from everything else.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"vari = if(ortho_2024.2 + ortho_2024.1 - ortho_2024.3 == 0, null(), max(-1.0, min(1.0, float(ortho_2024.2 - ortho_2024.1) / (ortho_2024.2 + ortho_2024.1 - ortho_2024.3))))"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"gli = float(2 * ortho_2024.2 - ortho_2024.1 - ortho_2024.3) / (2 * ortho_2024.2 + ortho_2024.1 + ortho_2024.3)"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"exg = (2.0 * ortho_2024.2 - ortho_2024.1 - ortho_2024.3) / (ortho_2024.1 + ortho_2024.2 + ortho_2024.3)"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"bi = sqrt((ortho_2024.1 * ortho_2024.1 + ortho_2024.2 * ortho_2024.2 + ortho_2024.3 * ortho_2024.3) / 3.0)"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=vari,gli,exg color=ndvi</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=bi color=grey</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=vari</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>ndvi</code> color table runs from red through white to green between -1 and 1 and suits any normalized index. Display VARI and GLI with the sample points on top.</p>
+<blockquote class="blockquote">
+<p>VARI in the block has a mean of 0.07 and a standard deviation of 0.13.</p>
+</blockquote>
+</section>
+<section id="index-values-at-the-sample-points" class="level3">
+<h3 class="anchored" data-anchor-id="index-values-at-the-sample-points">Index values at the sample points</h3>
+<p><code>r.what</code> reads every raster at the sample points:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.what</span> map=ortho_2024.1,ortho_2024.2,ortho_2024.3,vari,gli,exg,bi points=samples separator=comma</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Surface</th>
+<th>Red</th>
+<th>Green</th>
+<th>Blue</th>
+<th>VARI</th>
+<th>GLI</th>
+<th>ExG</th>
+<th>BI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>bare soil</td>
+<td>198</td>
+<td>177</td>
+<td>157</td>
+<td>-0.10</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>178</td>
+</tr>
+<tr class="even">
+<td>crop</td>
+<td>174</td>
+<td>173</td>
+<td>139</td>
+<td>0.00</td>
+<td>0.05</td>
+<td>0.07</td>
+<td>163</td>
+</tr>
+<tr class="odd">
+<td>trees</td>
+<td>52</td>
+<td>75</td>
+<td>38</td>
+<td>0.26</td>
+<td>0.25</td>
+<td>0.36</td>
+<td>57</td>
+</tr>
+<tr class="even">
+<td>paved road</td>
+<td>176</td>
+<td>159</td>
+<td>141</td>
+<td>-0.09</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>159</td>
+</tr>
+<tr class="odd">
+<td>grass</td>
+<td>108</td>
+<td>134</td>
+<td>92</td>
+<td>0.17</td>
+<td>0.15</td>
+<td>0.20</td>
+<td>113</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>VARI and GLI are near zero on soil and pavement and rise with the amount of green leaf. The crop point falls between, because a 20 cm cell in July mixes leaves with the soil between the rows; the brightness separates the shaded canopy from the sunlit field.</p>
+</section>
+<section id="a-threshold-map" class="level3">
+<h3 class="anchored" data-anchor-id="a-threshold-map">A threshold map</h3>
+<p>A simple classification by VARI: below 0 is bare soil and pavement, 0 to 0.1 is mixed, above 0.1 is green vegetation. <code>r.category</code> labels the classes and <code>r.report</code> gives their areas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"vari_class = if(vari &lt; 0, 1, if(vari &lt; 0.1, 2, 3))"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> map=vari_class separator=<span class="st">":"</span> rules=- <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">1:bare and built</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">2:mixed</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">3:green vegetation</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> map=vari_class units=h,p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>bare and built 6.5 ha (33 percent), mixed 6.5 ha (33 percent), green vegetation 6.8 ha (34 percent) of the 20 ha block.</p>
+</blockquote>
+</section>
+</section>
+<section id="part-2-nir-and-red-edge-indices-usgs-eros-2023" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-nir-and-red-edge-indices-usgs-eros-2023">Part 2: NIR and red edge indices, USGS EROS 2023</h2>
+<section id="a-second-project" class="level3">
+<h3 class="anchored" data-anchor-id="a-second-project">A second project</h3>
+<p>The USGS site is in South Dakota, in NAD83(2011) UTM zone 14N. Create a new project <code>eros_eccoe</code> from EPSG:6343 (in the GUI startup screen, or <code>grass -c EPSG:6343 ~/grassdata/eros_eccoe</code>) and start GRASS in its <code>PERMANENT</code> mapset.</p>
+</section>
+<section id="import-the-two-orthomosaics" class="level3">
+<h3 class="anchored" data-anchor-id="import-the-two-orthomosaics">Import the two orthomosaics</h3>
+<p>Set the region to the 220 by 240 m block of the site used in the lab, with the grass field, crop rows, a gravel road, the asphalt road with the calibration targets, and trees, at 10 cm (the orthomosaics are 4.2 cm), and import both orthomosaics for that region. Each import creates ten rasters, one per band in the order of the table above, and takes a minute or two because the bands are read from the cloud optimized GeoTIFF on the bucket.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=4845640 s=4845400 w=690700 e=690920 res=0.1 <span class="at">-pa</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/EROS_ECCOE_USGS/071823/2023-07-18_1200_MicaSenseDual_ortho_panels_Reflectance_ELM_cog.tif"</span> output=elm_raw extent=region resolution=region</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/EROS_ECCOE_USGS/071823/2023-07-18_1200_MicaSenseDual_ortho_panels_cog.tif"</span> output=panels_raw extent=region resolution=region</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.list</span> type=raster pattern=<span class="st">"elm_raw*"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=elm_raw.10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="clamp-the-bands-to-the-physical-range" class="level3">
+<h3 class="anchored" data-anchor-id="clamp-the-bands-to-the-physical-range">Clamp the bands to the physical range</h3>
+<p>The empirical line fit extrapolates: deep shadow comes out slightly below zero reflectance and the white tarp above one. A ratio of two bands near zero gives huge index values, so clamp every band to 0 to 1 before computing indices, for both products so they stay comparable:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> 1 2 3 4 5 6 7 8 9 10<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">r.mapcalc</span> <span class="st">"elm.</span><span class="va">$i</span><span class="st"> = max(0, min(1, elm_raw.</span><span class="va">$i</span><span class="st">))"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">r.mapcalc</span> <span class="st">"panels.</span><span class="va">$i</span><span class="st"> = max(0, min(1, panels_raw.</span><span class="va">$i</span><span class="st">))"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.remove</span> <span class="at">-f</span> type=raster pattern=<span class="st">"*_raw.*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The reflectance of grass and soil is low, so a composite of the raw values is dark. <code>i.colors.enhance</code> stretches the color tables of the three bands before <code>d.rgb</code> draws them (in the GUI: <em>Imagery &gt; Manage image colors &gt; Enhance colors</em>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.colors.enhance</span> red=elm.6 green=elm.4 blue=elm.2 strength=95</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rgb</span> red=elm.6 green=elm.4 blue=elm.2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ndvi-two-ways" class="level3">
+<h3 class="anchored" data-anchor-id="ndvi-two-ways">NDVI two ways</h3>
+<p><code>i.vi</code> computes the common indices from the band rasters; <code>r.mapcalc</code> does the same from the formula <span class="citation" data-cites="rouse_monitoring_1974">(<a href="#ref-rouse_monitoring_1974" role="doc-biblioref">Rouse et al. 1974</a>)</span>. Compute NDVI both ways and check that they agree.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.vi</span> output=ndvi viname=ndvi red=elm.6 nir=elm.10</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"ndvi_calc = (elm.10 - elm.6) / (elm.10 + elm.6)"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"ndvi_check = abs(ndvi - ndvi_calc)"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=ndvi_check</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="red-edge-soil-adjusted-and-green-indices" class="level3">
+<h3 class="anchored" data-anchor-id="red-edge-soil-adjusted-and-green-indices">Red edge, soil adjusted, and green indices</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"ndre = (elm.10 - elm.8) / (elm.10 + elm.8)"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"savi = 1.5 * (elm.10 - elm.6) / (elm.10 + elm.6 + 0.5)"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"gndvi = (elm.10 - elm.4) / (elm.10 + elm.4)"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=ndvi,ndre,savi,gndvi color=ndvi</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=ndvi</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=ndre</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>NDRE uses the 717 nm red edge band in place of red; it saturates later than NDVI in dense canopies. SAVI <span class="citation" data-cites="huete_soil-adjusted_1988">(<a href="#ref-huete_soil-adjusted_1988" role="doc-biblioref">Huete 1988</a>)</span> adds the soil adjustment L = 0.5 for sparse vegetation over bright soil. GNDVI uses green in place of red.</p>
+<blockquote class="blockquote">
+<p>NDVI from <code>i.vi</code> and from <code>r.mapcalc</code> differ by less than 0.000001 (float rounding). NDVI: mean 0.57, median 0.56, standard deviation 0.20. NDRE: mean 0.29, median 0.27, standard deviation 0.13. SAVI: mean 0.36. GNDVI: mean 0.56. The NDRE values are about half the NDVI values on the same surfaces because the 717 nm band sits on the rise of the red edge, where leaves already reflect more than in the red.</p>
+</blockquote>
+</section>
+<section id="the-distribution-of-ndvi-and-a-threshold-map" class="level3">
+<h3 class="anchored" data-anchor-id="the-distribution-of-ndvi-and-a-threshold-map">The distribution of NDVI and a threshold map</h3>
+<p>The histogram of NDVI (in the GUI: <em>Raster &gt; Reports and statistics &gt; Histogram</em>, or <code>d.histogram</code>; on the command line <code>r.stats -cn nsteps=50</code>) shows how the values group: one broad peak between 0.4 and 0.7 (the grass field, two thirds of the cells), a second group between 0.8 and 1 (the crop rows and trees), a small group between 0 and 0.2 (roads, targets, vehicles), and almost nothing between 0.2 and 0.3. The gap is where the threshold goes. Take cells above 0.3 as green vegetation:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"green = if(ndvi &gt; 0.3, 1, 2)"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> map=green separator=<span class="st">":"</span> rules=- <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">1:green vegetation</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">2:other</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> map=green units=h,p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>green vegetation 4.92 ha (93 percent), other 0.36 ha (7 percent) of the 5.28 ha block. The other class is the asphalt and gravel roads, the targets and vehicles, and the bare strips between the crop rows.</p>
+</blockquote>
+</section>
+</section>
+<section id="part-3-calibration-and-the-index" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-calibration-and-the-index">Part 3: Calibration and the index</h2>
+<p>The <code>panels</code> orthomosaic is the same flight processed with the manufacturer’s workflow: the reflectance panel imaged before the flight and the sun sensor on the aircraft. The <code>elm</code> orthomosaic was corrected afterwards with the empirical line method, a per-band linear fit between the imagery and reflectance measured on several targets in the field. <span class="citation" data-cites="shrestha_absolute_2025">Shrestha et al. (<a href="#ref-shrestha_absolute_2025" role="doc-biblioref">2025</a>)</span> found the manufacturer workflow about 0.015 too low in reflectance and the ELM within 0.005. <span class="citation" data-cites="poncet_multispectral_2019">Poncet et al. (<a href="#ref-poncet_multispectral_2019" role="doc-biblioref">2019</a>)</span> compared five calibration methods for a Parrot Sequoia camera and found no method best in every band: the manufacturer method was about as accurate as the best empirical line fit, an empirical fit applied to the finished orthomosaic beat one applied to the raw images, the red edge and NIR bands had the smallest errors, and the indices were most accurate over dense vegetation. <span class="citation" data-cites="laliberte_multispectral_2011">Laliberte et al. (<a href="#ref-laliberte_multispectral_2011" role="doc-biblioref">2011</a>)</span> describe the full workflow, from band alignment through calibration to classification, for a six-band rangeland camera.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"ndvi_panels = (panels.10 - panels.6) / (panels.10 + panels.6)"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="st">"ndvi_diff = ndvi - ndvi_panels"</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=ndvi_diff rules=- <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">-0.1 blue</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">0 white</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="st">0.1 red</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=ndvi_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Read all ten bands of both products at one calibration target to see the offset band by band:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.what</span> map=elm.1,elm.2,elm.3,elm.4,elm.5,elm.6,elm.7,elm.8,elm.9,elm.10 coordinates=690865.4,4845586.9</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.what</span> map=panels.1,panels.2,panels.3,panels.4,panels.5,panels.6,panels.7,panels.8,panels.9,panels.10 coordinates=690865.4,4845586.9</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>NDVI mean 0.587 with the manufacturer calibration and 0.573 with the ELM; the difference (ELM minus manufacturer) has mean -0.014, median -0.012, standard deviation 0.030. At the grey tarp the ELM product reads 0.33 to 0.36 in every band and the manufacturer product 0.30 to 0.32, so the ELM added 0.02 (NIR) to 0.06 (coastal blue) of reflectance. An offset added to both bands of a ratio lowers the ratio, which is why the ELM NDVI is lower by 0.01 to 0.03 over the whole field; the tree shadows and field edges go the other way because the manufacturer product has reflectance below zero there, clamped to zero. The threshold map is the same with either product; the offset matters when reflectance values or indices are compared between flights, sensors, or published thresholds.</p>
+</blockquote>
+</section>
+<section id="part-4-reading-the-indices" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-reading-the-indices">Part 4: Reading the indices</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Bands</th>
+<th>Range</th>
+<th>Responds to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VARI, GLI, ExG</td>
+<td>RGB</td>
+<td>about -1 to 1</td>
+<td>Green leaf cover; no information on plant condition</td>
+</tr>
+<tr class="even">
+<td>NDVI</td>
+<td>NIR, red</td>
+<td>-1 to 1; crops and forest 0.2 to 0.8</td>
+<td>Green vegetation; saturates in dense canopies</td>
+</tr>
+<tr class="odd">
+<td>NDRE</td>
+<td>NIR, red edge</td>
+<td>-1 to 1</td>
+<td>Chlorophyll in dense canopies, late season crops</td>
+</tr>
+<tr class="even">
+<td>SAVI</td>
+<td>NIR, red</td>
+<td>about -1.5 to 1.5</td>
+<td>Sparse vegetation over bright soil</td>
+</tr>
+<tr class="odd">
+<td>GNDVI</td>
+<td>NIR, green</td>
+<td>-1 to 1</td>
+<td>Chlorophyll; less saturation than NDVI</td>
+</tr>
+</tbody>
+</table>
+<p>Compare VARI on Lake Wheeler with NDVI on the USGS site on the same kinds of surface: both are near zero on bare soil and pavement, but NDVI reaches 0.8 on grass where VARI stays below 0.3, because the near infrared reflectance of leaves is five to ten times the green. That contrast is what the RGB camera cannot see.</p>
+</section>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>Prepare a report (2 to 3 pages including figures):</p>
+<ol type="1">
+<li><strong>RGB indices</strong>: the VARI or GLI map of the Lake Wheeler block, the index values at the five sample points, and the areas of the three VARI classes, with a paragraph on which surfaces the RGB indices separate and where they fail.</li>
+<li><strong>NIR and red edge indices</strong>: the NDVI and NDRE maps with their statistics, the NDVI histogram, and the area above the threshold, with a paragraph on where NDVI and NDRE differ and why.</li>
+<li><strong>Calibration</strong>: the statistics of the NDVI difference between the two calibrations and the two spectra of the target, with a sentence on whether the difference changes the threshold map and when it would matter.</li>
+<li><strong>Choosing an index</strong>: which index you would use for the Lake Wheeler classification in Assignment 6A and what a multispectral camera would add.</li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Lab: Vegetation indices:</p>
+<ul>
+<li>Your report as a PDF.</li>
+<li>Optional: your completed notebook (<code>.ipynb</code>) if you worked in Colab.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>RGB indices</strong>: the map, the sample values, and the class areas are reported and interpreted by surface type.</li>
+<li><strong>NIR and red edge indices</strong>: the four indices are computed on the reflectance data and NDVI and NDRE are compared.</li>
+<li><strong>Calibration</strong>: the two products are compared and the effect on the threshold is judged.</li>
+<li><strong>Choosing an index</strong>: the choice is argued from the lab results.</li>
+</ul>
+<hr>
+<p>This lab is adapted from the multispectral imagery lab of the earlier course, which followed chapter 17 of <span class="citation" data-cites="frazier_fundamentals_2021">Frazier and Singh (<a href="#ref-frazier_fundamentals_2021" role="doc-biblioref">2021</a>)</span>. The USGS data are from <span class="citation" data-cites="irwin_eccoe_2025">Irwin et al. (<a href="#ref-irwin_eccoe_2025" role="doc-biblioref">2025</a>)</span> (public domain).</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-frazier_fundamentals_2021" class="csl-entry" role="listitem">
+Frazier, Amy E., and Kunwar K. Singh, eds. 2021. <em>Fundamentals of Capturing and Processing Drone Imagery and Data</em>. <span>CRC</span> Press. <a href="https://doi.org/10.1201/9780429283239">https://doi.org/10.1201/9780429283239</a>.
+</div>
+<div id="ref-gitelson_novel_2002" class="csl-entry" role="listitem">
+Gitelson, Anatoly A., Yoram J. Kaufman, Robert Stark, and Don Rundquist. 2002. <span>“Novel Algorithms for Remote Estimation of Vegetation Fraction.”</span> <em>Remote Sensing of Environment</em> 80 (1): 76–87. <a href="https://doi.org/10.1016/S0034-4257(01)00289-9">https://doi.org/10.1016/S0034-4257(01)00289-9</a>.
+</div>
+<div id="ref-huete_soil-adjusted_1988" class="csl-entry" role="listitem">
+Huete, Alfredo R. 1988. <span>“A Soil-Adjusted Vegetation Index (<span>SAVI</span>).”</span> <em>Remote Sensing of Environment</em> 25 (3): 295–309. <a href="https://doi.org/10.1016/0034-4257(88)90106-X">https://doi.org/10.1016/0034-4257(88)90106-X</a>.
+</div>
+<div id="ref-irwin_eccoe_2025" class="csl-entry" role="listitem">
+Irwin, Jeffrey R., Victoria M. Scholl, Mahesh Shrestha, et al. 2025. <em>2023 <span>ECCOE</span> <span>UAS</span> Multispectral and Hyperspectral Imagery Radiometric Calibration Evaluation Field Data</em>. U.S. Geological Survey. <a href="https://doi.org/10.5066/P14FFHW5">https://doi.org/10.5066/P14FFHW5</a>.
+</div>
+<div id="ref-laliberte_multispectral_2011" class="csl-entry" role="listitem">
+Laliberte, Andrea S., Mark A. Goforth, Caitriana M. Steele, and Albert Rango. 2011. <span>“Multispectral Remote Sensing from Unmanned Aircraft: Image Processing Workflows and Applications for Rangeland Environments.”</span> <em>Remote Sensing</em> 3 (11): 2529–51. <a href="https://doi.org/10.3390/rs3112529">https://doi.org/10.3390/rs3112529</a>.
+</div>
+<div id="ref-poncet_multispectral_2019" class="csl-entry" role="listitem">
+Poncet, Aurelie M., Thorsten Knappenberger, Christian Brodbeck, Michael Fogle, Joey N. Shaw, and Brenda V. Ortiz. 2019. <span>“Multispectral <span>UAS</span> Data Accuracy for Different Radiometric Calibration Methods.”</span> <em>Remote Sensing</em> 11 (16): 1917. <a href="https://doi.org/10.3390/rs11161917">https://doi.org/10.3390/rs11161917</a>.
+</div>
+<div id="ref-rouse_monitoring_1974" class="csl-entry" role="listitem">
+Rouse, John W., Rudolf H. Haas, John A. Schell, and Donald W. Deering. 1974. <span>“Monitoring Vegetation Systems in the Great Plains with <span>ERTS</span>.”</span> <em>Third Earth Resources Technology Satellite-1 Symposium, Volume 1: Technical Presentations, <span>NASA</span> <span>SP</span>-351</em>, 309–17.
+</div>
+<div id="ref-shrestha_absolute_2025" class="csl-entry" role="listitem">
+Shrestha, Mahesh, Victoria Scholl, Aparajithan Sampath, et al. 2025. <span>“Absolute Radiometric Calibration Evaluation of Uncrewed Aerial System (<span>UAS</span>) Headwall and <span>MicaSense</span> Sensors and Improving Data Quality Using the Empirical Line Method.”</span> <em>Remote Sensing</em> 17 (22): 3738. <a href="https://doi.org/10.3390/rs17223738">https://doi.org/10.3390/rs17223738</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478358">
+<p>Moodle</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://help.ncsu.edu/">
+<p>Computing Help</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/">
+<p>MGIST Home</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.ncsu.edu/policies/prr-disclaimer.php">
+<p>Disclaimer</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://oit.ncsu.edu/itaccess">
+<p>Accessibility</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<p>© 2026 GeoForAll Lab CC BY-SA</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ncsu-geoforall-lab/gis-584-uas-course">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/geoforall/">
+<p>GeoForAll Lab</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

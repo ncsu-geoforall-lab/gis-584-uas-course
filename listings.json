@@ -1,17 +1,5 @@
 [
   {
-    "listing": "/course/topics/index.html",
-    "items": [
-      "/course/topics/topic_1_uas_basics/index.html",
-      "/course/topics/topic_2_sfm/index.html",
-      "/course/topics/topic_3_flight_planning/index.html",
-      "/course/topics/topic_4_GIS_analytics/index.html",
-      "/course/topics/topic_5_advanced_analytics/index.html",
-      "/course/topics/topic_6_change_detection/index.html",
-      "/course/topics/midterm/index.html"
-    ]
-  },
-  {
     "listing": "/course/schedule.html",
     "items": [
       "/course/topics/topic_1_uas_basics/part_a_introduction.html",
@@ -38,6 +26,18 @@
       "/course/topics/topic_6_change_detection/part_a_image_classification.html",
       "/course/topics/topic_6_change_detection/assignments/assignment_6a.html",
       "/course/topics/topic_6_change_detection/part_b_change_detection.html"
+    ]
+  },
+  {
+    "listing": "/course/topics/index.html",
+    "items": [
+      "/course/topics/topic_1_uas_basics/index.html",
+      "/course/topics/topic_2_sfm/index.html",
+      "/course/topics/topic_3_flight_planning/index.html",
+      "/course/topics/topic_4_GIS_analytics/index.html",
+      "/course/topics/topic_5_advanced_analytics/index.html",
+      "/course/topics/topic_6_change_detection/index.html",
+      "/course/topics/midterm/index.html"
     ]
   }
 ]

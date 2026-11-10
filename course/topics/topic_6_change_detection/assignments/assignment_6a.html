@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-0bc1bcc7162927abbdd28fec2080e05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-05ef257ffea5c5fd5ca58f032a70e1a4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -193,7 +193,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -611,6 +611,12 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-18" aria-labelledby="quarto-sidebar-section-18-label" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Vegetation Indices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 6A</span></a>
   </div>
@@ -684,7 +690,7 @@ window.Quarto = {
     <img src="../../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Assignment 6A</h1>
 <p class="subtitle lead">UAS Image Classification</p>
@@ -743,9 +749,9 @@ window.Quarto = {
 <section id="workflow" class="level2">
 <h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
 <p>Create a new mapset within your <code>Lake_Wheeler_NCspm</code> project and set your working directory.</p>
-<p>Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is save as a <a href="http://cogeo.org/"><em>Cloud Optimized GeoTIFF (COG)</em></a> which allows us to directory import the data using r.import with needing to download the data beforehand.</p>
+<p>Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is saved as a <a href="http://cogeo.org/"><em>Cloud Optimized GeoTIFF (COG)</em></a>, which lets <code>r.import</code> read it directly from its URL without downloading the file first.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif resample=nearest output=odm_071724_ortho</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s set the compuational region to the ortho imagery.</p>
+<p>Set the computational region to the ortho imagery.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=odm_071724_ortho.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -757,7 +763,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Task:</strong> What is the spatial resolution and how many pixels are include in the compuational region?</p>
+<p><strong>Task:</strong> What is the spatial resolution and how many pixels are included in the computational region?</p>
 </div>
 </div>
 <!-- ### Find overlaping areas
@@ -793,7 +799,7 @@ r.colors -e map=rgb_diff color=bcyr
 <h3 class="anchored" data-anchor-id="spectral-feature-extraction">Spectral Feature Extraction</h3>
 <section id="spectral-indices" class="level4">
 <h4 class="anchored" data-anchor-id="spectral-indices">Spectral Indices</h4>
-<p>Calculate <code>VARI (Visible Atmospherically Resistant Index)</code> index <a href="https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&amp;context=natrespapers">Gitelson et al.&nbsp;(2002)</a>.</p>
+<p>The <a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">vegetation indices lab</a> defines the indices used here and compares them on RGB and multispectral imagery. Calculate the <code>VARI (Visible Atmospherically Resistant Index)</code> index <a href="https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&amp;context=natrespapers">Gitelson et al.&nbsp;(2002)</a>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Let’s look at the univariate statistics of our <code>vari_2024</code> raster.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> vari_2024</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1038,7 +1044,7 @@ Warning
 <h4 class="anchored" data-anchor-id="feature-importance">Feature Importance</h4>
 <p>You can calculate the feature importance by using the <code>-f</code> flag and saving the results to a csv file using the parameter <code>fimp_file</code>. Our feature importance is saved to <code>feature_importance.csv</code>.</p>
 <p>The features with higher the importance scores indicate they are more influential in making predictions. While features with low importance, could potentially be removed to simplify the model.</p>
-<div id="03bef495" class="cell" data-execution_count="1">
+<div id="23e9541a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature importance plot (requires pandas, seaborn, matplotlib)</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
