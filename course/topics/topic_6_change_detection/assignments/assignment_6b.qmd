@@ -1,610 +1,397 @@
 ---
 topic: "Topic 6B: Machine Learning & AI"
-subtitle: "UAS Change Detection"
 title: "Assignment 6B"
+subtitle: "UAS change detection"
+date: 11/23/2026
 assignment-due-date: 11/30/2026
-author:
-    - Corey White
-date: 11/18/2026
-format:
-  html:
-    toc-depth: 4
-  ipynb: default
 activity: Lab
-jupyter: python3
-execute:
-  eval: false
-  enabled: true
-  freeze: auto
-  output: true
-draft: true
+format:
+    html:
+        toc: true
+        toc-depth: 3
+notebook-view:
+  - notebook: change_detection.ipynb
+    title: "UAS change detection in GRASS"
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/change_detection.ipynb
+resources:
+  - change_detection.ipynb
 ---
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/assignment_6b.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/change_detection.ipynb)
 
-## Objective
+## Task
 
-Apply DEM of Difference and NDVI differencing to provided datasets 
+In this assignment you detect change at Lake Wheeler between two UAS surveys: July 17, 2024 and September 17, 2025. The 2024 survey is georeferenced. The 2025 survey was processed without ground control points: its orthophoto is displaced by several meters, and its DSM is in an arbitrary vertical reference and is bent into a dome. You first co-register the 2025 products to the 2024 ones, horizontally and vertically. You then detect change in three ways: by differencing a spectral index, by differencing the DSMs with a level of detection, and by comparing two classified maps.
 
-Focus on:
+Keep in mind that a difference between two surveys contains real change, registration error, and measurement noise. The level of detection is the size of difference that the noise alone can produce; only larger differences are reported as change. The two flights are also from different months, so part of the spectral difference is the season and not a change in land cover.
 
-- Co-registration and alignment accuracy
-- Thresholding and LoD95 calculation
-- Quantifying and visualizing uncertainty
-
-```{python}
-# | eval: false
-
-# Import standard Python packages we need
-import sys
-import subprocess
-from pathlib import Path
-
-# Ask GRASS where its Python packages are to be able to run it from the notebook
-sys.path.append(
-    subprocess.check_output(["grass", "--config", "python_path"], text=True).strip()
-)
-
-```
-
-```{python}
-# | eval: false
-
-# Import the GRASS packages
-import grass.script as gs
-import grass.jupyter as gj
-```
-
-<!-- ```{python}
-# Start GRASS in default project mapset
-home_directory = Path.home()
-grassdata = Path(home_directory, "grassdata", "northcarolina_coast_spm")
-session = gj.init(grassdata)
-```
-
-```{python}
-layers = gs.parse_command("g.list", type="all", format="json")
-
-for i in layers:
-    print(i)
-``` -->
-
-<!-- ```{python}
-gs.run_command("g.region", region="jrdunes_1m", flags="p")
-
-```
-
-```{python}
-m = gj.Map(filename="./../images/airphoto_1932.png")
-m.d_rast(map="airphoto_1932")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_1932_hist.png")
-m.d_histogram(map="airphoto_1932")
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_1945.png")
-m.d_rast(map="airphoto_1945")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_1955.png")
-m.d_rast(map="airphoto_1955")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_1962.png")
-m.d_rast(map="airphoto_1962")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_1974.png")
-m.d_rast(map="airphoto_1974")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_1988.png")
-m.d_rast(map="airphoto_1988")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_2007.png")
-m.d_rast(map="airphoto_2007")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_2009.png")
-m.d_rast(map="airphoto_2009")
-m.d_barscale()
-m.show()
-
-m = gj.Map(filename="./../images/airphoto_2009_hist.png")
-m.d_histogram(map="airphoto_2009")
-m.show()
-```
-
-```{python}
-gs.run_command("r.info", map="airphoto_2009")
-
-gs.run_command("r.rgb", input="airphoto_2009", red="airphoto_2009.r", green="airphoto_2009.g", blue="airphoto_2009.b")
-m = gj.Map(filename="./../images/airphoto_2009_r_hist.png")
-m.d_histogram(map="airphoto_2009.r")
-m.show()
-```
-
-```{python}
-# airphotos = [1932, 1945, 1955, 1962, 1974, 1988, 2007, 2009]
-
-gs.run_command("t.create",
-    type="strds",
-    temporaltype="absolute",
-    output="jr_airphotos",
-    title="Jockey's Ridge Air Photos",
-    description="Jockey's Ridge Air Photos from 1932 - 2009"
-)
-airphotos_list = gs.parse_command("g.list", type="raster", pattern="airphoto_*", format="json")
-airphotos = [i.get('fullname') for i in airphotos_list]
-gs.run_command(
-    "t.register",
-    type="raster",
-    input="jr_airphotos",
-    file="./resources/airphotos.txt"
-)
-
-```
-
-```{python}
-# gs.run_command("t.connect", flags="p")
-# gs.run_command("t.info", input="jr_airphotos")
-import sqlite3
-con = sqlite3.connect(Path(home_directory, "grassdata", "northcarolina_coast_spm", "PERMANENT", "tgis", "sqlite.db"))
-cur = con.cursor()
-# res = cur.execute("SELECT * FROM sqlite_master WHERE table = 'tgis_metadata'")
-for row in cur.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"):
-    print(row)
-
-# row = res.fetchone()
-# print(row)
-con.close()
-```
-
-```{python}
-m = gj.TimeSeriesMap()
-m.add_raster_series("jr_airphotos", fill_gaps=False)
-m.d_barscale()
-m.show()
-``` 
--->
-
-## Lake Wheeler - Ortho
-
-```{python}
-# | eval: false
-
-# Start GRASS in default project mapset
-home_directory = Path.home()
-grassdata = Path(home_directory, "grassdata", "Lake_Wheeler_NCspm", "assignment6b")
-session = gj.init(grassdata)
-```
+Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and tables for you. The offsets between the two orthophotos in Part 2 are measured by the notebook with a cross-correlation; on the command line you use the values given here and check them with the Map Swipe tool. Either way, the report is the same.
 
 ## Data
 
-Import orthoimagery from Lake Wheeler from flights taken on 07/17/2024 and 09/17/2025.
+- [Lake Wheeler GRASS project: Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (EPSG:3358; you have it from the earlier assignments)
+- July 17, 2024, the reference survey: [orthophoto]({{< var data.lake_wheeler_flight_July_17_2024_orthophoto >}}) and [DSM]({{< var data.lake_wheeler_flight_July_17_2024_dsm >}}) (WebODM, 7 cm, UTM zone 17N; read from the URL)
+- September 17, 2025, processed without ground control points: [orthophoto]({{< var data.lake_wheeler_flight_Sept_17_2025_ortho >}}) (7 cm) and [DSM]({{< var data.lake_wheeler_flight_Sept_17_2025_dsm >}}) (8.5 cm), both in the coordinate system of the project (read from the URL)
+- [Polygons of Assignment 6A: classification_training.gpkg]({{< var data.classification_training_gpkg >}}); its road polygons (`class_id = 5`) are used as surfaces that did not change
 
-```{python}
-# Import Lake Wheeler orthophotos into GRASS directly from URLs using r.import
-import urllib.parse
-import re
-from pathlib import Path
-import grass.script as gs
+## Software
 
-orthos = {
-    "ortho_2024_07_17": "https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif",
-    "ortho_2025_09_17": "https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho_2025_09_17.cog.tif",
-}
+- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}}
+- The [r.dem](https://grass.osgeo.org/grass85/manuals/addons/r.dem.html) toolset, which installs `r.dem.coregister`, `r.dem.dod`, `r.dem.bias`, `r.dem.lod`, `r.dem.change`, and related tools. `r.dem.lod` needs the Python package scipy.
 
-
-# You can also write this to import the data in parallel
-def import_orthos(prefix, url):
-    print(f"\nProcessing {prefix}: {url}")
-
-    try:
-        gs.run_command("r.import", input=url, output=prefix, overwrite=True)
-    except Exception as e:
-        print(f"Import failed for {url}: {e}")
-
-    try:
-        print("Add semantic labels...")
-        bands = [f"{prefix}.{i + 1}" for i in range(3)]
-        gs.run_command("r.semantic.label", map=bands, semantic="r,g,b")
-    except Exception as e:
-        print(f"Semantic labeling failed {e}")
-
-
-for prefix, url in orthos.items():
-    import_orthos(prefix, url)
-
+```bash
+g.extension extension=r.dem
 ```
 
-Check that the images were imported.
+## Part 1: Import the two surveys
 
-```{python}
-# | label: table-raster-layers
-# | eval: false
-gs.run_command("g.list", type="raster", mapset="assignment6b")
+Start GRASS in the `Lake_Wheeler_NCspm` project and create a new mapset. Work at 0.5 m on the extent of Assignment 6A, and import the 2024 orthophoto and DSM, which `r.import` reprojects and resamples to the region.
+
+```bash
+g.mapset -c mapset=change_detection
+g.region n=219815 s=219070 w=636565 e=637355 res=0.5 -p
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif" output=ortho_2024 extent=region resolution=region resample=nearest
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif" output=dsm_2024 extent=region resolution=region resample=bilinear
 ```
 
-Notice that the flights were imported each with four bands.
+The 2025 products are already in the coordinate system of the project. Import a window 20 m larger than the region on every side, because the data will be moved. These rasters keep their original resolution, so the import takes two to three minutes. Then set the region back.
 
-| Name | Band | Semantic Label |
-|------|------|----------------|
-| ortho_2024_07_17 | 1 | red |
-| ortho_2024_07_17 | 2 | green |
-| ortho_2024_07_17 | 3 | blue |
-| ortho_2024_07_17 | 4 | alpha |
-| ortho_2025_09_17 | 1 | red |
-| ortho_2025_09_17 | 2 | green |
-| ortho_2025_09_17 | 3 | blue |
-| ortho_2025_09_17 | 4 | alpha |
-
-Visualize the composite RGB data.
-
-```{python}
-# | label: fig-rgb-orthos
-# | fig-cap:
-# |       - "2024"
-# |       - "2025"
-# | layout-ncol: 2
-# | eval: false
-m = gj.Map(width=600)
-m.d_rgb(red="ortho_2024_07_17.1", green="ortho_2024_07_17.2", blue="ortho_2024_07_17.3")
-m.d_barscale()
-m.show()
-
-m = gj.Map(width=600)
-m.d_rgb(red="ortho_2025_09_17.1", green="ortho_2025_09_17.2", blue="ortho_2025_09_17.3")
-m.d_barscale()
-m.show()
+```bash
+g.region n=219835 s=219050 w=636545 e=637375 res=0.5
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho_2025_09_17.cog.tif" output=ortho_2025_raw extent=region resolution=region resample=nearest
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif" output=dsm_2025_raw extent=region resolution=region resample=bilinear
+g.region n=219815 s=219070 w=636565 e=637355 res=0.5
+r.univar map=dsm_2024
+r.univar map=dsm_2025_raw
 ```
 
-Examine the metadata of `ortho_2024_07_17.1` using `r.info`.
+> dsm_2024: minimum: 74.63, maximum: 115.96, mean: 90.12
+>
+> dsm_2025_raw: minimum: -14.71, maximum: 57.72, mean: 0.55
 
-```{python}
-# | eval: false
+The 2024 DSM holds the elevation of the site above the vertical datum. The 2025 DSM does not, and its range is almost twice as large. Import the polygons of Assignment 6A, which were digitized on the 2024 orthophoto, and display them over both orthophotos around the farm buildings:
 
-gs.run_command("r.info", map="ortho_2024_07_17.1")
+```bash
+v.import input=classification_training.gpkg layer=training output=training
+g.region n=219450 s=219300 w=637030 e=637180 res=0.1
+d.rgb red=ortho_2025_raw.1 green=ortho_2025_raw.2 blue=ortho_2025_raw.3
+d.vect map=training color=yellow fill_color=none
+g.region n=219815 s=219070 w=636565 e=637355 res=0.5
 ```
 
-```{python}
-# | eval: false
+![](../images/a6b_offset.webp){width="100%" fig-alt="Three panels of the 150 m block around the farm buildings with the yellow building, road, and car outlines digitized in 2024. July 2024: the outlines fit the roofs and cars. September 2025 as delivered: the red roofed buildings lie several meters to the east and north of their outlines. September 2025 corrected: the roofs lie within two to three meters of the outlines."}
 
-gs.run_command("r.info", map="ortho_2025_09_17.1")
+The left and middle panels show the two orthophotos as delivered; the right panel is the result of Part 2.
+
+## Part 2: Horizontal co-registration
+
+### Measure the offset
+
+To measure the displacement, compare surfaces that look the same in both images: the gravel roads, the roofs, and the concrete pads. In the GUI, open *File > Map Swipe*, load `ortho_2024` and `ortho_2025_raw`, and measure the displacement of a road intersection or a roof corner with the measuring tool at several places from south to north. The notebook does this automatically: for 200 m blocks every 100 m it finds the shift at which the brightest surfaces of the two images agree best. The offset to apply to the 2025 image, in blocks along the east road:
+
+| Block center northing (m) | East offset (m) | North offset (m) |
+|---|---|---|
+| 219150 | -7.5 | -0.5 |
+| 219250 | -7.5 | 0.0 |
+| 219350 | -6.5 to -7.0 | -3.0 to -5.0 |
+| 219450 | -7.0 | -4.5 to -5.0 |
+| 219550 | -8.0 | -4.0 |
+| 219650 | -7.0 | -6.0 |
+| 219750 | -3.5 | -11.0 |
+
+The east offset is nearly constant. The north offset is close to zero in the south and grows to about 11 m in the north, so a single shift cannot remove it. The simplest model that fits is a constant east offset and a north offset that changes linearly with the northing:
+
+> east offset: -7.0 m
+>
+> north offset: -3.32 - 0.0126 * (northing - 219400) m, residual standard deviation 1.3 m
+
+### Apply the correction
+
+A raster in GRASS is a grid of cells plus the coordinates of its edges. [r.region](https://grass.osgeo.org/grass85/manuals/r.region.html) changes those coordinates without touching the cells. Moving all four edges by the same amount shifts the raster; moving the north and south edges by different amounts also stretches it, which is the model above. Copy the 2025 rasters and give the copies corrected edges: the east and west edges move by -7.0 m, and each north and south edge moves by the north offset at its corrected northing. For the rasters imported above the corrected edges are:
+
+```bash
+for band in 1 2 3 4; do
+    g.copy raster=ortho_2025_raw.$band,ortho_2025_moved.$band
+    r.region map=ortho_2025_moved.$band n=219826.364 s=219051.004 w=636537.987 e=637368.040
+done
+g.copy raster=dsm_2025_raw,dsm_2025_moved
+r.region map=dsm_2025_moved n=219826.344 s=219051.017 w=636537.961 e=637368.013
 ```
 
-::: {.callout-important}
-What is the spatial resolution of the orthoimagery.
-:::
+Aggregate the moved rasters from their original resolution to the 0.5 m cells of the region with [r.resamp.stats](https://grass.osgeo.org/grass85/manuals/r.resamp.stats.html): the mean of the cells that fall into each 0.5 m cell, and the minimum for the alpha band.
 
-View the data as an interactive webmap.
-
-```{python}
-# | label: fig-elev-dod-web
-# | fig-cap:
-# |       - "DoD Web Map"
-# | layout-ncol: 1
-# | eval: false
-m = gj.InteractiveMap(use_region=False)
-m.add_raster("ortho_2024_07_17.1", opacity=0.6)
-m.show()
+```bash
+for band in 1 2 3; do
+    r.resamp.stats input=ortho_2025_moved.$band output=ortho_2025.$band method=average
+done
+r.resamp.stats input=ortho_2025_moved.4 output=ortho_2025.4 method=minimum
+r.resamp.stats input=dsm_2025_moved output=dsm_2025_h method=average
 ```
 
-Set the computational region to $0.07 m$ with a spatial extent focused on a single field using the following command.
+### Check the result
 
-```{python}
-# | eval: false
+Compare `ortho_2024` and `ortho_2025` in Map Swipe again. The offsets measured by the notebook after the correction:
 
-gs.run_command(
-    "g.region", n=219488, s=219104, e=637233, w=636830, res="0.07", flags="pa"
-)
+> east: median 0.0 m; north: median -1.0 m; largest 4.0 m (in the northernmost block)
+
+The correction is a model with three numbers, fitted to blocks along the roads on the east side of the site. Offsets of 1 to 3 m remain (right panel of the figure above). Everything that follows compares the two dates cell by cell at 0.5 m, so the edges of objects will show apparent change that is only this remaining misregistration.
+
+Restrict the analysis to the cells covered by both surveys:
+
+```bash
+r.mapcalc expression="both = if(ortho_2024.4 > 0 && ortho_2025.4 > 0 && !isnull(dsm_2024) && !isnull(dsm_2025_h), 1, null())"
+r.mask raster=both
 ```
 
-View the historams of the red bands.
+> area covered by both surveys: 45.6 hectares
 
-```{python}
-# | eval: false
+![](../images/a6b_orthos.webp){width="100%" fig-alt="The whole Lake Wheeler site at both dates. July 17, 2024: green tree lines and crop fields with visible rows, one bare field in the east. September 17, 2025: the same fields brown and harvested, the tree lines still green."}
 
-from grass.script import array as garray
-import seaborn as sns
-import matplotlib.pyplot as plt
+## Part 3: Index differencing
 
-red_25 = garray.array(mapname="ortho_2025_09_17.1")
-red_24 = garray.array(mapname="ortho_2024_07_17.1")
-# Plot raster histogram
-sns.histplot(data=red_25.ravel(), kde=True)
-sns.histplot(data=red_24.ravel(), kde=True)
-plt.show()
+### VARI at both dates
+
+Compute VARI for both dates with the expression of Assignment 6A.
+
+```bash
+r.mapcalc expression="vari_2024 = if(ortho_2024.2 + ortho_2024.1 - ortho_2024.3 <= 25, null(), max(-1.0, min(1.0, float(ortho_2024.2 - ortho_2024.1) / (ortho_2024.2 + ortho_2024.1 - ortho_2024.3))))"
+r.mapcalc expression="vari_2025 = if(ortho_2025.2 + ortho_2025.1 - ortho_2025.3 <= 25, null(), max(-1.0, min(1.0, float(ortho_2025.2 - ortho_2025.1) / (ortho_2025.2 + ortho_2025.1 - ortho_2025.3))))"
+r.colors map=vari_2024,vari_2025 color=ndvi
+r.univar map=vari_2024
+r.univar map=vari_2025
 ```
 
+> vari_2024: mean: 0.104, standard deviation: 0.143
+>
+> vari_2025: mean: -0.043, standard deviation: 0.085
 
-```{python}
-# | eval: false
+### Relative normalization
 
-m = gj.Map(width=600, use_region=True)
-m.d_rgb(red="ortho_2024_07_17.1", green="ortho_2024_07_17.2", blue="ortho_2024_07_17.3")
-m.d_barscale()
-m.show()
+The two orthophotos come from different cameras, processing software, and light. A surface that did not change should have the same index value at both dates, so use the gravel roads as pseudo-invariant features. The difference between the median VARI of the road cells at the two dates is the radiometric offset between the images; subtract it from the 2025 index. `r.univar -e` with the road raster as `zones` gives the medians.
 
-m = gj.Map(width=600, use_region=True)
-m.d_rgb(red="ortho_2025_09_17.1", green="ortho_2025_09_17.2", blue="ortho_2025_09_17.3")
-m.d_barscale()
-m.show()
+```bash
+v.extract input=training where="class_id = 5" output=roads
+v.to.rast input=roads output=roads_rast use=val value=1
+r.univar -e map=vari_2024 zones=roads_rast
+r.univar -e map=vari_2025 zones=roads_rast
+r.mapcalc expression="vari_2025n = vari_2025 - (-0.005)"
+r.colors map=vari_2025n color=ndvi
 ```
 
-```{python}
-gs.run_command(
-    "r.composite",
-    red="ortho_2025_09_17.1",
-    green="ortho_2025_09_17.2",
-    blue="ortho_2025_09_17.3",
-    output="ortho_2025_09_17.rgb",
-)
+> roads, 2024: median: -0.004; roads, 2025: median: -0.009; radiometric offset: -0.005
+
+On this pair the offset is small: the index is a ratio of bands, which cancels most of the brightness difference between the images. A single band would need a larger correction.
+
+### The difference and a threshold
+
+The difference is the normalized 2025 index minus the 2024 index: negative where vegetation was lost, positive where it was gained.
+
+```bash
+r.mapcalc expression="vari_diff = vari_2025n - vari_2024"
+r.univar map=vari_diff
+r.univar map=vari_diff zones=roads_rast
 ```
 
-```{python}
-# | eval: false
-gs.run_command("r.univar", map="ortho_2024_07_17.1", flags="e")
+> all cells: mean: -0.143, standard deviation: 0.135
+>
+> roads: mean: -0.012, standard deviation: 0.039
+
+A threshold turns the difference into a change map. Use 0.1, which is well above the standard deviation of the difference on the roads, where nothing changed:
+
+```bash
+r.mapcalc expression="vari_change = if(vari_diff < -0.1, 1, if(vari_diff > 0.1, 3, 2))"
+r.category map=vari_change separator=pipe rules=- <<EOF
+1|vegetation decrease
+2|no change
+3|vegetation increase
+EOF
+r.report map=vari_change units=h,p
 ```
 
-```{python}
-# | eval: false
-gs.run_command("r.univar", map="ortho_2025_09_17.1", flags="e")
+> vegetation decrease: 26.74 ha (59.1 %), no change: 17.66 ha (39.0 %), vegetation increase: 0.86 ha (1.9 %)
+
+![](../images/a6b_vari.webp){width="100%" fig-alt="Three maps of the site. VARI in July 2024: tree lines and most fields green. VARI in September 2025, normalized: almost the whole site white, near zero, with only the tree lines and grassed strips slightly green. The difference, 2025 minus 2024: brown, a decrease, over the fields and tree lines; white on roads and the bare eastern field; light green on a few grassed waterways."}
+
+More than half of the site shows a decrease. July is the middle of the growing season and mid September is harvest time, so most of this is the crop cycle and would reverse by the next July.
+
+## Part 4: DSM co-registration
+
+The 2025 DSM now lines up horizontally (`dsm_2025_h`), but its elevations are not in the vertical datum. Bring it to the 2024 surface in two steps with the `r.dem` tools.
+
+### Vertical shift from pseudo ground control points
+
+[r.dem.coregister](https://grass.osgeo.org/grass85/manuals/addons/r.dem.coregister.html) samples the difference between the two DSMs on features that are assumed not to have changed, here the road polygons, and subtracts the median difference. It reports the bias and the NMAD (normalized median absolute deviation), a robust standard deviation of the remaining difference on those features.
+
+```bash
+r.dem.coregister dem=dsm_2025_h reference=dsm_2024 pgcp=roads output=dsm_2025_v method=pgcp_vertical buffer=0.5
 ```
 
-### VARI
+> N samples: 6834, Median bias: -89.3323 m, NMAD: 4.7858 m
 
+The bias is about -89 m, and after removing it the roads still disagree by almost 5 m. Compute the DEM of Difference (DoD), the later surface minus the earlier one, with [r.dem.dod](https://grass.osgeo.org/grass85/manuals/addons/r.dem.dod.html):
 
-```{python}
-# | eval: false
-gs.run_command(
-    "r.mapcalc",
-    expression="vari_2024 = ((float(ortho_2024_07_17.2) / 255.0) - (float(ortho_2024_07_17.1) / 255.0)) / ((float(ortho_2024_07_17.2) / 255.0) + (float(ortho_2024_07_17.1) / 255.0) - (float(ortho_2024_07_17.3) / 255.0) + 0.175)",
-)
-
-gs.run_command("r.univar", map="vari_2024", flags="e")
+```bash
+r.dem.dod dem=dsm_2025_v reference=dsm_2024 output=dod_shifted range=5
+r.univar map=dod_shifted
 ```
 
-```{python}
-# | eval: false
-gs.run_command("r.colors", map="vari_2024", color="ndvi", flags="")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="vari_2024")
-m.d_legend(raster="vari_2024")
-m.d_barscale()
-m.show()
+> minimum: -30.19, maximum: 33.25, mean: -2.76, standard deviation: 4.38
 
+The DoD is not noise around zero. It is a smooth shape several meters high: one sign in the middle of the site and the other toward the edges (left panel of the figure below). This is the dome, a known distortion of surfaces reconstructed from nadir images without ground control: an error in the estimated lens distortion bends the whole model. A shift cannot remove it, and neither can a rotation.
+
+### Stable surfaces
+
+To model the dome you need many cells, spread over the whole site, where the real surface did not change. The roads alone are too few and all on one side. Bare ground is a larger candidate: a cell with VARI below 0 at both dates carried no green vegetation at either date, so its surface is soil, gravel, or a roof. Also require a slope of less than 8 degrees within one meter in the 2024 DSM, to exclude the edges of buildings and trees, where the remaining horizontal offset turns into large height differences.
+
+For an independent check, divide the stable cells by a 100 m checkerboard: two thirds of the blocks are used to fit the correction, one third is held out.
+
+```bash
+r.slope.aspect elevation=dsm_2024 slope=slope_2024
+r.neighbors input=slope_2024 output=slope_2024_max size=5 method=maximum
+r.mapcalc expression="stable = if(vari_2024 < 0 && vari_2025 < 0 && slope_2024_max < 8, 1, null())"
+r.mapcalc expression="holdout_block = (int(x() / 100) + int(y() / 100)) % 3 == 0"
+r.mapcalc expression="stable_fit = if(stable && !holdout_block, 1, null())"
+r.mapcalc expression="stable_check = if(stable && holdout_block, 1, null())"
 ```
 
-```{python}
-# | eval: false
-gs.run_command(
-    "r.mapcalc",
-    expression="vari_2025 = ((float(ortho_2025_09_17.2) / 255.0) - (float(ortho_2025_09_17.1) / 255.0)) / ((float(ortho_2025_09_17.2) / 255.0) + (float(ortho_2025_09_17.1) / 255.0) - (float(ortho_2025_09_17.3) / 255.0) + 0.175)",
-)
+> stable: 265,748 cells (6.6 ha); stable_fit: 187,495 cells (4.7 ha); stable_check: 78,253 cells (2.0 ha)
 
-gs.run_command("r.univar", map="vari_2025", flags="e")
+![](../images/a6b_stable.webp){width="60%" fig-alt="The 2024 orthophoto with the stable cells: yellow cells used for the fit along the roads, in the bare eastern field, and scattered between crop rows over the whole site; cyan cells held out in a few 100 m blocks."}
+
+### Remove the dome
+
+[r.dem.bias](https://grass.osgeo.org/grass85/manuals/addons/r.dem.bias.html) with `method=spline` interpolates the DoD of the stable fit cells into a smooth surface, the bias field, and subtracts it from the DoD. The spline is fitted at 10 m resolution with strong smoothing, because the dome is a long wavelength shape.
+
+```bash
+r.dem.bias dod=dod_shifted output=dod method=spline stable_mask=stable_fit bias_field=dome
+r.univar map=dome
+r.univar map=dod zones=stable_fit
+r.univar map=dod zones=stable_check
+r.univar map=dod zones=roads_rast
 ```
 
-```{python}
-# | eval: false
-gs.run_command("r.colors", map="vari_2025", color="ndvi", flags="")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="vari_2025")
-m.d_legend(raster="vari_2025")
-m.d_barscale()
-m.show()
+> bias field: minimum: -7.56, maximum: 4.74
+>
+> corrected DoD on the fit cells: mean: -0.001, standard deviation: 0.113
+>
+> corrected DoD on the held out cells: mean: -0.043, standard deviation: 0.354
+>
+> corrected DoD on the road polygons: mean: 0.088, standard deviation: 0.198
+
+![](../images/a6b_dome.webp){width="100%" fig-alt="Two maps. The DoD after the vertical shift: strongly negative over the whole center of the site and positive along the western, northern, and eastern edges. The bias field fitted by the spline: the same shape as a smooth surface, about -7 m in the center and up to almost 5 m toward the edges."}
+
+The bias field spans 12 m across the site. After removing it, the stable cells agree to about 0.1 m where the correction was fitted and to 0.35 m in the held out blocks. The held out number is the one to report: it describes cells the correction did not see.
+
+## Part 5: Level of detection and significant change
+
+### Level of detection
+
+The level of detection (LoD) is the smallest difference that can be told apart from noise at a chosen confidence. [r.dem.lod](https://grass.osgeo.org/grass85/manuals/addons/r.dem.lod.html) estimates the noise as the NMAD of the corrected DoD on stable cells and multiplies it by the critical value of the normal distribution, 1.96 for 95 percent. Give it the held out cells.
+
+```bash
+r.dem.lod dod=dod output=lod method=global stable_mask=stable_check confidence=0.95
 ```
 
-```{python}
-# | eval: false
-gs.run_command(
-    "r.mapcalc",
-    expression="vari_diff = vari_2025 - vari_2024",
-)
+> NMAD: 0.1781 m, LoD: 0.3490 m (uniform)
 
-gs.run_command("r.univar", map="vari_diff", flags="e")
+### Significant change and volumes
+
+[r.dem.change](https://grass.osgeo.org/grass85/manuals/addons/r.dem.change.html) keeps the cells of the DoD whose absolute value exceeds the LoD, removes isolated cells with the `-n` flag, and sums the volumes of surface raising and lowering. The tool uses the terms of geomorphology, deposition and erosion; on this site a raised surface is mostly taller vegetation and a lowered surface mostly vegetation that was removed.
+
+```bash
+r.dem.change -n dod=dod lod=lod output_sig=dod_significant volume_csv=$HOME/volume.csv
+r.mapcalc expression="dod_class = if(isnull(dod_significant), 2, if(dod_significant < 0, 1, 3))"
+r.report map=dod_class units=h,p
 ```
 
-```{python}
-# | eval: false
-gs.run_command("r.colors", map="vari_diff", color="difference", flags="")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="vari_diff")
-m.d_legend(raster="vari_diff")
-m.d_barscale()
-m.show()
+> Deposition: 222,506.9 m3 (201,289 cells), Erosion: 221,508.8 m3 (513,187 cells), Net: 998.1 m3
+>
+> surface lowered: 12.83 ha (28.1 %), below the level of detection: 27.73 ha (60.8 %), surface raised: 5.03 ha (11.0 %)
+
+![](../images/a6b_dod.webp){width="100%" fig-alt="Two maps. The corrected DoD: white, near zero, over most of the site, light blue lowering in several fields, and saturated red and blue along the western tree line and around the trees at the farm. The significant change drawn over the 2025 orthophoto: blue lowering over the fields that carried a crop in 2024, red raising along the tree lines, and no color on the roads and the bare field."}
+
+The lowered cells have a median of -0.9 m and cover the fields that carried a crop in July 2024 and were harvested by September 2025. The raised cells have a median of 3.8 m and lie almost entirely along the tree lines, where a horizontal offset of a few meters against 15 m trees produces large differences of both signs. The two volumes are therefore not a crop volume: the tree line cells dominate them.
+
+Zoom to the farm buildings:
+
+```bash
+g.region n=219450 s=219300 w=637030 e=637180 res=0.1
+d.rgb red=ortho_2025.1 green=ortho_2025.2 blue=ortho_2025.3
+d.rast map=dod_significant
+g.region n=219815 s=219070 w=636565 e=637355 res=0.5
 ```
 
-## Redness Index
+![](../images/a6b_farm_change.webp){width="50%" fig-alt="Significant change around the farm buildings over the 2025 orthophoto: each building has a red band along one edge and a blue band along the opposite edge, the parked cars of 2024 appear as small blue patches and those of 2025 as red patches, the large tree is blue, and the crop field at the bottom is light blue."}
 
-Calculate redness index
+Each building shows a raised band on one side and a lowered band on the other. The buildings did not move; the pattern is the remaining horizontal misregistration. The cars are real change: they were parked in different places.
 
-$$
-RI = \frac{Red^2}{Blue*Green^2}
-$$
+Connect this result with Part 3 by the mean DoD inside each VARI change class (make a raster of each class with `r.mapcalc` and use it as `zones`):
 
-```{python}
-# | eval: false
-def ri(r, g, b, output):
-    gs.run_command(
-        "r.mapcalc",
-        expression=f"{output} = if(1.0 *(pow ( {r}, 2 ) )/( {b} * pow( {g} ,2)) >= 0.02, null(), 1.0 * (pow ( {r}, 2 ) )/( {b} * pow( {g} ,2)))",
-    )
-    return output
+> where VARI shows a vegetation decrease: median -0.22 m; no change: median -0.02 m; vegetation increase: median 0.11 m
 
+## Part 6: Post-classification comparison
+
+The third way to detect change is to classify each date on its own and compare the two maps. Use a classification that can be applied to both orthophotos: a cell is vegetation if its VARI is above 0.05 and bare or built otherwise, with the normalized index for 2025. `r.stats` on the two maps together gives the from-to matrix, the area of each combination of class in 2024 and class in 2025.
+
+```bash
+r.mapcalc expression="class_2024 = if(vari_2024 > 0.05, 1, 2)"
+r.mapcalc expression="class_2025 = if(vari_2025n > 0.05, 1, 2)"
+r.stats -an input=class_2024,class_2025
+r.mapcalc expression="from_to = (class_2024 - 1) * 2 + class_2025"
 ```
 
-```{python}
-# | eval: false
-ri(
-    "ortho_2025_09_17.1",
-    "ortho_2025_09_17.2",
-    "ortho_2025_09_17.3",
-    "ortho_2025_09_17.ri",
-)
-gs.run_command("r.colors", map="ortho_2025_09_17.ri", color="gyr", flags="e")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="ortho_2025_09_17.ri")
-m.d_legend(raster="ortho_2025_09_17.ri", flags="d")
-m.d_barscale()
-m.show()
+| 2024 \\ 2025 (ha) | vegetation | bare or built | total 2024 |
+|---|---|---|---|
+| **vegetation** | 5.57 | 20.20 | 25.77 |
+| **bare or built** | 1.12 | 18.37 | 19.49 |
+| **total 2025** | 6.69 | 38.57 | 45.26 |
+
+![](../images/a6b_from_to.webp){width="100%" fig-alt="Three maps of the site. Classes in July 2024: vegetation in green over the tree lines and most fields, bare or built in tan. Classes in September 2025: bare or built over almost all fields, vegetation only on the tree lines and grassed strips. From-to classes: vegetation to bare in brown over the crop fields, unchanged vegetation in green on the tree lines, unchanged bare in grey on the roads and the eastern field, and bare to vegetation in light green on a few strips."}
+
+### The three methods side by side
+
+The area each method reports as a loss of vegetation, from `r.stats` on the three maps together:
+
+| Method | Area (ha) |
+|---|---|
+| VARI decrease below -0.1 (Part 3) | 26.74 |
+| Surface lowered beyond the LoD (Part 5) | 12.72 |
+| Vegetation to bare (Part 6) | 20.20 |
+| All three agree | 9.27 |
+
+The spectral methods report twice the area of the DoD. A crop row that was green in July and stubble in September changes the index everywhere, but the surface drops by more than 0.35 m only where the crop was tall. Remove the mask when you are done:
+
+```bash
+r.mask -r
 ```
 
-```{python}
-# | eval: false
-ri(
-    "ortho_2024_07_17.1",
-    "ortho_2024_07_17.2",
-    "ortho_2024_07_17.3",
-    "ortho_2024_07_17.ri",
-)
-gs.run_command("r.colors", map="ortho_2024_07_17.ri", color="magma", flags="e")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="ortho_2024_07_17.ri")
-m.d_legend(raster="ortho_2024_07_17.ri", flags="d")
-m.d_barscale()
-m.show()
-```
+## Report
 
-## Visible Vegetation Index (VVI)
+Prepare a report (3 to 5 pages including figures):
 
-$$
-VVI = (1 - \frac{Red - 30}{Red + 30})(1 - \frac{Green - 50}{Green + 50})(1 - \frac{Blue - 1}{Blue + 1})
-$$
+1. **The uncontrolled survey**: the elevation ranges of the two DSMs, the farm building maps before the correction, and what they tell you about how the 2025 survey was processed.
+2. **Horizontal co-registration**: the offset model, the remaining offsets, and the farm building map after the correction, with a sentence on where the correction is least reliable and why.
+3. **Index differencing**: the radiometric offset, the VARI difference map, and the areas of the three change classes, with a paragraph on how much of the decrease you attribute to the season.
+4. **DSM co-registration**: the vertical bias, the DoD after the vertical shift, the bias field, and the standard deviation of the corrected DoD on the fit cells, the held out cells, and the roads, with a paragraph on what the dome is and why the vertical shift did not remove it.
+5. **Level of detection and change**: the LoD, the map of significant change, and the volumes, with a paragraph on which changes are real and which are artifacts of the registration.
+6. **Comparison of methods**: the from-to matrix and the areas of vegetation loss from the three methods, why they differ, and what ground control points in the 2025 survey would have changed in this assignment.
 
-```{python}
-# | eval: false
-def vvi(r, g, b, output):
-    """
-    Visible Vegetation Index (VVI)
-    """
-    expression = f"{output} = (1.0 - ((float({r}) / 255.0 - 30.0) / (float({r}) / 255.0 + 30.0 + 0.000001))) * (1.0 - ((float({g}) / 255.0 - 50.0) / (float({g}) / 255.0 + 50.0 + 0.000001))) * (1.0 - ((float({b}) / 255.0 - 1.0) / (float({b}) / 255.0 + 1.0 + 0.000001)))"
-    gs.run_command("r.mapcalc", expression=expression)
-    return output
-```
+## Submission
 
-```{python}
-# | eval: false
+Upload to Moodle, Assignment 6B:
 
-vvi(
-    r="ortho_2024_07_17.1",
-    g="ortho_2024_07_17.2",
-    b="ortho_2024_07_17.3",
-    output="ortho_2024_07_17.vvi",
-)
-gs.run_command("r.colors", map="ortho_2024_07_17.vvi", color="magma", flags="e")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="ortho_2024_07_17.vvi")
-m.d_legend(raster="ortho_2024_07_17.vvi", flags="db")
-m.d_barscale()
-m.show()
-```
+* Your report as a PDF.
+* Optional: your completed notebook (`.ipynb`) if you worked in Colab.
 
-## Brightness Index (BI)
+## Grading
 
-$$
-BI = \frac{\sqrt{Red^2 + Green^2 + Blue^2}}{3}
-$$
+* **The uncontrolled survey**: the horizontal and vertical offsets are reported and attributed to the missing ground control.
+* **Horizontal co-registration**: the correction is applied and its remaining error is reported.
+* **Index differencing**: the index is normalized, differenced, and thresholded, and the seasonal part of the change is discussed.
+* **DSM co-registration**: the vertical shift and the bias field are computed, and the correction is assessed on held out cells.
+* **Level of detection and change**: the LoD is derived from stable cells, significant change is mapped, and real change is separated from registration artifacts.
+* **Comparison of methods**: the from-to matrix is computed and the three results are compared.
+* **Interpretation**: conclusions tie back to the lecture: co-registration, stable surfaces, pseudo-invariant features, DEM of Difference, level of detection, post-classification comparison.
+* On-time submission.
 
-```{python}
-# | eval: false
-
-def bi(r, g, b, output):
-    """
-    Brightness Index (BI)
-    """
-    expression = f"{output} = sqrt(pow(float({r}),2)  + pow(float({g}),2) + pow(float({b}),2)) / 3.0"
-    gs.run_command("r.mapcalc", expression=expression)
-    return output
-```
-
-```{python}
-# | eval: false
-
-bi(
-    r="ortho_2024_07_17.1",
-    g="ortho_2024_07_17.2",
-    b="ortho_2024_07_17.3",
-    output="ortho_2024_07_17.bi",
-)
-gs.run_command("r.colors", map="ortho_2024_07_17.bi", color="wave", flags="")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="ortho_2024_07_17.bi")
-m.d_legend(raster="ortho_2024_07_17.bi", flags="d")
-m.d_barscale()
-m.show()
-```
-
-## Spectral Slope Saturation Index (SI)
-
-$$
-SI = \frac{(Red - Blue)}{(Red + Blue)}
-$$
-
-```{python}
-# | eval: false
-
-def si(r, b, output):
-    """
-    Compute SI = (R - B) / (R + B) with protection against division by zero.
-    r, b: raster names (band maps)
-    output: name of output raster
-    """
-    expr = (
-        f"{output} = if( (float({r}) + float({b})) == 0, null(), "
-        f"(float({r}) - float({b})) / (float({r}) + float({b}) + 0.00000001) )"
-    )
-    gs.run_command("r.mapcalc", expression=expr, overwrite=True)
-    return output
-```
-
-```{python}
-# | eval: false
-
-si(
-    r="ortho_2024_07_17.1",
-    b="ortho_2024_07_17.3",
-    output="ortho_2024_07_17.si",
-)
-gs.run_command("r.colors", map="ortho_2024_07_17.si", color="viridis", flags="e")
-m = gj.Map(width=600, use_region=True)
-m.d_rast(map="ortho_2024_07_17.si")
-m.d_legend(raster="ortho_2024_07_17.si", flags="db")
-m.d_barscale()
-m.show()
-```
-
-<!-- ```{python}
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-checkpoint = "HuggingFaceTB/SmolLM2-360M-Instruct"
-
-device = "cuda"  # for GPU usage or "cpu" for CPU usage
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-# for multiple GPUs install accelerate and do `model = AutoModelForCausalLM.from_pretrained(checkpoint, device_map="auto")`
-model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
-
-messages = [
-    {
-        "role": "user",
-        "content": "What can you do?",
-    }
-]
-input_text = tokenizer.apply_chat_template(messages, tokenize=False)
-print(input_text)
-inputs = tokenizer.encode(input_text, return_tensors="pt").to(device)
-outputs = model.generate(
-    inputs, max_new_tokens=1000, temperature=0.2, top_p=0.9, do_sample=True
-)
-print(tokenizer.decode(outputs[0]))
-``` -->
+### Due {{< meta assignment-due-date >}}

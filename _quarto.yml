@@ -154,6 +154,8 @@ website:
                   href: course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.qmd
                 - text: "Assignment 6A"
                   href: course/topics/topic_6_change_detection/assignments/assignment_6a.qmd
+                - text: "Assignment 6B"
+                  href: course/topics/topic_6_change_detection/assignments/assignment_6b.qmd
         - section: Midterm
           href: course/topics/midterm/index.qmd
           contents:
