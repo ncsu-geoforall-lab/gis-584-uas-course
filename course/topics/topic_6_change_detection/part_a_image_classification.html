@@ -6,8 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Corey White">
-<meta name="dcterms.date" content="2026-11-09">
+<meta name="dcterms.date" content="2026-11-16">
 
 <title>Image Classification – UAS Mapping and Analytics</title>
 <style>
@@ -49,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-05ef257ffea5c5fd5ca58f032a70e1a4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-b4895d10134ca2d091900c8d6c19e12e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -547,8 +546,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-18" aria-labelledby="quarto-sidebar-section-18-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Vegetation Indices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 6A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../course/topics/topic_6_change_detection/assignments/assignment_6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 6B</span></a>
   </div>
 </li>
       </ul>
@@ -606,17 +617,11 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Corey White </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 9, 2026</p>
+      <p class="date">November 16, 2026</p>
     </div>
   </div>
   
@@ -631,32 +636,46 @@ ul.task-list li input[type="checkbox"] {
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <ul>
-<li>Understand the principles of image classification in UAS mapping<br>
-</li>
-<li>Differentiate between <strong>supervised</strong>, <strong>unsupervised</strong> learning methods</li>
-<li>Learn how to apply classification workflows in <strong>GRASS</strong><br>
-</li>
-<li>Interpret and validate classification results using <strong>accuracy assessment metrics</strong><br>
-</li>
-<li>Explore real-world applications of UAS classification for <strong>environmental monitoring</strong></li>
+<li>Image classification with UAS data: pixel based, object based, and scene classification</li>
+<li>Spectral information: reflectance, sensor bands, calibration, and vegetation indices from RGB and multispectral imagery</li>
+<li>Features for classification: spatial filters, texture, and terrain derivatives from the DSM</li>
+<li>Segmentation: superpixels, object statistics, and promptable foundation models (SAM 2)</li>
+<li>Training and prediction: supervised and unsupervised methods, sampling design, random forests, and feature importance</li>
+<li>Accuracy assessment: the confusion matrix, user’s and producer’s accuracy, kappa, and held-out reference data</li>
 </ul>
 </section>
 <section id="lecture" class="level2">
 <h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
 <ul>
-<li><a href="../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html">Lecture Slides</a></li>
+<li><a href="../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html">Lecture slides</a></li>
 </ul>
 </section>
 <section id="supplemental-materials" class="level2">
 <h2 class="anchored" data-anchor-id="supplemental-materials">Supplemental materials</h2>
 <ul>
-<li><a href="https://www.mdpi.com/2072-4292/14/7/1718">Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion</a></li>
-<li>Jensen, J.R. Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed.; Prentice Hall Press: Upper Saddle River, NJ, USA, 2015.</li>
+<li><p><a href="https://doi.org/10.1023/A:1010933404324">Random Forests</a>, Breiman, Machine Learning 45(1), 2001</p></li>
+<li><p><a href="https://doi.org/10.1016/0034-4257(91)90048-B">A review of assessing the accuracy of classifications of remotely sensed data</a>, Congalton, Remote Sensing of Environment 37(1), 1991</p></li>
+<li><p><a href="https://doi.org/10.1109/TSMC.1973.4309314">Textural Features for Image Classification</a>, Haralick, Shanmugam, and Dinstein, IEEE Transactions on Systems, Man, and Cybernetics SMC-3(6), 1973</p></li>
+<li><p><a href="https://doi.org/10.21105/joss.05663">samgeo: A Python package for segmenting geospatial data with the Segment Anything Model (SAM)</a>, Wu and Osco, Journal of Open Source Software 8(89), 2023</p></li>
+<li><p><a href="https://grass.osgeo.org/grass85/manuals/addons/r.learn.ml2.html">r.learn.ml2</a>, <a href="https://grass.osgeo.org/grass85/manuals/r.texture.html">r.texture</a>, <a href="https://grass.osgeo.org/grass85/manuals/i.vi.html">i.vi</a>, and <a href="https://grass.osgeo.org/grass85/manuals/addons/i.sam2.html">i.sam2</a> manual pages</p></li>
+<li><p><a href="https://doi.org/10.3390/rs11171997">UAS for Wetland Mapping and Hydrological Modeling</a>, Jeziorska, Remote Sensing 11(17), 2019: a review of UAS sensors, including the multispectral cameras compared in the lecture</p></li>
+<li><p><a href="https://doi.org/10.3390/rs17223738">Absolute Radiometric Calibration Evaluation of UAS Headwall and MicaSense Sensors</a>, Shrestha et al., Remote Sensing 17(22), 2025: the USGS calibration campaign whose data the lab uses</p></li>
+<li><p><a href="https://pubs.usgs.gov/publication/ofr20231033/full">Guidelines for calibration of uncrewed aircraft systems imagery</a>, Sampath et al., USGS Open-File Report 2023-1033</p></li>
+<li><p><a href="https://doi.org/10.3390/rs14071718">Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion</a>, White et al., Remote Sensing 14(7), 2022</p></li>
+<li><p>Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed., Jensen, Pearson, 2015</p></li>
+<li><p>Past Lecture recordings:</p>
+<ul>
+<li><a href="https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=916922bd-6867-402b-bb59-b1c1016689f4&amp;start=84">Lecture</a> (NCSU only)</li>
+<li><a href="https://ncsu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=055c1c51-0c15-49ce-a024-b1c101668cb2">Assignment</a> (NCSU only)</li>
+</ul></li>
 </ul>
 </section>
 <section id="assignment-homework" class="level2">
 <h2 class="anchored" data-anchor-id="assignment-homework">Assignment &amp; Homework</h2>
-<p><a href="../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A: Image Classification</a></p>
+<ul>
+<li><a href="../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Lab: Vegetation indices</a> (optional): spectral indices from the 2024 Lake Wheeler orthophoto and from a 10-band multispectral orthomosaic; do it before the assignment</li>
+<li><a href="../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A: UAS image classification</a></li>
+</ul>
 
 
 </section>

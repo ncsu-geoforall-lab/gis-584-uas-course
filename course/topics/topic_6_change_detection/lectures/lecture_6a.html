@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Corey White">
-  <title>UAS Mapping and Analytics – Classification methods for UAS data</title>
+  <title>UAS Mapping and Analytics – Classification Methods for UAS Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,13 +35,30 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
-  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-157b806d10da31b12d0e5295aa3d58e5.css">
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../../../site_libs/revealjs/dist/theme/quarto-cd66e2d65041929da5b0571eecfd05ea.css">
   <link href="../../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -136,7 +153,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Classification methods for UAS data</h1>
+  <h1 class="title">Classification Methods for UAS Data</h1>
   <p class="subtitle">Center for Geospatial Analytics at North Carolina State University</p>
 
 <div class="quarto-title-authors">
@@ -148,44 +165,22 @@ Corey White
 </div>
 
 </section>
-<section id="outline" class="slide level2 center">
-<h2>Outline</h2>
+<section id="objectives" class="slide level2 smaller">
+<h2>Objectives</h2>
 <ul>
-<li>Pixel, Object, Image Classification</li>
-<li>Supervised vs Unsupervised learning</li>
-<li>Segmentation</li>
-<li>Feature Extraction</li>
-<li>Model Selection and Validation</li>
-<li>Real-time UAS analysis</li>
-</ul>
-</section>
-<section id="what-is-image-classification" class="slide level2 center">
-<h2>What is image classification?</h2>
-<ul>
-<li>Labling images with sematic lables</li>
-</ul>
-<p>Car, house, lake, tree, forest, etc..</p>
-</section>
-<section id="image-classification-applications" class="slide level2 center">
-<h2>Image classification applications</h2>
-<ul>
-<li>Land cover/land use classifcation</li>
-<li>Flood detection</li>
-<li>Species Identifcation</li>
-<li>Surveillance</li>
-<li>Object Tracking</li>
-</ul>
-</section>
-<section id="uas-data-characteristics" class="slide level2 center">
-<h2>UAS Data Characteristics</h2>
-<ul>
-<li>High spatial resolution (1–10 cm)</li>
-<li>Limited spectral bands (RGB or multispectral)</li>
-<li>High within-class variability</li>
-<li>Shadows, BRDF effects, and illumination differences</li>
+<li class="fragment">Distinguish pixel based, object based, and scene classification of UAS imagery</li>
+<li class="fragment">Explain what the bands of RGB and multispectral cameras record and compute spectral indices from them</li>
+<li class="fragment">Derive spatial, textural, and terrain features and segment an image into objects</li>
+<li class="fragment">Train a random forest, map its predictions, and read the feature importances</li>
+<li class="fragment">Assess a classification with a confusion matrix on reference data the model has not seen</li>
 </ul>
 <aside class="notes">
-<p>Discuss how UAS imagery differs from satellite data: small footprint, variable lighting, and high geometric accuracy.</p>
+<ul>
+<li>Topic 5 analyzed the surface models; Topic 6 turns to the imagery and to what is on the surface</li>
+<li>Today: from bands to features to a trained model to an accuracy statement, plus segmentation with a pretrained model</li>
+<li>The assignment (6A) classifies the July 2024 Lake Wheeler orthophoto into nine classes with a random forest and compares it with SAM 2</li>
+<li>Every step has a GRASS tool next to it; the assignment uses them in the same order</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -198,81 +193,341 @@ Corey White
           display:block!important;
       }</style></aside>
 </section>
-<section id="types-of-classification" class="slide level2 center">
-<h2>Types of classification</h2>
-</section>
-<section id="pixel-based-classification" class="slide level2 center">
-<h2>Pixel-based classification</h2>
-<p>Each pixel is given a semantic label</p>
-</section>
-<section id="object-based-classification" class="slide level2 center">
-<h2>Object-based classification</h2>
-<p>The image is segmented into objects (groups of pixels) and the objects are classified</p>
-</section>
-<section id="semantic-scene-classification" class="slide level2 center">
-<h2>Semantic Scene classification</h2>
-<p>The entire image is classified into a semantic scene</p>
-</section>
-<section id="machine-learning-methods" class="slide level2 center">
-<h2>Machine Learning Methods</h2>
+<section id="image-classification" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Image classification</h2>
+<aside class="notes">
 <ul>
-<li>Supervised Learning</li>
-<li>Unsupervised Learning</li>
-<li>Deep Learning</li>
+<li>Section 1: what classification is, what it is used for, and what is particular about UAS imagery</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="supervised-learning" class="slide level2 center">
-<h2>Supervised Learning</h2>
+<section id="what-is-image-classification" class="slide level2 smaller">
+<h2>What is image classification?</h2>
+<div class="term-card">
+<p><strong>Image classification</strong>: assigning a label from a fixed set of classes (building, tree, road, crop) to each unit of an image</p>
+</div>
 <ul>
-<li><p>Labeled features are used to train ML model</p></li>
-<li><p>May require significant amount of training data.</p></li>
-<li><p>Subject to the nonstationarity nature of spatial-temporal data</p></li>
-<li><p>Random Forest, Gradient Boot, SVM</p></li>
+<li class="fragment">Land cover and land use mapping</li>
+<li class="fragment">Crop type, weed, and disease mapping</li>
+<li class="fragment">Flood and damage extent after an event</li>
+<li class="fragment">Species identification and counts of individuals</li>
+<li class="fragment">Detection and tracking of objects such as vehicles</li>
 </ul>
-</section>
-<section id="unsupervised-learning" class="slide level2 center">
-<h2>Unsupervised Learning</h2>
+<aside class="notes">
 <ul>
-<li><p>Data is classified through statistical modeling.</p></li>
-<li><p>No training data is required</p></li>
-<li><p>Classes are not defined and require interpretation</p></li>
-<li><p>k-means, ISODATA</p></li>
+<li>The output is a categorical raster or a set of labeled objects, and it is only useful with a statement of how accurate it is</li>
+<li>The classes are a decision made before any model is trained; unclear class definitions are the most common source of error</li>
+<li>Assignment: nine classes on a research farm, from fields and trees down to cars and hay bales</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="deep-learning" class="slide level2 center">
-<h2>Deep Learning</h2>
+<section id="uas-data-characteristics" class="slide level2 smaller">
+<h2>UAS data characteristics</h2>
 <ul>
-<li>Artificial Neural Network (ANN)</li>
-<li>Convolutional Neural Network (CNN)</li>
-<li>Deep Neural Networks (UNET, )</li>
+<li>Very high spatial resolution, 1 to 10 cm: objects are many pixels wide</li>
+<li>Few spectral bands: RGB, or four to ten narrow bands with a multispectral camera</li>
+<li>High variability within a class: a tree crown contains sunlit leaves, shaded leaves, and branches</li>
+<li>Shadows, view angle effects, and illumination that changes during the flight</li>
+<li>A DSM from the same flight, registered to the image</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>With satellite pixels of 10 to 30 m, a pixel is a mixture and its spectrum carries most of the information</li>
+<li>With 5 cm pixels the spectrum of one pixel says little; the neighborhood, the texture, and the height carry it</li>
+<li>The DSM is the advantage of photogrammetric UAS products: every image comes with a height for each cell</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="spectral-properties" class="slide level2 center">
-<h2>Spectral Properties</h2>
+<section id="units-of-classification" class="slide level2 smaller">
+<h2>Units of classification</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="term-card">
+<p><strong>Pixel based</strong>: each cell receives a label from its own feature values</p>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="term-card">
+<p><strong>Object based</strong>: the image is first segmented into groups of similar cells; the groups are classified</p>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="term-card">
+<p><strong>Scene classification</strong>: a whole image or image tile receives one label</p>
+</div>
+</div></div>
 <ul>
-<li>Every surface has a <strong>unique spectral reflectance curve</strong></li>
-<li>UAS sensors capture reflected light in discrete bands:
+<li>Pixel based maps of UAS imagery are speckled: neighboring cells of one object receive different labels</li>
+<li>Object based maps follow object outlines but depend on the segmentation</li>
+<li>Deep learning adds two more outputs: boxes around objects (detection) and a label per cell from a network that sees the neighborhood (semantic segmentation)</li>
+</ul>
+<aside class="notes">
 <ul>
-<li>Red, Green, Blue (visible)</li>
-<li>NIR (if multispectral)</li>
-<li>Thermal</li>
-<li>etc..</li>
+<li>The assignment is pixel based, with neighborhood features to reduce the speckle, and shows the object based route up to the table of segment statistics</li>
+<li>Object based image analysis became standard for very high resolution imagery for exactly this reason</li>
+<li>Scene classification is what a model does when it says “this tile shows a parking lot”</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="spectral-information" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Spectral information</h2>
+<aside class="notes">
+<ul>
+<li>Section 2: what the bands record, how they are calibrated, and the indices derived from them</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="spectral-properties" class="slide level2 smaller">
+<h2>Spectral properties</h2>
+<ul>
+<li>Each surface reflects a characteristic share of the incoming light at each wavelength: its <strong>spectral reflectance curve</strong></li>
+<li>UAS sensors record reflected light in discrete bands
+<ul>
+<li>Red, green, and blue with a standard camera</li>
+<li>Red edge and near infrared with a multispectral camera</li>
+<li>Thermal infrared with a separate sensor</li>
 </ul></li>
-<li>Used to derive <strong>spectral indices</strong> for classification</li>
+<li>Bands are combined into <strong>spectral indices</strong> that are used as features for classification</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Two surfaces can only be separated spectrally if their curves differ in a band the camera records</li>
+<li>Green crop and green tree canopy do not differ much in RGB; the assignment shows the consequence</li>
+<li>The next slides come from the vegetation indices lab, which is the optional preparation for the assignment</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="spectral-bands" class="slide level2 text-center center">
-<h2>Spectral Bands</h2>
-<h4 id="rgb">RGB</h4>
-<p><img data-src="../images/ortho_r.png" style="width:25.0%" alt="red"> <img data-src="../images/ortho_g.png" style="width:25.0%" alt="green"> <img data-src="../images/ortho_b.png" style="width:25.0%" alt="blue"></p>
+<section id="reflectance-spectra-and-sensor-bands" class="slide level2 smaller">
+<h2>Reflectance spectra and sensor bands</h2>
+
+<img data-src="../images/ms_reflectance_spectra.webp" style="width:78.0%" alt="Reflectance against wavelength from 400 to 1000 nm for green vegetation, dry soil, and clear water, with the five MicaSense RedEdge bands drawn as shaded strips: blue 475, green 560, red 668, red edge 717, and NIR 842 nm. Vegetation is low in the visible with a small green peak, rises steeply across the red edge, and stays high in the NIR; soil rises slowly; water falls toward zero." class="r-stretch"><p>Schematic spectra; the band positions are those of the MicaSense RedEdge (center wavelength, width in the shaded strip).</p>
+<aside class="notes">
+<p>The eye sees 400 to 700 nm. Green vegetation reflects little red and blue (chlorophyll absorbs them), a little more green, and about half of the near infrared, because the leaf cell structure scatters it. The steep rise between 700 and 740 nm is the red edge. Dry soil rises slowly and smoothly across the whole range; clear water reflects almost nothing in the NIR. A camera band is a slice of this curve: a 10 nm red band at 668 nm reads the bottom of the chlorophyll absorption, a 40 nm NIR band at 842 nm reads the plateau. Every index in this lecture is a combination of such slices.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="common-spectral-indices" class="slide level2 center">
-<h2>Common Spectral Indices</h2>
+<section id="the-bands-of-a-multispectral-uas-camera" class="slide level2 smaller">
+<h2>The bands of a multispectral UAS camera</h2>
 <table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Band</th>
+<th>Typical range</th>
+<th>What it responds to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Green</td>
+<td>500 to 600 nm, peak near 550</td>
+<td>Chlorophyll reflection; healthy leaves look green</td>
+</tr>
+<tr class="even">
+<td>Red</td>
+<td>600 to 700 nm</td>
+<td>Chlorophyll absorption; low for vegetation, higher for soil</td>
+</tr>
+<tr class="odd">
+<td>Red edge</td>
+<td>700 to 730 nm</td>
+<td>The transition from absorption to NIR reflection; sensitive to chlorophyll content and stress</td>
+</tr>
+<tr class="even">
+<td>NIR</td>
+<td>700 nm to 1.3 µm</td>
+<td>Leaf cell structure; the strongest reflectance of healthy vegetation</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>RGB cameras give three wide bands; a multispectral camera adds narrow red edge and NIR bands, and often a narrow red and green as well. The red edge is the most informative band for plant condition because its position shifts with chlorophyll content: a stressed plant absorbs less red, and the rise moves toward shorter wavelengths. NIR separates vegetation from soil and water better than any visible band. Thermal and shortwave infrared are different sensors and are not covered here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="multispectral-cameras" class="slide level2 smaller">
+<h2>Multispectral cameras</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><img data-src="../images/ms_cameras.webp" style="width:92.0%" alt="Six multispectral UAS cameras photographed side by side: Buzzard Camera six, MicaSense RedEdge, Parrot Sequoia plus, Sentera Quad, Tetracam ADC Micro, and Tetracam MiniMCA6. Each has several small lenses, one per band."></p>
+</div><div class="column" style="width:52%;">
+<p><img data-src="../images/ms_camera_table.webp" style="width:62.0%" alt="Table of the same cameras with resolution, pixel size, weight, and the center wavelength and width of each band, for example MicaSense RedEdge: blue 475, green 560, red 668, red edge 717, NIR 840 nm."></p>
+</div></div>
+<p>Figure and table from <span class="citation" data-cites="jeziorska_uas_2019">Jeziorska (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>. One lens and sensor per band, so the bands are offset and aligned in processing.</p>
+<aside class="notes">
+<p>These are the common cameras of the last decade; the DJI Mavic 3 Multispectral and the MicaSense RedEdge-P and Altum are the current equivalents. The design is the same: one small sensor per band behind its own filter, so a frame is really four to ten frames taken from slightly different positions. Photogrammetry software aligns them during processing; a raw frame shows color fringes along edges. The band widths matter: a 10 nm red band and a 40 nm NIR band read different parts of the spectra on the previous slide than the wide bands of an RGB camera.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-digital-numbers-to-reflectance" class="slide level2 smaller">
+<h2>From digital numbers to reflectance</h2>
+<ul>
+<li>A camera records <strong>digital numbers</strong>: counts that depend on the sun, the atmosphere, the exposure, and the surface</li>
+<li>Indices and comparisons between dates need <strong>reflectance</strong>: the fraction of incoming light the surface reflects</li>
+<li>Calibration: a <strong>reflectance panel</strong> of known reflectance imaged before and after the flight, plus a <strong>downwelling light sensor</strong> on the aircraft that records the incoming light during the flight</li>
+<li>The <strong>empirical line method</strong> fits a line between the digital numbers of several targets and their measured reflectance, per band</li>
+</ul>
+<aside class="notes">
+<p>Processing software (Metashape, Pix4D) does the panel and sun sensor correction when told which images show the panel. The USGS campaign in the lab tested how good that correction is: the manufacturer workflow left the MicaSense reflectance about 0.015 too low, and the empirical line method with two well sized targets brought the error under 0.005 <span class="citation" data-cites="shrestha_absolute_2025">(<a href="#/references" role="doc-biblioref" onclick="">Shrestha et al. 2025</a>)</span>. For a single flight and a single index the offset hardly matters; for comparing dates, sensors, or thresholds published elsewhere it does. The USGS guidelines report <span class="citation" data-cites="sampath_guidelines_2023">(<a href="#/references" role="doc-biblioref" onclick="">Sampath et al. 2023</a>)</span> describes both methods, and <span class="citation" data-cites="poncet_multispectral_2019">Poncet et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> compare five of them for a Parrot Sequoia camera, with the manufacturer method about as accurate as the best empirical fit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="vegetation-indices" class="slide level2 smaller">
+<h2>Vegetation indices</h2>
+<ul>
+<li>An index combines bands arithmetically so that one number tracks one property, mostly green vegetation</li>
+<li>Normalized differences, (A - B) / (A + B), range from -1 to 1 and cancel part of the illumination differences</li>
+<li>NDVI <span class="citation" data-cites="rouse_monitoring_1974">(<a href="#/references" role="doc-biblioref" onclick="">Rouse et al. 1974</a>)</span> is the reference; VARI <span class="citation" data-cites="gitelson_novel_2002">(<a href="#/references" role="doc-biblioref" onclick="">Gitelson et al. 2002</a>)</span> does the same job with RGB only; SAVI <span class="citation" data-cites="huete_soil-adjusted_1988">(<a href="#/references" role="doc-biblioref" onclick="">Huete 1988</a>)</span> corrects for bright soil between sparse plants</li>
+</ul>
+<aside class="notes">
+<p>An index is a transformation of the bands, not a measurement of its own: the numbers depend on the sensor bands and the calibration. The idea behind all of them is the contrast between the visible, where chlorophyll absorbs, and the NIR, where leaves reflect. With an RGB camera the NIR is missing, so VARI and the green leaf index use the contrast between green and red instead; they work for separating green vegetation from soil and pavement, less well for plant condition. In GRASS, <code>i.vi</code> computes the common ones from the band rasters and <code>r.mapcalc</code> any other.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="index-maps-from-the-lab" class="slide level2 smaller">
+<h2>Index maps from the lab</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../images/ms_eros_rgb.webp" style="width:100.0%" alt="True color composite of a 220 by 240 m block at the USGS EROS site: a grass field, crop rows on the left, a gravel road, an asphalt road with a row of calibration targets, and trees in the corners."></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../images/ms_eros_ndvi.webp" style="width:100.0%" alt="NDVI map of the same block: the grass field in medium green, crop rows and trees in dark green, the roads and targets in white and tan near zero."></p>
+</div></div>
+<p>MicaSense RedEdge-MX Dual, 10 bands, July 18, 2023, EROS calibration site, South Dakota <span class="citation" data-cites="irwin_eccoe_2025">(<a href="#/references" role="doc-biblioref" onclick="">Irwin et al. 2025</a>)</span>. NDVI from the 668 and 842 nm bands: grass 0.5 to 0.7, crop rows and trees 0.8 to 1, roads near zero.</p>
+<aside class="notes">
+<p>These are two maps from the vegetation indices lab. The left panel is the composite of the red, green, and blue bands after a color stretch; reflectance of grass is only a few percent, so the raw composite is dark. The right panel is NDVI. The field is a mown grass plot and reads 0.5 to 0.7; the crop rows on the left and the trees reach 0.9; the asphalt and gravel roads, the calibration tarps, and the vehicles are near zero. The histogram of this map has almost no cells between 0.2 and 0.3, which is where a vegetation threshold belongs. The lab computes the same NDVI from the manufacturer-calibrated and the empirical line calibrated versions of the flight and compares them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="common-spectral-indices" class="slide level2 smaller">
+<h2>Common spectral indices</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Index</th>
 <th>Formula</th>
+<th>Bands</th>
 <th>Purpose</th>
 </tr>
 </thead>
@@ -280,90 +535,614 @@ Corey White
 <tr class="odd">
 <td>NDVI</td>
 <td>(NIR - Red) / (NIR + Red)</td>
-<td>Vegetation health</td>
+<td>NIR, red</td>
+<td>Green vegetation; 0.2 to 0.8 for crops and forest</td>
 </tr>
 <tr class="even">
-<td>VARI</td>
-<td>(G - R) / (G + R - B)</td>
-<td>Green vegetation from RGB</td>
+<td>NDRE</td>
+<td>(NIR - RedEdge) / (NIR + RedEdge)</td>
+<td>NIR, red edge</td>
+<td>Chlorophyll in dense canopies, late season crops</td>
+</tr>
+<tr class="odd">
+<td>SAVI</td>
+<td>(1 + L) (NIR - Red) / (NIR + Red + L), L = 0.5</td>
+<td>NIR, red</td>
+<td>Sparse vegetation over bright soil</td>
+</tr>
+<tr class="even">
+<td>GNDVI</td>
+<td>(NIR - Green) / (NIR + Green)</td>
+<td>NIR, green</td>
+<td>Chlorophyll, less saturation than NDVI</td>
 </tr>
 <tr class="odd">
 <td>NDWI</td>
-<td>(G - NIR) / (G + NIR)</td>
-<td>Water detection</td>
+<td>(Green - NIR) / (Green + NIR)</td>
+<td>green, NIR</td>
+<td>Open water</td>
+</tr>
+<tr class="even">
+<td>VARI</td>
+<td>(Green - Red) / (Green + Red - Blue)</td>
+<td>RGB</td>
+<td>Green vegetation from RGB</td>
+</tr>
+<tr class="odd">
+<td>GLI</td>
+<td>(2 Green - Red - Blue) / (2 Green + Red + Blue)</td>
+<td>RGB</td>
+<td>Green vegetation from RGB</td>
 </tr>
 <tr class="even">
 <td>NDBI</td>
 <td>(SWIR - NIR) / (SWIR + NIR)</td>
-<td>Built-up detection</td>
+<td>SWIR, NIR</td>
+<td>Built-up areas (satellite sensors)</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="feature-engineering" class="slide level2 smaller center">
-<h2>Feature Engineering</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+<aside class="notes">
 <ul>
-<li><strong>Normalized Indices</strong>
-<ul>
-<li>NDVI, NDWI, VARI, etc..</li>
-</ul></li>
-<li><strong>Low and High Pass Filters</strong>
-<ul>
-<li>Low Pass - Smoothing Kernal</li>
-<li>High Pass - Edge Detection</li>
-</ul></li>
-<li><strong>Textural features</strong>
-<ul>
-<li>Grey level co-occurrence matrix (GLCM)
-<ul>
-<li>Angular Second Moment</li>
-<li>Contrast</li>
-<li>Correlation</li>
-</ul></li>
-</ul></li>
-<li><strong>Geometric Characteristics</strong></li>
-<li><strong>Principal component analysis (PCA)</strong></li>
+<li>A reference table; the lab computes NDVI, NDRE, SAVI, GNDVI, VARI, and GLI</li>
+<li>The last two rows of RGB indices are the ones available for the Lake Wheeler orthophoto</li>
+<li>NDBI needs a shortwave infrared band, which UAS cameras do not have; it is listed because it appears in the satellite literature</li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../images/vari_drone.png" alt="VARI"> <span class="math display">\[
-VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
-\]</span></p>
-</div></div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="sampling-methods" class="slide level2 center">
-<h2>Sampling Methods</h2>
+<section id="features" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Features</h2>
+<aside class="notes">
 <ul>
-<li><strong>Random Sample</strong>
-<ul>
-<li>Sample the entire spatial extent <span class="math inline">\(n\)</span> number of locations</li>
-</ul></li>
-<li><strong>Cluster Sampling</strong>
-<ul>
-<li>Sample by different clusters</li>
-</ul></li>
-<li><strong>Stratified Random Sample</strong>
-<ul>
-<li>Sample by different classes (e.g.&nbsp;Developed, Undeveloped)</li>
-</ul></li>
+<li>Section 3: feature engineering, the rasters a model is given in addition to the bands</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="training-a-model" class="slide level2 center">
-<h2>Training a model</h2>
+<section id="feature-engineering" class="slide level2 smaller">
+<h2>Feature engineering</h2>
+<div class="term-card">
+<p><strong>Feature</strong>: one raster of values offered to the model for each cell: a band, an index, a filter result, a texture measure, or a terrain derivative</p>
+</div>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Examples</th>
+<th>What it adds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectral</td>
+<td>Bands, VARI, NDVI</td>
+<td>Color and vegetation contrast</td>
+</tr>
+<tr class="even">
+<td>Spatial filters</td>
+<td>Mean, standard deviation, edges</td>
+<td>The neighborhood of the cell</td>
+</tr>
+<tr class="odd">
+<td>Texture</td>
+<td>GLCM measures</td>
+<td>The pattern of grey levels</td>
+</tr>
+<tr class="even">
+<td>Terrain</td>
+<td>Height, slope, curvature, landforms</td>
+<td>The shape of the surface</td>
+</tr>
+<tr class="odd">
+<td>Transformations</td>
+<td>Principal components</td>
+<td>Fewer, uncorrelated bands</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
 <ul>
-<li>Break data into training and testing dataset 80/20</li>
-<li>Avoid overfitting data</li>
-<li>May require a large volume of data</li>
+<li>With three bands and 5 cm pixels, the features carry most of the information a model can use</li>
+<li>Features should describe the class, not the location of the training sample; the assignment has an example of a feature that does the second</li>
+<li>Assignment Parts 2 to 5 compute one or more features from each of the first four groups</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="classification-results" class="slide level2 center">
-<h2>Classification Results</h2>
+<section id="a-spectral-index-as-a-feature" class="slide level2 smaller">
+<h2>A spectral index as a feature</h2>
 
-<img data-src="../images/basic_classification.png" style="width:75.0%" class="r-stretch"></section>
-<section id="model-validation" class="slide level2 smaller center">
-<h2>Model Validation</h2>
-<h4 id="confusion-matrix">Confusion Matrix</h4>
+<img data-src="../images/a6a_vari.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:88.0%" alt="Two maps of the Lake Wheeler site. Left: VARI from -1 to 1; tree lines and the crop fields in the south are green, bare and sparsely planted fields and the roads are white. Right: the orthophoto with the cells excluded by the denominator rule in magenta, concentrated in the shadows along the tree lines."><div class="term-card">
+<p>In GRASS: <code>r.mapcalc expression="vari = float(ortho.2 - ortho.1) / (ortho.2 + ortho.1 - ortho.3)"</code>; <code>float()</code> avoids integer division of the 8-bit bands</p>
+</div>
+<aside class="notes">
+<ul>
+<li>Left: VARI of the July 2024 orthophoto; right: the cells where the denominator is near zero, in magenta</li>
+<li>Those cells are mostly deep shadows along the tree lines, where all three bands are low and green plus red is hardly larger than blue</li>
+<li>Assignment Part 2: integer division, the unbounded range, and the rule that masks and clamps the index</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="spatial-filters" class="slide level2 smaller">
+<h2>Spatial filters</h2>
+
+<img data-src="../images/a6a_filters.webp" style="width:100.0%" alt="Four panels of a 150 m block around the farm buildings: the orthophoto; the 9 by 9 mean of the red band, a blurred image; the 5 by 5 standard deviation of the green band, dark on roofs, road, and grass and bright on edges, cars, the tree, and crop rows; and zero crossing edges as short thin lines." class="r-stretch"><div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Low pass filter</strong>: a moving window mean; removes fine variation such as crop rows</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>High pass filter</strong>: local variation or edges; standard deviation, zero crossings</p>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Orthophoto, 9 by 9 mean of red, 5 by 5 standard deviation of green, and zero crossing edges for the farm block</li>
+<li>In GRASS: <code>r.neighbors</code> with <code>method=average</code> or <code>method=stddev</code>, and <code>i.zc</code> for edges</li>
+<li>Assignment Part 3: the smoothed red band becomes the second most important feature of the model</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="texture" class="slide level2 smaller">
+<h2>Texture</h2>
+
+<img data-src="../images/a6a_texture.webp" style="width:100.0%" alt="Three panels of the farm block: angular second moment, high on mown grass, road, and roofs and low in crop fields; contrast, high in crop fields, on the tree, and along building and car edges; and correlation, a fine pattern with the building outlines visible." class="r-stretch"><div class="term-card">
+<p><strong>Grey level co-occurrence matrix (GLCM)</strong>: counts how often pairs of grey levels occur in neighboring cells of a window; its statistics describe texture <span class="citation" data-cites="haralick_textural_1973">(<a href="#/references" role="doc-biblioref" onclick="">Haralick et al. 1973</a>)</span>. In GRASS: <code>r.texture input=ortho.2 output=green_tex method=asm,contrast,corr size=5</code></p>
+</div>
+<aside class="notes">
+<ul>
+<li>Angular second moment is high where the window is uniform; contrast where neighbors differ strongly; correlation where grey levels change gradually</li>
+<li>Crop rows have high contrast and low uniformity; mown grass and roofs the opposite</li>
+<li>Assignment Part 4; this is the slowest feature, about two minutes at 0.2 m</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="terrain-features" class="slide level2 smaller">
+<h2>Terrain features</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/a6a_slope.webp" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Slope of the DSM for the farm block: low slopes in green over grass and fields, steep slopes in magenta and red outlining the buildings, the cars, and the tree crown."></p>
+</figure>
+</div>
+<p>Slope of the DSM</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../images/a6a_geomorphon.webp" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Geomorphon landforms of the DSM for the farm block: slope class in yellow over most of the block, with ridges, shoulders, footslopes, and valleys along building edges and in the crop rows."></p>
+</figure>
+</div>
+<p>Geomorphons, 3 m search radius</p>
+</div></div>
+<div class="term-card">
+<p>In GRASS: <code>r.slope.aspect</code> for slope and curvatures, <code>r.geomorphon</code> for landforms <span class="citation" data-cites="jasiewicz_geomorphons_2013">(<a href="#/references" role="doc-biblioref" onclick="">Jasiewicz and Stepinski 2013</a>)</span></p>
+</div>
+<aside class="notes">
+<ul>
+<li>The DSM separates what color cannot: a tree from grass, a roof from a gravel pad</li>
+<li>Slope outlines everything that stands up from the ground; geomorphons classify the local shape into ten forms</li>
+<li>Absolute elevation is also a candidate feature, and a risky one: it describes where on the hill a cell lies. Assignment Parts 5 and 8</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="segmentation" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Segmentation</h2>
+<aside class="notes">
+<ul>
+<li>Section 4: grouping cells into objects, with a classical algorithm and with a pretrained model</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="superpixels-and-object-statistics" class="slide level2 smaller">
+<h2>Superpixels and object statistics</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="../images/a6a_superpixels.webp" style="width:100.0%" alt="The farm block orthophoto with yellow superpixel outlines: compact segments a few meters across that follow roof edges, the road, the cars, and the tree crown."></p>
+</div><div class="column" style="width:55%;">
+<div class="term-card">
+<p><strong>Superpixel</strong>: a compact group of neighboring cells with similar values; SLIC grows them from a regular grid of seeds <span class="citation" data-cites="achanta_slic_2012">(<a href="#/references" role="doc-biblioref" onclick="">Achanta et al. 2012</a>)</span></p>
+</div>
+<ul>
+<li>Each segment becomes one row of a table: mean and spread of each band, area, compactness</li>
+<li>The table is classified in place of the cells</li>
+<li>In GRASS: <code>i.superpixels.slic</code> and <code>i.segment.stats</code>; <code>i.segment</code> for region growing</li>
+</ul>
+</div></div>
+<aside class="notes">
+<ul>
+<li>About 2,000 superpixels of at least 50 cells on the farm block</li>
+<li>The segment statistics add shape as a feature, which a cell does not have</li>
+<li>Assignment Part 6 stops at the table; an object based classification would join labels to it and train on the rows</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="promptable-foundation-models" class="slide level2 smaller">
+<h2>Promptable foundation models</h2>
+<div class="term-card">
+<p><strong>Foundation model</strong>: a model trained once on a very large dataset and used for many tasks without further training. SAM <span class="citation" data-cites="kirillov_segment_2023">(<a href="#/references" role="doc-biblioref" onclick="">Kirillov et al. 2023</a>)</span> and SAM 2 <span class="citation" data-cites="ravi_sam2_2024">(<a href="#/references" role="doc-biblioref" onclick="">Ravi et al. 2024</a>)</span> return the outline of an object for a prompt: a point, a box, or, combined with a text model, a word</p>
+</div>
+<ul>
+<li class="fragment">Text prompts: Grounding DINO <span class="citation" data-cites="liu_grounding_2024">(<a href="#/references" role="doc-biblioref" onclick="">Liu et al. 2024</a>)</span> finds boxes that match the words, SAM 2 outlines the object in each box</li>
+<li class="fragment">No training polygons, no features; the output is a set of objects, not a label for every cell</li>
+<li class="fragment">Thresholds control how confident a box and its match to the text must be</li>
+<li class="fragment">In GRASS: <code>i.sam2 group=farm_rgb output=sam_trees text_prompt="trees"</code>, through the samgeo package <span class="citation" data-cites="wu_samgeo_2023">(<a href="#/references" role="doc-biblioref" onclick="">Wu and Osco 2023</a>)</span></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>The model was trained on about a billion masks of everyday photographs, not on aerial imagery; that it works on orthophotos at all is the notable result</li>
+<li>It processes one image tile at a time and needs a GPU to be fast: seconds per prompt on a GPU, about a minute on a CPU</li>
+<li>Assignment Part 10 runs three prompts on the farm block</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="text-prompted-segmentation-at-lake-wheeler" class="slide level2 smaller">
+<h2>Text prompted segmentation at Lake Wheeler</h2>
+
+<img data-src="../images/a6a_sam.webp" style="width:100.0%" alt="Three panels of the farm block orthophoto with the objects found by i.sam2 in random colors. Prompt trees: the large tree and a clump at the top edge. Prompt buildings: the two buildings, the walkway, two concrete pads, a strip at the top left corner, and nine parked cars. Prompt cars: the parked cars and three objects next to the pads." class="r-stretch"><p>Prompts “trees”, “buildings”, and “cars” at the default thresholds of 0.24: 2, 15, and 15 objects.</p>
+<aside class="notes">
+<ul>
+<li>Outlines are clean and follow the objects, which the pixel based map does not achieve</li>
+<li>The prompt “buildings” also returns the parked cars and the concrete pads; a box threshold of 0.35 leaves 5 objects, 0.5 leaves 3</li>
+<li>What counts as a match for a word is decided by the model, and it cannot be corrected with a few training polygons</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="training-and-prediction" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Training and prediction</h2>
+<aside class="notes">
+<ul>
+<li>Section 5: the families of methods, how training data are sampled, and the random forest used in the assignment</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="supervised-and-unsupervised-learning" class="slide level2 smaller">
+<h2>Supervised and unsupervised learning</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Supervised</strong>: the model learns the classes from labeled samples</p>
+</div>
+<ul>
+<li>Random forest, gradient boosting, support vector machines</li>
+<li>Needs training data for every class</li>
+<li>Training data from one place or date may not hold for another</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Unsupervised</strong>: cells are grouped by similarity; the analyst names the groups afterwards</p>
+</div>
+<ul>
+<li>k-means, ISODATA</li>
+<li>No training data</li>
+<li>The clusters need not correspond to the classes of interest</li>
+</ul>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Supervised methods dominate when the classes are defined in advance, as in a land cover legend</li>
+<li>Unsupervised clustering is useful for a first look at how many spectrally distinct surfaces an image contains</li>
+<li>In GRASS: <code>r.learn.train</code> for supervised models from scikit-learn, <code>i.cluster</code> with <code>i.maxlik</code> for the unsupervised route</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="deep-learning" class="slide level2 smaller">
+<h2>Deep learning</h2>
+<ul>
+<li><strong>Convolutional neural networks</strong> learn their own spatial features from the image, in place of hand made filters and textures</li>
+<li>Architectures by task: classification networks for scenes, U-Net for a label per cell, detectors for boxes</li>
+<li>They need many labeled examples and a GPU for training; pretrained models reduce both</li>
+<li>Foundation models such as SAM 2 are the same idea at a larger scale: pretrained once, prompted for each task</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>The filters and textures of the previous section are fixed versions of what the first layers of a convolutional network learn</li>
+<li>For a single farm and nine classes, a random forest on a dozen features is the proportionate tool; for a counting task over thousands of images, a detector is</li>
+<li>The assignment uses both ends: a random forest trained on site and a pretrained model that is only prompted</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sampling-design" class="slide level2 smaller">
+<h2>Sampling design</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Design</th>
+<th>How samples are placed</th>
+<th>Consideration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Random</td>
+<td>Anywhere in the extent with equal probability</td>
+<td>Rare classes receive few samples</td>
+</tr>
+<tr class="even">
+<td>Stratified random</td>
+<td>A fixed number per class or stratum</td>
+<td>Needs a prior map of the strata</td>
+</tr>
+<tr class="odd">
+<td>Cluster</td>
+<td>Groups of nearby samples, such as digitized polygons</td>
+<td>Efficient to collect; samples within a polygon are not independent</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment">Reference data are divided into a <strong>training set</strong> and a <strong>test set</strong> the model never sees</li>
+<li class="fragment">Neighboring cells are spatially autocorrelated: dividing the cells of one polygon at random puts near copies on both sides</li>
+<li class="fragment">Divide by polygon or by area, not by cell</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><span class="citation" data-cites="congalton_review_1991">Congalton (<a href="#/references" role="doc-biblioref" onclick="">1991</a>)</span> and <span class="citation" data-cites="olofsson_good_2014">Olofsson et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span> are the standard references for sampling and accuracy assessment</li>
+<li>In GRASS: <code>r.random</code> and the addon <code>r.sample.category</code> place random and stratified samples</li>
+<li>Assignment Part 7: 64 digitized polygons, every third one set aside for testing</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="random-forest" class="slide level2 smaller">
+<h2>Random forest</h2>
+<div class="term-card">
+<p><strong>Random forest</strong>: many decision trees, each trained on a bootstrap sample of the training data and a random subset of the features at each split; the class is the majority vote <span class="citation" data-cites="breiman_random_2001">(<a href="#/references" role="doc-biblioref" onclick="">Breiman 2001</a>)</span></p>
+</div>
+<ul>
+<li class="fragment">Works with features of different units and ranges without scaling</li>
+<li class="fragment">Few parameters: the number of trees and the number of features tried at each split</li>
+<li class="fragment"><strong>Feature importance</strong>: the drop in accuracy when one feature is shuffled</li>
+<li class="fragment">In GRASS: <code>r.learn.train group=features training_map=train_rast model_name=RandomForestClassifier</code>, then <code>r.learn.predict</code></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>The addon <code>r.learn.ml2</code> is an interface to scikit-learn; the same two tools run gradient boosting, support vector machines, and others by changing <code>model_name</code></li>
+<li>The training raster holds the class numbers; the group holds the features</li>
+<li>Assignment Parts 7 and 8: one model on the three bands, one on 14 features, 100 trees each</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-classifications-of-lake-wheeler" class="slide level2 smaller">
+<h2>Two classifications of Lake Wheeler</h2>
+
+<img data-src="../images/a6a_classification.webp" class="quarto-figure quarto-figure-center r-stretch" style="width:92.0%" alt="Two classification maps of the whole site with a nine class legend. Left, RGB bands only: a speckled mix of fields in yellow and trees in green over the crop fields. Right, 14 features: tree lines solid green, the eastern bare field solid yellow, the upper central field light green for crop, and the southern fields mostly brown for farm equipment."><p>RGB bands (left) and 14 features (right), July 17, 2024</p>
+<aside class="notes">
+<ul>
+<li>RGB only: crop rows and tree canopy have the same colors, so the fields are a speckle of both classes</li>
+<li>14 features: tree lines, roads, and buildings are clean, but 12.5 hectares of the southern fields are labeled farm equipment</li>
+<li>The next slide shows why</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="feature-importance" class="slide level2 smaller">
+<h2>Feature importance</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><img data-src="../images/a6a_feature_importance.webp" style="width:100.0%" alt="Horizontal bar chart of the permutation importance of the 14 features. The DSM is highest at 0.38, the 9 by 9 mean of the red band second at 0.22, then VARI at 0.04 and slope at 0.02; all other features are below 0.003."></p>
+</div><div class="column" style="width:42%;">
+<ul>
+<li>The DSM is the most important feature, ahead of the smoothed red band, VARI, and slope</li>
+<li>Elevation is a property of the location, not of the class</li>
+<li>The farm equipment polygons lie at the elevation of the southern fields</li>
+</ul>
+</div></div>
+<aside class="notes">
+<ul>
+<li>The model found the shortest path to reproducing the training polygons: each class was digitized at particular elevations</li>
+<li>On the training polygons this is perfectly accurate; on the rest of the site it is wrong</li>
+<li>A feature importance reports what the model used, not whether using it was sound</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="accuracy-assessment" class="slide level2 center text-center section-divider" data-background-color="#e9f2e9">
+<h2>Accuracy assessment</h2>
+<aside class="notes">
+<ul>
+<li>Section 6: the confusion matrix, the measures derived from it, and which reference data to use</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-confusion-matrix" class="slide level2 smaller">
+<h2>The confusion matrix</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 29%">
@@ -375,12 +1154,12 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 </colgroup>
 <thead>
 <tr class="header">
-<th>Reference &nbsp;Predicted</th>
+<th>Map \ Reference</th>
 <th>Forest</th>
 <th>Water</th>
 <th>Urban</th>
 <th>Agriculture</th>
-<th>User’s Accuracy (%)</th>
+<th>User’s accuracy (%)</th>
 </tr>
 </thead>
 <tbody>
@@ -398,7 +1177,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <td>45</td>
 <td>0</td>
 <td>4</td>
-<td>88.2</td>
+<td>90.0</td>
 </tr>
 <tr class="odd">
 <td><strong>Urban</strong></td>
@@ -414,12 +1193,12 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 <td>3</td>
 <td>5</td>
 <td>42</td>
-<td>85.7</td>
+<td>84.0</td>
 </tr>
 <tr class="odd">
-<td><strong>Producer’s Accuracy (%)</strong></td>
+<td><strong>Producer’s accuracy (%)</strong></td>
 <td>94.3</td>
-<td>86.5</td>
+<td>88.2</td>
 <td>83.3</td>
 <td>79.2</td>
 <td></td>
@@ -427,17 +1206,226 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
 </tbody>
 </table>
 <ul>
-<li><span class="math inline">\(Overall\ Accuarcy = \frac{Correctly\ classified\ samples}{Total\ samples}\)</span></li>
-<li>Kappa coefficient (Cohen’s Kappa): inter-rater agreement</li>
+<li><strong>Overall accuracy</strong>: correct samples divided by all samples, 177 / 205 = 86.3 %</li>
+<li><strong>User’s accuracy</strong>: of the samples mapped as a class, the share that is the class (row); 100 % minus the commission error</li>
+<li><strong>Producer’s accuracy</strong>: of the reference samples of a class, the share mapped as the class (column); 100 % minus the omission error</li>
+<li><strong>Kappa</strong>: agreement beyond chance, here 0.82</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Rows are the map, columns the reference, the layout <code>r.confusionmatrix</code> prints</li>
+<li>User’s accuracy answers “if the map says forest, how often is it forest”; producer’s accuracy answers “how much of the real forest did the map find”</li>
+<li>In GRASS: <code>r.confusionmatrix classification=rf_features raster_reference=test_rast -m</code>, or <code>r.kappa</code></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="challenges" class="slide level2 center">
+<section id="training-accuracy-and-test-accuracy" class="slide level2 smaller">
+<h2>Training accuracy and test accuracy</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Training polygons</th>
+<th>Test polygons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RGB bands</td>
+<td>99.5 %, kappa 0.98</td>
+<td>54.6 %, kappa 0.17</td>
+</tr>
+<tr class="even">
+<td>14 features</td>
+<td>100 %, kappa 1.00</td>
+<td>53.6 %, kappa 0.21</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment">A random forest reproduces its training data almost perfectly; that number says nothing about the rest of the map</li>
+<li class="fragment">On the test polygons the features raise the producer’s accuracy of trees from 85 to 99 %, ground from 47 to 93 %, and bales from 7 to 86 %</li>
+<li class="fragment">The overall accuracy does not change: 168,051 cells of one test field are mapped as farm equipment</li>
+<li class="fragment">With unequal classes, the overall accuracy mostly reports on the largest class</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>These are the assignment results for the two models</li>
+<li>Read the matrix by class before quoting one number; kappa and the per class accuracies show the improvement that the overall accuracy hides</li>
+<li>The test set here is small and clustered, with one field polygon holding most of its cells, so its overall accuracy is close to a statement about that polygon</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="challenges" class="slide level2 smaller">
 <h2>Challenges</h2>
 <ul>
-<li>Handling multiple spatial scales</li>
-<li>Nonstationarity</li>
-<li>Processing/Training</li>
+<li><strong>Class definitions</strong>: “fields” covers bare soil and planted rows; “crop” and “farm equipment” have very few training cells</li>
+<li><strong>Transfer</strong>: a model trained on one flight meets different illumination, phenology, and sensors on the next</li>
+<li><strong>Scale</strong>: the features that describe a car differ from the ones that describe a field</li>
+<li><strong>Location proxies</strong>: features such as elevation or coordinates that identify the training polygon in place of the class</li>
+<li><strong>Computation</strong>: 122 million cells at 7 cm; the assignment works at 0.2 m</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Most improvements to a classification come from the training data and the class legend, not from a different algorithm</li>
+<li>Transfer between dates is the bridge to Topic 6B: comparing two classified maps multiplies their errors</li>
+<li>The assignment asks for one change to the model and an honest report of whether it helped</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="key-terms" class="slide level2 smaller">
+<h2>Key terms</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Feature</strong>: a raster of values offered to the model for each cell</p>
+</div>
+<div class="term-card">
+<p><strong>Random forest</strong>: an ensemble of decision trees trained on bootstrap samples; the class is their majority vote</p>
+</div>
+<div class="term-card">
+<p><strong>Foundation model</strong>: a model pretrained on a very large dataset and prompted for a task without further training</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="term-card">
+<p><strong>Confusion matrix</strong>: the cross tabulation of mapped and reference classes</p>
+</div>
+<div class="term-card">
+<p><strong>User’s accuracy</strong>: the share of a mapped class that is correct; the complement of the commission error</p>
+</div>
+<div class="term-card">
+<p><strong>Producer’s accuracy</strong>: the share of a reference class that was found; the complement of the omission error</p>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>The words the assignment report has to use correctly</li>
+<li>The grading asks for conclusions in these terms: features, training and test data, user’s and producer’s accuracy, class imbalance</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<div class="term-card">
+<p><strong>Assignment 6A</strong>: <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">UAS image classification</a></p>
+<p><strong>Lab (optional)</strong>: <a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Vegetation indices from UAS imagery</a></p>
+</div>
+<aside class="notes">
+<ul>
+<li>Recap: bands and indices, then neighborhood, texture, and terrain features, then a model, then an accuracy statement on data the model has not seen</li>
+<li>A pretrained model returns objects from a word; a trained model labels every cell from your polygons; they fail in different ways</li>
+<li>Next: Topic 6B, change detection, which compares images, indices, surfaces, and classified maps between dates</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-achanta_slic_2012" class="csl-entry" role="listitem">
+Achanta, Radhakrishna, Appu Shaji, Kevin Smith, Aurelien Lucchi, Pascal Fua, and Sabine Süsstrunk. 2012. <span>“<span>SLIC</span> Superpixels Compared to State-of-the-Art Superpixel Methods.”</span> <em><span>IEEE</span> Transactions on Pattern Analysis and Machine Intelligence</em> 34 (11): 2274–82. <a href="https://doi.org/10.1109/TPAMI.2012.120">https://doi.org/10.1109/TPAMI.2012.120</a>.
+</div>
+<div id="ref-breiman_random_2001" class="csl-entry" role="listitem">
+Breiman, Leo. 2001. <span>“Random Forests.”</span> <em>Machine Learning</em> 45 (1): 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>.
+</div>
+<div id="ref-congalton_review_1991" class="csl-entry" role="listitem">
+Congalton, Russell G. 1991. <span>“A Review of Assessing the Accuracy of Classifications of Remotely Sensed Data.”</span> <em>Remote Sensing of Environment</em> 37 (1): 35–46. <a href="https://doi.org/10.1016/0034-4257(91)90048-B">https://doi.org/10.1016/0034-4257(91)90048-B</a>.
+</div>
+<div id="ref-gitelson_novel_2002" class="csl-entry" role="listitem">
+Gitelson, Anatoly A., Yoram J. Kaufman, Robert Stark, and Don Rundquist. 2002. <span>“Novel Algorithms for Remote Estimation of Vegetation Fraction.”</span> <em>Remote Sensing of Environment</em> 80 (1): 76–87. <a href="https://doi.org/10.1016/S0034-4257(01)00289-9">https://doi.org/10.1016/S0034-4257(01)00289-9</a>.
+</div>
+<div id="ref-haralick_textural_1973" class="csl-entry" role="listitem">
+Haralick, Robert M., K. Shanmugam, and Its’Hak Dinstein. 1973. <span>“Textural Features for Image Classification.”</span> <em><span>IEEE</span> Transactions on Systems, Man, and Cybernetics</em> <span>SMC</span>-3 (6): 610–21. <a href="https://doi.org/10.1109/TSMC.1973.4309314">https://doi.org/10.1109/TSMC.1973.4309314</a>.
+</div>
+<div id="ref-huete_soil-adjusted_1988" class="csl-entry" role="listitem">
+Huete, Alfredo R. 1988. <span>“A Soil-Adjusted Vegetation Index (<span>SAVI</span>).”</span> <em>Remote Sensing of Environment</em> 25 (3): 295–309. <a href="https://doi.org/10.1016/0034-4257(88)90106-X">https://doi.org/10.1016/0034-4257(88)90106-X</a>.
+</div>
+<div id="ref-irwin_eccoe_2025" class="csl-entry" role="listitem">
+Irwin, Jeffrey R., Victoria M. Scholl, Mahesh Shrestha, et al. 2025. <em>2023 <span>ECCOE</span> <span>UAS</span> Multispectral and Hyperspectral Imagery Radiometric Calibration Evaluation Field Data</em>. U.S. Geological Survey. <a href="https://doi.org/10.5066/P14FFHW5">https://doi.org/10.5066/P14FFHW5</a>.
+</div>
+<div id="ref-jasiewicz_geomorphons_2013" class="csl-entry" role="listitem">
+Jasiewicz, Jarosław, and Tomasz F. Stepinski. 2013. <span>“Geomorphons: A Pattern Recognition Approach to Classification and Mapping of Landforms.”</span> <em>Geomorphology</em> 182: 147–56. <a href="https://doi.org/10.1016/j.geomorph.2012.11.005">https://doi.org/10.1016/j.geomorph.2012.11.005</a>.
+</div>
+<div id="ref-jeziorska_uas_2019" class="csl-entry" role="listitem">
+Jeziorska, Justyna. 2019. <span>“<span>UAS</span> for Wetland Mapping and Hydrological Modeling.”</span> <em>Remote Sensing</em> 11 (17): 1997. <a href="https://doi.org/10.3390/rs11171997">https://doi.org/10.3390/rs11171997</a>.
+</div>
+<div id="ref-kirillov_segment_2023" class="csl-entry" role="listitem">
+Kirillov, Alexander, Eric Mintun, Nikhila Ravi, et al. 2023. <span>“Segment Anything.”</span> <em>2023 <span>IEEE</span>/<span>CVF</span> International Conference on Computer Vision (<span>ICCV</span>)</em>, 3992–4003. <a href="https://doi.org/10.1109/ICCV51070.2023.00371">https://doi.org/10.1109/ICCV51070.2023.00371</a>.
+</div>
+<div id="ref-liu_grounding_2024" class="csl-entry" role="listitem">
+Liu, Shilong, Zhaoyang Zeng, Tianhe Ren, et al. 2024. <span>“Grounding <span>DINO</span>: Marrying <span>DINO</span> with Grounded Pre-Training for Open-Set Object Detection.”</span> <em>Computer Vision - <span>ECCV</span> 2024, Lecture Notes in Computer Science</em>, 38–55. <a href="https://doi.org/10.1007/978-3-031-72970-6_3">https://doi.org/10.1007/978-3-031-72970-6_3</a>.
+</div>
+<div id="ref-olofsson_good_2014" class="csl-entry" role="listitem">
+Olofsson, Pontus, Giles M. Foody, Martin Herold, Stephen V. Stehman, Curtis E. Woodcock, and Michael A. Wulder. 2014. <span>“Good Practices for Estimating Area and Assessing Accuracy of Land Change.”</span> <em>Remote Sensing of Environment</em> 148: 42–57. <a href="https://doi.org/10.1016/j.rse.2014.02.015">https://doi.org/10.1016/j.rse.2014.02.015</a>.
+</div>
+<div id="ref-poncet_multispectral_2019" class="csl-entry" role="listitem">
+Poncet, Aurelie M., Thorsten Knappenberger, Christian Brodbeck, Michael Fogle, Joey N. Shaw, and Brenda V. Ortiz. 2019. <span>“Multispectral <span>UAS</span> Data Accuracy for Different Radiometric Calibration Methods.”</span> <em>Remote Sensing</em> 11 (16): 1917. <a href="https://doi.org/10.3390/rs11161917">https://doi.org/10.3390/rs11161917</a>.
+</div>
+<div id="ref-ravi_sam2_2024" class="csl-entry" role="listitem">
+Ravi, Nikhila, Valentin Gabeur, Yuan-Ting Hu, et al. 2024. <em><span>SAM</span> 2: Segment Anything in Images and Videos</em>. <a href="https://doi.org/10.48550/arXiv.2408.00714">https://doi.org/10.48550/arXiv.2408.00714</a>.
+</div>
+<div id="ref-rouse_monitoring_1974" class="csl-entry" role="listitem">
+Rouse, John W., Rudolf H. Haas, John A. Schell, and Donald W. Deering. 1974. <span>“Monitoring Vegetation Systems in the Great Plains with <span>ERTS</span>.”</span> <em>Third Earth Resources Technology Satellite-1 Symposium, Volume 1: Technical Presentations, <span>NASA</span> <span>SP</span>-351</em>, 309–17.
+</div>
+<div id="ref-sampath_guidelines_2023" class="csl-entry" role="listitem">
+Sampath, Aparajithan, Mahesh Shrestha, Michelle While, and Victoria Mary Scholl. 2023. <em>Guidelines for Calibration of Uncrewed Aircraft Systems Imagery</em>. Nos. 2023-1033. U.S. Geological Survey. <a href="https://doi.org/10.3133/ofr20231033">https://doi.org/10.3133/ofr20231033</a>.
+</div>
+<div id="ref-shrestha_absolute_2025" class="csl-entry" role="listitem">
+Shrestha, Mahesh, Victoria Scholl, Aparajithan Sampath, et al. 2025. <span>“Absolute Radiometric Calibration Evaluation of Uncrewed Aerial System (<span>UAS</span>) Headwall and <span>MicaSense</span> Sensors and Improving Data Quality Using the Empirical Line Method.”</span> <em>Remote Sensing</em> 17 (22): 3738. <a href="https://doi.org/10.3390/rs17223738">https://doi.org/10.3390/rs17223738</a>.
+</div>
+<div id="ref-wu_samgeo_2023" class="csl-entry" role="listitem">
+Wu, Qiusheng, and Lucas Prado Osco. 2023. <span>“Samgeo: A Python Package for Segmenting Geospatial Data with the Segment Anything Model (<span>SAM</span>).”</span> <em>Journal of Open Source Software</em> 8 (89): 5663. <a href="https://doi.org/10.21105/joss.05663">https://doi.org/10.21105/joss.05663</a>.
+</div>
+</div>
 
 
 </section>
@@ -455,7 +1443,6 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
   <script src="../../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -470,19 +1457,18 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': false,
+'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
-'chalkboard': {"buttons":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: true,
+        controls: false,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -528,7 +1514,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         disableLayout: false,
 
         // Vertical centering of slides
-        center: true,
+        center: false,
 
         // Enables touch navigation on devices with touch input
         touch: true,
@@ -604,7 +1590,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -624,9 +1610,9 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1400,
+        width: 1050,
 
-        height: 800,
+        height: 700,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -649,7 +1635,7 @@ VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
           RevealMath,
           RevealNotes,

@@ -6,8 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Corey White">
-<meta name="dcterms.date" content="2026-11-11">
+<meta name="dcterms.date" content="2026-11-18">
 
 <title>Assignment 6A – UAS Mapping and Analytics</title>
 <style>
@@ -84,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-05ef257ffea5c5fd5ca58f032a70e1a4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-b4895d10134ca2d091900c8d6c19e12e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -193,7 +192,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -611,8 +610,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-18" aria-labelledby="quarto-sidebar-section-18-label" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Vegetation Indices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 6A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 6B</span></a>
   </div>
 </li>
       </ul>
@@ -646,36 +657,38 @@ window.Quarto = {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
-  <ul>
-  <li><a href="#image-classification" id="toc-image-classification" class="nav-link" data-scroll-target="#image-classification">Image Classification</a></li>
-  <li><a href="#spectral-feature-extraction" id="toc-spectral-feature-extraction" class="nav-link" data-scroll-target="#spectral-feature-extraction">Spectral Feature Extraction</a>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#part-1-import-and-region" id="toc-part-1-import-and-region" class="nav-link" data-scroll-target="#part-1-import-and-region">Part 1: Import and region</a></li>
+  <li><a href="#part-2-spectral-index" id="toc-part-2-spectral-index" class="nav-link" data-scroll-target="#part-2-spectral-index">Part 2: Spectral index</a></li>
+  <li><a href="#part-3-spatial-filters" id="toc-part-3-spatial-filters" class="nav-link" data-scroll-target="#part-3-spatial-filters">Part 3: Spatial filters</a></li>
+  <li><a href="#part-4-texture" id="toc-part-4-texture" class="nav-link" data-scroll-target="#part-4-texture">Part 4: Texture</a></li>
+  <li><a href="#part-5-terrain-features" id="toc-part-5-terrain-features" class="nav-link" data-scroll-target="#part-5-terrain-features">Part 5: Terrain features</a></li>
+  <li><a href="#part-6-imagery-groups-and-segmentation" id="toc-part-6-imagery-groups-and-segmentation" class="nav-link" data-scroll-target="#part-6-imagery-groups-and-segmentation">Part 6: Imagery groups and segmentation</a></li>
+  <li><a href="#part-7-training-data-and-model" id="toc-part-7-training-data-and-model" class="nav-link" data-scroll-target="#part-7-training-data-and-model">Part 7: Training data and model</a>
   <ul class="collapse">
-  <li><a href="#spectral-indices" id="toc-spectral-indices" class="nav-link" data-scroll-target="#spectral-indices">Spectral Indices</a></li>
-  <li><a href="#low-pass-filters" id="toc-low-pass-filters" class="nav-link" data-scroll-target="#low-pass-filters">Low Pass Filters</a></li>
-  <li><a href="#high-pass-filters" id="toc-high-pass-filters" class="nav-link" data-scroll-target="#high-pass-filters">High Pass Filters</a></li>
-  <li><a href="#texture-features" id="toc-texture-features" class="nav-link" data-scroll-target="#texture-features">Texture Features</a></li>
+  <li><a href="#training-and-test-polygons" id="toc-training-and-test-polygons" class="nav-link" data-scroll-target="#training-and-test-polygons">Training and test polygons</a></li>
+  <li><a href="#train-two-random-forests" id="toc-train-two-random-forests" class="nav-link" data-scroll-target="#train-two-random-forests">Train two random forests</a></li>
   </ul></li>
-  <li><a href="#topographic-features-extraction" id="toc-topographic-features-extraction" class="nav-link" data-scroll-target="#topographic-features-extraction">Topographic Features Extraction</a>
+  <li><a href="#part-8-prediction-and-feature-importance" id="toc-part-8-prediction-and-feature-importance" class="nav-link" data-scroll-target="#part-8-prediction-and-feature-importance">Part 8: Prediction and feature importance</a></li>
+  <li><a href="#part-9-accuracy-assessment" id="toc-part-9-accuracy-assessment" class="nav-link" data-scroll-target="#part-9-accuracy-assessment">Part 9: Accuracy assessment</a>
   <ul class="collapse">
-  <li><a href="#slope-and-aspect" id="toc-slope-and-aspect" class="nav-link" data-scroll-target="#slope-and-aspect">Slope and Aspect</a></li>
-  <li><a href="#terrain-forms" id="toc-terrain-forms" class="nav-link" data-scroll-target="#terrain-forms">Terrain Forms</a></li>
+  <li><a href="#one-change-to-the-model" id="toc-one-change-to-the-model" class="nav-link" data-scroll-target="#one-change-to-the-model">One change to the model</a></li>
   </ul></li>
-  <li><a href="#create-imagery-group" id="toc-create-imagery-group" class="nav-link" data-scroll-target="#create-imagery-group">Create Imagery Group</a></li>
-  <li><a href="#image-segmentation" id="toc-image-segmentation" class="nav-link" data-scroll-target="#image-segmentation">Image Segmentation</a></li>
-  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a>
+  <li><a href="#part-10-segmentation-with-a-foundation-model" id="toc-part-10-segmentation-with-a-foundation-model" class="nav-link" data-scroll-target="#part-10-segmentation-with-a-foundation-model">Part 10: Segmentation with a foundation model</a>
   <ul class="collapse">
-  <li><a href="#sampling" id="toc-sampling" class="nav-link" data-scroll-target="#sampling">Sampling</a></li>
-  <li><a href="#train-model" id="toc-train-model" class="nav-link" data-scroll-target="#train-model">Train Model</a></li>
-  <li><a href="#feature-importance" id="toc-feature-importance" class="nav-link" data-scroll-target="#feature-importance">Feature Importance</a></li>
-  <li><a href="#run-model" id="toc-run-model" class="nav-link" data-scroll-target="#run-model">Run Model</a></li>
-  <li><a href="#model-validation" id="toc-model-validation" class="nav-link" data-scroll-target="#model-validation">Model Validation</a></li>
+  <li><a href="#thresholds" id="toc-thresholds" class="nav-link" data-scroll-target="#thresholds">Thresholds</a></li>
+  <li><a href="#comparison-with-the-random-forest" id="toc-comparison-with-the-random-forest" class="nav-link" data-scroll-target="#comparison-with-the-random-forest">Comparison with the random forest</a></li>
   </ul></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" id="toc-due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="nav-link" data-scroll-target="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 11/30/2026</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="assignment_6a.ipynb" download="assignment_6a.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -684,27 +697,21 @@ window.Quarto = {
     <img src="../../../../includes/images/banner.jpg" alt="Banner">
 </div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html">Assignment 6A</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Assignment 6A</h1>
-<p class="subtitle lead">UAS Image Classification</p>
+<p class="subtitle lead">UAS image classification</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Corey White </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 11, 2026</p>
+      <p class="date">November 18, 2026</p>
     </div>
   </div>
   
@@ -718,448 +725,376 @@ window.Quarto = {
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/assignment_6a.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
+<p><a href="https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/image_classification.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
 <figcaption>Open in Colab</figcaption>
 </figure>
 </div>
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<ul>
-<li>Feature Engineering</li>
-<li>Segmentation</li>
-<li>Image Classification</li>
-<li>Validation</li>
-</ul>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>In this assignment you classify the July 2024 orthophoto of Lake Wheeler into nine land cover classes. You derive features from the orthophoto and the DSM (a spectral index, spatial filters, texture, and terrain derivatives), group them, and segment part of the image into superpixels. You train a random forest on digitized training polygons, map the classes, read the feature importances, and assess the accuracy with a confusion matrix. In the last part you segment the same scene with a pretrained foundation model, SAM 2, from a text prompt and compare the result with the random forest classes.</p>
+<p>Keep in mind that an accuracy computed on the training polygons describes how well the model reproduces them, not how well it maps the rest of the site. You set every third polygon aside before training and assess the model on those; the difference between the two accuracies is one of the results of the assignment. The classes are also very unequal in size, so an overall accuracy mostly reports on the largest class.</p>
+<p>Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and tables for you. Part 10 needs PyTorch and runs fastest on a GPU, so the notebook with a Colab GPU runtime (<em>Runtime &gt; Change runtime type &gt; T4 GPU</em>) is the recommended way to do it. Either way, the report is the same.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>Download imagery data from March and June flights during 2017.</p>
-<!-- - [Orthos June 2017](https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/020617/ortho_2017_06_02.pack) -->
 <ul>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif">Orthos July 2024</a></li>
-<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif">DSM July 2024</a></li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler GRASS project: Lake_Wheeler_NCspm</a> (EPSG:3358; you have it from the earlier assignments)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif">Orthophoto, July 17, 2024</a>: WebODM orthomosaic, RGB plus alpha, 7 cm, UTM zone 17N, <a href="http://cogeo.org/">cloud optimized GeoTIFF</a> (read directly from the URL, no download needed)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif">DSM, July 17, 2024</a>: WebODM surface model of the same flight, 7 cm, GeoTIFF (read from the URL)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/classification_training.gpkg">Training polygons: classification_training.gpkg</a>: 64 polygons in nine classes, GeoPackage layer <code>training</code> with the attributes <code>class_id</code> and <code>class</code></li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/classification_colors.txt">Color rules for the classes: classification_colors.txt</a></li>
 </ul>
 </section>
-<section id="workflow" class="level2">
-<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
-<p>Create a new mapset within your <code>Lake_Wheeler_NCspm</code> project and set your working directory.</p>
-<p>Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is save as a <a href="http://cogeo.org/"><em>Cloud Optimized GeoTIFF (COG)</em></a> which allows us to directory import the data using r.import with needing to download the data beforehand.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif resample=nearest output=odm_071724_ortho</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s set the compuational region to the ortho imagery.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> raster=odm_071724_ortho.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Task:</strong> What is the spatial resolution and how many pixels are include in the compuational region?</p>
-</div>
-</div>
-<!-- ### Find overlaping areas
-
-```bash
-  r.series input="ortho_2017_06_02,ortho_2017_06_02" output="series_count" method=count
-``` -->
-<!-- :::{.callout-important}
-**Task:** Create a raster mask using raster algebra (`r.mapcalc`) to generate a raster where if both rasters overlap set the new raster to equal `1` else `null`.
-::: -->
-<!-- ### Visual Change Detection
-
-Map Swipe Tool `File -> Map Swipe` select your top left raster map and bottom/right raster map and press `OK`. Use the slider to examine the differences between to two dates. -->
-<!-- :::{.callout-important}
-**Task:** Describe the difference you see between the two dates.
-::: -->
-<!-- ### Binary Change Detection -->
-<!-- ### Image differencing
-
-```bash
-r.mapcalc expression=rgb_diff = ortho_2017_03_29  -  ortho_2017_06_02
-r.colors -e map=rgb_diff color=bcyr
-``` -->
-<section id="image-classification" class="level3">
-<h3 class="anchored" data-anchor-id="image-classification">Image Classification</h3>
-<p>Let’s create an RGB color composite from our ortho bands.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.composite</span> <span class="at">-d</span> red=odm_071724_ortho.1 green=odm_071724_ortho.2 blue=odm_071724_ortho.3 output=odm_071724_ortho.rgb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s create a raster mask for our analysis.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"img_mask = if( odm_071724_ortho.rgb, 1, null())"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> raster=img_mask</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<ul>
+<li><a href="https://grass.osgeo.org/">GRASS</a> 8.5</li>
+<li>The addons <a href="https://grass.osgeo.org/grass85/manuals/addons/r.learn.ml2.html">r.learn.ml2</a> (the tools <code>r.learn.train</code> and <code>r.learn.predict</code>), <a href="https://grass.osgeo.org/grass85/manuals/addons/i.superpixels.slic.html">i.superpixels.slic</a>, <a href="https://grass.osgeo.org/grass85/manuals/addons/i.segment.stats.html">i.segment.stats</a>, <a href="https://grass.osgeo.org/grass85/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a>, and <a href="https://grass.osgeo.org/grass85/manuals/addons/i.sam2.html">i.sam2</a>:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.learn.ml2</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=i.superpixels.slic</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=i.segment.stats</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.confusionmatrix</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=i.sam2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Python packages in the Python that GRASS uses: <a href="https://scikit-learn.org/stable/">scikit-learn</a> and pandas for <code>r.learn.ml2</code>; for <code>i.sam2</code>, <a href="https://samgeo.gishub.org/">segment-geospatial</a> with its SAM 2 extra, which installs PyTorch. The <code>transformers</code> package has to stay below version 4.45, because the Grounding DINO text model in segment-geospatial does not run with newer releases:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install scikit-learn pandas</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"segment-geospatial[samgeo2]"</span> <span class="st">"transformers&lt;4.45"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="spectral-feature-extraction" class="level3">
-<h3 class="anchored" data-anchor-id="spectral-feature-extraction">Spectral Feature Extraction</h3>
-<section id="spectral-indices" class="level4">
-<h4 class="anchored" data-anchor-id="spectral-indices">Spectral Indices</h4>
-<p>Calculate <code>VARI (Visible Atmospherically Resistant Index)</code> index <a href="https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&amp;context=natrespapers">Gitelson et al.&nbsp;(2002)</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s look at the univariate statistics of our <code>vari_2024</code> raster.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> vari_2024</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Task:</strong> What is the range from the <code>vari_2024</code> univariate statistics?</p>
-</div>
-</div>
-<p>Now let’s look at the metadata for each of our bands.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.info</span> odm_071724_ortho.1</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.info</span> odm_071724_ortho.2</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.info</span> odm_071724_ortho.3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Our original ortho bands were unsigned 8bit integers (a <code>CELL</code> data type in GRASS) ranging from 0-255 in value. However, when we calulate VARI the data is expected to be scaled from 0-1. To do this we must rescale our band data and cast our output data to Float32.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.red = if(isnull(odm_071724_ortho.1), null(), float(odm_071724_ortho.1) / 255.0)"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.green = if(isnull(odm_071724_ortho.2), null(), float(odm_071724_ortho.2) / 255.0)"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"odm_071724_ortho.blue = if(isnull(odm_071724_ortho.3), null(), float(odm_071724_ortho.3) / 255.0)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now let’s compute VARI for our dataset.</p>
+<section id="part-1-import-and-region" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-import-and-region">Part 1: Import and region</h2>
+<p>Start GRASS in the <code>Lake_Wheeler_NCspm</code> project and create a new mapset.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.mapset</span> <span class="at">-c</span> mapset=classification</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The orthophoto has 122 million cells at its original 7 cm resolution, and each feature below would take several minutes to compute. Work at 0.2 m: set the region to the extent of the mosaic and let <code>r.import</code> read, reproject, and resample the orthophoto to that grid. Cars, hay bales, and crop rows are still several cells wide at 0.2 m.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.2 <span class="at">-p</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif"</span> output=ortho extent=region resolution=region resample=nearest</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">g.list</span> type=raster pattern=<span class="st">"ortho*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The import creates <code>ortho.1</code> (red), <code>ortho.2</code> (green), <code>ortho.3</code> (blue), and <code>ortho.4</code> (alpha, zero outside the mosaic). Turn the alpha band into a mask, so that all following tools skip the cells outside the mosaic, and import the DSM with bilinear resampling, which suits a continuous surface.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"ortho_mask = if(ortho.4 &gt; 0, 1, null())"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> raster=ortho_mask</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif"</span> output=dsm extent=region resolution=region resample=bilinear</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=dsm color=elevation</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=ortho.1</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dsm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>ortho.1: n: 11484721, minimum: 0, maximum: 255</p>
+<p>dsm: minimum: 74.577, maximum: 116.062, mean: 90.117</p>
+</blockquote>
+<p>The region has 3,725 rows and 3,950 columns (14.7 million cells), of which 11.5 million are inside the mosaic. Display the orthophoto with <code>d.rgb red=ortho.1 green=ortho.2 blue=ortho.3</code>.</p>
+</section>
+<section id="part-2-spectral-index" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-spectral-index">Part 2: Spectral index</h2>
+<p>The <a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">vegetation indices lab</a> defines the indices that can be computed from an RGB orthophoto. Here you use VARI, the visible atmospherically resistant index:</p>
 <p><span class="math display">\[
-VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
+VARI = \frac{Green - Red}{Green + Red - Blue}
 \]</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the same color palette as NDVI</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_ortho.vari color=ndvi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s examine the univariate statistics.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> odm_071724_ortho.vari</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>We can see that our <code>min</code>, <code>max</code>, and <code>variatoin coefficient</code> are quite extreme as we would expect the results to fall within the range -1.0 - 1.0.</p>
-<p>This may be casued by outliers in our data where values in our denominator are zero or very close to zero. To fix this we can add a small constant to our denominator called <code>epsilon</code> to avoid an possible divison by zero errors.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue + 0.01)"</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the same color palette as NDVI</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_ortho.vari color=ndvi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now let’s recheck the univariate statistics.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> odm_071724_ortho.vari</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Although the <code>min</code>, <code>max</code>, and <code>variatoin coefficient</code> have improved they are still indicating outliers are skewing our data.</p>
-<p>To address this create a mask for cells where the denominator is greater than 0.1.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"vari_mask = if((odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue) &gt; 0.3, 1, null())"</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> <span class="at">--overwrite</span> expression=<span class="st">"odm_071724_ortho.vari = if(vari_mask, (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue), null())"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now examine the univariate statistics again.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> odm_071724_ortho.vari</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> odm_071724_ortho.vari</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> vari_mask</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Task:</strong> Examine areas that were excluded by the <code>vari_mask</code>. What type of things are responsible for the outliers? How else might you address these issues?</p>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/lake_wheeler_vari.png" class="img-fluid figure-img" style="width:45.0%"></p>
-<figcaption>VARI Example</figcaption>
-</figure>
-</div>
+<p>The bands are 8-bit integers (the <code>CELL</code> type in GRASS). In map algebra an integer divided by an integer gives an integer, so the first expression returns only whole numbers:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_int = (ortho.2 - ortho.1) / (ortho.2 + ortho.1 - ortho.3)"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=vari_int</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>minimum: -32, maximum: 27, mean: 0.001</p>
+</blockquote>
+<p>Convert the numerator with <code>float()</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_raw = float(ortho.2 - ortho.1) / (ortho.2 + ortho.1 - ortho.3)"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=vari_raw</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>minimum: -32, maximum: 27, mean: 0.108, standard deviation: 0.164</p>
+</blockquote>
+<p>The mean is now plausible, but the range is not: a normalized index should stay between -1 and 1. The extreme values come from cells where the denominator is close to zero. Set cells with a denominator of 25 or less (about 0.1 in reflectance units) to null, and clamp the result to -1 to 1:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari = if(ortho.2 + ortho.1 - ortho.3 &lt;= 25, null(), max(-1.0, min(1.0, float(ortho.2 - ortho.1) / (ortho.2 + ortho.1 - ortho.3))))"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=vari color=ndvi</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=vari</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>n: 11404539, minimum: -1, maximum: 1, mean: 0.104, standard deviation: 0.144</p>
+</blockquote>
+<p>The rule removes 80,182 cells. Mark them and display them over the orthophoto to see which surfaces they are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_excluded = if(isnull(vari) &amp;&amp; !isnull(ortho.1), 1, null())"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rgb</span> red=ortho.1 green=ortho.2 blue=ortho.3</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=vari_excluded</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="../images/a6a_vari.webp" class="img-fluid" style="width:100.0%" alt="Two maps of the Lake Wheeler site. Left: VARI from -1 to 1 in the ndvi color table; tree lines and the crop fields in the south are green, bare and sparsely planted fields and the roads are white. Right: the orthophoto with the cells excluded by the denominator rule in magenta, concentrated in the shadows along the tree lines."></p>
+<p>A classifier cannot predict a cell where one of its features is null, so the model uses a filled copy in which the excluded cells are 0:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_filled = if(isnull(vari) &amp;&amp; !isnull(ortho.1), 0.0, vari)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="low-pass-filters" class="level4">
-<h4 class="anchored" data-anchor-id="low-pass-filters">Low Pass Filters</h4>
-<p>We will now compute a <em>smooth</em> layer to remove noise from our data with the <a href="https://grass.osgeo.org/grass84/manuals/r.neighbors.html">r.neighbors</a> tool. To do this we will compute the mean value for each pixel using a 27x27 moving window.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=odm_071724_ortho.1 size=27 method=average output=odm_071724_ortho.1.27x27mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/low_pass_filter_mean_moving_window_red.png" class="img-fluid figure-img" style="width:45.0%"></p>
-<figcaption>27x27 Moving Window Mean</figcaption>
-</figure>
-</div>
+<section id="part-3-spatial-filters" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-spatial-filters">Part 3: Spatial filters</h2>
+<p>A cell value alone says nothing about its surroundings; moving window filters add that context. A low pass filter smooths: the mean of the red band in a 9 by 9 window (1.8 m) removes the row pattern inside the crop fields. A high pass filter responds to local variation: the standard deviation of the green band in a 5 by 5 window (1 m) is high along edges and in rough canopies and low on uniform surfaces such as roofs and the road. Both use <a href="https://grass.osgeo.org/grass85/manuals/r.neighbors.html">r.neighbors</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=ortho.1 output=red_mean9 size=9 method=average nprocs=4</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=ortho.2 output=green_stddev5 size=5 method=stddev nprocs=4</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=red_mean9 color=grey</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> <span class="at">-e</span> map=green_stddev5 color=viridis</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Edge detection is a third kind of filter. <a href="https://grass.osgeo.org/grass85/manuals/i.zc.html">i.zc</a> marks the zero crossings of the Laplacian of the smoothed image; the output is zero except on edges, where the value gives the edge orientation. Compute it for comparison; it is not used as a feature.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.zc</span> input=ortho.2 output=green_zc orientations=4 threshold=0.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To look at the filters in detail, zoom to the 150 m block around the farm buildings, and set the region back to the full mosaic afterwards:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219450 s=219300 w=637030 e=637180 res=0.2 save=farm</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=green_stddev5</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="../images/a6a_filters.webp" class="img-fluid" style="width:100.0%" alt="Four panels of the 150 m block around the farm buildings: the orthophoto with two red roofed buildings, a gravel road, a row of parked cars, and a large tree; the 9 by 9 mean of the red band, a blurred grey image; the 5 by 5 standard deviation of the green band, low and dark on the roofs, road, and grass and bright on building edges, cars, the tree, and the crop rows; and the zero crossing edges as thin short lines over the whole block."></p>
 </section>
-<section id="high-pass-filters" class="level4">
-<h4 class="anchored" data-anchor-id="high-pass-filters">High Pass Filters</h4>
-<p>We will now create a layer to define our edges using the <code>zero-crossings</code> edge detection method implemented as <a href="https://grass.osgeo.org/grass-devel/manuals/i.zc.html">i.zc</a> in GRASS. The output raster will contain cells (edges) labeled 0-4 which represent the azimuth directions (similar to aspect).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.zc</span> <span class="at">--overwrite</span> input=odm_071724_ortho.2 output=odm_071724_ortho.2.zc orientations=4 threshold=0.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="../images/zero_crossing_4d.png" class="img-fluid" style="width:100.0%"></p>
-<p>We can also use descriptive neighborhood statistics, such as, the standard deviation to calculate edges in our data.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> <span class="at">-c</span> input=odm_071724_ortho.2 size=7 method=stddev output=odm_071724_ortho.2.7x7stddev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="../images/high_pass_filter_variance_moving_window_green.png" class="img-fluid" style="width:40.0%"> <img src="../images/high_pass_filter_variance_moving_window_green2.png" class="img-fluid" style="width:40.0%"></p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Task:</strong> Find a nice color scheme to display <code>odm_071724_ortho.2.7x7stddev</code> and describe what information can be derived from the map.</p>
-</div>
-</div>
+<section id="part-4-texture" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-texture">Part 4: Texture</h2>
+<p><a href="https://grass.osgeo.org/grass85/manuals/r.texture.html">r.texture</a> computes the texture measures of Haralick, Shanmugam, and Dinstein (1973) from the grey level co-occurrence matrix (GLCM) of a moving window, which counts how often pairs of grey levels occur next to each other. Compute three of them for the green band in a 5 by 5 window, averaged over the four directions: the angular second moment (high where the window is uniform), contrast (high where neighboring cells differ strongly), and correlation (high where grey levels change gradually). This is the slowest feature of the assignment, about two minutes on four cores.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.texture</span> input=ortho.2 output=green_tex method=asm,contrast,corr size=5 nprocs=4</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.list</span> type=raster pattern=<span class="st">"green_tex*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The outputs are <code>green_tex_ASM</code>, <code>green_tex_Contr</code>, and <code>green_tex_Corr</code>.</p>
+<p><img src="../images/a6a_texture.webp" class="img-fluid" style="width:100.0%" alt="Three panels of the farm block: angular second moment, high on the mown grass, the road, and the roofs and low in the crop fields; contrast, high in the crop fields, on the tree, and along building and car edges; and correlation, a fine grained pattern with the building outlines visible."></p>
 </section>
-<section id="texture-features" class="level4">
-<h4 class="anchored" data-anchor-id="texture-features">Texture Features</h4>
-<p>Now we will calcuate the texture features Angular Second Moment (asm), Correlation (corr), and Contrast (con) for our green band using <a href="https://grass.osgeo.org/grass-devel/manuals/r.texture.html">r.texture</a> which implements Haralick et al.&nbsp;(1973) Grey level co-occurrence matrix (GLCM).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.texture</span> odm_071724_ortho.2 output=odm_071724_ortho.green_texture method=<span class="st">"asm,contrast,corr"</span> <span class="at">-s</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="../images/glcm_asm45.png" class="img-fluid" style="width:25.0%" alt="Angular Second Moment"> <img src="../images/glcm_cor45.png" class="img-fluid" style="width:25.0%" alt="Correlation"> <img src="../images/glcm_contr45.png" class="img-fluid" style="width:25.0%" alt="Contrast"></p>
+<section id="part-5-terrain-features" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-terrain-features">Part 5: Terrain features</h2>
+<p>Features do not have to come from the image. The DSM separates tall objects from flat ones of the same color: trees from grass, roofs from gravel. Derive slope and profile and tangential curvature with <a href="https://grass.osgeo.org/grass85/manuals/r.slope.aspect.html">r.slope.aspect</a>, and landforms with <a href="https://grass.osgeo.org/grass85/manuals/r.geomorphon.html">r.geomorphon</a> using a search radius of 15 cells (3 m). The DSM itself is also used as a feature.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=dsm slope=slope pcurvature=pcurv tcurvature=tcurv nprocs=4</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.geomorphon</span> elevation=dsm forms=geomorphon search=15 skip=0 flat=1 dist=0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The DSM stores elevation above the vertical datum, between 75 and 116 m on this site. Consider what a model can learn from that value: something about the land cover, or something about where on the hill a class was digitized. Part 8 returns to this.</p>
+</section>
+<section id="part-6-imagery-groups-and-segmentation" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-imagery-groups-and-segmentation">Part 6: Imagery groups and segmentation</h2>
+<p>GRASS imagery tools take their input as an imagery group, a named list of rasters (<a href="https://grass.osgeo.org/grass85/manuals/i.group.html">i.group</a>). Create one group with the three bands and one with the bands and the eleven derived rasters, and list the second.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=rgb_group subgroup=rgb_group input=ortho.1,ortho.2,ortho.3</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=features subgroup=features input=ortho.1,ortho.2,ortho.3,vari_filled,red_mean9,green_stddev5,green_tex_ASM,green_tex_Contr,green_tex_Corr,dsm,slope,pcurv,tcurv,geomorphon</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> <span class="at">-l</span> group=features</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A pixel based classifier labels each cell on its own. An object based classification first segments the image into groups of similar neighboring cells and then classifies the groups. <code>i.superpixels.slic</code> implements SLIC (simple linear iterative clustering), which grows compact segments from a regular grid of seeds. Run it on the farm block with about 2,000 superpixels of at least 50 cells; without <code>minsize</code> the result contains tens of thousands of fragments of a few cells. <code>i.segment.stats</code> then computes the mean and standard deviation of each band and the area and compactness of each segment into the attribute table of a vector map.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> region=farm</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=rgb_group output=superpixels num_pixels=2000 compactness=1 minsize=50</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">i.segment.stats</span> map=superpixels rasters=ortho.1,ortho.2,ortho.3 raster_statistics=mean,stddev area_measures=area,compact_circle vectormap=segment_stats processes=4</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">v.db.select</span> map=segment_stats <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rgb</span> red=ortho.1 green=ortho.2 blue=ortho.3</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> map=segment_stats color=yellow fill_color=none</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="../images/a6a_superpixels.webp" class="img-fluid" style="width:60.0%" alt="The farm block orthophoto with yellow superpixel outlines: compact segments a few meters across that follow the roof edges, the road, the cars, and the tree crown, and form an irregular mesh over the grass and the crop fields."></p>
+<p>The table has one row per segment and could be joined to training labels and classified with any tabular model. The rest of the assignment stays with the pixel based approach.</p>
+</section>
+<section id="part-7-training-data-and-model" class="level2">
+<h2 class="anchored" data-anchor-id="part-7-training-data-and-model">Part 7: Training data and model</h2>
+<section id="training-and-test-polygons" class="level3">
+<h3 class="anchored" data-anchor-id="training-and-test-polygons">Training and test polygons</h3>
+<p>The training data are 64 polygons digitized on the orthophoto. You can digitize your own with the interactive tool at <em>Imagery &gt; Classify image &gt; Interactive input for supervised classification</em> (<code>g.gui.iclass</code>); here you use the prepared ones. Download <code>classification_training.gpkg</code> and import it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.import</span> input=classification_training.gpkg layer=training output=training</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To test the model on data it has not seen, set every third polygon aside: polygons whose category number is divisible by 3 become the test set, the others the training set. <code>r.learn.train</code> expects the training data as a raster, so convert both sets to rasters whose values are the class numbers and whose labels are the class names.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.extract</span> input=training where=<span class="st">"cat % 3 != 0"</span> output=training_train</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.extract</span> input=training where=<span class="st">"cat % 3 = 0"</span> output=training_test</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">v.to.rast</span> input=training_train output=train_rast use=attr attribute_column=class_id label_column=class</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">v.to.rast</span> input=training_test output=test_rast use=attr attribute_column=class_id label_column=class</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.stats</span> <span class="at">-cln</span> input=train_rast</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.stats</span> <span class="at">-cln</span> input=test_rast</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Polygons</th>
+<th>Training cells</th>
+<th>Test cells</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 buildings</td>
+<td>3</td>
+<td>3,512</td>
+<td>6,291</td>
+</tr>
+<tr class="even">
+<td>2 trees</td>
+<td>9</td>
+<td>28,186</td>
+<td>12,871</td>
+</tr>
+<tr class="odd">
+<td>3 fields</td>
+<td>3</td>
+<td>401,645</td>
+<td>345,827</td>
+</tr>
+<tr class="even">
+<td>4 ground</td>
+<td>6</td>
+<td>5,099</td>
+<td>2,573</td>
+</tr>
+<tr class="odd">
+<td>5 road</td>
+<td>8</td>
+<td>22,898</td>
+<td>10,920</td>
+</tr>
+<tr class="even">
+<td>6 car</td>
+<td>8</td>
+<td>1,457</td>
+<td>1,088</td>
+</tr>
+<tr class="odd">
+<td>7 crop</td>
+<td>14</td>
+<td>75</td>
+<td>37</td>
+</tr>
+<tr class="even">
+<td>8 farm_equipment</td>
+<td>7</td>
+<td>793</td>
+<td>124</td>
+</tr>
+<tr class="odd">
+<td>9 bale</td>
+<td>6</td>
+<td>179</td>
+<td>70</td>
+</tr>
+</tbody>
+</table>
+<p>The three field polygons hold more than 85 percent of the cells, two of them in the training set and one in the test set, and the crop class has fewer than 100 training cells.</p>
+</section>
+<section id="train-two-random-forests" class="level3">
+<h3 class="anchored" data-anchor-id="train-two-random-forests">Train two random forests</h3>
+<p>A random forest is a set of decision trees, each trained on a bootstrap sample of the training cells and on a random subset of the features at each split; the class of a cell is the majority vote of the trees. <a href="https://grass.osgeo.org/grass85/manuals/addons/r.learn.train.html">r.learn.train</a> trains a scikit-learn model on the cells of a group under the training raster and saves it to a file. Train two models with 100 trees each: one on the three bands and one on all 14 features. <code>category_maps</code> tells the tool that the geomorphon raster holds categories, not quantities. The <code>-f</code> flag computes permutation feature importances and writes them to a CSV file. Give the model and CSV files as full paths; a bare file name is rejected.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=rgb_group training_map=train_rast model_name=RandomForestClassifier n_estimators=100 random_state=1 n_jobs=4 save_model=<span class="va">$HOME</span>/rf_rgb.gz</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> <span class="at">-f</span> group=features training_map=train_rast model_name=RandomForestClassifier n_estimators=100 random_state=1 n_jobs=4 category_maps=geomorphon save_model=<span class="va">$HOME</span>/rf_features.gz fimp_file=<span class="va">$HOME</span>/feature_importance.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Training takes about 20 seconds for the first model and a minute and a half for the second on eight cores. If it is slow on your machine, reduce <code>n_estimators</code>.</p>
 </section>
 </section>
-<section id="topographic-features-extraction" class="level3">
-<h3 class="anchored" data-anchor-id="topographic-features-extraction">Topographic Features Extraction</h3>
-<p>Not all features need to come from spectal data! You can use data from the DSM to provide more data when training your classification model.</p>
-<p>To start import the DSM data from the July, 2024 flight.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> resample=bilinear extent=region input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif output=odm_071724_dsm</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Set the color table and create a relief map for viusalization</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=odm_071724_dsm color=elevation</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.relief</span> input=odm_071724_dsm output=dsm_relief</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="slope-and-aspect" class="level4">
-<h4 class="anchored" data-anchor-id="slope-and-aspect">Slope and Aspect</h4>
-<p>Calculate slope and aspect using <a href="https://grass.osgeo.org/grass-devel/manuals/r.slope.aspect.html">r.slope.aspect</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="part-8-prediction-and-feature-importance" class="level2">
+<h2 class="anchored" data-anchor-id="part-8-prediction-and-feature-importance">Part 8: Prediction and feature importance</h2>
+<p><a href="https://grass.osgeo.org/grass85/manuals/addons/r.learn.predict.html">r.learn.predict</a> loads a model and predicts the class of every cell of the group in the computational region (about 40 seconds each). The class names are stored with the model; the color rules file gives each class a color.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=rgb_group load_model=<span class="va">$HOME</span>/rf_rgb.gz output=rf_rgb</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=features load_model=<span class="va">$HOME</span>/rf_features.gz output=rf_features</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=rf_rgb rules=classification_colors.txt</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=rf_features rules=classification_colors.txt</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> map=rf_features</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> map=rf_rgb units=h</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> map=rf_features units=h</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="../images/a6a_classification.webp" class="img-fluid" style="width:100.0%" alt="Two classification maps of the whole site with a nine class legend. Left, RGB bands only: a speckled mix of fields in yellow and trees in green over the crop fields, roads in grey. Right, 14 features: tree lines solid green, the eastern bare field solid yellow, the upper central field light green for crop, and the southern fields mostly brown for farm equipment."></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>RGB bands (ha)</th>
+<th>14 features (ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>buildings</td>
+<td>0.10</td>
+<td>0.73</td>
+</tr>
+<tr class="even">
+<td>trees</td>
+<td>16.98</td>
+<td>9.40</td>
+</tr>
+<tr class="odd">
+<td>fields</td>
+<td>19.29</td>
+<td>16.31</td>
+</tr>
+<tr class="even">
+<td>ground</td>
+<td>2.47</td>
+<td>1.43</td>
+</tr>
+<tr class="odd">
+<td>road</td>
+<td>6.47</td>
+<td>1.73</td>
+</tr>
+<tr class="even">
+<td>car</td>
+<td>0.06</td>
+<td>0.72</td>
+</tr>
+<tr class="odd">
+<td>crop</td>
+<td>0.03</td>
+<td>2.79</td>
+</tr>
+<tr class="even">
+<td>farm_equipment</td>
+<td>0.52</td>
+<td>12.54</td>
+</tr>
+<tr class="odd">
+<td>bale</td>
+<td>0.01</td>
+<td>0.15</td>
+</tr>
+</tbody>
+</table>
+<p>The two maps differ strongly. The RGB model confuses the crop fields with trees cell by cell, because green crop rows and tree canopy have the same colors. The 14 feature model maps the tree lines cleanly but labels more than 12 hectares of the southern fields as farm equipment, which cannot be right.</p>
+<p>The permutation importance of a feature is the drop in accuracy when its values are shuffled among the training cells. Open <code>feature_importance.csv</code>:</p>
+<p><img src="../images/a6a_feature_importance.webp" class="img-fluid" style="width:70.0%" alt="Horizontal bar chart of the permutation importance of the 14 features. The DSM is highest at 0.38, the 9 by 9 mean of the red band second at 0.22, then VARI at 0.04 and slope at 0.02; the three bands, the texture measures, the curvatures, and the geomorphons are all below 0.003."></p>
+<blockquote class="blockquote">
+<p>dsm 0.384, red_mean9 0.219, vari_filled 0.040, slope 0.017, all others below 0.003</p>
+</blockquote>
+<p>The model depends on the DSM more than on any other feature. The training polygons of each class sit at particular elevations on the hill, so the elevation identifies the polygon, and the model applies that to the rest of the site: the farm equipment polygons lie at the elevation of the southern fields.</p>
 </section>
-<section id="terrain-forms" class="level4">
-<h4 class="anchored" data-anchor-id="terrain-forms">Terrain Forms</h4>
-<p>Now derive terrain forms form the the DSM using <a href="https://grass.osgeo.org/grass-devel/manuals/r.geomorphon.html">r.geomorphon</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.geomorphon</span> elevation=odm_071724_dsm forms=geomorphon search=3 skip=0 flat=1 dist=0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="create-imagery-group" class="level3">
-<h3 class="anchored" data-anchor-id="create-imagery-group">Create Imagery Group</h3>
-<p>GRASS uses imagery groups (<a href="https://grass.osgeo.org/grass84/manuals/i.group.html">i.group</a>) to manage imagery data.</p>
-<p>Let’s start by creating a new imagery group called <code>rgb_group</code> with the subgroup <code>rgb_group</code> and add the red, green, and blue bands to the group/subgroup.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=rgb_group subgroup=rgb_group input=odm_071724_ortho.1,odm_071724_ortho.2,odm_071724_ortho.3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You can now check that it worked by viewing which rasters are in the group (<code>rgb_group</code>) and subgroup (<code>rgb_group</code>).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> <span class="at">-l</span> group=rgb_group subgroup=rgb_group</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s now add some of our other derived features to the group (<code>analysis_bands</code>) in a new subgroup called <code>analysis_bands</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=analysis_bands subgroup=analysis_bands input=odm_071724_ortho.vari,odm_071724_ortho.3,odm_071724_ortho.1.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,odm_071724_pcurv,odm_071724_tcurv,geomorphon,odm_071724_ortho.2.7x7stddev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="image-segmentation" class="level3">
-<h3 class="anchored" data-anchor-id="image-segmentation">Image Segmentation</h3>
-<p>Install <a href="https://grass.osgeo.org/grass-devel/manuals/addons/i.superpixels.slic.html">i.superpixels.slic</a> GRASS Addon using the <code>g.extension</code> command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.superpixels.slic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s see if we can segment the fields.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce the compuational region</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219508.87 s=219309.09 w=636953.87 e=637210.35 res=0.07 <span class="at">-ap</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=analysis_bands output=superpixels num_pixels=200</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s see if we can improve our segmentation to capture individual crops in the field.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.superpixels.slic</span> input=analysis_bands output=superpixels_analysis compactness=0.8 num_pixels=100000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>For our object based classification we will use <a href="https://grass.osgeo.org/grass-devel/manuals/addons/i.segment.stats.html">i.segment.stats</a> to generate multiple statistics about our segments at once.</p>
-<p>To do this we must first install <a href="https://grass.osgeo.org/grass-devel/manuals/addons/i.segment.stats.html">i.segment.stats</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> i.segment.stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Compute the mean, standard deviation, and sum for each feature per segment. We also compute details about the geomertry of each segment such as the area, perimeter, and compactness.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If you run this command as givin it will take a long time to run. Try to reduce the number of segments to speed things up.</p>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.segment.stats</span> map=superpixels rasters=odm_071724_ortho.1,odm_071724_ortho.2,odm_071724_ortho.3 raster_statistics=<span class="st">"mean,stddev,sum"</span> vectormap=segment_stats processes=3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="classification" class="level3">
-<h3 class="anchored" data-anchor-id="classification">Classification</h3>
-<p>For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS addon <a href="https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.ml.html">r.learn.ml</a> which gives us access to models from the <a href="https://scikit-learn.org/stable/">scikit learn</a> python library.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.learn.ml2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="sampling" class="level4">
-<h4 class="anchored" data-anchor-id="sampling">Sampling</h4>
-<p>One benifit of using the RandomForest classification model is that it utilizes a sampling strategy know as <em>bootstraping</em>. It does this by using out-of-bag samples (OOB) for each decision tree in the model. The OOB samples are used to calculate error, which works as a cross-validation mechanism and helps maintain diversity between decision trees.</p>
-<p>However, many models require you to sample your data independently. To do this you can perform and random sample using <a href="https://grass.osgeo.org/grass-devel/manuals/r.random.html">r.random</a> or a stratified random sample using <a href="https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html">r.sample.category</a>.</p>
-<p>Let’s import NLCD 2019 land cover data to perform the sampling.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When importing COGs make sure to set the <code>extent=region</code> to make sure you are only downloading the data you need.</p>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=https://storage.googleapis.com/stac-data/Spatial_Data/LandUse/NLCD_Land_Cover_L48/nlcd_2019_cog/nlcd_2019_cog.tif output=nlcd_2019 extent=region resolution=region resample=nearest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now we will perform a stratified random sample using <a href="https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html">r.sample.category</a>.</p>
-<p>However, we must first install the addon:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.sample.category</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now run the command to take 1000 samples from each land cover class.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> map=nlcd_2019</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.sample.category</span> input=nlcd_2019 output=nlcd_2019_strat_samples npoints=1000</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the sample data</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> nlcd_2019</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> nlcd_2019_strat_samples</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Task:</strong> How many NLCD classes were sampled? Would these training points work well for classifying our dataset?</p>
-</div>
-</div>
-</section>
-<section id="train-model" class="level4">
-<h4 class="anchored" data-anchor-id="train-model">Train Model</h4>
-<p>To train the model you will use <a href="https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.train.html">r.learn.train</a>. The random forest model requires us to provide a <a href="resources/training.gpkg">training_map</a> and our imagery group. To save time use our <code>rgb_group</code>, but in practice you should using the <code>analysis_bands</code> group that contains the additional features you created.</p>
-<p>Training data can be downloaded here: <a href="resources/training.gpkg">Download Training Data</a> or you can create your own using the <code>g.gui.iclass</code> tool found at <code>Imagery -&gt; Classify image -&gt; Interactive input for supervised classification</code>.</p>
-<p>To use the downloaded training data you need to fisrt import <code>training.gpkg</code> into GRASS.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.import</span> input=training.gpkg layer=training output=training</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The training module <a href="https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.train.html">r.learn.train</a> expects the <code>training_map</code> parameter to be a raster, so you need to convert the training data to raster where the raster values matches each categories class.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.to.rast</span> input=training output=training_rf use=attr attribute_column=cat_ label_column=class</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Model training can take a long time to run. If you are having issues running on your local machine try shrinking the compuational region.</p>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3 fimp_file=feature_importance.csv <span class="at">-f</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The trained model will be save as <code>rf_model.gz</code>.</p>
-</section>
-<section id="feature-importance" class="level4">
-<h4 class="anchored" data-anchor-id="feature-importance">Feature Importance</h4>
-<p>You can calculate the feature importance by using the <code>-f</code> flag and saving the results to a csv file using the parameter <code>fimp_file</code>. Our feature importance is saved to <code>feature_importance.csv</code>.</p>
-<p>The features with higher the importance scores indicate they are more influential in making predictions. While features with low importance, could potentially be removed to simplify the model.</p>
-<div id="ccd92c58" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature importance plot (requires pandas, seaborn, matplotlib)</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>fi <span class="op">=</span> pd.read_csv(<span class="st">"feature_importance_rf.csv"</span>)</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>fi <span class="op">=</span> fi.sort_values(<span class="st">"importance"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>fi, x<span class="op">=</span><span class="st">"importance"</span>, y<span class="op">=</span><span class="st">"feature"</span>, orient<span class="op">=</span><span class="st">"h"</span>, errorbar<span class="op">=</span><span class="va">None</span></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># std provided separately</span></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add error bars manually</span></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (imp, std) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(fi[<span class="st">"importance"</span>], fi[<span class="st">"std"</span>])):</span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    plt.errorbar(</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>imp, y<span class="op">=</span>i, xerr<span class="op">=</span>std, fmt<span class="op">=</span><span class="st">"none"</span>, ecolor<span class="op">=</span><span class="st">"black"</span>, capsize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">0.8</span></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Importance"</span>)</span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature"</span>)</span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Random Forest Feature Importance (± std)"</span>)</span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"../images/feature_importance_rf.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="assignment_6a_files/figure-html/cell-2-output-1.png" width="674" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="run-model" class="level4">
-<h4 class="anchored" data-anchor-id="run-model">Run Model</h4>
-<p>To use the model run <a href="https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.predict.html">r.learn.predict</a> by loading the model (<a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/rf_model.gz"><code>rf_model.gz</code></a>) you create during training.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=rgb_group load_model=rf_model.gz output=rf_basic_classification</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now we can check the categories and set the colors.</p>
-<p>You can download the color table here <a href="resources/category_colors.txt">category_colors.txt</a> or copy the rules here</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 255:0:0</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> 0:128:0</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> 255:255:0</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> 139:105:20</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> 127:127:127</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="ex">6</span> 128:0:128</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="ex">7</span> 144:238:144</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="ex">8</span> 165:42:42</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="ex">9</span> 255:165:0</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="ex">nv</span> white</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check raster categories - they are automatically applied to the classification output</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> rf_classification</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=rf_basic_classification rules=category_colors.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><img src="../images/basic_classification.png" class="img-fluid"></p>
-</section>
-<section id="model-validation" class="level4">
-<h4 class="anchored" data-anchor-id="model-validation">Model Validation</h4>
-<p>We will now evaluate our model by looking at the models confussion matrix, overvall accuracy, and kappa coefficient using the GRASS addon <a href="https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a>.</p>
-<p>To begin we first need to install the addon.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> r.confusionmatrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now run <a href="https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> classification=rf_basic_classification raster_reference=training_rf <span class="at">-m</span> <span class="at">-d</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The output for our classified model will look similar to below</p>
-<p><strong>Overall accuracy</strong></p>
-<p>Number of correct pixels / total number of pixels</p>
-<p><code>Overall Accuracy, 97.07</code></p>
-<p><strong>User Accuracy</strong></p>
+<section id="part-9-accuracy-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="part-9-accuracy-assessment">Part 9: Accuracy assessment</h2>
+<p><a href="https://grass.osgeo.org/grass85/manuals/addons/r.confusionmatrix.html">r.confusionmatrix</a> cross tabulates a classification with a reference raster and derives the accuracy measures:</p>
 <ul>
-<li>From the perspective of the user of the classified map, how accurate is the map?</li>
-<li>For a given class, how many of the pixels on the map are actually what they say they are?</li>
-<li>Calculated as: Number correctly identified in a given map class / Number claimed to be in that map class</li>
+<li><strong>Overall accuracy</strong>: correctly classified cells divided by all reference cells.</li>
+<li><strong>User’s accuracy</strong> of a class: of the cells mapped as the class, the share that is the class in the reference. The commission error is 100 percent minus the user’s accuracy.</li>
+<li><strong>Producer’s accuracy</strong> of a class: of the reference cells of the class, the share that was mapped as the class. The omission error is 100 percent minus the producer’s accuracy.</li>
+<li><strong>Kappa coefficient</strong>: the agreement beyond what chance would produce; 0 is chance agreement and 1 is perfect agreement.</li>
 </ul>
-<p><strong>Producer Accuracy</strong></p>
-<ul>
-<li>From the perspective of the maker of the classified map, how accurate is the map?</li>
-<li>For a given class in reference plots, how many of the pixels on the map are labeled correctly?</li>
-<li>Calculated as: Number correctly identified in ref. plots of a given class / Number actually in that reference class</li>
-</ul>
-<p><strong>Commission Error</strong></p>
-<p>Commission error refers to sites that are classified as to reference sites that were left out (or omitted) from the correct class in the classified map. Commission errors are calculated by reviewing the classified sites for incorrect classifications.</p>
-<p>Commission Error = 100 % - User Accuracy</p>
-<p><strong>Omission Error</strong></p>
-<p>Omission error refers to reference sites that were left out (or omitted) from the correct class in the classified map. The real land cover type was left out or omitted from the classified map.</p>
-<p>Omission Error = 100 % - Producer Accuracy</p>
-<p><strong>Kappa coefficient</strong></p>
-<p>It characterizes the degree of matching between reference data set and classification.</p>
-<ul>
-<li><strong>Kappa = 0</strong>: indicates that obtained agreement equals chance agreement.</li>
-<li><strong>Kappa &gt; 0</strong>: indicates that obtained agreement is greater than chance agreement.</li>
-<li><strong>Kappa &lt; 0</strong>: indicates that obtained agreement is smaller than chance agreement.</li>
-<li><strong>Kappa = 1</strong>: is perfect agreement.</li>
-</ul>
-<p><code>Kappa coefficient, 0.85</code></p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Task:</strong> Interpret how well the model is performing. Which classes are performing well? Which need to be improved?</p>
-</div>
-</div>
+<p>Compute them for each model against the training polygons, which the model has seen, and against the test polygons, which it has not. The <code>-m</code> flag prints the matrix and <code>-d</code> the definitions.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> <span class="at">-m</span> classification=rf_rgb raster_reference=train_rast</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> <span class="at">-m</span> classification=rf_rgb raster_reference=test_rast</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> <span class="at">-m</span> classification=rf_features raster_reference=train_rast</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> <span class="at">-m</span> <span class="at">-d</span> classification=rf_features raster_reference=test_rast</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Reference</th>
+<th>Overall accuracy</th>
+<th>Kappa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RGB bands</td>
+<td>training polygons</td>
+<td>99.54 %</td>
+<td>0.98</td>
+</tr>
+<tr class="even">
+<td>RGB bands</td>
+<td>test polygons</td>
+<td>54.64 %</td>
+<td>0.17</td>
+</tr>
+<tr class="odd">
+<td>14 features</td>
+<td>training polygons</td>
+<td>100.00 %</td>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<td>14 features</td>
+<td>test polygons</td>
+<td>53.60 %</td>
+<td>0.21</td>
+</tr>
+</tbody>
+</table>
+<p>The confusion matrix of the 14 feature model on the test polygons (rows: classified map, columns: reference):</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 8%">
 <col style="width: 9%">
 <col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 8%">
 <col style="width: 9%">
 <col style="width: 9%">
-<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
 <col style="width: 9%">
 <col style="width: 9%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Category</th>
+<th></th>
 <th>buildings</th>
 <th>trees</th>
 <th>fields</th>
@@ -1167,154 +1102,268 @@ Important
 <th>road</th>
 <th>car</th>
 <th>crop</th>
-<th>farm equipment</th>
+<th>farm_equipment</th>
 <th>bale</th>
-<th>User Accuracy</th>
+<th>User’s accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>buildings</td>
-<td>80379</td>
+<td><strong>buildings</strong></td>
+<td>6126</td>
+<td>4</td>
+<td>0</td>
+<td>64</td>
+<td>33</td>
+<td>40</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>97.75</td>
+</tr>
+<tr class="even">
+<td><strong>trees</strong></td>
+<td>2</td>
+<td>12765</td>
 <td>63</td>
-<td>22</td>
-<td>6</td>
-<td>70</td>
-<td>27</td>
-<td>1</td>
-<td>34</td>
-<td>24</td>
-<td>99.69</td>
-</tr>
-<tr class="even">
-<td>trees</td>
-<td>118</td>
-<td>264667</td>
-<td>25671</td>
 <td>0</td>
-<td>237</td>
+<td>0</td>
+<td>109</td>
 <td>2</td>
-<td>105</td>
-<td>44</td>
 <td>0</td>
-<td>91.0</td>
+<td>0</td>
+<td>98.64</td>
 </tr>
 <tr class="odd">
-<td>fields</td>
-<td>610</td>
-<td>77160</td>
-<td>6187667</td>
-<td>16564</td>
-<td>53766</td>
-<td>268</td>
-<td>762</td>
-<td>2636</td>
-<td>133</td>
-<td>97.6</td>
-</tr>
-<tr class="even">
-<td>ground</td>
-<td>57</td>
-<td>1</td>
-<td>8871</td>
-<td>45799</td>
-<td>3132</td>
-<td>1</td>
-<td>2</td>
-<td>151</td>
-<td>0</td>
-<td>78.94</td>
-</tr>
-<tr class="odd">
-<td>road</td>
-<td>409</td>
-<td>58</td>
-<td>7070</td>
-<td>1559</td>
-<td>221794</td>
-<td>1709</td>
-<td>1</td>
-<td>395</td>
-<td>77</td>
-<td>95.16</td>
-</tr>
-<tr class="even">
-<td>car</td>
-<td>75</td>
-<td>2</td>
-<td>38</td>
-<td>0</td>
-<td>2694</td>
-<td>19216</td>
-<td>0</td>
-<td>18</td>
-<td>1095</td>
-<td>83.05</td>
-</tr>
-<tr class="odd">
-<td>crop</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>0</td>
-<td>2</td>
-<td>0</td>
-<td>36</td>
-<td>0</td>
-<td>0</td>
-<td>87.8</td>
-</tr>
-<tr class="even">
-<td>farm equipment</td>
-<td>32</td>
-<td>9</td>
-<td>88</td>
+<td><strong>fields</strong></td>
 <td>5</td>
-<td>46</td>
-<td>19</td>
+<td>2</td>
+<td>171344</td>
 <td>0</td>
-<td>4311</td>
+<td>24</td>
+<td>0</td>
 <td>1</td>
-<td>95.57</td>
+<td>3</td>
+<td>0</td>
+<td>99.98</td>
+</tr>
+<tr class="even">
+<td><strong>ground</strong></td>
+<td>0</td>
+<td>0</td>
+<td>3109</td>
+<td>2400</td>
+<td>537</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>39.70</td>
 </tr>
 <tr class="odd">
-<td>bale</td>
+<td><strong>road</strong></td>
+<td>4</td>
+<td>0</td>
+<td>3256</td>
+<td>105</td>
+<td>10293</td>
+<td>492</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>72.74</td>
+</tr>
+<tr class="even">
+<td><strong>car</strong></td>
+<td>133</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>446</td>
+<td>0</td>
+<td>9</td>
+<td>10</td>
+<td>73.36</td>
+</tr>
+<tr class="odd">
+<td><strong>crop</strong></td>
+<td>1</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 <td>20</td>
 <td>0</td>
-<td>2</td>
 <td>0</td>
-<td>5</td>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-<td>719</td>
-<td>95.99</td>
+<td>80.00</td>
 </tr>
 <tr class="even">
-<td>Producer Accuracy</td>
-<td>98.38</td>
-<td>77.4</td>
-<td>99.33</td>
-<td>71.64</td>
-<td>78.72</td>
-<td>90.45</td>
-<td>3.97</td>
-<td>56.8</td>
-<td>35.09</td>
+<td><strong>farm_equipment</strong></td>
+<td>20</td>
+<td>91</td>
+<td>168051</td>
+<td>4</td>
+<td>31</td>
+<td>0</td>
+<td>14</td>
+<td>112</td>
+<td>0</td>
+<td>0.07</td>
+</tr>
+<tr class="odd">
+<td><strong>bale</strong></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>60</td>
+<td>96.77</td>
+</tr>
+<tr class="even">
+<td><strong>Producer’s accuracy</strong></td>
+<td>97.38</td>
+<td>99.18</td>
+<td>49.55</td>
+<td>93.28</td>
+<td>94.26</td>
+<td>40.99</td>
+<td>54.05</td>
+<td>90.32</td>
+<td>85.71</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<!-- ## Optional
-
-### LLM-based image segmentation with SAMGeo2
-
-```bash
-g.extension r.confusionmatrix
-``` -->
-
-
+<p>Both models are close to perfect on the polygons they were trained on and near 54 percent on the test polygons. The overall numbers hide what the features changed: compared with the RGB model, the producer’s accuracy rose from 85 to 99 percent for trees, from 47 to 93 for ground, from 86 to 94 for road, from 34 to 90 for farm equipment, and from 7 to 86 for bales. The overall accuracy did not move because it is dominated by one number: 168,051 cells of the test field polygon mapped as farm equipment. With one large test polygon in the largest class, the overall accuracy is close to a statement about that polygon.</p>
+<section id="one-change-to-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="one-change-to-the-model">One change to the model</h3>
+<p>Change one thing, then repeat the training, prediction, and assessment on the test polygons. One example replaces the DSM by the height above the lowest cell within 7.5 m, which describes the height of an object and not its position on the hill (the 75 by 75 minimum filter takes about two and a half minutes):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=dsm output=dsm_min size=75 method=minimum nprocs=4</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"height = dsm - dsm_min"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=features_height subgroup=features_height input=ortho.1,ortho.2,ortho.3,vari_filled,red_mean9,green_stddev5,green_tex_ASM,green_tex_Contr,green_tex_Corr,height,slope,pcurv,tcurv,geomorphon</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.train</span> group=features_height training_map=train_rast model_name=RandomForestClassifier n_estimators=100 random_state=1 n_jobs=4 category_maps=geomorphon save_model=<span class="va">$HOME</span>/rf_height.gz</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.learn.predict</span> group=features_height load_model=<span class="va">$HOME</span>/rf_height.gz output=rf_height</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.confusionmatrix</span> <span class="at">-m</span> classification=rf_height raster_reference=test_rast</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Overall accuracy 44.41, Kappa coefficient 0.16</p>
+</blockquote>
+<p>This change does not help: the test field is now split between crop (86,761 cells) and farm equipment (81,297 cells). Removing the elevation did not fix the fields class, which points at the training data: the class “fields” contains a bare field and planted fields, and “crop” and “farm equipment” have very few training cells. Other changes to try: remove a feature, balance the classes with the <code>-b</code> flag, use more trees, choose another <code>model_name</code>, merge or redefine classes, or digitize additional training polygons.</p>
 </section>
+</section>
+<section id="part-10-segmentation-with-a-foundation-model" class="level2">
+<h2 class="anchored" data-anchor-id="part-10-segmentation-with-a-foundation-model">Part 10: Segmentation with a foundation model</h2>
+<p>The random forest learned the classes from the training polygons. A foundation model is trained once on a very large collection of images and then used without further training. <a href="https://grass.osgeo.org/grass85/manuals/addons/i.sam2.html">i.sam2</a> runs two of them through the segment-geospatial package: Grounding DINO finds boxes in the image that match a text prompt, and SAM 2 (Segment Anything Model 2) outlines the object in each box. The output raster is 0 in the background and numbers the objects from 1.</p>
+<p>The tool reads the whole computational region as one image, so use the farm block at 0.1 m (1,500 by 1,500 cells) and import the orthophoto again at that resolution. The model weights (about 1.5 GB) are downloaded on the first run. On a GPU a prompt takes a few seconds. Without a GPU, set <code>CUDA_VISIBLE_DEVICES=-1</code> before starting; a prompt then takes about a minute.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">CUDA_VISIBLE_DEVICES</span><span class="op">=</span>-1    <span class="co"># only on a machine without a CUDA GPU</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> region=farm res=0.1</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif"</span> output=farm_ortho extent=region resolution=region resample=nearest</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">i.group</span> group=farm_rgb subgroup=farm_rgb input=farm_ortho.1,farm_ortho.2,farm_ortho.3</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">i.sam2</span> group=farm_rgb output=sam_trees text_prompt=<span class="st">"trees"</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="ex">i.sam2</span> group=farm_rgb output=sam_buildings text_prompt=<span class="st">"buildings"</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="ex">i.sam2</span> group=farm_rgb output=sam_cars text_prompt=<span class="st">"cars"</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="ex">r.info</span> <span class="at">-r</span> map=sam_buildings</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>trees: 2 objects, buildings: 15 objects, cars: 15 objects</p>
+</blockquote>
+<p><img src="../images/a6a_sam.webp" class="img-fluid" style="width:100.0%" alt="Three panels of the farm block orthophoto with the objects found by i.sam2 in random colors. Prompt trees: the large tree by the road and a clump at the top edge. Prompt buildings: the two red roofed buildings, the connecting walkway, two concrete pads, a strip at the top left corner, and nine parked cars. Prompt cars: the parked cars along the road and three objects next to the pads."></p>
+<section id="thresholds" class="level3">
+<h3 class="anchored" data-anchor-id="thresholds">Thresholds</h3>
+<p><code>box_threshold</code> is the minimum confidence of a box and <code>text_threshold</code> the minimum similarity between the box and the words of the prompt; both default to 0.24. The prompt “buildings” at the default also returns the parked cars and the concrete pads. Raise the box threshold:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">i.sam2</span> group=farm_rgb output=sam_buildings_35 text_prompt=<span class="st">"buildings"</span> box_threshold=0.35</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">i.sam2</span> group=farm_rgb output=sam_buildings_50 text_prompt=<span class="st">"buildings"</span> box_threshold=0.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>box_threshold 0.24: 15 objects, 0.35: 5 objects, 0.5: 3 objects</p>
+</blockquote>
+<p>The tool stops with the error “No masks found” when no box passes the threshold.</p>
+</section>
+<section id="comparison-with-the-random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-with-the-random-forest">Comparison with the random forest</h3>
+<p>For each prompt, compare the SAM mask with the cells of the same class in the 14 feature random forest map inside the farm block. The map <code>cmp_trees</code> is 1 where only SAM found trees, 2 where only the random forest did, and 3 where both did; <code>r.report</code> gives the areas. The intersection over union (IoU) is the area of both divided by the area of either: 1 for identical masks, 0 for masks that do not overlap.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"cmp_trees = if(sam_trees &gt; 0, 1, 0) + if(rf_features == 2, 2, 0)"</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"cmp_buildings = if(sam_buildings &gt; 0, 1, 0) + if(rf_features == 1, 2, 0)"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"cmp_cars = if(sam_cars &gt; 0, 1, 0) + if(rf_features == 6, 2, 0)"</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> map=cmp_trees units=me</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Prompt</th>
+<th>SAM (m2)</th>
+<th>Random forest (m2)</th>
+<th>Both (m2)</th>
+<th>IoU</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>trees</td>
+<td>600</td>
+<td>1,295</td>
+<td>565</td>
+<td>0.43</td>
+</tr>
+<tr class="even">
+<td>buildings</td>
+<td>1,050</td>
+<td>477</td>
+<td>412</td>
+<td>0.37</td>
+</tr>
+<tr class="odd">
+<td>cars</td>
+<td>131</td>
+<td>459</td>
+<td>112</td>
+<td>0.23</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../images/a6a_sam_compare.webp" class="img-fluid" style="width:100.0%" alt="Three comparison maps of the farm block for trees, buildings, and cars: black where SAM and the random forest agree, blue where only SAM marked the class, orange where only the random forest did. Trees: the large tree is black with an orange fringe, and orange speckle is scattered in the crop fields. Buildings: the two buildings are black, the pads, walkway, cars, and a corner strip are blue. Cars: the parked cars are black with orange outlines, and orange lines follow the building edges and the bale rows."></p>
+<p>The two approaches fail in different ways. The random forest labels every cell of the site, including scattered cells of trees in the crop rows and cars along roof edges. SAM returns whole objects with clean outlines, but what counts as a match for the word is decided by the model: pads and cars are returned for “buildings”, and a low threshold adds a field corner.</p>
+</section>
+</section>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>Prepare a report (3 to 5 pages including figures):</p>
+<ol type="1">
+<li><strong>Region and features</strong>: the resolution and number of cells of the computational region, the VARI map, and one filter or texture map, with a sentence on which surfaces each one separates.</li>
+<li><strong>VARI outliers</strong>: which surfaces were excluded by the denominator rule, why they produce extreme values, and one other way to handle them.</li>
+<li><strong>Classification</strong>: the two classification maps and the class areas, where the RGB model and the 14 feature model differ most, and which features explain it according to the feature importances.</li>
+<li><strong>Accuracy</strong>: the overall accuracy and kappa of both models on the training and on the test polygons, and the confusion matrix of the 14 feature model on the test polygons, with a paragraph on which classes are mapped well, which are confused, and why the training numbers are so much higher.</li>
+<li><strong>One change</strong>: the change you made to the model, the accuracy on the test polygons before and after, and whether and why it helped.</li>
+<li><strong>SAM 2</strong>: the objects found for two prompts, the effect of the box threshold, and the comparison table, with a paragraph on which task on this site you would give to the random forest and which to the text prompt.</li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Assignment 6A:</p>
+<ul>
+<li>Your report as a PDF.</li>
+<li>Optional: your completed notebook (<code>.ipynb</code>) if you worked in Colab.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>Region and features</strong>: the features are computed on the stated region and described by the surfaces they separate.</li>
+<li><strong>VARI outliers</strong>: the excluded surfaces are identified and the cause of the extreme values is explained.</li>
+<li><strong>Classification</strong>: both models are trained and mapped, and their differences are explained with the feature importances.</li>
+<li><strong>Accuracy</strong>: the four accuracy assessments and the confusion matrix are reported and read by class, and the gap between training and test accuracy is explained.</li>
+<li><strong>One change</strong>: one change is made, assessed on the test polygons, and interpreted.</li>
+<li><strong>SAM 2</strong>: two prompts and the threshold experiment are run and compared with the random forest classes.</li>
+<li><strong>Interpretation</strong>: conclusions tie back to the lecture: features, training and test data, user’s and producer’s accuracy, class imbalance, pixel based and object based classification, foundation models.</li>
+<li>On-time submission.</li>
+</ul>
+<section id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="level3">
+<h3 class="anchored" data-anchor-id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 11/30/2026</h3>
+
+
 </section>
 </section>
 

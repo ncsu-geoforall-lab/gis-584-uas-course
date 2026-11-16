@@ -1,2 +1,1638 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-23">
+
+<title>Assignment 6B – UAS Mapping and Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.ico" rel="icon">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-b4895d10134ca2d091900c8d6c19e12e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">UAS Mapping and Analytics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/policies.html"> 
+<span class="menu-text">Logistics &amp; Policies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../../course/topics/index.html" aria-current="page"> 
+<span class="menu-text">Topics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../course/projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6b.html">Assignment 6B</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_1_uas_basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Topic 1: UAS Basics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: Topic 1: UAS Basics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/part_a_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1A: Introduction to UAS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/part_b_rules_regs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1B: Rules and Regulations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/lectures/lecture_1b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/assignments/assignment_1b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_1_uas_basics/faa_part_107_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference: FAA Part 107 Guide</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_2_sfm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Topic 2: Structure from Motion</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Topic 2: Structure from Motion">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/part_a_images_to_3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A: Photogrammetry and SfM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/part_b_img_processing_sfm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B: Imagery Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/lectures/lecture_2b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/assignments/assignment_2c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2C</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_2_sfm/sfm_demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demo: Structure from Motion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_3_flight_planning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Topic 3: UAS Flight Planning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: Topic 3: UAS Flight Planning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/part_a_uas_flight_planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3A: UAS Flight Planning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/part_b_ground_control_accuracy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3B: Ground Control &amp; Accuracy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-8-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/lectures/lecture_3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/lectures/lecture_3b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-controls="quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-9-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-9" aria-labelledby="quarto-sidebar-section-9-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/assignments/assignment_3a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 3A</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_3_flight_planning/field_protocol_gnss.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GNSS Field Protocol</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_4_GIS_analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-10-label">Topic 4: GIS Analytics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-controls="quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section: Topic 4: GIS Analytics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-10" aria-labelledby="quarto-sidebar-section-10-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_a_analysis_uas_processing_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4A: Analysis of UAS Data Products</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/part_b_point_cloud_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4B: Point Cloud Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-controls="quarto-sidebar-section-11" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-11-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-11" aria-labelledby="quarto-sidebar-section-11-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/lectures/lecture_4b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-controls="quarto-sidebar-section-12" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-12-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-12" aria-labelledby="quarto-sidebar-section-12-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_volumes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Volumes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/lab_dsm_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: DSM Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_4_GIS_analytics/assignments/assignment_4b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_5_advanced_analytics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-13-label">Topic 5: Advanced Analytics</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-controls="quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section: Topic 5: Advanced Analytics">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-13" aria-labelledby="quarto-sidebar-section-13-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_a_UAS_lidar_data_comparison_fusion_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5A: UAS and Lidar Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/part_b_Analysis_multitemporal_UAS_data_applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5B: Multitemporal UAS Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-controls="quarto-sidebar-section-14" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-14-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-14" aria-labelledby="quarto-sidebar-section-14-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/lectures/lecture_5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-controls="quarto-sidebar-section-15" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-15-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-15" aria-labelledby="quarto-sidebar-section-15-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 5A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/assignment_5b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 5B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_5_advanced_analytics/assignments/lab_python_scripting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Python Scripting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/topic_6_change_detection/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-16-label">Topic 6: Machine Learning &amp; AI</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-controls="quarto-sidebar-section-16" aria-expanded="true" aria-label="Toggle section: Topic 6: Machine Learning &amp; AI">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-16" aria-labelledby="quarto-sidebar-section-16-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/part_a_image_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6A: Image Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/part_b_change_detection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6B: Change Detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" aria-controls="quarto-sidebar-section-17" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-17-label">Slides</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-17" aria-labelledby="quarto-sidebar-section-17-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/lectures/lecture_6b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" aria-controls="quarto-sidebar-section-18" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-18-label">Assignments</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-18" aria-labelledby="quarto-sidebar-section-18-label" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab: Vegetation Indices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 6A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6b.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Assignment 6B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../course/topics/midterm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-19-label">Midterm</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" aria-controls="quarto-sidebar-section-19" aria-expanded="false" aria-label="Toggle section: Midterm">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-19" aria-labelledby="quarto-sidebar-section-19-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../course/topics/midterm/fall2025.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm Rubric</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#task" id="toc-task" class="nav-link active" data-scroll-target="#task">Task</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#part-1-import-the-two-surveys" id="toc-part-1-import-the-two-surveys" class="nav-link" data-scroll-target="#part-1-import-the-two-surveys">Part 1: Import the two surveys</a></li>
+  <li><a href="#part-2-horizontal-co-registration" id="toc-part-2-horizontal-co-registration" class="nav-link" data-scroll-target="#part-2-horizontal-co-registration">Part 2: Horizontal co-registration</a>
+  <ul class="collapse">
+  <li><a href="#measure-the-offset" id="toc-measure-the-offset" class="nav-link" data-scroll-target="#measure-the-offset">Measure the offset</a></li>
+  <li><a href="#apply-the-correction" id="toc-apply-the-correction" class="nav-link" data-scroll-target="#apply-the-correction">Apply the correction</a></li>
+  <li><a href="#check-the-result" id="toc-check-the-result" class="nav-link" data-scroll-target="#check-the-result">Check the result</a></li>
+  </ul></li>
+  <li><a href="#part-3-index-differencing" id="toc-part-3-index-differencing" class="nav-link" data-scroll-target="#part-3-index-differencing">Part 3: Index differencing</a>
+  <ul class="collapse">
+  <li><a href="#vari-at-both-dates" id="toc-vari-at-both-dates" class="nav-link" data-scroll-target="#vari-at-both-dates">VARI at both dates</a></li>
+  <li><a href="#relative-normalization" id="toc-relative-normalization" class="nav-link" data-scroll-target="#relative-normalization">Relative normalization</a></li>
+  <li><a href="#the-difference-and-a-threshold" id="toc-the-difference-and-a-threshold" class="nav-link" data-scroll-target="#the-difference-and-a-threshold">The difference and a threshold</a></li>
+  </ul></li>
+  <li><a href="#part-4-dsm-co-registration" id="toc-part-4-dsm-co-registration" class="nav-link" data-scroll-target="#part-4-dsm-co-registration">Part 4: DSM co-registration</a>
+  <ul class="collapse">
+  <li><a href="#vertical-shift-from-pseudo-ground-control-points" id="toc-vertical-shift-from-pseudo-ground-control-points" class="nav-link" data-scroll-target="#vertical-shift-from-pseudo-ground-control-points">Vertical shift from pseudo ground control points</a></li>
+  <li><a href="#stable-surfaces" id="toc-stable-surfaces" class="nav-link" data-scroll-target="#stable-surfaces">Stable surfaces</a></li>
+  <li><a href="#remove-the-dome" id="toc-remove-the-dome" class="nav-link" data-scroll-target="#remove-the-dome">Remove the dome</a></li>
+  </ul></li>
+  <li><a href="#part-5-level-of-detection-and-significant-change" id="toc-part-5-level-of-detection-and-significant-change" class="nav-link" data-scroll-target="#part-5-level-of-detection-and-significant-change">Part 5: Level of detection and significant change</a>
+  <ul class="collapse">
+  <li><a href="#level-of-detection" id="toc-level-of-detection" class="nav-link" data-scroll-target="#level-of-detection">Level of detection</a></li>
+  <li><a href="#significant-change-and-volumes" id="toc-significant-change-and-volumes" class="nav-link" data-scroll-target="#significant-change-and-volumes">Significant change and volumes</a></li>
+  </ul></li>
+  <li><a href="#part-6-post-classification-comparison" id="toc-part-6-post-classification-comparison" class="nav-link" data-scroll-target="#part-6-post-classification-comparison">Part 6: Post-classification comparison</a>
+  <ul class="collapse">
+  <li><a href="#the-three-methods-side-by-side" id="toc-the-three-methods-side-by-side" class="nav-link" data-scroll-target="#the-three-methods-side-by-side">The three methods side by side</a></li>
+  </ul></li>
+  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" id="toc-due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="nav-link" data-scroll-target="#due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 11/30/2026</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+<!-- banner.html -->
+<div class="banner-image">
+    <img src="../../../../includes/images/banner.jpg" alt="Banner">
+</div>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/index.html">Topic 6: Machine Learning &amp; AI</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/lab_vegetation_indices.html">Assignments</a></li><li class="breadcrumb-item"><a href="../../../../course/topics/topic_6_change_detection/assignments/assignment_6b.html">Assignment 6B</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Assignment 6B</h1>
+<p class="subtitle lead">UAS change detection</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 23, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/change_detection.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
+<figcaption>Open in Colab</figcaption>
+</figure>
+</div>
+<section id="task" class="level2">
+<h2 class="anchored" data-anchor-id="task">Task</h2>
+<p>In this assignment you detect change at Lake Wheeler between two UAS surveys: July 17, 2024 and September 17, 2025. The 2024 survey is georeferenced. The 2025 survey was processed without ground control points: its orthophoto is displaced by several meters, and its DSM is in an arbitrary vertical reference and is bent into a dome. You first co-register the 2025 products to the 2024 ones, horizontally and vertically. You then detect change in three ways: by differencing a spectral index, by differencing the DSMs with a level of detection, and by comparing two classified maps.</p>
+<p>Keep in mind that a difference between two surveys contains real change, registration error, and measurement noise. The level of detection is the size of difference that the noise alone can produce; only larger differences are reported as change. The two flights are also from different months, so part of the spectral difference is the season and not a change in land cover.</p>
+<p>Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and tables for you. The offsets between the two orthophotos in Part 2 are measured by the notebook with a cross-correlation; on the command line you use the values given here and check them with the Map Swipe tool. Either way, the report is the same.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/Lake_Wheeler_NCspm.zip">Lake Wheeler GRASS project: Lake_Wheeler_NCspm</a> (EPSG:3358; you have it from the earlier assignments)</li>
+<li>July 17, 2024, the reference survey: <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif">orthophoto</a> and <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif">DSM</a> (WebODM, 7 cm, UTM zone 17N; read from the URL)</li>
+<li>September 17, 2025, processed without ground control points: <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho_2025_09_17.cog.tif">orthophoto</a> (7 cm) and <a href="https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif">DSM</a> (8.5 cm), both in the coordinate system of the project (read from the URL)</li>
+<li><a href="https://storage.googleapis.com/gis-course-data/gis584/grassdata/classification_training.gpkg">Polygons of Assignment 6A: classification_training.gpkg</a>; its road polygons (<code>class_id = 5</code>) are used as surfaces that did not change</li>
+</ul>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<ul>
+<li><a href="https://grass.osgeo.org/">GRASS</a> 8.5</li>
+<li>The <a href="https://grass.osgeo.org/grass85/manuals/addons/r.dem.html">r.dem</a> toolset, which installs <code>r.dem.coregister</code>, <code>r.dem.dod</code>, <code>r.dem.bias</code>, <code>r.dem.lod</code>, <code>r.dem.change</code>, and related tools. <code>r.dem.lod</code> needs the Python package scipy.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.extension</span> extension=r.dem</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="part-1-import-the-two-surveys" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-import-the-two-surveys">Part 1: Import the two surveys</h2>
+<p>Start GRASS in the <code>Lake_Wheeler_NCspm</code> project and create a new mapset. Work at 0.5 m on the extent of Assignment 6A, and import the 2024 orthophoto and DSM, which <code>r.import</code> reprojects and resamples to the region.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.mapset</span> <span class="at">-c</span> mapset=change_detection</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.5 <span class="at">-p</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif"</span> output=ortho_2024 extent=region resolution=region resample=nearest</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif"</span> output=dsm_2024 extent=region resolution=region resample=bilinear</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The 2025 products are already in the coordinate system of the project. Import a window 20 m larger than the region on every side, because the data will be moved. These rasters keep their original resolution, so the import takes two to three minutes. Then set the region back.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219835 s=219050 w=636545 e=637375 res=0.5</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho_2025_09_17.cog.tif"</span> output=ortho_2025_raw extent=region resolution=region resample=nearest</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.import</span> input=<span class="st">"/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif"</span> output=dsm_2025_raw extent=region resolution=region resample=bilinear</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.5</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dsm_2024</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dsm_2025_raw</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>dsm_2024: minimum: 74.63, maximum: 115.96, mean: 90.12</p>
+<p>dsm_2025_raw: minimum: -14.71, maximum: 57.72, mean: 0.55</p>
+</blockquote>
+<p>The 2024 DSM holds the elevation of the site above the vertical datum. The 2025 DSM does not, and its range is almost twice as large. Import the polygons of Assignment 6A, which were digitized on the 2024 orthophoto, and display them over both orthophotos around the farm buildings:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.import</span> input=classification_training.gpkg layer=training output=training</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219450 s=219300 w=637030 e=637180 res=0.1</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rgb</span> red=ortho_2025_raw.1 green=ortho_2025_raw.2 blue=ortho_2025_raw.3</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">d.vect</span> map=training color=yellow fill_color=none</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="../images/a6b_offset.webp" class="img-fluid" style="width:100.0%" alt="Three panels of the 150 m block around the farm buildings with the yellow building, road, and car outlines digitized in 2024. July 2024: the outlines fit the roofs and cars. September 2025 as delivered: the red roofed buildings lie several meters to the east and north of their outlines. September 2025 corrected: the roofs lie within two to three meters of the outlines."></p>
+<p>The left and middle panels show the two orthophotos as delivered; the right panel is the result of Part 2.</p>
+</section>
+<section id="part-2-horizontal-co-registration" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-horizontal-co-registration">Part 2: Horizontal co-registration</h2>
+<section id="measure-the-offset" class="level3">
+<h3 class="anchored" data-anchor-id="measure-the-offset">Measure the offset</h3>
+<p>To measure the displacement, compare surfaces that look the same in both images: the gravel roads, the roofs, and the concrete pads. In the GUI, open <em>File &gt; Map Swipe</em>, load <code>ortho_2024</code> and <code>ortho_2025_raw</code>, and measure the displacement of a road intersection or a roof corner with the measuring tool at several places from south to north. The notebook does this automatically: for 200 m blocks every 100 m it finds the shift at which the brightest surfaces of the two images agree best. The offset to apply to the 2025 image, in blocks along the east road:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Block center northing (m)</th>
+<th>East offset (m)</th>
+<th>North offset (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>219150</td>
+<td>-7.5</td>
+<td>-0.5</td>
+</tr>
+<tr class="even">
+<td>219250</td>
+<td>-7.5</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>219350</td>
+<td>-6.5 to -7.0</td>
+<td>-3.0 to -5.0</td>
+</tr>
+<tr class="even">
+<td>219450</td>
+<td>-7.0</td>
+<td>-4.5 to -5.0</td>
+</tr>
+<tr class="odd">
+<td>219550</td>
+<td>-8.0</td>
+<td>-4.0</td>
+</tr>
+<tr class="even">
+<td>219650</td>
+<td>-7.0</td>
+<td>-6.0</td>
+</tr>
+<tr class="odd">
+<td>219750</td>
+<td>-3.5</td>
+<td>-11.0</td>
+</tr>
+</tbody>
+</table>
+<p>The east offset is nearly constant. The north offset is close to zero in the south and grows to about 11 m in the north, so a single shift cannot remove it. The simplest model that fits is a constant east offset and a north offset that changes linearly with the northing:</p>
+<blockquote class="blockquote">
+<p>east offset: -7.0 m</p>
+<p>north offset: -3.32 - 0.0126 * (northing - 219400) m, residual standard deviation 1.3 m</p>
+</blockquote>
+</section>
+<section id="apply-the-correction" class="level3">
+<h3 class="anchored" data-anchor-id="apply-the-correction">Apply the correction</h3>
+<p>A raster in GRASS is a grid of cells plus the coordinates of its edges. <a href="https://grass.osgeo.org/grass85/manuals/r.region.html">r.region</a> changes those coordinates without touching the cells. Moving all four edges by the same amount shifts the raster; moving the north and south edges by different amounts also stretches it, which is the model above. Copy the 2025 rasters and give the copies corrected edges: the east and west edges move by -7.0 m, and each north and south edge moves by the north offset at its corrected northing. For the rasters imported above the corrected edges are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> band <span class="kw">in</span> 1 2 3 4<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">g.copy</span> raster=ortho_2025_raw.<span class="va">$band</span>,ortho_2025_moved.<span class="va">$band</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">r.region</span> map=ortho_2025_moved.<span class="va">$band</span> n=219826.364 s=219051.004 w=636537.987 e=637368.040</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">g.copy</span> raster=dsm_2025_raw,dsm_2025_moved</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.region</span> map=dsm_2025_moved n=219826.344 s=219051.017 w=636537.961 e=637368.013</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Aggregate the moved rasters from their original resolution to the 0.5 m cells of the region with <a href="https://grass.osgeo.org/grass85/manuals/r.resamp.stats.html">r.resamp.stats</a>: the mean of the cells that fall into each 0.5 m cell, and the minimum for the alpha band.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> band <span class="kw">in</span> 1 2 3<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">r.resamp.stats</span> input=ortho_2025_moved.<span class="va">$band</span> output=ortho_2025.<span class="va">$band</span> method=average</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.resamp.stats</span> input=ortho_2025_moved.4 output=ortho_2025.4 method=minimum</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.resamp.stats</span> input=dsm_2025_moved output=dsm_2025_h method=average</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="check-the-result" class="level3">
+<h3 class="anchored" data-anchor-id="check-the-result">Check the result</h3>
+<p>Compare <code>ortho_2024</code> and <code>ortho_2025</code> in Map Swipe again. The offsets measured by the notebook after the correction:</p>
+<blockquote class="blockquote">
+<p>east: median 0.0 m; north: median -1.0 m; largest 4.0 m (in the northernmost block)</p>
+</blockquote>
+<p>The correction is a model with three numbers, fitted to blocks along the roads on the east side of the site. Offsets of 1 to 3 m remain (right panel of the figure above). Everything that follows compares the two dates cell by cell at 0.5 m, so the edges of objects will show apparent change that is only this remaining misregistration.</p>
+<p>Restrict the analysis to the cells covered by both surveys:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"both = if(ortho_2024.4 &gt; 0 &amp;&amp; ortho_2025.4 &gt; 0 &amp;&amp; !isnull(dsm_2024) &amp;&amp; !isnull(dsm_2025_h), 1, null())"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> raster=both</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>area covered by both surveys: 45.6 hectares</p>
+</blockquote>
+<p><img src="../images/a6b_orthos.webp" class="img-fluid" style="width:100.0%" alt="The whole Lake Wheeler site at both dates. July 17, 2024: green tree lines and crop fields with visible rows, one bare field in the east. September 17, 2025: the same fields brown and harvested, the tree lines still green."></p>
+</section>
+</section>
+<section id="part-3-index-differencing" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-index-differencing">Part 3: Index differencing</h2>
+<section id="vari-at-both-dates" class="level3">
+<h3 class="anchored" data-anchor-id="vari-at-both-dates">VARI at both dates</h3>
+<p>Compute VARI for both dates with the expression of Assignment 6A.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_2024 = if(ortho_2024.2 + ortho_2024.1 - ortho_2024.3 &lt;= 25, null(), max(-1.0, min(1.0, float(ortho_2024.2 - ortho_2024.1) / (ortho_2024.2 + ortho_2024.1 - ortho_2024.3))))"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_2025 = if(ortho_2025.2 + ortho_2025.1 - ortho_2025.3 &lt;= 25, null(), max(-1.0, min(1.0, float(ortho_2025.2 - ortho_2025.1) / (ortho_2025.2 + ortho_2025.1 - ortho_2025.3))))"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=vari_2024,vari_2025 color=ndvi</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=vari_2024</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=vari_2025</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>vari_2024: mean: 0.104, standard deviation: 0.143</p>
+<p>vari_2025: mean: -0.043, standard deviation: 0.085</p>
+</blockquote>
+</section>
+<section id="relative-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="relative-normalization">Relative normalization</h3>
+<p>The two orthophotos come from different cameras, processing software, and light. A surface that did not change should have the same index value at both dates, so use the gravel roads as pseudo-invariant features. The difference between the median VARI of the road cells at the two dates is the radiometric offset between the images; subtract it from the 2025 index. <code>r.univar -e</code> with the road raster as <code>zones</code> gives the medians.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">v.extract</span> input=training where=<span class="st">"class_id = 5"</span> output=roads</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v.to.rast</span> input=roads output=roads_rast use=val value=1</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=vari_2024 zones=roads_rast</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> <span class="at">-e</span> map=vari_2025 zones=roads_rast</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_2025n = vari_2025 - (-0.005)"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.colors</span> map=vari_2025n color=ndvi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>roads, 2024: median: -0.004; roads, 2025: median: -0.009; radiometric offset: -0.005</p>
+</blockquote>
+<p>On this pair the offset is small: the index is a ratio of bands, which cancels most of the brightness difference between the images. A single band would need a larger correction.</p>
+</section>
+<section id="the-difference-and-a-threshold" class="level3">
+<h3 class="anchored" data-anchor-id="the-difference-and-a-threshold">The difference and a threshold</h3>
+<p>The difference is the normalized 2025 index minus the 2024 index: negative where vegetation was lost, positive where it was gained.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_diff = vari_2025n - vari_2024"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=vari_diff</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=vari_diff zones=roads_rast</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>all cells: mean: -0.143, standard deviation: 0.135</p>
+<p>roads: mean: -0.012, standard deviation: 0.039</p>
+</blockquote>
+<p>A threshold turns the difference into a change map. Use 0.1, which is well above the standard deviation of the difference on the roads, where nothing changed:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"vari_change = if(vari_diff &lt; -0.1, 1, if(vari_diff &gt; 0.1, 3, 2))"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.category</span> map=vari_change separator=pipe rules=- <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">1|vegetation decrease</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">2|no change</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">3|vegetation increase</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> map=vari_change units=h,p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>vegetation decrease: 26.74 ha (59.1 %), no change: 17.66 ha (39.0 %), vegetation increase: 0.86 ha (1.9 %)</p>
+</blockquote>
+<p><img src="../images/a6b_vari.webp" class="img-fluid" style="width:100.0%" alt="Three maps of the site. VARI in July 2024: tree lines and most fields green. VARI in September 2025, normalized: almost the whole site white, near zero, with only the tree lines and grassed strips slightly green. The difference, 2025 minus 2024: brown, a decrease, over the fields and tree lines; white on roads and the bare eastern field; light green on a few grassed waterways."></p>
+<p>More than half of the site shows a decrease. July is the middle of the growing season and mid September is harvest time, so most of this is the crop cycle and would reverse by the next July.</p>
+</section>
+</section>
+<section id="part-4-dsm-co-registration" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-dsm-co-registration">Part 4: DSM co-registration</h2>
+<p>The 2025 DSM now lines up horizontally (<code>dsm_2025_h</code>), but its elevations are not in the vertical datum. Bring it to the 2024 surface in two steps with the <code>r.dem</code> tools.</p>
+<section id="vertical-shift-from-pseudo-ground-control-points" class="level3">
+<h3 class="anchored" data-anchor-id="vertical-shift-from-pseudo-ground-control-points">Vertical shift from pseudo ground control points</h3>
+<p><a href="https://grass.osgeo.org/grass85/manuals/addons/r.dem.coregister.html">r.dem.coregister</a> samples the difference between the two DSMs on features that are assumed not to have changed, here the road polygons, and subtracts the median difference. It reports the bias and the NMAD (normalized median absolute deviation), a robust standard deviation of the remaining difference on those features.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.dem.coregister</span> dem=dsm_2025_h reference=dsm_2024 pgcp=roads output=dsm_2025_v method=pgcp_vertical buffer=0.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>N samples: 6834, Median bias: -89.3323 m, NMAD: 4.7858 m</p>
+</blockquote>
+<p>The bias is about -89 m, and after removing it the roads still disagree by almost 5 m. Compute the DEM of Difference (DoD), the later surface minus the earlier one, with <a href="https://grass.osgeo.org/grass85/manuals/addons/r.dem.dod.html">r.dem.dod</a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.dem.dod</span> dem=dsm_2025_v reference=dsm_2024 output=dod_shifted range=5</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dod_shifted</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>minimum: -30.19, maximum: 33.25, mean: -2.76, standard deviation: 4.38</p>
+</blockquote>
+<p>The DoD is not noise around zero. It is a smooth shape several meters high: one sign in the middle of the site and the other toward the edges (left panel of the figure below). This is the dome, a known distortion of surfaces reconstructed from nadir images without ground control: an error in the estimated lens distortion bends the whole model. A shift cannot remove it, and neither can a rotation.</p>
+</section>
+<section id="stable-surfaces" class="level3">
+<h3 class="anchored" data-anchor-id="stable-surfaces">Stable surfaces</h3>
+<p>To model the dome you need many cells, spread over the whole site, where the real surface did not change. The roads alone are too few and all on one side. Bare ground is a larger candidate: a cell with VARI below 0 at both dates carried no green vegetation at either date, so its surface is soil, gravel, or a roof. Also require a slope of less than 8 degrees within one meter in the 2024 DSM, to exclude the edges of buildings and trees, where the remaining horizontal offset turns into large height differences.</p>
+<p>For an independent check, divide the stable cells by a 100 m checkerboard: two thirds of the blocks are used to fit the correction, one third is held out.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.slope.aspect</span> elevation=dsm_2024 slope=slope_2024</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.neighbors</span> input=slope_2024 output=slope_2024_max size=5 method=maximum</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"stable = if(vari_2024 &lt; 0 &amp;&amp; vari_2025 &lt; 0 &amp;&amp; slope_2024_max &lt; 8, 1, null())"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"holdout_block = (int(x() / 100) + int(y() / 100)) % 3 == 0"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"stable_fit = if(stable &amp;&amp; !holdout_block, 1, null())"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"stable_check = if(stable &amp;&amp; holdout_block, 1, null())"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>stable: 265,748 cells (6.6 ha); stable_fit: 187,495 cells (4.7 ha); stable_check: 78,253 cells (2.0 ha)</p>
+</blockquote>
+<p><img src="../images/a6b_stable.webp" class="img-fluid" style="width:60.0%" alt="The 2024 orthophoto with the stable cells: yellow cells used for the fit along the roads, in the bare eastern field, and scattered between crop rows over the whole site; cyan cells held out in a few 100 m blocks."></p>
+</section>
+<section id="remove-the-dome" class="level3">
+<h3 class="anchored" data-anchor-id="remove-the-dome">Remove the dome</h3>
+<p><a href="https://grass.osgeo.org/grass85/manuals/addons/r.dem.bias.html">r.dem.bias</a> with <code>method=spline</code> interpolates the DoD of the stable fit cells into a smooth surface, the bias field, and subtracts it from the DoD. The spline is fitted at 10 m resolution with strong smoothing, because the dome is a long wavelength shape.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.dem.bias</span> dod=dod_shifted output=dod method=spline stable_mask=stable_fit bias_field=dome</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dome</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dod zones=stable_fit</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dod zones=stable_check</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">r.univar</span> map=dod zones=roads_rast</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>bias field: minimum: -7.56, maximum: 4.74</p>
+<p>corrected DoD on the fit cells: mean: -0.001, standard deviation: 0.113</p>
+<p>corrected DoD on the held out cells: mean: -0.043, standard deviation: 0.354</p>
+<p>corrected DoD on the road polygons: mean: 0.088, standard deviation: 0.198</p>
+</blockquote>
+<p><img src="../images/a6b_dome.webp" class="img-fluid" style="width:100.0%" alt="Two maps. The DoD after the vertical shift: strongly negative over the whole center of the site and positive along the western, northern, and eastern edges. The bias field fitted by the spline: the same shape as a smooth surface, about -7 m in the center and up to almost 5 m toward the edges."></p>
+<p>The bias field spans 12 m across the site. After removing it, the stable cells agree to about 0.1 m where the correction was fitted and to 0.35 m in the held out blocks. The held out number is the one to report: it describes cells the correction did not see.</p>
+</section>
+</section>
+<section id="part-5-level-of-detection-and-significant-change" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-level-of-detection-and-significant-change">Part 5: Level of detection and significant change</h2>
+<section id="level-of-detection" class="level3">
+<h3 class="anchored" data-anchor-id="level-of-detection">Level of detection</h3>
+<p>The level of detection (LoD) is the smallest difference that can be told apart from noise at a chosen confidence. <a href="https://grass.osgeo.org/grass85/manuals/addons/r.dem.lod.html">r.dem.lod</a> estimates the noise as the NMAD of the corrected DoD on stable cells and multiplies it by the critical value of the normal distribution, 1.96 for 95 percent. Give it the held out cells.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.dem.lod</span> dod=dod output=lod method=global stable_mask=stable_check confidence=0.95</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>NMAD: 0.1781 m, LoD: 0.3490 m (uniform)</p>
+</blockquote>
+</section>
+<section id="significant-change-and-volumes" class="level3">
+<h3 class="anchored" data-anchor-id="significant-change-and-volumes">Significant change and volumes</h3>
+<p><a href="https://grass.osgeo.org/grass85/manuals/addons/r.dem.change.html">r.dem.change</a> keeps the cells of the DoD whose absolute value exceeds the LoD, removes isolated cells with the <code>-n</code> flag, and sums the volumes of surface raising and lowering. The tool uses the terms of geomorphology, deposition and erosion; on this site a raised surface is mostly taller vegetation and a lowered surface mostly vegetation that was removed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.dem.change</span> <span class="at">-n</span> dod=dod lod=lod output_sig=dod_significant volume_csv=<span class="va">$HOME</span>/volume.csv</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"dod_class = if(isnull(dod_significant), 2, if(dod_significant &lt; 0, 1, 3))"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.report</span> map=dod_class units=h,p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Deposition: 222,506.9 m3 (201,289 cells), Erosion: 221,508.8 m3 (513,187 cells), Net: 998.1 m3</p>
+<p>surface lowered: 12.83 ha (28.1 %), below the level of detection: 27.73 ha (60.8 %), surface raised: 5.03 ha (11.0 %)</p>
+</blockquote>
+<p><img src="../images/a6b_dod.webp" class="img-fluid" style="width:100.0%" alt="Two maps. The corrected DoD: white, near zero, over most of the site, light blue lowering in several fields, and saturated red and blue along the western tree line and around the trees at the farm. The significant change drawn over the 2025 orthophoto: blue lowering over the fields that carried a crop in 2024, red raising along the tree lines, and no color on the roads and the bare field."></p>
+<p>The lowered cells have a median of -0.9 m and cover the fields that carried a crop in July 2024 and were harvested by September 2025. The raised cells have a median of 3.8 m and lie almost entirely along the tree lines, where a horizontal offset of a few meters against 15 m trees produces large differences of both signs. The two volumes are therefore not a crop volume: the tree line cells dominate them.</p>
+<p>Zoom to the farm buildings:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219450 s=219300 w=637030 e=637180 res=0.1</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rgb</span> red=ortho_2025.1 green=ortho_2025.2 blue=ortho_2025.3</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">d.rast</span> map=dod_significant</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">g.region</span> n=219815 s=219070 w=636565 e=637355 res=0.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="../images/a6b_farm_change.webp" class="img-fluid" style="width:50.0%" alt="Significant change around the farm buildings over the 2025 orthophoto: each building has a red band along one edge and a blue band along the opposite edge, the parked cars of 2024 appear as small blue patches and those of 2025 as red patches, the large tree is blue, and the crop field at the bottom is light blue."></p>
+<p>Each building shows a raised band on one side and a lowered band on the other. The buildings did not move; the pattern is the remaining horizontal misregistration. The cars are real change: they were parked in different places.</p>
+<p>Connect this result with Part 3 by the mean DoD inside each VARI change class (make a raster of each class with <code>r.mapcalc</code> and use it as <code>zones</code>):</p>
+<blockquote class="blockquote">
+<p>where VARI shows a vegetation decrease: median -0.22 m; no change: median -0.02 m; vegetation increase: median 0.11 m</p>
+</blockquote>
+</section>
+</section>
+<section id="part-6-post-classification-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-post-classification-comparison">Part 6: Post-classification comparison</h2>
+<p>The third way to detect change is to classify each date on its own and compare the two maps. Use a classification that can be applied to both orthophotos: a cell is vegetation if its VARI is above 0.05 and bare or built otherwise, with the normalized index for 2025. <code>r.stats</code> on the two maps together gives the from-to matrix, the area of each combination of class in 2024 and class in 2025.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"class_2024 = if(vari_2024 &gt; 0.05, 1, 2)"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"class_2025 = if(vari_2025n &gt; 0.05, 1, 2)"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r.stats</span> <span class="at">-an</span> input=class_2024,class_2025</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mapcalc</span> expression=<span class="st">"from_to = (class_2024 - 1) * 2 + class_2025"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>2024 \ 2025 (ha)</th>
+<th>vegetation</th>
+<th>bare or built</th>
+<th>total 2024</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>vegetation</strong></td>
+<td>5.57</td>
+<td>20.20</td>
+<td>25.77</td>
+</tr>
+<tr class="even">
+<td><strong>bare or built</strong></td>
+<td>1.12</td>
+<td>18.37</td>
+<td>19.49</td>
+</tr>
+<tr class="odd">
+<td><strong>total 2025</strong></td>
+<td>6.69</td>
+<td>38.57</td>
+<td>45.26</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../images/a6b_from_to.webp" class="img-fluid" style="width:100.0%" alt="Three maps of the site. Classes in July 2024: vegetation in green over the tree lines and most fields, bare or built in tan. Classes in September 2025: bare or built over almost all fields, vegetation only on the tree lines and grassed strips. From-to classes: vegetation to bare in brown over the crop fields, unchanged vegetation in green on the tree lines, unchanged bare in grey on the roads and the eastern field, and bare to vegetation in light green on a few strips."></p>
+<section id="the-three-methods-side-by-side" class="level3">
+<h3 class="anchored" data-anchor-id="the-three-methods-side-by-side">The three methods side by side</h3>
+<p>The area each method reports as a loss of vegetation, from <code>r.stats</code> on the three maps together:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Area (ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VARI decrease below -0.1 (Part 3)</td>
+<td>26.74</td>
+</tr>
+<tr class="even">
+<td>Surface lowered beyond the LoD (Part 5)</td>
+<td>12.72</td>
+</tr>
+<tr class="odd">
+<td>Vegetation to bare (Part 6)</td>
+<td>20.20</td>
+</tr>
+<tr class="even">
+<td>All three agree</td>
+<td>9.27</td>
+</tr>
+</tbody>
+</table>
+<p>The spectral methods report twice the area of the DoD. A crop row that was green in July and stubble in September changes the index everywhere, but the surface drops by more than 0.35 m only where the crop was tall. Remove the mask when you are done:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">r.mask</span> <span class="at">-r</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="report" class="level2">
+<h2 class="anchored" data-anchor-id="report">Report</h2>
+<p>Prepare a report (3 to 5 pages including figures):</p>
+<ol type="1">
+<li><strong>The uncontrolled survey</strong>: the elevation ranges of the two DSMs, the farm building maps before the correction, and what they tell you about how the 2025 survey was processed.</li>
+<li><strong>Horizontal co-registration</strong>: the offset model, the remaining offsets, and the farm building map after the correction, with a sentence on where the correction is least reliable and why.</li>
+<li><strong>Index differencing</strong>: the radiometric offset, the VARI difference map, and the areas of the three change classes, with a paragraph on how much of the decrease you attribute to the season.</li>
+<li><strong>DSM co-registration</strong>: the vertical bias, the DoD after the vertical shift, the bias field, and the standard deviation of the corrected DoD on the fit cells, the held out cells, and the roads, with a paragraph on what the dome is and why the vertical shift did not remove it.</li>
+<li><strong>Level of detection and change</strong>: the LoD, the map of significant change, and the volumes, with a paragraph on which changes are real and which are artifacts of the registration.</li>
+<li><strong>Comparison of methods</strong>: the from-to matrix and the areas of vegetation loss from the three methods, why they differ, and what ground control points in the 2025 survey would have changed in this assignment.</li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload to Moodle, Assignment 6B:</p>
+<ul>
+<li>Your report as a PDF.</li>
+<li>Optional: your completed notebook (<code>.ipynb</code>) if you worked in Colab.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li><strong>The uncontrolled survey</strong>: the horizontal and vertical offsets are reported and attributed to the missing ground control.</li>
+<li><strong>Horizontal co-registration</strong>: the correction is applied and its remaining error is reported.</li>
+<li><strong>Index differencing</strong>: the index is normalized, differenced, and thresholded, and the seasonal part of the change is discussed.</li>
+<li><strong>DSM co-registration</strong>: the vertical shift and the bias field are computed, and the correction is assessed on held out cells.</li>
+<li><strong>Level of detection and change</strong>: the LoD is derived from stable cells, significant change is mapped, and real change is separated from registration artifacts.</li>
+<li><strong>Comparison of methods</strong>: the from-to matrix is computed and the three results are compared.</li>
+<li><strong>Interpretation</strong>: conclusions tie back to the lecture: co-registration, stable surfaces, pseudo-invariant features, DEM of Difference, level of detection, post-classification comparison.</li>
+<li>On-time submission.</li>
+</ul>
+<section id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d" class="level3">
+<h3 class="anchored" data-anchor-id="due-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612061737369676e6d656e742d6475652d64617465203e7d7d">Due 11/30/2026</h3>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://moodle-courses2527.wolfware.ncsu.edu/mod/forum/view.php?id=1478358">
+<p>Moodle</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://help.ncsu.edu/">
+<p>Computing Help</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/">
+<p>MGIST Home</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.ncsu.edu/policies/prr-disclaimer.php">
+<p>Disclaimer</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://oit.ncsu.edu/itaccess">
+<p>Accessibility</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by-sa/4.0/">
+<p>© 2026 GeoForAll Lab CC BY-SA</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ncsu-geoforall-lab/gis-584-uas-course">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://geospatial.ncsu.edu/geoforall/">
+<p>GeoForAll Lab</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
