@@ -62,6 +62,8 @@ data:
   dif_lidar_uav_colors_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/dif_lidar_uav.txt
   fields_pack_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/fields.pack
   uas_dsm_series_txt_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/series.txt
+  classification_training_gpkg: https://storage.googleapis.com/gis-course-data/gis584/grassdata/classification_training.gpkg
+  classification_colors_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/classification_colors.txt
   gcp_12_decimal_pack_url: https://storage.googleapis.com/gis-course-data/gis584/grassdata/GCP_12_decimal.pack
   flight_path_kml_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path1.kml
   flight_path_kml_2_url: https://storage.googleapis.com/gis-course-data/gis584/flight_path2.kml
@@ -86,6 +88,7 @@ data:
   lake_wheeler_flight_Sept_16_2026_checkpoints: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/checkpoints.csv
   lake_wheeler_flight_Sept_16_2026_checkpoints_full: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/checkpoints_full.csv
   lake_wheeler_flight_Sept_16_2026_base_bundle: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091626/base_bundle.zip
+  lake_wheeler_flight_Sept_17_2025_ortho: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/ortho_2025_09_17.cog.tif
   lake_wheeler_flight_Sept_17_2025_dsm: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/dsm.tif
   lake_wheeler_flight_Sept_17_2025_flight_data: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/091725.tar.xz
   lake_wheeler_flight_Sept_17_2025_point_cloud: https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/091725/points_fall_25.copc.laz

@@ -8,9 +8,11 @@
 set -uo pipefail
 
 ADDONS=(
+    i.sam2
     i.segment.stats
     i.superpixels.slic
     r.confusionmatrix
+    r.dem
     r.learn.ml2
     r.local.relief
     r.patch.smooth
