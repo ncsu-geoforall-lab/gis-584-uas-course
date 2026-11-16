@@ -2,28 +2,34 @@
 topic: "Topic 6B: Machine Learning & AI"
 title: "Change Detection"
 subtitle: "Topic 6B: Machine Learning & AI"
-date: 11/16/2026
-author: Corey White
+date: 11/23/2026
 activity: Lecture
 ---
 
 ## Outline
 
-- Understand the different types of change detection
-- Impacts of spatial-temporal scale
-- Data co-registration
-- Environmental Considerations
-
+- Change detection with UAS: applications, and the components of a difference between two surveys (real change, registration error, noise)
+- Pre-processing: radiometric normalization, horizontal and vertical co-registration, and surveys without ground control
+- Pre-classification methods: image and index differencing, the DEM of Difference, and multitemporal transformations
+- Uncertainty: stable surfaces, NMAD, the level of detection, and significant change
+- Object based and post-classification methods: from-to matrices and how classification errors combine
+- Applications in geomorphology, vegetation monitoring, and infrastructure
 
 ## Lecture
 
-- [Lecture Slides](lectures/lecture_6b.qmd)
+- [Lecture slides](lectures/lecture_6b.qmd)
 
 ## Supplemental materials
 
-- [Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion](https://www.mdpi.com/2072-4292/14/7/1718)
-- Jensen, J.R. Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed.; Prentice Hall Press: Upper Saddle River, NJ, USA, 2015.
+- [Accounting for uncertainty in DEMs from repeat topographic surveys: improved sediment budgets](https://doi.org/10.1002/esp.1886), Wheaton, Brasington, Darby, and Sear, Earth Surface Processes and Landforms 35(2), 2010
+- [Co-registration and bias corrections of satellite elevation data sets for quantifying glacier thickness change](https://doi.org/10.5194/tc-5-271-2011), Nuth and Kääb, The Cryosphere 5(1), 2011
+- [Mitigating systematic error in topographic models derived from UAV and ground-based image networks](https://doi.org/10.1002/esp.3609), James and Robson, Earth Surface Processes and Landforms 39(10), 2014: the doming of surfaces reconstructed without ground control
+- [Accuracy assessment of digital elevation models by means of robust statistical methods](https://doi.org/10.1016/j.isprsjprs.2009.02.003), Höhle and Höhle, ISPRS Journal of Photogrammetry and Remote Sensing 64(4), 2009: NMAD
+- [Digital change detection techniques using remotely-sensed data](https://doi.org/10.1080/01431168908903939), Singh, International Journal of Remote Sensing 10(6), 1989
+- [Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion](https://doi.org/10.3390/rs14071718), White et al., Remote Sensing 14(7), 2022
+- [r.dem](https://grass.osgeo.org/grass85/manuals/addons/r.dem.html) toolset manual: co-registration, DEM of Difference, bias correction, and level of detection in GRASS
+- Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed., Jensen, Pearson, 2015
 
-<!-- ## Assignment & Homework
+## Assignment & Homework
 
-[Assignment 6B: Change Detection](assignments/assignment_6b.qmd) -->
+[Assignment 6B: UAS change detection](assignments/assignment_6b.qmd)

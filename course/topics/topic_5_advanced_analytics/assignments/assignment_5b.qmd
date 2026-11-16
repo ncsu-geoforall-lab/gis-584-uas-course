@@ -2,7 +2,7 @@
 topic: "Topic 5B: Advanced Analytics"
 title: "Assignment 5B"
 subtitle: "Analysis of multitemporal UAS data"
-date: 10/28/2026
+date: 11/11/2026
 assignment-due-date: 11/18/2026
 activity: Lab
 format:

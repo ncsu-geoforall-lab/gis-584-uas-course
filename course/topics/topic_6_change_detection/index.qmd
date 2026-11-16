@@ -11,10 +11,11 @@ order: 6
 
 ## Slides
 
-- [Lecture 6A: Image Classification](lectures/lecture_6a.qmd)
+- [Lecture 6A: Classification Methods for UAS Data](lectures/lecture_6a.qmd)
 - [Lecture 6B: UAS Change Detection Methods](lectures/lecture_6b.qmd)
 
 ## Assignments
 
-- [Lab: Vegetation indices](assignments/lab_vegetation_indices.qmd)
-- [Assignment 6A: UAS Image Classification](assignments/assignment_6a.qmd)
+- [Lab: Vegetation indices](assignments/lab_vegetation_indices.qmd) (optional)
+- [Assignment 6A: UAS image classification](assignments/assignment_6a.qmd)
+- [Assignment 6B: UAS change detection](assignments/assignment_6b.qmd)

@@ -1,553 +1,448 @@
 ---
 topic: "Topic 6A: Machine Learning & AI"
-subtitle: "UAS Image Classification"
 title: "Assignment 6A"
+subtitle: "UAS image classification"
+date: 11/18/2026
 assignment-due-date: 11/30/2026
-author:
-    - Corey White
-date: 11/11/2026
-format:
-  html:
-    toc-depth: 4
-  ipynb: default
 activity: Lab
+format:
+    html:
+        toc: true
+        toc-depth: 3
+notebook-view:
+  - notebook: image_classification.ipynb
+    title: "UAS image classification in GRASS"
+    url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/image_classification.ipynb
+resources:
+  - image_classification.ipynb
 ---
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/assignment_6a.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/image_classification.ipynb)
 
-## Outline
+## Task
 
-- Feature Engineering
-- Segmentation
-- Image Classification
-- Validation
+In this assignment you classify the July 2024 orthophoto of Lake Wheeler into nine land cover classes. You derive features from the orthophoto and the DSM (a spectral index, spatial filters, texture, and terrain derivatives), group them, and segment part of the image into superpixels. You train a random forest on digitized training polygons, map the classes, read the feature importances, and assess the accuracy with a confusion matrix. In the last part you segment the same scene with a pretrained foundation model, SAM 2, from a text prompt and compare the result with the random forest classes.
+
+Keep in mind that an accuracy computed on the training polygons describes how well the model reproduces them, not how well it maps the rest of the site. You set every third polygon aside before training and assess the model on those; the difference between the two accuracies is one of the results of the assignment. The classes are also very unequal in size, so an overall accuracy mostly reports on the largest class.
+
+Work through the steps below in the GRASS GUI or command line, or open the notebook in Colab (badge above), which runs the same steps in Python and produces the maps and tables for you. Part 10 needs PyTorch and runs fastest on a GPU, so the notebook with a Colab GPU runtime (*Runtime > Change runtime type > T4 GPU*) is the recommended way to do it. Either way, the report is the same.
 
 ## Data
 
-Download imagery data from March and June flights during 2017.
-
-<!-- - [Orthos June 2017]({{< var data.lake_wheeler_flight_Jun_2017_orthos >}}) -->
-- [Orthos July 2024]({{< var data.lake_wheeler_flight_July_17_2024_orthophoto >}})
-- [DSM July 2024]({{< var data.lake_wheeler_flight_July_17_2024_dsm >}})
-
-## Workflow
-
-Create a new mapset within your `Lake_Wheeler_NCspm` project and set your working directory.
-
-Import the ortho imagery for the July 17, 2024 UAS flight. The orthophoto is saved as a [*Cloud Optimized GeoTIFF (COG)*](http://cogeo.org/), which lets `r.import` read it directly from its URL without downloading the file first.
-
-```bash
-r.import input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif resample=nearest output=odm_071724_ortho
-```
-
-Set the computational region to the ortho imagery.
-
-```bash
-g.region raster=odm_071724_ortho.1
-```
-
-:::{.callout-important}
-**Task:** What is the spatial resolution and how many pixels are included in the computational region?
-:::
-
-<!-- ### Find overlaping areas
-
-```bash
-  r.series input="ortho_2017_06_02,ortho_2017_06_02" output="series_count" method=count
-``` -->
-
-<!-- :::{.callout-important}
-**Task:** Create a raster mask using raster algebra (`r.mapcalc`) to generate a raster where if both rasters overlap set the new raster to equal `1` else `null`.
-::: -->
-
-<!-- ### Visual Change Detection
-
-Map Swipe Tool `File -> Map Swipe` select your top left raster map and bottom/right raster map and press `OK`. Use the slider to examine the differences between to two dates. -->
-
-<!-- :::{.callout-important}
-**Task:** Describe the difference you see between the two dates.
-::: -->
-
-<!-- ### Binary Change Detection -->
-
-<!-- ### Image differencing
-
-```bash
-r.mapcalc expression=rgb_diff = ortho_2017_03_29  -  ortho_2017_06_02
-r.colors -e map=rgb_diff color=bcyr
-``` -->
-
-### Image Classification
-
-Let's create an RGB color composite from our ortho bands.
-
-```bash
-r.composite -d red=odm_071724_ortho.1 green=odm_071724_ortho.2 blue=odm_071724_ortho.3 output=odm_071724_ortho.rgb
-```
-
-Let's create a raster mask for our analysis.
-
-```bash
-r.mapcalc expression="img_mask = if( odm_071724_ortho.rgb, 1, null())"
-r.mask raster=img_mask
-```
-
-### Spectral Feature Extraction
-
-#### Spectral Indices
-
-The [vegetation indices lab](lab_vegetation_indices.qmd) defines the indices used here and compares them on RGB and multispectral imagery. Calculate the `VARI (Visible Atmospherically Resistant Index)` index [Gitelson et al. (2002)](https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1151&context=natrespapers).
-
-```bash
-r.mapcalc expression="vari_2024 = (odm_071724_ortho.2 - odm_071724_ortho.1) / (odm_071724_ortho.2 + odm_071724_ortho.1 - odm_071724_ortho.3)"
-```
-
-Let's look at the univariate statistics of our `vari_2024` raster.
-
-```bash
-r.univar vari_2024
-```
-
-:::{.callout-important}
-**Task:** What is the range from the `vari_2024` univariate statistics?
-:::
-
-Now let's look at the metadata for each of our bands.
-
-```bash
-r.info odm_071724_ortho.1
-r.info odm_071724_ortho.2
-r.info odm_071724_ortho.3
-```
-
-Our original ortho bands were unsigned 8bit integers (a `CELL` data type in GRASS) ranging from 0-255 in value. However, when we calulate VARI the data is expected to be scaled from 0-1. To do this we must rescale our band data and cast our output data to Float32.
-
-```bash
-r.mapcalc expression="odm_071724_ortho.red = if(isnull(odm_071724_ortho.1), null(), float(odm_071724_ortho.1) / 255.0)"
-r.mapcalc expression="odm_071724_ortho.green = if(isnull(odm_071724_ortho.2), null(), float(odm_071724_ortho.2) / 255.0)"
-r.mapcalc expression="odm_071724_ortho.blue = if(isnull(odm_071724_ortho.3), null(), float(odm_071724_ortho.3) / 255.0)"
-```
-
-Now let's compute VARI for our dataset.
-
-$$
-VARI = \frac{(Green - Red)}{(Green + Red - Blue)}
-$$
-
-```bash
-r.mapcalc --overwrite expression="odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue)"
-
-# Use the same color palette as NDVI
-r.colors map=odm_071724_ortho.vari color=ndvi
-```
-
-Let's examine the univariate statistics.
-
-```bash
-r.univar odm_071724_ortho.vari
-```
-
-We can see that our `min`, `max`, and `variatoin coefficient` are quite extreme as we would expect the results to fall within the range -1.0 - 1.0.
-
-This may be casued by outliers in our data where values in our denominator are zero or very close to zero. To fix this we can add a small constant to our denominator called `epsilon` to avoid an possible divison by zero errors.
-
-```bash
-r.mapcalc --overwrite expression="odm_071724_ortho.vari = (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue + 0.01)"
-
-# Use the same color palette as NDVI
-r.colors map=odm_071724_ortho.vari color=ndvi
-```
-
-Now let's recheck the univariate statistics.
-
-```bash
-r.univar odm_071724_ortho.vari
-```
-
-Although the `min`, `max`, and `variatoin coefficient` have improved they are still indicating outliers are skewing our data.
-
-To address this create a mask for cells where the denominator is greater than 0.1. 
-
-```bash
-r.mapcalc --overwrite expression="vari_mask = if((odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue) > 0.3, 1, null())"
-
-r.mapcalc --overwrite expression="odm_071724_ortho.vari = if(vari_mask, (odm_071724_ortho.green - odm_071724_ortho.red) / (odm_071724_ortho.green + odm_071724_ortho.red - odm_071724_ortho.blue), null())"
-```
-
-Now examine the univariate statistics again.
-
-```bash
-r.univar odm_071724_ortho.vari
-d.rast odm_071724_ortho.vari
-d.rast vari_mask
-```
-
-:::{.callout-important}
-**Task:** Examine areas that were excluded by the `vari_mask`. What type of things are responsible for the outliers? How else might you address these issues?
-:::
-
-
-![VARI Example](../images/lake_wheeler_vari.png){width=45%}
-
-#### Low Pass Filters
-
-We will now compute a *smooth* layer to remove noise from our data with the [r.neighbors](https://grass.osgeo.org/grass84/manuals/r.neighbors.html) tool. To do this we will compute the mean value for each pixel using a 27x27 moving window.
-
-```bash
-r.neighbors input=odm_071724_ortho.1 size=27 method=average output=odm_071724_ortho.1.27x27mean
-```
-
-![27x27 Moving Window Mean](../images/low_pass_filter_mean_moving_window_red.png){width=45%}
-
-#### High Pass Filters
-
-We will now create a layer to define our edges using the `zero-crossings` edge detection method implemented as [i.zc](https://grass.osgeo.org/grass-devel/manuals/i.zc.html) in GRASS. The output raster will contain cells (edges) labeled 0-4 which represent the azimuth directions (similar to aspect).
-
-```bash
-i.zc --overwrite input=odm_071724_ortho.2 output=odm_071724_ortho.2.zc orientations=4 threshold=0.5
-```
-
-![](../images/zero_crossing_4d.png){width=100%}
-
-We can also use descriptive neighborhood statistics, such as, the standard deviation to calculate edges in our data.
-
-```bash
-r.neighbors -c input=odm_071724_ortho.2 size=7 method=stddev output=odm_071724_ortho.2.7x7stddev
-```
-
-![](../images/high_pass_filter_variance_moving_window_green.png){width=40%}
-![](../images/high_pass_filter_variance_moving_window_green2.png){width=40%}
-
-:::{.callout-important}
-**Task:** Find a nice color scheme to display `odm_071724_ortho.2.7x7stddev` and describe what information can be derived from the map.
-:::
-
-
-#### Texture Features
-
-Now we will calcuate the texture features Angular Second Moment (asm), Correlation (corr), and Contrast (con)
- for our green band using [r.texture](https://grass.osgeo.org/grass-devel/manuals/r.texture.html) which implements Haralick et al. (1973) Grey level co-occurrence matrix (GLCM).
-
-
-
-```bash
-r.texture odm_071724_ortho.2 output=odm_071724_ortho.green_texture method="asm,contrast,corr" -s
-```
-
-![Angular Second Moment](../images/glcm_asm45.png){width=25%}
-![Correlation](../images/glcm_cor45.png){width=25%}
-![Contrast](../images/glcm_contr45.png){width=25%}
-
-### Topographic Features Extraction
-
-Not all features need to come from spectal data! You can use data from the DSM to provide more data when training your classification model.
-
-To start import the DSM data from the July, 2024 flight.
-
-```bash
-r.import resample=bilinear extent=region input=https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif output=odm_071724_dsm
-
-# (Optional) Set the color table and create a relief map for viusalization
-r.colors map=odm_071724_dsm color=elevation
-r.relief input=odm_071724_dsm output=dsm_relief
-```
-
-#### Slope and Aspect
-
-Calculate slope and aspect using [r.slope.aspect](https://grass.osgeo.org/grass-devel/manuals/r.slope.aspect.html)
-
-```bash
-r.slope.aspect elevation=odm_071724_dsm slope=odm_071724_slope aspect=odm_071724_aspect pcurvature=odm_071724_pcurv tcurvature=odm_071724_tcurv
-```
-
-#### Terrain Forms
-
-Now derive terrain forms form the the DSM using [r.geomorphon](https://grass.osgeo.org/grass-devel/manuals/r.geomorphon.html).
-
-```bash
-r.geomorphon elevation=odm_071724_dsm forms=geomorphon search=3 skip=0 flat=1 dist=0
-```
-
-### Create Imagery Group
-
-GRASS uses imagery groups ([i.group](https://grass.osgeo.org/grass84/manuals/i.group.html)) to manage imagery data.
-
-Let's start by creating a new imagery group called `rgb_group` with the subgroup `rgb_group` and add the red, green, and blue bands to the group/subgroup.
-
-```bash
-i.group group=rgb_group subgroup=rgb_group input=odm_071724_ortho.1,odm_071724_ortho.2,odm_071724_ortho.3
-```
-
-You can now check that it worked by viewing which rasters are in the group (`rgb_group`) and subgroup (`rgb_group`).
-
-```bash
-i.group -l group=rgb_group subgroup=rgb_group
-```
-
-Let's now add some of our other derived features to the group (`analysis_bands`) in a new subgroup called `analysis_bands`.
-
-```bash
-i.group group=analysis_bands subgroup=analysis_bands input=odm_071724_ortho.vari,odm_071724_ortho.3,odm_071724_ortho.1.27x27mean,odm_071724_dsm,odm_071724_slope,odm_071724_aspect,odm_071724_pcurv,odm_071724_tcurv,geomorphon,odm_071724_ortho.2.7x7stddev
-```
-
-### Image Segmentation
-
-Install [i.superpixels.slic](https://grass.osgeo.org/grass-devel/manuals/addons/i.superpixels.slic.html) GRASS Addon using the `g.extension` command.
-
-```bash
-g.extension i.superpixels.slic
-```
-
-Let's see if we can segment the fields.
-
-```bash
-# Reduce the compuational region
-g.region n=219508.87 s=219309.09 w=636953.87 e=637210.35 res=0.07 -ap
-i.superpixels.slic input=analysis_bands output=superpixels num_pixels=200
-```
-
-Let's see if we can improve our segmentation to capture individual crops in the field.
-
-```bash
-i.superpixels.slic input=analysis_bands output=superpixels_analysis compactness=0.8 num_pixels=100000
-```
-
-For our object based classification we will use [i.segment.stats](https://grass.osgeo.org/grass-devel/manuals/addons/i.segment.stats.html) to generate multiple statistics about our segments at once.
-
-To do this we must first install [i.segment.stats](https://grass.osgeo.org/grass-devel/manuals/addons/i.segment.stats.html).
-
-```bash
-g.extension i.segment.stats
-```
-
-Compute the mean, standard deviation, and sum for each feature per segment. We also compute details about the geomertry of each segment such as the area, perimeter, and compactness.   
-
-:::{.callout-caution}
-If you run this command as givin it will take a long time to run. Try to reduce the number of segments to speed things up.
-:::
-
-```bash
-i.segment.stats map=superpixels rasters=odm_071724_ortho.1,odm_071724_ortho.2,odm_071724_ortho.3 raster_statistics="mean,stddev,sum" vectormap=segment_stats processes=3
-```
-### Classification
-
-For classification we are going to use a decision tree based model called a RandomForest. To do this we need to install the GRASS addon [r.learn.ml](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.ml.html) which gives us access to models from the [scikit learn](https://scikit-learn.org/stable/) python library.
+- [Lake Wheeler GRASS project: Lake_Wheeler_NCspm]({{< var data.lake_wheeler_url >}}) (EPSG:3358; you have it from the earlier assignments)
+- [Orthophoto, July 17, 2024]({{< var data.lake_wheeler_flight_July_17_2024_orthophoto >}}): WebODM orthomosaic, RGB plus alpha, 7 cm, UTM zone 17N, [cloud optimized GeoTIFF](http://cogeo.org/) (read directly from the URL, no download needed)
+- [DSM, July 17, 2024]({{< var data.lake_wheeler_flight_July_17_2024_dsm >}}): WebODM surface model of the same flight, 7 cm, GeoTIFF (read from the URL)
+- [Training polygons: classification_training.gpkg]({{< var data.classification_training_gpkg >}}): 64 polygons in nine classes, GeoPackage layer `training` with the attributes `class_id` and `class`
+- [Color rules for the classes: classification_colors.txt]({{< var data.classification_colors_url >}})
+
+## Software
+
+- [GRASS]({{< var software.grass.website >}}) {{< var software.grass.version >}}
+- The addons [r.learn.ml2](https://grass.osgeo.org/grass85/manuals/addons/r.learn.ml2.html) (the tools `r.learn.train` and `r.learn.predict`), [i.superpixels.slic](https://grass.osgeo.org/grass85/manuals/addons/i.superpixels.slic.html), [i.segment.stats](https://grass.osgeo.org/grass85/manuals/addons/i.segment.stats.html), [r.confusionmatrix](https://grass.osgeo.org/grass85/manuals/addons/r.confusionmatrix.html), and [i.sam2](https://grass.osgeo.org/grass85/manuals/addons/i.sam2.html):
 
 ```bash
 g.extension extension=r.learn.ml2
+g.extension extension=i.superpixels.slic
+g.extension extension=i.segment.stats
+g.extension extension=r.confusionmatrix
+g.extension extension=i.sam2
 ```
 
-#### Sampling
-
-One benifit of using the RandomForest classification model is that it utilizes a sampling strategy know as *bootstraping*. It does this by using out-of-bag samples (OOB) for each decision tree in the model. The OOB samples are used to calculate error, which works as a cross-validation mechanism and helps maintain diversity between decision trees.  
-
-However, many models require you to sample your data independently. To do this you can perform and random sample using [r.random](https://grass.osgeo.org/grass-devel/manuals/r.random.html) or a stratified random sample using [r.sample.category](https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html).
-
-Let's import NLCD 2019 land cover data to perform the sampling.
-
-:::{.callout-caution}
-When importing COGs make sure to set the `extent=region` to make sure you are only downloading the data you need.
-:::
+- Python packages in the Python that GRASS uses: [scikit-learn](https://scikit-learn.org/stable/) and pandas for `r.learn.ml2`; for `i.sam2`, [segment-geospatial](https://samgeo.gishub.org/) with its SAM 2 extra, which installs PyTorch. The `transformers` package has to stay below version 4.45, because the Grounding DINO text model in segment-geospatial does not run with newer releases:
 
 ```bash
-r.import input=https://storage.googleapis.com/stac-data/Spatial_Data/LandUse/NLCD_Land_Cover_L48/nlcd_2019_cog/nlcd_2019_cog.tif output=nlcd_2019 extent=region resolution=region resample=nearest
+pip install scikit-learn pandas
+pip install "segment-geospatial[samgeo2]" "transformers<4.45"
 ```
 
-Now we will perform a stratified random sample using [r.sample.category](https://grass.osgeo.org/grass84/manuals/addons/r.sample.category.html).
+## Part 1: Import and region
 
-However, we must first install the addon:
+Start GRASS in the `Lake_Wheeler_NCspm` project and create a new mapset.
 
 ```bash
-g.extension r.sample.category
+g.mapset -c mapset=classification
 ```
 
-Now run the command to take 1000 samples from each land cover class.
+The orthophoto has 122 million cells at its original 7 cm resolution, and each feature below would take several minutes to compute. Work at 0.2 m: set the region to the extent of the mosaic and let `r.import` read, reproject, and resample the orthophoto to that grid. Cars, hay bales, and crop rows are still several cells wide at 0.2 m.
 
 ```bash
-r.category map=nlcd_2019
-r.sample.category input=nlcd_2019 output=nlcd_2019_strat_samples npoints=1000
-# Display the sample data
-d.rast nlcd_2019
-d.vect nlcd_2019_strat_samples
+g.region n=219815 s=219070 w=636565 e=637355 res=0.2 -p
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif" output=ortho extent=region resolution=region resample=nearest
+g.list type=raster pattern="ortho*"
 ```
 
-:::{.callout-important}
-**Task:** How many NLCD classes were sampled? Would these training points work well for classifying our dataset?
-:::
-
-#### Train Model
-
-To train the model you will use [r.learn.train](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.train.html). The random forest model requires us to provide a [training_map](resources/training.gpkg) and our imagery group. To save time use our `rgb_group`, but in practice you should using the `analysis_bands` group that contains the additional features you created.
-
-Training data can be downloaded here: [Download Training Data](resources/training.gpkg) or you can create your own using the `g.gui.iclass` tool found at `Imagery -> Classify image -> Interactive input for supervised classification`.
-
-To use the downloaded training data you need to fisrt import `training.gpkg` into GRASS.
+The import creates `ortho.1` (red), `ortho.2` (green), `ortho.3` (blue), and `ortho.4` (alpha, zero outside the mosaic). Turn the alpha band into a mask, so that all following tools skip the cells outside the mosaic, and import the DSM with bilinear resampling, which suits a continuous surface.
 
 ```bash
-v.import input=training.gpkg layer=training output=training
+r.mapcalc expression="ortho_mask = if(ortho.4 > 0, 1, null())"
+r.mask raster=ortho_mask
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/dsm.tif" output=dsm extent=region resolution=region resample=bilinear
+r.colors map=dsm color=elevation
+r.univar map=ortho.1
+r.univar map=dsm
 ```
 
-The training module [r.learn.train](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.train.html) expects the `training_map` parameter to be a raster, so you need to convert the training data to raster where the raster values matches each categories class.
+> ortho.1: n: 11484721, minimum: 0, maximum: 255
+>
+> dsm: minimum: 74.577, maximum: 116.062, mean: 90.117
+
+The region has 3,725 rows and 3,950 columns (14.7 million cells), of which 11.5 million are inside the mosaic. Display the orthophoto with `d.rgb red=ortho.1 green=ortho.2 blue=ortho.3`.
+
+## Part 2: Spectral index
+
+The [vegetation indices lab](lab_vegetation_indices.qmd) defines the indices that can be computed from an RGB orthophoto. Here you use VARI, the visible atmospherically resistant index:
+
+$$
+VARI = \frac{Green - Red}{Green + Red - Blue}
+$$
+
+The bands are 8-bit integers (the `CELL` type in GRASS). In map algebra an integer divided by an integer gives an integer, so the first expression returns only whole numbers:
 
 ```bash
-v.to.rast input=training output=training_rf use=attr attribute_column=cat_ label_column=class
+r.mapcalc expression="vari_int = (ortho.2 - ortho.1) / (ortho.2 + ortho.1 - ortho.3)"
+r.univar map=vari_int
 ```
 
-:::{.callout-warning}
-Model training can take a long time to run. If you are having issues running on your local machine try shrinking the compuational region.
-:::
+> minimum: -32, maximum: 27, mean: 0.001
+
+Convert the numerator with `float()`:
 
 ```bash
-r.learn.train group=rgb_group training_map=training_rf model_name=RandomForestClassifier n_estimators=500 save_model=rf_model.gz max_features=3 fimp_file=feature_importance.csv -f
+r.mapcalc expression="vari_raw = float(ortho.2 - ortho.1) / (ortho.2 + ortho.1 - ortho.3)"
+r.univar map=vari_raw
 ```
 
-The trained model will be save as `rf_model.gz`.
+> minimum: -32, maximum: 27, mean: 0.108, standard deviation: 0.164
 
-#### Feature Importance
-
-You can calculate the feature importance by using the `-f` flag and saving the results to a csv file using the parameter `fimp_file`. Our feature importance is saved to `feature_importance.csv`.
-
-The features with higher the importance scores indicate they are more influential in making predictions. While features with  low importance, could potentially be removed to simplify the model.
-
-```{python}
-# Feature importance plot (requires pandas, seaborn, matplotlib)
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-fi = pd.read_csv("feature_importance_rf.csv")
-fi = fi.sort_values("importance", ascending=False)
-
-plt.figure(figsize=(7, 4))
-sns.barplot(
-    data=fi, x="importance", y="feature", orient="h", errorbar=None
-)  # std provided separately
-# Add error bars manually
-for i, (imp, std) in enumerate(zip(fi["importance"], fi["std"])):
-    plt.errorbar(
-        x=imp, y=i, xerr=std, fmt="none", ecolor="black", capsize=3, linewidth=0.8
-    )
-
-plt.xlabel("Importance")
-plt.ylabel("Feature")
-plt.title("Random Forest Feature Importance (± std)")
-plt.tight_layout()
-plt.savefig("../images/feature_importance_rf.png")
-```
-
-#### Run Model
-
-To use the model run [r.learn.predict](https://grass.osgeo.org/grass-devel/manuals/addons/r.learn.predict.html) by loading the model ([`rf_model.gz`](https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/rf_model.gz)) you create during training.
+The mean is now plausible, but the range is not: a normalized index should stay between -1 and 1. The extreme values come from cells where the denominator is close to zero. Set cells with a denominator of 25 or less (about 0.1 in reflectance units) to null, and clamp the result to -1 to 1:
 
 ```bash
-r.learn.predict group=rgb_group load_model=rf_model.gz output=rf_basic_classification
+r.mapcalc expression="vari = if(ortho.2 + ortho.1 - ortho.3 <= 25, null(), max(-1.0, min(1.0, float(ortho.2 - ortho.1) / (ortho.2 + ortho.1 - ortho.3))))"
+r.colors map=vari color=ndvi
+r.univar map=vari
 ```
 
-Now we can check the categories and set the colors.
+> n: 11404539, minimum: -1, maximum: 1, mean: 0.104, standard deviation: 0.144
 
-You can download the color table here [category_colors.txt](resources/category_colors.txt) or copy the rules here
+The rule removes 80,182 cells. Mark them and display them over the orthophoto to see which surfaces they are:
 
 ```bash
-1 255:0:0
-2 0:128:0
-3 255:255:0
-4 139:105:20
-5 127:127:127
-6 128:0:128
-7 144:238:144
-8 165:42:42
-9 255:165:0
-nv white
+r.mapcalc expression="vari_excluded = if(isnull(vari) && !isnull(ortho.1), 1, null())"
+d.rgb red=ortho.1 green=ortho.2 blue=ortho.3
+d.rast map=vari_excluded
 ```
 
-```bash
-# check raster categories - they are automatically applied to the classification output
-r.category rf_classification
-r.colors map=rf_basic_classification rules=category_colors.txt
-```
-![](../images/basic_classification.png)
+![](../images/a6a_vari.webp){width="100%" fig-alt="Two maps of the Lake Wheeler site. Left: VARI from -1 to 1 in the ndvi color table; tree lines and the crop fields in the south are green, bare and sparsely planted fields and the roads are white. Right: the orthophoto with the cells excluded by the denominator rule in magenta, concentrated in the shadows along the tree lines."}
 
-#### Model Validation
-
-We will now evaluate our model by looking at the models confussion matrix, overvall accuracy, and kappa coefficient using the GRASS addon [r.confusionmatrix](https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html).
-
-To begin we first need to install the addon.
+A classifier cannot predict a cell where one of its features is null, so the model uses a filled copy in which the excluded cells are 0:
 
 ```bash
-g.extension r.confusionmatrix
+r.mapcalc expression="vari_filled = if(isnull(vari) && !isnull(ortho.1), 0.0, vari)"
 ```
 
-Now run [r.confusionmatrix](https://grass.osgeo.org/grass84/manuals/addons/r.confusionmatrix.html)  
+## Part 3: Spatial filters
+
+A cell value alone says nothing about its surroundings; moving window filters add that context. A low pass filter smooths: the mean of the red band in a 9 by 9 window (1.8 m) removes the row pattern inside the crop fields. A high pass filter responds to local variation: the standard deviation of the green band in a 5 by 5 window (1 m) is high along edges and in rough canopies and low on uniform surfaces such as roofs and the road. Both use [r.neighbors](https://grass.osgeo.org/grass85/manuals/r.neighbors.html).
 
 ```bash
-r.confusionmatrix classification=rf_basic_classification raster_reference=training_rf -m -d
+r.neighbors input=ortho.1 output=red_mean9 size=9 method=average nprocs=4
+r.neighbors input=ortho.2 output=green_stddev5 size=5 method=stddev nprocs=4
+r.colors map=red_mean9 color=grey
+r.colors -e map=green_stddev5 color=viridis
 ```
 
-The output for our classified model will look similar to below
-
-**Overall accuracy**
-
-Number of correct pixels / total number of pixels
-
-`Overall Accuracy, 97.07`
-
-
-**User Accuracy**
-
-* From the perspective of the user of the classified map, how accurate is the map?
-* For a given class, how many of the pixels on the map are actually what they say they are?
-* Calculated as: Number correctly identified in a given map class / Number claimed to be in that map class
-
-**Producer Accuracy**
-
-* From the perspective of the maker of the classified map, how accurate is the map?
-* For a given class in reference plots, how many of the pixels on the map are labeled correctly?
-* Calculated as: Number correctly identified in ref. plots of a given class / Number actually in that reference class
-
-**Commission Error**
-
-Commission error refers to sites that are classified as to reference sites that were left out (or omitted) from the correct class in the classified map. Commission errors are calculated by reviewing the classified sites for incorrect classifications.
-
-Commission Error = 100 % - User Accuracy
-
-**Omission Error**
-
-Omission error refers to reference sites that were left out (or omitted) from the correct class in the classified map. The real land cover type was left out or omitted from the classified map.
-
-Omission Error = 100 % - Producer Accuracy
-
-**Kappa coefficient**
-
-It characterizes the degree of matching between reference data set and classification.
-
-- **Kappa = 0**: indicates that obtained agreement equals chance agreement.
-- **Kappa > 0**: indicates that obtained agreement is greater than chance agreement.
-- **Kappa < 0**: indicates that obtained agreement is smaller than chance agreement.
-- **Kappa = 1**: is perfect agreement.
-
-`Kappa coefficient, 0.85`
-
-:::{.callout-important}
-**Task:** Interpret how well the model is performing. Which classes are performing well? Which need to be improved?
-:::
-
-|       Category         | buildings            | trees               | fields               | ground               | road               | car               | crop               |  	farm equipment               | bale               | User Accuracy   | Commission Error |
-|----------------|---------------|-----------------|-----------------|----------------|---------------|-----------------|-----------------|---------------|-----------------|-----------------|
-|   buildings     | 80379           | 63              | 22              | 6               | 70              | 27              | 1               | 34              | 24              | 99.69           | 0.31            |
-|   trees         | 118             | 264667          | 25671           | 0               | 237             | 2               | 105             | 44              | 0               | 91.0            | 9.0             |
-|                 fields        | 610             | 77160           | 6187667         | 16564           | 53766           | 268             | 762             | 2636            | 133             | 97.6            | 2.4             |
-|                 ground        | 57              | 1               | 8871            | 45799           | 3132            | 1               | 2               | 151             | 0               | 78.94           | 21.06           |
-|                 road          | 409             | 58              | 7070            | 1559            | 221794          | 1709            | 1               | 395             | 77              | 95.16           | 4.84            |
-|                 car           | 75              | 2               | 38              | 0               | 2694            | 19216           | 0               | 18              | 1095            | 83.05           | 16.95           |
-|                 crop          | 0               | 1               | 2               | 0               | 2               | 0               | 36              | 0               | 0               | 87.8            | 12.2            |
-|                 farm equipment| 32              | 9               | 88              | 5               | 46              | 19              | 0               | 4311            | 1               | 95.57           | 4.43            |
-|                 bale          | 20              | 0               | 2               | 0               | 5               | 2               | 0               | 1               | 719             | 95.99           | 4.01            |
-|                 Producer Accuracy | 98.38       | 77.4            | 99.33           | 71.64           | 78.72           | 90.45           | 3.97            | 56.8            | 35.09                   |
-
-<!-- ## Optional
-
-### LLM-based image segmentation with SAMGeo2
+Edge detection is a third kind of filter. [i.zc](https://grass.osgeo.org/grass85/manuals/i.zc.html) marks the zero crossings of the Laplacian of the smoothed image; the output is zero except on edges, where the value gives the edge orientation. Compute it for comparison; it is not used as a feature.
 
 ```bash
-g.extension r.confusionmatrix
-``` -->
+i.zc input=ortho.2 output=green_zc orientations=4 threshold=0.5
+```
+
+To look at the filters in detail, zoom to the 150 m block around the farm buildings, and set the region back to the full mosaic afterwards:
+
+```bash
+g.region n=219450 s=219300 w=637030 e=637180 res=0.2 save=farm
+d.rast map=green_stddev5
+g.region n=219815 s=219070 w=636565 e=637355 res=0.2
+```
+
+![](../images/a6a_filters.webp){width="100%" fig-alt="Four panels of the 150 m block around the farm buildings: the orthophoto with two red roofed buildings, a gravel road, a row of parked cars, and a large tree; the 9 by 9 mean of the red band, a blurred grey image; the 5 by 5 standard deviation of the green band, low and dark on the roofs, road, and grass and bright on building edges, cars, the tree, and the crop rows; and the zero crossing edges as thin short lines over the whole block."}
+
+## Part 4: Texture
+
+[r.texture](https://grass.osgeo.org/grass85/manuals/r.texture.html) computes the texture measures of Haralick, Shanmugam, and Dinstein (1973) from the grey level co-occurrence matrix (GLCM) of a moving window, which counts how often pairs of grey levels occur next to each other. Compute three of them for the green band in a 5 by 5 window, averaged over the four directions: the angular second moment (high where the window is uniform), contrast (high where neighboring cells differ strongly), and correlation (high where grey levels change gradually). This is the slowest feature of the assignment, about two minutes on four cores.
+
+```bash
+r.texture input=ortho.2 output=green_tex method=asm,contrast,corr size=5 nprocs=4
+g.list type=raster pattern="green_tex*"
+```
+
+The outputs are `green_tex_ASM`, `green_tex_Contr`, and `green_tex_Corr`.
+
+![](../images/a6a_texture.webp){width="100%" fig-alt="Three panels of the farm block: angular second moment, high on the mown grass, the road, and the roofs and low in the crop fields; contrast, high in the crop fields, on the tree, and along building and car edges; and correlation, a fine grained pattern with the building outlines visible."}
+
+## Part 5: Terrain features
+
+Features do not have to come from the image. The DSM separates tall objects from flat ones of the same color: trees from grass, roofs from gravel. Derive slope and profile and tangential curvature with [r.slope.aspect](https://grass.osgeo.org/grass85/manuals/r.slope.aspect.html), and landforms with [r.geomorphon](https://grass.osgeo.org/grass85/manuals/r.geomorphon.html) using a search radius of 15 cells (3 m). The DSM itself is also used as a feature.
+
+```bash
+r.slope.aspect elevation=dsm slope=slope pcurvature=pcurv tcurvature=tcurv nprocs=4
+r.geomorphon elevation=dsm forms=geomorphon search=15 skip=0 flat=1 dist=0
+```
+
+The DSM stores elevation above the vertical datum, between 75 and 116 m on this site. Consider what a model can learn from that value: something about the land cover, or something about where on the hill a class was digitized. Part 8 returns to this.
+
+## Part 6: Imagery groups and segmentation
+
+GRASS imagery tools take their input as an imagery group, a named list of rasters ([i.group](https://grass.osgeo.org/grass85/manuals/i.group.html)). Create one group with the three bands and one with the bands and the eleven derived rasters, and list the second.
+
+```bash
+i.group group=rgb_group subgroup=rgb_group input=ortho.1,ortho.2,ortho.3
+i.group group=features subgroup=features input=ortho.1,ortho.2,ortho.3,vari_filled,red_mean9,green_stddev5,green_tex_ASM,green_tex_Contr,green_tex_Corr,dsm,slope,pcurv,tcurv,geomorphon
+i.group -l group=features
+```
+
+A pixel based classifier labels each cell on its own. An object based classification first segments the image into groups of similar neighboring cells and then classifies the groups. `i.superpixels.slic` implements SLIC (simple linear iterative clustering), which grows compact segments from a regular grid of seeds. Run it on the farm block with about 2,000 superpixels of at least 50 cells; without `minsize` the result contains tens of thousands of fragments of a few cells. `i.segment.stats` then computes the mean and standard deviation of each band and the area and compactness of each segment into the attribute table of a vector map.
+
+```bash
+g.region region=farm
+i.superpixels.slic input=rgb_group output=superpixels num_pixels=2000 compactness=1 minsize=50
+i.segment.stats map=superpixels rasters=ortho.1,ortho.2,ortho.3 raster_statistics=mean,stddev area_measures=area,compact_circle vectormap=segment_stats processes=4
+v.db.select map=segment_stats | head
+d.rgb red=ortho.1 green=ortho.2 blue=ortho.3
+d.vect map=segment_stats color=yellow fill_color=none
+g.region n=219815 s=219070 w=636565 e=637355 res=0.2
+```
+
+![](../images/a6a_superpixels.webp){width="60%" fig-alt="The farm block orthophoto with yellow superpixel outlines: compact segments a few meters across that follow the roof edges, the road, the cars, and the tree crown, and form an irregular mesh over the grass and the crop fields."}
+
+The table has one row per segment and could be joined to training labels and classified with any tabular model. The rest of the assignment stays with the pixel based approach.
+
+## Part 7: Training data and model
+
+### Training and test polygons
+
+The training data are 64 polygons digitized on the orthophoto. You can digitize your own with the interactive tool at *Imagery > Classify image > Interactive input for supervised classification* (`g.gui.iclass`); here you use the prepared ones. Download `classification_training.gpkg` and import it.
+
+```bash
+v.import input=classification_training.gpkg layer=training output=training
+```
+
+To test the model on data it has not seen, set every third polygon aside: polygons whose category number is divisible by 3 become the test set, the others the training set. `r.learn.train` expects the training data as a raster, so convert both sets to rasters whose values are the class numbers and whose labels are the class names.
+
+```bash
+v.extract input=training where="cat % 3 != 0" output=training_train
+v.extract input=training where="cat % 3 = 0" output=training_test
+v.to.rast input=training_train output=train_rast use=attr attribute_column=class_id label_column=class
+v.to.rast input=training_test output=test_rast use=attr attribute_column=class_id label_column=class
+r.stats -cln input=train_rast
+r.stats -cln input=test_rast
+```
+
+| Class | Polygons | Training cells | Test cells |
+|---|---|---|---|
+| 1 buildings | 3 | 3,512 | 6,291 |
+| 2 trees | 9 | 28,186 | 12,871 |
+| 3 fields | 3 | 401,645 | 345,827 |
+| 4 ground | 6 | 5,099 | 2,573 |
+| 5 road | 8 | 22,898 | 10,920 |
+| 6 car | 8 | 1,457 | 1,088 |
+| 7 crop | 14 | 75 | 37 |
+| 8 farm_equipment | 7 | 793 | 124 |
+| 9 bale | 6 | 179 | 70 |
+
+The three field polygons hold more than 85 percent of the cells, two of them in the training set and one in the test set, and the crop class has fewer than 100 training cells.
+
+### Train two random forests
+
+A random forest is a set of decision trees, each trained on a bootstrap sample of the training cells and on a random subset of the features at each split; the class of a cell is the majority vote of the trees. [r.learn.train](https://grass.osgeo.org/grass85/manuals/addons/r.learn.train.html) trains a scikit-learn model on the cells of a group under the training raster and saves it to a file. Train two models with 100 trees each: one on the three bands and one on all 14 features. `category_maps` tells the tool that the geomorphon raster holds categories, not quantities. The `-f` flag computes permutation feature importances and writes them to a CSV file. Give the model and CSV files as full paths; a bare file name is rejected.
+
+```bash
+r.learn.train group=rgb_group training_map=train_rast model_name=RandomForestClassifier n_estimators=100 random_state=1 n_jobs=4 save_model=$HOME/rf_rgb.gz
+r.learn.train -f group=features training_map=train_rast model_name=RandomForestClassifier n_estimators=100 random_state=1 n_jobs=4 category_maps=geomorphon save_model=$HOME/rf_features.gz fimp_file=$HOME/feature_importance.csv
+```
+
+Training takes about 20 seconds for the first model and a minute and a half for the second on eight cores. If it is slow on your machine, reduce `n_estimators`.
+
+## Part 8: Prediction and feature importance
+
+[r.learn.predict](https://grass.osgeo.org/grass85/manuals/addons/r.learn.predict.html) loads a model and predicts the class of every cell of the group in the computational region (about 40 seconds each). The class names are stored with the model; the color rules file gives each class a color.
+
+```bash
+r.learn.predict group=rgb_group load_model=$HOME/rf_rgb.gz output=rf_rgb
+r.learn.predict group=features load_model=$HOME/rf_features.gz output=rf_features
+r.colors map=rf_rgb rules=classification_colors.txt
+r.colors map=rf_features rules=classification_colors.txt
+r.category map=rf_features
+r.report map=rf_rgb units=h
+r.report map=rf_features units=h
+```
+
+![](../images/a6a_classification.webp){width="100%" fig-alt="Two classification maps of the whole site with a nine class legend. Left, RGB bands only: a speckled mix of fields in yellow and trees in green over the crop fields, roads in grey. Right, 14 features: tree lines solid green, the eastern bare field solid yellow, the upper central field light green for crop, and the southern fields mostly brown for farm equipment."}
+
+| Class | RGB bands (ha) | 14 features (ha) |
+|---|---|---|
+| buildings | 0.10 | 0.73 |
+| trees | 16.98 | 9.40 |
+| fields | 19.29 | 16.31 |
+| ground | 2.47 | 1.43 |
+| road | 6.47 | 1.73 |
+| car | 0.06 | 0.72 |
+| crop | 0.03 | 2.79 |
+| farm_equipment | 0.52 | 12.54 |
+| bale | 0.01 | 0.15 |
+
+The two maps differ strongly. The RGB model confuses the crop fields with trees cell by cell, because green crop rows and tree canopy have the same colors. The 14 feature model maps the tree lines cleanly but labels more than 12 hectares of the southern fields as farm equipment, which cannot be right.
+
+The permutation importance of a feature is the drop in accuracy when its values are shuffled among the training cells. Open `feature_importance.csv`:
+
+![](../images/a6a_feature_importance.webp){width="70%" fig-alt="Horizontal bar chart of the permutation importance of the 14 features. The DSM is highest at 0.38, the 9 by 9 mean of the red band second at 0.22, then VARI at 0.04 and slope at 0.02; the three bands, the texture measures, the curvatures, and the geomorphons are all below 0.003."}
+
+> dsm 0.384, red_mean9 0.219, vari_filled 0.040, slope 0.017, all others below 0.003
+
+The model depends on the DSM more than on any other feature. The training polygons of each class sit at particular elevations on the hill, so the elevation identifies the polygon, and the model applies that to the rest of the site: the farm equipment polygons lie at the elevation of the southern fields.
+
+## Part 9: Accuracy assessment
+
+[r.confusionmatrix](https://grass.osgeo.org/grass85/manuals/addons/r.confusionmatrix.html) cross tabulates a classification with a reference raster and derives the accuracy measures:
+
+- **Overall accuracy**: correctly classified cells divided by all reference cells.
+- **User's accuracy** of a class: of the cells mapped as the class, the share that is the class in the reference. The commission error is 100 percent minus the user's accuracy.
+- **Producer's accuracy** of a class: of the reference cells of the class, the share that was mapped as the class. The omission error is 100 percent minus the producer's accuracy.
+- **Kappa coefficient**: the agreement beyond what chance would produce; 0 is chance agreement and 1 is perfect agreement.
+
+Compute them for each model against the training polygons, which the model has seen, and against the test polygons, which it has not. The `-m` flag prints the matrix and `-d` the definitions.
+
+```bash
+r.confusionmatrix -m classification=rf_rgb raster_reference=train_rast
+r.confusionmatrix -m classification=rf_rgb raster_reference=test_rast
+r.confusionmatrix -m classification=rf_features raster_reference=train_rast
+r.confusionmatrix -m -d classification=rf_features raster_reference=test_rast
+```
+
+| Model | Reference | Overall accuracy | Kappa |
+|---|---|---|---|
+| RGB bands | training polygons | 99.54 % | 0.98 |
+| RGB bands | test polygons | 54.64 % | 0.17 |
+| 14 features | training polygons | 100.00 % | 1.00 |
+| 14 features | test polygons | 53.60 % | 0.21 |
+
+The confusion matrix of the 14 feature model on the test polygons (rows: classified map, columns: reference):
+
+| | buildings | trees | fields | ground | road | car | crop | farm_equipment | bale | User's accuracy |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **buildings** | 6126 | 4 | 0 | 64 | 33 | 40 | 0 | 0 | 0 | 97.75 |
+| **trees** | 2 | 12765 | 63 | 0 | 0 | 109 | 2 | 0 | 0 | 98.64 |
+| **fields** | 5 | 2 | 171344 | 0 | 24 | 0 | 1 | 3 | 0 | 99.98 |
+| **ground** | 0 | 0 | 3109 | 2400 | 537 | 0 | 0 | 0 | 0 | 39.70 |
+| **road** | 4 | 0 | 3256 | 105 | 10293 | 492 | 0 | 0 | 0 | 72.74 |
+| **car** | 133 | 9 | 0 | 0 | 1 | 446 | 0 | 9 | 10 | 73.36 |
+| **crop** | 1 | 0 | 4 | 0 | 0 | 0 | 20 | 0 | 0 | 80.00 |
+| **farm_equipment** | 20 | 91 | 168051 | 4 | 31 | 0 | 14 | 112 | 0 | 0.07 |
+| **bale** | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 60 | 96.77 |
+| **Producer's accuracy** | 97.38 | 99.18 | 49.55 | 93.28 | 94.26 | 40.99 | 54.05 | 90.32 | 85.71 | |
+
+Both models are close to perfect on the polygons they were trained on and near 54 percent on the test polygons. The overall numbers hide what the features changed: compared with the RGB model, the producer's accuracy rose from 85 to 99 percent for trees, from 47 to 93 for ground, from 86 to 94 for road, from 34 to 90 for farm equipment, and from 7 to 86 for bales. The overall accuracy did not move because it is dominated by one number: 168,051 cells of the test field polygon mapped as farm equipment. With one large test polygon in the largest class, the overall accuracy is close to a statement about that polygon.
+
+### One change to the model
+
+Change one thing, then repeat the training, prediction, and assessment on the test polygons. One example replaces the DSM by the height above the lowest cell within 7.5 m, which describes the height of an object and not its position on the hill (the 75 by 75 minimum filter takes about two and a half minutes):
+
+```bash
+r.neighbors input=dsm output=dsm_min size=75 method=minimum nprocs=4
+r.mapcalc expression="height = dsm - dsm_min"
+i.group group=features_height subgroup=features_height input=ortho.1,ortho.2,ortho.3,vari_filled,red_mean9,green_stddev5,green_tex_ASM,green_tex_Contr,green_tex_Corr,height,slope,pcurv,tcurv,geomorphon
+r.learn.train group=features_height training_map=train_rast model_name=RandomForestClassifier n_estimators=100 random_state=1 n_jobs=4 category_maps=geomorphon save_model=$HOME/rf_height.gz
+r.learn.predict group=features_height load_model=$HOME/rf_height.gz output=rf_height
+r.confusionmatrix -m classification=rf_height raster_reference=test_rast
+```
+
+> Overall accuracy 44.41, Kappa coefficient 0.16
+
+This change does not help: the test field is now split between crop (86,761 cells) and farm equipment (81,297 cells). Removing the elevation did not fix the fields class, which points at the training data: the class "fields" contains a bare field and planted fields, and "crop" and "farm equipment" have very few training cells. Other changes to try: remove a feature, balance the classes with the `-b` flag, use more trees, choose another `model_name`, merge or redefine classes, or digitize additional training polygons.
+
+## Part 10: Segmentation with a foundation model
+
+The random forest learned the classes from the training polygons. A foundation model is trained once on a very large collection of images and then used without further training. [i.sam2](https://grass.osgeo.org/grass85/manuals/addons/i.sam2.html) runs two of them through the segment-geospatial package: Grounding DINO finds boxes in the image that match a text prompt, and SAM 2 (Segment Anything Model 2) outlines the object in each box. The output raster is 0 in the background and numbers the objects from 1.
+
+The tool reads the whole computational region as one image, so use the farm block at 0.1 m (1,500 by 1,500 cells) and import the orthophoto again at that resolution. The model weights (about 1.5 GB) are downloaded on the first run. On a GPU a prompt takes a few seconds. Without a GPU, set `CUDA_VISIBLE_DEVICES=-1` before starting; a prompt then takes about a minute.
+
+```bash
+export CUDA_VISIBLE_DEVICES=-1    # only on a machine without a CUDA GPU
+g.region region=farm res=0.1
+r.import input="/vsicurl/https://storage.googleapis.com/gis-course-data/gis584/uas-flight-data/Lake%20Wheeler%20-%20NCSU/071724/odm_orthophoto.tif" output=farm_ortho extent=region resolution=region resample=nearest
+i.group group=farm_rgb subgroup=farm_rgb input=farm_ortho.1,farm_ortho.2,farm_ortho.3
+i.sam2 group=farm_rgb output=sam_trees text_prompt="trees"
+i.sam2 group=farm_rgb output=sam_buildings text_prompt="buildings"
+i.sam2 group=farm_rgb output=sam_cars text_prompt="cars"
+r.info -r map=sam_buildings
+```
+
+> trees: 2 objects, buildings: 15 objects, cars: 15 objects
+
+![](../images/a6a_sam.webp){width="100%" fig-alt="Three panels of the farm block orthophoto with the objects found by i.sam2 in random colors. Prompt trees: the large tree by the road and a clump at the top edge. Prompt buildings: the two red roofed buildings, the connecting walkway, two concrete pads, a strip at the top left corner, and nine parked cars. Prompt cars: the parked cars along the road and three objects next to the pads."}
+
+### Thresholds
+
+`box_threshold` is the minimum confidence of a box and `text_threshold` the minimum similarity between the box and the words of the prompt; both default to 0.24. The prompt "buildings" at the default also returns the parked cars and the concrete pads. Raise the box threshold:
+
+```bash
+i.sam2 group=farm_rgb output=sam_buildings_35 text_prompt="buildings" box_threshold=0.35
+i.sam2 group=farm_rgb output=sam_buildings_50 text_prompt="buildings" box_threshold=0.5
+```
+
+> box_threshold 0.24: 15 objects, 0.35: 5 objects, 0.5: 3 objects
+
+The tool stops with the error "No masks found" when no box passes the threshold.
+
+### Comparison with the random forest
+
+For each prompt, compare the SAM mask with the cells of the same class in the 14 feature random forest map inside the farm block. The map `cmp_trees` is 1 where only SAM found trees, 2 where only the random forest did, and 3 where both did; `r.report` gives the areas. The intersection over union (IoU) is the area of both divided by the area of either: 1 for identical masks, 0 for masks that do not overlap.
+
+```bash
+r.mapcalc expression="cmp_trees = if(sam_trees > 0, 1, 0) + if(rf_features == 2, 2, 0)"
+r.mapcalc expression="cmp_buildings = if(sam_buildings > 0, 1, 0) + if(rf_features == 1, 2, 0)"
+r.mapcalc expression="cmp_cars = if(sam_cars > 0, 1, 0) + if(rf_features == 6, 2, 0)"
+r.report map=cmp_trees units=me
+g.region n=219815 s=219070 w=636565 e=637355 res=0.2
+```
+
+| Prompt | SAM (m2) | Random forest (m2) | Both (m2) | IoU |
+|---|---|---|---|---|
+| trees | 600 | 1,295 | 565 | 0.43 |
+| buildings | 1,050 | 477 | 412 | 0.37 |
+| cars | 131 | 459 | 112 | 0.23 |
+
+![](../images/a6a_sam_compare.webp){width="100%" fig-alt="Three comparison maps of the farm block for trees, buildings, and cars: black where SAM and the random forest agree, blue where only SAM marked the class, orange where only the random forest did. Trees: the large tree is black with an orange fringe, and orange speckle is scattered in the crop fields. Buildings: the two buildings are black, the pads, walkway, cars, and a corner strip are blue. Cars: the parked cars are black with orange outlines, and orange lines follow the building edges and the bale rows."}
+
+The two approaches fail in different ways. The random forest labels every cell of the site, including scattered cells of trees in the crop rows and cars along roof edges. SAM returns whole objects with clean outlines, but what counts as a match for the word is decided by the model: pads and cars are returned for "buildings", and a low threshold adds a field corner.
+
+## Report
+
+Prepare a report (3 to 5 pages including figures):
+
+1. **Region and features**: the resolution and number of cells of the computational region, the VARI map, and one filter or texture map, with a sentence on which surfaces each one separates.
+2. **VARI outliers**: which surfaces were excluded by the denominator rule, why they produce extreme values, and one other way to handle them.
+3. **Classification**: the two classification maps and the class areas, where the RGB model and the 14 feature model differ most, and which features explain it according to the feature importances.
+4. **Accuracy**: the overall accuracy and kappa of both models on the training and on the test polygons, and the confusion matrix of the 14 feature model on the test polygons, with a paragraph on which classes are mapped well, which are confused, and why the training numbers are so much higher.
+5. **One change**: the change you made to the model, the accuracy on the test polygons before and after, and whether and why it helped.
+6. **SAM 2**: the objects found for two prompts, the effect of the box threshold, and the comparison table, with a paragraph on which task on this site you would give to the random forest and which to the text prompt.
+
+## Submission
+
+Upload to Moodle, Assignment 6A:
+
+* Your report as a PDF.
+* Optional: your completed notebook (`.ipynb`) if you worked in Colab.
+
+## Grading
+
+* **Region and features**: the features are computed on the stated region and described by the surfaces they separate.
+* **VARI outliers**: the excluded surfaces are identified and the cause of the extreme values is explained.
+* **Classification**: both models are trained and mapped, and their differences are explained with the feature importances.
+* **Accuracy**: the four accuracy assessments and the confusion matrix are reported and read by class, and the gap between training and test accuracy is explained.
+* **One change**: one change is made, assessed on the test polygons, and interpreted.
+* **SAM 2**: two prompts and the threshold experiment are run and compared with the random forest classes.
+* **Interpretation**: conclusions tie back to the lecture: features, training and test data, user's and producer's accuracy, class imbalance, pixel based and object based classification, foundation models.
+* On-time submission.
+
+### Due {{< meta assignment-due-date >}}

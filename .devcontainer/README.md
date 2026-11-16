@@ -27,7 +27,7 @@ with a CPU-only build of PyTorch (the default wheels pull in several GB of CUDA
 libraries that a Codespace cannot use).
 
 These GRASS addons are installed as well, because the assignments call them:
-`i.segment.stats`, `i.superpixels.slic`, `r.confusionmatrix`, `r.learn.ml2`,
+`i.sam2`, `i.segment.stats`, `i.superpixels.slic`, `r.confusionmatrix`, `r.dem`, `r.learn.ml2`,
 `r.local.relief`, `r.patch.smooth`, `r.sample.category`, `r.shaded.pca`,
 `r.skyview`, `v.profile.points`. Anything else the assignments use is core
 GRASS 8.5. Install more with `g.extension extension=<name>`.

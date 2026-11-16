@@ -2,35 +2,41 @@
 topic: "Topic 6A: Machine Learning & AI"
 title: "Image Classification"
 subtitle: "Topic 6A: Machine Learning & AI"
-date: 11/9/2026
-# assignment-due-date: 11/13/2025
-author: Corey White
+date: 11/16/2026
 activity: Lecture
 ---
 
 ## Outline
 
-- Understand the principles of image classification in UAS mapping  
-- Differentiate between **supervised**, **unsupervised** learning methods
-- Derive spectral indices from RGB and multispectral UAS imagery and read them as features
-- Learn how to apply classification workflows in **GRASS**  
-- Interpret and validate classification results using **accuracy assessment metrics**  
-- Explore real-world applications of UAS classification for **environmental monitoring**
+- Image classification with UAS data: pixel based, object based, and scene classification
+- Spectral information: reflectance, sensor bands, calibration, and vegetation indices from RGB and multispectral imagery
+- Features for classification: spatial filters, texture, and terrain derivatives from the DSM
+- Segmentation: superpixels, object statistics, and promptable foundation models (SAM 2)
+- Training and prediction: supervised and unsupervised methods, sampling design, random forests, and feature importance
+- Accuracy assessment: the confusion matrix, user's and producer's accuracy, kappa, and held-out reference data
 
 ## Lecture
 
-- [Lecture Slides](lectures/lecture_6a.qmd)
+- [Lecture slides](lectures/lecture_6a.qmd)
 
 ## Supplemental materials
 
-- [Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion](https://www.mdpi.com/2072-4292/14/7/1718)
-- Jensen, J.R. Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed.; Prentice Hall Press: Upper Saddle River, NJ, USA, 2015.
-- [i.vi](https://grass.osgeo.org/grass85/manuals/i.vi.html) manual page: the vegetation indices GRASS computes and their formulas
+- [Random Forests](https://doi.org/10.1023/A:1010933404324), Breiman, Machine Learning 45(1), 2001
+- [A review of assessing the accuracy of classifications of remotely sensed data](https://doi.org/10.1016/0034-4257(91)90048-B), Congalton, Remote Sensing of Environment 37(1), 1991
+- [Textural Features for Image Classification](https://doi.org/10.1109/TSMC.1973.4309314), Haralick, Shanmugam, and Dinstein, IEEE Transactions on Systems, Man, and Cybernetics SMC-3(6), 1973
+- [samgeo: A Python package for segmenting geospatial data with the Segment Anything Model (SAM)](https://doi.org/10.21105/joss.05663), Wu and Osco, Journal of Open Source Software 8(89), 2023
+- [r.learn.ml2](https://grass.osgeo.org/grass85/manuals/addons/r.learn.ml2.html), [r.texture](https://grass.osgeo.org/grass85/manuals/r.texture.html), [i.vi](https://grass.osgeo.org/grass85/manuals/i.vi.html), and [i.sam2](https://grass.osgeo.org/grass85/manuals/addons/i.sam2.html) manual pages
 - [UAS for Wetland Mapping and Hydrological Modeling](https://doi.org/10.3390/rs11171997), Jeziorska, Remote Sensing 11(17), 2019: a review of UAS sensors, including the multispectral cameras compared in the lecture
 - [Absolute Radiometric Calibration Evaluation of UAS Headwall and MicaSense Sensors](https://doi.org/10.3390/rs17223738), Shrestha et al., Remote Sensing 17(22), 2025: the USGS calibration campaign whose data the lab uses
 - [Guidelines for calibration of uncrewed aircraft systems imagery](https://pubs.usgs.gov/publication/ofr20231033/full), Sampath et al., USGS Open-File Report 2023-1033
+- [Rapid-DEM: Rapid Topographic Updates through Satellite Change Detection and UAS Data Fusion](https://doi.org/10.3390/rs14071718), White et al., Remote Sensing 14(7), 2022
+- Introductory Digital Image Processing: A Remote Sensing Perspective, 4th ed., Jensen, Pearson, 2015
+
+- Past Lecture recordings:
+  - [Lecture]({{< var recordings.topic6.lecture6a >}}) (NCSU only)
+  - [Assignment]({{< var recordings.topic6.assignment6a >}}) (NCSU only)
 
 ## Assignment & Homework
 
-- [Lab: Vegetation indices](assignments/lab_vegetation_indices.qmd): spectral indices from the 2024 Lake Wheeler orthophoto and from a 10-band multispectral orthomosaic; do it before the assignment
-- [Assignment 6A: Image Classification](assignments/assignment_6a.qmd)
+- [Lab: Vegetation indices](assignments/lab_vegetation_indices.qmd) (optional): spectral indices from the 2024 Lake Wheeler orthophoto and from a 10-band multispectral orthomosaic; do it before the assignment
+- [Assignment 6A: UAS image classification](assignments/assignment_6a.qmd)
