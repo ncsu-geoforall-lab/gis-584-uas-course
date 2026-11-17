@@ -48,11 +48,11 @@ g.extension extension=r.confusionmatrix
 g.extension extension=i.sam2
 ```
 
-- Python packages in the Python that GRASS uses: [scikit-learn](https://scikit-learn.org/stable/) and pandas for `r.learn.ml2`; for `i.sam2`, [segment-geospatial](https://samgeo.gishub.org/) with its SAM 2 extra, which installs PyTorch. The `transformers` package has to stay below version 4.45, because the Grounding DINO text model in segment-geospatial does not run with newer releases:
+- Python packages in the Python that GRASS uses: [scikit-learn](https://scikit-learn.org/stable/) and pandas for `r.learn.ml2`; for `i.sam2`, [segment-geospatial](https://samgeo.gishub.org/) with its SAM 2 extra, which installs PyTorch, and groundingdino-py, which finds the objects named in a text prompt. The `transformers` package has to stay below version 5, because the Grounding DINO text model in segment-geospatial does not run with newer releases:
 
 ```bash
 pip install scikit-learn pandas
-pip install "segment-geospatial[samgeo2]" "transformers<4.45"
+pip install "segment-geospatial[samgeo2]" groundingdino-py "transformers<5"
 ```
 
 ## Part 1: Import and region
