@@ -3,6 +3,8 @@ project:
   output-dir: docs
   render: 
     - "*.qmd"
+    # Topic 6B is a draft. Reveal.js decks ignore `draft: true`, so the lecture is excluded here.
+    - "!course/topics/topic_6_change_detection/lectures/lecture_6b.qmd"
 website:
   favicon: favicon.ico
   title: "UAS Mapping and Analytics"
@@ -146,8 +148,9 @@ website:
               contents:
                 - text: "Lecture 6A"
                   href: course/topics/topic_6_change_detection/lectures/lecture_6a.qmd
-                - text: "Lecture 6B"
-                  href: course/topics/topic_6_change_detection/lectures/lecture_6b.qmd
+                # Topic 6B is a draft; restore with the render exclusion above.
+                # - text: "Lecture 6B"
+                #   href: course/topics/topic_6_change_detection/lectures/lecture_6b.qmd
             - section: Assignments
               contents:
                 - text: "Lab: Vegetation Indices"

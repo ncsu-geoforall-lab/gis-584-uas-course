@@ -4,6 +4,7 @@ title: "Change Detection"
 subtitle: "Topic 6B: Machine Learning & AI"
 date: 11/23/2026
 activity: Lecture
+draft: true
 ---
 
 ## Outline

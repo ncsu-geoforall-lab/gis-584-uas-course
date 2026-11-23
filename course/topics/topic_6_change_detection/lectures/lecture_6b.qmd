@@ -8,6 +8,7 @@ format:
         footer: "[Return Home](../part_b_change_detection.qmd)"
         slide-number: true
 bibliography: ../references.bib
+draft: true
 ---
 
 ## Objectives {.smaller}
