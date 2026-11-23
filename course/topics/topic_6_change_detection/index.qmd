@@ -12,7 +12,8 @@ order: 6
 ## Slides
 
 - [Lecture 6A: Classification Methods for UAS Data](lectures/lecture_6a.qmd)
-- [Lecture 6B: UAS Change Detection Methods](lectures/lecture_6b.qmd)
+<!-- Topic 6B is a draft. Restore this line when it is released:
+     Lecture 6B: UAS Change Detection Methods, linked to lectures/lecture_6b (qmd) -->
 
 ## Assignments
 

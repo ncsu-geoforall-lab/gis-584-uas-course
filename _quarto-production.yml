@@ -1,5 +1,7 @@
 project:
   render: 
     - "*.qmd"
+    # Topic 6B is a draft. Reveal.js decks ignore `draft: true`, so the lecture is excluded here.
+    - "!course/topics/topic_6_change_detection/lectures/lecture_6b.qmd"
 execute:
   freeze: false

@@ -13,8 +13,10 @@ notebook-view:
   - notebook: change_detection.ipynb
     title: "UAS change detection in GRASS"
     url: https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/change_detection.ipynb
-resources:
-  - change_detection.ipynb
+# Restore when 6B leaves draft; a draft page still publishes its resources.
+# resources:
+#   - change_detection.ipynb
+draft: true
 ---
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ncsu-geoforall-lab/gis-584-uas-course/blob/gh-pages/course/topics/topic_6_change_detection/assignments/change_detection.ipynb)
